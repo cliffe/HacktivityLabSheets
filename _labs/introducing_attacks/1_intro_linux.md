@@ -28,6 +28,19 @@ cybok:
 
 This work by [Z. Cliffe Schreuders](http://z.cliffe.schreuders.org) at Leeds Beckett University is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/deed.en_GB).
 
+<div class="action-item">
+### ⚡ Lab Setup Required
+Before starting this lab, ensure you have:
+- A ==Linux virtual machine== or system with ==root access==
+- Internet connectivity for downloading tools
+- At least ==2GB of available disk space==
+</div>
+
+<div class="warning-item">
+### ⚠️ Important Notice
+This lab involves using security tools that could be detected as malicious by antivirus software. Work in an isolated environment and disable real-time protection if necessary.
+</div>
+
 ### Contents {#preparation-and-logging-in}
 
 [License](#preparation-and-logging-in)
@@ -72,7 +85,7 @@ This work by [Z. Cliffe Schreuders](http://z.cliffe.schreuders.org) at Leeds Bec
 
 One of the interesting and inevitable things about working with security attacks, is that because we are often intentionally “breaking” things and making them misbehave for our own intentions, sometimes things do not go exactly according to plan, software may crash or behave erratically. This adds to the challenge, and may require some troubleshooting.
 
-The labs are written to be informative and, in order to aid clarity, instructions that you should actually execute are generally written in this colour. Note that all lab content is assessable for the module, but the colour coding may help you skip to the “next thing to *do*”, but make sure you dedicate time to read and understand everything. Coloured instructions in *italics* indicates you need to change the instructions based on your environment: for example, using your own IP address.
+The labs are written to be informative and, in order to aid clarity, instructions that you should actually execute are generally written in this colour. Note that all lab content is assessable for the module, but the ==colour coding may help you skip to the “next thing to *do*”==, but make sure you dedicate time to read and understand everything. Coloured instructions in ==*italics*== indicates you need to change the instructions based on your environment: for example, using your own IP address.
 
 Often the lab instructions are intentionally open ended, and you will have to figure some things out for yourselves. This module is designed to be challenging, as well as fun\!
 
@@ -94,7 +107,7 @@ Note that a command shell will open automatically, and a username has been rando
 
 From the command line run:
 
-whoami
+```whoami```
 
 Your password is “tiaspbiqe2r” (**t**his **i**s **a** **s**ecure **p**assword **b**ut **i**s **q**uite **e**asy **2** **r**emember). 
 

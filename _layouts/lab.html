@@ -68,6 +68,7 @@ layout: default
 .lab-header h1 {
   margin-bottom: 0.5rem;
   color: var(--fg-color);
+  font-weight: normal;
 }
 
 .lab-description {
@@ -126,11 +127,12 @@ layout: default
 }
 
 .lab-content-body code {
-  background-color: var(--highlight-color);
+  background-color: #ffeb3b;
   padding: 0.125rem 0.25rem;
   border-radius: 3px;
   font-size: 0.875rem;
   border: 1px solid var(--panelborder-color);
+  color: black;
 }
 
 .lab-content-body pre {
@@ -139,12 +141,14 @@ layout: default
   border-radius: 6px;
   overflow-x: auto;
   border: 1px solid var(--panelborder-color);
+  color: white;
 }
 
 .lab-content-body pre code {
   background-color: transparent;
   padding: 0;
   border: none;
+  color: white;
 }
 
 .lab-footer {
@@ -192,6 +196,15 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       themeIcon.className = 'fas fa-moon';
     }
+  }
+});
+
+// Process ==highlight== syntax
+document.addEventListener('DOMContentLoaded', function() {
+  const contentBody = document.querySelector('.lab-content-body');
+  if (contentBody) {
+    // Replace ==text== with <mark>text</mark>
+    contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
   }
 });
 </script>

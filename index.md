@@ -102,4 +102,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+
+// Process ==highlight== syntax
+document.addEventListener('DOMContentLoaded', function() {
+  const contentBody = document.querySelector('.lab-list');
+  if (contentBody) {
+    // Replace ==text== with <mark>text</mark>
+    contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
+  }
+});
 </script>

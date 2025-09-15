@@ -1,7 +1,7 @@
 # Site settings
 title: Hacktivity Lab Sheets
 description: Lab sheets for Hacktivity SecGen labs
-baseurl: "/HacktivityLabSheets"
+# baseurl: "/HacktivityLabSheets"  # Commented out for local development
 url: "https://cliffe.github.io"
 
 # GitHub Pages settings
@@ -43,3 +43,8 @@ exclude:
   - .gitignore
   - Gemfile
   - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata

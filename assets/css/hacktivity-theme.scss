@@ -10,6 +10,7 @@ body {
 
 h1, h2, h3 {
   font-family: "Do Hyeon", "Source Code Pro", Monaco, monospace;
+  font-weight: normal;
 }
 
 code, pre, .highlight {
@@ -191,7 +192,7 @@ a:focus {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 .category-labs {
@@ -311,12 +312,13 @@ h1.user_handle, h1.team_name {
 .lab-item h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-weight: normal;
 }
 
 .lab-item h3 a {
   text-decoration: none;
   color: var(--link-color);
-  font-weight: 600;
+  font-weight: normal;
 }
 
 .lab-item h3 a:hover {
@@ -541,7 +543,7 @@ a.scale_on_click:focus .fa-solid {
 // Typography improvements
 h1, h2, h3, h4, h5, h6 {
   color: var(--fg-color);
-  font-weight: 600;
+  font-weight: normal;
 }
 
 // Code blocks
@@ -549,6 +551,7 @@ pre, code {
   background-color: var(--highlight-color);
   border: 1px solid var(--panelborder-color);
   border-radius: 4px;
+  color: white;
 }
 
 code {
@@ -586,4 +589,114 @@ blockquote {
   padding: 0.5rem 1rem;
   background-color: var(--highlight-color);
   font-style: italic;
+}
+
+// Action item styles for lab sheets
+.action-item {
+  background-color: var(--alert-infobg-color);
+  border: 1px solid var(--alert-infoborder-color);
+  border-left: 4px solid var(--primary-btnbg-color);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: var(--alert-infofg-color);
+}
+
+.action-item h1, .action-item h2, .action-item h3, .action-item h4, .action-item h5, .action-item h6 {
+  color: var(--alert-infofg-color);
+  margin-top: 0;
+}
+
+.action-item::before {
+  content: "⚡ ";
+  font-weight: bold;
+  color: var(--primary-btnbg-color);
+}
+
+.warning-item {
+  background-color: var(--alert-warningbg-color);
+  border: 1px solid var(--alert-warningborder-color);
+  border-left: 4px solid #f0ad4e;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: var(--alert-warningfg-color);
+}
+
+.warning-item h1, .warning-item h2, .warning-item h3, .warning-item h4, .warning-item h5, .warning-item h6 {
+  color: var(--alert-warningfg-color);
+  margin-top: 0;
+}
+
+.warning-item::before {
+  content: "⚠️ ";
+  font-weight: bold;
+}
+
+.danger-item {
+  background-color: var(--alert-dangerbg-color);
+  border: 1px solid var(--alert-dangerborder-color);
+  border-left: 4px solid #d9534f;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: var(--alert-dangerfg-color);
+}
+
+.danger-item h1, .danger-item h2, .danger-item h3, .danger-item h4, .danger-item h5, .danger-item h6 {
+  color: var(--alert-dangerfg-color);
+  margin-top: 0;
+}
+
+.danger-item::before {
+  content: "🚨 ";
+  font-weight: bold;
+}
+
+.success-item {
+  background-color: var(--alert-successbg-color);
+  border: 1px solid var(--alert-successborder-color);
+  border-left: 4px solid #5cb85c;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: var(--alert-successfg-color);
+}
+
+.success-item h1, .success-item h2, .success-item h3, .success-item h4, .success-item h5, .success-item h6 {
+  color: var(--alert-successfg-color);
+  margin-top: 0;
+}
+
+.success-item::before {
+  content: "✅ ";
+  font-weight: bold;
+}
+
+// Inline action styling
+.action-text {
+  background-color: var(--primary-btnbg-color);
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.action-text::before {
+  content: "→ ";
+}
+
+// Markdown highlight syntax support
+mark, .highlight-text {
+  background-color: #ffeb3b;
+  color: #000;
+  padding: 0.1rem 0.2rem;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] mark, 
+[data-theme="dark"] .highlight-text {
+  background-color: #ffc107;
+  color: #000;
 }
