@@ -53,96 +53,107 @@ layout: default
 }
 
 .lab-header {
-  border-bottom: 2px solid #e1e4e8;
+  border-bottom: 2px solid var(--panelborder-color);
   padding-bottom: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .lab-header h1 {
   margin-bottom: 0.5rem;
+  color: var(--fg-color);
 }
 
 .lab-description {
   font-size: 1.125rem;
-  color: #586069;
+  color: var(--fg-color);
+  opacity: 0.8;
   margin-bottom: 1rem;
 }
 
 .lab-metadata {
   display: grid;
   gap: 0.5rem;
-  background-color: #f8f9fa;
+  background-color: var(--panelbg-color);
   padding: 1rem;
   border-radius: 6px;
-  border: 1px solid #e1e4e8;
+  border: 1px solid var(--panelborder-color);
 }
 
 .metadata-item {
   font-size: 0.875rem;
+  color: var(--fg-color);
 }
 
 .metadata-item strong {
-  color: #24292e;
+  color: var(--fg-color);
+  font-weight: 600;
 }
 
 .tag {
-  background-color: #f1f8ff;
-  color: #0366d6;
+  background-color: var(--primary-btnbg-color);
+  color: white;
   padding: 0.125rem 0.5rem;
   border-radius: 12px;
   font-size: 0.75rem;
-  border: 1px solid #c8e1ff;
+  border: 1px solid var(--primary-btnbg-color);
   margin-left: 0.25rem;
 }
 
 .lab-content-body {
   line-height: 1.6;
+  color: var(--fg-color);
 }
 
 .lab-content-body h2 {
-  border-bottom: 1px solid #e1e4e8;
+  border-bottom: 1px solid var(--panelborder-color);
   padding-bottom: 0.3rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  color: var(--fg-color);
 }
 
 .lab-content-body h3 {
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
+  color: var(--fg-color);
 }
 
 .lab-content-body code {
-  background-color: #f6f8fa;
+  background-color: var(--highlight-color);
   padding: 0.125rem 0.25rem;
   border-radius: 3px;
   font-size: 0.875rem;
+  border: 1px solid var(--panelborder-color);
 }
 
 .lab-content-body pre {
-  background-color: #f6f8fa;
+  background-color: var(--highlight-color);
   padding: 1rem;
   border-radius: 6px;
   overflow-x: auto;
+  border: 1px solid var(--panelborder-color);
 }
 
 .lab-content-body pre code {
   background-color: transparent;
   padding: 0;
+  border: none;
 }
 
 .lab-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #e1e4e8;
+  border-top: 1px solid var(--panelborder-color);
 }
 
 .back-link {
-  color: #0366d6;
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
 }
 
 .back-link:hover {
   text-decoration: underline;
+  color: var(--primary-btnhov-color);
 }
 </style>

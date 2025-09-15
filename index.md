@@ -55,75 +55,40 @@ These lab sheets are designed to work with SecGen (Security Scenario Generator) 
 
 If you'd like to contribute new labs or improvements to existing ones, please see the repository's contribution guidelines.
 
-<style>
-.lab-list {
-  margin: 2rem 0;
-}
+<!-- Theme Toggle Button -->
+<div class="theme-toggle-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+  <button id="theme-toggle" class="btn btn-sm" style="background-color: var(--primary-btnbg-color); color: white; border: none; border-radius: 20px; padding: 8px 16px;">
+    <i class="fas fa-moon" id="theme-icon"></i>
+  </button>
+</div>
 
-.lab-item {
-  border: 1px solid #e1e4e8;
-  border-radius: 6px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  background-color: #f8f9fa;
-}
-
-.lab-item h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
-
-.lab-item h3 a {
-  text-decoration: none;
-  color: #0366d6;
-}
-
-.lab-item h3 a:hover {
-  text-decoration: underline;
-}
-
-.lab-description {
-  margin-bottom: 1rem;
-  color: #586069;
-}
-
-.lab-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.875rem;
-}
-
-.difficulty, .duration {
-  color: #586069;
-  font-weight: 500;
-}
-
-.tags {
-  display: flex;
-  gap: 0.25rem;
-}
-
-.tag {
-  background-color: #f1f8ff;
-  color: #0366d6;
-  padding: 0.125rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  border: 1px solid #c8e1ff;
-}
-
-.no-labs {
-  text-align: center;
-  padding: 2rem;
-  background-color: #f8f9fa;
-  border: 1px solid #e1e4e8;
-  border-radius: 6px;
-  margin: 2rem 0;
-}
-
-.no-labs p {
-  margin: 0.5rem 0;
-  color: #586069;
-}
-</style>
+<script>
+// Theme toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const body = document.body;
+  
+  // Check for saved theme preference or default to light mode
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  body.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+  
+  themeToggle.addEventListener('click', function() {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+  });
+  
+  function updateThemeIcon(theme) {
+    if (theme === 'dark') {
+      themeIcon.className = 'fas fa-sun';
+    } else {
+      themeIcon.className = 'fas fa-moon';
+    }
+  }
+});
+</script>
