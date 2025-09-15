@@ -1,3 +1,24 @@
+---
+title: "Introduction to Linux and Security"
+author: "Z. Cliffe Schreuders"
+description: "Learn Linux fundamentals and security tools, including command-line operations, file system navigation, SSH, and basic penetration testing with Kali Linux."
+difficulty: "Beginner"
+duration: "90 minutes"
+prerequisites: "Basic computer skills"
+tags: ["linux", "command-line", "ssh", "kali", "networking", "security"]
+lab_sheet_url: "https://docs.google.com/document/d/1vA_Ev_GPqPg3cGZblgVclWmTU-sUEEBqwYpFH09mQjg/edit?usp=sharing"
+type: ["ctf-lab", "lab-sheet"]
+lecture_url: "http://z.cliffe.schreuders.org/presentations/slides/DSL_DS_OSPT_Lectures_1_Intro_to_Unix_FOSS_and_Linux.html"
+reading: "Chapters 1-2: Practical Unix and Internet Security by Garfinkel, Spafford, and Schwartz"
+cybok:
+  - ka: "NS"
+    topic: "Network Protocols and Vulnerability"
+    keywords: ["common network attacks"]
+  - ka: "SOIM"
+    topic: "PENETRATION TESTING"
+    keywords: ["PENETRATION TESTING - SOFTWARE TOOLS"]
+---
+
 # Introduction to Linux and security tools
 
 ### License {#preparation-and-logging-in}
