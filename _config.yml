@@ -1,0 +1,40 @@
+# Site settings
+title: Hacktivity Lab Sheets
+description: Lab sheets for Hacktivity SecGen labs
+baseurl: "/HacktivityLabSheets"
+url: "https://cliffe.github.io"
+
+# GitHub Pages settings
+github:
+  repository_name: HacktivityLabSheets
+
+# Jekyll settings
+markdown: kramdown
+highlighter: rouge
+
+# Collections for organizing labs
+collections:
+  labs:
+    output: true
+    permalink: /:collection/:name/
+
+# Default settings for lab posts
+defaults:
+  - scope:
+      path: "_labs"
+      type: "labs"
+    values:
+      layout: "lab"
+
+# Plugin settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
