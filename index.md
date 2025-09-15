@@ -11,26 +11,37 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
 
 {% if site.labs.size > 0 %}
 <div class="lab-list">
-  {% for lab in site.labs %}
-  <div class="lab-item">
-    <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
-    <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
-    <div class="lab-meta">
-      {% if lab.difficulty %}
-        <span class="difficulty">Difficulty: {{ lab.difficulty }}</span>
-      {% endif %}
-      {% if lab.duration %}
-        <span class="duration">Duration: {{ lab.duration }}</span>
-      {% endif %}
-      {% if lab.tags %}
-        <div class="tags">
-          {% for tag in lab.tags %}
-            <span class="tag">{{ tag }}</span>
-          {% endfor %}
+  {% assign labs_by_category = site.labs | group_by: 'category' %}
+  {% for category in labs_by_category %}
+    {% if category.name != blank %}
+      <h2 class="category-heading">{{ category.name | replace: '_', ' ' | capitalize }}</h2>
+    {% else %}
+      <h2 class="category-heading">General Labs</h2>
+    {% endif %}
+    
+    <div class="category-labs">
+      {% for lab in category.items %}
+      <div class="lab-item">
+        <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
+        <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
+        <div class="lab-meta">
+          {% if lab.difficulty %}
+            <span class="difficulty">Difficulty: {{ lab.difficulty }}</span>
+          {% endif %}
+          {% if lab.duration %}
+            <span class="duration">Duration: {{ lab.duration }}</span>
+          {% endif %}
+          {% if lab.tags %}
+            <div class="tags">
+              {% for tag in lab.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
-      {% endif %}
+      </div>
+      {% endfor %}
     </div>
-  </div>
   {% endfor %}
 </div>
 {% else %}

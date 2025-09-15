@@ -25,6 +25,11 @@ defaults:
       type: "labs"
     values:
       layout: "lab"
+  - scope:
+      path: "_labs/**"
+      type: "labs"
+    values:
+      layout: "lab"
 
 # Plugin settings
 plugins:

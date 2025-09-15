@@ -169,6 +169,20 @@ a:focus {
   margin: 2rem 0;
 }
 
+.category-heading {
+  color: var(--fg-color);
+  border-bottom: 2px solid var(--primary-btnbg-color);
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.category-labs {
+  margin-bottom: 2rem;
+}
+
 .lab-item {
   border: 1px solid var(--panelborder-color);
   border-radius: 6px;

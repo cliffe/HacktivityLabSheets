@@ -6,6 +6,7 @@ difficulty: "Beginner"
 duration: "90 minutes"
 prerequisites: "Basic computer skills"
 tags: ["linux", "command-line", "ssh", "kali", "networking", "security"]
+category: "introducing_attacks"
 lab_sheet_url: "https://docs.google.com/document/d/1vA_Ev_GPqPg3cGZblgVclWmTU-sUEEBqwYpFH09mQjg/edit?usp=sharing"
 type: ["ctf-lab", "lab-sheet"]
 lecture_url: "http://z.cliffe.schreuders.org/presentations/slides/DSL_DS_OSPT_Lectures_1_Intro_to_Unix_FOSS_and_Linux.html"
