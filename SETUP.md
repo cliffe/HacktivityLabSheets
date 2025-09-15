@@ -5,7 +5,8 @@ This Jekyll site is designed to display cybersecurity lab exercises organized by
 ## Features
 
 - **Organized by Category**: Labs are grouped by their directory structure (e.g., "Introducing Attacks", "Network Security", etc.)
-- **Hacktivity Theme**: Custom theme matching the Hacktivity platform with light/dark mode toggle
+- **Hacktivity Theme**: Custom theme matching the Hacktivity platform with light/dark mode toggle (dark mode default)
+- **Google Fonts**: Uses Inter for body text and JetBrains Mono for code
 - **GitHub Pages Compatible**: Ready for deployment on GitHub Pages
 - **Responsive Design**: Works on desktop and mobile devices
 

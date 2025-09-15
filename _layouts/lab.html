@@ -2,6 +2,13 @@
 layout: default
 ---
 
+<!-- Theme Toggle Button -->
+<div class="theme-toggle-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+  <button id="theme-toggle" class="btn btn-sm" style="background-color: var(--primary-btnbg-color); color: white; border: none; border-radius: 20px; padding: 8px 16px;">
+    <i class="fas fa-moon" id="theme-icon"></i>
+  </button>
+</div>
+
 <article class="lab-content">
   <header class="lab-header">
     <h1>{{ page.title }}</h1>
@@ -157,3 +164,34 @@ layout: default
   color: var(--primary-btnhov-color);
 }
 </style>
+
+<script>
+// Theme toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const body = document.body;
+
+  // Check for saved theme preference or default to dark mode
+  const currentTheme = localStorage.getItem('theme') || 'dark';
+  body.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  themeToggle.addEventListener('click', function() {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+  });
+
+  function updateThemeIcon(theme) {
+    if (theme === 'dark') {
+      themeIcon.className = 'fas fa-sun';
+    } else {
+      themeIcon.className = 'fas fa-moon';
+    }
+  }
+});
+</script>
