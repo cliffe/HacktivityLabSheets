@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+    
+    {% if site.plugins contains 'jekyll-feed' %}
+        <link type="application/atom+xml" rel="alternate" href="{{ '/feed.xml' | relative_url }}" title="{{ site.title | escape }}" />
+    {% endif %}
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="wrapper">
+            <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+            
+            <nav class="site-nav">
+                <span class="menu-icon">☰</span>
+                <div class="trigger">
+                    <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
+                    <a class="page-link" href="https://github.com/{{ site.github.repository_name }}" target="_blank">GitHub</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="wrapper">
+            {{ content }}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrapper">
+            <p class="footer-text">
+                © 2024 {{ site.title | escape }}. 
+                <a href="https://github.com/cliffe/{{ site.github.repository_name }}">View on GitHub</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
