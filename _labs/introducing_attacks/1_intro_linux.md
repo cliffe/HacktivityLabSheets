@@ -46,7 +46,7 @@ This work by [Z. Cliffe Schreuders](http://z.cliffe.schreuders.org) at Leeds Bec
 
 ### General notes about the labs
 
-Many of the tasks you complete within our labs could be considered illegal if targeted at a computer that you do not have explicit permission to interact with, do security tests on, and attack. In short, keep all activity contained to our labs and to computers you have legal permission to attack[^1]. Use common sense, and act within the law, ethically, and according to your own morals. With power comes responsibility, use it wisely.
+==Many of the tasks== you complete within our labs could be considered illegal if targeted at a computer that you do not have explicit permission to interact with, do security tests on, and attack. In short, keep all activity contained to our labs and to computers you have legal permission to attack[^1]. Use common sense, and act within the law, ethically, and according to your own morals. With power comes responsibility, use it wisely.
 
 One of the interesting and inevitable things about working with security attacks, is that because we are often intentionally “breaking” things and making them misbehave for our own intentions, sometimes things do not go exactly according to plan, software may crash or behave erratically. This adds to the challenge, and may require some troubleshooting.
 
