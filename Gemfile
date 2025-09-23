@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 
 # Jekyll and core dependencies
-gem 'jekyll', '~> 4.3.0'
+gem 'jekyll', '~> 4.0.0'
 gem 'jekyll-feed', '~> 0.12'
 gem 'jekyll-sitemap', '~> 1.4'
 gem 'jekyll-seo-tag', '~> 2.8'
 
 # Markdown processor
-gem 'kramdown', '~> 2.4'
+gem 'kramdown', '~> 2.3'
 gem 'kramdown-parser-gfm', '~> 1.1'
 
 # Syntax highlighting
-gem 'rouge', '~> 4.0'
+gem 'rouge', '~> 3.26'
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.

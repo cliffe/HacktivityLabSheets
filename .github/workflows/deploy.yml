@@ -24,15 +24,14 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.0'
           bundler-cache: true
           
       - name: Install dependencies
         run: |
-          gem install bundler --version '~> 2.4'
-          bundle config set --local deployment 'true'
-          bundle config set --local without 'development test'
-          bundle install --jobs 4 --retry 3
+          gem install bundler
+          bundle config set --local path 'vendor/bundle'
+          bundle install
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
