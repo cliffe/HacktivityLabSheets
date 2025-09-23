@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # GitHub Pages compatible gems
-gem 'github-pages', group: :jekyll_plugins
+gem 'github-pages', '~> 227', group: :jekyll_plugins
 gem 'jekyll-feed', '~> 0.12'
 gem 'jekyll-sitemap'
 gem 'jekyll-seo-tag'
