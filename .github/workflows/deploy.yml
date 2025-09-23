@@ -39,7 +39,19 @@ jobs:
           echo "Ruby version: $(ruby --version)"
           echo "Bundler version: $(bundle --version)"
           echo "Jekyll version: $(bundle exec jekyll --version)"
+          echo "Listing files before build:"
+          ls -la
+          echo "Listing _labs directory:"
+          ls -la _labs/
+          echo "Listing _labs/introducing_attacks directory:"
+          ls -la _labs/introducing_attacks/
           bundle exec jekyll build --verbose
+          echo "Listing _site directory after build:"
+          ls -la _site/
+          echo "Listing _site/labs directory:"
+          ls -la _site/labs/ || echo "No labs directory found"
+          echo "Listing _site/assets directory:"
+          ls -la _site/assets/ || echo "No assets directory found"
         env:
           JEKYLL_ENV: production
           PAGES_REPO_NWO: cliffe/HacktivityLabSheets
