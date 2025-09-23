@@ -29,7 +29,6 @@ jobs:
           
       - name: Install dependencies
         run: |
-          gem install bundler -v '~> 2.3.0'
           bundle install
           
       - name: Setup Pages
