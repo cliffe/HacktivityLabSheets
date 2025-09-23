@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/hacktivity-theme.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -22,19 +23,23 @@
 </head>
 
 <body>
+    <script>
+        // Check for embedded query parameter
+        if (window.location.search.includes('embedded')) {
+            document.body.classList.add('embedded-mode');
+        }
+    </script>
+    
+    {% unless page.embed or site.embedded %}
     <header class="site-header">
         <div class="wrapper">
-            <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+            <a href="https://hacktivity.co.uk"><img src="{{ '/assets/images/hacktivity-logo.svg' | relative_url }}" alt="Hacktivity Logo" class="hacktivity-logo"></a></span>
+            <!-- <a class="nav-link" href="{{ '/' | relative_url }}">Sheets</a>
+            <a class="nav-link" href="https://github.com/{{ site.github.repository_name }}" target="_blank">GitHub</a> -->
             
-            <nav class="site-nav">
-                <span class="menu-icon">☰</span>
-                <div class="trigger">
-                    <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
-                    <a class="page-link" href="https://github.com/{{ site.github.repository_name }}" target="_blank">GitHub</a>
-                </div>
-            </nav>
         </div>
     </header>
+    {% endunless %}
 
     <main class="page-content">
         <div class="wrapper">
@@ -42,13 +47,14 @@
         </div>
     </main>
 
+    {% unless page.embed or site.embedded %}
     <footer class="site-footer">
         <div class="wrapper">
             <p class="footer-text">
-                © 2024 {{ site.title | escape }}. 
                 <a href="https://github.com/cliffe/{{ site.github.repository_name }}">View on GitHub</a>
             </p>
         </div>
     </footer>
+    {% endunless %}
 </body>
 </html>

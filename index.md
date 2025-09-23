@@ -25,11 +25,23 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
         <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
         <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
         <div class="lab-meta">
-          {% if lab.difficulty %}
-            <span class="difficulty">Difficulty: {{ lab.difficulty }}</span>
+          {% if lab.author %}
+            <div class="author">
+              <strong>Author:</strong> {{ lab.author }}
+            </div>
           {% endif %}
-          {% if lab.duration %}
-            <span class="duration">Duration: {{ lab.duration }}</span>
+          {% if lab.license %}
+            <div class="license">
+              <strong>License:</strong> {{ lab.license }}
+            </div>
+          {% endif %}
+          {% if lab.cybok %}
+            <div class="cybok">
+              <strong>CyBOK Knowledge Areas:</strong>
+              {% for cybok_item in lab.cybok %}
+                <span class="cybok-ka">{{ cybok_item.ka }}: {{ cybok_item.topic }}</span>
+              {% endfor %}
+            </div>
           {% endif %}
           {% if lab.tags %}
             <div class="tags">
@@ -105,10 +117,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Process ==highlight== syntax
 document.addEventListener('DOMContentLoaded', function() {
-  const contentBody = document.querySelector('.lab-list');
-  if (contentBody) {
-    // Replace ==text== with <mark>text</mark>
-    contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
-  }
-});
+              const contentBody = document.querySelector('.lab-list');
+              if (contentBody) {
+                // Replace specific highlight types first
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==action:\s*([^=]+)==/gi, '<span class="action-highlight">⚡ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==tip:\s*([^=]+)==/gi, '<span class="tip-highlight">💡 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==hint:\s*([^=]+)==/gi, '<span class="hint-highlight">💭 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==note:\s*([^=]+)==/gi, '<span class="note-highlight">$1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==warning:\s*([^=]+)==/gi, '<span class="warning-highlight">⚠️ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==VM:\s*([^=]+)==/gi, '<span class="vm-highlight">🖥️ $1</span>');
+                
+                // Replace generic ==text== with <mark>text</mark>
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
+                
+                // Replace > TIP: patterns with tip-item divs
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*<em>Tip:<\/em>\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="tip-item">$1</div>'
+                );
+                
+                // Handle > *Tip: ANYTHINGHERE* (entire content in italics)
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*<em>Tip:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/em>\s*<\/p>\s*<\/blockquote>/gi,
+                  '<div class="tip-item">$1</div>'
+                );
+                
+                // Also handle > TIP: without italics
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Tip:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="tip-item">$1</div>'
+                );
+                
+                // Handle block-level action, warning, note, hint patterns
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Action:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="action-item">$1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Warning:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="warning-item">$1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Note:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="note-item">Note: $1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Hint:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="hint-item">Hint: $1</div>'
+                );
+              }
+            });
 </script>

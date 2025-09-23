@@ -10,13 +10,27 @@ layout: default
 </div>
 
 <article class="lab-content">
-  <header class="lab-header">
     <h1>{{ page.title }}</h1>
     {% if page.description %}
       <p class="lab-description">{{ page.description }}</p>
     {% endif %}
     
+    {% if page.overview %}
+      <h2>Lab Overview</h2>
+      <div class="overview-content">{{ page.overview | markdownify }}</div>
+    {% endif %}
+    
     <div class="lab-metadata">
+      {% if page.author %}
+        <div class="metadata-item">
+          <strong>Author:</strong> {{ page.author }}
+        </div>
+      {% endif %}
+      {% if page.license %}
+        <div class="metadata-item">
+          <strong>License:</strong> {{ page.license }}
+        </div>
+      {% endif %}
       {% if page.difficulty %}
         <div class="metadata-item">
           <strong>Difficulty:</strong> {{ page.difficulty }}
@@ -32,23 +46,38 @@ layout: default
           <strong>Prerequisites:</strong> {{ page.prerequisites }}
         </div>
       {% endif %}
-      {% if page.tags %}
-        <div class="metadata-item">
-          <strong>Tags:</strong>
-          {% for tag in page.tags %}
-            <span class="tag">{{ tag }}</span>
+      {% if page.cybok %}
+      <div class="cybok">
+        <strong>CyBOK Knowledge Areas:</strong>
+        {% for cybok_item in page.cybok %}
+          <span class="cybok-ka">{{ cybok_item.ka }}: {{ cybok_item.topic }}</span>
+          {% for keyword in cybok_item.keywords %}
+            <span class="cybok-keyword">{{ keyword }}</span>
           {% endfor %}
-        </div>
-      {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if page.tags %}
+      <div class="tags">
+        {% for tag in page.tags %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     </div>
-  </header>
+  <br />
 
   <div class="lab-content-body">
+    <div id="toc-container" class="toc-container">
+      <h2>Table of Contents</h2>
+      <ul id="toc-list"></ul>
+    </div>
     {{ content }}
   </div>
 
   <footer class="lab-footer">
-    <a href="{{ '/' | relative_url }}" class="back-link">← Back to Lab Index</a>
+    <a href="https://hacktivity.co.uk" class="back-link">← Back to Hacktivity</a>
   </footer>
 </article>
 
@@ -78,6 +107,13 @@ layout: default
   margin-bottom: 1rem;
 }
 
+
+.overview-content {
+  color: var(--fg-color);
+  line-height: 1.6;
+}
+
+
 .lab-metadata {
   display: grid;
   gap: 0.5rem;
@@ -97,15 +133,6 @@ layout: default
   font-weight: 600;
 }
 
-.tag {
-  background-color: var(--primary-btnbg-color);
-  color: white;
-  padding: 0.125rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  border: 1px solid var(--primary-btnbg-color);
-  margin-left: 0.25rem;
-}
 
 .lab-content-body {
   line-height: 1.6;
@@ -126,31 +153,6 @@ layout: default
   color: var(--fg-color);
 }
 
-.lab-content-body code {
-  background-color: #ffeb3b;
-  padding: 0.125rem 0.25rem;
-  border-radius: 3px;
-  font-size: 0.875rem;
-  border: 1px solid var(--panelborder-color);
-  color: black;
-}
-
-.lab-content-body pre {
-  background-color: var(--highlight-color);
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  border: 1px solid var(--panelborder-color);
-  color: white;
-}
-
-.lab-content-body pre code {
-  background-color: transparent;
-  padding: 0;
-  border: none;
-  color: white;
-}
-
 .lab-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -167,6 +169,55 @@ layout: default
   text-decoration: underline;
   color: var(--primary-btnhov-color);
 }
+
+.toc-container {
+  background-color: var(--panelbg-color);
+  border: 1px solid var(--panelborder-color);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.toc-container h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--fg-color);
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--panelborder-color);
+  padding-bottom: 0.5rem;
+}
+
+#toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#toc-list li {
+  margin: 0.25rem 0;
+}
+
+#toc-list a {
+  color: var(--link-color);
+  text-decoration: none;
+  display: block;
+  padding: 0.25rem 0;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+#toc-list a:hover {
+  background-color: var(--highlight-color);
+  text-decoration: none;
+}
+
+/* Indentation based on heading level */
+#toc-list li[data-level="1"] { padding-left: 0; }
+#toc-list li[data-level="2"] { padding-left: 1rem; }
+#toc-list li[data-level="3"] { padding-left: 2rem; }
+#toc-list li[data-level="4"] { padding-left: 3rem; }
+#toc-list li[data-level="5"] { padding-left: 4rem; }
+#toc-list li[data-level="6"] { padding-left: 5rem; }
 </style>
 
 <script>
@@ -199,12 +250,103 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Process ==highlight== syntax
+            // Process ==highlight== syntax and > TIP: patterns
+            document.addEventListener('DOMContentLoaded', function() {
+              const contentBody = document.querySelector('.lab-content-body');
+              if (contentBody) {
+                // Replace specific highlight types first
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==action:\s*([^=]+)==/gi, '<span class="action-highlight">⚡ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==tip:\s*([^=]+)==/gi, '<span class="tip-highlight">💡 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==hint:\s*([^=]+)==/gi, '<span class="hint-highlight">💭 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==note:\s*([^=]+)==/gi, '<span class="note-highlight">📝 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==warning:\s*([^=]+)==/gi, '<span class="warning-highlight">⚠️ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==VM:\s*([^=]+)==/gi, '<span class="vm-highlight">🖥️ $1</span>');
+                
+                // Replace generic ==text== with <mark>text</mark>
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
+                
+                // Replace > TIP: patterns with tip-item divs
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*<em>Tip:<\/em>\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="tip-item">$1</div>'
+                );
+                
+                // Handle > *Tip: ANYTHINGHERE* (entire content in italics)
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*<em>Tip:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/em>\s*<\/p>\s*<\/blockquote>/gi,
+                  '<div class="tip-item">$1</div>'
+                );
+                
+                // Also handle > TIP: without italics
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Tip:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="tip-item">$1</div>'
+                );
+                
+                // Handle block-level action, warning, note, hint patterns
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Action:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="action-item">$1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Warning:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="warning-item">$1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Note:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="note-item">$1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Hint:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="hint-item">Hint: $1</div>'
+                );
+              }
+            });
+
+// Auto-generate Table of Contents
 document.addEventListener('DOMContentLoaded', function() {
+  const tocList = document.getElementById('toc-list');
   const contentBody = document.querySelector('.lab-content-body');
-  if (contentBody) {
-    // Replace ==text== with <mark>text</mark>
-    contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
+  
+  if (tocList && contentBody) {
+    // Find all headings in the content
+    const headings = contentBody.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    
+    if (headings.length === 0) {
+      // Hide TOC if no headings found
+      document.getElementById('toc-container').style.display = 'none';
+      return;
+    }
+    
+    // Generate TOC items
+    headings.forEach((heading, index) => {
+      // Create ID if it doesn't exist
+      if (!heading.id) {
+        heading.id = heading.textContent
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+      
+      // Create TOC item
+      const li = document.createElement('li');
+      const level = parseInt(heading.tagName.charAt(1));
+      li.setAttribute('data-level', level);
+      
+      const a = document.createElement('a');
+      a.href = '#' + heading.id;
+      a.textContent = heading.textContent;
+      
+      // Add click handler for smooth scrolling
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        heading.scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
   }
 });
 </script>
