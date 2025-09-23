@@ -24,19 +24,25 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.1'
           bundler-cache: true
           
       - name: Install dependencies
         run: |
-          bundle install
+          gem install bundler --version '~> 2.4'
+          bundle config set --local deployment 'true'
+          bundle config set --local without 'development test'
+          bundle install --jobs 4 --retry 3
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
       - name: Build with Jekyll
         run: |
-          bundle exec jekyll build
+          echo "Ruby version: $(ruby --version)"
+          echo "Bundler version: $(bundle --version)"
+          echo "Jekyll version: $(bundle exec jekyll --version)"
+          bundle exec jekyll build --verbose
         env:
           JEKYLL_ENV: production
           
