@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Jekyll and core dependencies
-gem 'jekyll', '~> 4.3.0'
+gem 'jekyll', '~> 3.10.0'
 gem 'jekyll-feed', '~> 0.12'
 gem 'jekyll-sitemap'
 gem 'jekyll-seo-tag'

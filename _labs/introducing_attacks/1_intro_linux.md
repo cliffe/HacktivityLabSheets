@@ -8,7 +8,7 @@ overview: |
 
   Throughout this lab, you will learn how to perform various tasks, such as creating and manipulating files, exploring the Linux file system, and conducting network-related activities. You will gain hands-on experience with SSH, a secure remote shell protocol used for administration, and even attempt online brute force attacks to understand the importance of security in the digital realm. By the end of this lab, you will have honed your Linux command-line skills, developed a basic understanding of networking, and practiced using essential security tools, preparing you for more advanced challenges in the field of cyber security.
 tags: ["linux", "command-line", "ssh", "kali", "networking", "security"]
-category: "introducing_attacks"
+categories: ["introducing_attacks"]
 lab_sheet_url: "https://docs.google.com/document/d/1vA_Ev_GPqPg3cGZblgVclWmTU-sUEEBqwYpFH09mQjg/edit?usp=sharing"
 type: ["ctf-lab", "lab-sheet"]
 lecture_url: "http://z.cliffe.schreuders.org/presentations/slides/DSL_DS_OSPT_Lectures_1_Intro_to_Unix_FOSS_and_Linux.html"

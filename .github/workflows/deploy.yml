@@ -24,15 +24,19 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.0'
           bundler-cache: true
+          
+      - name: Install dependencies
+        run: |
+          bundle install
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
       - name: Build with Jekyll
         run: |
-          bundle exec jekyll build --baseurl "${{ steps.page_url.outputs.base_path }}"
+          bundle exec jekyll build
         env:
           JEKYLL_ENV: production
           

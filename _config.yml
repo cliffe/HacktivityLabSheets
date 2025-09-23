@@ -16,7 +16,7 @@ highlighter: rouge
 collections:
   labs:
     output: true
-    permalink: /:collection/:category/:name/
+    permalink: /:collection/:categories/:name/
 
 # Default settings for lab posts
 defaults:
