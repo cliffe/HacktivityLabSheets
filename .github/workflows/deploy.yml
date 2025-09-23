@@ -42,6 +42,7 @@ jobs:
           bundle exec jekyll build --verbose
         env:
           JEKYLL_ENV: production
+          PAGES_REPO_NWO: cliffe/HacktivityLabSheets
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
