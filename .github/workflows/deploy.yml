@@ -25,10 +25,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7'
-          bundler-cache: true
+          bundler-cache: false
           
       - name: Install dependencies
         run: |
+          gem install bundler -v '~> 2.3.0'
           bundle install
           
       - name: Setup Pages
