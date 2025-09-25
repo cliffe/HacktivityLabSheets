@@ -27,7 +27,15 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
         <div class="lab-meta">
           {% if lab.author %}
             <div class="author">
-              <strong>Author:</strong> {{ lab.author }}
+              <strong>{% if lab.author.first %}Authors:{% else %}Author:{% endif %}</strong> 
+              {% if lab.author.first %}
+                {% assign author_count = lab.author.size %}
+                {% for author in lab.author %}
+                  {% if forloop.last and author_count > 1 %}and {% endif %}{{ author }}{% unless forloop.last %}, {% endunless %}
+                {% endfor %}
+              {% else %}
+                {{ lab.author }}
+              {% endif %}
             </div>
           {% endif %}
           {% if lab.license %}

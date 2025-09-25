@@ -26,6 +26,21 @@ The highlighting system supports two main types of highlighting:
 ### Basic Format
 Use `==type: content==` where `type` is one of: `action`, `tip`, `hint`, `warning`, `VM`
 
+### Command Formatting
+All bash/terminal commands should be properly formatted with markdown code blocks:
+
+**Before:**
+```
+msfvenom -l payload | less
+```
+
+**After:**
+```bash
+msfvenom -l payload | less
+```
+
+**Important**: Always use `bash` language tag for terminal commands and escape pipe characters (`|` becomes `\|`) within code blocks.
+
 ### Examples
 
 **Action Highlights:**
@@ -98,7 +113,30 @@ Use `> Type: content` where `Type` is one of: `Action`, `Tip`, `Warning`, `Hint`
 
 > Note: This command lists all processes running on the system. The "aux" flags provide detailed information about each process.
 
+**Important**: Since the "Note:", "Tip:", and "Hint:" labels are not visible in the rendered output, always capitalize the first word after the colon to make the content clear and readable.
+
 ## 🤖 AI Instructions for Lab Sheet Editing
+
+### Step 0: Format Commands Properly
+Before applying highlighting, ensure all bash/terminal commands are properly formatted:
+
+**Command Formatting Rules:**
+- All terminal commands must be in markdown code blocks with `bash` language tag
+- Escape pipe characters: `|` becomes `\|` within code blocks
+- Commands should be on their own lines, not inline with text
+
+**Examples:**
+```markdown
+# Before (incorrect):
+Run the command msfvenom -l payload | less
+
+# After (correct):
+==action: Run the command:==
+
+```bash
+msfvenom -l payload \| less
+```
+```
 
 ### Step 1: Identify Action Items
 Look for sentences that describe actions students need to perform:
@@ -155,6 +193,8 @@ Look for:
 - Clarifications about expected results
 
 **Convert to:** `> Note: [troubleshooting or explanation content]` for block-level notes
+
+**Important**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output.
 
 
 ## 📋 Conversion Examples
@@ -245,6 +285,21 @@ From the command line ==action: run:==
 ```bash
 whoami
 ```
+```
+
+### Before (Plain Text):
+```
+Run the command msfvenom -l payload | less to see available payloads.
+```
+### After (Highlighted):
+```
+==action: Run the command:==
+
+```bash
+msfvenom -l payload \| less
+```
+
+to see available payloads.
 ```
 ### Before (Plain Text):
 ```
@@ -345,6 +400,8 @@ Before applying highlighting to any lab sheet:
 - [ ] **Check TOC completeness** - ensure all major sections are listed
 - [ ] **Verify heading hierarchy** - confirm proper use of #, ##, ###, etc.
 - [ ] **Test all existing links** - both internal TOC links and external URLs
+- [ ] **Format all commands** - ensure all bash/terminal commands use proper markdown code blocks with `bash` language tag
+- [ ] **Escape pipe characters** - convert `|` to `\|` in all command code blocks
 - [ ] **Identify content types** - map out where actions, tips, hints, warnings, VM context, and troubleshooting/explanations appear
 - [ ] **Identify troubleshooting text** - find text that provides troubleshooting information after commands and format as note blocks
 - [ ] **Plan highlighting strategy** - decide which content truly needs highlighting
@@ -390,6 +447,8 @@ ls -la
 5. **Ignoring warnings**: Ensure all safety warnings and important cautions are highlighted
 6. **Poor tip placement**: Tips should be genuinely helpful, not obvious information
 7. **Missing troubleshooting formatting**: Don't forget to format troubleshooting text after commands as note blocks
+8. **Improper command formatting**: Always use `bash` code blocks for terminal commands and escape pipe characters
+9. **Uncapitalized block content**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output
 
 ### File Structure Requirements
 

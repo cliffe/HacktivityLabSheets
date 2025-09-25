@@ -405,7 +405,7 @@ To ==action: check the fingerprint, on the desktop run==:
 ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub
 ```
 
-> hint: Hint: you may also need to check other .pub files in that directory
+> Hint: you may also need to check other .pub files in that directory
 
 If the fingerprint presented to you while connecting matches, type “yes”, and from then on if you connect to the same machine you won't be prompted.
 

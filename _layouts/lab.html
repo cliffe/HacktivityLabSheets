@@ -23,7 +23,15 @@ layout: default
     <div class="lab-metadata">
       {% if page.author %}
         <div class="metadata-item">
-          <strong>Author:</strong> {{ page.author }}
+          <strong>{% if page.author.first %}Authors:{% else %}Author:{% endif %}</strong> 
+          {% if page.author.first %}
+            {% assign author_count = page.author.size %}
+            {% for author in page.author %}
+              {% if forloop.last and author_count > 1 %}and {% endif %}{{ author }}{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+          {% else %}
+            {{ page.author }}
+          {% endif %}
         </div>
       {% endif %}
       {% if page.license %}
