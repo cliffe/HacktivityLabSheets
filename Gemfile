@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-# GitHub Pages compatible gems
-gem 'github-pages', group: :jekyll_plugins
+# GitHub Pages compatible gems - pin to version compatible with Ruby 3.1.7
+gem 'github-pages', '~> 232', group: :jekyll_plugins
 gem 'jekyll-feed', '~> 0.12'
 gem 'jekyll-sitemap'
 

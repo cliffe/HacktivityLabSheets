@@ -275,7 +275,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (< 8.0)
-  github-pages
+  github-pages (~> 232)
   http_parser.rb (~> 0.6.0)
   jekyll-feed (~> 0.12)
   jekyll-sitemap
