@@ -28,6 +28,10 @@ if [ $? -ne 0 ]; then
     bundle install --path vendor/bundle
 fi
 
+# Install webrick for local development (Ruby 3.2+ compatibility)
+echo "📦 Installing webrick for local development..."
+bundle add webrick --version '~> 1.7'
+
 echo "🌐 Starting Jekyll server..."
 echo "📱 Site will be available at: http://localhost:4000"
 echo "🌐 Also available at: http://0.0.0.0:4000"

@@ -19,8 +19,6 @@ gem 'wdm', '~> 0.1.1', :platforms => [:mingw, :x64_mingw, :mswin]
 # do not have a Java counterpart.
 gem 'http_parser.rb', '~> 0.6.0', :platforms => [:jruby]
 
-# Add webrick for Ruby 3.2+ compatibility (local development only)
-# GitHub Pages uses Ruby 3.1.7 which doesn't need this gem
-if RUBY_VERSION >= "3.2.0"
-  gem 'webrick', '~> 1.7'
-end
+# Note: webrick is needed for local development with Ruby 3.2+
+# but GitHub Pages (Ruby 3.1.7) doesn't need it
+# This is handled in the start-server-github-pages.sh script
