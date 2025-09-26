@@ -24,7 +24,7 @@ The highlighting system supports two main types of highlighting:
 ## 📝 Inline Highlighting Syntax
 
 ### Basic Format
-Use `==type: content==` where `type` is one of: `action`, `tip`, `hint`, `warning`, `VM`
+Use `==type: content==` where `type` is one of: `action`, `tip`, `hint`, `warning`, `VM`, `question`, `edit`
 
 ### Command Formatting
 All bash/terminal commands should be properly formatted with markdown code blocks:
@@ -81,10 +81,26 @@ msfvenom -l payload | less
 ==VM: On the Windows target machine==
 ```
 
+**Question Highlights:**
+```markdown
+==question: Self-study Question:==
+==question: Log Book Question:==
+==question: Reflection Question:==
+==question: Discussion Question:==
+```
+
+**Edit Highlights:**
+```markdown
+==edit: Replace with your IP address==
+==edit: Change to your target IP==
+==edit: Update with your network range==
+==edit: Modify as needed==
+```
+
 ## 📦 Block-Level Highlighting Syntax
 
 ### Basic Format
-Use `> Type: content` where `Type` is one of: `Action`, `Tip`, `Warning`, `Hint`, `Note`
+Use `> Type: content` where `Type` is one of: `Action`, `Tip`, `Warning`, `Hint`, `Note`, `Question`, `Flag`
 
 ### Examples
 
@@ -113,7 +129,23 @@ Use `> Type: content` where `Type` is one of: `Action`, `Tip`, `Warning`, `Hint`
 
 > Note: This command lists all processes running on the system. The "aux" flags provide detailed information about each process.
 
-**Important**: Since the "Note:", "Tip:", and "Hint:" labels are not visible in the rendered output, always capitalize the first word after the colon to make the content clear and readable.
+**Question Blocks:**
+> Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
+
+> Question: How does the Metasploit framework help in penetration testing? What are the advantages of using a standardized exploitation framework?
+
+**Flag Blocks:**
+> Flag: Find the flag hidden in the victim's home directory and submit it to Hacktivity to complete this challenge.
+
+> Flag: There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
+
+**When to Use Question Blocks:**
+Use `> Question:` for clear self-study or log book questions where students are expected to answer for themselves. Do NOT use for rhetorical questions that are answered later in the lab.
+
+**When to Use Flag Blocks:**
+Use `> Flag:` for CTF challenge tasks where students need to find and submit flags. This highlights the competitive/assessment aspect of the task.
+
+**Important**: Since the "Note:", "Tip:", "Hint:", "Question:", and "Flag:" labels are not visible in the rendered output, always capitalize the first word after the colon to make the content clear and readable.
 
 ## 🤖 AI Instructions for Lab Sheet Editing
 
@@ -194,7 +226,34 @@ Look for:
 
 **Convert to:** `> Note: [troubleshooting or explanation content]` for block-level notes
 
-**Important**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output.
+### Step 7: Identify Self-Study and Log Book Questions
+Look for:
+- Clear questions where students are expected to provide their own answers
+- Self-study questions for reflection and learning
+- Log book questions for documentation and record-keeping
+- Questions that require student analysis or research
+
+**Convert to:** `> Question: [question content]` for block-level questions
+
+### Step 8: Identify CTF Flag Tasks
+Look for:
+- Tasks that ask students to find and submit flags
+- CTF challenge completion requirements
+- Assessment tasks that involve finding specific information
+- Competitive elements in the lab
+
+**Convert to:** `> Flag: [flag task content]` for block-level flag tasks
+
+**Important Guidelines for Question Blocks:**
+- **USE** `> Question:` for self-study questions, log book questions, and reflection questions where students answer for themselves
+- **DO NOT USE** `> Question:` for rhetorical questions that are answered later in the lab
+- **DO NOT USE** `> Question:` for questions immediately followed by the answer in the text
+
+**Important Guidelines for Flag Blocks:**
+- **USE** `> Flag:` for CTF challenge tasks where students need to find and submit flags
+- **DO NOT USE** `> Flag:` for general information gathering tasks
+
+**Important**: Always capitalize the first word after "Note:", "Tip:", "Hint:", "Question:", or "Flag:" since these labels are not visible in the rendered output.
 
 
 ## 📋 Conversion Examples
@@ -301,6 +360,24 @@ msfvenom -l payload \| less
 
 to see available payloads.
 ```
+
+### Before (Plain Text):
+```
+Ping your own Kali VM from Kali itself (with the IP address you noted earlier):
+
+ping *Kali-IP-address*
+```
+
+### After (Highlighted):
+```
+==action: Ping your own Kali VM from Kali itself (with the IP address you noted earlier):==
+
+```bash
+ping ==edit:Kali-IP-address==
+```
+```
+
+
 ### Before (Plain Text):
 ```
 Note, this is lowercase “LS”.
@@ -319,9 +396,13 @@ When properly highlighted, the content will display as:
 - **Hint highlights**: Green background with 💭 icon
 - **Warning highlights**: Orange background with ⚠️ icon
 - **VM highlights**: Light blue background with 🖥️ icon
+- **Question highlights**: Teal background with ❓ icon
+- **Edit highlights**: Yellow background with ✏️ icon
 
 Block-level highlights will appear as styled boxes with appropriate colors and icons:
 - **Note blocks**: Light gray background with 📝 icon (for troubleshooting and explanations)
+- **Question blocks**: Teal background with ❓ icon (for self-study, log book, and reflection questions)
+- **Flag blocks**: Purple background with 🏁 icon (for CTF challenge tasks)
 
 ## ✅ Quality Checklist
 
@@ -334,7 +415,7 @@ Before finalizing a lab sheet, ensure:
 5. **VM/Environment context is marked** - Clear indication of which system/VM to use
 6. **Consistency** - Use the same highlighting style throughout the document
 7. **Appropriate level** - Don't over-highlight; only highlight truly important information
-8. **TOC links are working** - Check that all headings in the Table of Contents have proper markdown links that work correctly
+8. **TOC links are working** - Check that all headings in the Table of Contents have proper markdown links that don't contain any special characters
 
 ## 🔄 Process Summary
 
@@ -437,6 +518,24 @@ ls -la
 ```
 
 **Rule**: Any brief explanation and any troubleshooting text that directly follows a command instruction should be formatted as a note block using `> Note:` to visually separate the explanation/troubleshooting information from the instruction.
+
+### Before (Plain Text):
+```
+Self-study Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
+
+Log Book Question: Document your findings from the vulnerability assessment, including which exploits were successful and why.
+
+There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
+```
+
+### After (Highlighted):
+```
+> Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
+
+> Question: Document your findings from the vulnerability assessment, including which exploits were successful and why.
+
+> Flag: There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
+```
 
 ### Common Processing Errors to Avoid
 

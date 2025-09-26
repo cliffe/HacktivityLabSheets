@@ -9,6 +9,103 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla";
 }
 
+// Limit image width within lab content
+.lab-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+// Enhanced syntax highlighting for code blocks
+.highlight pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  position: relative;
+
+  // General light theme colors for all languages
+  .c1, .c { color: #718096; font-style: italic; } // Comments
+  .nb { color: #63b3ed; font-weight: bold; } // Built-in commands
+  .s2, .s { color: #68d391; } // Strings
+  .o { color: #f56565; }  // Operators
+  .nv { color: #b794f6; } // Variables
+  .k { color: #f56565; }  // Keywords
+  .nt { color: #f6ad55; } // Command line options
+  .na { color: #63b3ed; } // Command names
+  .se { color: #68d391; } // String escapes
+
+  
+  // Edit highlights within code blocks - light theme
+  .edit-highlight {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+    border-left: 3px solid #ffc107 !important;
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+  }
+  
+  // Copy button styling (handled by JavaScript)
+  .copy-btn {
+    &:hover {
+      background: #0056b3 !important;
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+
+// Dark theme support
+[data-theme="dark"] .highlight pre {
+  background-color: #1a202c;
+  border-color: #2d3748;
+  color: #e2e8f0;
+  
+  // General dark theme colors for all languages
+  .c1, .c { color: #718096; font-style: italic; } // Comments
+  .nb { color: #63b3ed; font-weight: bold; } // Built-in commands
+  .s2, .s { color: #68d391; } // Strings
+  .o { color: #f56565; }  // Operators
+  .nv { color: #b794f6; } // Variables
+  .k { color: #f56565; }  // Keywords
+  .nt { color: #f6ad55; } // Command line options
+  .na { color: #63b3ed; } // Command names
+  .se { color: #68d391; } // String escapes
+  
+  // Edit highlights within code blocks - dark theme
+  .edit-highlight {
+    background-color: #664d03 !important;
+    color: #ffda6a !important;
+    border-left: 3px solid #ffc107 !important;
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+  }
+  
+  // Dark theme copy button styling
+  .copy-btn {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+    
+    &:hover {
+      background: #2d3748 !important;
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Do Hyeon", "Source Code Pro", Monaco, monospace;
   font-weight: normal;
@@ -727,11 +824,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
-// Code blocks
-pre, code {
-  background-color: var(--highlight-color);
-  color: var(--fg-color);
-}
 
 code {
   padding: 0.125rem 0.25rem;
@@ -1029,6 +1121,100 @@ blockquote {
   color: #d4edda;
 }
 
+.question-item {
+  background-color: #e0f2f1;
+  border: 1px solid #4db6ac;
+  border-left: 4px solid #009688;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #00695c;
+}
+
+.question-item h1, .question-item h2, .question-item h3, .question-item h4, .question-item h5, .question-item h6 {
+  color: #00695c;
+  margin-top: 0;
+}
+
+.question-item::before {
+  content: "❓ ";
+  font-weight: bold;
+}
+
+[data-theme="dark"] .question-item {
+  background-color: #004d40;
+  border-color: #26a69a;
+  border-left-color: #26a69a;
+  color: #4db6ac;
+}
+
+[data-theme="dark"] .question-item h1, 
+[data-theme="dark"] .question-item h2, 
+[data-theme="dark"] .question-item h3, 
+[data-theme="dark"] .question-item h4, 
+[data-theme="dark"] .question-item h5, 
+[data-theme="dark"] .question-item h6 {
+  color: #4db6ac;
+}
+
+.flag-item {
+  background: linear-gradient(135deg, #e1bee7  0%, #f3e5f5 100%);
+  border: 1px solid #ea75ff;
+  border-left: 6px solid #503883;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  color: #2e1065;
+  box-shadow: 0 4px 12px rgba(80, 56, 131, 0.15);
+  position: relative;
+  font-weight: 500;
+}
+
+.flag-item h1, .flag-item h2, .flag-item h3, .flag-item h4, .flag-item h5, .flag-item h6 {
+  color: #2e1065;
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.flag-item::before {
+  content: "🏳️ ";
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-right: 0.5rem;
+}
+
+// .flag-item::after {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   width: 0;
+//   height: 0;
+//   border-left: 20px solid transparent;
+//   border-top: 20px solid #9c27b0;
+// }
+
+[data-theme="dark"] .flag-item {
+  background: linear-gradient(135deg, #2d1b69 0%, #4a148c 100%);
+  border-color: plum;
+  border-left-color: #ea75ff;
+  color: #f3e5f5;
+  box-shadow: 0 4px 12px rgba(80, 56, 131, 0.3);
+}
+
+[data-theme="dark"] .flag-item h1, 
+[data-theme="dark"] .flag-item h2, 
+[data-theme="dark"] .flag-item h3, 
+[data-theme="dark"] .flag-item h4, 
+[data-theme="dark"] .flag-item h5, 
+[data-theme="dark"] .flag-item h6 {
+  color: #f3e5f5;
+}
+
+[data-theme="dark"] .flag-item::after {
+  border-top-color: #9c27b0;
+}
+
 // Inline action styling
 .action-text {
   background-color: var(--primary-btnbg-color);
@@ -1160,6 +1346,40 @@ mark, .highlight-text{
   border-left-color: #29b6f6;
 }
 
+  .question-highlight {
+    background-color: #e0f2f1;
+    color: #00695c;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    border-left: 3px solid #009688;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0.1rem 0;
+  }
+
+  [data-theme="dark"] .question-highlight {
+    background-color: #004d40;
+    color: #4db6ac;
+    border-left-color: #26a69a;
+  }
+
+  .edit-highlight {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    border-left: 3px solid #ffc107;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0.1rem 0;
+  }
+
+  [data-theme="dark"] .edit-highlight {
+    background-color: #664d03;
+    color: #ffda6a;
+    border-left-color: #ffc107;
+  }
+
 .language-bash {
   font-family: "Source Code Pro", Monaco, monospace !important;
   // background-color: #f0ad4e;
@@ -1191,3 +1411,4 @@ mark, .highlight-text{
   color: var(--primary-btnhov-color);
   text-decoration: none;
 }
+

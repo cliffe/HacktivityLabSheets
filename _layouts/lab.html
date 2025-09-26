@@ -10,15 +10,17 @@ layout: default
 </div>
 
 <article class="lab-content">
-    <h1>{{ page.title }}</h1>
-    {% if page.description %}
-      <p class="lab-description">{{ page.description }}</p>
-    {% endif %}
-    
-    {% if page.overview %}
-      <h2>Lab Overview</h2>
-      <div class="overview-content">{{ page.overview | markdownify }}</div>
-    {% endif %}
+    <div class="hidden-when-embedded">
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}
+        <p class="lab-description">{{ page.description }}</p>
+      {% endif %}
+      
+      {% if page.overview %}
+        <h2>Lab Overview</h2>
+        <div class="overview-content">{{ page.overview | markdownify }}</div>
+      {% endif %}
+    </div>
     
     <div class="lab-metadata">
       {% if page.author %}
@@ -54,24 +56,26 @@ layout: default
           <strong>Prerequisites:</strong> {{ page.prerequisites }}
         </div>
       {% endif %}
+      <div class="hidden-when-embedded">
       {% if page.cybok %}
-      <div class="cybok">
-        <strong>CyBOK Knowledge Areas:</strong>
-        {% for cybok_item in page.cybok %}
-          <span class="cybok-ka">{{ cybok_item.ka }}: {{ cybok_item.topic }}</span>
-          {% for keyword in cybok_item.keywords %}
-            <span class="cybok-keyword">{{ keyword }}</span>
+        <div class="cybok">
+          <strong>CyBOK Knowledge Areas:</strong>
+          {% for cybok_item in page.cybok %}
+            <span class="cybok-ka">{{ cybok_item.ka }}: {{ cybok_item.topic }}</span>
+            {% for keyword in cybok_item.keywords %}
+              <span class="cybok-keyword">{{ keyword }}</span>
+            {% endfor %}
           {% endfor %}
-        {% endfor %}
+        </div>
+      {% endif %}
+      {% if page.tags %}
+          <div class="tags">
+            {% for tag in page.tags %}
+              <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+      {% endif %}
       </div>
-    {% endif %}
-    {% if page.tags %}
-      <div class="tags">
-        {% for tag in page.tags %}
-          <span class="tag">{{ tag }}</span>
-        {% endfor %}
-      </div>
-    {% endif %}
 
     </div>
   <br />
@@ -98,6 +102,9 @@ layout: default
 
 .embeded-mode .lab-content {
   max-width: 100%;
+}
+.embedded-mode .hidden-when-embedded {
+  display: none;
 }
 
 .lab-header {
@@ -273,9 +280,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 contentBody.innerHTML = contentBody.innerHTML.replace(/==note:\s*([^=]+)==/gi, '<span class="note-highlight">📝 $1</span>');
                 contentBody.innerHTML = contentBody.innerHTML.replace(/==warning:\s*([^=]+)==/gi, '<span class="warning-highlight">⚠️ $1</span>');
                 contentBody.innerHTML = contentBody.innerHTML.replace(/==VM:\s*([^=]+)==/gi, '<span class="vm-highlight">🖥️ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==question:\s*([^=]+)==/gi, '<span class="question-highlight">❓ $1</span>');
                 
-                // Replace generic ==text== with <mark>text</mark>
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==([^=]+)==/g, '<mark>$1</mark>');
+                // Process edit highlights BEFORE other processing to avoid syntax highlighting interference
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==edit:\s*([^=]+)==/gi, '<span class="edit-highlight">✏️ $1</span>');
+                
+                // Replace generic ==text== with <mark>text</mark> (but not edit highlights)
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==(?!edit:)([^=]+)==/g, '<mark>$1</mark>');
                 
                 // Replace > TIP: patterns with tip-item divs
                 contentBody.innerHTML = contentBody.innerHTML.replace(
@@ -295,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   '<div class="tip-item">$1</div>'
                 );
                 
-                // Handle block-level action, warning, note, hint patterns
+                // Handle block-level action, warning, note, hint, flag patterns
                 contentBody.innerHTML = contentBody.innerHTML.replace(
                   /<blockquote>\s*<p>\s*Action:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
                   '<div class="action-item">$1</div>'
@@ -312,6 +323,84 @@ document.addEventListener('DOMContentLoaded', function() {
                   /<blockquote>\s*<p>\s*Hint:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
                   '<div class="hint-item">Hint: $1</div>'
                 );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Question:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="question-item">$1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Flag:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="flag-item">$1</div>'
+                );
+                
+                // Add copy functionality to code blocks
+                const codeBlocks = contentBody.querySelectorAll('pre code');
+                codeBlocks.forEach(block => {
+                  const pre = block.parentElement;
+                  if (pre.classList.contains('highlight') || pre.closest('.highlight')) {
+                    pre.style.position = 'relative';
+                    const copyBtn = document.createElement('button');
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.className = 'copy-btn';
+                    copyBtn.style.cssText = `
+                      position: absolute;
+                      top: 0.5rem;
+                      right: 0.5rem;
+                      background: #007bff;
+                      color: white;
+                      border: none;
+                      padding: 0.25rem 0.5rem;
+                      border-radius: 3px;
+                      font-size: 0.75rem;
+                      cursor: pointer;
+                      opacity: 0;
+                      transition: all 0.2s ease;
+                      z-index: 10;
+                    `;
+                    copyBtn.addEventListener('click', () => {
+                      navigator.clipboard.writeText(block.textContent).then(() => {
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                      });
+                    });
+                    pre.addEventListener('mouseenter', () => copyBtn.style.opacity = '1');
+                    pre.addEventListener('mouseleave', () => copyBtn.style.opacity = '0');
+                    pre.appendChild(copyBtn);
+                  }
+                });
+                
+                // Process edit highlights that got broken up by syntax highlighting
+                const codeElements = contentBody.querySelectorAll('code, pre code, .highlight code');
+                codeElements.forEach(codeElement => {
+                  // Look for the pattern: <span class="o">==</span>edit:content<span class="o">==</span>
+                  const html = codeElement.innerHTML;
+                  if (html.includes('==') && html.includes('edit:')) {
+                    // Handle the broken pattern from syntax highlighting
+                    codeElement.innerHTML = html.replace(
+                      /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+)<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    // Handle patterns with mark tags in the middle
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+(?:<[^>]+>[^<]*)*?)<span[^>]*class="[^"]*o[^"]*"[^>]*><mark><\/mark><\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    // Handle the specific pattern: ==edit:content<span class="o"><mark></mark></span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+)<span[^>]*class="[^"]*o[^"]*"[^>]*><mark><\/mark><\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    // Handle pattern with variable highlighting in the middle: ==edit:content <span class="nv">VAR</span>==
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+)\s*<span[^>]*class="[^"]*nv[^"]*"[^>]*>([^<]+)<\/span><span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>/gi,
+                      '<span class="edit-highlight">✏️$1 $2</span>'
+                    );
+                    // Also handle any remaining unprocessed edit highlights
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /==edit:\s*([^=]+)==/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                  }
+                });
               }
             });
 

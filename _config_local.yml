@@ -1,0 +1,54 @@
+# Site settings
+title: Hacktivity Lab Sheets
+description: Lab sheets for Hacktivity SecGen labs
+baseurl: ""  # Empty for local development
+url: "http://localhost:4000"
+
+# GitHub Pages settings
+github:
+  repository_name: HacktivityLabSheets
+repository: "cliffe/HacktivityLabSheets"
+
+# Jekyll settings
+markdown: kramdown
+highlighter: rouge
+
+# Collections for organizing labs
+collections:
+  labs:
+    output: true
+    permalink: /:collection/:categories/:name/
+
+# Default settings for lab posts
+defaults:
+  - scope:
+      path: "_labs"
+      type: "labs"
+    values:
+      layout: "lab"
+  - scope:
+      path: "_labs/**"
+      type: "labs"
+    values:
+      layout: "lab"
+
+# Plugin settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-paginate
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata
