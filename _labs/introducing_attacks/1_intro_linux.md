@@ -570,6 +570,6 @@ Well done\! Not bad for the first week\!
 
 [^7]:  Public-key crypto will be covered at a later stage in your studies, but if you are curious now here is an overview: [http://en.wikipedia.org/wiki/Public\_key](http://en.wikipedia.org/wiki/Public_key)
 
-[vm_launch_icon]: /assets/images/common/vm_launch_icon.png
-[virtualisation]: /assets/images/introducing_attacks/1_intro_linux/virtualisation.png
-[terminal_icon]: /assets/images/introducing_attacks/1_intro_linux/terminal_icon.png 
+[vm_launch_icon]: {{ site.baseurl }}/assets/images/common/vm_launch_icon.png
+[virtualisation]: {{ site.baseurl }}/assets/images/introducing_attacks/1_intro_linux/virtualisation.png
+[terminal_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/1_intro_linux/terminal_icon.png 

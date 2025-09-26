@@ -643,11 +643,11 @@ Well done\!
 
 [^2]:  Remember we are exploiting a vulnerability of the Adobe Reader application, so use Adobe Reader and not Chrome to open the PDF file.
 
-[bind_shell]: /assets/images/introducing_attacks/3_vulnerabilities/bind_shell.png
-[vm_launch_icon]: /assets/images/common/vm_launch_icon.png
-[firewall_dialogue]: /assets/images/introducing_attacks/3_vulnerabilities/firewall_dialogue.png
-[linux_victim_server_vm]: /assets/images/introducing_attacks/3_vulnerabilities/linux_victim_server_vm.png
-[bind_shell_blocked]: /assets/images/introducing_attacks/3_vulnerabilities/bind_shell_blocked.png
-[reverse_shell]: /assets/images/introducing_attacks/3_vulnerabilities/reverse_shell.png
-[msf_interfaces]: /assets/images/introducing_attacks/3_vulnerabilities/msf_interfaces.png
+[bind_shell]: {{ site.baseurl }}/assets/images/introducing_attacks/3_vulnerabilities/bind_shell.png
+[vm_launch_icon]: {{ site.baseurl }}/assets/images/common/vm_launch_icon.png
+[firewall_dialogue]: {{ site.baseurl }}/assets/images/introducing_attacks/3_vulnerabilities/firewall_dialogue.png
+[linux_victim_server_vm]: {{ site.baseurl }}/assets/images/introducing_attacks/3_vulnerabilities/linux_victim_server_vm.png
+[bind_shell_blocked]: {{ site.baseurl }}/assets/images/introducing_attacks/3_vulnerabilities/bind_shell_blocked.png
+[reverse_shell]: {{ site.baseurl }}/assets/images/introducing_attacks/3_vulnerabilities/reverse_shell.png
+[msf_interfaces]: {{ site.baseurl }}/assets/images/introducing_attacks/3_vulnerabilities/msf_interfaces.png
 

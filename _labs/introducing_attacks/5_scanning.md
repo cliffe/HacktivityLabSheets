@@ -686,6 +686,6 @@ There are flags to be found in the banner grabbing tasks, and an opportunity to 
 [^3]:  For a technical description of how Nmap’s OS detection works: [http://nmap.org/book/osdetect-methods.html](http://nmap.org/book/osdetect-methods.html)
 
 
-[vm_launch_icon]: /assets/images/common/vm_launch_icon.png
-[tcp_handshake]: /assets/images/introducing_attacks/5_scanning/tcp_handshake.png
-[zenmap]: /assets/images/introducing_attacks/5_scanning/zenmap.png
+[vm_launch_icon]: {{ site.baseurl }}/assets/images/common/vm_launch_icon.png
+[tcp_handshake]: {{ site.baseurl }}/assets/images/introducing_attacks/5_scanning/tcp_handshake.png
+[zenmap]: {{ site.baseurl }}/assets/images/introducing_attacks/5_scanning/zenmap.png
