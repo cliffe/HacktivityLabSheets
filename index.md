@@ -11,16 +11,78 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
 
 {% if site.labs.size > 0 %}
 <div class="lab-list">
-  {% assign labs_by_category = site.labs | group_by: 'category' %}
-  {% for category in labs_by_category %}
-    {% if category.name != blank %}
-      <h2 class="category-heading">{{ category.name | replace: '_', ' ' | capitalize }}</h2>
-    {% else %}
-      <h2 class="category-heading">General Labs</h2>
+  {% comment %} Create a collection of all unique categories {% endcomment %}
+  {% assign all_categories = '' | split: '' %}
+  {% for lab in site.labs %}
+    {% if lab.categories %}
+      {% for category in lab.categories %}
+        {% unless all_categories contains category %}
+          {% assign all_categories = all_categories | push: category %}
+        {% endunless %}
+      {% endfor %}
     {% endif %}
+  {% endfor %}
+  
+  {% comment %} Sort categories alphabetically {% endcomment %}
+  {% assign sorted_categories = all_categories | sort %}
+  
+  {% comment %} Display labs grouped by category {% endcomment %}
+  {% for category in sorted_categories %}
+    <h2 class="category-heading">{{ category | replace: '_', ' ' | capitalize }}</h2>
     
     <div class="category-labs">
-      {% for lab in category.items %}
+      {% for lab in site.labs %}
+        {% if lab.categories contains category %}
+        <div class="lab-item">
+          <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
+          <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
+          <div class="lab-meta">
+            {% if lab.author %}
+              <div class="author">
+                <strong>{% if lab.author.first %}Authors:{% else %}Author:{% endif %}</strong> 
+                {% if lab.author.first %}
+                  {% assign author_count = lab.author.size %}
+                  {% for author in lab.author %}
+                    {% if forloop.last and author_count > 1 %}and {% endif %}{{ author }}{% unless forloop.last %}, {% endunless %}
+                  {% endfor %}
+                {% else %}
+                  {{ lab.author }}
+                {% endif %}
+              </div>
+            {% endif %}
+            {% if lab.license %}
+              <div class="license">
+                <strong>License:</strong> {{ lab.license }}
+              </div>
+            {% endif %}
+            {% if lab.cybok %}
+              <div class="cybok">
+                <strong>CyBOK Knowledge Areas:</strong>
+                {% for cybok_item in lab.cybok %}
+                  <span class="cybok-ka">{{ cybok_item.ka }}: {{ cybok_item.topic }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if lab.tags %}
+              <div class="tags">
+                {% for tag in lab.tags %}
+                  <span class="tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+  
+  {% comment %} Display labs without categories {% endcomment %}
+  {% assign uncategorized_labs = site.labs | where: 'categories', nil %}
+  {% if uncategorized_labs.size > 0 %}
+    <h2 class="category-heading">General Labs</h2>
+    <div class="category-labs">
+      {% for lab in uncategorized_labs %}
       <div class="lab-item">
         <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
         <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
@@ -62,7 +124,7 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
       </div>
       {% endfor %}
     </div>
-  {% endfor %}
+  {% endif %}
 </div>
 {% else %}
 <div class="no-labs">
@@ -73,14 +135,21 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
 
 ## About
 
-These lab sheets are designed to work with SecGen (Security Scenario Generator) and provide practical, hands-on experience with various cybersecurity concepts and techniques.
+These lab sheets are designed to provide practical, hands-on experience with various cybersecurity concepts and techniques.
 
-### How to Use
+These labs are written to be completed on VMs configured with practical hacking/security challenges.
 
-1. Browse the available labs above
-2. Click on a lab title to view the detailed instructions
-3. Follow the setup and execution steps provided in each lab
-4. Complete the challenges and questions included in each exercise
+### Option 1: Hacktivity Cyber Security Labs (Recommended)
+**Visit [Hacktivity Cyber Security Labs](https://hacktivity.leeds.ac.uk)** for a fully configured, cloud-based lab environment
+- No setup required - labs are pre-configured and ready to use
+- Access to virtual machines and all required tools
+- Perfect for students and educators
+
+### Option 2: Manual Setup with SecGen
+For advanced users who want to build their own lab environment:
+- Use **SecGen (Security Scenario Generator)** to create vulnerable VMs
+- Requires technical expertise in virtualization and security tools
+
 
 ### Contributing
 
