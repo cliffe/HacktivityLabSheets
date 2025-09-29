@@ -289,7 +289,7 @@ Brute force attacks usually start with the ***password dictionary*** attempt to 
 
 ![][zap_fuzz_menu_selection]
 
-==action: Select the password value (pass in the example below) of the HTTP request (1), add a new fuzz (2), add the payload (3), and copy paste the list of passwords from the suggested password list file \\- [passwords.txt](https://drive.google.com/file/d/1YqUJMhXGqoEmp-OoZ7TJkskAZ8Uv6s8Y/view?usp=sharing) (4). Click on 'Add' (5) and 'OK' to finish (6)==.   
+==action: Select the password value (pass in the example below) of the HTTP request==: (1), add a new fuzz (2), add the payload (3), and copy paste the list of passwords from the suggested password list file \\- [passwords.txt](https://drive.google.com/file/d/1YqUJMhXGqoEmp-OoZ7TJkskAZ8Uv6s8Y/view?usp=sharing) (4). Click on 'Add' (5) and 'OK' to finish (6).   
 
 ![][zap_password_fuzzing_configuration]
 
