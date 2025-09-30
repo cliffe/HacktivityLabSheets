@@ -1412,3 +1412,14 @@ mark, .highlight-text{
   text-decoration: none;
 }
 
+// Add a small caption below images
+img + em, 
+a:has(img) + em {
+  font-size: 0.8em;
+  font-style: italic;
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+

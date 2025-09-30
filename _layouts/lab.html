@@ -402,6 +402,71 @@ document.addEventListener('DOMContentLoaded', function() {
                     );
                   }
                 });
+                
+                // Convert YouTube links to embedded videos
+                const youtubeLinks = contentBody.querySelectorAll('a[href*="youtu.be"], a[href*="youtube.com/watch"]');
+                youtubeLinks.forEach(link => {
+                  const href = link.href;
+                  let videoId = '';
+                  
+                  // Extract video ID from different YouTube URL formats
+                  if (href.includes('youtu.be/')) {
+                    videoId = href.split('youtu.be/')[1].split('?')[0];
+                  } else if (href.includes('youtube.com/watch?v=')) {
+                    videoId = href.split('v=')[1].split('&')[0];
+                  }
+                  
+                  if (videoId) {
+                    // Create embedded iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                    iframe.width = '560';
+                    iframe.height = '315';
+                    iframe.frameBorder = '0';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.style.cssText = 'max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; transition: all 0.3s ease;';
+                    
+                    // Create container div
+                    const container = document.createElement('div');
+                    container.className = 'youtube-embed';
+                    container.style.cssText = 'text-align: center; margin: 1rem 0; cursor: pointer;';
+                    
+                    // Add hover effects with delay
+                    let hoverTimeout = null;
+                    
+                    container.addEventListener('mouseenter', function() {
+                      // Clear any existing timeout
+                      if (hoverTimeout) {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = null;
+                      }
+                      
+                      iframe.style.transform = 'scale(1.05)';
+                      iframe.style.height = '400px'; // Make it taller on hover
+                    });
+                    
+                    container.addEventListener('mouseleave', function() {
+                      // Set a timeout to return to normal size after 30 seconds
+                      hoverTimeout = setTimeout(function() {
+                        iframe.style.transform = 'scale(1)';
+                        iframe.style.height = 'auto'; // Return to original height
+                        hoverTimeout = null;
+                      }, 30000); // 30 seconds delay
+                    });
+                    
+                    // Add the link text as a caption
+                    const caption = document.createElement('p');
+                    caption.textContent = link.textContent;
+                    caption.style.cssText = 'font-style: italic; color: var(--fg-color); opacity: 0.8; margin-top: 0.5rem;';
+                    
+                    container.appendChild(iframe);
+                    container.appendChild(caption);
+                    
+                    // Replace the link with the embedded video
+                    link.parentNode.replaceChild(container, link);
+                  }
+                });
               }
             });
 

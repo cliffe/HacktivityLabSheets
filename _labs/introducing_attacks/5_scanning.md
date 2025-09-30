@@ -376,7 +376,7 @@ less ==edit:IP-address==.open_ports
 Many port scanners are quite simple, and do more than is strictly necessary to know whether a port is open. In order to establish a TCP connection and start sending and receiving data, a full three way handshake takes place.
 
 ![][tcp_handshake]
-TCP three-way handshake
+*TCP three-way handshake*
 
 As illustrated above, 1\) the client starts by sending a TCP packet that includes the port that it wants to talk to (say port 80), and the SYN flag set, meaning that it wants to start a new connection. 2\) If the server accepts the connection (there is indeed a program listening on that port), then it responds with the SYN and ACK flags set, meaning it accepts the connection. 3\) The client can now complete the connection by sending a packet with the ACK flag set. 
 
@@ -650,8 +650,7 @@ Based on what you have learned:
 There are various graphical user interface (GUI) front-ends for Nmap, including the official Zenmap, which is illustrated in the figure below. Essentially the GUI can help to create the command for starting Nmap, and then runs Nmap and displays the results. The GUI can be helpful for beginners, and for saving scanning profiles, although most experts will generally prefer the command line. ==tip: Consider why the command line may be the preferable option==.
 
 ![][zenmap]
-
-[Zenmap: a GUI for Nmap](http://nmap.org/zenmap/)
+*[Zenmap: a GUI for Nmap](http://nmap.org/zenmap/)*
 
 > Note: Kali Linux recently removed Zenmap (and all python 2 programs), however, the screenshot above illustrates that these GUI programs provide an alternative interface. If you wish to learn more about it, you can find information at [https://nmap.org/zenmap/](https://nmap.org/zenmap/). You could also spend a few minutes looking into alternative GUIs.
 

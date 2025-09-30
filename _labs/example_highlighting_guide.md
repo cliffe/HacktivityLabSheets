@@ -549,6 +549,76 @@ There is a flag to be found on a user's Desktop! Find and submit it to Hacktivit
 8. **Improper command formatting**: Always use `bash` code blocks for terminal commands and escape pipe characters
 9. **Uncapitalized block content**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output
 
+### Image Caption Formatting
+
+For proper CSS styling, image captions should be formatted as follows:
+
+**Format:**
+```markdown
+![][image_reference]
+*Caption text here*
+```
+
+**Examples:**
+```markdown
+![][binary_output]
+*Output of "xxd -b simple" showing binary representation of the "simple" executable file*
+```
+
+```markdown
+![][assembly_code]
+*Disassembly of main() function of the "simple" executable in gdb*
+```
+
+**Important Guidelines:**
+- Place the caption on the line directly below the image (no blank line between)
+- Use italics (`*text*`) for the caption
+- Identify existing captions by looking for descriptive text that explains what the image shows (often incomplete sentences or phrases), rather than assuming any text following an image is a caption
+
+### C Code Formatting
+
+When working with C programming content, ensure all C code is properly formatted:
+
+**Format:**
+```markdown
+```c
+// C code here
+```
+```
+
+**Important Guidelines:**
+- Place any C code into C code blocks using ` ```c ` and ` ``` `
+- Remove any special characters from Markdown that may interfere with C syntax
+- Ensure C code is syntactically correct and readable
+- Common issues to fix:
+  - Remove escaped characters like `\*` and `\<` that were used for Markdown emphasis
+  - Remove backslashes before special characters that are part of C syntax
+  - Ensure proper C syntax without Markdown formatting artifacts
+
+**Examples:**
+
+**Before (incorrect):**
+```markdown
+\#include \<stdio.h\>
+
+int main (void) {
+   printf("Hello, world\!\\n");
+   return 0;
+}
+```
+
+**After (correct):**
+```markdown
+```c
+#include <stdio.h>
+
+int main (void) {
+   printf("Hello, world!\n");
+   return 0;
+}
+```
+```
+
 ### File Structure Requirements
 
 Ensure lab sheets maintain proper structure:
@@ -558,6 +628,7 @@ Ensure lab sheets maintain proper structure:
 - **Working TOC** with functional anchor links
 - **Consistent code block formatting** using proper language tags
 - **Valid markdown syntax** throughout the document
+- **Proper image caption formatting** using italics on the line directly below images
 
 ---
 

@@ -146,14 +146,12 @@ echo Good thing this isn't malware! > not_malware.txt
 The important thing to note is that with a bind shell the target listens to a port, and the attacker then connects through to the shell. This is illustrated below.
 
 ![Bind Shell Concept][bind_shell]
-
-Bind shell: attacker connects to port on victim
+*Bind shell: attacker connects to port on victim*
 
 The main limitation with this approach, is that nowadays Firewalls and NAT routing often prevents any *incoming* network connections that are not already established, unless there is a reason to allow incoming connections on certain ports: for example, if the system is a server it needs to be allowed to accept connections to some ports. Score one for the good guys...
 
 ![Bind Shell Blocked by Firewall][bind_shell_blocked]
-
-Bind shell: main limitation, NAT/firewalls rules typically prevent this
+*Bind shell: main limitation, NAT/firewalls rules typically prevent this*
 
 When you are finished simulating a bind shell, run:
 
@@ -164,8 +162,7 @@ exit
 A solution for an attacker is to rethink the way the connection is established; and rather than connect from the attacker to the victim, get the victim to initiate the connection to the attacker. This is known as a *reverse shell*, and is now the most common approach to shell payloads.
 
 ![Reverse Shell Concept][reverse_shell]
-
-Reverse shell: connection from the victim to the attacker
+*Reverse shell: connection from the victim to the attacker*
 
 Again, you will simulate this using Netcat:
 
@@ -222,8 +219,7 @@ Metasploit’s primary focus, as the sound of the name suggests, is on exploits,
 The framework itself provides a set of libraries and tools for exploit development and deployment, and includes modules which add support for specific exploits, payloads, encoders, post-exploitation tools, and other extensions. As illustrated in the figure below, sitting above the framework are a number of different interfaces that can be used to interact with the framework and make use of the modules. Each interface has its uses, and like many software tools, you should learn about the available options so that you can use the right tool for each job.
 
 ![Metasploit Interfaces and Modules][msf_interfaces]
-
-Metasploit interfaces and modules
+*Metasploit interfaces and modules*
 
 The most popular interfaces for MSF are:
 
