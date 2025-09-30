@@ -1395,6 +1395,25 @@ mark, .highlight-text{
   font-size: 1em;
   margin-right: 0.5rem;
   float: left;
+  font-family: "Source Code Pro", Monaco, monospace !important;
+
+}
+
+// Add icon above c code blocks
+.language-c::before {
+  content: ".c ";
+  font-size: 1em;
+  margin-right: 0.5rem;
+  float: left;
+  font-family: "Source Code Pro", Monaco, monospace !important;
+}
+// Add icon above c code blocks
+.language-nasm::before {
+  content: "asm ";
+  font-size: 1em;
+  margin-right: 0.5rem;
+  float: left;
+  font-family: "Source Code Pro", Monaco, monospace !important;
 }
 
 .nav-link {

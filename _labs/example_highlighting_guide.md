@@ -617,6 +617,19 @@ For proper CSS styling, image captions should be formatted as follows:
 - Use italics (`*text*`) for the caption
 - Identify existing captions by looking for descriptive text that explains what the image shows (often incomplete sentences or phrases), rather than assuming any text following an image is a caption
 
+**Example:**
+```markdown
+![][image-11]
+
+#### **Examining the contents of a memory address containing an unsigned integer** 
+```
+
+**After (correct):**
+```markdown
+![][image-11]
+*Examining the contents of a memory address containing an unsigned integer*
+```
+
 ### C Code Formatting
 
 When working with C programming content, ensure all C code is properly formatted:
