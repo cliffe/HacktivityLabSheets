@@ -41,6 +41,21 @@ msfvenom -l payload | less
 
 **Important**: Always use `bash` language tag for terminal commands and escape pipe characters (`|` becomes `\|`) within code blocks.
 
+### Inline Code Formatting
+Within text, inline code should be enclosed using backticks and any markdown artifacts removed:
+
+**Before:**
+```
+"push ebp" becomes `push ebp`
+```
+
+**After:**
+```
+`push ebp`
+```
+
+**Important**: Remove any escaped characters, quotes, or markdown artifacts from inline code. Use single backticks for inline code within sentences.
+
 ### Examples
 
 **Action Highlights:**
@@ -162,6 +177,11 @@ Before applying highlighting, ensure all bash/terminal commands, C code, and ass
 - All assembly code must be in markdown code blocks with `nasm` language tag
 - Remove escaped characters and markdown artifacts from code
 - Ensure proper syntax highlighting for better readability
+
+**Inline Code Formatting Rules:**
+- Within text, inline code should be enclosed using single backticks: `code`
+- Remove any escaped characters, quotes, or markdown artifacts from inline code
+- Examples: `push ebp`, `mov eax, 0x1`, `DWORD PTR [ebp-0x4]`
 
 **Examples:**
 ```markdown
@@ -568,7 +588,8 @@ There is a flag to be found on a user's Desktop! Find and submit it to Hacktivit
 8. **Improper command formatting**: Always use `bash` code blocks for terminal commands and escape pipe characters
 9. **Improper code formatting**: Always use `c` code blocks for C code and `nasm` code blocks for assembly code
 10. **Markdown artifacts in code**: Remove escaped characters and formatting artifacts from all code blocks
-11. **Uncapitalized block content**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output
+11. **Improper inline code formatting**: Use single backticks for inline code and remove markdown artifacts
+12. **Uncapitalized block content**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output
 
 ### Image Caption Formatting
 
@@ -681,6 +702,18 @@ mov ebx, [0x00a7800f]
 
 mov eax, [ebx + 8]
 ```
+```
+
+### Inline Code Formatting
+
+**Before (incorrect):**
+```markdown
+The instructions "push ebp" and "mov ebp, esp" appear in most functions.
+```
+
+**After (correct):**
+```markdown
+The instructions `push ebp` and `mov ebp, esp` appear in most functions.
 ```
 
 ### File Structure Requirements
