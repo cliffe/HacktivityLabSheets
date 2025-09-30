@@ -22,7 +22,7 @@ layout: default
       {% endif %}
     </div>
     
-    <div class="lab-metadata">
+    <div class="lab-metadata hidden-when-embedded">
       {% if page.author %}
         <div class="metadata-item">
           <strong>{% if page.author.first %}Authors:{% else %}Author:{% endif %}</strong> 
@@ -83,7 +83,7 @@ layout: default
 
   <div class="lab-content-body">
     <div id="toc-container" class="toc-container">
-      <h2>Table of Contents</h2>
+      <h2>Contents</h2>
       <ul id="toc-list"></ul>
     </div>
     {{ content }}
@@ -487,6 +487,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Generate TOC items
     headings.forEach((heading, index) => {
+      // Skip "Contents" heading
+      if (heading.textContent.trim() === 'Contents') {
+        return;
+      }
+      
       // Create ID if it doesn't exist
       if (!heading.id) {
         heading.id = heading.textContent

@@ -99,14 +99,14 @@ Here’s a brief cheat sheet of some common Linux/Unix commands:
 
 | Command | Simplified description | Example usage |
 | :---- | :---- | :---- |
-| pwd | Check your current location in the file system | pwd |
-| ls | Lists all the files in your current working directory, similar to “dir” on windows (-la shows details) | ls \-la |
-| cp | Copies files (-r to recursively copy directory contents) | cp file1 copy\_of\_file1 |
-| mv | Moves (or renames) a file or directory | mv file1 file2 |
-| cat | Prints the contents of a file to the console | cat file1 |
-| echo | Prints a message to the screen | echo “hello, world\!” |
-| mkdir | Makes a directory | mkdir newdirectory |
-| cd | Change working directory, to “move us into a different directory” | cd newdirectory |
+| `pwd` | Check your current location in the file system | `pwd` |
+| `ls` | Lists all the files in your current working directory, similar to “dir” on windows (-la shows details) | `ls -la` |
+| `cp` | Copies files (-r to recursively copy directory contents) | `cp file1 copy_of_file1` |
+| `mv` | Moves (or renames) a file or directory | `mv file1 file2` |
+| `cat` | Prints the contents of a file to the console | `cat file1` |
+| `echo` | Prints a message to the screen | `echo "hello, world!"` |
+| `mkdir` | Makes a directory | `mkdir newdirectory` |
+| `cd` | Change working directory, to “move us into a different directory” | `cd newdirectory` |
 
 > Tip: If you ever get lost within the file structure, you can type "cd" on its own (no directory name afterwards) and you'll return to your home folder. To go up just one level within the file system, type "cd .." ("cd", followed by a space then two full-stops.)
 
