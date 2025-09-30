@@ -149,13 +149,19 @@ Use `> Flag:` for CTF challenge tasks where students need to find and submit fla
 
 ## 🤖 AI Instructions for Lab Sheet Editing
 
-### Step 0: Format Commands Properly
-Before applying highlighting, ensure all bash/terminal commands are properly formatted:
+### Step 0: Format Commands and Code Properly
+Before applying highlighting, ensure all bash/terminal commands, C code, and assembly code are properly formatted:
 
 **Command Formatting Rules:**
 - All terminal commands must be in markdown code blocks with `bash` language tag
 - Escape pipe characters: `|` becomes `\|` within code blocks
 - Commands should be on their own lines, not inline with text
+
+**Code Formatting Rules:**
+- All C code must be in markdown code blocks with `c` language tag
+- All assembly code must be in markdown code blocks with `nasm` language tag
+- Remove escaped characters and markdown artifacts from code
+- Ensure proper syntax highlighting for better readability
 
 **Examples:**
 ```markdown
@@ -167,6 +173,16 @@ Run the command msfvenom -l payload | less
 
 ```bash
 msfvenom -l payload \| less
+```
+
+# Before (incorrect):
+mov eax, 0x1a
+mov ebx, [0x00a7800f]
+
+# After (correct):
+```nasm
+mov eax, 0x1a
+mov ebx, [0x00a7800f]
 ```
 ```
 
@@ -483,6 +499,9 @@ Before applying highlighting to any lab sheet:
 - [ ] **Test all existing links** - both internal TOC links and external URLs
 - [ ] **Format all commands** - ensure all bash/terminal commands use proper markdown code blocks with `bash` language tag
 - [ ] **Escape pipe characters** - convert `|` to `\|` in all command code blocks
+- [ ] **Format all C code** - ensure all C code uses proper markdown code blocks with `c` language tag
+- [ ] **Format all assembly code** - ensure all assembly code uses proper markdown code blocks with `nasm` language tag
+- [ ] **Remove markdown artifacts** - clean up escaped characters and formatting artifacts from all code
 - [ ] **Identify content types** - map out where actions, tips, hints, warnings, VM context, and troubleshooting/explanations appear
 - [ ] **Identify troubleshooting text** - find text that provides troubleshooting information after commands and format as note blocks
 - [ ] **Plan highlighting strategy** - decide which content truly needs highlighting
@@ -547,7 +566,9 @@ There is a flag to be found on a user's Desktop! Find and submit it to Hacktivit
 6. **Poor tip placement**: Tips should be genuinely helpful, not obvious information
 7. **Missing troubleshooting formatting**: Don't forget to format troubleshooting text after commands as note blocks
 8. **Improper command formatting**: Always use `bash` code blocks for terminal commands and escape pipe characters
-9. **Uncapitalized block content**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output
+9. **Improper code formatting**: Always use `c` code blocks for C code and `nasm` code blocks for assembly code
+10. **Markdown artifacts in code**: Remove escaped characters and formatting artifacts from all code blocks
+11. **Uncapitalized block content**: Always capitalize the first word after "Note:", "Tip:", or "Hint:" since these labels are not visible in the rendered output
 
 ### Image Caption Formatting
 
@@ -616,6 +637,49 @@ int main (void) {
    printf("Hello, world!\n");
    return 0;
 }
+```
+```
+
+### Assembly Code Formatting
+
+When working with assembly language content, ensure all assembly code is properly formatted:
+
+**Format:**
+```markdown
+```nasm
+; Assembly code here
+```
+```
+
+**Important Guidelines:**
+- Place any assembly code into NASM code blocks using ` ```nasm ` and ` ``` `
+- Remove any special characters from Markdown that may interfere with assembly syntax
+- Ensure assembly code is syntactically correct and readable
+- Common issues to fix:
+  - Remove escaped characters like `\*` and `\<` that were used for Markdown emphasis
+  - Remove backslashes before special characters that are part of assembly syntax
+  - Ensure proper assembly syntax without Markdown formatting artifacts
+  - Use semicolons (`;`) for comments in assembly code
+
+**Examples:**
+
+**Before (incorrect):**
+```markdown
+mov eax, 0x1a
+
+mov ebx, \[0x00a7800f\]
+
+mov eax, \[ebx \+ 8\]
+```
+
+**After (correct):**
+```markdown
+```nasm
+mov eax, 0x1a
+
+mov ebx, [0x00a7800f]
+
+mov eax, [ebx + 8]
 ```
 ```
 
