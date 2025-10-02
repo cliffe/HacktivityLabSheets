@@ -167,6 +167,11 @@ Use `> Flag:` for CTF challenge tasks where students need to find and submit fla
 ### Step 0: Format Commands and Code Properly
 Before applying highlighting, ensure all bash/terminal commands, C code, and assembly code are properly formatted:
 
+**Heading Formatting Rules:**
+- Remove bold formatting from all headings (remove `**` around heading text)
+- Keep anchor links intact: `{#anchor-link}`
+- Example: `## **General notes about the labs** {#general-notes-about-the-labs}` becomes `## General notes about the labs {#general-notes-about-the-labs}`
+
 **Command Formatting Rules:**
 - All terminal commands must be in markdown code blocks with `bash` language tag
 - Escape pipe characters: `|` becomes `\|` within code blocks

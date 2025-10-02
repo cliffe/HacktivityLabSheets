@@ -1407,7 +1407,6 @@ mark, .highlight-text{
   float: left;
   font-family: "Source Code Pro", Monaco, monospace !important;
 }
-// Add icon above c code blocks
 .language-nasm::before {
   content: "asm ";
   font-size: 1em;
@@ -1415,7 +1414,13 @@ mark, .highlight-text{
   float: left;
   font-family: "Source Code Pro", Monaco, monospace !important;
 }
-
+.language-php::before {
+  content: "php ";
+  font-size: 1em;
+  margin-right: 0.5rem;
+  float: left;
+  font-family: "Source Code Pro", Monaco, monospace !important;
+}
 .nav-link {
   font-family: "Cute Font", "Source Code Pro", Monaco, monospace;
   font-size: 16px;
