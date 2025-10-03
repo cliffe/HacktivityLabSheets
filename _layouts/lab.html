@@ -284,10 +284,59 @@ document.addEventListener('DOMContentLoaded', function() {
                 contentBody.innerHTML = contentBody.innerHTML.replace(/==question:\s*([^=]+)==/gi, '<span class="question-highlight">❓ $1</span>');
                 
                 // Process edit highlights BEFORE other processing to avoid syntax highlighting interference
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==edit:\s*([^=]+)==/gi, '<span class="edit-highlight">✏️ $1</span>');
+                // But exclude content that's already inside block-level elements (hint, tip, etc.)
+                // Handle both regular quotes and HTML-encoded quotes
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==edit:\s*([^=]+)==/gi, function(match, p1, offset, string) {
+                  // Check if this match is inside a blockquote or other block element
+                  const beforeMatch = string.substring(0, offset);
+                  const afterMatch = string.substring(offset + match.length);
+                  
+                  // Count unclosed blockquote tags before this position
+                  const openBlockquotes = (beforeMatch.match(/<blockquote>/g) || []).length;
+                  const closedBlockquotes = (beforeMatch.match(/<\/blockquote>/g) || []).length;
+                  
+                  // If we're inside a blockquote, don't process this edit highlight
+                  if (openBlockquotes > closedBlockquotes) {
+                    return match; // Return unchanged
+                  }
+                  
+                  return '<span class="edit-highlight">✏️ ' + p1 + '</span>';
+                });
+                
+                // Also handle HTML-encoded quotes (like &quot;==edit:content==&quot;)
+                contentBody.innerHTML = contentBody.innerHTML.replace(/&quot;==edit:\s*([^=]+)==&quot;/gi, function(match, p1, offset, string) {
+                  // Check if this match is inside a blockquote or other block element
+                  const beforeMatch = string.substring(0, offset);
+                  
+                  // Count unclosed blockquote tags before this position
+                  const openBlockquotes = (beforeMatch.match(/<blockquote>/g) || []).length;
+                  const closedBlockquotes = (beforeMatch.match(/<\/blockquote>/g) || []).length;
+                  
+                  // If we're inside a blockquote, don't process this edit highlight
+                  if (openBlockquotes > closedBlockquotes) {
+                    return match; // Return unchanged
+                  }
+                  
+                  return '&quot;<span class="edit-highlight">✏️ ' + p1 + '</span>&quot;';
+                });
                 
                 // Replace generic ==text== with <mark>text</mark> (but not edit highlights)
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==(?!edit:)([^=]+)==/g, '<mark>$1</mark>');
+                // But exclude content that's already inside block-level elements
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==(?!edit:)([^=]+)==/g, function(match, p1, offset, string) {
+                  // Check if this match is inside a blockquote or other block element
+                  const beforeMatch = string.substring(0, offset);
+                  
+                  // Count unclosed blockquote tags before this position
+                  const openBlockquotes = (beforeMatch.match(/<blockquote>/g) || []).length;
+                  const closedBlockquotes = (beforeMatch.match(/<\/blockquote>/g) || []).length;
+                  
+                  // If we're inside a blockquote, don't process this highlight
+                  if (openBlockquotes > closedBlockquotes) {
+                    return match; // Return unchanged
+                  }
+                  
+                  return '<mark>' + p1 + '</mark>';
+                });
                 
                 // Replace > TIP: patterns with tip-item divs
                 contentBody.innerHTML = contentBody.innerHTML.replace(
@@ -320,9 +369,33 @@ document.addEventListener('DOMContentLoaded', function() {
                   /<blockquote>\s*<p>\s*Note:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
                   '<div class="note-item">$1</div>'
                 );
+                
+                // Post-process note items to handle ==edit:== syntax that was preserved
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<div class="note-item">([^<]*(?:<[^>]+>[^<]*)*?)<\/div>/gi,
+                  function(match, content) {
+                    // Process any remaining ==edit:== syntax in note content
+                    let processedContent = content.replace(/==edit:\s*([^=]+)==/gi, '<span class="edit-highlight">✏️ $1</span>');
+                    // Also handle HTML-encoded quotes
+                    processedContent = processedContent.replace(/&quot;==edit:\s*([^=]+)==&quot;/gi, '&quot;<span class="edit-highlight">✏️ $1</span>&quot;');
+                    return '<div class="note-item">' + processedContent + '</div>';
+                  }
+                );
                 contentBody.innerHTML = contentBody.innerHTML.replace(
                   /<blockquote>\s*<p>\s*Hint:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
                   '<div class="hint-item">Hint: $1</div>'
+                );
+                
+                // Post-process hint items to handle ==edit:== syntax that was preserved
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<div class="hint-item">Hint: ([^<]*(?:<[^>]+>[^<]*)*?)<\/div>/gi,
+                  function(match, content) {
+                    // Process any remaining ==edit:== syntax in hint content
+                    let processedContent = content.replace(/==edit:\s*([^=]+)==/gi, '<span class="edit-highlight">✏️ $1</span>');
+                    // Also handle HTML-encoded quotes
+                    processedContent = processedContent.replace(/&quot;==edit:\s*([^=]+)==&quot;/gi, '&quot;<span class="edit-highlight">✏️ $1</span>&quot;');
+                    return '<div class="hint-item">Hint: ' + processedContent + '</div>';
+                  }
                 );
                 contentBody.innerHTML = contentBody.innerHTML.replace(
                   /<blockquote>\s*<p>\s*Question:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
@@ -370,38 +443,176 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Process edit highlights that got broken up by syntax highlighting
+                // 
+                // PROBLEM: Syntax highlighters (like Pygments) break up ==edit:content== patterns
+                // across multiple HTML spans, making them impossible for regex to match.
+                // 
+                // COMMON PATTERNS TO HANDLE:
+                // 1. Quoted: "==edit:content==" → <span>"==edit:</span><span>content</span><span>=="</span>
+                // 2. Unquoted: ==edit:content== → <span>==</span><span>edit</span><span>:content</span><span>==</span>
+                // 3. HTML-encoded: &quot;==edit:content==&quot; → <span>&quot;==edit:</span><span>content</span><span>=="</span>
+                // 4. Mixed classes: Different CSS classes (s2, se, o, n, ss) depending on content type
+                //
+                // SOLUTION: Add regex patterns for each common breakup pattern
+                // TROUBLESHOOTING: If new patterns don't work, inspect the HTML output to see
+                // how the syntax highlighter is breaking up the ==edit:== patterns
                 const codeElements = contentBody.querySelectorAll('code, pre code, .highlight code');
                 codeElements.forEach(codeElement => {
                   // Look for the pattern: <span class="o">==</span>edit:content<span class="o">==</span>
                   const html = codeElement.innerHTML;
                   if (html.includes('==') && html.includes('edit:')) {
-                    // Handle the broken pattern from syntax highlighting
+                    // Debug: Log the HTML structure to help troubleshoot
+                    if (html.includes('==edit:') || html.includes('==<span')) {
+                      console.log('Found ==edit: pattern in code block:', html);
+                    }
+                    
+                    // Debug: Check for the specific Ruby pattern
+                    if (html.includes('<span class="o">==</span><span class="n">edit</span><span class="ss">:')) {
+                      console.log('Found Ruby ==edit: pattern:', html);
+                      console.log('Attempting to match pattern...');
+                    }
+                    // PATTERN 1: Basic syntax highlighting breakup
+                    // Handles: <span class="o">==</span>edit:content<span class="o">==</span>
                     codeElement.innerHTML = html.replace(
                       /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+)<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>/gi,
                       '<span class="edit-highlight">✏️$1</span>'
                     );
-                    // Handle patterns with mark tags in the middle
+                    
+                    // PATTERN 2: With mark tags in the middle (from previous highlighting)
+                    // Handles: <span class="o">==</span>edit:content<span class="o"><mark></mark></span>
                     codeElement.innerHTML = codeElement.innerHTML.replace(
                       /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+(?:<[^>]+>[^<]*)*?)<span[^>]*class="[^"]*o[^"]*"[^>]*><mark><\/mark><\/span>/gi,
                       '<span class="edit-highlight">✏️$1</span>'
                     );
-                    // Handle the specific pattern: ==edit:content<span class="o"><mark></mark></span>
+                    
+                    // PATTERN 3: Specific mark tag pattern
+                    // Handles: ==edit:content<span class="o"><mark></mark></span>
                     codeElement.innerHTML = codeElement.innerHTML.replace(
                       /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+)<span[^>]*class="[^"]*o[^"]*"[^>]*><mark><\/mark><\/span>/gi,
                       '<span class="edit-highlight">✏️$1</span>'
                     );
-                    // Handle pattern with variable highlighting in the middle: ==edit:content <span class="nv">VAR</span>==
+                    
+                    // PATTERN 4: Variable highlighting in the middle
+                    // Handles: ==edit:content <span class="nv">VAR</span>==
                     codeElement.innerHTML = codeElement.innerHTML.replace(
                       /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>edit:\s*([^<]+)\s*<span[^>]*class="[^"]*nv[^"]*"[^>]*>([^<]+)<\/span><span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>/gi,
                       '<span class="edit-highlight">✏️$1 $2</span>'
                     );
-                    // Also handle any remaining unprocessed edit highlights
+                    // PATTERN 5: Quoted strings with s2 class
+                    // Handles: <span class="s2">==edit:</span>content<span class="s2">==</span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*s[^"]*"[^>]*>==edit:<\/span>([^<]+)<span[^>]*class="[^"]*s[^"]*"[^>]*>==<\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    
+                    // PATTERN 5B: Single quotes with s1 class
+                    // Handles: <span class="s1">'==edit:</span>content<span class="s1">=='</span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*s[^"]*"[^>]*>'==edit:<\/span>([^<]+)<span[^>]*class="[^"]*s[^"]*"[^>]*>=='<\/span>/gi,
+                      '<span class="s1">\'</span><span class="edit-highlight">✏️$1</span><span class="s1">\'</span>'
+                    );
+                    
+                    // PATTERN 6: Single span with entire pattern
+                    // Handles: <span class="s2">==edit:content==</span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*s[^"]*"[^>]*>==edit:([^<]+)==<\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    
+                    // PATTERN 7: Quoted with hex content (se class for escape sequences)
+                    // Handles: <span class="s2">"==edit:</span><span class="se">\x78\x56</span><span class="s2">=="</span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*s[^"]*"[^>]*>"==edit:<\/span><span[^>]*class="[^"]*se[^"]*"[^>]*>([^<]+)<\/span><span[^>]*class="[^"]*s[^"]*"[^>]*>=="<\/span>/gi,
+                      '<span class="s2">"</span><span class="edit-highlight">✏️$1</span><span class="s2">"</span>'
+                    );
+                    
+                    // PATTERN 8: Different class combinations
+                    // Handles: Various class combinations for quoted patterns
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*s[^"]*"[^>]*>"==edit:<\/span><span[^>]*class="[^"]*[^"]*"[^>]*>([^<]+)<\/span><span[^>]*class="[^"]*s[^"]*"[^>]*>=="<\/span>/gi,
+                      '<span class="s2">"</span><span class="edit-highlight">✏️$1</span><span class="s2">"</span>'
+                    );
+                    
+                    // PATTERN 9: Quoted patterns with mixed classes
+                    // Handles: <span class="s2">"==edit:</span><span>content</span><span class="s2">=="</span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*s[^"]*"[^>]*>"==edit:<\/span><span[^>]*>([^<]+)<\/span><span[^>]*class="[^"]*s[^"]*"[^>]*>=="<\/span>/gi,
+                      '<span class="s2">"</span><span class="edit-highlight">✏️$1</span><span class="s2">"</span>'
+                    );
+                    
+                    // PATTERN 10: Most general quoted case
+                    // Handles: Any span structure with "==edit:" pattern
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*>"==edit:<\/span><span[^>]*>([^<]+)<\/span><span[^>]*>=="<\/span>/gi,
+                      '<span class="s2">"</span><span class="edit-highlight">✏️$1</span><span class="s2">"</span>'
+                    );
+                    
+                    // PATTERN 11: HTML-encoded quotes
+                    // Handles: &quot;==edit:content==&quot; patterns
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*>&quot;==edit:<\/span><span[^>]*>([^<]+)<\/span><span[^>]*>=="<\/span>/gi,
+                      '<span class="s2">&quot;</span><span class="edit-highlight">✏️$1</span><span class="s2">&quot;</span>'
+                    );
+                    
+                    // PATTERN 12: Unquoted with specific class breakdown
+                    // Handles: <span class="o">==</span><span class="n">edit</span><span class="ss">:offset</span><span class="o">==</span>
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span><span[^>]*class="[^"]*n[^"]*"[^>]*>edit<\/span><span[^>]*class="[^"]*ss[^"]*"[^>]*>:([^<]+)<\/span><span[^>]*class="[^"]*o[^"]*"[^>]*>==<\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    
+                    // PATTERN 13: General unquoted case
+                    // Handles: Any span structure with ==edit: pattern (no quotes)
+                    codeElement.innerHTML = codeElement.innerHTML.replace(
+                      /<span[^>]*>==<\/span><span[^>]*>edit<\/span><span[^>]*>:([^<]+)<\/span><span[^>]*>==<\/span>/gi,
+                      '<span class="edit-highlight">✏️$1</span>'
+                    );
+                    
+                    // FALLBACK: Catch any remaining unprocessed patterns
+                    // This should handle any patterns not caught by the above
                     codeElement.innerHTML = codeElement.innerHTML.replace(
                       /==edit:\s*([^=]+)==/gi,
                       '<span class="edit-highlight">✏️$1</span>'
                     );
                   }
                 });
+                
+                // TROUBLESHOOTING GUIDE FOR FUTURE ISSUES:
+                // ===========================================
+                // If ==edit:== patterns aren't working in code blocks:
+                // 
+                // 1. INSPECT THE HTML: Right-click on the code block and "Inspect Element"
+                //    Look for how the syntax highlighter broke up the ==edit:== pattern
+                // 
+                // 2. COMMON BREAKUP PATTERNS:
+                //    - Quoted: "==edit:content==" → <span>"==edit:</span><span>content</span><span>=="</span>
+                //    - Unquoted: ==edit:content== → <span>==</span><span>edit</span><span>:content</span><span>==</span>
+                //    - HTML-encoded: &quot;==edit:content==&quot; → <span>&quot;==edit:</span><span>content</span><span>=="</span>
+                // 
+                // 3. CSS CLASSES TO LOOK FOR:
+                //    - s2, s1: String literals
+                //    - se: String escape sequences (\x78, \n, etc.)
+                //    - o: Operators (==, +, etc.)
+                //    - n: Names/identifiers
+                //    - ss: String symbols
+                //    - nv: Name variables
+                // 
+                // 4. ADDING NEW PATTERNS:
+                //    - Copy an existing pattern above
+                //    - Modify the regex to match the new HTML structure
+                //    - Test with the specific case that's failing
+                //    - Add a comment explaining what the pattern handles
+                // 
+                // 5. TESTING:
+                //    - Use browser dev tools to see the actual HTML structure
+                //    - Test with both quoted and unquoted ==edit:== patterns
+                //    - Test with different content types (hex, text, variables)
+                // 
+                // 6. COMMON ISSUES:
+                //    - Order matters: More specific patterns should come first
+                //    - CSS class matching: Use [^"]* to match any class containing the target
+                //    - HTML entities: Check for &quot; instead of " in patterns
+                //    - Nested spans: Use (?:<[^>]+>[^<]*)*? for complex nested structures
                 
                 // Convert YouTube links to embedded videos
                 const youtubeLinks = contentBody.querySelectorAll('a[href*="youtu.be"], a[href*="youtube.com/watch"]');
