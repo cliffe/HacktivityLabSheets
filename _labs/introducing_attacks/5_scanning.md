@@ -278,7 +278,7 @@ nc -lvp 4444
 Leave that running, and from another terminal (hint: press Ctl-Shift-T), ==action: send a message using the cat command:==
 
 ```bash
-cat \>/dev/tcp/localhost/4444
+cat > /dev/tcp/localhost/4444
 ```
 
 Type in a message, and check the other tab to see that it was sent through. Ctl-D to end (only press it once or you may close your terminal window).
@@ -294,7 +294,7 @@ echo $?
 ==action: If you try to connect to a port that is not open:==
 
 ```bash
-echo \>/dev/tcp/localhost/7777
+echo > /dev/tcp/localhost/7777
 ```
 
 The $? will report failure:
@@ -333,7 +333,7 @@ echo `date` >> $ip_address.open_ports
 for port in {1..65535}  
 do  
 	# use a short timeout, and write to the port on the IP address  
-	timeout 1 echo >/dev/tcp/$ip_address/$port  
+	timeout 1 echo > /dev/tcp/$ip_address/$port  
 	# if that succeeded (checks the return value stored in $?)  
 	if [ $? -eq 0 ]  
 	then  
