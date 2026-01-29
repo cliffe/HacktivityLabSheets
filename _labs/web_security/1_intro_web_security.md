@@ -1,6 +1,6 @@
 ---
 title: "Introducing Web Security: Web and Local Proxy Fundamentals"
-author: ["Z. Cliffe Schreuders", "Andrew Scholey", "Thalita Vergilio"]
+author: ["Z. Cliffe Schreuders", "Andrew Scholey", "Thalita Vergilio", "Tom Shaw"]
 license: "CC BY-SA 4.0"
 description: "Learn web security fundamentals through hands-on exercises including HTTP client-server interactions, web server simulation with netcat, dynamic PHP pages, and security testing with OWASP ZAP proxy."
 overview: |
