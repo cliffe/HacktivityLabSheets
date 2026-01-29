@@ -58,6 +58,21 @@ This module makes use of these great learning resources (amongst others):
 
 These lab sheets will guide you through your use of the above and also introduce some important fundamental concepts and techniques.
 
+## Web fundamentals
+
+As this lab focuses on web application security it is worth starting with some background of what we mean by the web and how it works. A useful way of thinking about the technologies and protocols involved is to consider...
+
+**What happens when you visit a website in your browser?**
+
+1. You type a **URL** (e.g. `http://www.leedsbeckett.ac.uk`) into the address bar of your **web browser** (e.g. Google Chrome) and press enter or click go.
+2. Your browser sends a **request** to a **web server** over the network.
+3. The **web server** processes the **request** and sends a **response**.
+4. Your browser interprets and presents the response.
+
+This interaction takes place using the HTTP protocol, which operates the Application layer of the TCP/IP stack.
+
+> **Note:** The above is simplified to focus on the web application layer. In reality, there are additional networking steps involved (DNS lookup to resolve domain names to IP addresses, TCP connection establishment, routing through network infrastructure, etc.). These topics are out of scope for this lab, but we will cover them in depth later in the module.
+
 ## Understanding the Web and client-server interactions {#understanding-the-web-and-client-server-interactions}
 
 HTTP (HyperText Transfer Protocol) is a client-server protocol that involves a client (for example a Web browser, such as Firefox or Chromium) making requests for web pages from the web server (such as Apache or IIS). 
@@ -65,7 +80,7 @@ HTTP (HyperText Transfer Protocol) is a client-server protocol that involves a c
 ![][image-3]
 *Client-server architecture. Image: Gnome-fs-client.svg by David Vignoni \[LGPL (http://www.gnu.org/licenses/lgpl.html)\]*
 
-Note that the server software can be on a remote “server” computer (as in the figure above), or as you will see throughout this module, we can also host web server software on your own computer, and access the pages via a web browser.
+Note that the server software can be on a remote “server” computer (as in the figure above), or as you will see throughout this module, we can also host web server software locally on your own computer, and access the pages via a web browser.
 
 ## The simplest web server {#the-simplest-web-server}
 
@@ -125,11 +140,32 @@ Hello!
 
 This response from our web server includes the server software (netcat), the type of information sent (a web page), and the content of the page to display.
 
-==action: Press Ctrl-C==.
+==action: Press Ctrl-C to close the connection==.
 
 Your web browser will display the web page.
 
+## Clarifying terms: "Server" and "Dynamic"
+
+Two terms which often cause confusion when first familiarising yourself with the technologies involved in the web are "server" and "dynamic". Each has two meanings depending on the context it is used in.
+
+**The two types of "server":**
+1. **Server (the machine)**: The physical/virtual computer hosting the website
+2. **Server software stack**:
+    * **Web server software** handles HTTP communication (e.g., Apache, nginx, PHP's built-in server)
+    * **Web application** generates content and implements functionality (e.g., your PHP scripts, a WordPress site, an online shop)
+    * Often these work together: web server receives request → passes to application → application generates response → web server sends it back
+
+When we say "the server sends a response" or "receives a request", we are talking about the **software** and not the computer.
+
+**The two types of "dynamic":**
+1. **Client-side dynamic**: JavaScript code runs **in your browser** and can respond to user actions without contacting the server (e.g. button changes color when clicked, form validation, dropdown menus, animations, etc.)
+2. **Server-side dynamic**: Code runs **on the server** before sending HTML (e.g., page shows current time, pin is checked, account credentials are checked, session is initialised in the database, etc.)
+
+The next section involves creating a simple dynamic web application server with PHP.
+
 ## A simple dynamic web page using PHP {#a-simple-dynamic-web-page-using-php}
+
+PHP is both a server-side programming language and can act as a simple web server (via `php -S`). When PHP's web server receives a request, it executes your PHP code **on the server**, generates HTML, and sends it to the client. The browser receives plain HTML - it doesn't know PHP was involved. This is different from our netcat example, where you manually typed the response.
 
 ==action: Create a new file:==
 
@@ -179,7 +215,7 @@ nc localhost 8075 -C
 
 > Note: The -C instructs Netcat to send [CRLF for the newlines](https://en.wikipedia.org/wiki/Newline#Representation).
 
-The Netcat process will connect to the Apache server running locally, and now you can type in commands to send to the server. ==action: Type:==
+The Netcat process will connect to the PHP server running locally, and now you can type in commands to send to the server. ==action: Type:==
 
 ```
 GET /hello.php HTTP/1.1
@@ -196,13 +232,53 @@ The server will respond with the HTML for a webpage. This is exactly how a Web b
 
 ==action: Browse to the same page using Firefox http://localhost:8075/hello.php, and right-click the page and "View Page Source"==. Confirm this is the same source you obtained manually.
 
+The example above demonstrated dynamic functionality which did not involve user interaction, where PHP code ran on the server to find the time and then inserted it into the HTML data before sending the response.
+
+## Sending data to the server
+
+If we wanted to build a dynamic application which responded differently depending on data sent from the client, we need a way of sending additional data to the server in addition to just the URL.
+
+### HTTP Methods / Verbs
+
+The HTTP protocol provides a number of methods for interacting with a server which provide an indication of what the client is trying to achieve. The most common methods are: GET, POST, PUT, and DELETE.
+
+**GET requests** indicate that a client wants to retrieve a resource from the server. Data is conventionally attached to at the end of a URL in key-value pairs. For example: 
+
+```bash
+https://www.google.com/search?q=web+security
+https://www.youtube.com/watch?v=tmVObMBDzFE&list=PLUhmDd3hiISnCZksY71qyRit-F_riNDFk
+```
+
+Explanation:
+
+In URLs the `?` character at the end of the URL indicates the start of the GET parameter data. 
+
+
+The first example has one parameter: 
+- The `q=web+security` is the key:value pair
+- The `q` character is the key (short for 'query', google's chosen variable name for searches)
+- The `web+security` is the value (the search term. 
+
+In the second example there are two GET parameters, separated by a `&`.
+
+**POST requests** indicate that a client wants to submit some data to the server (e.g. submitting a login form). Data in POST requests is typically included within the request body.
+
+**PUT and DELETE requests** are less common in traditional web applications but important in modern web APIs. PUT typically sends data in the request body (similar to POST) to update a resource. DELETE usually only needs the URL to identify what to delete.
+
+This next section focuses on GET parameters as they are the simplest to understand and manipulate. 
+
+
 ## A dynamic web page with GET parameters using PHP {#a-dynamic-web-page-with-get-parameters-using-php}
+
+The following example involves creating basic PHP server-side application for checking a 3-digit PIN code.
 
 ==action: Create a new file:==
 
 ```bash
 vi pin.php
 ```
+
+In the following program, if the GET parameter value matches the PIN of `123`, the application grants access. If not, it reports that the PIN is incorrect.
 
 ==action: Enter and save this content:==
 
@@ -245,6 +321,9 @@ Finally, as we know from the source code, ==action: send the correct PIN:==
 http://localhost:8075/pin.php?pin=123
 ```
 
+Now that we have a basic web application which accepts data, we can take a look at ways in which an attacker can intercept and manipulate requests using a web proxy.
+
+
 ## Using a local Web proxy to intercept and modify Web traffic {#using-a-local-web-proxy-to-intercept-and-modify-web-traffic}
 
 "*Zed Attack Proxy (ZAP) is a free, open-source penetration testing tool being maintained under the umbrella of the Open Web Application Security Project (OWASP). ZAP is designed specifically for testing web applications and is both flexible and extensible. At its core, ZAP is what is known as an "intercepting proxy." It stands between the tester's browser and the web application so that it can intercept and inspect messages sent between browser and web application, modify the contents if needed, and then forward those packets on to the destination. In essence, ZAP can be used as a "man in the middle," but also can be used as a stand-alone application, and as a daemon process.*"
@@ -258,7 +337,7 @@ Using ZAP enables you to intercept HTTP requests between your browser and the we
 ![][image-7]
 *Starting OWASP Zap*
 
-==action: Wait for the proxy to start==. Select, "No, I do not want to persist this session at this moment in time" and ==action: Click "Start"==.
+==action: Wait for the proxy to start==. Select, "No, I do not want to persist this session at this moment in time", don't check for updates if prompted, then ==action: Click "Start"==.
 
 You can get help by pressing F1.
 
@@ -379,6 +458,8 @@ The results are shown in the Fuzzer tab.
 ==hint: Find the correct PIN, by sorting the results by the "Size Resp. Body" column!==
 
 You will get a chance to experiment with other Fuzzer functions such as multiple payloads and payload processors as you complete the challenges below.
+
+As you have seen, web proxy tools like ZAP make it very easy for an attacker to manipulate data being sent from the client. An essential principle in web security is to **never trust data from the client**. 
 
 ## Log in to WebGoat and work through learning tasks {#log-in-to-webgoat-and-work-through-learning-tasks}
 
