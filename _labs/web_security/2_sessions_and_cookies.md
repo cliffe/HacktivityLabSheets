@@ -305,7 +305,6 @@ DVWA has four different security levels: low, medium, high and impossible. ==act
 
 * **(Broken) Session Management (only the first 5 challenges)**
 * **Poor Data Validation**
-* **~~Security Misconfigurations~~**
 
 ### Session Management Tips {#session-management-tips}
 
@@ -342,21 +341,6 @@ Tue, Mar 16 2021 15:26:35 -0000
 
 > Hint: Use the browser's developer tools to widen the quantity boxes so you can see what you are buying (or send the requests using Zap). Experiment with unexpected numbers and/or numbers way outside the expected range.
 
-### ~~Security Misconfigurations Tips~~ {#security-misconfigurations-tips}
-
-~~The "Security Misconfigurations" challenge involves stealing another user's cookies, but you will not be able to sniff other students' traffic on the network. In order to complete the challenge, **you will need to create a new user in Security Shepherd** (remember to log back in as your main user to complete the task, or we will not be able to see your results). You will also need to use a different tool. Remember web proxies such as Zap work at the **application** layer of the OSI model. You will need a packet analyser such as Wireshark to sniff traffic at the **network** layer.~~
-
-~~Start Wireshark ("Applications" menu, "09 - Sniffing and Spoofing", "Wireshark").~~
-
-![][image-8]
-*Wireshark interface*
-
-~~Double-click on the network interface you want to analyse (eth0), and you will start to see packets captured in real-time. Experiment with different filters to narrow down the results displayed. Documentation on how to build display filters for Wireshark can be found here: [https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html](https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html)~~
-
-~~Filter example:~~
-
-![][image-9]
-*Wireshark filter example*
 
 ### General Reminders {#general-reminders}
 
