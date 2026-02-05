@@ -1,3 +1,23 @@
+---
+title: "LDAP Authentication Setup Guide"
+author: ["Z. Cliffe Schreuders"]
+license: "CC BY-SA 4.0"
+description: "Learn how to set up centralized LDAP authentication between an OpenLDAP server and Linux clients using nslcd and PAM for enterprise identity management."
+overview: |
+  This lab provides a comprehensive guide to setting up LDAP (Lightweight Directory Access Protocol) authentication in a networked environment. You will learn how to configure an OpenLDAP server using phpLDAPadmin for user management, and configure Linux client systems to authenticate against the LDAP directory using nslcd. The lab covers creating organizational units, POSIX groups, and user accounts with proper UID/GID management to avoid conflicts with local users. You will also learn how to configure NSS (Name Service Switch) and PAM (Pluggable Authentication Modules) to enable centralized authentication and automatic home directory creation. By the end of this lab, you will understand the fundamentals of directory services and centralized authentication, which are essential components of enterprise identity management systems.
+tags: ["ldap", "authentication", "identity-management", "openldap", "nslcd", "pam", "directory-services", "phpldapadmin", "linux"]
+categories: ["systems_security"]
+type: ["lab-sheet"]
+difficulty: "intermediate"
+cybok:
+  - ka: "AAA"
+    topic: "Authentication"
+    keywords: ["identity management", "user authentication", "facets of authentication", "authentication in distributed systems"]
+  - ka: "AAA"
+    topic: "Authorisation"
+    keywords: ["AUTHORIZATION - LDAP (LIGHTWEIGHT DIRECTORY ACCESS PROTOCOL)"]
+---
+
 # LDAP Authentication Setup Guide
 
 This guide will walk you through setting up LDAP authentication between the `auth_servr` (LDAP server) and `staff_desktop` (LDAP client).
