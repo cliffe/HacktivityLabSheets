@@ -29,7 +29,7 @@ This guide will walk you through setting up LDAP authentication between the `aut
 
 ## Step 1: Find the auth_server IP Address
 
-1. ==VM: Log in to `auth_server`==
+1. ==VM: Log in to auth_server==
 
 2. ==action: Find the IP address:==
 
@@ -51,7 +51,7 @@ Example output might be: `10.9.8.7`
 
 ## Step 2: Access phpLDAPadmin
 
-1. ==VM: On the `auth_server`==, ==action: open a web browser==
+1. ==VM: On the auth_server==, ==action: open a web browser==
 
 2. ==action: Navigate to the phpLDAPadmin web interface:==
 
@@ -105,11 +105,11 @@ Before creating users, it's good practice to organize your directory structure.
 
 3. ==action: Select "Generic: Organisational Unit"==
 
-4. ==action: Enter the OU name: `people`==
+4. ==action: Enter the OU name: "people"==
 
 5. ==action: Click "Create Object" then "Commit"==
 
-6. ==action: Repeat steps 1-5 to create another OU named `groups`==
+6. ==action: Repeat steps 1-5 to create another OU named "groups"==
 
 Your directory structure should now look like:
 
@@ -123,7 +123,7 @@ dc=safetynet,dc=local
 
 Before creating users, you need to create at least one group for them to belong to.
 
-1. ==action: Click on `ou=groups` in the tree==
+1. ==action: Click on "ou=groups" in the tree==
 
 2. ==action: Click "Create a child entry"==
 
@@ -160,15 +160,13 @@ Your group DN will be: `cn=staff,ou=groups,dc=safetynet,dc=local`
 
 > Warning: The **Password** field is REQUIRED - authentication will fail if not set. The **uidNumber** should automatically be 10000 or higher (configured in Step 3.5). If it shows 1000, manually change it to 10000. All POSIX attributes (uidNumber, gidNumber, loginShell, homeDirectory) are REQUIRED for system login to work.
 
-> Note: REVIEW NOTE: The 1000 rule hasn't been set in the config file
-
 6. ==action: Click "Create Object" then "Commit"==
 
 Your user DN will be: `uid=jdoe,ou=people,dc=safetynet,dc=local`
 
 7. ==action: Verify the user was created correctly:==
    
-==VM: On the `auth_server`==, ==action: test the user exists with all required attributes:==
+==VM: On the auth_server==, ==action: test the user exists with all required attributes:==
 
 ```bash
 ldapsearch -x -H ldap://localhost -b "dc=safetynet,dc=local" "(uid=jdoe)" uidNumber gidNumber loginShell homeDirectory userPassword
@@ -194,7 +192,7 @@ Now we'll configure the `staff_desktop` to authenticate against the LDAP server 
 
 ### 7.1: Install Required Packages (already done for you)
 
-The `ldap_packages` SecGen module has already installed:
+Hacktivity/SecGen has already installed:
 - ldap-utils (LDAP command-line tools)
 - libnss-ldap (NSS module for LDAP lookups)
 - libpam-ldap (PAM module for LDAP authentication)
@@ -206,7 +204,7 @@ The `ldap_packages` SecGen module has already installed:
 
 The nslcd daemon handles LDAP queries for the system. Configure it to connect to your auth_server:
 
-1. ==VM: SSH or log in to `staff_desktop`==
+1. ==VM: SSH or log in to staff_desktop==
 
 2. ==action: Edit the nslcd configuration:==
 
@@ -239,17 +237,15 @@ Edit the Name Service Switch configuration to use LDAP:
 sudo nano /etc/nsswitch.conf
 ```
 
-2. ==action: Update the `passwd`, `group`, and `shadow` lines to include `ldap`:==
+2. ==action: Update the passwd, group, and shadow lines to include ldap:==
 
 ```
-passwd:         files systemd ldap
-group:          files systemd ldap
-shadow:         files ldap
+passwd:         compat systemd ldap
+group:          compat systemd ldap
+shadow:         compat ldap
 ```
 
 > Note: This tells the system to check local files first, then query LDAP for user/group information.
-
-> Note: REVIEW NOTE: had compat rather than files? `passwd: compat systemd ldap`, `group: compat systemd ldap`, `shadow: compat ldap`
 
 3. ==action: Save and exit (Ctrl+X, Y, Enter)==
 
