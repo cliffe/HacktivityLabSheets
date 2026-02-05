@@ -1,24 +1,25 @@
+---
+title: "Active Directory Setup Guide"
+author: ["Z. Cliffe Schreuders"]
+license: "CC BY-SA 4.0"
+description: "Learn how to set up Active Directory Domain Services on Windows Server 2016, configure DNS, create users, and join Windows and Linux clients to an Active Directory domain."
+overview: |
+  This lab provides a comprehensive guide to setting up Active Directory (AD) in a Windows Server environment. You will learn how to configure a Domain Controller (DC) with Active Directory Domain Services (AD DS), assign static IP addresses, configure DNS services, and establish a new forest with a fully qualified domain name (FQDN). The lab covers creating organizational units, managing user accounts, and configuring password policies. You will also learn how to join both Windows 7 and Linux client systems to the Active Directory domain for centralized authentication and management. By the end of this lab, you will understand the fundamentals of directory services, domain controllers, and enterprise identity management using Active Directory, which are essential components of modern Windows-based network infrastructures.
+tags: ["active-directory", "windows-server", "domain-controller", "authentication", "identity-management", "dns", "adds", "windows", "directory-services"]
+categories: ["systems_security"]
+type: ["lab-sheet"]
+difficulty: "intermediate"
+cybok:
+  - ka: "AAA"
+    topic: "Authentication"
+    keywords: ["identity management", "user authentication", "facets of authentication", "authentication in distributed systems"]
+  - ka: "AAA"
+    topic: "Authorisation"
+    keywords: ["access control", "authorization models"]
+
+---
+
 # Getting started with your assignment – setting up Active Directory and joining Windows clients
-
-# Contents
-
-[Introduction](#introduction)
-
-[Setting up AD](#setting-up-ad)
-
-[Assigning a static IP](#assigning-a-static-ip)
-
-[Active Directory Domain Services](#active-directory-domain-services)
-
-[Installation](#installation)
-
-[Adding Users](#adding-users)
-
-[Joining your Windows 7 VM to your new domain](#joining-your-windows-7-vm-to-your-new-domain)
-
-[Joining a Linux VM to your new domain](#joining-a-linux-vm-to-your-new-domain)
-
-[The end of the beginning](#the-end-of-the-beginning)
 
 # Introduction {#introduction}
 
