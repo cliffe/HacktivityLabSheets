@@ -25,13 +25,13 @@ cybok:
 
 # Introduction {#introduction}
 
-In modern enterprise environments, managing user accounts and authentication across dozens, hundreds, or even thousands of computers becomes impossible without centralised systems. Imagine having to create a separate user account on every single computer for every employee in an organization – not only would this be time-consuming, but it would also be a security nightmare when employees leave, passwords need to be changed, or access permissions need to be updated.
+In modern enterprise environments, managing user accounts and authentication across dozens, hundreds, or even thousands of computers becomes impossible without centralised systems. Imagine having to create a separate user account on every single computer for every employee in an organisation – not only would this be time-consuming, but it would also be a security nightmare when employees leave, passwords need to be changed, or access permissions need to be updated.
 
 Directory services solve this problem by providing a centralised database of users, computers, and other network resources, along with a standardised way for systems to authenticate users and query information about them. This lab will introduce you to two major directory service technologies: **Active Directory** (Microsoft's solution) and **LDAP** (an open standard implemented by various systems).
 
 # What are Directory Services? {#what-are-directory-services}
 
-A **directory service** is a centralised system that stores, organizes, and provides access to information about network resources. Think of it as a specialized database optimized for reading and searching, containing information about:
+A **directory service** is a centralised system that stores, organises, and provides access to information about network resources. Think of it as a specialised database optimised for reading and searching, containing information about:
 
 - **Users**: Names, credentials, email addresses, phone numbers, group memberships
 - **Computers**: Hostnames, operating systems, network addresses
@@ -45,7 +45,7 @@ Directory services provide several critical functions:
 2. **Authorisation**: Determining what authenticated users can access (what you can do)
 3. **Centralised Management**: Single location to manage all users and resources
 4. **Single Sign-On (SSO)**: Users authenticate once and access multiple systems
-5. **Policy Enforcement**: Consistent security policies across the organization
+5. **Policy Enforcement**: Consistent security policies across the organisation
 
 # Active Directory vs LDAP {#active-directory-vs-ldap}
 
@@ -73,7 +73,7 @@ Directory services provide several critical functions:
 **Key characteristics:**
 - Platform-independent and open standard
 - Works with Linux, Unix, macOS, and Windows
-- Flexible schema that can be customized
+- Flexible schema that can be customised
 - Uses various authentication mechanisms (simple bind, SASL)
 - Hierarchical structure based on organisational units (OUs)
 - Commonly used with additional tools for web-based management
@@ -91,7 +91,7 @@ Directory services provide several critical functions:
 | **Platform** | Windows-centric | Cross-platform |
 | **Authentication** | Kerberos (primary) | Various (simple, SASL, Kerberos) |
 | **Management** | Native Windows tools, PowerShell | Web interfaces (phpLDAPadmin), CLI tools |
-| **Schema** | Fixed Microsoft schema | Flexible, customizable schema |
+| **Schema** | Fixed Microsoft schema | Flexible, customisable schema |
 | **Group Policy** | Yes (extensive) | No (requires additional tools) |
 | **Cost** | Requires Windows Server licenses | Free and open-source |
 
@@ -126,7 +126,7 @@ While centralised authentication offers many benefits, it also introduces consid
 - **Network Dependency**: Systems may need network connectivity to authenticate
 - **Complexity**: Requires careful planning and configuration
 
-> Warning: Because directory services are security-critical, they are prime targets for attackers. Securing your directory service is essential to organizational security.
+> Warning: Because directory services are security-critical, they are prime targets for attackers. Securing your directory service is essential to organisational security.
 
 # Key Concepts {#key-concepts}
 
@@ -134,9 +134,9 @@ While centralised authentication offers many benefits, it also introduces consid
 
 A **Domain Controller** is a server that responds to authentication requests and verifies users on the network. In Active Directory, DCs store a complete copy of the directory database and handle authentication. Organisations typically deploy multiple DCs for redundancy.
 
-## Organizational Units (OUs)
+## Organisational Units (OUs)
 
-**Organizational Units** are containers within a directory that organize users, groups, computers, and other objects. They allow administrators to apply policies and delegate administrative control at different levels of the organization.
+**Organisational Units** are containers within a directory that organise users, groups, computers, and other objects. They allow administrators to apply policies and delegate administrative control at different levels of the organisation.
 
 ## Groups
 
@@ -177,25 +177,27 @@ The Active Directory guide walks you through:
 - Adding users to Active Directory
 - Joining Windows clients to the domain
 
-==action: [Click here for the Active Directory Setup Guide](3_ad_setup.md)==
+==action: Complete the Active Directory guide:====
+[Click here for the Active Directory Setup Guide](../3_ad_setup.md)
 
 ## LDAP Setup  
 
 The LDAP guide walks you through:
 - Setting up an OpenLDAP server on Linux
 - Configuring phpLDAPadmin for web-based management
-- Creating organizational units and POSIX groups
+- Creating organisational units and POSIX groups
 - Adding user accounts with proper UID/GID management
 - Configuring Linux clients to authenticate against LDAP using nslcd
 - Setting up PAM for automatic home directory creation
 
-==action: [Click here for the LDAP Authentication Setup Guide](3_ldap_setup.md)==
+==action: Complete the LDAP guide:==
+[Click here for the LDAP Authentication Setup Guide](../3_ldap_setup.md)
 
 # Your Assignment {#your-assignment}
 
 ## Getting Started
 
-==action: Work through both the Active Directory and LDAP setup guides== to understand how each directory service works and to get hands-on experience with centralized authentication.
+==action: Work through both the Active Directory and LDAP setup guides== to understand how each directory service works and to get hands-on experience with centralised authentication.
 
 Once you have completed the setup guides:
 
