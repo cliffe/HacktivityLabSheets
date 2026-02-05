@@ -77,7 +77,7 @@ http://localhost/phpldapadmin/
 
 The `ldap_server` SecGen module has already configured phpLDAPadmin to auto-increment UIDs starting at 10000 instead of the default 1000. This avoids conflicts with local system users (which typically use UIDs 1000-9999).
 
-==VM: You can verify this configuration on the `auth_server`:==
+==VM: You can verify this configuration on the auth_server:==
 
 ```bash
 sudo grep "auto_number.*uidNumber" /etc/phpldapadmin/config.php
@@ -97,7 +97,7 @@ This means when you create new LDAP users, phpLDAPadmin will automatically assig
 
 Before creating users, it's good practice to organize your directory structure.
 
-1. ==action: Click on `dc=safetynet,dc=com` in the tree==
+1. ==action: Click on dc=safetynet,dc=com in the tree==
 
 > Tip: It's safe to ignore the "Automatically removed objectClass from template" messages.
 
@@ -139,7 +139,7 @@ Your group DN will be: `cn=staff,ou=groups,dc=safetynet,dc=local`
 
 ## Step 6: Create an LDAP User
 
-1. ==action: Click on `ou=people` in the tree==
+1. ==action: Click on ou=people in the tree==
 
 2. ==action: Click "Create a child entry"==
 
@@ -231,7 +231,7 @@ bindpw tiaspbiqe2r
 
 Edit the Name Service Switch configuration to use LDAP:
 
-1. ==action: Edit `/etc/nsswitch.conf`:==
+1. ==action: Edit /etc/nsswitch.conf:==
 
 ```bash
 sudo nano /etc/nsswitch.conf
@@ -274,7 +274,7 @@ sudo systemctl status nslcd
 sudo pam-auth-update
 ```
 
-==action: Make sure the following are enabled (marked with `[*]`):==
+==action: Make sure the following are enabled (marked with [*]):==
 - `Unix authentication`
 - `LDAP Authentication`
 - `Create home directory on login`
@@ -334,7 +334,7 @@ id        # Should show UID 10000, GID 500
 
 ### Check LDAP Server Status
 
-==VM: On `auth_server`:==
+==VM: On auth_server:==
 
 ```bash
 sudo systemctl status slapd
@@ -343,7 +343,7 @@ sudo slapcat \| head -20
 
 ### Check Client Configuration
 
-==VM: On `staff_desktop`:==
+==VM: On staff_desktop:==
 
 ```bash
 # Check nslcd status
@@ -368,7 +368,7 @@ getent passwd jdoe
    
    The `nslcd` service is trying to connect to localhost instead of your auth_server.
    
-   **Fix:** ==action: Update `/etc/nslcd.conf` with the correct server IP:==
+   **Fix:** ==action: Update /etc/nslcd.conf with the correct server IP:==
 
 ```bash
 sudo nano /etc/nslcd.conf
@@ -437,7 +437,7 @@ ldapsearch -x -H ldap://==edit:<AUTH_SERVER_IP>== -b "dc=safetynet,dc=local" "(u
 sudo pam-auth-update
 ```
 
-==action: Make sure these are enabled (marked with `[*]`):==
+==action: Make sure these are enabled (marked with [*]):==
 - `Unix authentication`
 - `LDAP Authentication`
 - `Create home directory on login`
@@ -456,7 +456,7 @@ sudo pam-auth-update
 
 ### Create LDAP Groups
 
-1. ==action: In phpLDAPadmin, click on `ou=groups`==
+1. ==action: In phpLDAPadmin, click on ou=groups==
 2. ==action: Create a child entry==
 3. ==action: Select "Generic: Posix Group"==
 4. ==action: Set group name (e.g., "developers")==
@@ -478,7 +478,7 @@ sudo systemctl stop nslcd
 sudo systemctl disable nslcd
 ```
 
-2. ==action: Create `/etc/sssd/sssd.conf`:==
+2. ==action: Create /etc/sssd/sssd.conf:==
 
 ```ini
 [sssd]
@@ -506,7 +506,7 @@ sudo systemctl restart sssd
 sudo systemctl enable sssd
 ```
 
-4. ==action: Update `/etc/nsswitch.conf` to use `sss` instead of `ldap`:==
+4. ==action: Update /etc/nsswitch.conf to use sss instead of ldap:==
 
 ```
 passwd:         files systemd sss
