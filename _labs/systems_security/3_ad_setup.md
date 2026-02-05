@@ -19,13 +19,11 @@ cybok:
 
 ---
 
-# Getting started with your assignment – setting up Active Directory and joining Windows clients
+# Setting up Active Directory and joining Windows clients
 
 # Introduction {#introduction}
 
-Here is a guide to help you get started by setting up Active Directory on Windows. This guide is based on some good previous assignment submissions (reworded to act as a guide for you – with references removed), so this document not only serves to get you a good start to your assignment, but also gives you a good insight into what makes for a good level of detail for the description of your assignment changes.
-
-If you follow the getting started guide we have provided, you don't need to document those steps in so much detail in your report, but you should include evidence that it was completed and document anything you do that isn't the same as in the guide (and generally cover any other changes you make to any VMs).
+Here is a guide to help you get started by setting up Active Directory on Windows. 
 
 Start by making note of the IP addresses you have been allocated on your VMs. In particular the 10.X.X.X addresses for each VM.
 
