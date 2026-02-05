@@ -195,7 +195,7 @@ The LDAP guide walks you through:
 
 ## Getting Started
 
-==action: Work through both the Active Directory and LDAP setup guides== to understand how each directory service works and to get hands-on experience with centralised authentication.
+==action: Work through both the Active Directory and LDAP setup guides== to get a start on your assignment and understand how each directory service works and to get hands-on experience with centralised authentication. 
 
 Once you have completed the setup guides:
 
