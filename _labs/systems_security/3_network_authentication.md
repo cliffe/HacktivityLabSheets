@@ -177,8 +177,7 @@ The Active Directory guide walks you through:
 - Adding users to Active Directory
 - Joining Windows clients to the domain
 
-==action: Complete the Active Directory guide:====
-[Click here for the Active Directory Setup Guide](../3_ad_setup.md)
+> Action: Complete the Active Directory guide. [Click here for the Active Directory Setup Guide](../3_ad_setup.md)
 
 ## LDAP Setup  
 
@@ -190,8 +189,7 @@ The LDAP guide walks you through:
 - Configuring Linux clients to authenticate against LDAP using nslcd
 - Setting up PAM for automatic home directory creation
 
-==action: Complete the LDAP guide:==
-[Click here for the LDAP Authentication Setup Guide](../3_ldap_setup.md)
+> Action: Complete the LDAP guide. [Click here for the LDAP Authentication Setup Guide](../3_ldap_setup.md)
 
 # Your Assignment {#your-assignment}
 
