@@ -2,9 +2,9 @@
 title: "LDAP Authentication Setup Guide"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Learn how to set up centralized LDAP authentication between an OpenLDAP server and Linux clients using nslcd and PAM for enterprise identity management."
+description: "Learn how to set up centralised LDAP authentication between an OpenLDAP server and Linux clients using nslcd and PAM for enterprise identity management."
 overview: |
-  This lab provides a comprehensive guide to setting up LDAP (Lightweight Directory Access Protocol) authentication in a networked environment. You will learn how to configure an OpenLDAP server using phpLDAPadmin for user management, and configure Linux client systems to authenticate against the LDAP directory using nslcd. The lab covers creating organizational units, POSIX groups, and user accounts with proper UID/GID management to avoid conflicts with local users. You will also learn how to configure NSS (Name Service Switch) and PAM (Pluggable Authentication Modules) to enable centralized authentication and automatic home directory creation. By the end of this lab, you will understand the fundamentals of directory services and centralized authentication, which are essential components of enterprise identity management systems.
+  This lab provides a comprehensive guide to setting up LDAP (Lightweight Directory Access Protocol) authentication in a networked environment. You will learn how to configure an OpenLDAP server using phpLDAPadmin for user management, and configure Linux client systems to authenticate against the LDAP directory using nslcd. The lab covers creating organisational units, POSIX groups, and user accounts with proper UID/GID management to avoid conflicts with local users. You will also learn how to configure NSS (Name Service Switch) and PAM (Pluggable Authentication Modules) to enable centralised authentication and automatic home directory creation. By the end of this lab, you will understand the fundamentals of directory services and centralised authentication, which are essential components of enterprise identity management systems.
 tags: ["ldap", "authentication", "identity-management", "openldap", "nslcd", "pam", "directory-services", "phpldapadmin", "linux"]
 categories: ["systems_security"]
 type: ["lab-sheet"]
@@ -15,7 +15,7 @@ cybok:
     keywords: ["identity management", "user authentication", "facets of authentication", "authentication in distributed systems"]
   - ka: "AAA"
     topic: "Authorisation"
-    keywords: ["AUTHORIZATION - LDAP (LIGHTWEIGHT DIRECTORY ACCESS PROTOCOL)"]
+    keywords: ["AUTHORIsATION - LDAP (LIGHTWEIGHT DIRECTORY ACCESS PROTOCOL)"]
 ---
 
 # LDAP Authentication Setup Guide
@@ -93,9 +93,9 @@ This means when you create new LDAP users, phpLDAPadmin will automatically assig
 
 > Note: If for some reason the configuration wasn't applied, you can manually edit `/etc/phpldapadmin/config.php` and change the `uidNumber` value from 1000 to 10000.
 
-## Step 4: Create Organizational Units
+## Step 4: Create Organisational Units
 
-Before creating users, it's good practice to organize your directory structure.
+Before creating users, it's good practice to organise your directory structure.
 
 1. ==action: Click on dc=safetynet,dc=com in the tree==
 
@@ -531,7 +531,7 @@ su - jdoe
 > - **LDAPS**: Enable TLS/SSL (ldaps://)
 > - **Strong Passwords**: Enforce password policies in LDAP
 > - **Access Control**: Use LDAP ACLs to restrict who can read/modify entries
-> - **Firewall**: Restrict LDAP port (389) access to authorized systems only
+> - **Firewall**: Restrict LDAP port (389) access to authorised systems only
 > - **Monitoring**: Monitor authentication logs for suspicious activity
 
 ## Conclusion
@@ -542,4 +542,4 @@ You now have a working LDAP authentication system where:
 - User accounts are managed through phpLDAPadmin
 - Home directories are created automatically on first login
 
-This setup demonstrates centralized authentication, a key component of enterprise identity management systems.
+This setup demonstrates centralised authentication, a key component of enterprise identity management systems.

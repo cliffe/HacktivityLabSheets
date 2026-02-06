@@ -4,7 +4,7 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Learn how to set up Active Directory Domain Services on Windows Server 2016, configure DNS, create users, and join Windows and Linux clients to an Active Directory domain."
 overview: |
-  This lab provides a comprehensive guide to setting up Active Directory (AD) in a Windows Server environment. You will learn how to configure a Domain Controller (DC) with Active Directory Domain Services (AD DS), assign static IP addresses, configure DNS services, and establish a new forest with a fully qualified domain name (FQDN). The lab covers creating organizational units, managing user accounts, and configuring password policies. You will also learn how to join both Windows 7 and Linux client systems to the Active Directory domain for centralized authentication and management. By the end of this lab, you will understand the fundamentals of directory services, domain controllers, and enterprise identity management using Active Directory, which are essential components of modern Windows-based network infrastructures.
+  This lab provides a comprehensive guide to setting up Active Directory (AD) in a Windows Server environment. You will learn how to configure a Domain Controller (DC) with Active Directory Domain Services (AD DS), assign static IP addresses, configure DNS services, and establish a new forest with a fully qualified domain name (FQDN). The lab covers creating organisational units, managing user accounts, and configuring password policies. You will also learn how to join both Windows 7 and Linux client systems to the Active Directory domain for centralised authentication and management. By the end of this lab, you will understand the fundamentals of directory services, domain controllers, and enterprise identity management using Active Directory, which are essential components of modern Windows-based network infrastructures.
 tags: ["active-directory", "windows-server", "domain-controller", "authentication", "identity-management", "dns", "adds", "windows", "directory-services"]
 categories: ["systems_security"]
 type: ["lab-sheet"]
@@ -15,7 +15,7 @@ cybok:
     keywords: ["identity management", "user authentication", "facets of authentication", "authentication in distributed systems"]
   - ka: "AAA"
     topic: "Authorisation"
-    keywords: ["access control", "authorization models"]
+    keywords: ["access control", "authorisation models"]
 
 ---
 
@@ -53,8 +53,6 @@ A static IP address needs to be set on the Domain Controller (DC). The DC will a
 
 ==action: Assign a static IP address in the 'IP address' field.== It must follow the same first 3 octets as the other computers on the network which will be connecting to the AD instance. 
 
-> Warning: Use the IP range specified in [this spreadsheet](https://leedsbeckett-my.sharepoint.com/:x:/g/personal/thomas_shaw_leedsbeckett_ac_uk/IQDPBabWsf91Rpv73U_amy99AbJxcpy5t8HQoeb1b_YiuAE).
-
 The subnet will be 255.0.0.0, with DNS servers left blank.
 
 ==action: Open Server Manager, go to All Servers==
@@ -83,7 +81,7 @@ Warnings recommend: a strong password for the administrator account, a static IP
 
 ![][image8]
 
-==action: Select Role-based or feature-based installation.== Another option is for setting up AD within a virtualized remote desktop environment (Microsoft, 2017).
+==action: Select Role-based or feature-based installation.== Another option is for setting up AD within a virtualised remote desktop environment (Microsoft, 2017).
 
 ![][image9]
 
