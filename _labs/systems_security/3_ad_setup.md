@@ -187,6 +187,26 @@ On the right side of the local server, ==action: click Users > New > User==
 
 ![][image28]
 
+# Joining your Windows 7 VM to your new domain
+
+==VM: On your Windows 7 VM==
+
+==action: Open IPv4 Settings, as previously shown.==
+
+==action: Set the DC's IP as the DNS.==
+
+==action: Open system properties​ to join the domain and change the hostname.==
+
+==action: Click the 'Domain' radio button and type the FQDN for your domain.==
+
+==action: Set a memorable and unique hostname and press "OK"==
+
+==action: Authenticate as administrator to join the domain.== Username: `administrator`, password: ==edit: your administrator password==.
+
+> Note: After a restart, AD accounts can now be logged into.
+
+
+
 # The end of the beginning {#the-end-of-the-beginning}
 
 Note at this point you have completed some of the assignment specifications, but you need to further complete the configuration of these systems to meet the requirements and give a reasonable user experience. For example, make sure user home directories are created when users login for the first time, and ensuring that users can login via the graphical login screen.
