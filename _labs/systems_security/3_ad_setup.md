@@ -149,7 +149,7 @@ The next window informs us that we're unable to create a DNS delegation as there
 
 ![][image19]
 
-As per the spec, ==action: set the NetBIOS domain name as your ==edit: cNUMBER==.== NetBIOS is a directory service, similar to DNS. NetBIOS was used in older Windows operating systems before Windows adopted DNS (sambawiki, 2020).
+As per the spec, ==action: set the NetBIOS domain name== as your ==edit: cNUMBER==. NetBIOS is a directory service, similar to DNS. NetBIOS was used in older Windows operating systems before Windows adopted DNS (sambawiki, 2020).
 
 ![][image20]
 
