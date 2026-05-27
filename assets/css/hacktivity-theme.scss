@@ -1,6 +1,14 @@
 ---
 ---
 
+@font-face {
+  font-family: 'GNF';
+  src: url('../fonts/gnf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 // Hacktivity Theme CSS Variables and Styles
 
 // Set default font family
@@ -209,6 +217,34 @@ body {
   font-size: 16px;
   scroll-behavior: smooth;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Game fragments use in-game typography to match Break Escape UI. */
+body.game-fragment,
+body.game-fragment .lab-content,
+body.game-fragment .lab-content-body,
+body.game-fragment p,
+body.game-fragment li,
+body.game-fragment td,
+body.game-fragment th,
+body.game-fragment .overview-content,
+body.game-fragment .lab-description,
+body.game-fragment blockquote {
+  font-family: 'GNF', 'Source Code Pro', monospace;
+  font-size: 1.5em;
+}
+
+body.game-fragment h1,
+body.game-fragment h2,
+body.game-fragment h3,
+body.game-fragment h4,
+body.game-fragment h5,
+body.game-fragment h6,
+body.game-fragment .toc-container h2,
+body.game-fragment .lab-metadata h3 {
+  font-family: 'Press Start 2P', 'GNF', monospace;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
 }
 
 html {
