@@ -14,7 +14,7 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
   {% comment %} Create a collection of all unique categories {% endcomment %}
   {% assign all_categories = '' | split: '' %}
   {% for lab in site.labs %}
-    {% if lab.categories %}
+    {% if lab.categories and lab.game_fragment != true %}
       {% for category in lab.categories %}
         {% unless all_categories contains category %}
           {% assign all_categories = all_categories | push: category %}
@@ -32,7 +32,7 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
     
     <div class="category-labs">
       {% for lab in site.labs %}
-        {% if lab.categories contains category %}
+        {% if lab.categories contains category and lab.game_fragment != true %}
         <div class="lab-item">
           <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
           <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
@@ -83,6 +83,7 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
     <h2 class="category-heading">General Labs</h2>
     <div class="category-labs">
       {% for lab in uncategorized_labs %}
+      {% if lab.game_fragment != true %}
       <div class="lab-item">
         <h3><a href="{{ lab.url | relative_url }}">{{ lab.title }}</a></h3>
         <p class="lab-description">{{ lab.description | default: lab.excerpt }}</p>
@@ -122,6 +123,7 @@ Welcome to the Hacktivity SecGen lab sheets repository. This site contains hands
           {% endif %}
         </div>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   {% endif %}
