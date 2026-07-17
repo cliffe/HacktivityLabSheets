@@ -62,11 +62,21 @@
 
     <script type="module">
         // kramdown renders ```mermaid fences as <pre><code class="language-mermaid">.
-        // Mermaid needs the source in an element of its own, so unwrap them first.
-        // textContent also undoes kramdown's escaping of <b>/<br/> inside node labels.
-        const codes = document.querySelectorAll('pre > code.language-mermaid');
+        // Hide them up front so the graph source doesn't sit on screen until
+        // mermaid swaps in the SVG. With JS off nothing hides and the source
+        // stays readable, which is the fallback we want.
+        const fences = () => document.querySelectorAll('pre > code.language-mermaid');
+        fences().forEach(c => { c.parentElement.style.visibility = 'hidden'; });
 
-        if (codes.length) {
+        const start = async () => {
+            // Must run after lab.html's DOMContentLoaded handler, which rewrites
+            // .lab-content-body innerHTML for the ==highlight== syntax. Each of those
+            // assignments rebuilds every child node, so any element reference taken
+            // before it goes stale — hence re-querying here rather than reusing.
+            const codes = fences();
+            if (!codes.length) return;
+
+            // textContent undoes kramdown's escaping of <b>/<br/> inside node labels.
             const hosts = [...codes].map(code => {
                 const host = document.createElement('pre');
                 host.className = 'mermaid';
@@ -93,7 +103,15 @@
                         theme: document.body.dataset.theme === 'light' ? 'default' : 'dark',
                         flowchart: { htmlLabels: true, useMaxWidth: true }
                     });
-                    await mermaid.run({ nodes: hosts });
+                    // Render one at a time: a single bad diagram then can't
+                    // take the rest of the page's diagrams down with it.
+                    for (const h of hosts) {
+                        try {
+                            await mermaid.run({ nodes: [h] });
+                        } catch (e) {
+                            console.error('mermaid: diagram failed to render', e);
+                        }
+                    }
                 };
 
                 await render();
@@ -104,12 +122,16 @@
                     attributes: true, attributeFilter: ['data-theme']
                 });
             } catch (e) {
-                // CDN unreachable or a diagram failed to parse: show the graph
-                // source rather than leaving a blank gap on the page.
+                // Mermaid unreachable: show the graph source rather than a blank gap.
                 reveal();
                 console.error('mermaid unavailable; showing diagram source', e);
             }
-        }
+        };
+
+        // 'load' rather than DOMContentLoaded: guarantees we run after every
+        // DOMContentLoaded handler, regardless of script order.
+        if (document.readyState === 'complete') start();
+        else window.addEventListener('load', start);
     </script>
 </body>
 </html>
