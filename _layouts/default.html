@@ -117,6 +117,13 @@
                 await render();
                 reveal();
 
+                // Diagrams reflow the page after load, which strands the browser's
+                // initial jump to a #hash partway up the document. Re-apply it.
+                if (location.hash) {
+                    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+                    if (target) target.scrollIntoView();
+                }
+
                 // Re-render on theme toggle: mermaid bakes colours into the generated SVG.
                 new MutationObserver(render).observe(document.body, {
                     attributes: true, attributeFilter: ['data-theme']

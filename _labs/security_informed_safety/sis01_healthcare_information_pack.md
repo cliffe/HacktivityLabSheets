@@ -699,8 +699,7 @@ The argument does not claim absolute protection against all firmware attacks. A 
 
 **D2: Zero-day vulnerability in firmware verification implementation**. A flaw in the device's signature verification code could allow a crafted firmware image to pass verification despite not carrying a valid signature. **Status**: Partially mitigated. Network segmentation (CLAIM-HC-001) limits the attacker's ability to reach the device; firmware version register (E19) provides a secondary detection mechanism. Accepted as contributing to residual risk R1.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C2["<b>CLAIM-HC-002</b><br/>Firmware integrity prevents<br/>device manipulation"]
@@ -769,8 +768,7 @@ The argument acknowledges a critical gap: in Scenario 02, the attacker modifies 
 
 **D4: Fleet management console unavailable (Scenario 01)**. If the console is encrypted by ransomware, both the audit trail (E1) and the automated comparison (E2) are unavailable. Pumps continue operating on their locally stored library, which is safe if it has not been previously corrupted — but new prescriptions requiring dose adjustments must be programmed manually, reintroducing transcription error risk. **Status**: Mitigated by clinical fallback procedures (CLAIM-HC-010) and dual authorisation for manual dose entry (REQ-HC-SAF-014).
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C3["<b>CLAIM-HC-003</b><br/>Drug library change control<br/>preserves dose safety"]
@@ -833,8 +831,7 @@ The compensating control argument addresses the scenario where the central stati
 
 **D6: Attacker modifies the clinical governance baseline profile**. If the attacker alters both the device thresholds and the reference profile used for comparison, the audit would report no deviations. **Status**: Partially mitigated. The Clinical Governance Committee maintains an independent paper record of approved alarm profiles. Cross-referencing the electronic baseline against the paper record during quarterly governance review would detect this tampering, but with a significant delay.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C4["<b>CLAIM-HC-004</b><br/>Alarm configuration auditing<br/>maintains monitoring effectiveness"]
@@ -897,8 +894,7 @@ The compensating control argument acknowledges a critical limitation: the curren
 
 **D8: Undocumented device command interfaces**. Medical devices may have debugging interfaces, maintenance modes, or vendor-specific command channels that bypass the documented authentication mechanisms. **Status**: Partially mitigated. Supply chain security assessment (REQ-HC-SEC-027) includes pre-deployment assessment of device command interfaces, but cannot guarantee completeness for proprietary firmware.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C9["<b>CLAIM-HC-009</b><br/>Device authentication prevents<br/>unauthorised command execution"]
@@ -971,8 +967,7 @@ The operational continuity argument demonstrates that restoration from these imm
 
 **D10: Off-site backup authentication compromise**. If an attacker compromises the credentials for the off-site immutable storage (which are on a separate IAM domain), they could potentially delete or corrupt the off-site copies. **Status**: Mitigated. The off-site storage uses MFA, is on a separate identity domain, and WORM policies prevent deletion within the retention period even by the storage administrator.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C6["<b>CLAIM-HC-006</b><br/>Immutable backups enable<br/>safety-preserving recovery"]
@@ -1039,8 +1034,7 @@ The argument acknowledges that content-level image manipulation (altering pixel 
 
 **D12: PACS system compromise enabling integrity control bypass**. If the attacker gains administrative access to the PACS server, they may be able to disable the integrity verification mechanism or modify images while the mechanism is suspended. **Status**: Partially mitigated by network segmentation (CLAIM-HC-001) and clinical zone monitoring (REQ-HC-SEC-019). The PACS administrator account uses separate credentials from the domain, reducing the attack surface.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C8["<b>CLAIM-HC-008</b><br/>PACS integrity controls<br/>prevent diagnostic error"]
@@ -1099,8 +1093,7 @@ Third, the procedures include a defined process for recognising and correcting e
 
 **D14: Fallback procedures themselves introduce safety errors**. Paper-based prescribing reintroduces transcription errors, removes electronic allergy checking, and creates handwriting legibility issues. The fallback is safer than no procedure at all, but materially less safe than electronic prescribing. **Status**: Partially mitigated by double-check requirements (REQ-HC-SAF-014) and additional pharmacy staffing during incidents. Accepted as an inherent limitation of manual clinical processes.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C10["<b>CLAIM-HC-010</b><br/>Clinical fallback procedures<br/>maintain safe care during outage"]
@@ -1171,8 +1164,7 @@ The defence-in-depth layer addresses the scenario where a novel application-laye
 
 **D16: Configuration drift re-introduces exception rules**. Over time, operational pressures may lead to the re-introduction of firewall exception rules (as happened in the original Northgate scenario, where legacy rules were maintained for workflow continuity). **Status**: Mitigated. Continuous firewall change monitoring (E12) generates alerts for any rule modification. Quarterly audit with dual verification ensures any drift is detected and remediated within the audit cycle. Joint IT/Clinical Engineering governance committee (REQ-HC-SEC-024) provides organisational oversight of cross-zone access requests.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C1["<b>CLAIM-HC-001</b><br/>Network segmentation<br/>protects device integrity"]
@@ -1235,8 +1227,7 @@ The argument for CLAIM-HC-005 applies three layers of control. First, vendor rem
 
 **D18: Vendor uses maintenance window for unsanctioned access**. The vendor, acting within a legitimate session, could access devices or perform actions beyond the scope of the maintenance work order. **Status**: Partially mitigated. Session monitoring compares accessed devices against the work order scope. Vendor contract terms (REQ-HC-SEC-026) impose obligations and audit rights. However, fine-grained action-level monitoring is limited by the granularity of device-level logging.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C5["<b>CLAIM-HC-005</b><br/>Vendor access controls prevent<br/>supply-chain attack path"]
@@ -1299,8 +1290,7 @@ Evidence E16 documents the results of joint IT/Clinical Engineering tabletop exe
 
 **D20: Novel containment scenario not covered by decision trees**. The pre-defined decision trees cover common scenarios but cannot anticipate every possible containment combination. A novel attack vector or unexpected system dependency could create a containment decision with clinical consequences not addressed in the plan. **Status**: Partially mitigated. The escalation matrix provides a fallback to the clinical governance committee for scenarios outside the decision trees. Post-incident review (E17e) captures novel scenarios for incorporation into future plan revisions.
 
-#### Mermaid Diagram
-
+#### Argument Diagram
 ```mermaid
 graph TD
     C7["<b>CLAIM-HC-007</b><br/>Integrated incident response<br/>prevents containment-induced<br/>safety hazards"]
@@ -1363,8 +1353,7 @@ This creates two mutually exclusive strategies for any given vulnerability discl
 
 **Residual risk**: The known vulnerability is exploited by an attacker during the deferral window despite the compensating network controls. This is identified as Residual Risk R5.
 
-### Mermaid Diagram
-
+### Argument Diagram
 ```mermaid
 graph TD
     GP["<b>G-Patch: Patching Sub-Goal</b><br/>Safety-certified device firmware<br/>vulnerabilities are managed without<br/>introducing unacceptable safety<br/>or security risk"]
