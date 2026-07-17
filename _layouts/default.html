@@ -89,8 +89,91 @@
 
             const reveal = () => hosts.forEach(h => { h.style.visibility = ''; });
 
+            // Give each diagram a fixed-height viewport to pan/zoom inside. Without a
+            // definite height, svg-pan-zoom has nothing to fit the graph to.
+            const views = hosts.map(host => {
+                const viewport = document.createElement('div');
+                viewport.className = 'mermaid-viewport';
+                host.parentNode.insertBefore(viewport, host);
+                viewport.appendChild(host);
+                viewport.insertAdjacentHTML('beforeend', `
+                    <div class="mermaid-controls">
+                        <button type="button" data-act="in"   title="Zoom in">+</button>
+                        <button type="button" data-act="out"  title="Zoom out">&minus;</button>
+                        <button type="button" data-act="fit"  title="Fit to view">Fit</button>
+                        <button type="button" data-act="full" title="Fullscreen">&#9974;</button>
+                    </div>`);
+                return { host, viewport, pz: null };
+            });
+
+            // svg-pan-zoom ships as UMD, same build the dungeon graph uses.
+            const loadScript = src => new Promise((res, rej) => {
+                const s = document.createElement('script');
+                s.src = src; s.onload = res; s.onerror = rej;
+                document.head.appendChild(s);
+            });
+
+            const attachPanZoom = () => {
+                const svgPanZoom = window.svgPanZoom;
+                if (!svgPanZoom) return;
+                for (const v of views) {
+                    if (v.pz) { try { v.pz.destroy(); } catch (_) {} v.pz = null; }
+                    const svg = v.host.querySelector('svg');
+                    if (!svg) continue;
+                    // mermaid sizes the SVG to its content; let it fill the viewport instead.
+                    svg.style.maxWidth = 'none';
+                    svg.setAttribute('width', '100%');
+                    svg.setAttribute('height', '100%');
+                    try {
+                        v.pz = svgPanZoom(svg, {
+                            zoomEnabled: true,
+                            controlIconsEnabled: false,
+                            mouseWheelZoomEnabled: true,
+                            fit: true,
+                            center: true,
+                            minZoom: 0.2,
+                            maxZoom: 20,
+                            zoomScaleSensitivity: 0.3
+                        });
+                    } catch (e) {
+                        console.error('svg-pan-zoom: failed to attach', e);
+                    }
+                }
+            };
+
+            // Controls, delegated so they survive re-renders.
+            document.addEventListener('click', e => {
+                const btn = e.target.closest('.mermaid-controls button');
+                if (!btn) return;
+                const v = views.find(x => x.viewport === btn.closest('.mermaid-viewport'));
+                if (!v || !v.pz) return;
+                const act = btn.dataset.act;
+                if (act === 'in') v.pz.zoomIn();
+                else if (act === 'out') v.pz.zoomOut();
+                else if (act === 'fit') { v.pz.fit(); v.pz.center(); }
+                else if (act === 'full') {
+                    if (document.fullscreenElement) document.exitFullscreen();
+                    else v.viewport.requestFullscreen();
+                }
+            });
+
+            // Fullscreen changes the viewport size out from under the SVG.
+            document.addEventListener('fullscreenchange', () => {
+                setTimeout(() => views.forEach(v => {
+                    if (!v.pz) return;
+                    v.pz.resize(); v.pz.fit(); v.pz.center();
+                }), 50);
+            });
+
             try {
                 const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+
+                // Zoom is an enhancement: if this CDN is down the diagrams still render.
+                try {
+                    await loadScript('https://cdn.jsdelivr.net/npm/svg-pan-zoom@3/dist/svg-pan-zoom.min.js');
+                } catch (e) {
+                    console.error('svg-pan-zoom unavailable; diagrams will render without zoom', e);
+                }
 
                 const render = async () => {
                     // mermaid.run() consumes the element, so restore the source each pass.
@@ -112,6 +195,7 @@
                             console.error('mermaid: diagram failed to render', e);
                         }
                     }
+                    attachPanZoom();
                 };
 
                 await render();
