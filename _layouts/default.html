@@ -157,12 +157,16 @@
                 }
             });
 
-            // Fullscreen changes the viewport size out from under the SVG.
+            // Fullscreen resizes the viewport out from under the SVG, and
+            // svg-pan-zoom caches those dimensions. Re-measure once the
+            // fullscreen layer has actually laid out, not on a guessed timer.
             document.addEventListener('fullscreenchange', () => {
-                setTimeout(() => views.forEach(v => {
-                    if (!v.pz) return;
-                    v.pz.resize(); v.pz.fit(); v.pz.center();
-                }), 50);
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    views.forEach(v => {
+                        if (!v.pz) return;
+                        v.pz.resize(); v.pz.fit(); v.pz.center();
+                    });
+                }));
             });
 
             try {

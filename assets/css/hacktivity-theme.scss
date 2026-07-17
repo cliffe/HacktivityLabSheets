@@ -914,12 +914,19 @@ pre.mermaid {
     }
   }
 
+  // The base rule's position/height/margin otherwise survive into the
+  // fullscreen layer and leave the diagram letterboxed, so override all of it.
   &:fullscreen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
     height: 100vh;
+    max-width: none;
+    max-height: none;
     margin: 0;
     border: none;
     border-radius: 0;
-    background: var(--bg-color, #1c1c1c);
+    background: var(--bg-color);
   }
 }
 
