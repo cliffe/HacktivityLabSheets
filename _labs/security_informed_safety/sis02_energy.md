@@ -1,6 +1,6 @@
 ---
 title: "SIS02 Energy - Albion Energy Grid Attack Investigation"
-author: ["Dr Chris Lewin", "Break Escape Team"]
+author: ["Z. Cliffe Schreuders", "Oleg Illiashenko"]
 license: "CC BY-SA 4.0"
 overview: |
   This scenario explores how cybersecurity and functional safety intersect in critical infrastructure. You will investigate a sophisticated cyber attack on an energy storage facility, where attackers have progressed from the corporate IT network into the operational technology (OT) environment. The scenario demonstrates the unique challenges of incident response in systems where cyber security failures directly create physical safety hazards—where disabling a protection system doesn't just mean losing security, it means losing the safeguards that prevent equipment damage or grid instability.

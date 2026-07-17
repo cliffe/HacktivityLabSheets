@@ -59,5 +59,57 @@
         </div>
     </footer>
     {% endunless %}
+
+    <script type="module">
+        // kramdown renders ```mermaid fences as <pre><code class="language-mermaid">.
+        // Mermaid needs the source in an element of its own, so unwrap them first.
+        // textContent also undoes kramdown's escaping of <b>/<br/> inside node labels.
+        const codes = document.querySelectorAll('pre > code.language-mermaid');
+
+        if (codes.length) {
+            const hosts = [...codes].map(code => {
+                const host = document.createElement('pre');
+                host.className = 'mermaid';
+                host.dataset.src = code.textContent;
+                host.textContent = code.textContent;
+                host.style.visibility = 'hidden';
+                code.parentElement.replaceWith(host);
+                return host;
+            });
+
+            const reveal = () => hosts.forEach(h => { h.style.visibility = ''; });
+
+            try {
+                const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+
+                const render = async () => {
+                    // mermaid.run() consumes the element, so restore the source each pass.
+                    hosts.forEach(h => {
+                        h.textContent = h.dataset.src;
+                        h.removeAttribute('data-processed');
+                    });
+                    mermaid.initialize({
+                        startOnLoad: false,
+                        theme: document.body.dataset.theme === 'light' ? 'default' : 'dark',
+                        flowchart: { htmlLabels: true, useMaxWidth: true }
+                    });
+                    await mermaid.run({ nodes: hosts });
+                };
+
+                await render();
+                reveal();
+
+                // Re-render on theme toggle: mermaid bakes colours into the generated SVG.
+                new MutationObserver(render).observe(document.body, {
+                    attributes: true, attributeFilter: ['data-theme']
+                });
+            } catch (e) {
+                // CDN unreachable or a diagram failed to parse: show the graph
+                // source rather than leaving a blank gap on the page.
+                reveal();
+                console.error('mermaid unavailable; showing diagram source', e);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -873,6 +873,20 @@ pre {
   overflow-x: auto;
 }
 
+// Mermaid diagrams: rendered SVG, not code — drop the code-block chrome.
+pre.mermaid {
+  border: none;
+  background: none;
+  padding: 0.5rem 0;
+  text-align: center;
+  line-height: normal;
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 // Table styles
 table {
   border-collapse: collapse;

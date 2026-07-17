@@ -1,6 +1,6 @@
 ---
 title: "SIS03 Cyber Insurance: Information Pack — Meridian Insurance"
-author: ["Dr Chris Lewin", "Break Escape Team"]
+author: ["Z. Cliffe Schreuders", "Oleg Illiashenko"]
 license: "CC BY-SA 4.0"
 description: |
   The authoritative technical source behind the SIS03 Cyber Insurance scenario: Meridian's business model and trust architecture, policyholder obligations and warranty conditions, assurance cases, claims with traceable requirement IDs, regulatory frameworks (GDPR, PCI DSS, SOC 2), and the cross-organisational hazard chain linking back to Albion Energy.
@@ -9,8 +9,6 @@ tags: ["security-informed-safety", "cyber-insurance", "third-party-risk", "syste
 type: ["information-pack"]
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/sis03_cyber_insurance/information_pack.md"
 ---
-
-## File: ./assurance_cases/assurance_case_overview.md
 
 # Assurance Case Overview — Meridian Cyber Insurance Coverage Determination
 
@@ -206,9 +204,6 @@ The assurance case represents this tension through Sub-Goal G2 (warranty complia
 
 This is the core teaching point: insurance warranties function as indirect safety controls, but their effectiveness depends on the credibility of enforcement. If policyholders believe that warranties will never be enforced, the incentive disappears. If policyholders believe that warranties will be enforced disproportionately, they may underreport risks or avoid buying insurance altogether. The assurance case structure — with its evidence nodes, context assumptions, and residual risks — makes this balance visible and discussable.
 
-
-## File: ./regulatory_frameworks/overview.md
-
 # Regulatory Frameworks Overview — Cyber Insurance Context
 
 This overview identifies the regulatory obligations that shape the insurance response to a cyber-physical incident. Regulatory requirements operate at two levels: obligations on the policyholder (Albion Energy Storage) that create insurable liabilities, and obligations on the insurer (Meridian Cyber Insurance) that govern how claims are handled and how capital is managed.
@@ -287,9 +282,6 @@ As a managing general agent underwriting on behalf of Lloyd's syndicates, Meridi
 
 This scenario illustrates the systemic consequence of the silent cyber mandates: by requiring explicit coverage positions, Lloyd's has created clarity but also accountability. An insurer that affirmatively covers cyber-physical losses bears the full financial consequence of those losses, without the ambiguity that previously allowed costs to be shared (or avoided) across multiple policies.
 
-
-## File: ./regulatory_frameworks/standards_mapping.md
-
 # Standards Mapping — Regulatory Requirements, Insurance Obligations, and Security-Safety Implications
 
 This mapping table shows how regulatory requirements on policyholders create security obligations that intersect with Meridian's insurance policy conditions. Each row traces a regulatory requirement through the insurance mechanism to its safety consequence.
@@ -311,9 +303,6 @@ This mapping table shows how regulatory requirements on policyholders create sec
 | 11 | **Insurance Act 2015** — Warranties and Terms: Warranty breach suspends (not voids) coverage. Breach must be causally connected to the loss for the insurer to rely on it. Insurer must demonstrate proportionality. | Governs the Meridian-Albion contractual relationship | All POL-OBL warranties operate under the Insurance Act 2015 framework. | Meridian cannot simply void coverage for any warranty breach; it must demonstrate that the specific breach was causally connected to the specific loss. The Act protects policyholders from disproportionate exclusion arguments. | The Insurance Act 2015's proportionality requirement ensures that warranty conditions — which function as indirect safety controls — cannot be used as blanket coverage denial mechanisms. This preserves the incentive alignment: policyholders maintain security controls because the warranty incentivises them, but the insurer cannot retrospectively weaponise every minor deviation to avoid paying a claim. |
 | 12 | **NCSC CAF Objective A.2 — Risk Management**: OES should have appropriate risk management processes that address cyber security risks to essential service delivery. Risk assessments should consider cyber threats to OT/ICS. | Albion (OES obligation) | POL-OBL-016 (Security risk register): Known security vulnerabilities that cannot be immediately remediated must be documented with compensating controls. | Failure to document known risks (e.g., the SIS firmware vulnerability) in the risk register may be treated as a failure to cooperate and may affect the warranty assessment. | The risk register is where the security-safety trade-off is formally documented. Albion's risk register should have recorded the SIS firmware deferral, the rationale (IEC 61511 recertification), and the compensating controls. If this documentation is complete, it strengthens Albion's argument that the deferral was a managed risk, not negligence. If incomplete, it suggests inadequate governance of a safety-relevant security decision. |
 | 13 | **Ofgem — Enforcement Powers under NIS Regulations**: Ofgem can issue enforcement notices, compliance orders, and financial penalties (up to £17M) for NIS non-compliance by energy sector OES. | Albion (energy OES) | Policy covers regulatory defence costs. NIS fines are excluded from coverage. | If Ofgem pursues enforcement, Albion's legal defence is covered by Meridian, but any penalty is Albion's own liability. Ofgem enforcement findings may reference the same security deficiencies that Meridian's warranty assessment addresses. | Ofgem enforcement and Meridian warranty assessment may reach the same conclusion (Albion's security posture was inadequate) for different purposes (regulatory compliance vs. insurance coverage). Consistent findings reinforce each other; conflicting findings create complexity — e.g., if Ofgem accepts Albion's SIS patch deferral rationale but Meridian does not, or vice versa. |
-
-
-## File: ./requirements/claims.md
 
 # Security-Informed Safety Claims — Cyber Insurance Context
 
@@ -596,9 +585,6 @@ Albion incident status: UNDER ARBITRATION — this claim is at the heart of
 the coverage dispute between Meridian and Albion.
 ```
 
-
-## File: ./requirements/cybersecurity_requirements.md
-
 # Cybersecurity Requirements — Meridian Cyber Insurance (Insurer's Own Systems)
 
 These requirements define the security controls Meridian Cyber Insurance must maintain for its own information systems. While less dramatic than the ICS security requirements in Cases 1 and 2, these requirements are critical: Meridian holds detailed security posture information for over 500 critical infrastructure organisations. A compromise of Meridian's systems would constitute a significant threat intelligence breach.
@@ -676,9 +662,6 @@ In the event that a security breach of Meridian's systems results in unauthorise
 
 **MER-SEC-018: Attribution Intelligence Handling**
 Threat intelligence received from law enforcement or the NCSC (including attribution assessments related to policyholder incidents) shall be handled in accordance with the originator's classification. Such intelligence shall not be used to inform coverage decisions without legal counsel review of the implications, and shall not be shared beyond the authorised recipients within Meridian.
-
-
-## File: ./requirements/policyholder_security_obligations.md
 
 # Policyholder Security Obligations — Meridian Cyber Insurance Warranty Schedule
 
@@ -1143,9 +1126,6 @@ peripheral or control system devices are a documented vector for
 accessing safety-critical environments.
 ```
 
-
-## File: ./storylines/attack_scenarios/albion_insurance_response_chain.md
-
 # Albion Insurance Response Chain
 
 Attack and Response Scenario — Meridian Cyber Insurance / Albion Energy Storage
@@ -1294,9 +1274,6 @@ Meridian's forensic team, deployed to the Albion Storage Facility on day three p
 | **Decision** | Meridian instructs its specialist recovery firm to investigate a potential subrogation claim against CastleTech Solutions, focusing on whether CastleTech's management of the shared service account (cross-site administrative privileges, default credentials on dormant accounts) constituted a breach of CastleTech's managed services contract with Albion. |
 | **Key tension** | Subrogation against CastleTech creates a three-party dynamic: Meridian pursuing CastleTech for costs arising from Albion's incident, where Albion may need CastleTech's continued cooperation for incident remediation and ongoing IT services. Albion may resist Meridian's subrogation action if it risks damaging the Albion-CastleTech relationship. The subrogation right is Meridian's contractual entitlement under the policy, but exercising it requires balancing legal recovery against operational practicality. |
 
-
-## File: ./storylines/meridian_response.md
-
 # The Meridian Response
 
 A Security-Informed Safety Storyline — Meridian Cyber Insurance Ltd
@@ -1435,9 +1412,6 @@ The following decision moments present the core security-informed safety trade-o
 
 **Decision 6 — Third-Party Liability Allocation.** Trent Water Services was potentially compromised through shared infrastructure with Albion. If Trent Water's water pumping SCADA system was affected, who bears liability — Albion (for maintaining shared infrastructure that was insecure), Meridian (under Albion's third-party cyber coverage), or CastleTech Solutions (the managed service provider that administered the shared infrastructure)? Should Meridian proactively investigate the Trent Water exposure, or wait for Trent Water to submit its own claim?
 
-
-## File: ./system_architecture/network_architecture.md
-
 # Network Architecture — Meridian Cyber Insurance
 
 ## Organisational Data Flow Diagram
@@ -1558,9 +1532,6 @@ Regulatory data flows create a three-way trust challenge. Albion reports to Ofge
 
 When the Albion claim approaches the £5 million reinsurance attachment point, Meridian's Reinsurance Reporting System generates notifications to the reinsurance broker. These notifications contain summary claim details — enough for the reinsurer to assess its exposure, but not the full forensic dataset or policyholder-identifiable information. The reinsurer relies on Meridian's claims assessment: a further trust delegation in the chain.
 
-
-## File: ./system_architecture/policyholder_interfaces.md
-
 # Policyholder Interfaces — Meridian Cyber Insurance
 
 ## How Meridian Connects to and Monitors Policyholder Systems
@@ -1638,9 +1609,6 @@ The fundamental challenge in the insurer-policyholder relationship is informatio
 **Claims validation**: During the claims process, the policyholder holds the primary evidence base. Meridian's forensic investigation mitigates this by independently verifying the attack chain and loss causation, but the forensic team's access is scoped and negotiated — they may not see everything. The cooperation clause creates a contractual obligation to cooperate, but a policyholder with legal counsel will provide what is required, not necessarily what is maximally helpful to the insurer's assessment.
 
 **Mechanisms that reduce asymmetry**: Meridian employs several mechanisms beyond the warranty schedule: automated telemetry feeds provide continuous (if limited) visibility into the policyholder's security posture; audit rights allow periodic independent verification; site visits during underwriting establish a baseline understanding of the physical and logical environment; and the forensic investigation at claims stage provides an independent evidence base against which the policyholder's representations can be tested. None of these mechanisms fully resolve the information asymmetry — they reduce it, creating a more balanced assessment, but the insurer never has the same depth of understanding of the policyholder's systems as the policyholder itself.
-
-
-## File: ./system_architecture/subsystem_descriptions.md
 
 # Subsystem Descriptions — Meridian Cyber Insurance
 
@@ -1730,9 +1698,6 @@ Meridian maintains interfaces with multiple regulatory bodies, managed through a
 
 **Role in the Albion incident:** The compliance module generates a PRA large-loss notification when the Albion claim reserve exceeds £5 million. It also records Meridian's internal assessment that the claims handling process complies with FCA treating-customers-fairly requirements — a record that may be relevant if the coverage determination is challenged.
 
-
-## File: ./system_architecture/system_overview.md
-
 # System Overview — Meridian Cyber Insurance
 
 ## The Insurer's "System"
@@ -1784,9 +1749,6 @@ The critical trust boundary issue in the Meridian system is the asymmetry of inf
 - Meridian holds detailed information about Albion's security posture — network architecture weaknesses, deferred patches, warranty compliance status — obtained through the underwriting process and quarterly reporting. This information is commercially sensitive to Albion and potentially damaging if disclosed to regulators or other parties.
 - Albion controls the primary evidence base for the insurance claim — forensic data, incident timeline, loss documentation. Meridian depends on Albion's cooperation to validate the claim, but Albion's interests in the claim outcome may influence what information is disclosed and how.
 - The NCSC holds attribution intelligence that could materially affect Meridian's coverage decision (act-of-war exclusion). Sharing this intelligence with Meridian creates a tension: transparency supports fair coverage determination, but could incentivise insurers to invoke exclusions that undermine the purpose of cyber insurance for critical infrastructure.
-
-
-## File: ./theoretical_background/background.md
 
 # Theoretical Background — Cyber Insurance and Security-Informed Safety
 

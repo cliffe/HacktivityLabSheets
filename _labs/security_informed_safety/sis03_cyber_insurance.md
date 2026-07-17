@@ -1,6 +1,6 @@
 ---
 title: "SIS03 Cyber Insurance - Meridian Insurance Breach Investigation"
-author: ["Dr Chris Lewin", "Break Escape Team"]
+author: ["Z. Cliffe Schreuders", "Oleg Illiashenko"]
 license: "CC BY-SA 4.0"
 overview: |
   This scenario explores how cybersecurity breaches at trusted service providers can create cascading safety impacts across their clients' organizations. You will investigate a data breach at Meridian Insurance, a provider of cyber risk assessment and insurance services to critical infrastructure operators. The scenario demonstrates systemic risk: when an insurer's confidential risk assessments, security audits, and vulnerability information are stolen, attackers gain detailed intelligence for targeted attacks on the insurer's policyholders. This reveals the critical but often overlooked connection between trust relationships and safety-critical security failures—a breach at one organization can enable compromises at many others.

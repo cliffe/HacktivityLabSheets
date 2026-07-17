@@ -1,6 +1,6 @@
 ---
 title: "SIS01 Healthcare - Northgate General Hospital Incident Response"
-author: ["Dr Chris Lewin", "Break Escape Team"]
+author: ["Z. Cliffe Schreuders", "Oleg Illiashenko"]
 license: "CC BY-SA 4.0"
 overview: |
   This scenario explores how cybersecurity and functional safety intersect in healthcare environments. You will respond to a ransomware attack at a hospital that has encrypted systems across the enterprise network, and there's immediate concern about whether medical device networks have been affected. The scenario demonstrates the critical challenge of incident response in healthcare: how to conduct rapid forensic investigation and system restoration while prioritizing patient safety, managing 24/7 clinical operations that cannot simply be "shut down," and navigating the tension between IT security and clinical staff who have fundamentally different perspectives on risk and response priorities.

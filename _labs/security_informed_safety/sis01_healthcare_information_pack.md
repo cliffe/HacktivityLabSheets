@@ -1,6 +1,6 @@
 ---
 title: "SIS01 Healthcare: Information Pack — Northgate General Hospital"
-author: ["Dr Chris Lewin", "Break Escape Team"]
+author: ["Z. Cliffe Schreuders", "Oleg Illiashenko"]
 license: "CC BY-SA 4.0"
 description: |
   The authoritative technical source behind the SIS01 Healthcare scenario: hospital network architecture, InfusionGuard medical device systems, GSN/CAE assurance cases, CLAIM-HC safety claims with traceable requirement IDs, regulatory frameworks (HIPAA, FDA, NHS DSPT, IEC 62304/61508), and the Northgate incident storyline with attack chain.
@@ -9,8 +9,6 @@ tags: ["security-informed-safety", "healthcare", "medical-devices", "incident-re
 type: ["information-pack"]
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/sis01_healthcare/information_pack.md"
 ---
-
-## File: ./assurance_cases/assurance_case_overview.md
 
 # Security-Informed Safety Assurance Case — Northgate General Hospital
 
@@ -149,9 +147,6 @@ This assurance case is a teaching artefact, not a production safety case. A real
 - Integration with the Trust's broader clinical risk management framework
 
 The assurance case also does not address the human factors dimension — the impact of cyber incidents on clinical staff workload, stress, and decision-making quality, all of which affect patient safety during a crisis.
-
-
-## File: ./assurance_cases/cae_evidence_catalogue.md
 
 # Evidence Catalogue — Northgate General Hospital Security-Informed Safety Case
 
@@ -510,9 +505,6 @@ This catalogue lists every evidence node referenced in the detailed CAE case ([d
 - **Dependencies**: Requires the approved asset register and RBAC policy to be current and accurate.
 - **Traceability**: REQ-HC-SEC-016, REQ-HC-SEC-004
 - **Scenario Relevance**: Addresses the access control environment in which Scenario 02 operates. The move from shared credentials to individual named accounts and the restriction of the service account to application-only use are direct remediations for the Scenario 02 attack vector (Step 4 — harvesting the shared service account credential).
-
-
-## File: ./assurance_cases/detailed_cae_case.md
 
 # Detailed Security-Informed Safety Case — Northgate General Hospital (CAE)
 
@@ -1568,9 +1560,6 @@ This healthcare safety case connects to the other two case studies in the CyBOK 
 
 6. **The assurance case treats the three sub-goals as semi-independent, but the Northgate incident demonstrates compounding effects — simultaneous failure of monitoring, prescribing, and clinical records is worse than any individual failure. Does the CAE structure adequately represent this compound risk?** How would it need to be modified to explicitly address multi-system failure scenarios?
 
-
-## File: ./regulatory_frameworks/overview.md
-
 # Regulatory Framework Overview — Healthcare
 
 Applicable regulations, safety standards, and security standards for Northgate General Hospital.
@@ -1647,9 +1636,6 @@ NIST Special Publication 800-82 provides guidance on securing industrial control
 
 NIST SP 800-82's six-step risk management process (identify assets, identify vulnerabilities, identify threats, determine impacts, set probability, implement controls) provides a structured approach to assessing the cyber-safety risk at Northgate. The standard also emphasises the importance of separating IT and OT networks, validating patch applicability before deployment to control systems, and maintaining manual overrides as a safety fallback — all principles that are directly applicable to the healthcare scenario.
 
-
-## File: ./regulatory_frameworks/standards_mapping.md
-
 # Standards Mapping — Healthcare
 
 Mapping between regulatory requirements, applicable standards, and their security and safety implications for the Northgate General Hospital scenario.
@@ -1673,9 +1659,6 @@ Mapping between regulatory requirements, applicable standards, and their securit
 | Medical device networks must implement integrity controls to detect and prevent unauthorised modifications | IEC 62443-3-3 SR 3.4 (Software and information integrity); MHRA Guidance | Drives requirements for application whitelisting, configuration change detection, and firmware signature verification on the clinical device network | Protects the integrity of safety-critical device parameters (dose limits, alarm thresholds, firmware) against manipulation by an attacker within the clinical zone |
 | Risk assessment for IACS must consider the consequences of security events on the physical process | NIST SP 800-82 Section 3; ISO 14971 | Requires that cybersecurity risk assessment explicitly evaluates the impact of cyber events on patient care processes and safety outcomes | Bridges the gap between purely technical security risk assessment and clinical safety risk assessment, enabling the security-informed safety approach |
 | Healthcare organisations must comply with UK data protection law regarding patient data security | UK GDPR / Data Protection Act 2018; ICO guidance | Drives encryption, access control, and breach notification requirements for patient personal data | While primarily a data protection obligation, the integrity controls required for GDPR compliance also support the accuracy of clinical data used in safety-critical decisions |
-
-
-## File: ./requirements/claims.md
 
 # Security-Informed Safety Claims — Northgate General Hospital
 
@@ -1724,9 +1707,6 @@ Evidence required: Device authentication testing (commands from unauthorised sou
 **CLAIM-HC-010: Clinical Fallback Procedures Maintain Safe Care During Outage**
 Claim: Provided that documented clinical fallback procedures are maintained, regularly tested, and accessible at the point of care (REQ-HC-SEC-023, REQ-HC-SAF-008), clinicians can deliver safe care during any cyber-induced system outage, with defined process for recognising and correcting errors introduced during the manual phase (REQ-HC-SAF-010).
 Evidence required: Fallback procedure documentation in all clinical areas; biannual fallback procedure drill results; post-drill assessment confirming staff competence in paper-based clinical processes.
-
-
-## File: ./requirements/cybersecurity_requirements.md
 
 # Cybersecurity Requirements — Northgate General Hospital
 
@@ -1914,9 +1894,6 @@ Description: The clinical device network shall be included in the Trust's vulner
 Rationale: The clinical workstation exploited in Scenario 02 ran an unpatched operating system with known vulnerabilities. Regular vulnerability scanning of the clinical zone would have identified this exposure.
 Standard reference: IEC 62443-3-3 SR 3.3; NCSC Vulnerability Management guidance.
 
-
-## File: ./requirements/safety_requirements.md
-
 # Functional Safety Requirements — Northgate General Hospital
 
 Derived from the scenario hazard analysis. These requirements define the safety behaviours that clinical systems must maintain regardless of the state of the cyber environment.
@@ -1988,9 +1965,6 @@ Rationale: After the Northgate ransomware event, uncertainty persisted about whe
 **REQ-HC-SAF-014: Dual Authorisation for Safety-Critical Overrides**
 Description: Any action that overrides a safety control on a medical device (e.g., bypassing a dose limit, disabling an alarm, modifying a safety interlock) shall require dual authorisation from two independently authenticated clinicians.
 Rationale: Safety overrides are sometimes clinically necessary, but they reduce the margin of safety. Dual authorisation ensures that safety barriers are not reduced by a single compromised account or a single clinician error.
-
-
-## File: ./storylines/attack_scenarios/scenario_01_ransomware_to_device_impact.md
 
 # Scenario 01: Ransomware Propagation Leading to Clinical Device Availability Loss
 
@@ -2109,9 +2083,6 @@ Critically, the safety consequences are compounded by the loss of the EHR system
 | Encryption of patient monitoring central station | Impair Process Control | Denial of View | T0815 |
 | Loss of PACS availability | Inhibit Response Function | Data Destruction | T0809 |
 
-
-## File: ./storylines/attack_scenarios/scenario_02_device_integrity_compromise.md
-
 # Scenario 02: Device Integrity Compromise — Manipulation of Networked Clinical Devices
 
 Healthcare Attack Scenario — Northgate General Hospital
@@ -2224,9 +2195,6 @@ The most significant safety consequence of an integrity attack may be the erosio
 | Manipulate PACS DICOM images and metadata | Impair Process Control | Manipulate I/O Image | T0835 |
 | Abuse vendor remote access for persistent entry | Lateral Movement | Remote Services | T0886 |
 | Modify fleet management audit logs | Evasion | Modify Alarm Settings | T0838 |
-
-
-## File: ./storylines/northgate_incident.md
 
 # The Northgate Incident
 
@@ -2359,9 +2327,6 @@ The following moments in the Northgate Incident present meaningful choices for l
 
 6. **Disclosure Timing (Day 2 onwards)**: When and how should the Trust disclose the incident to patients, the ICO, NHS England, and the media? *Trade-off*: early disclosure supports transparency and regulatory compliance but may cause panic; delayed disclosure allows time for clearer messaging but risks regulatory sanction and loss of public trust.
 
-
-## File: ./system_architecture/network_architecture.md
-
 # Network Architecture — Northgate General Hospital
 
 ---
@@ -2475,9 +2440,6 @@ The architecture has three properties that are directly relevant to the security
 
 3. **Vendor remote access bypasses segmentation**: The infusion pump manufacturer's persistent VPN connection terminates directly in the clinical zone, providing an alternative entry point that bypasses the enterprise perimeter entirely. If the vendor's own credentials are compromised, the clinical zone is directly exposed.
 
-
-## File: ./system_architecture/subsystem_descriptions.md
-
 # Subsystem Descriptions — Northgate General Hospital
 
 ---
@@ -2548,9 +2510,6 @@ The enterprise IT environment comprises Active Directory domain services (authen
 
 **Key security vulnerabilities**: Active Directory is the highest-value target in the enterprise zone — domain admin compromise provides access to every domain-joined system, including the dual-homed clinical workstations. The backup infrastructure at Northgate was network-accessible from the enterprise zone without air-gapping or immutability controls, meaning that a ransomware attack that compromised the enterprise zone could also destroy the backup estate. The SIEM's coverage of the clinical zone was partial — medical device logs were not ingested, creating a monitoring blind spot.
 
-
-## File: ./system_architecture/system_overview.md
-
 # System Overview — Northgate General Hospital
 
 ---
@@ -2593,9 +2552,6 @@ At the time of the incident, several security gaps were known but unresolved:
 4. On-site backup infrastructure was network-accessible from the enterprise zone without air-gapping.
 5. Medical device communication protocols lacked encryption and mutual authentication.
 6. No formal governance structure linked the IT Security team with Clinical Engineering for managing cyber risks to medical devices.
-
-
-## File: ./theoretical_background/background.md
 
 # Theoretical Background: Cybersecurity and Patient Safety in Healthcare
 
