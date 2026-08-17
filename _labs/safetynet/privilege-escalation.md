@@ -7,7 +7,9 @@ source: "scenarios/m01_first_contact/lab_sheet/1_intro_linux.md"
 license: "CC BY-SA 4.0"
 description: "Hidden in-game field guide for sudo usage, privilege escalation, and lateral movement."
 game_fragment: true
-permalink: /labs/m01_first_contact/safetynet-field-guide-privilege-escalation/
+permalink: /labs/safetynet/privilege-escalation/
+redirect_from:
+  - /labs/m01_first_contact/safetynet-field-guide-privilege-escalation/
 ---
 
 # Handler Note — Agent HaX

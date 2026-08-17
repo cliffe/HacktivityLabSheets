@@ -3,7 +3,9 @@ title: "SAFETYNET Field Note: Information Leakage & the PIN Oracle"
 layout: lab
 description: Optional in-game field note on partial-feedback oracles — how a device that leaks "how close you got" turns a blind four-digit lock into a handful of deductions
 game_fragment: true
-permalink: /labs/m02_ransomed_trust/safetynet-field-note-information-leakage-and-the-pin-oracle/
+permalink: /labs/safetynet/information-leakage-and-the-pin-oracle/
+redirect_from:
+  - /labs/m02_ransomed_trust/safetynet-field-note-information-leakage-and-the-pin-oracle/
 ---
 
 # Handler Note — Agent HaX

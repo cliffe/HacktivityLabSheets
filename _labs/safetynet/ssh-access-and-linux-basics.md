@@ -7,7 +7,9 @@ source: "scenarios/m01_first_contact/lab_sheet/1_intro_linux.md"
 license: "CC BY-SA 4.0"
 description: "Hidden in-game field guide for SSH access, Hydra wordlists, and Linux navigation."
 game_fragment: true
-permalink: /labs/m01_first_contact/safetynet-field-guide-ssh-access-and-linux-basics/
+permalink: /labs/safetynet/ssh-access-and-linux-basics/
+redirect_from:
+  - /labs/m01_first_contact/safetynet-field-guide-ssh-access-and-linux-basics/
 ---
 
 # Handler Note — Agent HaX

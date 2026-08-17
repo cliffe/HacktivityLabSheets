@@ -7,7 +7,9 @@ source: "_labs/cyber_security_landscape/4_encoding_encryption.md"
 license: "CC BY-SA 4.0"
 description: "Hidden in-game field guide for identifying and decoding Base64 and ROT13 in Mission 1 using CyberChef."
 game_fragment: true
-permalink: /labs/m01_first_contact/safetynet-field-guide-encoding-and-decoding-with-cyberchef/
+permalink: /labs/safetynet/encoding-and-decoding-with-cyberchef/
+redirect_from:
+  - /labs/m01_first_contact/safetynet-field-guide-encoding-and-decoding-with-cyberchef/
 ---
 
 # Handler Note — Agent HaX

@@ -3,7 +3,9 @@ title: SAFETYNET Field Guide - Reconnaissance and Network Mapping
 layout: lab
 description: Optional in-game guide for structured host discovery and service enumeration
 game_fragment: true
-permalink: /labs/m02_ransomed_trust/safetynet-field-guide-reconnaissance-and-network-mapping/
+permalink: /labs/safetynet/reconnaissance-and-network-mapping/
+redirect_from:
+  - /labs/m02_ransomed_trust/safetynet-field-guide-reconnaissance-and-network-mapping/
 ---
 
 # SAFETYNET Field Guide: Reconnaissance and Network Mapping

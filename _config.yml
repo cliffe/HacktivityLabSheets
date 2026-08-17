@@ -39,6 +39,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-gist
   - jekyll-paginate
+  - jekyll-redirect-from
 
 # Exclude files from processing
 exclude:

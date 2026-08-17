@@ -7,7 +7,9 @@ source: "scenarios/m01_first_contact/lab_sheet/lockpicking.md"
 license: "CC BY-SA 4.0"
 description: "Hidden in-game field guide for understanding pin tumbler locks and the two-tool lockpicking technique."
 game_fragment: true
-permalink: /labs/m01_first_contact/safetynet-field-guide-lockpicking/
+permalink: /labs/safetynet/lockpicking/
+redirect_from:
+  - /labs/m01_first_contact/safetynet-field-guide-lockpicking/
 ---
 
 # Handler Note — Agent HaX
