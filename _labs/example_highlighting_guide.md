@@ -18,23 +18,28 @@ This guide provides comprehensive instructions for AI assistants on how to prope
 ## 🎯 Overview
 
 The highlighting system supports two main types of highlighting:
+
 1. **Inline highlights** - for short phrases within sentences
 2. **Block highlights** - for standalone action items, tips, warnings, and notes
 
 ## 📝 Inline Highlighting Syntax
 
 ### Basic Format
+
 Use `==type: content==` where `type` is one of: `action`, `tip`, `hint`, `warning`, `VM`, `question`, `edit`
 
 ### Command Formatting
+
 All bash/terminal commands should be properly formatted with markdown code blocks:
 
 **Before:**
+
 ```
 msfvenom -l payload | less
 ```
 
 **After:**
+
 ```bash
 msfvenom -l payload | less
 ```
@@ -42,14 +47,17 @@ msfvenom -l payload | less
 **Important**: Always use `bash` language tag for terminal commands and escape pipe characters (`|` becomes `\|`) within code blocks.
 
 ### Inline Code Formatting
+
 Within text, inline code should be enclosed using backticks and any markdown artifacts removed:
 
 **Before:**
+
 ```
 "push ebp" becomes `push ebp`
 ```
 
 **After:**
+
 ```
 `push ebp`
 ```
@@ -59,6 +67,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ### Examples
 
 **Action Highlights:**
+
 ```markdown
 ==action: Open a terminal window==
 ==action: Run the command sudo apt update==
@@ -66,6 +75,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ```
 
 **Tip Highlights:**
+
 ```markdown
 ==tip: Use Tab for auto-completion==
 ==tip: Press Ctrl+C to cancel a running command==
@@ -73,6 +83,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ```
 
 **Hint Highlights:**
+
 ```markdown
 ==hint: The flag is hidden in the /home/victim directory==
 ==hint: Try using the sudo command to access restricted files==
@@ -80,6 +91,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ```
 
 **Warning Highlights:**
+
 ```markdown
 ==warning: This command will delete files permanently==
 ==warning: Only run this in a test environment==
@@ -87,6 +99,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ```
 
 **VM Highlights:**
+
 ```markdown
 ==VM: On Kali==
 ==VM: On Windows==
@@ -97,6 +110,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ```
 
 **Question Highlights:**
+
 ```markdown
 ==question: Self-study Question:==
 ==question: Log Book Question:==
@@ -105,6 +119,7 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ```
 
 **Edit Highlights:**
+
 ```markdown
 ==edit: Replace with your IP address==
 ==edit: Change to your target IP==
@@ -115,81 +130,93 @@ Within text, inline code should be enclosed using backticks and any markdown art
 ## 📦 Block-Level Highlighting Syntax
 
 ### Basic Format
+
 Use `> Type: content` where `Type` is one of: `Action`, `Tip`, `Warning`, `Hint`, `Note`, `Question`, `Flag`
 
 ### Examples
 
 **Action Blocks:**
+
 > Action: Open a terminal and navigate to your home directory. Create a new folder called "lab_exercise" and change into it.
 
 > Action: Download the required files using wget. Verify the download completed successfully by listing the directory contents.
 
 **Tip Blocks:**
+
 > Tip: If you encounter permission errors, try using sudo before the command. Be careful with sudo as it gives you administrative privileges.
 
 > Tip: You can use the history command to see all previously executed commands. Use the up and down arrows to navigate through command history.
 
 **Warning Blocks:**
+
 > Warning: This lab involves using security tools that may be detected as malicious software. Ensure you're working in an isolated environment and consider disabling real-time antivirus protection temporarily.
 
 > Warning: The commands in this section will modify system files. Make sure you understand what each command does before executing it.
 
 **Hint Blocks:**
+
 > Hint: The flag is located in a hidden file in the victim's home directory. Look for files starting with a dot.
 
 > Hint: The password for the victim account is one of the most common passwords. Try the rockyou.txt wordlist.
 
 **Note Blocks:**
+
 > Note: If you get an error, try running it with sudo. The output may vary depending on your system configuration.
 
 > Note: This command lists all processes running on the system. The "aux" flags provide detailed information about each process.
 
 **Question Blocks:**
+
 > Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
 
 > Question: How does the Metasploit framework help in penetration testing? What are the advantages of using a standardized exploitation framework?
 
 **Flag Blocks:**
+
 > Flag: Find the flag hidden in the victim's home directory and submit it to Hacktivity to complete this challenge.
 
 > Flag: There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
 
-**When to Use Question Blocks:**
-Use `> Question:` for clear self-study or log book questions where students are expected to answer for themselves. Do NOT use for rhetorical questions that are answered later in the lab.
+**When to Use Question Blocks:** Use `> Question:` for clear self-study or log book questions where students are expected to answer for themselves. Do NOT use for rhetorical questions that are answered later in the lab.
 
-**When to Use Flag Blocks:**
-Use `> Flag:` for CTF challenge tasks where students need to find and submit flags. This highlights the competitive/assessment aspect of the task.
+**When to Use Flag Blocks:** Use `> Flag:` for CTF challenge tasks where students need to find and submit flags. This highlights the competitive/assessment aspect of the task.
 
 **Important**: Since the "Note:", "Tip:", "Hint:", "Question:", and "Flag:" labels are not visible in the rendered output, always capitalize the first word after the colon to make the content clear and readable.
 
 ## 🤖 AI Instructions for Lab Sheet Editing
 
 ### Step 0: Format Commands and Code Properly
+
 Before applying highlighting, ensure all bash/terminal commands, C code, and assembly code are properly formatted:
 
 **Heading Formatting Rules:**
+
 - Remove bold formatting from all headings (remove `**` around heading text)
 - Keep anchor links intact: `{#anchor-link}`
 - Example: `## **General notes about the labs** {#general-notes-about-the-labs}` becomes `## General notes about the labs {#general-notes-about-the-labs}`
 
 **Command Formatting Rules:**
+
 - All terminal commands must be in markdown code blocks with `bash` language tag
 - Escape pipe characters: `|` becomes `\|` within code blocks
 - Commands should be on their own lines, not inline with text
 
 **Code Formatting Rules:**
+
 - All C code must be in markdown code blocks with `c` language tag
 - All assembly code must be in markdown code blocks with `nasm` language tag
 - Remove escaped characters and markdown artifacts from code
 - Ensure proper syntax highlighting for better readability
 
 **Inline Code Formatting Rules:**
+
 - Within text, inline code should be enclosed using single backticks: `code`
 - Remove any escaped characters, quotes, or markdown artifacts from inline code
 - Examples: `push ebp`, `mov eax, 0x1`, `DWORD PTR [ebp-0x4]`
 
 **Examples:**
-```markdown
+
+````markdown
 # Before (incorrect):
 Run the command msfvenom -l payload | less
 
@@ -198,17 +225,19 @@ Run the command msfvenom -l payload | less
 
 ```bash
 msfvenom -l payload \| less
-```
+````
 
 # Before (incorrect):
-mov eax, 0x1a
-mov ebx, [0x00a7800f]
+
+mov eax, 0x1a mov ebx, \[0x00a7800f]
 
 # After (correct):
+
 ```nasm
 mov eax, 0x1a
 mov ebx, [0x00a7800f]
 ```
+
 ```
 
 ### Step 1: Identify Action Items
@@ -301,132 +330,176 @@ Look for:
 
 ### Before (Plain Text):
 ```
-Open a terminal window. Navigate to your home directory using the cd command. Create a new directory called "security_lab" and change into it. Be careful not to delete any existing files.
+
+Open a terminal window. Navigate to your home directory using the cd command. Create a new directory called "security\_lab" and change into it. Be careful not to delete any existing files.
+
 ```
 
 ### After (Highlighted):
 ```
-==action: Open a terminal window==. ==action: Navigate to your home directory using the cd command==. ==action: Create a new directory called "security_lab" and change into it==. ==warning: Be careful not to delete any existing files==.
+
+\==action: Open a terminal window==. ==action: Navigate to your home directory using the cd command==. ==action: Create a new directory called "security\_lab" and change into it==. ==warning: Be careful not to delete any existing files==.
+
 ```
 
 ### Before (Plain Text):
 ```
+
 On Kali, open a terminal and run the following commands. Make sure you're connected to the lab network.
+
 ```
 
 ### After (Highlighted):
 ```
-==VM: On Kali==, ==action: open a terminal and run the following commands==. ==hint: Make sure you're connected to the lab network==.
+
+\==VM: On Kali==, ==action: open a terminal and run the following commands==. ==hint: Make sure you're connected to the lab network==.
+
 ```
 
 ### Before (Plain Text):
 ```
+
 Interact with the Desktop VM. Click the icon after the VMs have started. Then switch to the target VM and run the scan.
+
 ```
 
 ### After (Highlighted):
 ```
-==VM: Interact with the Desktop VM==. ==action: Click the icon after the VMs have started==. Then ==VM: switch to the target VM== and ==action: run the scan==.
+
+\==VM: Interact with the Desktop VM==. ==action: Click the icon after the VMs have started==. Then ==VM: switch to the target VM== and ==action: run the scan==.
+
 ```
 
 ### Before (Plain Text):
 ```
+
 If you get lost in the file system, you can always return to your home directory by typing "cd" without any arguments. This is a useful shortcut to remember.
+
 ```
 
 ### After (Highlighted):
 ```
-==tip: If you get lost in the file system, you can always return to your home directory by typing "cd" without any arguments==. This is a useful shortcut to remember.
+
+\==tip: If you get lost in the file system, you can always return to your home directory by typing "cd" without any arguments==. This is a useful shortcut to remember.
+
 ```
 
 ### Before (Plain Text):
 ```
+
 This lab requires root access to modify system files. Make sure you understand the implications of running commands with elevated privileges.
+
 ```
 
 ### After (Highlighted):
 ```
+
 > Hint: This lab requires root access to modify system files.
 
 > Warning: Make sure you understand the implications of running commands with elevated privileges.
+
 ```
 
 
 ### Before (Plain Text):
 ```
-Interact with the Desktop VM. (Click ![][image2] after the VMs have started).
+
+Interact with the Desktop VM. (Click !\[]\[image2] after the VMs have started).
+
 ```
 ### After (Highlighted):
 ```
-==VM: Interact with the Desktop VM==. (Click ![][image2] after the VMs have started).
+
+\==VM: Interact with the Desktop VM==. (Click !\[]\[image2] after the VMs have started).
+
 ```
 
 ### Before (Plain Text):
 ```
+
 On the Kali VM:
+
 ```
 ### After (Highlighted):
 ```
-==VM: On the Kali VM:==
+
+\==VM: On the Kali VM:==
+
 ```
 
 ### Before (Plain Text):
 ```
+
 From the command line run:
 
 ```bash
 whoami
 ```
+
 ```
 ### After (Highlighted):
 ```
+
 From the command line ==action: run:==
 
 ```bash
 whoami
 ```
+
 ```
 
 ### Before (Plain Text):
 ```
+
 Run the command msfvenom -l payload | less to see available payloads.
+
 ```
 ### After (Highlighted):
 ```
-==action: Run the command:==
+
+\==action: Run the command:==
 
 ```bash
 msfvenom -l payload \| less
 ```
 
 to see available payloads.
+
 ```
 
 ### Before (Plain Text):
 ```
+
 Ping your own Kali VM from Kali itself (with the IP address you noted earlier):
 
 ping *Kali-IP-address*
+
 ```
 
 ### After (Highlighted):
 ```
-==action: Ping your own Kali VM from Kali itself (with the IP address you noted earlier):==
+
+\==action: Ping your own Kali VM from Kali itself (with the IP address you noted earlier):==
 
 ```bash
 ping ==edit:Kali-IP-address==
 ```
+
 ```
 
 
 ### Before (Plain Text):
 ```
+
 Note, this is lowercase “LS”.
+
 ```
 ### After (Highlighted):
 ```
+
 > Note: this is lowercase “LS”.
-```
+
+````
 
 ## 🎨 Visual Results
 
@@ -503,14 +576,15 @@ When processing lab sheets, always verify the Table of Contents:
 1. Remove any TOC/Contents section that is hardcoded, these are added automatically based on headers
    ```markdown
    [Section Name](#anchor-link)
-   ```
+````
 
-2. **Verify Anchor Links**: Confirm that each heading in the document has a correct anchor:
+1. **Verify Anchor Links**: Confirm that each heading in the document has a correct anchor:
    ```markdown
    ### Section Name {#anchor-link}
    ```
 
-3. **Common TOC Issues to Fix**:
+1. **Common TOC Issues to Fix**:
+
    - Missing anchor IDs in headings
    - Incorrect anchor formatting (spaces, special characters -- remove any brackets() and slashes from within anchors)
 
@@ -544,42 +618,51 @@ After applying highlighting:
 When instructions are followed by troubleshooting information about the command that was just run, format the troubleshooting text as a note block:
 
 **Before:**
-```markdown
+
+````markdown
 Run this command:
 ```bash
 ls -la
-```
+````
+
 If you get an error, try running it with sudo. The output may vary depending on your system configuration.
-```
+
+````
 
 **After:**
 ```markdown
 Run this command:
 ```bash
 ls -la
-```
+````
+
 > Note: If you get an error, try running it with sudo. The output may vary depending on your system configuration.
+
 ```
 
 **Rule**: Any brief explanation and any troubleshooting text that directly follows a command instruction should be formatted as a note block using `> Note:` to visually separate the explanation/troubleshooting information from the instruction.
 
 ### Before (Plain Text):
 ```
+
 Self-study Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
 
 Log Book Question: Document your findings from the vulnerability assessment, including which exploits were successful and why.
 
 There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
+
 ```
 
 ### After (Highlighted):
 ```
+
 > Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
 
 > Question: Document your findings from the vulnerability assessment, including which exploits were successful and why.
 
 > Flag: There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
-```
+
+````
 
 ### Common Processing Errors to Avoid
 
@@ -604,9 +687,10 @@ For proper CSS styling, image captions should be formatted as follows:
 ```markdown
 ![][image_reference]
 *Caption text here*
-```
+````
 
 **Examples:**
+
 ```markdown
 ![][binary_output]
 *Output of "xxd -b simple" showing binary representation of the "simple" executable file*
@@ -618,11 +702,13 @@ For proper CSS styling, image captions should be formatted as follows:
 ```
 
 **Important Guidelines:**
+
 - Place the caption on the line directly below the image (no blank line between)
 - Use italics (`*text*`) for the caption
 - Identify existing captions by looking for descriptive text that explains what the image shows (often incomplete sentences or phrases), rather than assuming any text following an image is a caption
 
 **Example:**
+
 ```markdown
 ![][image-11]
 
@@ -630,6 +716,7 @@ For proper CSS styling, image captions should be formatted as follows:
 ```
 
 **After (correct):**
+
 ```markdown
 ![][image-11]
 *Examining the contents of a memory address containing an unsigned integer*
@@ -640,11 +727,13 @@ For proper CSS styling, image captions should be formatted as follows:
 When working with C programming content, ensure all C code is properly formatted:
 
 **Format:**
-```markdown
+
+````markdown
 ```c
 // C code here
-```
-```
+````
+
+````
 
 **Important Guidelines:**
 - Place any C code into C code blocks using ` ```c ` and ` ``` `
@@ -665,10 +754,11 @@ int main (void) {
    printf("Hello, world\!\\n");
    return 0;
 }
-```
+````
 
 **After (correct):**
-```markdown
+
+````markdown
 ```c
 #include <stdio.h>
 
@@ -676,8 +766,9 @@ int main (void) {
    printf("Hello, world!\n");
    return 0;
 }
-```
-```
+````
+
+````
 
 ### Assembly Code Formatting
 
@@ -687,8 +778,9 @@ When working with assembly language content, ensure all assembly code is properl
 ```markdown
 ```nasm
 ; Assembly code here
-```
-```
+````
+
+````
 
 **Important Guidelines:**
 - Place any assembly code into NASM code blocks using ` ```nasm ` and ` ``` `
@@ -706,30 +798,33 @@ When working with assembly language content, ensure all assembly code is properl
 ```markdown
 mov eax, 0x1a
 
-mov ebx, \[0x00a7800f\]
+mov ebx, [0x00a7800f\]
 
-mov eax, \[ebx \+ 8\]
-```
+mov eax, [ebx \+ 8\]
+````
 
 **After (correct):**
-```markdown
+
+````markdown
 ```nasm
 mov eax, 0x1a
 
 mov ebx, [0x00a7800f]
 
 mov eax, [ebx + 8]
-```
-```
+````
+
+````
 
 ### Inline Code Formatting
 
 **Before (incorrect):**
 ```markdown
 The instructions "push ebp" and "mov ebp, esp" appear in most functions.
-```
+````
 
 **After (correct):**
+
 ```markdown
 The instructions `push ebp` and `mov ebp, esp` appear in most functions.
 ```

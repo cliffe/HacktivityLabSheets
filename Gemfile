@@ -25,3 +25,5 @@ gem 'http_parser.rb', '~> 0.6.0', :platforms => [:jruby]
 # Note: webrick is needed for local development with Ruby 3.2+
 # but GitHub Pages (Ruby 3.1.7) doesn't need it
 # This is handled in the start-server-github-pages.sh script
+
+gem "webrick", "~> 1.7"

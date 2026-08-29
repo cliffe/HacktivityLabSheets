@@ -5,6 +5,7 @@ This guide shows how to use the special styling classes to highlight action item
 ## Available Action Item Classes
 
 ### 1. `.action-item` - General Action Required
+
 Use this for general actions that students need to perform.
 
 ```html
@@ -20,6 +21,7 @@ Use this for general actions that students need to perform.
 ```
 
 ### 2. `.warning-item` - Important Warnings
+
 Use this for warnings or important notices.
 
 ```html
@@ -30,6 +32,7 @@ Use this for warnings or important notices.
 ```
 
 ### 3. `.danger-item` - Critical Warnings
+
 Use this for critical warnings or dangerous operations.
 
 ```html
@@ -40,6 +43,7 @@ Use this for critical warnings or dangerous operations.
 ```
 
 ### 4. `.success-item` - Completion/Success
+
 Use this to indicate successful completion or positive outcomes.
 
 ```html
@@ -50,6 +54,7 @@ Use this to indicate successful completion or positive outcomes.
 ```
 
 ### 5. `.action-text` - Inline Action Items
+
 Use this for inline action items within paragraphs.
 
 ```html
@@ -60,7 +65,7 @@ Use this for inline action items within paragraphs.
 
 Since Jekyll processes Markdown, you can also use HTML directly in your Markdown files:
 
-```markdown
+````markdown
 ## Lab Exercise 1
 
 <div class="action-item">
@@ -69,14 +74,7 @@ Use Nmap to scan the target network and identify active hosts.
 
 ```bash
 nmap -sn 192.168.1.0/24
-```
-</div>
-
-<div class="warning-item">
-### ⚠️ Legal Notice
-Remember to only scan networks you own or have explicit permission to test.
-</div>
-```
+````
 
 ## Color Schemes
 
@@ -98,7 +96,7 @@ The action items automatically adapt to both light and dark themes:
 
 Here's how you might structure a typical lab section:
 
-```markdown
+````markdown
 ## Network Scanning Lab
 
 <div class="action-item">
@@ -107,27 +105,10 @@ Perform a basic network scan of the target range 192.168.1.0/24.
 
 ```bash
 nmap -sn 192.168.1.0/24
-```
-</div>
-
-<div class="warning-item">
-### Important
-Only scan networks you own or have explicit permission to test.
-</div>
-
-<div class="action-item">
-### Task 2: Service Detection
-Once you've identified active hosts, perform service detection on the first three hosts.
+````
 
 ```bash
 nmap -sV 192.168.1.1,2,3
-```
-</div>
-
-<div class="success-item">
-### Completion
-If you can see the services running on the target hosts, you have successfully completed this lab section.
-</div>
 ```
 
 This creates a visually distinct and easy-to-follow lab experience for students.
@@ -143,6 +124,7 @@ You can also highlight ==multiple words== in the same paragraph.
 ```
 
 This will render as:
+
 - **Light theme**: Yellow background with black text
 - **Dark theme**: Darker yellow background with black text
 
@@ -153,7 +135,7 @@ This will render as:
 
 ### Example Usage
 
-```markdown
+````markdown
 ## Network Security Lab
 
 <div class="action-item">
@@ -162,13 +144,6 @@ Use Nmap to scan the ==target network== and identify ==active hosts==.
 
 ```bash
 nmap -sn 192.168.1.0/24
-```
-</div>
-
-<div class="warning-item">
-### Important
-Only scan networks you ==own== or have explicit permission to test.
-</div>
-```
+````
 
 This combines both highlighting techniques for maximum clarity.
