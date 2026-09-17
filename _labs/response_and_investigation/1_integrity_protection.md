@@ -400,12 +400,6 @@ An excellent resource on the subject of integrity management is Chapter 20 of th
 
 Bind mounting: http://lwn.net/Articles/281157/
 
-## License {#license}
-
-This lab by [*Z. Cliffe Schreuders*](http://z.cliffe.schreuders.org) at Leeds Beckett University is licensed under a [*Creative Commons Attribution-ShareAlike 3.0 Unported License*](http://creativecommons.org/licenses/by-sa/3.0/deed.en_GB).
-
-![Leeds Beckett logo][leedsbeckett-logo]
-
 [skullandusb]: {{ site.baseurl }}/assets/images/response_and_investigation/1_integrity_protection/skullandusb.svg [leedsbeckett-logo]: {{ site.baseurl }}/assets/images/response_and_investigation/1_integrity_protection/leedsbeckett-logo.png
 
 ## Footnotes
