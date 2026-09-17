@@ -398,10 +398,10 @@ Perhaps the greatest limitation to all of these approaches, is that if a system 
 
 An excellent resource on the subject of integrity management is Chapter 20 of the excellent book *Practical Unix & Internet Security, 3rd Ed*, by Garfinkel et al (2003).
 
-Bind mounting: http://lwn.net/Articles/281157/
+Bind mounting: [http://lwn.net/Articles/281157/](http://lwn.net/Articles/281157/)
 
-[skullandusb]: {{ site.baseurl }}/assets/images/response_and_investigation/1_integrity_protection/skullandusb.svg [leedsbeckett-logo]: {{ site.baseurl }}/assets/images/response_and_investigation/1_integrity_protection/leedsbeckett-logo.png
-
-## Footnotes
+## Footnotes {#footnotes}
 
 1. Setting a file to immutable (and therefore impossible to simply delete) can be an effective prank against the uninitiated in Unix ways. [↩](#user-content-fnref-1)
+
+[skullandusb]: {{ site.baseurl }}/assets/images/response_and_investigation/1_integrity_protection/skullandusb.svg
