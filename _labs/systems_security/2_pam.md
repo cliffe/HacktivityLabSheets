@@ -53,7 +53,7 @@ Later in this lab you will `ssh` into the server VM, so you need its IP address.
 ip -4 -o a s
 ```
 
-> Note: The `ip a s` command lists all local IP addresses, `-4` filters to only show IPv4, and `-o` sets one-line output mode. Note the address on the network interface (typically something like `ens19`) — this is your **server IP address**.
+> Note: The `ip a s` command lists all local IP addresses, `-4` filters to only show IPv4, and `-o` sets one-line output mode. Note the address on the network interface (typically something like `ens19`): this is your **server IP address**.
 
 > Tip: Wherever this lab sheet says "the server IP address", ==edit: substitute the address you noted down==.
 
@@ -101,7 +101,7 @@ ls /etc/pam.d
 
 Depending on what is installed on the system, there will be a few configuration files. Each file contains a PAM configuration for the program it is named after. If a PAM-aware program does not have a configuration file the `other` file is used.
 
-==action: view the "other" file:==
+\==action: view the "other" file:==
 
 ```bash
 less /etc/pam.d/other
@@ -145,11 +145,11 @@ Possible control values include:
 >
 > include all lines of given type from the configuration file specified as an argument to this control.
 >
-> -- from the man page for pam.conf
+> \-- from the man page for pam.conf
 
 There is also a more complex rule syntax available, described in the man page.
 
-==action: look at which authentication methods are used by `passwd`:==
+\==action: look at which authentication methods are used by `passwd`:==
 
 ```bash
 less /etc/pam.d/passwd
@@ -157,7 +157,7 @@ less /etc/pam.d/passwd
 
 > Note: This indicates that PAM will apply the password rules in `common-password` for the `passwd` program.
 
-==action: edit the rules in `common-password`:==
+\==action: edit the rules in `common-password`:==
 
 ```bash
 sudo vi /etc/pam.d/common-password
@@ -165,25 +165,25 @@ sudo vi /etc/pam.d/common-password
 
 > Tip: Vi is 'modal': it has an insert mode, where you can type text into the file, and normal mode, where what you type is interpreted as commands. Press the "i" key to enter "insert mode". Type your changes to the file, then exit back to "normal mode" by pressing the Esc key. Now to exit and save the file press the ":" key, followed by "wq" (write quit), and press Enter.
 
-==action: edit the `pam_pwquality` line, so it reads:==
+\==action: edit the `pam_pwquality` line, so it reads:==
 
 ```
 password requisite pam_pwquality.so minlen=7 dictcheck=0
 ```
 
-==action: comment out the `passwdqc` line== (add a `#` at the start of the line), so it reads:
+\==action: comment out the `passwdqc` line== (add a `#` at the start of the line), so it reads:
 
 ```
 #password requisite pam_passwdqc.so
 ```
 
-==action: create a test user account:==
+\==action: create a test user account:==
 
 ```bash
 sudo useradd -m -s /bin/bash testuser
 ```
 
-==action: set the initial password for the test user:== (enter a simple password like `password123` when prompted)
+\==action: set the initial password for the test user:== (enter a simple password like `password123` when prompted)
 
 ```bash
 sudo passwd testuser
@@ -191,7 +191,7 @@ sudo passwd testuser
 
 > Note: This runs as root, setting the password for the testuser.
 
-==action: confirm that normal users can no longer use a password that is less than 7 characters long.== Run this command as the testuser, and try a password that is less than 7 characters long:
+\==action: confirm that normal users can no longer use a password that is less than 7 characters long.== Run this command as the testuser, and try a password that is less than 7 characters long:
 
 ```bash
 sudo -u testuser passwd
@@ -199,7 +199,7 @@ sudo -u testuser passwd
 
 > Note: This will run *as the testuser*, rather than root setting the password for the user.
 
-==action: view the man page for this PAM module:==
+\==action: view the man page for this PAM module:==
 
 ```bash
 man pam_pwquality
@@ -209,11 +209,11 @@ man pam_pwquality
 
 Based on the options described in the man page, ==action: configure the `pam_pwquality` module to require at least one non-alphanumeric character.==
 
-==action: confirm that normal users can no longer use passwords that contain only alphanumeric characters.==
+\==action: confirm that normal users can no longer use passwords that contain only alphanumeric characters.==
 
 ## Troubleshooting PAM configurations {#troubleshooting-pam-configurations}
 
-Before we continue configuring PAM modules, it's important to understand how to safely test changes and monitor results. Making changes to PAM can potentially lock you out of your system, so we'll use these tools throughout the lab to verify our configurations.
+A mistake in a PAM configuration file can lock you out of your own system, so before making more changes, it's worth knowing how to test them safely and watch what's happening.
 
 > Warning: A mistake in a PAM configuration file can lock every user, including root, out of a service. Consider keeping a root terminal open when making PAM changes (`sudo -i`), so you can revert changes easily.
 
@@ -241,7 +241,7 @@ echo "wrongpass" | sudo pamtester sshd testuser authenticate
 
 When making PAM changes, it's helpful to monitor the authentication logs to understand what's happening and troubleshoot issues.
 
-==action: monitor authentication attempts in real-time:==
+\==action: monitor authentication attempts in real-time:==
 
 ```bash
 sudo tail -f /var/log/auth.log
@@ -278,69 +278,80 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Password quality enhancement {#password-quality-enhancement}
 
-Password quality control is crucial for system security. While longer passwords generally provide better security, the relationship isn't linear — a short password with high complexity can be more secure than a long but simple one. The `pam_passwdqc` module implements advanced password quality controls using a multi-tiered approach. It recognises that very long passwords can be secure even with lower complexity (due to increased entropy), while shorter passwords need stricter requirements to maintain security. The module also checks against dictionary words and common patterns, addressing a common weakness where users choose memorable but easily guessable passwords.
+Longer passwords aren't automatically better: a short, high-complexity password can beat a long but simple one. The `pam_passwdqc` module takes a multi-tiered approach to this, allowing very long passwords to get away with less complexity (their length gives them enough entropy anyway), while shorter passwords have to meet stricter requirements. It also checks against dictionary words and common patterns, since users tend to pick something memorable, which usually also means something guessable.
 
-==action: configure advanced password quality control using passwdqc:==
+\==action: configure advanced password quality control using passwdqc:==
 
 ```bash
 sudo vi /etc/pam.d/common-password
 ```
 
-==action: add or modify (uncomment and edit) this line:==
+\==action: add or modify (uncomment and edit) this line:==
 
 ```
 password requisite pam_passwdqc.so min=disabled,24,12,8,7
 ```
 
-==action: comment out the `pam_pwquality` line== (add a `#` at the start of the line), so it reads:
+\==action: comment out the `pam_pwquality` line== (add a `#` at the start of the line), so it reads:
 
 ```
 #password requisite pam_pwquality.so minlen=7 dictcheck=0
 ```
 
-This enforces:
+The `min=` values work the other way round from what you might expect: each number sets the *minimum length* required for passwords that use that *number of character classes*, so a password using **fewer** classes has to be **longer**, and one using **more** classes can be shorter. This enforces:
 
-- 24+ chars: no restrictions
-- 12+ chars: must contain 3 character classes
-- 8+ chars: must contain 3 character classes and can't be a dictionary word
-- 7+ chars: must contain all 4 character classes
+- 1 character class: never allowed, regardless of length (`disabled`)
+- 2 character classes: must be at least 24 characters
+- a passphrase (3+ words): must be at least 12 characters
+- 3 character classes: must be at least 8 characters
+- 4 character classes: must be at least 7 characters
 
 Character classes are:
 
 - Uppercase letters (A-Z)
 - Lowercase letters (a-z)
 - Digits (0-9)
-- Special characters (!@#$%^&* etc.)
+- Special characters (!@#$%^&\* etc.)
 
-==action: test the passwdqc password rules.== Try changing your password with each of these scenarios:
+\==action: test the passwdqc password rules.== Try changing your password with each of these scenarios:
 
 ```bash
 sudo -u testuser passwd
 ```
 
-==action: test the 7-character rule:==
+\==action: test the 1-class rule:==
 
-Should fail — only 7 chars but missing character classes: `New0nn3`
+Should fail: only one character class, disallowed at any length: `lowercaseonly`
 
-Should succeed — 7 chars with all classes (upper, lower, digits, special): `NewP4$sw`
+\==action: test the 2-class rule (needs 24+ characters):==
 
-==action: test the 8-character rule:==
+Should fail: 2 classes but too short: `abcdefgh12345678`
 
-Should fail — dictionary word with numbers: `Password123`
+Should succeed: 2 classes, 24+ characters: `abcdefghijklmnopqrstuvwx12`
 
-Should succeed — 8 chars, 3 classes, non-dictionary: `Nw5$tr8p`
+\==action: test the passphrase rule (needs 12+ characters):==
 
-==action: test the 12-character rule:==
+Should fail: a passphrase but too short: `cat dog run`
 
-Should fail — only 2 character classes: `HELLOWORLD123`
+Should succeed: a passphrase, 12+ characters: `cat dog runs`
 
-Should succeed — 12 chars with 3 classes: `HelloWorld123`
+\==action: test the 3-class rule (needs 8+ characters):==
 
-==action: test the 24-character rule:==
+Should fail: 3 classes but too short: `New0nn`
 
-Should succeed — no restrictions at this length: `this-is-a-very-long-password-123`
+Should succeed: 3 classes, 8+ characters: `New0nn3x`
 
-==action: monitor the authentication logs== to see detailed rejection reasons:
+\==action: test the 4-class rule (needs only 7+ characters):==
+
+Should fail: 4 classes but too short: `Nw5$tr`
+
+Should succeed: 4 classes, 7+ characters: `Nw5$trp`
+
+Also try a dictionary word: passwdqc rejects these independently of the class/length rules above.
+
+Should fail: a dictionary word, even with digits appended: `Password123`
+
+\==action: monitor the authentication logs== to see detailed rejection reasons:
 
 ```bash
 sudo tail -f /var/log/auth.log
@@ -358,28 +369,19 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Limiting failed login attempts {#limiting-failed-login-attempts}
 
-Failed login attempt limiting is a critical security control that protects against password-guessing attacks. When attackers attempt to breach a system through brute force or dictionary attacks, they typically need multiple attempts to guess the correct credentials. By implementing account lockouts after a specified number of failed attempts, we create a time-based penalty that makes such attacks impractical. This defense is particularly effective against:
+Brute force and dictionary attacks rely on guessing a password over many attempts. Locking an account out after a set number of failures turns that into a time-based penalty, which makes guessing impractical whether the attempts come from a script or a person at the keyboard.
 
-- Automated password guessing tools
-- Dictionary-based attacks
-- Credential stuffing attacks
-- Manual brute force attempts
-
-The lockout mechanism provides a balance between security and usability:
-
-- Short lockout periods (minutes) protect against automated attacks while minimising user inconvenience
-- Longer lockouts (hours) provide stronger protection but may impact legitimate users
-- Some organisations implement progressive lockouts, where the duration increases with repeated failures
+There's a trade-off in how long the lockout lasts. A few minutes is enough to blunt automated attacks without inconveniencing a legitimate user who mistyped their password; hours give stronger protection but cost more when it's a real user locked out. Some organisations use progressive lockouts instead, where the duration grows with each repeated failure.
 
 In Debian Bookworm, we use `pam_faillock.so` to manage failed login attempts. This module is included by default and replaces the older `pam_tally2.so` module.
 
-==action: let's configure account lockouts.== First, ==action: check if `faillock.conf` exists:==
+\==action: let's configure account lockouts.== First, ==action: check if `faillock.conf` exists:==
 
 ```bash
 sudo ls /etc/security/faillock.conf
 ```
 
-==action: edit or create the configuration:==
+\==action: edit or create the configuration:==
 
 ```bash
 sudo vi /etc/security/faillock.conf
@@ -394,15 +396,15 @@ unlock_time = 600
 
 This will lock accounts for 10 minutes (600 seconds) after 5 failed attempts.
 
-==action: edit the PAM configuration:==
+\==action: edit the PAM configuration:==
 
 ```bash
 sudo vi /etc/pam.d/common-auth
 ```
 
-PAM's power comes from its ability to stack multiple authentication modules. This allows for sophisticated authentication policies that combine different security controls. Understanding module stacking is crucial for implementing defense in depth, creating flexible authentication policies, handling edge cases and fallback authentication, and managing emergency access procedures.
+PAM's power comes from stacking multiple authentication modules, so a policy can combine several controls rather than relying on just one.
 
-==action: add these three lines (around the existing line):==
+\==action: add these three lines (around the existing line):==
 
 ```
 auth    required pam_faillock.so preauth audit
@@ -416,13 +418,13 @@ auth    sufficient pam_faillock.so authsucc audit
 
 > Note: This configuration sets up a secure account lockout system using `pam_faillock`. The `preauth` line checks if the account is already locked before even attempting authentication, preventing unnecessary password attempts on locked accounts. The existing line is standard Unix password authentication (`pam_unix.so`); if it succeeds, it skips to the `authsucc` line due to `success=1`. The `authfail` line records failed login attempts in faillock's database, running only if the password authentication failed. The `authsucc` line records successful logins and resets the failure counter. Together these create a complete account lockout system, applying to all PAM-aware services that include `common-auth`.
 
-==action: test the lockout configuration.== ==action: monitor the auth log in one terminal:==
+\==action: test the lockout configuration.== ==action: monitor the auth log in one terminal:==
 
 ```bash
 sudo tail -f /var/log/auth.log
 ```
 
-==action: in another terminal, attempt failed logins:==
+\==action: in another terminal, attempt failed logins:==
 
 ```bash
 # Try to login with incorrect password multiple times
@@ -430,7 +432,7 @@ su - testuser
 # Enter incorrect password repeatedly
 ```
 
-==action: check the faillock status.== You can monitor lockouts and manage them using these commands:
+\==action: check the faillock status.== You can monitor lockouts and manage them using these commands:
 
 ```bash
 # View current lockouts
@@ -450,9 +452,9 @@ Expected test results:
 - Further attempts: Should be rejected immediately
 - After 10 minutes: Login should be possible again with correct password
 
-==action: verify the lockout is working.== Try logging in with the correct password immediately after lockout (should be denied despite correct password). Wait 10 minutes. Try logging in with correct password (should succeed).
+\==action: verify the lockout is working.== Try logging in with the correct password immediately after lockout (should be denied despite correct password). Wait 10 minutes. Try logging in with correct password (should succeed).
 
-==action: test faillock with pamtester:==
+\==action: test faillock with pamtester:==
 
 ```bash
 # Attempt multiple failed logins
@@ -471,11 +473,9 @@ echo "correctpass" | sudo pamtester login testuser authenticate
 
 ## Automated blacklist (libpam-abl) {#automated-blacklist-libpam-abl}
 
-Automated blacklisting is a crucial defense against brute-force attacks. Rather than just limiting authentication attempts, this approach actively blocks potential threats by temporarily banning IP addresses that show suspicious behavior. The `libpam-abl` module implements a dynamic blacklist system that tracks failed login attempts both per-IP and per-username, providing protection against distributed attacks and credential stuffing. The temporary nature of the bans helps prevent permanent denial of service while still effectively deterring automated attacks. This approach is particularly effective against automated scanning tools and botnets that attempt to breach systems through repeated login attempts.
+Where lockouts limit attempts against a single account, `libpam-abl` goes further and temporarily bans the source: it tracks failed logins both per-IP and per-username, so it catches automated scanners and botnets hammering different accounts from the same address, not just repeated guesses against one. The bans are temporary rather than permanent, so a legitimate user who trips it isn't locked out forever.
 
-This module automatically blacklists IP addresses after repeated failed login attempts.
-
-==action: configure the blacklist settings:==
+\==action: configure the blacklist settings:==
 
 ```bash
 sudo vi /etc/security/pam_abl.conf
@@ -500,7 +500,7 @@ host_whitelist=localhost
 user_whitelist=
 ```
 
-==action: add the module to SSH authentication:==
+\==action: add the module to SSH authentication:==
 
 ```bash
 sudo vi /etc/pam.d/sshd
@@ -512,7 +512,7 @@ Add this line at the top of the auth section:
 auth required pam_abl.so config=/etc/security/pam_abl.conf
 ```
 
-==action: test the blacklisting== by making repeated failed SSH login attempts.
+\==action: test the blacklisting== by making repeated failed SSH login attempts.
 
 ```bash
 ssh nonexistent_user@localhost
@@ -526,30 +526,21 @@ If you don't already have the logs visible in a terminal tab/window:
 sudo tail -f /var/log/auth.log
 ```
 
-==action: once done, clear all blocks:==
+\==action: once done, clear all blocks:==
 
 ```bash
 sudo rm /var/lib/abl/hosts.db /var/lib/abl/users.db
 ```
 
-> Warning: If you are testing this over SSH from your own host, be careful not to lock yourself out — clear the blocks (above) once you're done.
+> Warning: If you are testing this over SSH from your own host, be careful not to lock yourself out. Clear the blocks (above) once you're done.
 
 ## Time-based access control {#time-based-access-control}
 
-Time-based access control is a security approach that implements temporal least privilege — users only have access when they legitimately need it. This approach significantly reduces the attack surface by limiting the windows of opportunity for unauthorised access. For example, if a system is only accessed during business hours, any login attempts outside these hours are likely malicious. This control is particularly effective against automated attacks and helps detect compromised credentials, as legitimate users typically follow predictable access patterns.
-
-Key security benefits include:
-
-- Reduced exposure window for brute force attacks
-- Detection of anomalous access patterns
-- Enforcement of work-hour policies
-- Automated access management for temporary workers
-- Compliance with security frameworks requiring time-based controls
-- Protection against credential abuse in different time zones
+Time-based access control gives users access only when they legitimately need it, which shrinks the window an attacker has to work with. If a system is only ever accessed during business hours, a login attempt at 3am is a useful anomaly to flag, and legitimate users tend to follow predictable patterns that make deviations stand out.
 
 Let's configure PAM to only allow the user "testuser" to login between 9am and 5pm, and only on a Tuesday.
 
-==action: first, edit the PAM configuration:==
+\==action: first, edit the PAM configuration:==
 
 ```bash
 sudo vi /etc/pam.d/common-account
@@ -561,7 +552,7 @@ Add this line at the start of the account section:
 account required pam_time.so
 ```
 
-==action: configure the time restrictions:==
+\==action: configure the time restrictions:==
 
 ```bash
 sudo vi /etc/security/time.conf
@@ -581,7 +572,7 @@ services;ttys;users;times
 
 > Tip: For testing purposes, you can add a 10-minute window from the current time. For example, if it's currently 14:30: `*;*;testuser;Al1430-1440`.
 
-==action: test the time-based restrictions:==
+\==action: test the time-based restrictions:==
 
 ```bash
 # Check current time
@@ -596,7 +587,7 @@ sudo tail -f /var/log/auth.log
 
 Expected results: if current time is Tuesday 9am-5pm, login should succeed; if outside allowed time, login should be denied with a time restriction message.
 
-==action: to automatically disconnect the user, set up a cron job:==
+\==action: to automatically disconnect the user, set up a cron job:==
 
 ```bash
 sudo crontab -e
@@ -612,9 +603,9 @@ Add these lines:
 00 17 * * tue pkill -u testuser
 ```
 
-==action: test the automatic disconnection== by logging in as testuser during allowed hours, waiting for the warning message (if near 16:50), and observing the automatic disconnection at 17:00.
+\==action: test the automatic disconnection== by logging in as testuser during allowed hours, waiting for the warning message (if near 16:50), and observing the automatic disconnection at 17:00.
 
-==action: monitor access attempts:==
+\==action: monitor access attempts:==
 
 ```bash
 # Watch authentication logs in real-time
@@ -625,7 +616,7 @@ w
 who
 ```
 
-==action: verify time restrictions are working== by trying to log in before the end time, watching for the warning message, confirming the session is terminated at the end time, and attempting to log in again after the end time (should be denied).
+\==action: verify time restrictions are working== by trying to log in before the end time, watching for the warning message, confirming the session is terminated at the end time, and attempting to log in again after the end time (should be denied).
 
 #### Hackerbot Attack #3 {#hackerbot-attack-3}
 
@@ -639,23 +630,23 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Multi-factor authentication (MFA) {#multi-factor-authentication-mfa}
 
-Multi-factor authentication (MFA) adds additional security layers beyond just passwords. It requires users to verify their identity using two or more different factors:
+Multi-factor authentication (MFA) requires users to prove their identity with two or more different kinds of factor:
 
 - Something you know (password, PIN)
 - Something you have (security token, smartphone)
 - Something you are (fingerprint, facial recognition)
 
-By combining multiple factors, MFA significantly improves security. Even if an attacker obtains a user's password, they still can't gain access without the second factor. This is especially important for protecting sensitive systems and data. Common MFA methods include SMS codes, authenticator apps generating time-based codes (TOTP), hardware security keys, and biometrics.
+An attacker who steals a password still can't get in without the second factor. Common MFA methods include SMS codes, authenticator apps generating time-based codes (TOTP), hardware security keys, and biometrics.
 
-==action: generate MFA configuration:==
+\==action: generate MFA configuration:==
 
 ```bash
 google-authenticator
 ```
 
-==action: scan the QR code== with your authenticator app on your smartphone.
+\==action: scan the QR code== with your authenticator app on your smartphone.
 
-==action: get google-authenticator working for `su` logins== with your PAM configuration, requiring the user to enter a TOTP code, in addition to their password.
+\==action: get google-authenticator working for `su` logins== with your PAM configuration, requiring the user to enter a TOTP code, in addition to their password.
 
 > Hint: you need to add a line to the sshd PAM configuration.
 
@@ -664,6 +655,7 @@ google-authenticator
 > Question: What are the trade-offs between security and usability in these configurations? Consider password complexity vs memorability, lockout duration vs legitimate user access, and time-based restrictions vs flexibility.
 
 > Question: Briefly describe what each of the following PAM configurations do:
+>
 > ```
 > session optional pam_mkhomedir.so skel=/etc/skel umask=077
 >
@@ -676,7 +668,7 @@ Public-key cryptography (AKA asymmetric) uses a pair of keys: a *public key* whi
 
 SSH can be configured to enable access without a password, granting access to whoever holds the private key.
 
-==action: run:==
+\==action: run:==
 
 ```bash
 ssh-keygen
@@ -684,7 +676,7 @@ ssh-keygen
 
 The keypair will be created in `~/.ssh/`.
 
-==action: copy the contents of the public key== (ends in `.pub`) to `.ssh/authorized_keys` on the server.
+\==action: copy the contents of the public key== (ends in `.pub`) to `.ssh/authorized_keys` on the server.
 
 You can now ==action: ssh to the server== without providing your password.
 

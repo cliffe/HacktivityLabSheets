@@ -78,7 +78,7 @@ Assuming you have already logged in, you have already authenticated yourself on 
 
 > Question: When and how did you authenticate yourself?
 
-==action: Use these commands to find out about your current identity== (or more accurately the identity of the software you are interacting with):
+\==action: Use these commands to find out about your current identity== (or more accurately the identity of the software you are interacting with):
 
 ```bash
 whoami
@@ -88,31 +88,31 @@ groups
 id
 ```
 
-==edit: Make a note of your UID and username.==
+\==edit: Make a note of your UID and username.==
 
 Note that your account is also a member of one or more groups. A primary group, and a list of other groups. Some Linux systems, such as Debian, create a new separate primary group for each user, others such as openSUSE have a shared group (named "users") that all normal users are a member of. Similar to the relationship between user names and UIDs, each group has a group name, and a group ID (GID).
 
 Information about user accounts is stored in the /etc/passwd file, which typically all users can read.
 
-==action: View the /etc/passwd file:==
+\==action: View the /etc/passwd file:==
 
 ```bash
 less /etc/passwd
 ```
 
-==action: Find the line that describes your user account.==
+\==action: Find the line that describes your user account.==
 
 This line defines the username, password (well, it used to be stored here... we will come back to this), UID, primary group GID, full name, home directory, and shell for your account.
 
 Confirm this matches the information you recorded earlier.
 
-==action: Find the line that describes the root user account.==
+\==action: Find the line that describes the root user account.==
 
 > Question: Where is the root user's home directory?
 
 > Tip: Press 'q' to quit less.
 
-==action: View the /etc/group file:==
+\==action: View the /etc/group file:==
 
 ```bash
 less /etc/group
@@ -126,7 +126,7 @@ Remember, primary groups do not appear in this file; for example, on openSUSE th
 
 The "sudo" program can be used to run a program as another user, effectively enabling users to switch between user accounts at the command prompt.
 
-==action: Change your identity to root.== Run:
+\==action: Change your identity to root.== Run:
 
 ```bash
 sudo -i
@@ -134,7 +134,7 @@ sudo -i
 
 Enter your password.
 
-==action: Use these commands to find out about your new identity:==
+\==action: Use these commands to find out about your new identity:==
 
 ```bash
 whoami
@@ -148,19 +148,19 @@ id
 
 > Question: What gives this user special privileges: the name of the account, or the UID?
 
-==action: Use the useradd command to create a new user account 'fred'.==
+\==action: Use the useradd command to create a new user account 'fred'.==
 
 > Hint: Refer to the man page for useradd, by running `man useradd`.
 
-==action: Set a password for the user fred.==
+\==action: Set a password for the user fred.==
 
 > Hint: `sudo passwd fred`
 
-==action: Change identity to fred.==
+\==action: Change identity to fred.==
 
 > Hint: `su - fred` or `sudo -i -u fred`
 
-==action: Run (after su):==
+\==action: Run (after su):==
 
 ```bash
 id
@@ -170,43 +170,43 @@ id
 
 > Question: How does this compare to your other normal user account? What is different, and what about it is the same?
 
-==action: Run the single command "id" as root:==
+\==action: Run the single command "id" as root:==
 
 ```bash
 sudo id
 ```
 
-==action: Open a fresh terminal window== (so you are running as your normal user again).
+\==action: Open a fresh terminal window== (so you are running as your normal user again).
 
 > Question: What is the difference between sudo and su? Which is most likely to protect against accidental damage and also log the commands used? Do they authenticate users (that is, use passwords) differently?
 
 ## Users and SSH {#users-and-ssh}
 
-==action: Log in to the server via ssh:==
+\==action: Log in to the server via ssh:==
 
 ```bash
 ssh $USER@<server IP address>
 ```
 
-==action: Display details of all users logged on to the system:==
+\==action: Display details of all users logged on to the system:==
 
 ```bash
 who
 ```
 
-==action: List all the processes run by all users:==
+\==action: List all the processes run by all users:==
 
 ```bash
 ps -eo user,comm
 ```
 
-==action: List all the processes running as root:==
+\==action: List all the processes running as root:==
 
 ```bash
 ps -o user,comm -u root
 ```
 
-==action: Run a command to list all the processes running as *your* normal user.==
+\==action: Run a command to list all the processes running as *your* normal user.==
 
 > Question: How is this server authenticating users? What user accounts exist?
 
@@ -228,7 +228,7 @@ shasum
 
 > Tip: Type "hello" without the quotes. Press Ctrl-D (which indicates "EOF"; that is, end of input).
 
-==action: Repeat the above, with the same password ("hello"), and with a slight difference ("hello.").==
+\==action: Repeat the above, with the same password ("hello"), and with a slight difference ("hello.").==
 
 > Question: Are the outputs the same? Are the different hashes similar? Is this good? Why?
 
@@ -236,7 +236,7 @@ shasum
 
 For password authentication, the hash still needs to be stored. On Unix, password hashes were once stored in the world-readable file /etc/passwd, now they are typically stored in /etc/shadow, which only root (the superuser) can access.
 
-==action: View the shadow file:==
+\==action: View the shadow file:==
 
 ```bash
 sudo less /etc/shadow
@@ -246,11 +246,11 @@ The format of the shadow file is:
 
 > Note: username:**password**:last-changed(since 1-1-1970):days-until-may-change:days-until-must-change:days-warning-notice:days-since-expired-account-disabled:date-disable:reserved-field
 
-==action: Find the hash of your user account's password.==
+\==action: Find the hash of your user account's password.==
 
 > Tip: Exit less ("q").
 
-==action: Use the passwd command to change your password:==
+\==action: Use the passwd command to change your password:==
 
 ```bash
 passwd
@@ -258,18 +258,22 @@ passwd
 
 > Note: When prompted, enter a new password of your choosing.
 
-==edit: Make a note of your new password! You will need this!==
+\==edit: Make a note of your new password! You will need this!==
 
-==action: View the shadow file, and confirm that the stored password has changed.==
+\==action: View the shadow file, and confirm that the stored password has changed.==
 
 With reference to the shadow file, and the man page for crypt (Hint: `man crypt`, or search online if not installed), consider these questions:
 
 - On Linux, the password hash stored in /etc/shadow has a prefix that specifies the hash function used.
+
   > Question: What hash function is used for your password?
+-
 
-- > Question: When was the root password last changed?
+> Question: When was the root password last changed?
 
-- > Question: Do any accounts have a setting that will force a password change at a specific date?
+-
+
+> Question: Do any accounts have a setting that will force a password change at a specific date?
 
 A salt is a random string, used as further input into a one-way hash function (concatenated to the password). The salt is typically stored along with the hash. As a result the same password will have different hashes, so long as the salt is different.
 
