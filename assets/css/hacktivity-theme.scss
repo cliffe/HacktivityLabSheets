@@ -25,6 +25,20 @@ body {
   margin: 1rem auto;
 }
 
+// Hackerbot avatar (shared "Meet Hackerbot!" section, see _includes/hackerbot-intro.md).
+// The artwork is black line-work on a transparent ground, so it needs a light
+// backdrop of its own to stay visible against a dark page background.
+.lab-content img.hackerbot-avatar {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  padding: 0.75rem;
+  background: #d9d9d9;
+  border-radius: 8px;
+}
+
 // Enhanced syntax highlighting for code blocks
 .highlight pre {
   background-color: #f8f9fa;
@@ -216,7 +230,9 @@ body {
   color: var(--fg-color);
   font-size: 16px;
   scroll-behavior: smooth;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  // Keep the emoji fallbacks from the default font-family rule above:
+  // this declaration is later in the file and would otherwise override them.
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla";
 }
 
 /* Game fragments use in-game typography to match Break Escape UI. */

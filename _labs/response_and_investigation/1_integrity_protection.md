@@ -38,24 +38,7 @@ cybok:
 
 You won't log in to the hackerbot_server, but the VM needs to be running to complete the lab.
 
-## Meet Hackerbot! {#meet-hackerbot}
-
-![Skull and USB stick][skullandusb]
-
-This exercise involves interacting with Hackerbot, a chatbot who will attack your system. If you satisfy Hackerbot by completing the challenges she will reveal flags to you.
-
-\==VM: On the desktop VM==, ==action: open Pidgin and send some messages to Hackerbot:==
-
-- Try asking Hackerbot some questions
-- Send "help"
-- Send "list"
-- Send "hello"
-
-> Tip: You can say **goto *N*** to Hackerbot to skip straight to a given attack number, or **next**/**previous** to move along one attack at a time.
-
-Work through the below exercises, completing the Hackerbot challenges as noted.
-
----
+{% include hackerbot-intro.md role="attack your system" pidgin="full" %}
 
 ## Integrity {#integrity}
 
@@ -404,4 +387,3 @@ Bind mounting: [http://lwn.net/Articles/281157/](http://lwn.net/Articles/281157/
 
 1. Setting a file to immutable (and therefore impossible to simply delete) can be an effective prank against the uninitiated in Unix ways. [↩](#user-content-fnref-1)
 
-[skullandusb]: {{ site.baseurl }}/assets/images/response_and_investigation/1_integrity_protection/skullandusb.svg
