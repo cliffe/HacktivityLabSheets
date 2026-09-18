@@ -136,7 +136,7 @@ Using newer versions of Snort it is possible to write Snort rules that detect th
 
 You can skip the bot to here, by saying **goto 1**.
 
-> Hackerbot: "You need to monitor your sensitive list of clients. The file contains credit card details and national insurance numbers. You have a copy in `trade_secrets/clients.csv` in your home directory on the web_server (SSH in using your own username and password: `ssh ==edit: your username==@==edit: WEB_SERVER_IP==`). Use one or more Snort rules to detect unencrypted transport of the file. The alert must include the message that Hackerbot gives you in the chat. (This attack may take a while.)"
+> Hackerbot: Write one or more Snort rules that detect the sensitive client list being transferred unencrypted, using text-based matching. Hackerbot gives you the file to protect and the alert message to use in the chat.
 
 Do any necessary preparation, then when you are ready for the bot to complete the attack, ==action: say 'ready'==.
 
@@ -148,7 +148,7 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 2**.
 
-> Hackerbot: "Update your rule so that it also matches the fake_clients file. Use REGEXP so that your rule doesn't include any of the actual data. You have a copy in `trade_secrets/fake_clients.csv` in your home directory on the web_server. Use one or more Snort rules to detect unencrypted transport of either of the files. The alert must include the message that Hackerbot gives you in the chat."
+> Hackerbot: Update your rule to use a regular expression, so that it matches the data without containing any of it. Hackerbot gives you the files to cover and the alert message to use in the chat.
 
 Do any necessary preparation, then when you are ready for the bot to complete the attack, ==action: say 'ready'==.
 
@@ -162,7 +162,7 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 3**.
 
-> Hackerbot: "Update your rule so that it doesn't contain any of the sensitive data. Use hash-based matching. You have a copy in `trade_secrets/clients.csv` in your home directory on the web_server. Use one or more Snort rules to detect unencrypted transport of the file. The alert must include the message that Hackerbot gives you in the chat."
+> Hackerbot: Update your rule again to use hash-based matching, so that the rule holds no sensitive data at all. Hackerbot gives you the file and the alert message in the chat.
 
 Do any necessary preparation, then when you are ready for the bot to complete the attack, ==action: say 'ready'==.
 
