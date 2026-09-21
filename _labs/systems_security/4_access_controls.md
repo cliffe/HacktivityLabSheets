@@ -43,10 +43,14 @@ All of these VMs need to be running to complete the lab.
 
 - User 1: ==edit: your username, given to you when you claimed the VMs==
 - Password: `tiaspbiqe2r` (**t**his **i**s **a** **s**ecure **p**assword **b**ut **i**s **q**uite **e**asy **2** **r**emember)
-- User 2: ==edit: your second username, given to you when you claimed the VMs==
-- Password: ==edit: your second user's password, given to you when you claimed the VMs==
 
-> Tip: Wherever this lab sheet refers to "your second user", substitute the second username and password you were given.
+Your desktop VM also has a second user account, with a password you don't know. ==action: List the other usernames on the desktop VM:==
+
+```bash
+ls /home
+```
+
+> Note: This lists the other usernames present on the desktop. Wherever this lab sheet says "your second user", ==edit: substitute the second username you found here==. Since you don't know this account's password, you'll access it using `sudo` (as your own sudoer account) rather than logging in directly with `su`.
 
 You won't log in to the hackerbot_server, but the VM needs to be running to complete the lab.
 
@@ -216,10 +220,10 @@ Therefore, `-rwxr-xr-x` = 755.
 \==action: Switch to your second user account:==
 
 ```bash
-su - <second user>
+sudo -u <second user> -i
 ```
 
-> Note: Do not log in as root, instead use `sudo` or `su` as required.
+> Note: Do not log in as root, instead use `sudo` as required. Since you don't know your second user's password, `sudo -u <second user> -i` gets you an interactive shell as that user using your own sudo privileges, without needing their password.
 
 Create a file named "mysecrets" in your second user's home directory[2](#user-content-fn-2):
 
