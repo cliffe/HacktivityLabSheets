@@ -66,7 +66,7 @@ ip -4 -o a s
 
 > Note: Note the IP address — this is your **siem_management IP address**. Kibana listens on port 5601, so its address is `http://<siem_management IP address>:5601`. Firefox on that VM is already set to open it for you.
 
-{% include hackerbot-intro.md role="attack your system, and task you with tracking down what changed using a SIEM" pidgin="full" %}
+{% include hackerbot-intro.md role="attack your system, and task you with tracking down what changed using a SIEM" chat="full" %}
 
 ## An introduction to logging and systemd {#an-introduction-to-logging-and-systemd}
 

@@ -60,7 +60,7 @@ ip -4 -o a s
 
 > Tip: Wherever this lab sheet says "the desktop IP address" or "the server IP address", ==edit: substitute the address you noted down==.
 
-{% include hackerbot-intro.md role="task you to configure new users, then crack and use passwords to find flags on the server" pidgin="full" %}
+{% include hackerbot-intro.md role="task you to configure new users, then crack and use passwords to find flags on the server" chat="full" %}
 
 ## Introduction to authentication {#introduction-to-authentication}
 

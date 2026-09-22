@@ -57,7 +57,7 @@ ip -4 -o a s
 
 > Tip: Wherever this lab sheet says "the server IP address", ==edit: substitute the address you noted down==.
 
-{% include hackerbot-intro.md role="task you with configuring PAM authentication policies on your desktop, and will then attack it to test your work" pidgin="hello" %}
+{% include hackerbot-intro.md role="task you with configuring PAM authentication policies on your desktop, and will then attack it to test your work" chat="hello" %}
 
 ## Pluggable Authentication Modules (PAM) {#pluggable-authentication-modules-pam}
 

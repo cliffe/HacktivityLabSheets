@@ -49,7 +49,7 @@ Password: tiaspbiqe2r (**t**his **i**s **a** **s**ecure **p**assword **b**ut **i
 
 You won't login to the hackerbot_server, but the VM needs to be running to complete the lab.
 
-{% include hackerbot-intro.md role="interact with you and challenge you with RSA encryption tasks" pidgin="full" %}
+{% include hackerbot-intro.md role="interact with you and challenge you with RSA encryption tasks" chat="full" %}
 
 ## Purpose {#purpose}
 

@@ -43,7 +43,7 @@ You won't log in to the hackerbot_server, but the VM needs to be running to comp
 
 > Note: In bash you can type `~` as shorthand for your home directory. Commands below also use `~` in this way; substitute your own username where a full path is shown.
 
-{% include hackerbot-intro.md role="attack your system" pidgin="full" %}
+{% include hackerbot-intro.md role="attack your system" chat="full" %}
 
 ## Integrity {#integrity}
 

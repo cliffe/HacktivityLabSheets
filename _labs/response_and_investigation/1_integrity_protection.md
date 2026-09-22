@@ -38,7 +38,7 @@ cybok:
 
 You won't log in to the hackerbot_server, but the VM needs to be running to complete the lab.
 
-{% include hackerbot-intro.md role="attack your system" pidgin="full" %}
+{% include hackerbot-intro.md role="attack your system" chat="full" %}
 
 ## Integrity {#integrity}
 

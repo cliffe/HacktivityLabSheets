@@ -64,7 +64,7 @@ ls /home
 
 You'll use this second username (\==edit: SECONDUSER== in the commands below) later in the lab, when Hackerbot asks you to back up their files.
 
-{% include hackerbot-intro.md role="task you to perform backups and will attack your system" pidgin="hello" %}
+{% include hackerbot-intro.md role="task you to perform backups and will attack your system" chat="hello" %}
 
 ## Availability and recovery {#availability-and-recovery}
 

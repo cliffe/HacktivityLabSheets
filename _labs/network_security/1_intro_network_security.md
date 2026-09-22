@@ -52,7 +52,7 @@ The **gateway** has a network interface on each of the three segments and routes
 
 > Note: Throughout this lab, commands are prefixed with the VM you should run them on. Unless told otherwise, you should be working on the **desktop**. When you need to run commands on another VM, you will SSH into it from the desktop.
 
-{% include hackerbot-intro.md role="set you networking and security challenges and verify your work" pidgin="full" %}
+{% include hackerbot-intro.md role="set you networking and security challenges and verify your work" chat="full" %}
 
 ## Network design principles {#network-design-principles}
 
