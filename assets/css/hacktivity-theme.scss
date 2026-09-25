@@ -14,7 +14,7 @@
 // Set default font family
 // use color emoji
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
 }
 
 // Limit image width within lab content
@@ -232,7 +232,7 @@ body {
   scroll-behavior: smooth;
   // Keep the emoji fallbacks from the default font-family rule above:
   // this declaration is later in the file and would otherwise override them.
-  font-family: "Helvetica Neue", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
 }
 
 /* Game fragments use in-game typography to match Break Escape UI. */
@@ -1112,7 +1112,7 @@ blockquote {
 
 .action-item::before {
   content: "⚡ ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1133,7 +1133,7 @@ blockquote {
 
 .warning-item::before {
   content: "⚠️ ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1154,7 +1154,7 @@ blockquote {
 
 .danger-item::before {
   content: "🚨 ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1175,7 +1175,7 @@ blockquote {
 
 .success-item::before {
   content: "✅ ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1196,7 +1196,7 @@ blockquote {
 
 .tip-item::before {
   content: "💡 ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1251,7 +1251,7 @@ blockquote {
 
 .hint-item::before {
   content: "💭 ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1288,7 +1288,7 @@ blockquote {
 
 .question-item::before {
   content: "❓ ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
 }
 
@@ -1329,7 +1329,7 @@ blockquote {
 
 .flag-item::before {
   content: "🏳️ ";
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+  font-family: emoji, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-weight: bold;
   font-size: 1.2em;
   margin-right: 0.5rem;
