@@ -275,13 +275,13 @@ document.addEventListener('DOMContentLoaded', function() {
               const contentBody = document.querySelector('.lab-content-body');
               if (contentBody) {
                 // Replace specific highlight types first
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==action:\s*([^=]+)==/gi, '<span class="action-highlight">⚡ $1</span>');
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==tip:\s*([^=]+)==/gi, '<span class="tip-highlight">💡 $1</span>');
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==hint:\s*([^=]+)==/gi, '<span class="hint-highlight">💭 $1</span>');
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==note:\s*([^=]+)==/gi, '<span class="note-highlight">📝 $1</span>');
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==warning:\s*([^=]+)==/gi, '<span class="warning-highlight">⚠️ $1</span>');
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==VM:\s*([^=]+)==/gi, '<span class="vm-highlight">🖥️ $1</span>');
-                contentBody.innerHTML = contentBody.innerHTML.replace(/==question:\s*([^=]+)==/gi, '<span class="question-highlight">❓ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==action:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="action-highlight">⚡ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==tip:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="tip-highlight">💡 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==hint:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="hint-highlight">💭 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==note:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="note-highlight">📝 $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==warning:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="warning-highlight">⚠️ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==VM:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="vm-highlight">🖥️ $1</span>');
+                contentBody.innerHTML = contentBody.innerHTML.replace(/==question:\s*((?:[^=]|=(?!=))+)==/gi, '<span class="question-highlight">❓ $1</span>');
                 
                 // Process edit highlights BEFORE other processing to avoid syntax highlighting interference
                 // But exclude content that's already inside block-level elements (hint, tip, etc.)

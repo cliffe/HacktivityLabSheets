@@ -14,7 +14,7 @@
 // Set default font family
 // use color emoji
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla";
+  font-family: "Helvetica Neue", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
 }
 
 // Limit image width within lab content
@@ -232,7 +232,7 @@ body {
   scroll-behavior: smooth;
   // Keep the emoji fallbacks from the default font-family rule above:
   // this declaration is later in the file and would otherwise override them.
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla";
+  font-family: "Helvetica Neue", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
 }
 
 /* Game fragments use in-game typography to match Break Escape UI. */
