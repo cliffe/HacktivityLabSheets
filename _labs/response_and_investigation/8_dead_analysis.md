@@ -100,19 +100,19 @@ Autopsy is a front-end for the Sleuth Kit (TSK) collection of forensic analysis 
 sudo mkdir /root/evidence/autopsy
 ```
 
-Start Autopsy. You can do this using the program menu. \==action: Click Applications / Forensics / autopsy.==
+Start Autopsy. You can do this using the program menu. ==action: Click Applications / Forensics / autopsy.==
 
 A terminal window should be displayed.
 
-\==action: Open Firefox, and visit [http://localhost:9999/autopsy](http://localhost:9999/autopsy)==
+\==action: Open Firefox, and visit http://localhost:9999/autopsy==
 
 \==action: Click "New Case".==
 
-\==action: Enter a case name==, such as "RedHatCompromised", and \==action: a description==, such as "Compromised Linux server", and \==action: enter your name==. \==action: Click "New Case".==
+\==action: Enter a case name==, such as "RedHatCompromised", and ==action: a description==, such as "Compromised Linux server", and ==action: enter your name==. ==action: Click "New Case".==
 
 \==action: Click the "Add Host" button.==
 
-In section "6. Path of Ignore Hash Database", \==action: enter /root/evidence/md5s==
+In section "6. Path of Ignore Hash Database", ==action: enter /root/evidence/md5s==
 
 \==action: Click the "Add Host" button== at the bottom of the page.
 
@@ -120,11 +120,11 @@ In section "6. Path of Ignore Hash Database", \==action: enter /root/evidence/md
 
 \==action: Click "Add Image File".==
 
-For section "1. Location", \==action: enter /root/evidence/hda1.img==
+For section "1. Location", ==action: enter /root/evidence/hda1.img==
 
-For "2. Type", \==action: select "Partition".==
+For "2. Type", ==action: select "Partition".==
 
-For "3. Import Method", \==action: select "Symlink".==
+For "3. Import Method", ==action: select "Symlink".==
 
 \==action: Click "Next".==
 
@@ -146,13 +146,13 @@ Confirm that "Ignore files that are found in the Exclude Hash Database" is selec
 
 \==action: Click "Ok"==, **this analysis takes quite some time, wait for the output to update with results**.
 
-Once complete, \==action: view the "Results Summary".==
+Once complete, ==action: view the "Results Summary".==
 
 The output shows that over 16000 files have been ignored because they were found in the md5 hashes ("Hash Database Exclusions"). This is good news, since what it leaves us with are the interesting files that have changed or been created since the system was in a clean state. This includes archives, executables, and text files (amongst other categories).
 
 \==action: Click "View Sorted Files".==
 
-Copy the results file location as reported by Autopsy, and \==action: open the report in a new tab within Firefox:==
+Copy the results file location as reported by Autopsy, and ==action: open the report in a new tab within Firefox:==
 
 > `/var/lib/autopsy/RedHatCompromised/host1/output/sorter-vol1/`
 >
@@ -164,13 +164,13 @@ Copy the results file location as reported by Autopsy, and \==action: open the r
 
 > Tip: The VMs have no internet access, so search from your host machine's browser for the file name, or part thereof.
 
-Browse the evidence in `/mnt/compromised/etc/opt` (on the Kali Linux system, using a file browser, such as Dolphin) and look at the contents of the archive (in `/etc/opt`, and you may find that the attacker has left an uncompressed version which you can assess in Autopsy). Remember, don't execute any files from the compromised system on your analysis machine: you don't want to end up infecting your analysis machine. For this reason, it is safer to assess these files via Autopsy. \==action: Browse to the directory by clicking back to the Results Summary tab of Autopsy, and clicking "File Analysis"==, then browse to the files from there (in `/etc/opt`). Read the psyBNC README file, and \==action: note what this software package is used for.==
+Browse the evidence in `/mnt/compromised/etc/opt` (on the Kali Linux system, using a file browser, such as Dolphin) and look at the contents of the archive (in `/etc/opt`, and you may find that the attacker has left an uncompressed version which you can assess in Autopsy). Remember, don't execute any files from the compromised system on your analysis machine: you don't want to end up infecting your analysis machine. For this reason, it is safer to assess these files via Autopsy. ==action: Browse to the directory by clicking back to the Results Summary tab of Autopsy, and clicking "File Analysis"==, then browse to the files from there (in `/etc/opt`). Read the psyBNC README file, and ==action: note what this software package is used for.==
 
 > Help: if the README file did not display as expected, click on the inode (meta) number at the right-hand side of the line containing the README file. You will need to click each direct block link in turn to see the content of the README file. The direct block links are displayed at the bottom left-hand side of the webpage.
 
 Next, we investigate what sslstop.tar.gz is used for. A search reveals a CGSecurity.org page, which reports that this script modifies httpd.conf to disable SSL support from Apache. Interesting... Why would an attacker want to disable SSL support? This should soon become clear.
 
-\==action: Return to the page where "compress" was accessed== (`/root/evidence/autopsy/RedHatCompromised/host1/output/sorter-vol1/index.html`), and \==action: click "exec"==. This page lists a fairly extensive collection of new executables on our compromised server.
+\==action: Return to the page where "compress" was accessed== (`/root/evidence/autopsy/RedHatCompromised/host1/output/sorter-vol1/index.html`), and ==action: click "exec"==. This page lists a fairly extensive collection of new executables on our compromised server.
 
 \==action: Make a list of all the executables that are likely trojanised.==
 
@@ -178,7 +178,7 @@ Next, we investigate what sslstop.tar.gz is used for. A search reveals a CGSecur
 
 ---
 
-Two of these have particularly interesting file names: `/usr/bin/smbd -D` and `/usr/bin/(swapd)`. These names are designed to be deceptive: for example, the inclusion of ` -D` is designed to trick system administrators into thinking that any processes were started with the "-D" command line argument flag.
+Two of these have particularly interesting file names: `/usr/bin/smbd -D` and `/usr/bin/(swapd)`. These names are designed to be deceptive: for example, the inclusion of `-D` is designed to trick system administrators into thinking that any processes were started with the "-D" command line argument flag.
 
 Note that `/lib/.x/` contains a number of new executables, including one called "hide". These are likely part of a rootkit.
 
@@ -206,7 +206,7 @@ SuckIT and the rootkit technique is described in detail in Phrack issue 58, arti
 
 > Help: again you may need to view the block directly that contains the .boot file. Make a note of the file's access times, this will come in handy soon.
 
-This shell script starts an SSH server (s/xopen), and sends an email to a specific email address to inform them that the machine is available. View the script, and \==action: determine what email address it will email the information to.==
+This shell script starts an SSH server (s/xopen), and sends an email to a specific email address to inform them that the machine is available. View the script, and ==action: determine what email address it will email the information to.==
 
 Return to the file type analysis (presumably still open in a Firefox tab), still viewing the "exec" category, also note the presence of "adore.o". Adore is another rootkit (and worm), this one loads via an LKM (loadable kernel module).
 
@@ -222,7 +222,7 @@ This system is well and truly compromised, with multiple kernel rootkits install
 
 It helps to reconstruct the timeline of events on the system, to get a better understanding. Software such as Sleuth Kit (either using the Autopsy frontend or the mactime command line tool) analyses the MAC times of files (that is, the most recent modification, most recent access, and most recent inode change[1](#user-content-fn-1)) to reconstruct a sequence of file access events.
 
-In another Firefox tab, \==action: visit [http://localhost:9999/autopsy](http://localhost:9999/autopsy), click "Open Case", "Ok", "Ok".==
+In another Firefox tab, ==action: visit http://localhost:9999/autopsy, click "Open Case", "Ok", "Ok".==
 
 \==action: Click "File Activity Timelines".==
 
@@ -234,11 +234,11 @@ In another Firefox tab, \==action: visit [http://localhost:9999/autopsy](http://
 
 \==action: Click "Ok".==
 
-For "2. Enter the starting date" \==action: select "Specify" and enter July 1 2003.==
+For "2. Enter the starting date" ==action: select "Specify" and enter July 1 2003.==
 
 > Note: The access date you previously recorded (for `/lib/.x/.boot`) was in August 2003, so this is probably a good place to start.
 
-For "5. Select the UNIX image that contains the /etc/passwd and /etc/group files", \==action: select "hda1.img-0-0".==
+For "5. Select the UNIX image that contains the /etc/passwd and /etc/group files", ==action: select "hda1.img-0-0".==
 
 Wait while a timeline is generated.
 
@@ -270,11 +270,11 @@ Next more header files were accessed, this time Linux kernel headers, presumably
 
 Note that a number of these files are again owned by the "apache" user.
 
-> Question: What does this tell you about the likely source of the compromise?
+> Log Book Question: What does this tell you about the likely source of the compromise?
 
 Further down, note the creation of the `/root/sslstop.tar.gz` file which was extracted (files created), then compiled and run. Shortly after, the Apache config file (`/etc/httpd/conf/httpd.conf`) was modified.
 
-> Question: Why would an attacker, after compromising a system, want to stop SSL support in Apache?
+> Log Book Question: Why would an attacker, after compromising a system, want to stop SSL support in Apache?
 
 Meanwhile the attacker has accidentally created a `/.bash_history`, which has not been deleted.
 
@@ -290,13 +290,13 @@ You can skip the bot to here, by saying **goto 1**.
 
 > Hackerbot: Create a list of the potentially trojanised executables on the compromised system, and save it to your Kali VM at `/home/kali/evidence/`, in a file with the name Hackerbot gives you in the chat. Create an evidence directory, and a file with that name within it. List full pathnames, one per line.
 
-When you are ready for the bot to run the attack, \==action: say 'ready'== to Hackerbot.
+When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-Don't forget to \==action: save and submit any flags!==
+Don't forget to ==action: save and submit any flags!==
 
 ## Logs analysis {#logs-analysis}
 
-The most common logging system on Unix systems is Syslog, which is typically configured in `/etc/syslog.conf` (or similar, such as rsyslog). Within the Autopsy File Analysis browser, \==action: navigate to this configuration file and view its contents.== Note that most logging is configured to go to `/var/log/messages`. Some security messages are logged to `/var/log/secure`. Boot messages are logged to `/var/log/boot.log`.
+The most common logging system on Unix systems is Syslog, which is typically configured in `/etc/syslog.conf` (or similar, such as rsyslog). Within the Autopsy File Analysis browser, ==action: navigate to this configuration file and view its contents.== Note that most logging is configured to go to `/var/log/messages`. Some security messages are logged to `/var/log/secure`. Boot messages are logged to `/var/log/boot.log`.
 
 \==action: Make a note of where mail messages are logged==, you will use this later.
 
@@ -306,7 +306,7 @@ As previously seen in the timeline, this file has been symlinked to `/dev/null`.
 
 For now, we will continue by investigating the files that are available, and later investigate deleted files.
 
-Using Autopsy, \==action: view the /var/log/secure file==, and identify any IP addresses that have attempted to log in to the system using SSH or Telnet.
+Using Autopsy, ==action: view the /var/log/secure file==, and identify any IP addresses that have attempted to log in to the system using SSH or Telnet.
 
 \==action: Determine the country of origin for each of these connection attempts:==
 
@@ -322,17 +322,17 @@ Using Autopsy, \==action: view the /var/log/secure file==, and identify any IP a
 
 ---
 
-Within Autopsy, \==action: view the /var/log/boot.log file==. At the top of this file Syslog reports starting at August 10 at 13:33:57.
+Within Autopsy, ==action: view the /var/log/boot.log file==. At the top of this file Syslog reports starting at August 10 at 13:33:57.
 
-> Question: Given what we have learned about this system during timeline analysis, what is suspicious about Syslog restarting on August 10th? Was the system actually restarted at that time?
+> Log Book Question: Given what we have learned about this system during timeline analysis, what is suspicious about Syslog restarting on August 10th? Was the system actually restarted at that time?
 
 Note that according to the log, Apache fails to restart. Why can't Apache restart? Do you think the attacker intended to do this?
 
-\==action: Open the mail log file==, which you recorded the location of earlier. \==action: Identify the email addresses that messages were sent to.==
+\==action: Open the mail log file==, which you recorded the location of earlier. ==action: Identify the email addresses that messages were sent to.==
 
 ---
 
-Another valuable source of information are records of commands that have been run by users. One source of this information is the `.bash_history` file. As noted during timeline analysis, the `/root/.bash_history` file was symlinked to `/dev/null`, meaning the history was not saved. However, the attacker did leave behind a Bash history file in the root of the filesystem ("/"). \==action: View this file.==
+Another valuable source of information are records of commands that have been run by users. One source of this information is the `.bash_history` file. As noted during timeline analysis, the `/root/.bash_history` file was symlinked to `/dev/null`, meaning the history was not saved. However, the attacker did leave behind a Bash history file in the root of the filesystem ("/"). ==action: View this file.==
 
 Towards the end of this short Bash session the attacker downloads sslstop.tar.gz, then the attacker runs:
 
@@ -342,11 +342,11 @@ ps aux | grep apache
 kill -9 21510 21511 23289 23292 23302
 ```
 
-> Question: What is the attacker attempting to do with these commands?
+> Log Book Question: What is the attacker attempting to do with these commands?
 
 Apache has clearly played an important role in the activity of the attacker, so it is natural to investigate Apache's configuration and logs.
 
-Still in Autopsy, \==action: browse to /etc/httpd/conf/, and view httpd.conf.==
+Still in Autopsy, ==action: browse to /etc/httpd/conf/, and view httpd.conf.==
 
 Note that the Apache config has been altered by sslstop, by changing the "HAVE_SSL" directive to "HAVE_SSS" (remember, this file was shown in the timeline to be modified after sslstop was run).
 
@@ -362,11 +362,11 @@ You can skip the bot to here, by saying **goto 2**.
 
 > Hackerbot: Create a list of IP addresses you believe have attempted to log in to the system using SSH or Telnet. Save it to your Kali VM at `/home/kali/evidence/`, in the file with the name Hackerbot gives you in the chat.
 
-When you are ready for the bot to run the attack, \==action: say 'ready'== to Hackerbot.
+When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-There is a quiz to complete. Once Hackerbot asks you the question, \==action: answer 'YOURANSWER'==.
+There is a quiz to complete. Once Hackerbot asks you the question, ==action: answer 'YOURANSWER'==.
 
-Don't forget to \==action: save and submit any flags!==
+Don't forget to ==action: save and submit any flags!==
 
 #### Hackerbot Attack #3 {#hackerbot-attack-3}
 
@@ -374,9 +374,9 @@ You can skip the bot to here, by saying **goto 3**.
 
 > Hackerbot: Save the email addresses that messages were sent to. Save them to your Kali VM at `/home/kali/evidence/`, in the file with the name Hackerbot gives you in the chat.
 
-When you are ready for the bot to run the attack, \==action: say 'ready'== to Hackerbot.
+When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-Don't forget to \==action: save and submit any flags!==
+Don't forget to ==action: save and submit any flags!==
 
 ## Deleted files analysis {#deleted-files-analysis}
 
@@ -386,7 +386,7 @@ However, this is not an efficient way of searching through content to find relev
 
 Since we are primarily interested in recovering lost log files (which are ASCII human-readable), one of the quickest methods is to extract all unallocated data from our evidence image, and search that for likely log messages. Autopsy has a keyword search. However, manual searching can be more efficient.
 
-\==VM: In a terminal console in Kali Linux==, \==action: run:==
+\==VM: In a terminal console in Kali Linux==, ==action: run:==
 
 ```bash
 blkls -A evidence/hda1.img | strings > evidence/unallocated
@@ -400,19 +400,19 @@ Open the extracted information for viewing:
 less evidence/unallocated
 ```
 
-Scroll down, and \==action: find any deleted email message logs.==
+Scroll down, and ==action: find any deleted email message logs.==
 
 > Hint: try pressing ":" then type "/To:".
 
-> Question: What sorts of information was emailed?
+> Log Book Question: What sorts of information was emailed?
 
-To get the list of all email recipients quit less (press 'q'), and \==action: run:==
+To get the list of all email recipients quit less (press 'q'), and ==action: run:==
 
 ```bash
 grep "To:.*@" evidence/unallocated
 ```
 
-Once again, \==action: open the extracted deleted information== for viewing:
+Once again, ==action: open the extracted deleted information== for viewing:
 
 ```bash
 less evidence/unallocated
@@ -462,11 +462,11 @@ You can skip the bot to here, by saying **goto 4**.
 
 > Hackerbot: Save the wget commands used to download rootkits. Save them to your Kali VM at `/home/kali/evidence/`, in the file with the name Hackerbot gives you in the chat.
 
-When you are ready for the bot to run the attack, \==action: say 'ready'== to Hackerbot.
+When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-There is a quiz to complete. Once Hackerbot asks you the question, \==action: answer 'YOURANSWER'==.
+There is a quiz to complete. Once Hackerbot asks you the question, ==action: answer 'YOURANSWER'==.
 
-Don't forget to \==action: save and submit any flags!==
+Don't forget to ==action: save and submit any flags!==
 
 ## Footnotes {#footnotes}
 

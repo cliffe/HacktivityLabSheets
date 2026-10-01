@@ -398,12 +398,21 @@ document.addEventListener('DOMContentLoaded', function() {
                   }
                 );
                 contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>\s*<p>\s*Log Book Question:\s*([\s\S]*?)<\/p>\s*<\/blockquote>/gi,
+                  '<div class="logbook-item"><span class="logbook-label"><i class="fas fa-book" aria-hidden="true"></i> Log Book Question:</span> $1</div>'
+                );
+                contentBody.innerHTML = contentBody.innerHTML.replace(
                   /<blockquote>\s*<p>\s*Question:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
                   '<div class="question-item">$1</div>'
                 );
                 contentBody.innerHTML = contentBody.innerHTML.replace(
                   /<blockquote>\s*<p>\s*Flag:\s*([^<]+(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)*)<\/p>\s*<\/blockquote>/gi,
                   '<div class="flag-item">$1</div>'
+                );
+                // > Hackerbot: and > Hackerbot quiz: blocks get the skull-and-USB avatar as an inline icon
+                contentBody.innerHTML = contentBody.innerHTML.replace(
+                  /<blockquote>(\s*<p>)\s*Hackerbot( quiz)?:\s*/gi,
+                  '<blockquote class="hackerbot-item">$1<img class="hackerbot-icon" src="{{ site.baseurl }}/assets/images/shared/skullandusb.svg" alt=""> <strong>Hackerbot$2:</strong> '
                 );
                 
                 // Add copy functionality to code blocks

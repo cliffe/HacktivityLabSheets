@@ -39,6 +39,19 @@ body {
   border-radius: 8px;
 }
 
+// Inline Hackerbot icon on "> Hackerbot:" blocks (added by _layouts/lab.html).
+// Same light backdrop as the avatar so the line-work shows in dark mode.
+.lab-content img.hackerbot-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.1em;
+  margin: 0 0.2em 0 0;
+  vertical-align: middle;
+  background: #d9d9d9;
+  border-radius: 4px;
+}
+
 // Enhanced syntax highlighting for code blocks
 .highlight pre {
   background-color: #f8f9fa;
@@ -1306,6 +1319,37 @@ blockquote {
 [data-theme="dark"] .question-item h5, 
 [data-theme="dark"] .question-item h6 {
   color: #4db6ac;
+}
+
+.logbook-item {
+  background-color: #fbf3e4;
+  border: 1px solid #d7b98a;
+  border-left: 4px solid #8d6e63;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #4e342e;
+}
+
+.logbook-item .logbook-label {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.logbook-item .logbook-label .fa-book {
+  color: #8d6e63;
+  margin-right: 0.25rem;
+}
+
+[data-theme="dark"] .logbook-item {
+  background-color: #3e2c22;
+  border-color: #a1887f;
+  border-left-color: #bcaaa4;
+  color: #e8d5c4;
+}
+
+[data-theme="dark"] .logbook-item .logbook-label .fa-book {
+  color: #d7b98a;
 }
 
 .flag-item {

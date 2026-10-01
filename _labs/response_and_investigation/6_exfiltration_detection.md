@@ -172,5 +172,4 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Resources {#resources}
 
-Martin Roesch (n.d.) **Chapter 2:** Writing Snort Rules - How to Write Snort Rules and Keep Your Sanity. In: *Snort Users Manual*. Available from: <[http://www.snort.org.br/documentacao/SnortUsersManual.pdf](http://www.snort.org.br/documentacao/SnortUsersManual.pdf)>
-
+Martin Roesch (n.d.) **Chapter 2:** Writing Snort Rules - How to Write Snort Rules and Keep Your Sanity. In: *Snort Users Manual*. Available from: <http://www.snort.org.br/documentacao/SnortUsersManual.pdf>

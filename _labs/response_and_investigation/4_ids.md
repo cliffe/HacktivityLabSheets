@@ -91,7 +91,7 @@ sudo tcpdump -i ens19
 
 > Note: Where `ens19` is the name of the interface you identified earlier (it may be different in your environment).
 
-With tcpdump still running, \==VM: from the desktop VM==, ==action: perform a ping to the ids_monitor VM:==
+With tcpdump still running, ==VM: from the desktop VM==, ==action: perform a ping to the ids_monitor VM:==
 
 ```bash
 ping <ids_monitor IP address>
@@ -103,7 +103,7 @@ ping <ids_monitor IP address>
 
 The ids_monitor VM's network interface has been configured so that it can view traffic destined for other systems on the network, not just traffic destined for itself.
 
-Test this, \==VM: from the desktop VM== ==action: ping the web_server:==
+Test this, ==VM: from the desktop VM== ==action: ping the web_server:==
 
 ```bash
 ping <web_server IP address>
@@ -135,7 +135,7 @@ curl <web_server IP address>
 
 \==action: Stop tcpdump== (Ctrl-C) on the ids_monitor VM once you have observed the output.
 
-\==action: Run the following== command \==VM: on the ids_monitor:==
+\==action: Run the following== command ==VM: on the ids_monitor:==
 
 ```bash
 sudo tcpdump -v -i ens19
@@ -151,7 +151,7 @@ It is possible to write tcpdump network traffic to storage, so that it can be an
 sudo tcpdump -w /tmp/tcpdump-output -i ens19
 ```
 
-While that is running, \==VM: access a web page from Firefox on the desktop VM==, ==action: browse to== `http://<web_server IP address>` (in a new tab).
+While that is running, ==VM: access a web page from Firefox on the desktop VM==, ==action: browse to== `http://<web_server IP address>` (in a new tab).
 
 \==action: Close tcpdump== (Ctrl-C).
 
@@ -195,7 +195,7 @@ You can also open the captured network traffic in Wireshark.
 
 \==action: Right click the same HTTP request in Wireshark and "Follow", "HTTP Stream".==
 
-> Question: Explain the differences in the TCP and HTTP stream view for the same web traffic.
+> Log Book Question: Explain the differences in the TCP and HTTP stream view for the same web traffic.
 
 Note that making sense of network traffic information using tcpdump and/or Wireshark is possible (and is a common sys-admin task), but the output is too noisy to be constantly and effectively monitored by a human to detect security incidents. Therefore we can use an IDS such as Snort to monitor and analyse the network traffic to detect activity that it is configured to alert.
 
@@ -227,7 +227,7 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Intrusion detection system (IDS) monitoring basics {#ids-monitoring-basics}
 
-Continuing \==VM: on the ids_monitor VM:==
+Continuing ==VM: on the ids_monitor VM:==
 
 \==action: Confirm Snort's output is set to something readable:==
 
@@ -261,7 +261,7 @@ sudo service snort start
 
 Snort should now be running, monitoring network traffic for activity.
 
-\==action: Do an nmap port scan of the web_server== VM (\==VM: from the desktop VM==):
+\==action: Do an nmap port scan of the web_server== VM (==VM: from the desktop VM==):
 
 ```bash
 sudo nmap -sX <web_server IP address>
@@ -277,7 +277,7 @@ sudo tail -f /var/log/snort/alert
 
 > Note: The tail program will wait for new alerts to be written to the file, and will display them as they are logged. (Ctrl-C to exit).
 
-> Question: What does the `-sX` in the nmap command mean? Does the log match what happened? Are there any false positives (alerts that describe things that did not actually happen)?
+> Log Book Question: What does the `-sX` in the nmap command mean? Does the log match what happened? Are there any false positives (alerts that describe things that did not actually happen)?
 
 \==hint: Try another type of port scan from the desktop VM.== (Hint: `man nmap`).
 
@@ -416,5 +416,4 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Resources {#resources}
 
-Martin Roesch (n.d.) **Chapter 2:** Writing Snort Rules - How to Write Snort Rules and Keep Your Sanity. In: *Snort Users Manual*. Available from: [http://www.snort.org.br/documentacao/SnortUsersManual.pdf](http://www.snort.org.br/documentacao/SnortUsersManual.pdf)
-
+Martin Roesch (n.d.) **Chapter 2:** Writing Snort Rules - How to Write Snort Rules and Keep Your Sanity. In: *Snort Users Manual*. Available from: http://www.snort.org.br/documentacao/SnortUsersManual.pdf

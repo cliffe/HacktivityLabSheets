@@ -409,7 +409,7 @@ sudo logger -t mymonitor Hello, World!
 sudo tail /var/log/mymonitor
 ```
 
-> Question: Use what you have learned to add a rule so that any sudo command generates a message to all users (which would typically be sent on terminals and as a popup notification). Hint: look at how the existing emergency messages rule works, and combine that method of output with the rule above, modified to be triggered by sudo. Remember to reload Syslog.
+> Log Book Question: Use what you have learned to add a rule so that any sudo command generates a message to all users (which would typically be sent on terminals and as a popup notification). Hint: look at how the existing emergency messages rule works, and combine that method of output with the rule above, modified to be triggered by sudo. Remember to reload Syslog.
 
 \==warning: Remove the rule you added above, before continuing.==
 
@@ -500,7 +500,7 @@ You can also do all kinds of neat tricks such as matching repeating text (using 
 
 There are plenty of good tutorials available. You can learn more about regex matching from sources such as `man grep`, and http://gnosis.cx/publish/programming/regular_expressions.html
 
-> Question: Using what you have learned, write a grep command that performs a regex on /var/log/messages for log entries sent by the kernel. Once that is working, extend your regex to only match log events sent in the afternoon (12:00) today (hint: consider the date).
+> Log Book Question: Using what you have learned, write a grep command that performs a regex on /var/log/messages for log entries sent by the kernel. Once that is working, extend your regex to only match log events sent in the afternoon (12:00) today (hint: consider the date).
 
 ## Logrotate {#logrotate}
 
@@ -762,7 +762,7 @@ It is helpful to visualise the audit data to make sense of what is happening in 
 
 \==action: Experiment by dropping more than one field, and by applying filters.==
 
-> Question: Design a helpful dashboard with a number of visualisations that highlight the security related events we have started to log. Show a screenshot of your dashboard, and document how and why you selected those fields and visualisation approaches.
+> Log Book Question: Design a helpful dashboard with a number of visualisations that highlight the security related events we have started to log. Show a screenshot of your dashboard, and document how and why you selected those fields and visualisation approaches.
 
 ### File integrity monitoring {#file-integrity-monitoring}
 

@@ -113,7 +113,6 @@ Within text, inline code should be enclosed using backticks and any markdown art
 
 ```markdown
 ==question: Self-study Question:==
-==question: Log Book Question:==
 ==question: Reflection Question:==
 ==question: Discussion Question:==
 ```
@@ -171,13 +170,19 @@ Use `> Type: content` where `Type` is one of: `Action`, `Tip`, `Warning`, `Hint`
 
 > Question: How does the Metasploit framework help in penetration testing? What are the advantages of using a standardized exploitation framework?
 
+**Log Book Question Blocks:**
+
+> Log Book Question: Compare the file access/modification times of the scp and rsync backups. Are they the same? If not, why?
+
 **Flag Blocks:**
 
 > Flag: Find the flag hidden in the victim's home directory and submit it to Hacktivity to complete this challenge.
 
 > Flag: There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
 
-**When to Use Question Blocks:** Use `> Question:` for clear self-study or log book questions where students are expected to answer for themselves. Do NOT use for rhetorical questions that are answered later in the lab.
+**When to Use Question Blocks:** Use `> Question:` for clear self-study questions where students are expected to answer for themselves. Do NOT use for rhetorical questions that are answered later in the lab.
+
+**When to Use Log Book Question Blocks:** Use `> Log Book Question:` for any question or task the original lab tells students to answer or record in their log book (or lab book). Write it as a single paragraph. The label stays visible and gets a book icon, so students can tell which answers belong in their log book.
 
 **When to Use Flag Blocks:** Use `> Flag:` for CTF challenge tasks where students need to find and submit flags. This highlights the competitive/assessment aspect of the task.
 
@@ -300,10 +305,13 @@ Look for:
 Look for:
 - Clear questions where students are expected to provide their own answers
 - Self-study questions for reflection and learning
-- Log book questions for documentation and record-keeping
 - Questions that require student analysis or research
 
 **Convert to:** `> Question: [question content]` for block-level questions
+
+Log book (or lab book) questions and tasks, including instructions such as "make a note of this in your Log Book", get their own block:
+
+**Convert to:** `> Log Book Question: [question content]`
 
 ### Step 8: Identify CTF Flag Tasks
 Look for:
@@ -315,7 +323,7 @@ Look for:
 **Convert to:** `> Flag: [flag task content]` for block-level flag tasks
 
 **Important Guidelines for Question Blocks:**
-- **USE** `> Question:` for self-study questions, log book questions, and reflection questions where students answer for themselves
+- **USE** `> Question:` for self-study and reflection questions (use `> Log Book Question:` for log book questions) where students answer for themselves
 - **DO NOT USE** `> Question:` for rhetorical questions that are answered later in the lab
 - **DO NOT USE** `> Question:` for questions immediately followed by the answer in the text
 
@@ -515,7 +523,8 @@ When properly highlighted, the content will display as:
 
 Block-level highlights will appear as styled boxes with appropriate colors and icons:
 - **Note blocks**: Light gray background with 📝 icon (for troubleshooting and explanations)
-- **Question blocks**: Teal background with ❓ icon (for self-study, log book, and reflection questions)
+- **Question blocks**: Teal background with ❓ icon (for self-study and reflection questions)
+- **Log Book Question blocks**: Parchment background with a Font Awesome book icon and a visible "Log Book Question:" label
 - **Flag blocks**: Purple background with 🏁 icon (for CTF challenge tasks)
 
 ## ✅ Quality Checklist
@@ -658,7 +667,7 @@ There is a flag to be found on a user's Desktop! Find and submit it to Hacktivit
 
 > Question: What are the key differences between bind shells and reverse shells? Consider the network connectivity requirements for each approach.
 
-> Question: Document your findings from the vulnerability assessment, including which exploits were successful and why.
+> Log Book Question: Document your findings from the vulnerability assessment, including which exploits were successful and why.
 
 > Flag: There is a flag to be found on a user's Desktop! Find and submit it to Hacktivity.
 

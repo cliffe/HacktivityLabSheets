@@ -56,13 +56,13 @@ You won't log in to the hackerbot_server, but the VM needs to be running to comp
 
 You don't need to log in to the backup_server directly, but you will connect to it via SSH later in the lab.
 
-There is also a second user account on the desktop VM. \==action: List the users on the system==, to find the second user's username:
+There is also a second user account on the desktop VM. ==action: List the users on the system==, to find the second user's username:
 
 ```bash
 ls /home
 ```
 
-You'll use this second username (\==edit: SECONDUSER== in the commands below) later in the lab, when Hackerbot asks you to back up their files.
+You'll use this second username (==edit: SECONDUSER== in the commands below) later in the lab, when Hackerbot asks you to back up their files.
 
 {% include hackerbot-intro.md role="task you to perform backups and will attack your system" chat="hello" %}
 
@@ -88,7 +88,7 @@ uptime
 
 A common goal is to aim for "five nines" availability (99.999%). If you only have one server, that means keeping it running constantly, other than for scheduled maintenance.
 
-\==question: Log Book Question:== List a few legitimate security reasons for performing off-line maintenance.
+> Log Book Question: List a few legitimate security reasons for performing off-line maintenance.
 
 ## Copy {#copy}
 
@@ -259,7 +259,7 @@ sudo rsync -avzh --fake-super --delete /etc ==edit: YOURUSERNAME==@==edit: BACKU
 
 > Hint: login via SSH and view the backups
 
-\==question: Log Book Question:== Compare the file access/modification times of the scp and rsync backups, are they the same/similar? If not, why?
+> Log Book Question: Compare the file access/modification times of the scp and rsync backups, are they the same/similar? If not, why?
 
 #### Hackerbot Attack #2 {#hackerbot-attack-2}
 
@@ -547,7 +547,6 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Resources {#resources}
 
-[http://webgnuru.com/linux/rsync_incremental.php](http://webgnuru.com/linux/rsync_incremental.php)
+http://webgnuru.com/linux/rsync_incremental.php
 
-[http://everythinglinux.org/rsync/](http://everythinglinux.org/rsync/)
-
+http://everythinglinux.org/rsync/

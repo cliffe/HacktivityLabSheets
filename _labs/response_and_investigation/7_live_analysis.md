@@ -86,7 +86,7 @@ script -f evid/invst.log
 
 > Note: *If you do this lab over multiple sessions*, be sure to save a copy of the log of your progress (`evid/invst.log`), and restart `script`.
 
-==question: Log Book question:== Make a note of the risks and benefits associated with storing a record of what we are doing locally on the computer that we are investigating.
+> Log Book Question: Make a note of the risks and benefits associated with storing a record of what we are doing locally on the computer that we are investigating.
 
 Consider the advantages of *handwritten* documentation of what investigators are doing.
 
@@ -134,7 +134,9 @@ ldd /media/cdrom0/statbins/linux2.2_x86/ls
 
 \==action: Compare the output to the previous command== run on your own desktop system. The output will be distinctly different, stating that the program is not dynamically compiled.
 
-Note that, although an improvement, using statically linked programs such as these still do not guarantee that you can trust the output of the programs you run. \==action: Consider why, and make a note of this in your Log Book.==
+Note that, although an improvement, using statically linked programs such as these still do not guarantee that you can trust the output of the programs you run.
+
+> Log Book Question: Why can't you fully trust the output of statically linked programs run on a compromised system?
 
 ## First look around {#first-look-around}
 
@@ -151,7 +153,7 @@ Run the static version:
 /media/cdrom0/statbins/linux2.2_x86/ls
 ```
 
-Note the presence of a "u_r_powned" file in the output from the live disk version of `ls`! Running the local version of `ls` is not accurately reporting the files that exist! Lucky we thought to run another copy of `ls`.
+Note the presence of a "u_r\_powned" file in the output from the live disk version of `ls`! Running the local version of `ls` is not accurately reporting the files that exist! Lucky we thought to run another copy of `ls`.
 
 ## Collecting live state manually {#collecting-live-state-manually}
 
@@ -218,6 +220,8 @@ Save a list of the files currently being accessed by programs:
 ```bash
 ssh $COMPROMISED_IP "/media/cdrom0/statbins/linux2.2_x86/lsof" | tee evidence/lsof_out
 ```
+
+> Log Book Question: Are any of the files in `evidence/lsof_out` marked as "(deleted)"? What does this indicate?
 
 Save a list of network connections:
 
@@ -312,7 +316,7 @@ ls -la $HOME/evidence
 
 At this stage ==action: take a closer look through== some of the information you have collected.
 
-==question: Log Book Task:== Examine the contents of the various output files and identify anything that may indicate that the computer has been compromised by an attacker. Hint: does the network usage seem suspicious?
+> Log Book Question: Examine the contents of the various output files and identify anything that may indicate that the computer has been compromised by an attacker. Hint: does the network usage seem suspicious?
 
 ### Collecting live state using scripts {#collecting-live-state-using-scripts}
 
@@ -467,4 +471,3 @@ Don't forget to ==action: save and submit any flags!==
 ## Footnotes {#footnotes}
 
 1. Note that it would be better to not have to include `$PATH`, and only use static versions. Unfortunately, FIRE does not include statically compiled versions of all of the commands that chkrootkit requires. [↩](#user-content-fnref-1)
-

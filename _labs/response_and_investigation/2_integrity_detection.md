@@ -99,8 +99,7 @@ sudo vi /etc/passwd
 
 > Note: Move the cursor onto the line representing your new account (probably at the bottom).
 >
-> In vi type:
-> `:m -`==edit: number==
+> In vi type: `:m -`==edit: number==
 >
 > Where ==edit: number== is the number of lines to move up, for example: `:m -20` will move the currently selected line up 20 lines, 'hiding' the new user account amongst the others.
 >
@@ -272,7 +271,7 @@ Now use your new hash list to ==action: check that nothing has changed== since w
 shasum -c ~/hashes/hash.sha
 ```
 
-> Question: Log Book question: Why does shasum fail to check the integrity of the shadow file?
+> Log Book Question: Why does shasum fail to check the integrity of the shadow file?
 
 \==action: Make a change== to the end of your chosen file:
 
@@ -330,7 +329,7 @@ Then ==action: run the script== with:
 ruby checker.rb
 ```
 
-> Question: Log Book question: Are the files reported as unmodified, or have they changed? Why might they be different to when I wrote the script?
+> Log Book Question: Are the files reported as unmodified, or have they changed? Why might they be different to when I wrote the script?
 
 #### Hackerbot Attack #4 {#hackerbot-attack-4}
 
@@ -586,7 +585,7 @@ sudo debsums -a ==edit: package-name==
 
 Try to understand the cause of any files failing the integrity checks.
 
-> Question: Log Book question: What are the limitations of this approach? What files will (and won't) this approach to integrity management cover? Are the hashes protected against tampering?
+> Log Book Question: What are the limitations of this approach? What files will (and won't) this approach to integrity management cover? Are the hashes protected against tampering?
 
 #### Hackerbot Attack #10 {#hackerbot-attack-10}
 
@@ -620,5 +619,4 @@ Perhaps the greatest limitation to all of these approaches, is that if a system 
 
 An excellent resource on the subject of integrity management is Chapter 20 of the excellent book *Practical Unix & Internet Security, 3rd Ed*, by Garfinkel et al (2003).
 
-Bind mounting: [http://lwn.net/Articles/281157/](http://lwn.net/Articles/281157/)
-
+Bind mounting: http://lwn.net/Articles/281157/
