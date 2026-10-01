@@ -4,7 +4,7 @@ Parameters: role - the clause after "a chatbot who will". Default: "attack your 
 
 ## Meet Hackerbot! {#meet-hackerbot}
 
-![Skull and USB stick]\({{ site.baseurl }}/assets/images/shared/skullandusb.svg){: .hackerbot-avatar}
+![Skull and USB stick]({{ site.baseurl }}/assets/images/shared/skullandusb.svg){: .hackerbot-avatar}
 
 This exercise involves interacting with Hackerbot, a chatbot who will {{ include.role | default: "attack your system" }}. If you satisfy Hackerbot by completing the challenges, she will reveal flags to you. {% if include.chat == "full" %} ==VM: On the desktop VM==, ==action: open Firefox and go to `hackerbot:8080`, then send some messages to Hackerbot:==
 
