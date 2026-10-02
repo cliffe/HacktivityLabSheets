@@ -5,7 +5,7 @@ classification: "OPERATIONAL"
 author: ["Agent HaX", "Adapted from SAFETYNET Training Materials"]
 source: "_labs/cyber_security_landscape/4_encoding_encryption.md"
 license: "CC BY-SA 4.0"
-description: "Hidden in-game field guide for identifying and decoding Base64 and ROT13 in Mission 1 using CyberChef."
+description: "Hidden in-game field guide for identifying and decoding Base64 and ROT13 using CyberChef."
 game_fragment: true
 permalink: /labs/safetynet/encoding-and-decoding-with-cyberchef/
 redirect_from:
@@ -16,7 +16,7 @@ redirect_from:
 
 You've reached the point where intelligence is hidden in plain sight.
 
-Your objective right now is to turn encoded notes into usable operational data quickly and reliably. In this mission, the common patterns are Base64 and shift-style substitution (ROT13).
+Your objective right now is to turn encoded notes into usable operational data quickly and reliably. The common patterns you will meet are Base64 and shift-style substitution (ROT13).
 
 Do not guess. Identify the pattern, apply the right CyberChef recipe, verify the output, then act on what you recover.
 
@@ -90,9 +90,9 @@ echo "Qrexr vf gur yrny" | tr 'A-Za-z' 'N-ZA-Mn-za-m'
 
 ---
 
-## Mission-Relevant Application (M01)
+## Mission-Relevant Application
 
-In Mission 1, encoded notes are used to hide key operational details (for example, lock values, reminders, and access clues).
+Encoded notes are a common way to hide key operational details in plain sight — lock values, reminders, and access clues all turn up this way.
 
 Your process should be:
 1. Identify whether note shape fits Base64 or ROT13.

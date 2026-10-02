@@ -195,6 +195,38 @@ This gives you a root login shell. You now have complete system access.
 
 ---
 
+### Method 4: Escaping an Allowed Command to a Shell (GTFOBins)
+
+`sudo -l` will often show you are allowed to run **one specific command** as root, not a full shell:
+
+```text
+User derek may run the following commands:
+    (root) NOPASSWD: /usr/bin/awk
+```
+
+This looks like a tight restriction. It usually is not. Many ordinary programs can run other commands, open a shell, read any file, or write one — and when you are allowed to run such a program *as root*, that capability becomes a full root compromise. The sudo rule only names the binary; it cannot stop the binary doing what it was built to do.
+
+**The technique**: identify what the allowed binary can do beyond its obvious purpose, then use that to spawn a shell or read the file you want. The reference for this is **[GTFOBins](https://gtfobins.github.io/)** — a catalogue of standard Unix binaries and the exact trick each one offers when you can run it with elevated rights. Look your allowed command up there first.
+
+Two patterns you will meet here:
+
+```bash
+# A text-processing tool that can run system commands.
+# If you may run awk as root, awk can spawn a root shell:
+sudo awk 'BEGIN {system("/bin/bash")}'
+
+# A tool with a "run this around the real work" hook, or that opens a pager.
+# If you may run apt-get as root, both of these give a root shell:
+sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
+sudo apt-get changelog apt        # opens in a pager; at the ':' prompt type  !/bin/sh
+```
+
+The same idea covers `vim`, `less`, `find`, `tar`, `nmap`, `env` and dozens more: each has a documented way to break out of its lane. The pager case is worth remembering on its own — any command whose output drops you into `less` or `more` lets you type `!/bin/sh` to escape to a shell running with that command's privileges.
+
+**When you'd need this**: `sudo -l` grants exactly one command as root and nothing looks directly useful. The command itself is the escalation — find its GTFOBins entry and use it.
+
+---
+
 ## Password Prompts
 
 When you run a sudo command, you may be prompted for a password:
