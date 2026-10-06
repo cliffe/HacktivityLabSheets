@@ -373,6 +373,13 @@ We can save (redirect) this output to a file so that we have a record of the cur
 sudo sha1deep -r /etc > ~/hashes/etc_hashes
 ```
 
+You may notice that there are a number of error messages related to missing files that obscure the output. A useful trick to only display non-error output is to redirect stderr to /dev/null -- a special 'device' that discards all data but returns a success.
+
+
+```bash
+sudo sha1deep -r /etc > ~/hashes/etc_hashes 2>/dev/null
+```
+
 This may take a minute or so, while the program calculates all the hashes and sends them to standard out (known as stdout), which is then redirected to the etc_hashes file.
 
 Next, let's compare the size of our list of hashes, with the actual content that we have hashed...
@@ -418,7 +425,7 @@ Md5deep/sha1deep takes a different approach to checking integrity, by checking a
 Run sha1deep to check whether any files in /etc/ do not match a hash previously generated:
 
 ```bash
-sudo sha1deep -X ~/hashes/etc_hashes -r /etc
+sudo sha1deep -X ~/hashes/etc_hashes -r /etc 2>/dev/null
 ```
 
 This should detect both modified files, both new and modified.
@@ -440,7 +447,7 @@ Another tool, hashdeep, which is included with md5deep, provides more coverage w
 Generate a hash list for /etc using hashdeep:
 
 ```bash
-sudo hashdeep -r /etc/ > ~/hashes/etc_hashdeep_hashes
+sudo hashdeep -r /etc/ > ~/hashes/etc_hashdeep_hashes 2>/dev/null
 ```
 
 Hashdeep stores hashes in a different format than the previous tools. Have a look:
@@ -460,7 +467,7 @@ sudo rm /etc/==edit: whatever-the-filename-was==
 Conduct a hashdeep audit to detect any changes:
 
 ```bash
-sudo hashdeep -r -a -k ~/hashes/etc_hashdeep_hashes /etc
+sudo hashdeep -r -a -k ~/hashes/etc_hashdeep_hashes /etc 2>/dev/null
 ```
 
 > Note: This can take a while, so feel free to start working through the next section in another terminal, if you like.
@@ -468,7 +475,7 @@ sudo hashdeep -r -a -k ~/hashes/etc_hashdeep_hashes /etc
 After, run it again, this time asking for more details, since the default message does not provide any information as to why an audit has failed:
 
 ```bash
-sudo hashdeep -ravv /etc/ -k ~/hashes/etc_hashdeep_hashes
+sudo hashdeep -ravv /etc/ -k ~/hashes/etc_hashdeep_hashes 2>/dev/null
 ```
 
 Consult the man page for information about what each of the above flags do.
