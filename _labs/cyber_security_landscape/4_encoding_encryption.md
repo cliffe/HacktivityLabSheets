@@ -26,8 +26,6 @@ cybok:
     keywords: ["ENCODING", "BASE64"]
 ---
 
-
-
 ## Purpose
 
 The purpose of this lab is to familiarise students with common encoding schemes, hash algorithms, basic OpenSSL and Gnu Privacy Guard (GPG).
@@ -44,14 +42,15 @@ Encoding and encryption are important concepts, and the ability to identify and 
 
 **Encoding data** involves changing it into a new format using a reversible scheme. Encoding is reversible – data can be encoded into a format then decoded back to the original format. Usually encoding is done using publicly known schemes, and is typically done to make it easier to transfer, store, or use data. Encoding is often applied for compatibility reasons.
 
-> Tip: You can use `iconv -l` command to list all the known coded character sets ☺.  
+> Tip: You can use `iconv -l` command to list all the known coded character sets ☺.
 
 In this section you learn how to use Linux Command Line Interface (CLI) to encode/decode using some of those schemes.
 
 ## Character Encoding and ASCII
 
 For example, the string "hello!" can be represented in ASCII (decimal):
-* 104 101 108 108 111
+
+- 104 101 108 108 111
 
 ASCII (American Standard Code for Information Interchange) is a character encoding scheme for electronic communication. Character encoding schemes translate text into a format so that they can be stored and transferred electronically. Most modern character encoding schemes, such as Unicode (UTF-8 being the most common) are based on ASCII, and support many more symbols, such as emoji (😃).
 
@@ -61,7 +60,7 @@ In the above example, we are using a decimal format: base 10, like our typical n
 
 You can use any Linux distribution for this lab, please refer to Hacktivity guide to create your own VM.
 
-==action: Open Linux CLI and type python3 (to open python3 command prompt) followed by the code below:==
+\==action: Open Linux CLI and type python3 (to open python3 command prompt) followed by the code below:==
 
 ```python
 myString="Valhalla!".encode('utf-8')  
@@ -75,7 +74,7 @@ print(myString.hex())
 
 Likewise "hello!" also translates to "68 65 6c 6c 6f 21" in hex (hexadecimal), and "01101000 01100101 01101100 01101100 01101111 00100001" in binary.
 
-==action: Run these commands in a Linux shell:==
+\==action: Run these commands in a Linux shell:==
 
 ```bash
 echo hello! | xxd -b
@@ -95,18 +94,15 @@ Hex is also a common way of displaying "binary data"; that is, non-text data, wh
 
 Another popular encoding method is Base64, which uses the symbols: 0-9, a-Z, A-Z, +, /, and also uses = for padding. Base64 is often used with Web technologies, as a safe way of encoding binary data (and is more efficient than using hex).
 
-Base-N encoding is simply a representation of sequence octets in a form that allows the use of both upper and lowercase letters but that need not be human readable. In Base-64, a 65-character subset of US-ASCII is used, enabling 6 bits to be represented per printable character. (The extra 65th character, "=", is used "usually" for padding). The encoding process represents 24-bit groups of input bits as output strings of 4 encoded characters. Proceeding from left to right, a 24-bit input group is formed by concatenating 3 8-bit input groups. These 24 bits are then treated as 4 concatenated 6-bit groups, each of which is translated into a single character in the base 64 alphabet. Each 6-bit group is used as an index into an array of 64 printable characters. The character referenced by the index is placed in the output string\[RFC4648\]
+Base-N encoding is simply a representation of sequence octets in a form that allows the use of both upper and lowercase letters but that need not be human readable. In Base-64, a 65-character subset of US-ASCII is used, enabling 6 bits to be represented per printable character. (The extra 65th character, "=", is used "usually" for padding). The encoding process represents 24-bit groups of input bits as output strings of 4 encoded characters. Proceeding from left to right, a 24-bit input group is formed by concatenating 3 8-bit input groups. These 24 bits are then treated as 4 concatenated 6-bit groups, each of which is translated into a single character in the base 64 alphabet. Each 6-bit group is used as an index into an array of 64 printable characters. The character referenced by the index is placed in the output string[RFC4648]
 
-![][image-2]
-*Figure 1: The Base 64 Alphabet*
+![][image-2] *Figure 1: The Base 64 Alphabet*
 
-![][image-3]
-*Figure 2: Example of base64 encoding (no padding used)*
+![][image-3] *Figure 2: Example of base64 encoding (no padding used)*
 
-![][image-4]
-*Figure 3: Example of base64 encoding (with pad "=")*
+![][image-4] *Figure 3: Example of base64 encoding (with pad "=")*
 
-==action: Open Linux CLI and type the following commands:==
+\==action: Open Linux CLI and type the following commands:==
 
 ```bash
 echo "0x14fb9c03d97e" | xxd -r -p | base64  
@@ -115,22 +111,24 @@ echo "0x14fb9c03" | xxd -r -p | base64
 
 > Note: The output should match the above examples (figures 2 and 3)
 
-==action: Another basic example of encoding and decoding data using base64:==
+\==action: Another basic example of encoding and decoding data using base64:==
 
 ```bash
 echo "Valhalla" | base64  
 ```
 
-Output: 
+Output:
+
 ```
 VmFsaGFsbGEK
 ```
 
-==action: To decode:==
+\==action: To decode:==
 
 ```bash
 echo "VmFsaGFsbGEK" | base64 -d  
 ```
+
 ```
 Valhalla
 ```
@@ -139,11 +137,12 @@ Valhalla
 
 ## Let's do a bit more
 
-==action: Still using Linux command prompt:==
+\==action: Still using Linux command prompt:==
 
 ```bash
 echo "Valhalla" | xxd -p  
 ```
+
 ```
 56616c68616c6c610a
 ```
@@ -151,6 +150,7 @@ echo "Valhalla" | xxd -p
 ```bash
 echo "Valhalla" | base64 | xxd -p  
 ```
+
 ```
 566d4673614746736247454b0a
 ```
@@ -158,15 +158,16 @@ echo "Valhalla" | base64 | xxd -p
 ```bash
 echo "566d4673614746736247454b0a" | xxd -r -p | base64 -d  
 ```
+
 ```
 Valhalla
 ```
 
-==action: Try to understand what is going on and use different words/strings...==  
+\==action: Try to understand what is going on and use different words/strings...==
 
 > Hint: Use `man base64` and `man xxd` to understand the command options/switches...
 
-==action: Let's create a file and name it fruitSalad.txt==
+\==action: Let's create a file and name it fruitSalad.txt==
 
 We'll use iconv command, which is a tool to convert text from one character encoding to another.
 
@@ -184,7 +185,7 @@ $Grapefruit%
 EOF
 ```
 
-==action: Convert fruitSalad.txt to something else:==
+\==action: Convert fruitSalad.txt to something else:==
 
 ```bash
 iconv -f ASCII fruitSalad.txt -t EBCDIC-CP-GB -o fileEncoded.xyz
@@ -194,7 +195,7 @@ iconv -f ASCII fruitSalad.txt -t EBCDIC-CP-GB -o fileEncoded.xyz
 cat fruitSalad.txt
 ```
 
-==action: To reverse the operation (decode), run this command:==
+\==action: To reverse the operation (decode), run this command:==
 
 ```bash
 iconv -f EBCDIC-CP-GB fileEncoded.xyz -t ASCII  
@@ -208,26 +209,19 @@ iconv -f EBCDIC-CP-GB fileEncoded.xyz -t ASCII
 
 ## Simple encryption/decryption using OpenSSL
 
-OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.  
+OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.\
 The openssl program is a command line tool for using the various cryptography functions of OpenSSL's crypto library from the shell. It can be used for:
 
-* Creation and management of private keys, public keys and parameters
+- Creation and management of private keys, public keys and parameters
+- Public key cryptographic operations
+- Creation of X.509 certiﬁcates, CSRs and CRLs
+- Calculation of Message Digests
+- Encryption and Decryption with Ciphers
+- SSL/TLS Client and Server Tests
+- Handling of S/MIME signed or encrypted mail
+- Time Stamp requests, generation and veriﬁcation
 
-* Public key cryptographic operations
-
-* Creation of X.509 certiﬁcates, CSRs and CRLs
-
-* Calculation of Message Digests
-
-* Encryption and Decryption with Ciphers
-
-* SSL/TLS Client and Server Tests
-
-* Handling of S/MIME signed or encrypted mail
-
-* Time Stamp requests, generation and veriﬁcation
-
-==action: To list the cipher commands & algorithms supported by OpenSSL, type the following commands:==
+\==action: To list the cipher commands & algorithms supported by OpenSSL, type the following commands:==
 
 ```bash
 openssl list -cipher-commands
@@ -251,7 +245,7 @@ There are many tools to perform encryption, including OpenSSL.
 
 Data Encryption Standard (DES) is a block cipher designed by IBM in 1970s and was based on Feistel Cipher. It is a symmetric key algorithm uses key size of 56-bit (keyspace is 256) which is too small to be secure nowadays.
 
-==action: Create a file and name it coconut.txt either using your preferable text editor or directly from the Linux terminal as per the example below:==
+\==action: Create a file and name it coconut.txt either using your preferable text editor or directly from the Linux terminal as per the example below:==
 
 ```bash
 cat << EOF > coconut.txt  
@@ -261,25 +255,20 @@ keep on doing that until you have one letter left. What is the word?
 EOF
 ```
 
-==action: Now, we'll use DES (symmetric-key) algorithm to encrypt coconut.txt:==
+\==action: Now, we'll use DES (symmetric-key) algorithm to encrypt coconut.txt:==
 
 ```bash
 openssl enc -e -des-cbc -pbkdf2 -in coconut.txt -out coconut.enc
 ```
 
-> Note: You will be prompt to enter a password (the key)  
+> Note: You will be prompt to enter a password (the key)\
 > Warning: The password will NOT be echoed (printed to the screen)
 
 The above command will use Data Encryption Standard (DES) cipher with CBC mode to encrypt coconut.txt using a key derived from a password.
 
-| enc | encoding with ciphers |
-| \-des-cbc | des algorithm with cipher block chaining (cbc) mode |
-| \-pbkdf2 | password-based key derivation function 2 |
-| \-in | input ﬁle |
-| \-out | output ﬁle |
+\| enc | encoding with ciphers | | -des-cbc | des algorithm with cipher block chaining (cbc) mode | | -pbkdf2 | password-based key derivation function 2 | | -in | input ﬁle | | -out | output ﬁle |
 
-
-==action: To decrypt:==
+\==action: To decrypt:==
 
 ```bash
 openssl enc -des-cbc -d -in coconut.enc -out getMyFileBack.txt
@@ -291,9 +280,9 @@ openssl enc -des-cbc -d -in coconut.enc -out getMyFileBack.txt
 
 ## Advanced Encryption Standard (AES)
 
-* AES is a 128-bit block (symmetric-key based) cipher with a variable key size of 128, 192 or 256 bits. It uses a mix of encryption/decryption techniques such as substitution, permutation, shifting and xoring (for key generation).
+- AES is a 128-bit block (symmetric-key based) cipher with a variable key size of 128, 192 or 256 bits. It uses a mix of encryption/decryption techniques such as substitution, permutation, shifting and xoring (for key generation).
 
-==action: In this example we'll encrypt coconut.txt using openssl (aes):==
+\==action: In this example we'll encrypt coconut.txt using openssl (aes):==
 
 ```bash
 openssl enc -e -aes-128-cbc -pbkdf2 -k Hello -in coconut.txt -out coconut-eas-128.enc
@@ -301,7 +290,7 @@ openssl enc -e -aes-128-cbc -pbkdf2 -k Hello -in coconut.txt -out coconut-eas-12
 
 > Note: `-k` here is for a passphrase
 
-==action: To decrypt:==
+\==action: To decrypt:==
 
 ```bash
 openssl enc -d -aes-128-cbc -pbkdf2 -in coconut-eas-128.enc -out coconut-decrypted-128.txt
@@ -325,9 +314,9 @@ Public keys can be made public: for example, used to encrypt messages intended f
 
 GNU Privacy Guard (GnuPG) is an FOSS alternative to Pretty Good Privacy (PGP), following the OpenPGP standard, which provides public key crypto.
 
-* GPG Manual: http://www.gnupg.org/gph/en/manual.html
+- GPG Manual: http://www.gnupg.org/gph/en/manual.html
 
-==action: To create a key:==
+\==action: To create a key:==
 
 ```bash
 gpg --gen-key
@@ -335,7 +324,7 @@ gpg --gen-key
 
 You'll be prompted to enter a password or passphrase (for your private/secret key), you can leave it blank. However, it is highly recommended to create one.
 
-==action: Export a public key into file public.key:==
+\==action: Export a public key into file public.key:==
 
 ```bash
 gpg --export -a "User Name" > yourname_publicKey.txt
@@ -343,7 +332,7 @@ gpg --export -a "User Name" > yourname_publicKey.txt
 
 > Note: The above command will create a file called yourname_publicKey.txt with the ascii representation of the public key for User Name.
 
-==action: Export a private key:==
+\==action: Export a private key:==
 
 ```bash
 gpg --export-secret-key -a "User Name" > yourname_privateKey.txt
@@ -351,25 +340,25 @@ gpg --export-secret-key -a "User Name" > yourname_privateKey.txt
 
 > Note: The above command will create a file called yourname_privateKey.txt with the ascii representation of the private key for User Name.
 
-==action: To list the keys in your public key ring:==
+\==action: To list the keys in your public key ring:==
 
 ```bash
 gpg --list-key
 ```
 
-==action: To list the keys in your secret key ring:==
+\==action: To list the keys in your secret key ring:==
 
 ```bash
 gpg --list-secret-keys
 ```
 
-==action: To generate a short list of numbers that you can use via an alternative method to verify a public key, use:==
+\==action: To generate a short list of numbers that you can use via an alternative method to verify a public key, use:==
 
 ```bash
 gpg --fingerprint > fingerprint
 ```
 
-==action: To encrypt data:==
+\==action: To encrypt data:==
 
 ```bash
 gpg -e -u "Sender User Name" -r "Receiver User Name" file
@@ -379,13 +368,13 @@ The recipient (Receiver User Name) public key should be imported to your key rin
 
 > Note: File here is the plaintext, after the encryption process a ciphertext will be generated as file.gpg within the current working directory, which can be decrypted as per the example below.
 
-==action: To decrypt data:==
+\==action: To decrypt data:==
 
 ```bash
 gpg -d file.gpg
 ```
 
-==action: To edit/revoke key:==
+\==action: To edit/revoke key:==
 
 ```bash
 gpg --edit-key Username
@@ -401,13 +390,13 @@ You will have generated your public key in step no. 1
 
 You can use a stand alone testing environment and create two users on the same machine, exchange the keys and test using the commands below.
 
-==action: Create two users:==
+\==action: Create two users:==
 
 ```bash
 sudo useradd -m -s /bin/bash user1 ; sudo useradd -m -s /bin/bash user2
 ```
 
-==action: Generate pair of keys for each user and export ONLY public key to a file:==
+\==action: Generate pair of keys for each user and export ONLY public key to a file:==
 
 ```bash
 gpg --gen-key
@@ -419,7 +408,7 @@ gpg --export -a "user1" > user1_publicKey.txt
 
 > Note: Do the same as above for user2
 
-==action: Exchange public keys between user1 and user2:==
+\==action: Exchange public keys between user1 and user2:==
 
 > Note: As user1 import user2 public key (and of course vise versa)
 
@@ -427,17 +416,17 @@ gpg --export -a "user1" > user1_publicKey.txt
 gpg --import user2_publicKey.txt
 ```
 
-==action: Create a file (message/plaintext) and encrypt it with user2's public key as per the example in step 7 above.==
+\==action: Create a file (message/plaintext) and encrypt it with user2's public key as per the example in step 7 above.==
 
-==action: User2 can decrypt the message sent from user1 as per the example in step no. 8==
+\==action: User2 can decrypt the message sent from user1 as per the example in step no. 8==
 
 ## CTF Challenges
 
 > Flag: We have VMs on Hacktivity containing some challenges related to basic cryptography, mainly encoding, hashing, etc..
 
-==action: Log-in to Hacktivity (https://hacktivity.leedsbeckett.ac.uk/hacktivities/53)==.
+\==action: Log-in to Hacktivity (https://hacktivity.leedsbeckett.ac.uk/hacktivities/53)==.
 
-==action: Click on Activate and start challenge, then click on Desktop to start the VM, this may take a few minutes==.
+\==action: Click on Activate and start challenge, then click on Desktop to start the VM, this may take a few minutes==.
 
 Once the VM is up and running, you should be able to login automatically.
 
@@ -459,8 +448,4 @@ sudo unzip /srv/protected.zip
 
 > Flag: Good luck!
 
-[image-1]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-1.png
-[image-2]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-2.png
-[image-3]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-3.png
-[image-4]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-4.png
-
+[image-1]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-1.png [image-2]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-2.png [image-3]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-3.png [image-4]: {{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption/image-4.png
