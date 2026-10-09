@@ -1,6 +1,6 @@
 ---
 title: "Backing Up and Recovering from Disaster: SSH/SCP, Deltas, and Rsync"
-author: ["Z. Cliffe Schreuders"]
+author: ["Z. Cliffe Schreuders", "Thomas Shaw"]
 license: "CC BY-SA 4.0"
 description: "Learn to back up and restore data using scp, and full, differential, and incremental rsync backups, while Hackerbot puts your backups to the test."
 overview: |
@@ -23,17 +23,21 @@ cybok:
 
 ### Tips for completing this lab {#tips-for-completing-this-lab}
 
-This lab **needs to be completed in order**.
+This lab **needs to be completed in order**. Between your backups, Hackerbot has the second user change their files, so each backup needs to be taken at the right moment in that sequence.
 
 > Tip: You should use the rsync dry run option (by adding `-n` to the command) to test which files are going to be backed up, without making the changes.
 
-You should manually check you have done your backups correctly **before** telling Hackerbot you are ready. It may be a good idea to SSH to your backup server in a separate console tab (but do keep an eye on which system you are running each command on!):
+You should manually check you have done your backups correctly **before** telling Hackerbot you are ready. It may be a good idea to SSH to your backup server in a separate console tab (but do keep an eye on which system you are running each command on; your prompt shows the hostname, or you can run `hostname` if unsure!):
 
 ```bash
 ssh ==edit: the backup_server's IP address==
 ```
 
-> Note: Hackerbot's FYI outputs can include error messages that don't indicate that you did something wrong. For example, an error might state that a file doesn't exist -- this only gives you some transparency about what Hackerbot is looking at, that error doesn't really tell you whether or not Hackerbot wanted to see that error.
+> Note: Hackerbot's FYI output shows what it has checked: one line for each thing it looked for (`OK ...`, `MISSING ...` or `UNEXPECTED ...`), followed by `RESULT PASS` or `RESULT FAIL`. The `MISSING` and `UNEXPECTED` lines describe what is wrong with your backup, so read these first.
+
+> Tip: **If a backup goes wrong because the files have already moved on**, you don't need to start the lab again. The steps where the second user changes their files (Hackerbot attacks 3, 5, 7 and 9) can be repeated: say `goto 3` (or 5, 7 or 9) followed by `ready`, and Hackerbot returns their files to exactly the state they were in at that step. You can then delete the bad backup on the backup_server, take it again, and carry on.
+
+> Warning: When you use `sudo` with `ssh`, `scp` or `rsync`, **always write `==edit: YOURUSERNAME==@` before the backup_server's IP address**. Since `sudo` makes you root locally, leaving out the username means the connection is attempted as `root`, and you don't have the backup_server's root password. You will also be asked for two passwords: first your local password (for `sudo`), and then your password on the backup_server.
 
 ### VMs in this lab {#vms-in-this-lab}
 
@@ -62,7 +66,7 @@ There is also a second user account on the desktop VM. ==action: List the users 
 ls /home
 ```
 
-You'll use this second username (==edit: SECONDUSER== in the commands below) later in the lab, when Hackerbot asks you to back up their files.
+You will see your own username, `vagrant` (an account that is part of the VM image, which you can ignore), and the second user. You'll use this second username (==edit: SECONDUSER== in the commands below) later in the lab, when Hackerbot asks you to back up their files; Hackerbot also tells you their name when it reaches that task.
 
 {% include hackerbot-intro.md role="task you to perform backups and will attack your system" chat="hello" %}
 
@@ -121,30 +125,40 @@ Using SSH (secure shell), `scp` (secure copy) can transfer files securely (encry
 
 > Note: This replaces the old insecure rcp command, which sends files over the network in the clear (not encrypted). Rcp should never be used.
 
-\==action: Backup your /etc/ directory to the backup_server== computer using `scp`:
+In this section we will back up your SSH configuration directory, `/etc/ssh/`, to the backup_server. First, ==action: create a directory on the backup_server to hold the backup== (as shown below, `ssh` can also run a single command on the remote computer):
 
 ```bash
-sudo scp -pr /etc/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/ssh_etc_backup
+ssh ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP== mkdir -p scp_backup
 ```
 
-> Tip: You will be prompted for your local password, to confirm the host's fingerprint ("yes"), and the remote password (which is the same). This copy may take some time -- feel free to open another terminal console (Ctrl-T), to read the scp man page while you wait.
+> Tip: If this is the first time you have connected to the backup_server, you will be asked to confirm the host's fingerprint ("yes"); you will then be asked for your password on the backup_server, which is the same as on the desktop.
+
+\==action: Back up /etc/ssh to the backup_server== using `scp`:
+
+```bash
+sudo scp -pr /etc/ssh ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/scp_backup/
+```
+
+> Tip: You will be prompted for your local password (`sudo` is required because some of these files are only readable by root), followed by the remote password.
 
 Read the scp man page to ==action: determine what the `-p` and `-r` flags do==.
 
 > Hint: `man scp`, press "q" to quit.
 
-Now, let's add a file to /etc, and repeat the backup:
+> Note: **Where does scp put a directory?** If the destination directory already exists (as `scp_backup` does), scp copies the directory *into* it, resulting in `scp_backup/ssh/`. If, however, the destination does not exist, scp creates it *as* the copy, so the contents of `ssh` would end up directly in the new directory. Furthermore, with current versions of OpenSSH, a destination ending in `/` that does not yet exist is treated as an error, which is why we created `scp_backup` first.
+
+Now, let's change a file in /etc/ssh, and repeat the backup:
 
 ```bash
-sudo bash -c 'echo > /etc/hi'
-sudo scp -pr /etc/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/ssh_backup/
+sudo bash -c 'echo "# backup test" >> /etc/ssh/ssh_config'
+sudo scp -pr /etc/ssh ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/scp_backup/
 ```
 
 Note that the program re-copies all of the files entirely, regardless of whether (or how much) they have changed.
 
 \==action: SSH to your backup_server system==, to look at your backup files:
 
-> Tip: `ssh *username*@*server-ip-address*` will log you in with *username* on the system. Assuming the remote computer has the same user account available (as is the case with the VMs provided), you can omit "username", and just run `ssh *ip-address*`, and you will be prompted to provide authentication for your own account, as configured on their system.
+> Tip: `ssh *username*@*server-ip-address*` will log you in with *username* on the system. Assuming the remote computer has the same user account available (as is the case with the VMs provided), you can omit "username", and just run `ssh *ip-address*`, and you will be prompted to provide authentication for your own account, as configured on their system. However, this does **not** apply when you use `sudo`, as described in the warning at the start of this lab.
 
 So, that is:
 
@@ -157,7 +171,7 @@ ssh ==edit: BACKUPSERVERIP==
 List the files that have been backed up:
 
 ```bash
-ls -la ssh_backup/
+ls -la scp_backup/ssh/
 ```
 
 \==action: Exit ssh==:
@@ -170,11 +184,15 @@ ls -la ssh_backup/
 
 You can skip the bot to here, by saying **goto 1**.
 
-> Hackerbot: Use scp to copy the desktop /bin/ directory to the backup_server: BACKUPSERVERIP:/home/YOURUSERNAME/remote-bin-backup-*(a short suffix Hackerbot gives you in the chat)*/, which should then include the backed up bin/ directory.
+> Hackerbot: Use scp to copy the desktop's /usr/bin/ directory to the backup_server, so that BACKUPSERVERIP:/home/YOURUSERNAME/remote-bin-backup-*(a short suffix Hackerbot gives you in the chat)*/ contains the backed up bin/ directory.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: Hackerbot will tell you the exact directory name (including the random suffix) in the chat when it runs this attack. Remember that a trailing "/" changes whether you are copying directories or their contents.
+> Note: Hackerbot will tell you the exact directory name (including the random suffix) in the chat when it runs this attack. As described above, scp needs the destination to exist, so create the `remote-bin-backup-...` directory first and then copy `/usr/bin` into it. If scp reports `realpath ...: No such file` or `path canonicalization failed`, the destination directory does not exist yet.
+
+> Tip: Why `/usr/bin` rather than `/bin`? On current Debian (and most modern Linux distributions), `/bin` is simply a symbolic link to `/usr/bin`, which you can confirm by running `ls -ld /bin`. Since `/usr/bin` is where the programs are actually stored, it is the directory worth backing up.
+
+> Note: Expect scp to finish with `scp: local "/usr/bin/X11" is not a regular file` ... `failed to upload directory /usr/bin ...`; everything else *has* been copied. `/usr/bin/X11` is a legacy compatibility symbolic link that points back to `/usr/bin` itself (`ls -l /usr/bin/X11` shows `X11 -> .`), so following it would recurse indefinitely. Scp does not follow symbolic links to directories, so it skips this one and reports the failure. This illustrates a limitation of scp, which only copies regular files and directories; rsync, which you will use next, copies symbolic links *as* symbolic links.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -211,7 +229,7 @@ Note that only the new file was transferred to update our epoch (full) backup of
 Rsync can act as a server, listening on a TCP port. It can also be used via SSH, as you will see. ==action: Copy your /etc/ directory to your backup_server== system using Rsync via SSH:
 
 ```bash
-sudo rsync -avzh --fake-super /etc ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/
+sudo rsync -avzh -M--fake-super /etc ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/
 ```
 
 > Tip: this is all one line
@@ -231,26 +249,22 @@ sudo rm /etc/hello
 Even if you ==action: re-sync your local changes== to the backup_server, the file will not be deleted from the server:
 
 ```bash
-sudo rsync -avzh --fake-super /etc ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/
+sudo rsync -avzh -M--fake-super /etc ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/
 ```
 
 To recover the file, you can simply ==action: retrieve the backup:==
 
 ```bash
-sudo rsync -avz --fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/etc/hello /etc/
+sudo rsync -avz -M--fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/etc/hello /etc/
 ```
 
-> Note: The `--fake-super` option is used to ensure the recovered file is still owned by root (even though it is not associated with root on the backup_server). This avoids requiring SSH root access to the remote machine (for security reasons this is not usually done) to retain ownership and so on.
-
-\==action: Read the man page entry for `--fake-super`==
-
-> Hint: `man rsync`, then press '/' followed by '--fake-super$', and enter.
+> Note: The `-M--fake-super` option preserves the original ownership and permissions of your files. Since rsync on the backup_server runs as your user, it cannot set the real owners of the backed up files; instead, this option has it record them alongside each backup copy, so that they can be put back when you restore. Use it both when backing up and when restoring; this also avoids the need for root SSH access to the backup_server, which, for security reasons, is not usually permitted.
 
 \==action: Delete the file locally, and sync the changes== *including deletions* to the server so that it is also deleted there:
 
 ```bash
 sudo rm /etc/hello
-sudo rsync -avzh --fake-super --delete /etc ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/
+sudo rsync -avzh -M--fake-super --delete /etc ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/
 ```
 
 > Note the added **`--delete`**
@@ -265,11 +279,13 @@ sudo rsync -avzh --fake-super --delete /etc ==edit: YOURUSERNAME==@==edit: BACKU
 
 You can skip the bot to here, by saying **goto 2**.
 
-> Hackerbot: It's your job to set up remote backups for ==edit: SECONDUSER== (a user on your system). Use rsync to create a full (epoch) remote backup of /home/==edit: SECONDUSER== from your desktop system to the backup_server: BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-full-backup/SECONDUSER.
+> Hackerbot: It's your job to set up remote backups for ==edit: SECONDUSER== (a user on your system). Use rsync to create a full (epoch) remote backup of /home/==edit: SECONDUSER== from your desktop system to the backup_server, so it ends up in BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-full-backup/SECONDUSER -- keeping SECONDUSER's file ownership (-M--fake-super, see the lab sheet).
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: Remember that the trailing "/" changes whether you are copying directories or their contents.
+> Note: Remember that the trailing "/" changes whether you are copying directories or their contents. For example, `rsync ... /home/==edit: SECONDUSER== ...:/home/==edit: YOURUSERNAME==/remote-rsync-full-backup/` copies the *directory* itself, so it ends up as `remote-rsync-full-backup/==edit: SECONDUSER==`. You should use this same structure for every backup in the remainder of this lab.
+
+> Note: You will need to use `sudo`, since a number of ==edit: SECONDUSER=='s files (such as their `.ssh` directory) are private to them; without it, rsync reports `Permission denied` and leaves those files out. Additionally, if rsync reports `mkdir "..." failed: No such file or directory`, the *parent* of your destination does not exist, as rsync only creates the final directory in the destination path.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -289,13 +305,21 @@ And now let's ==action: create differential backups== of our changes to /etc (bo
 
 ```bash
 # local
-sudo rsync -av /etc --compare-dest=~/backups/rsync_backup/ ~/backups/rsync_backup_week1/
+sudo rsync -av /etc --compare-dest=$HOME/backups/rsync_backup/ ~/backups/rsync_backup_week1/
 
 # remote
-sudo rsync -avzh --fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-week1/
+sudo rsync -avzh -M--fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-week1/
 ```
 
 > Note: The `--compare-dest` flag tells rsync to search these backup copies, and only copy files if they have changed since a backup. Refer to the man page for further explanation.
+
+> Warning: There are three common mistakes that cause `--compare-dest` to silently copy *everything*, so that your "differential" is in fact another full backup:
+>
+> - **Using `~` in the path, for a local backup.** The shell does not expand `~` after the `=` in an option such as `--compare-dest=~/...`, so rsync receives a literal `~`; it warns `--compare-dest arg does not exist: ~/backups/rsync_backup`, but this is easily missed amongst the list of files. Use `$HOME/...` or the full path instead, as shown above. For a *remote* backup, `~` happens to work, since rsync passes the path to the backup_server as a separate word and the backup_server's shell expands it to your home directory there; however, a full path works in both cases.
+> - **Using a relative path.** A relative path such as `--compare-dest=remote-rsync-backup/` (without a leading `/`) is interpreted relative to the *destination directory*, so rsync cannot find it, warns `--compare-dest arg does not exist`, and copies everything.
+> - **Pointing at the wrong level of directory.** The `--compare-dest` directory must have the same layout as your destination. Since we copy `/etc` (without a trailing slash), the destination contains an `etc/` directory, and `rsync_backup/` likewise contains `etc/`. If you point it one level too deep (for example, `.../rsync_backup/etc/`), nothing matches, and rsync does not warn you at all.
+>
+> A dry run (`-n`) shows what would be copied; if it lists every file, check your `--compare-dest`.
 
 Look at what is contained in the differential update:
 
@@ -315,10 +339,10 @@ To ==action: make another differential backup== (saving changes since the last f
 
 ```bash
 # local
-sudo rsync -av /etc --compare-dest=~/backups/rsync_backup/ ~/backups/rsync_backup_week2/
+sudo rsync -av /etc --compare-dest=$HOME/backups/rsync_backup/ ~/backups/rsync_backup_week2/
 
 # remote
-sudo rsync -avzh --fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/
+sudo rsync -avzh -M--fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/
 ```
 
 \==action: Look at the contents== of your new backup. You will find it now contains your two new files. That is, all of the changes since the full backup.
@@ -332,22 +356,44 @@ sudo rm /etc/wgetrc /etc/hello
 Now ==action: restore from your backups== by first restoring from the full backup, then the latest differential backup ("week2"). The advantage of a differential backup, is you only need to use two commands to restore your system.
 
 ```bash
-sudo rsync -avz --fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/etc/ /etc/
+sudo rsync -avz -M--fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup/etc/ /etc/
 
-sudo rsync -avz --fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/etc/ /etc/
+sudo rsync -avz -M--fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/etc/ /etc/
 ```
 
 > Tip: This example restores from the remote copy. ==action: Try restoring from the local copy==.
+
+#### How the Hackerbot backup tasks fit together {#how-the-hackerbot-backup-tasks-fit-together}
+
+From this point onwards, Hackerbot alternates between having ==edit: SECONDUSER== change their files and asking you to back them up. Consequently, each backup must be taken **after** the change that precedes it, and **before** the change that follows it, as summarised in the table below:
+
+| Hackerbot step | What happens | Your backup should contain |
+|---|---|---|
+| 2 | *(you)* full backup -> `remote-rsync-full-backup/` | all of SECONDUSER's files |
+| 3 | SECONDUSER makes changes (A) | |
+| 4 | *(you)* differential -> `remote-rsync-differential1/` | A |
+| 5 | SECONDUSER makes changes (B) | |
+| 6 | *(you)* differential -> `remote-rsync-differential2/` | A + B (everything since the full backup) |
+| 7 | SECONDUSER makes changes (C) | |
+| 8 | *(you)* incremental -> `remote-rsync-incremental1/` | C only (compare with full + differential2) |
+| 9 | SECONDUSER makes changes (D) | |
+| 10 | *(you)* incremental -> `remote-rsync-incremental2/` | D only (compare with full + differential2 + incremental1) |
+| 11 | Hackerbot checks all five backups above, then deletes SECONDUSER's files | |
+| 12 | *(you)* restore: full -> differential2 -> incremental1 -> incremental2 | |
+
+If you take a backup at the wrong moment, Hackerbot will tell you which changes are missing, or which should not be there; as described in the tips at the start of this lab, you can then use `goto` (to step 3, 5, 7 or 9) followed by `ready` to return SECONDUSER's files to the state they were in at that step, delete the bad backup, and take it again.
+
+Since every backup builds on the ones before it, **you cannot skip any of them**. If you jump ahead (for example, straight to the incremental backup at step 8 without having taken differential2), Hackerbot tells you which earlier backup is missing, and which `goto` returns you to the point at which it should be taken.
 
 #### Hackerbot Attack #3 {#hackerbot-attack-3}
 
 You can skip the bot to here, by saying **goto 3**.
 
-> Hackerbot: The SECONDUSER user is about to create some files...
+> Hackerbot: Step 3: the SECONDUSER user is about to make some changes to their files. Say 'ready' to let them.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: This step just has Hackerbot create some files as SECONDUSER, ready for the next backup. (Hint: Keep an eye out for a flag...)
+> Note: In this step, Hackerbot simply changes a number of SECONDUSER's files in preparation for the next backup. (Hint: Keep an eye out for a flag...)
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -355,9 +401,11 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 4**.
 
-> Hackerbot: Create a differential backup of SECONDUSER's home directory to the backup_server: BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-differential1/SECONDUSER/.
+> Hackerbot: Create a differential backup of SECONDUSER's home directory on the backup_server, so it ends up in BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-differential1/SECONDUSER/ (just the changes since the full backup).
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
+
+> Note: This backup uses the same structure as your full backup (the source is `/home/==edit: SECONDUSER==`, without a trailing slash, and the destination is `.../remote-rsync-differential1/`), with the addition of `--compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-full-backup/`, which is the directory that *contains* `==edit: SECONDUSER==/`. Do a dry run (`-n`) first; it should list only the files that were changed at step 3.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -377,10 +425,10 @@ Now ==action: create an incremental backup== based on the last differential back
 
 ```bash
 # local
-sudo rsync -av /etc --compare-dest=~/backups/rsync_backup/ --compare-dest=~/backups/rsync_backup_week2/ ~/backups/rsync_backup_monday/
+sudo rsync -av /etc --compare-dest=$HOME/backups/rsync_backup/ --compare-dest=$HOME/backups/rsync_backup_week2/ ~/backups/rsync_backup_monday/
 
 # remote
-sudo rsync -avzh --fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-monday/
+sudo rsync -avzh -M--fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-monday/
 ```
 
 \==action: Another change== to /etc:
@@ -393,10 +441,10 @@ Now ==action: create an incremental backup based on the last differential backup
 
 ```bash
 # local
-sudo rsync -av /etc --compare-dest=~/backups/rsync_backup/ --compare-dest=~/backups/rsync_backup_week2/ --compare-dest=~/backups/rsync_backup_monday/ ~/backups/rsync_backup_tuesday/
+sudo rsync -av /etc --compare-dest=$HOME/backups/rsync_backup/ --compare-dest=$HOME/backups/rsync_backup_week2/ --compare-dest=$HOME/backups/rsync_backup_monday/ ~/backups/rsync_backup_tuesday/
 
 # remote
-sudo rsync -avzh --fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/ --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup-monday/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-tuesday/
+sudo rsync -avzh -M--fake-super /etc --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup/ --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup-week2/ --compare-dest=/home/==edit: YOURUSERNAME==/remote-rsync-backup-monday/ ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-backup-tuesday/
 ```
 
 Now ==action: delete a number of files:==
@@ -411,11 +459,11 @@ sudo rm /etc/wgetrc /etc/hello /etc/test1 /etc/test2
 
 You can skip the bot to here, by saying **goto 5**.
 
-> Hackerbot: The SECONDUSER user is about to create some more files...
+> Hackerbot: Step 5: the SECONDUSER user is about to make some more changes. Say 'ready' to let them.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: Ok, good... No flag this time, carry on...
+> Note: There is no flag this time; this step simply changes SECONDUSER's files in preparation for your next backup.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -423,11 +471,11 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 6**.
 
-> Hackerbot: Create another differential backup of SECONDUSER's home directory to the backup_server: BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-differential2/.
+> Hackerbot: Create another differential backup of SECONDUSER's home directory, so it ends up in BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-differential2/SECONDUSER/ (all changes since the full backup).
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: Your differential backup should include all changes since the full backup (including the first set of changes), but not the original files.
+> Note: Your differential backup should include all of the changes since the full backup (including the first set of changes, from step 3), but not the original files. You should therefore compare against the full backup only, rather than differential1.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -435,7 +483,7 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 7**.
 
-> Hackerbot: The SECONDUSER user is about to create even more files...
+> Hackerbot: Step 7: the SECONDUSER user is about to make even more changes. Say 'ready' to let them.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
@@ -445,9 +493,11 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 8**.
 
-> Hackerbot: Create an incremental backup of SECONDUSER's home directory to the backup_server: BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-incremental1/SECONDUSER/. Base it on the epoch and also differential2.
+> Hackerbot: Create an incremental backup of SECONDUSER's home directory, so it ends up in BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-incremental1/SECONDUSER/ -- only the changes since your last backup, so base it on the full backup and differential2.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
+
+> Note: This requires two `--compare-dest` options: one for `remote-rsync-full-backup/`, and one for `remote-rsync-differential2/`.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -460,10 +510,17 @@ These snapshots can be achieved using the `--link-dest` flag. Open the Rsync man
 \==action: Make an rsync snapshot== containing hard links to files that have not changed, with copies for files that have changed:
 
 ```bash
-sudo rsync -av --delete --link-dest=~/backups/rsync_backup/ /etc ~/backups/rsync_backup_snapshot_1
+sudo rsync -av --delete --link-dest=$HOME/backups/rsync_backup/ /etc ~/backups/rsync_backup_snapshot_1
 ```
 
-Rsync reports not having copied any new files, yet look at what is contained in rsync_backup_snapshot_1. It looks like a complete copy, yet is **taking up almost no extra storage space**.
+Rsync reports not having copied any new files, yet look at what is contained in rsync_backup_snapshot_1. It looks like a complete copy, yet is **taking up almost no extra storage space**. ==action: Check this== by counting the files that are hard links (that is, files with more than one name for the same data), and comparing the space used by each backup (`du` counts each hard-linked file only once):
+
+```bash
+sudo find ~/backups/rsync_backup_snapshot_1 -type f -links +1 | wc -l
+sudo du -sh ~/backups/rsync_backup ~/backups/rsync_backup_snapshot_1
+```
+
+> Note: The snapshot does still take up a small amount of space, since directories cannot be hard linked, and so every directory in the snapshot is newly created.
 
 \==action: Create other changes== to /etc:
 
@@ -473,10 +530,10 @@ sudo bash -c 'echo "Another test change" > /etc/test3'
 sudo bash -c 'echo "Another test change" > /etc/test4'
 ```
 
-And ==action: make a new rsync snapshot==, with copies of files that have changed:
+And ==action: make a new rsync snapshot==, with copies of the files that have changed, and hard links to the previous snapshot for everything else:
 
 ```bash
-sudo rsync -av --delete --link-dest=~/backups/rsync_backup/ /etc ~/backups/rsync_backup_snapshot_2
+sudo rsync -av --delete --link-dest=$HOME/backups/rsync_backup_snapshot_1/ /etc ~/backups/rsync_backup_snapshot_2
 ```
 
 \==action: Delete some files==, and ==action: make a new differential rsync snapshot==. Although Rsync does not report a deletion, the deleted files will be absent from the new snapshot.
@@ -487,7 +544,7 @@ sudo rsync -av --delete --link-dest=~/backups/rsync_backup/ /etc ~/backups/rsync
 
 You can skip the bot to here, by saying **goto 9**.
 
-> Hackerbot: Again, the SECONDUSER user is about to create even more files...
+> Hackerbot: Step 9: again, the SECONDUSER user is about to make even more changes. Say 'ready' to let them.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
@@ -497,15 +554,15 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 10**.
 
-> Hackerbot: Create another incremental backup of SECONDUSER's home directory to the backup_server: BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-incremental2/SECONDUSER/.
+> Hackerbot: Create another incremental backup of SECONDUSER's home directory, so it ends up in BACKUPSERVERIP:/home/YOURUSERNAME/remote-rsync-incremental2/SECONDUSER/ -- only the changes since your last backup, so base it on the full backup, differential2 and incremental1.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: Your backup should include just the changes since the last backup.
+> Note: Your backup should include only the changes since the last backup, which this time requires three `--compare-dest` options.
 
-> Hackerbot quiz: Access the backups via SSH. What's the contents of SECONDUSER/personal_secrets/nothing_much?
+> Hackerbot quiz: Access the backups on the backup_server via SSH: what did SECONDUSER's notes file say in incremental1?
 
-\==action: answer *YOURANSWER*== to Hackerbot with the file's contents, to get another flag.
+\==action: answer *YOURANSWER*== to Hackerbot with what the file said, to get another flag. Since the desktop's copy has changed since then, you will need to use your backup.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -513,11 +570,11 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 11**.
 
-> Hackerbot: I am going to attack you now!
+> Hackerbot: I am going to attack you now! (Don't worry: first I'll check that every backup you'll need afterwards is right -- full, differential1, differential2, incremental1 and incremental2.)
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Warning: Hackerbot will delete all of the second user's files! Make sure your backups are in place first.
+> Warning: Hackerbot will delete all of the second user's files! However, it checks your backups first, and will not attack until all five (full, differential1, differential2, incremental1 and incremental2) are correct, since the restore requires four of them and the final task requires differential1. If it refuses, its FYI output shows which backup is wrong, and why.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -525,11 +582,13 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 12**.
 
-> Hackerbot: Use all the backups (including differential and incremental) to restore all of SECONDUSER's files on the desktop system.
+> Hackerbot: Use all the backups you need (including differential and incremental) to restore all of SECONDUSER's files on the desktop system, with their original ownership.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Note: Restore from the full backup, then apply the differential backups and incremental backups, in the correct order, to end up with all of the files restored.
+> Note: Restore from the full backup, then apply the differential and incremental backups in the correct order (as shown in the table above), to end up with all of the files restored. Each restore copies the *contents* of a backup's `==edit: SECONDUSER==/` directory into `/home/==edit: SECONDUSER==/`, so the source requires a trailing slash, for example: `sudo rsync -av -M--fake-super ==edit: YOURUSERNAME==@==edit: BACKUPSERVERIP==:/home/==edit: YOURUSERNAME==/remote-rsync-full-backup/==edit: SECONDUSER==/ /home/==edit: SECONDUSER==/` (and the same for the others).
+
+> Tip: If the restore goes wrong and SECONDUSER's home directory is left in a mess, say `goto 11` followed by `ready`; Hackerbot deletes their files again, so that you can restore from scratch.
 
 Don't forget to ==action: save and submit any flags!==
 
@@ -537,11 +596,11 @@ Don't forget to ==action: save and submit any flags!==
 
 You can skip the bot to here, by saying **goto 13**.
 
-> Hackerbot: Restore SECONDUSER's notes file to its earliest state.
+> Hackerbot: Restore SECONDUSER's notes file to the first version of it that was backed up.
 
 When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
 
-> Hint: Think about which of your backups holds the very first version of the notes file, and restore just that file from there.
+> Hint: The notes file did not exist when you took the full backup. Think about which of your backups holds the very first version of it, and restore just that file from there.
 
 Don't forget to ==action: save and submit any flags!==
 
