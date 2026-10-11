@@ -23,7 +23,7 @@ Learn the principle, because you will meet it again everywhere. Any system that 
 # SAFETYNET Field Note: Information Leakage & the PIN Oracle
 
 ## Objective
-Use this note the moment you have the ENTROPY keypad oracle on a lock. Your aim is to read its feedback correctly and deduce the code in a handful of attempts, and to recognise the same partial-feedback weakness when it shows up in software you are assessing.
+Use this note the moment you have the ENTROPY keypad oracle (the PIN cracker) on a lock. Your aim is to read its feedback correctly and deduce the code in a handful of attempts, and to recognise the same partial-feedback weakness when it shows up in software you are assessing.
 
 ## Quick Reference
 - **Green light** = right digit, **right position**.
@@ -31,6 +31,16 @@ Use this note the moment you have the ENTROPY keypad oracle on a lock. Your aim 
 - **No light for a slot** = that digit is **not in the code** (once greens and ambers are accounted for).
 - The count of lights matters more than which slot they appear next to — treat each guess as a question and each light as part of the answer.
 - Every guess should be *designed to eliminate possibilities*, not to get lucky.
+
+## Using the PIN Cracker
+
+1. Carry it. There is nothing to equip: with the cracker in your inventory, it clamps on to any four-digit keypad you open. You will see its icon and a **PIN cracker lights** switch under the keypad.
+2. Type a guess. It submits on the fourth digit.
+3. Read the row it adds to the **Attempts Log**: your guess, then a green light for each digit in the right place and an amber light for each right digit in the wrong place. The lights are counts, listed greens first. They do not line up with the digits above them.
+4. Keep guessing. While the cracker is fitted the keypad cannot lock you out, so take as many rows as you need.
+5. Your earlier rows stay on the log if you walk away and come back to the same keypad, so you never have to remember them. (They are cleared when the page is reloaded.)
+
+The cracker only reads number keypads. It does nothing for password prompts, key locks or card readers. Without it, a keypad just says "incorrect" and locks you out after a few tries.
 
 ## The Core Idea — a Partial-Feedback Oracle
 
