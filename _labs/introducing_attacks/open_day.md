@@ -236,4 +236,32 @@ This is the end of this short exercise, in which you have:
 
 Congratulations!
 
-[experience_menu]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/experience_menu.png [open_day_proxmox]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/open_day_proxmox.png [assign_vms]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/assign_vms.png [give_another_set]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/give_another_set.png [startup_servers_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/startup_servers_icon.png [interact_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/interact_icon.png [scenario_diagram]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/scenario_diagram.png [terminal_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/terminal_icon.png [terminal_window]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/terminal_window\.png [msfdb_reinit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/msfdb_reinit.png [armitage_connect]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_connect.png [armitage_progress]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_progress.png [hostname_i]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/hostname_i.png [intense_scan]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/intense_scan.png [ip_range]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/ip_range.png [scan_complete]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/scan_complete.png [services_irc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/services_irc.png [set_exploit_rank]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/set_exploit_rank.png [find_attacks]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/find_attacks.png [attack_irc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/attack_irc.png [reverse_connection]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/reverse_connection.png [compromised_bolts]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/compromised_bolts.png [show_payloads_cmd]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/show_payloads_cmd.png [payloads_list]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/payloads_list.png [set_payload_exploit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/set_payload_exploit.png [compromised_shell]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/compromised_shell.png [shell_interact]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/shell_interact.png [cat_credentials]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/cat_credentials.png [interact_third]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/interact_third.png
+[experience_menu]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/experience_menu.png
+[open_day_proxmox]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/open_day_proxmox.png
+[assign_vms]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/assign_vms.png
+[give_another_set]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/give_another_set.png
+[startup_servers_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/startup_servers_icon.png
+[interact_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/interact_icon.png
+[scenario_diagram]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/scenario_diagram.png
+[terminal_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/terminal_icon.png
+[terminal_window]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/terminal_window.png
+[msfdb_reinit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/msfdb_reinit.png
+[armitage_connect]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_connect.png
+[armitage_progress]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_progress.png
+[hostname_i]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/hostname_i.png
+[intense_scan]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/intense_scan.png
+[ip_range]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/ip_range.png
+[scan_complete]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/scan_complete.png
+[services_irc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/services_irc.png
+[set_exploit_rank]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/set_exploit_rank.png
+[find_attacks]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/find_attacks.png
+[attack_irc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/attack_irc.png
+[reverse_connection]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/reverse_connection.png
+[compromised_bolts]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/compromised_bolts.png
+[show_payloads_cmd]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/show_payloads_cmd.png
+[payloads_list]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/payloads_list.png
+[set_payload_exploit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/set_payload_exploit.png
+[compromised_shell]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/compromised_shell.png
+[shell_interact]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/shell_interact.png
+[cat_credentials]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/cat_credentials.png
+[interact_third]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/interact_third.png
