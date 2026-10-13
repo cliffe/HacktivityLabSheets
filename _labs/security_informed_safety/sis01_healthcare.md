@@ -68,12 +68,12 @@ The concepts in play, each with a short section under [Concepts](#concepts) if y
 
 ## How to Use This Sheet {#how-to-use}
 
-1. Read **Starting the Game** and start playing. The warm-up is optional and takes five minutes.
+1. Read **Starting the Game** and start playing.
 2. Play. Skim **Concepts** as you reach each new idea, or come back to it when a character or a document leaves you wanting more.
-3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and the full steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
+3. Explore the game and try to work things out inside it. If you are not sure what to do next, check the objectives list and talk to the people you meet: they often have more to say after something changes. If you are still stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage starts with a light hint, and the stronger nudges and full steps stay hidden until you open them.
 4. After the game, work through **Reflection and Exercises**.
 
-> Note: Some stages are decisions, not puzzles. Several things in this game have more than one outcome: whether Mr Ahmed in Bed 4 is escalated in time, whether the drug library tamper is caught, and when the ICO hears from the Trust. The hints for those stages tell you what you know and what each obligation means. They do not tell you what to choose. Every ending gives you something to reflect on, and the debrief and the closing credits show what happened as a result of your choices.
+> Note: Most stages in this game are decisions, not puzzles. Several things in this game have more than one outcome: whether Mr Ahmed in Bed 4 is escalated in time, whether the drug library tamper is caught, and when the ICO hears from the Trust. The hints for those stages tell you what you know and what each obligation means. They do not tell you what to choose. Every ending gives you something to reflect on, and the debrief and the closing credits show what happened as a result of your choices.
 
 ## Getting Started {#getting-started}
 
@@ -87,6 +87,8 @@ Your mission is to:
 - Verify the integrity and safety of the InfusionGuard smart infusion pump system, including critical drug library parameters
 - Make decisions about network isolation and backup restoration that balance security containment with clinical operations
 - Meet the 72-hour regulatory notification deadline while conducting a thorough investigation
+
+> Note: In a real hospital, an IT incident responder would not check on patients or confirm an infusion pump's rate. Nurses, doctors and clinical engineers would, and you would advise them. The game puts you on the ward, so that you can see what is at stake and how a cyber attack reaches the people and physical systems that depend on IT. Treat the bedside decisions as the information you would be giving the clinical team, and the questions you would be asking them.
 
 ### What You Will Do {#what-you-will-do}
 
@@ -102,7 +104,7 @@ By the end of the scenario, you should have a complete understanding of:
 
 ### Starting the Game {#starting-the-game}
 
-You do not need a clinical background. The people you meet explain their side of things, and the documents lying around the hospital explain the rest. Everything happens in the browser: this game has no virtual machines and no flags to find. The log analysis, the network map and the drug library check are all consoles inside the game.
+You do not need a clinical background. The people you meet explain their side of things, and the documents lying around the hospital explain the rest. Everything happens in the browser. The log analysis, the network map and the drug library check are all consoles inside the game.
 
 1. \==action: Start the Break Escape mission **Northgate General: Code Black**==.
 2. \==action: Watch the opening briefing from Sarah Mitchell, the charge nurse==. She hands you the **Northgate IT Security — Visitor Access Card**, which opens the IT Security office.

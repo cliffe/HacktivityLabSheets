@@ -65,9 +65,9 @@ The concepts in play, each with a short section under [Concepts](#concepts) if y
 
 ## How to Use This Sheet {#how-to-use}
 
-1. Read **Starting the Game** and start playing. The warm-up is optional and takes five minutes.
+1. Read **Starting the Game** and start playing.
 2. Play. Skim **Concepts** as you reach each new idea, or come back to it when a character or a document leaves you wanting more.
-3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger hint in a collapsed section labelled **Nudge**, and the full method in one labelled **Steps** or **Recipe**. Open one at a time, and go back to the game after each.
+3. Explore the game and try to work things out inside it. If you are not sure what to do next, check the objectives list and talk to the people you meet: they often have more to say after something changes. If you are still stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage starts with a light hint, and the stronger nudges and full steps stay hidden until you open them.
 4. After the game, work through **After the Game: Reflection and Exercises**.
 
 > Note: Most stages in this game are decisions, not puzzles. When to press the emergency shutdown, whether to save evidence first, how far to cut the attacker off, when to notify and whether to warn a neighbour all have more than one defensible answer. The hints tell you what you know and what each option costs. They do not tell you what to choose. No ending is a failure: even if nobody shuts the hall down in time, the game carries on to the debrief, and the debrief and the closing credits show what happened as a result of your choices.
@@ -99,7 +99,7 @@ By the end of the scenario, you should be able to explain:
 
 ### Starting the Game {#starting-the-game}
 
-You play a member of the response and engineering team, on site early for a maintenance window, when the site's SCADA engineer decides she does not believe her own screens. You do not need an engineering background. Helen explains the plant as you go, Marcus explains the network, and the documents around the site explain the rest. Everything happens in the browser: this game has no virtual machines and no flags to find. The historian, the jump server log and the safety system panel are all consoles inside the game.
+You play a member of the response and engineering team, on site early for a maintenance window, when the site's SCADA engineer decides she does not believe her own screens. You do not need an engineering background. Helen explains the plant as you go, Marcus explains the network, and the documents around the site explain the rest. Everything happens in the browser. The historian, the jump server log and the safety system panel are all consoles inside the game.
 
 1. \==action: Start the Break Escape mission **Albion Battery Hall: Code Red** (SIS02 Energy)==.
 2. \==action: Watch the opening scene and listen to Helen's briefing in the control room==. She gives you her **Battery Hall Access Badge**, which opens the north door into Battery Hall 1.
