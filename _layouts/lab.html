@@ -3,9 +3,13 @@ layout: default
 ---
 
 <!-- Theme Toggle Button -->
-<div class="theme-toggle-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+<div class="theme-toggle-container">
   <button id="theme-toggle" class="btn btn-sm" style="background-color: var(--primary-btnbg-color); color: white; border: none; border-radius: 20px; padding: 8px 16px;">
     <i class="fas fa-moon" id="theme-icon"></i>
+  </button>
+  <!-- Shown by the TOC script below, only when the page has a TOC -->
+  <button id="toc-toggle" class="btn btn-sm" type="button" hidden aria-controls="toc-container" aria-expanded="true" aria-label="Hide contents" title="Hide contents" style="background-color: var(--primary-btnbg-color); color: white; border: none; border-radius: 20px; padding: 8px 16px;">
+    <i class="fas fa-list" aria-hidden="true"></i>
   </button>
 </div>
 
@@ -95,6 +99,19 @@ layout: default
 </article>
 
 <style>
+.theme-toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+}
+
+#toc-toggle[aria-expanded="false"] {
+  opacity: 0.7;
+}
+
 .lab-content {
   max-width: 800px;
   margin: 0 auto;
@@ -190,12 +207,43 @@ layout: default
   color: var(--primary-btnhov-color);
 }
 
+/* Floating panel under the toggle buttons, so it is reachable from anywhere on the page */
 .toc-container {
+  position: fixed;
+  top: 64px;
+  right: 20px;
+  z-index: 999;
+  box-sizing: border-box;
+  width: 280px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 84px);
+  overflow-y: auto;
   background-color: var(--panelbg-color);
   border: 1px solid var(--panelborder-color);
   border-radius: 6px;
   padding: 1rem;
-  margin-bottom: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Phones: buttons move to the bottom corner, away from the header logo, and the panel opens above them */
+@media (max-width: 767px) {
+  .theme-toggle-container {
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .toc-container {
+    top: auto;
+    bottom: 64px;
+    right: 16px;
+    max-width: calc(100vw - 32px);
+    max-height: 60vh;
+  }
+}
+
+.toc-container h2 {
+  margin-top: 0;
 }
 
 .toc-container h3 {
@@ -704,6 +752,40 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('toc-container').style.display = 'none';
       return;
     }
+
+    // TOC toggle: remember the choice like the theme, default to shown
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocContainer = document.getElementById('toc-container');
+    function setToc(open) {
+      tocContainer.hidden = !open;
+      tocToggle.setAttribute('aria-expanded', open);
+      const label = open ? 'Hide contents' : 'Show contents';
+      tocToggle.setAttribute('aria-label', label);
+      tocToggle.title = label;
+    }
+    // The TOC floats over the text: it always starts closed on phones, and
+    // elsewhere starts open (unless the reader chose otherwise) only where
+    // there is room beside the 800px column
+    const phone = window.matchMedia('(max-width: 767px)');
+    let tocOpen = window.innerWidth >= 1400;
+    try {
+      const saved = localStorage.getItem('toc');
+      if (saved && !phone.matches) tocOpen = saved === 'open';
+    } catch (e) {}
+    setToc(tocOpen);
+    tocToggle.hidden = false;
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && tocOpen && !tocContainer.hidden) {
+        tocOpen = false;
+        setToc(false);
+        tocToggle.focus();
+      }
+    });
+    tocToggle.addEventListener('click', function() {
+      tocOpen = !tocOpen;
+      setToc(tocOpen);
+      try { localStorage.setItem('toc', tocOpen ? 'open' : 'closed'); } catch (e) {}
+    });
     
     // Generate TOC items
     headings.forEach((heading, index) => {
@@ -733,6 +815,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // Add click handler for smooth scrolling
       a.addEventListener('click', function(e) {
         e.preventDefault();
+        // On phones the panel covers the text, so close it once a section is chosen
+        if (phone.matches && tocOpen) {
+          tocOpen = false;
+          setToc(false);
+        }
         heading.scrollIntoView({ behavior: 'smooth' });
       });
       
