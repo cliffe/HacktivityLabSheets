@@ -48,22 +48,24 @@ source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/sis02_energy/
 
 ## Purpose {#purpose}
 
-By the end of this lab you should be able to:
+This lab gives you a hands-on way to work through a case study and see theory in action: risk management, incident handling, regulation and security planning, applied to an organisation in trouble. Here it is a battery storage site, where an attacker has quietly changed the safety system's settings overnight.
 
-- explain how a cyber attack on an energy site becomes a physical hazard, using the chain: cyber attack, loss of a safety function, physical hazard
-- check a networked display against an independent physical measurement, and spot data that is being written rather than measured
-- tell apart the control system, a programmable safety system and a hardwired emergency shutdown, and say which ones an attacker on the network can reach
-- read a remote access log for a dormant account and a source address that does not belong
-- compare a safety system's live setpoints with its certified baseline, and convert a gas reading between per cent by volume and per cent of the lower explosive limit
-- weigh a safety action against the evidence it destroys, and an isolation option against what it costs
-- say who must be told about an incident at a GB energy operator, when, and under which law
-- read a safety case claim as claim, argument and evidence, and judge whether it held
+The concepts in play, each with a short section under [Concepts](#concepts) if you want to read up:
 
-The game teaches by doing. The questions are in this sheet, after the game.
+- Security-informed safety: how a cyber attack becomes a physical hazard
+- Trusting a screen: independent measurements and data that is written, not measured
+- Layers of protection: the control system, the safety system and a hardwired emergency shutdown
+- Spotting the attacker: remote access logs and dormant accounts
+- Integrity: checking safety settings against a certified baseline
+- Incident handling: evidence or safety first, and how far to cut the attacker off
+- Regulation: who must be told, when, and under which law (the NIS Regulations)
+- Safety cases: claim, argument and evidence, and whether they held
+
+> Note: Albion Energy Storage is fictional. The [Information Pack](/HacktivityLabSheets/labs/security_informed_safety/sis02-energy-information-pack/) has a lot more detail on it: its systems, its safety case and the incident timeline. You don't need it to play.
 
 ## How to Use This Sheet {#how-to-use}
 
-1. Read the [Information Pack](/HacktivityLabSheets/labs/security_informed_safety/sis02-energy-information-pack/) if your tutor has set it, then read **Getting Started** and try the short warm-up. It takes five minutes.
+1. Read **Starting the Game** and start playing. The warm-up is optional and takes five minutes.
 2. Play. Skim **Concepts** as you reach each new idea, or come back to it when a character or a document leaves you wanting more.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger hint in a collapsed section labelled **Nudge**, and the full method in one labelled **Steps** or **Recipe**. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Reflection and Exercises**.
@@ -99,11 +101,10 @@ By the end of the scenario, you should be able to explain:
 
 You play a member of the response and engineering team, on site early for a maintenance window, when the site's SCADA engineer decides she does not believe her own screens. You do not need an engineering background. Helen explains the plant as you go, Marcus explains the network, and the documents around the site explain the rest. Everything happens in the browser: this game has no virtual machines and no flags to find. The historian, the jump server log and the safety system panel are all consoles inside the game.
 
-1. \==action: Read the [Information Pack](/HacktivityLabSheets/labs/security_informed_safety/sis02-energy-information-pack/)== to understand the site's network architecture, the SCADA system, the SIS and its safety case, the UK regulatory context (the NIS Regulations, IEC 61511 and IEC 62443) and the incident timeline. If your tutor has not set it, skim its timeline after the game instead.
-2. \==action: Start the Break Escape mission **Albion Battery Hall: Code Red** (SIS02 Energy)==.
-3. \==action: Watch the opening scene and listen to Helen's briefing in the control room==. She gives you her **Battery Hall Access Badge**, which opens the north door into Battery Hall 1.
-4. \==action: Read the **Incident Response Folder** on the duty desk before you head for the hall==. It holds the site's rules for the emergency shutdown, the hydrogen levels, the NIS notification and who may instruct CastleTech.
-5. \==action: Open the objectives list and keep an eye on it==. Aims open as you find things, and their tasks tell you which room to go to next.
+1. \==action: Start the Break Escape mission **Albion Battery Hall: Code Red** (SIS02 Energy)==.
+2. \==action: Watch the opening scene and listen to Helen's briefing in the control room==. She gives you her **Battery Hall Access Badge**, which opens the north door into Battery Hall 1.
+3. \==action: Read the **Incident Response Folder** on the duty desk before you head for the hall==. It holds the site's rules for the emergency shutdown, the hydrogen levels, the NIS notification and who may instruct CastleTech.
+4. \==action: Open the objectives list and keep an eye on it==. Aims open as you find things, and their tasks tell you which room to go to next.
 
 The game takes about 70 minutes, including the debrief. In a 60-minute class, read Getting Started and do the warm-up before the session. If you run out of time, a good place to stop is once the emergency shutdown for Hall 1 is in and you have found who is on the jump server: the hall is safe, and what is left (isolation, the notification and the debrief) can wait for next time. Your progress is saved, and the game's clocks count only the time you spend playing, so they carry on from where they were when you come back.
 

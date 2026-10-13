@@ -51,21 +51,24 @@ source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/sis01_healthc
 
 ## Purpose {#purpose}
 
-By the end of this lab you should be able to:
+This lab gives you a hands-on way to work through a case study and see theory in action: risk management, incident handling, regulation and security planning, applied to an organisation in trouble. Here it is an NHS hospital, where ransomware has reached the cardiac ward.
 
-- explain how a cyber attack can become a hazard to a patient, using the chain: cyber attack, loss of a safety function, physical hazard
-- triage security alerts and authentication logs, and tell an attacker's actions from routine noise
-- read a safety case claim as claim, argument and evidence, and judge whether its conditions still hold
-- weigh a containment action against what it costs the wards, and record the gap as a compensating control or an accepted risk with an owner
-- check a medical device's configuration for tampering, using a hash and two independent sources
-- choose a recovery source by trading recovery time against how sure you are it is clean
-- say who must be told about a hospital cyber incident, when, and under which law
+The concepts in play, each with a short section under [Concepts](#concepts) if you want to read up:
 
-The game teaches by doing. The questions are in this sheet, after the game.
+- Security-informed safety: how a cyber attack becomes a danger to patients
+- Spotting the attack: security alerts, VPN logs and MFA
+- Safety cases: claim, argument and evidence, and whether they still hold
+- Containment: isolating the network, and what that costs the wards
+- Integrity: checking a medical device's settings for tampering
+- Recovery: backups, recovery time and the risk of reinfection
+- Regulation: who must be told, when, and under which law (UK GDPR, the NIS Regulations)
+- Risk ownership: accepted risks, compensating controls and who signs for them
+
+> Note: Northgate General Hospital is fictional. The [Information Pack](/HacktivityLabSheets/labs/security_informed_safety/sis01-healthcare-information-pack/) has a lot more detail on it: its systems, its safety case and the incident timeline. You don't need it to play.
 
 ## How to Use This Sheet {#how-to-use}
 
-1. Read the [Information Pack](/HacktivityLabSheets/labs/security_informed_safety/sis01-healthcare-information-pack/) if your tutor has set it, then read **Getting Started** and try the short warm-up. It takes five minutes.
+1. Read **Starting the Game** and start playing. The warm-up is optional and takes five minutes.
 2. Play. Skim **Concepts** as you reach each new idea, or come back to it when a character or a document leaves you wanting more.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and the full steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **Reflection and Exercises**.
