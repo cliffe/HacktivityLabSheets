@@ -961,7 +961,7 @@ Work through these after you have finished the scenario. Use your own run: the d
 
 Each section opens with questions to discuss, then exercises to work through.
 
-### 1. Risk Management {#1-risk-management}
+### 1. Risk Management {#reflect-1-risk-management}
 
 Nothing that failed at Northgate was new. Each failure had been known about, and in most cases someone had decided to live with it.
 
@@ -985,7 +985,7 @@ Nothing that failed at Northgate was new. Each failure had been known about, and
 
 > Action: **E3. Bow-tie.** Draw a bow-tie for the top event "a patient's infusion pump runs at the wrong morphine rate". Put threats on the left (including the tampered drug library) and consequences on the right, with preventive and mitigating barriers between them. Mark which barriers the attack defeated, which held in your run, and which depended on a person (the second check, querying pharmacy).
 
-### 2. Incident Response {#2-incident-response}
+### 2. Incident Response {#reflect-2-incident-response}
 
 **Questions**
 
@@ -1009,7 +1009,7 @@ Nothing that failed at Northgate was new. Each failure had been known about, and
 
 > Action: **E6. Learning response.** England's NHS now reviews patient safety incidents under PSIRF, which looks for system causes rather than individual blame. Write three improvement actions for Northgate in that style: each names a system weakness the incident exposed, the action, an owner and how the Trust would know it worked.
 
-### 3. Security-Informed Safety {#3-security-informed-safety}
+### 3. Security-Informed Safety {#reflect-3-security-informed-safety}
 
 The hazard chain at Northgate was: **cyber attack → loss of a safety function → physical hazard to a patient**. Security-informed safety asks how a safety case must change once you accept that someone may be trying to defeat it.
 

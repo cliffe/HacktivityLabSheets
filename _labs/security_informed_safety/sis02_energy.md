@@ -945,7 +945,7 @@ Work through these after you have finished the scenario. Use your own run: Priya
 
 Each section opens with questions to discuss, then exercises to work through.
 
-### 1. Risk Management {#1-risk-management}
+### 1. Risk Management {#reflect-1-risk-management}
 
 Nothing that failed at Albion was new. In her closing, Priya names a commissioning link nobody closed, a dead account nobody removed and a patch nobody rescheduled.
 
@@ -969,7 +969,7 @@ Nothing that failed at Albion was new. In her closing, Priya names a commissioni
 
 > Action: **E3. Bow-tie.** Draw a bow-tie for the top event "thermal runaway in Racks A1 to A4". Put threats on the left (including falsified readings that let an overcharge through, and the raised SIS setpoints) and consequences on the right (venting, hydrogen build-up, fire, loss of grid services, harm to people), with preventive and mitigating barriers between them: the BMS charge cut-off, the operator watching the HMI, the SIS trip, the hydrogen alarm, the analogue dial, the hardwired ESD and evacuation. Mark which barriers the attack defeated, which held in your run, and which depended on a person.
 
-### 2. Incident Response {#2-incident-response}
+### 2. Incident Response {#reflect-2-incident-response}
 
 **Questions**
 
@@ -997,7 +997,7 @@ Nothing that failed at Albion was new. In her closing, Priya names a commissioni
 
 > Action: **E6. OT incident decision guide.** Write a one-page guide for Albion's control room for "a credible thermal hazard with a suspected intrusion". Cover: who may press the ESD and when; what evidence may be captured first, and the time limit; the isolation options, each with the compensating control it needs; who may instruct CastleTech and how they verify it; and who is told, by when. This is the kind of evidence CLAIM-EN-010 asks for.
 
-### 3. Security-Informed Safety {#3-security-informed-safety}
+### 3. Security-Informed Safety {#reflect-3-security-informed-safety}
 
 The hazard chain at Albion was: **cyber attack → loss of a safety function → physical hazard**. Security-informed safety asks what a safety case must claim, and what evidence it needs, once you accept that someone may be trying to defeat it.
 
