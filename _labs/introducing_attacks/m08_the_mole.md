@@ -563,6 +563,8 @@ Several decisions run through the mission and show up in the ending:
 
 **Where:** the main lobby, after the confrontation. **Goal:** report to the Director.
 
+![The debrief with Agent HaX]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/37-debrief-opening.png)
+
 > Hint: Once you have decided, the Director is waiting. The debrief opens straight away.
 
 <details markdown="1">

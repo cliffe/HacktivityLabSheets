@@ -487,7 +487,7 @@ The vault also holds the **Trunk Cable Runs** (the splice that is newer than eve
 
 **Where:** the SCADA control room. **Goal:** face Dr James Mercer, then put the abort in at the Cascade Control System.
 
-![The Cascade Control System, still locked]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/14-control-room-console-locked.png)
+![The Cascade Control System after the sequence is aborted]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/31-cascade-console-open.png)
 
 > Hint: Mercer will talk if you let him, and he cannot help explaining himself. The console behind him will not take an abort until the work on the attack host is done.
 
@@ -510,6 +510,8 @@ The **Cascade Control System** is the only place the abort goes in. It stays loc
 ### Calling It In and the Debrief {#hints-finale}
 
 **Where:** your phone, then wherever you are standing. **Goal:** finish the night and hear the debrief.
+
+![Director Netherton's debrief]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/35-debrief-opening.png)
 
 > Hint: Once the abort is in, you can keep exploring. The plant and the vault stay open until you ask to be brought in. After that the building belongs to the police.
 

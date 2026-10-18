@@ -557,6 +557,8 @@ None of these is scored as right or wrong by the game; they change who is safe a
 
 **Where:** the key vault, then your phone. **Goal:** finish reading, then call HaX.
 
+![The HQ debrief after you call HaX in]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/32-debrief-hq-opening.png)
+
 > Hint: Whatever you have not read in the vault is still there. When you are ready to leave, HaX is the way out.
 
 <details markdown="1">

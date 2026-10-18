@@ -435,6 +435,8 @@ None of these is scored as right or wrong. They change what the debrief says abo
 
 **Where:** the plant room, then the loading dock. **Goal:** stop the runaway, then decide what else to read before you leave.
 
+![The emergency shutdown firing once the hazard is confirmed]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/33-esd-shutdown-firing.png)
+
 > Hint: The button is behind a hinged flap. If it refuses you, it says which condition is missing.
 
 <details markdown="1">
@@ -480,6 +482,8 @@ To learn more in game, open your phone, choose **[Send me a field guide.]** then
 ### The Debrief and Your Decisions {#hints-finale}
 
 **Where:** HQ, once you are brought in. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
+
+![The HQ debrief with Agent HaX]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/37-debrief-start.png)
 
 > Hint: The debrief reads back what you did and who you protected. You will be asked how much of the story to tell the public.
 

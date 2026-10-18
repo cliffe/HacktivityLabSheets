@@ -417,7 +417,7 @@ The drive is Base64 over ROT13. At the CyberChef workstation, run From Base64 fi
 
 **Where:** Danny Foster's office, then back to Sterling in the conference room. The confrontation opens only once all four flags are in. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![The drop-site gate that accepts the four flags]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/12-finale-gate-dropsite.png)
+![Confronting Victoria Sterling in the conference room]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/30-sterling-confrontation-open.png)
 
 > Hint: Two people are still in the building at night. Danny Foster, the consultant who drew the hospital survey, is in the office across from Sterling's. Sterling is waiting in the conference room. See Danny before you settle with her.
 

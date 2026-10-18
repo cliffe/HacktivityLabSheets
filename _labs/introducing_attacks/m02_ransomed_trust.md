@@ -549,7 +549,7 @@ The badge number you need to compare against comes out of the server work, so yo
 
 **Where:** the **Hospital Recovery Console** in the Server Room. **Goal:** choose how St. Catherine's recovers.
 
-![The clinical recovery console, with its restore sources and what each one still needs]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/18-recovery-console-gated.png)
+![The clinical recovery console, choosing a restore source]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/30-recovery-console-decision.png)
 
 > Hint: The console shows what it still needs for each option. Read the list before you choose, and think about what each option costs, not only how fast it is.
 
@@ -580,7 +580,7 @@ Ghost may call you at the console with an offer. It is an option on the table, n
 
 **Where:** the **Hospital Communications Terminal** in the Boardroom. **Goal:** the last decision, and the debrief with HaX. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![The Hospital Comms Terminal, locked until the server work and the recovery choice are done]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/20-comms-terminal-gated.png)
+![The HQ debrief with Agent HaX after reporting in]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/32-hq-debrief.png)
 
 > Hint: The terminal in the Boardroom decides what the public gets to read about tonight. It stays locked until the server work is done and the hospital has chosen how to recover.
 
