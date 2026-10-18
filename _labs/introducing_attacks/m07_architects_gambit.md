@@ -211,6 +211,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the briefing, then the security checkpoint. **Goal:** commit the tactical team to one operation and start moving.
 
+![Director Netherton briefs Agent 0x00]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/01-briefing-netherton.png)
+
 > Hint: The Threat Desk Summary in your inventory holds the three briefs. The Director will talk through each one. You can ask for them side by side before you decide.
 
 <details markdown="1">
@@ -237,6 +239,8 @@ Whichever operation you pick, the game records it and the debrief reads it back.
 ### Getting Past Ray Hollis {#hints-hollis}
 
 **Where:** the security checkpoint. **Goal:** deal with the guard and get through to the operations floor.
+
+![Ray Hollis challenges Agent 0x00 at the checkpoint]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/02-hollis-checkpoint.png)
 
 > Hint: The building is being evacuated and one guard has not left his post. He is armed and frightened. You can talk, bluff, back off, or fight, and what each one gets you differs.
 
@@ -268,6 +272,8 @@ None of these is marked as wrong. They change what you hear and what the debrief
 ### Getting a Server-Zone Badge {#hints-badge}
 
 **Where:** the checkpoint and the operations floor. **Lock:** the server hall reader (a card). **Lock wants:** a server-zone badge.
+
+![The Contractor Badge Station PIN pad]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/04-badge-station-pin.png)
 
 > Hint: The reader wants a server-zone badge, not a visitor pass. There is more than one way to get one. Look at what is on the security desk and what is sitting in a tray on the operations floor.
 
@@ -341,6 +347,8 @@ The **Cabling Survey Note** on the rack door is hers. It says where the survey c
 
 **Where:** anywhere, once you hold a second document or have spoken to Elena. **Goal:** decide whether the figures you committed on still hold.
 
+![Agent HaX's phone offering the option to move the team]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/12-hax-phone-redirect-option.png)
+
 > Hint: Your phone gains an option, **[Their schedule doesn't match our brief.]**, once you hold the second document. Put your Threat Desk Summary next to it and compare row by row.
 
 <details markdown="1">
@@ -361,6 +369,8 @@ The option to move the team stays open for a limited time, about 40 minutes from
 ### The Control Room Door {#hints-control-door}
 
 **Where:** the SCADA control room, north of the server hall. **Lock:** a password door. **Lock wants:** a password.
+
+![The password prompt on the SCADA control room door]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/13-control-room-password-door.png)
 
 > Hint: The door wants a password and nobody has left it lying around. Two people know it, and one of them is not a person.
 
@@ -446,6 +456,8 @@ If you have not met either of them, open your phone and choose **[I'm stuck on s
 
 **Where:** the cable vault. **Goal:** deal with Thomas Park, who is cutting a cable run.
 
+![Thomas Park in the cable vault, with the cable run behind him]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/19-park-in-the-vault.png)
+
 > Hint: He has four minutes of work left and he will not stop for words alone. What does he believe he is doing, and what is the one piece of paper in the building that says otherwise?
 
 <details markdown="1">
@@ -474,6 +486,8 @@ The vault also holds the **Trunk Cable Runs** (the splice that is newer than eve
 ### The Control Room and the Console {#hints-console}
 
 **Where:** the SCADA control room. **Goal:** face Dr James Mercer, then put the abort in at the Cascade Control System.
+
+![The Cascade Control System, still locked]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/14-control-room-console-locked.png)
 
 > Hint: Mercer will talk if you let him, and he cannot help explaining himself. The console behind him will not take an abort until the work on the attack host is done.
 

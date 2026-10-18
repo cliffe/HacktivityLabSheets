@@ -199,6 +199,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the reception lobby, then the security checkpoint to the north. **Goal:** get past the Checkpoint Guard to the trading floor. **Lock wants:** a key lock, or a good enough story.
 
+![The security checkpoint and the guard's sight cone]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/02-checkpoint-guard-talked-past.png)
+
 > Hint: The trading-floor door is a key lock and you start with a Lock Pick Kit. The guard is the real obstacle. Who are you pretending to be, and who are you here to see?
 
 <details markdown="1">
@@ -240,6 +242,8 @@ Or pick it instead:
 
 **Where:** the trading floor. **Goal:** meet Dr Irina Volkova, and leave with her password wordlist. **Lock wants:** a conversation.
 
+![Dr Volkova's conversation menu on the trading floor]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/03-trading-floor-volkova.png)
+
 > Hint: She is the CTO, she built the exchange's privacy tools, and she is proud of them. How you open the conversation decides how much she trusts you.
 
 <details markdown="1">
@@ -269,6 +273,8 @@ Agent HaX can help here: **[How do I play Volkova?]** explains how to turn her, 
 ### The Server Room Door {#hints-server-door}
 
 **Where:** the server room door, north off the trading floor. **Clues:** the **IT New Starter Checklist** (on the noticeboard at the security checkpoint) and the **Password Dictionary List** (from Dr Volkova). **Lock wants:** a typed passphrase.
+
+![The server room passphrase prompt]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/04-server-room-door-passphrase-lock.png)
 
 > Hint: The checklist describes the house rule for door passphrases and the list names the words staff pick. Neither is the answer alone. Put the rule and the list together.
 
@@ -300,6 +306,8 @@ The lock compares exactly what you type. No space between the parts, and no capi
 ### The Blockchain Analysis Lab {#hints-lab}
 
 **Where:** the Blockchain Analysis Lab, east off the trading floor. **Clue:** the **ENTROPY Transaction Network Analysis**. **Goal:** take Priya Raghavan's write-up.
+
+![Priya Raghavan's transaction analysis, with the three deposits]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/07-blockchain-lab-writeup.png)
 
 > Hint: Priya has traced the money as far as the mixer and stopped. Her write-up lists what went in and when. It says where she gets stuck.
 
@@ -365,6 +373,8 @@ Open the Door Controller Export from your inventory and look for the line that n
 
 **Where:** the data centre. **Clues:** the **Financial Transaction Server** (three files) and the three deposits from Priya's write-up. **Lock wants:** a four-digit slot number, **one try per opening**.
 
+![The custody console PIN pad]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/10-custody-console-pin-pad.png)
+
 > Hint: The transaction server has the numbers you need and the custody console wants one of them. Which slot received the money from all three deposits, after the mixer's fee, and no sooner than its hold?
 
 <details markdown="1">
@@ -426,6 +436,8 @@ Emulate the badge at the executive wing's RFID reader.
 
 **Where:** the executive wing. **Goal:** get through the CEO's door, past Kemal Aydin, who holds the key. **Lock wants:** a key lock, or the key.
 
+![Kemal Aydin at the executive wing]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/13-executive-wing-minder-kemal.png)
+
 > Hint: Kemal walks a short loop between two doors and his cone of sight is drawn on the floor. The CEO's office is key-locked and he holds the key.
 
 <details markdown="1">
@@ -451,6 +463,8 @@ There are three ways through. **Talk:** with the cover held he accepts the FCA l
 ### Satoshi Nakamoto II and Dr Volkova {#hints-finale}
 
 **Where:** the CEO's office, then Dr Volkova on the trading floor. **Goal:** confront the man at the top, then make two decisions. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
+
+![Confronting Satoshi Nakamoto II in his office]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/16-satoshi-confrontation.png)
 
 > Hint: Two decisions close the mission: what happens to the money, and what happens to Dr Volkova. Read what you are holding before you decide either.
 

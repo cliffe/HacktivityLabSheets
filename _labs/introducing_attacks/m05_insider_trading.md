@@ -199,6 +199,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the reception lobby and Patricia's office (east). **Goal:** meet your contact and get a visitor badge.
 
+![Patricia's office]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/01-patricia-office.png)
+
 > Hint: Your handler's briefing sends you to the person who wants this solved. She is east of the lobby, and she keeps her own records on her desk.
 
 <details markdown="1">
@@ -223,6 +225,8 @@ Talk to Patricia Morgan. She gives you a visitor badge and explains what Securit
 ### The Server Hallway Reader {#hints-hallway}
 
 **Where:** the main corridor, east to the server hallway. **Clue:** the person with the lanyard in the open-plan office, north of the corridor. **Lock:** a staff badge reader. **Lock wants:** a staff badge.
+
+![The server hallway reader]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/02-server-hallway-reader-locked.png)
 
 > Hint: A visitor badge gets you through the front, not past a staff reader. Who in the building carries a staff badge, and what is in your kit for copying one?
 
@@ -284,6 +288,8 @@ The **IT Notice: Server Room Access** by the door names who to contact. Ask Owen
 
 **Where:** the server room, north of the server hallway. **Goal:** get in and see what the room holds.
 
+![The server room]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/06-server-room-entry.png)
+
 > Hint: This room is more than a place to pass through. It holds two terminals, and a door on the north wall that leads on to the key vault.
 
 <details markdown="1">
@@ -300,6 +306,8 @@ The **IT Notice: Server Room Access** by the door names who to contact. Ask Owen
 ### Reading the Badge Log {#hints-badge-log}
 
 **Where:** Owen, in the open-plan office, once you have read Patricia's log. **Clue:** the **Server Hallway Badge Log**. **Goal:** work out whose badge was in the server hallway.
+
+![The server hallway badge log]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/05-badge-log-deduction.png)
 
 > Hint: The incident log tells you a badge was there at night but not whose. Owen can print the swipes. When you have them, read the main-entrance lines as well as the hallway ones.
 
@@ -441,6 +449,8 @@ The option to ask for the office appears once your evidence points at one person
 
 **Where:** the Mug in the suspect's office, then the key vault north of the server room. **Lock:** a fingerprint reader. **Lock wants:** an enrolled print.
 
+![Dusting the mug for a print]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/08-mug-fingerprint-dusted.png)
+
 > Hint: The vault reader is enrolled to two people. You can only lift one print in this building. Where does that person leave their fingers?
 
 <details markdown="1">
@@ -467,6 +477,8 @@ The Mug on the desk has a thumbprint on the glaze. Use the Fingerprint Kit to du
 ### Inside the Key Vault {#hints-vault-inside}
 
 **Where:** the key vault. **Clues:** the **Upload Schedule**, the **Data Package Manifest**, the **Sealed TalentStack Envelope** and the **Exfiltration Upload Terminal**. **Goal:** find proof of what is leaving and when.
+
+![Inside the key vault]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/11-key-vault-inside.png)
 
 > Hint: The vault is the last place the data passes through. Look at every document on the desk and the terminal. They say when, what and who.
 
@@ -505,6 +517,8 @@ When your naming conversation closes, the Recruiter texts you. You can ring the 
 ### The Confrontation {#hints-confrontation}
 
 **Where:** the key vault, at the Exfiltration Upload Terminal. **Goal:** decide what happens to the insider and stop the upload. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
+
+![The confrontation in the server room]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/14-confrontation-reached.png)
 
 > Hint: You have a motive, proof of what was staged, and the person's own words. What each choice costs, and who it protects, is what you decide on.
 

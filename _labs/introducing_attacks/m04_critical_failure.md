@@ -194,6 +194,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the main entrance, then the operations office. **Goal:** get inside, and find a way past the card readers.
 
+![The security guard at the main entrance checkpoint]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/01-checkpoint-guard.png)
+
 > Hint: The guard is the one person on site doing his job properly. Your cover has paperwork. What are you holding that fits?
 
 <details markdown="1">
@@ -218,6 +220,8 @@ To learn more in game, open your phone and choose **[How do I get past the gate?
 ### Getting a Level 1 Card {#hints-level1}
 
 **Where:** the operations office (Vance), or the security office (the locker). **Lock wanted by:** the card reader into Battery Hall 2. **Needs:** a Level 1 card.
+
+![The RFID cloner reading Vance's card]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/02-vance-card-clone.png)
 
 > Hint: The reader wants a Level 1 card, and you do not have one. The person who does is standing in front of you, talking about a site map.
 
@@ -326,6 +330,8 @@ To learn more in game, open your phone and choose **[Relay's got the workshop ca
 
 **Where:** the engineering workshop, south of Battery Hall 1. **Lock:** the OptiGrid Tool Case (a medium key lock). **Goal:** a Fingerprint Kit.
 
+![Picking the OptiGrid Tool Case with the lock pick kit]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/06-toolcase-lockpick.png)
+
 > Hint: The crew's equipment is still in the room. One case is padlocked, and what it holds is what the plant-room door needs.
 
 <details markdown="1">
@@ -369,6 +375,8 @@ To learn more in game, open your phone, choose **[Send me a field guide.]** then
 
 **Where:** the Duty Round Panel in Battery Hall 1. **Goal:** a print the plant-room reader will accept.
 
+![The fingerprint kit compare step, with two reference cards]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/08-fingerprint-compare.png)
+
 > Hint: The duty engineer logs every round on a small wall terminal. Somebody who touches it every two hours leaves more than a log entry.
 
 <details markdown="1">
@@ -396,6 +404,8 @@ This is quiet work that can be done before the server work, while nothing is cou
 ### The Plant Room {#hints-plant}
 
 **Where:** the plant room, south of Battery Hall 2. **Who:** Static and Voltage. **Goal:** get to the Emergency Shutdown pushbutton.
+
+![ENTROPY operative Static in the plant room]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/10-plant-room-static.png)
 
 > Hint: The man holding the live trigger is standing next to the button. You will not walk past him, and what you choose to do about him decides how the rest goes.
 
@@ -442,6 +452,8 @@ None of these is scored as right or wrong. They change what the debrief says abo
 ### The Go-Bag and the Encoded Card {#hints-gobag}
 
 **Where:** the loading dock. **Lock:** a key lock on the go-bag (an easy one). **Clue:** a card with a long block of letters.
+
+![The CyberChef Workstation decoding the encoded safehouse card]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/14-cyberchef-decode.png)
 
 > Hint: The card in the bag is one unbroken run of mixed-case letters and digits. You already have a tool for that.
 

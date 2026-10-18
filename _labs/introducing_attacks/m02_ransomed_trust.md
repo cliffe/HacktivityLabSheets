@@ -70,6 +70,8 @@ The work on the hospital's backup server (the VM Access Terminal and the flags) 
 
 You are a SAFETYNET field agent. ENTROPY's Ransomware Incorporated cell has encrypted St. Catherine's Regional Medical Centre. Forty-seven patients are on generators with about twelve hours of fuel, and the board votes on paying the ransom in four. Dr. Sarah Kim, the hospital's CTO, called SAFETYNET in. She cannot authorise a single door, because the system that does that is behind the ransom screen with everything else. Agent HaX runs you by phone.
 
+![The mission brief notebook page at the start of the game]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/02-mission-brief.png)
+
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
 1. \==action: Start the Break Escape mission **Ransomed Trust**==.
@@ -259,6 +261,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** reception, at the start. **Goal:** get signed in, and get a way into the IT department.
 
+![Bernie Nwosu on the night desk, with the sign-in choices]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/04-bernie-key-npc.png)
+
 > Hint: No badge will open anything tonight, so the first lock is a person. Who has the key hook, and what would make her willing to use it?
 
 <details markdown="1">
@@ -318,6 +322,8 @@ Any red ransomware screen can be read. Reading one satisfies the task about iden
 ### Gary Whitlock and the Server Room Card {#hints-gary}
 
 **Where:** the IT Department, east of the Night Handover room. **Lock:** a key lock on the door (easy). **Goal:** get the **Server Room Keycard** from Gary.
+
+![Picking the IT Department door with the override key]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/09-it-door-key-lock.png)
 
 > Hint: The server room reader only takes a card that already exists, and Gary Whitlock holds the only one. What does a man who has been ignored for six months want from the next person through his door?
 
@@ -381,6 +387,8 @@ Read **Gary's Password Sticky Note**. It lists a short run of passwords he descr
 
 **Where:** the Main Corridor, then the **Security Office** at its west end, then the Server Room beyond. **Lock:** a key lock on the Security Office door (easy), with Val Okonkwo standing in front of it. **Goal:** get through the Security Office.
 
+![Val Okonkwo at the Security Office checkpoint, with the response choices]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/14-val-checkpoint.png)
+
 > Hint: Whoever stands at that door decides if it opens tonight. A person can open it, a key can, a pick can. What does Val need to believe before she acts?
 
 <details markdown="1">
@@ -443,6 +451,8 @@ The Security Office is a key lock (easy). If Val sees the pick in your hands, sh
 
 **Where:** inside the rack door in the Server Room, with the CyberChef Workstation next to it. **Clue:** **Handwritten Note, Taped Inside the Rack**.
 
+![The handwritten note decoded with ROT13 in CyberChef]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/16-cyberchef-rot13.png)
+
 > Hint: The letters are wrong, but the word lengths and the spaces look right. Whoever wrote it was hiding it from a passing glance, not from you.
 
 <details markdown="1">
@@ -470,6 +480,8 @@ Letters scrambled with normal word lengths and no `=` is a shift cipher, and thi
 ### The Emergency Store Safe {#hints-safe}
 
 **Where:** **Emergency Storage**, off the east side of the Patient Ward. **Lock:** the **PIN-Locked Safe** (a four-digit PIN). **Goal:** the **Offline Backup Encryption Keys**.
+
+![The four-digit PIN keypad on the emergency store safe]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/06-safe-pin-pad.png)
 
 > Hint: The code is something everyone in this building could recite. People have complained about it on notices and audit lists, and the hospital has written the clue on its own wall.
 
@@ -537,6 +549,8 @@ The badge number you need to compare against comes out of the server work, so yo
 
 **Where:** the **Hospital Recovery Console** in the Server Room. **Goal:** choose how St. Catherine's recovers.
 
+![The clinical recovery console, with its restore sources and what each one still needs]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/18-recovery-console-gated.png)
+
 > Hint: The console shows what it still needs for each option. Read the list before you choose, and think about what each option costs, not only how fast it is.
 
 <details markdown="1">
@@ -565,6 +579,8 @@ Ghost may call you at the console with an offer. It is an option on the table, n
 ### The Communications Terminal and the Debrief {#hints-finale}
 
 **Where:** the **Hospital Communications Terminal** in the Boardroom. **Goal:** the last decision, and the debrief with HaX. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
+
+![The Hospital Comms Terminal, locked until the server work and the recovery choice are done]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/20-comms-terminal-gated.png)
 
 > Hint: The terminal in the Boardroom decides what the public gets to read about tonight. It stays locked until the server work is done and the hospital has chosen how to recover.
 

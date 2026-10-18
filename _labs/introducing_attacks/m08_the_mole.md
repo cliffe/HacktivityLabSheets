@@ -232,6 +232,8 @@ Find the stage you are on. The stages are in the order most players meet them, a
 
 **Where:** the main lobby, then the Director's office, north. **Goal:** take the briefing.
 
+![Director Netherton briefing Agent 0x00 in his office]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/01-lobby-director-briefing.png)
+
 > Hint: Everything starts with the Director. ATHENA at reception will tell you what she may and may not say, and she hints at two places worth remembering for later.
 
 <details markdown="1">
@@ -258,6 +260,8 @@ His desk carries three **Suspect Dossiers**. Read them. They are short, and they
 ### The Three Interviews {#hints-suspects}
 
 **Where:** Vector on the Operations Floor (east of the lobby); Phantom in Intelligence Analysis (north of the Operations Floor); Nightshade in the Crypto Lab (west of the lobby). **Goal:** talk to all three.
+
+![Interview with Agent 0x23 Vector, with the dialogue choices shown]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/02-interview-vector.png)
 
 > Hint: Each of them gives you a claim you can test later. Where does each say they were? Which of those claims could a log confirm or contradict?
 
@@ -288,6 +292,8 @@ The Director will not hand over his keycard until you have talked to all three. 
 
 **Where:** the Break Room, west of the Crypto Lab. **Goal:** collect the two codes written down on a sticky note, a timeline for the leak, and a witness's account.
 
+![The Break Room, with the three staff lockers along the back wall]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/03b-breakroom-lockers-witness.png)
+
 > Hint: A building at Level Red still has a kettle. Facilities write things down, and ATHENA told you where they spend the night.
 
 <details markdown="1">
@@ -315,6 +321,8 @@ The Off-Duty Agent in the corner has a short account of the morning. Treat it as
 ### The Security Archives {#hints-archives}
 
 **Where:** the Security Archives, south of the Operations Floor. **Lock:** a password. **Goal:** find the door audit for the leak window.
+
+![The Badge Audit Printout for the leak window, open in the Archives]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/04-archives-door-audit.png)
 
 > Hint: This door wants a password, not a PIN. The person who set it also wrote it down, and you were just in the room where they did.
 
@@ -407,6 +415,8 @@ Once he has the name, he gives you the code for the interrogation suite and poin
 
 **Where:** the Server Room, east of the Operations Floor. **Lock:** an RFID card reader. **Goal:** get in.
 
+![The Server Room, with the server-room badge reader already passed]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/07-server-room-entry.png)
+
 > Hint: The reader wants a card that opens the server zone. The Director has one, and he is not going to hand it over. There is also a quieter route from the lobby that someone left out in the open.
 
 <details markdown="1">
@@ -483,6 +493,8 @@ Take the stick and open it. HaX offers the decoding field guide. To get it, open
 ### The Director's Safe and the Interrogation Suite Code {#hints-suite-code}
 
 **Where:** the Director's office safe (four digits), then the keypad south of the Crypto Lab. **Goal:** open the safe for the code card, or get the code from the Director.
+
+![The Director's Safe open, showing its contents]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/06-directors-safe-open.png)
 
 > Hint: The safe belongs to the Director and the policy says everyone uses the same kind of number for theirs. The page you want is on the Operations Floor, and its header says who requested it.
 

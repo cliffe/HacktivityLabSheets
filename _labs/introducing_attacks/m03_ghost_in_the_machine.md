@@ -226,6 +226,8 @@ Talk to Ffion Rees and sign in for your visitor badge. The conference-room door 
 
 **Where:** the conference room. **Goal:** clone Sterling's executive card while you interview.
 
+![RFID Flipper reading Sterling's custom-key card]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/03-card-copy-whiteboard.png)
+
 > Hint: Her card is custom-key, so it needs a longer read. The read runs while you are standing close to her. Where in the room can you stand next to her and keep her talking?
 
 <details markdown="1">
@@ -266,6 +268,8 @@ Finish anything you want to do by day first (there is little). When you walk int
 
 **Where:** the server room, north off the main hallway, at night. **Goal:** get in and reach the VM Access Terminal.
 
+![The server room at night]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/04-server-room-entry.png)
+
 > Hint: This door wants Sterling's executive card, not the receptionist's. Inside is a terminal onto their training network and a drop-site terminal where flags are submitted.
 
 <details markdown="1">
@@ -283,6 +287,8 @@ Finish anything you want to do by day first (there is little). When you walk int
 ### Decoding What You Find {#hints-decode}
 
 **Where:** the CyberChef workstation (a laptop in the server room). **Clues:** the web price list, the whiteboard note, the client roster, and the drive from Sterling's desk.
+
+![CyberChef decoding the whiteboard note with ROT13]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/05-cyberchef-rot13-decode.png)
 
 > Hint: None of these is encrypted, only encoded. Look at the shape of each to tell ROT13 from Base64 from hex. If one decode still looks like nonsense, it is layered: decode again.
 
@@ -314,6 +320,8 @@ Take the CyberChef workstation, then paste each encoded thing into Input and add
 
 **Where:** the executive wing, at night. **Goal:** reach Sterling's office past Terry Mott.
 
+![Terry Mott challenges you in the executive wing]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/06-guard-challenge.png)
+
 > Hint: At night the building is shut, so if the guard's torch finds you he stops you. You can talk your way out, but the clean route is to move while his back is turned.
 
 <details markdown="1">
@@ -337,6 +345,8 @@ Sterling's office is a key lock, so you need the pick kit, and picking takes tim
 ### Sterling's Office: The Computer and the Roster {#hints-office}
 
 **Where:** Sterling's office, north off the executive wing. **Locks:** a key lock on the door, a password on the computer.
+
+![Sterling's executive computer and its helpdesk slip]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/07-sterling-computer-unlocked.png)
 
 > Hint: The door is a pick. The computer password is not hidden: someone wrote the format down and left it on the monitor, and the missing piece is on a plaque you walked past.
 
@@ -363,6 +373,8 @@ Pick the office door. The helpdesk slip on the monitor says the password was res
 
 **Where:** the server-room wall safe (a four-digit PIN). **Goal:** open it for the exploit catalogue.
 
+![The wall safe and its contents panel]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/11-wall-safe-open.png)
+
 > Hint: The code is not written on the whiteboard, and it is not the founding year. The whiteboard tells you who changed it and where the new code went. Follow that trail.
 
 <details markdown="1">
@@ -388,6 +400,8 @@ The chain: whiteboard (ROT13) tells you where → Sterling's computer (password 
 
 **Where:** the hidden drive in Sterling's desk drawer. **Goal:** decode it and tell HaX what it says.
 
+![CyberChef decoding the desk drive with Base64 and ROT13]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/09-cyberchef-usb-directive.png)
+
 > Hint: The drive is one unbroken block of letters, digits, `+` and `/`, and one decode may not be enough. When you have it in plain English, HaX wants to hear it from you.
 
 <details markdown="1">
@@ -402,6 +416,8 @@ The drive is Base64 over ROT13. At the CyberChef workstation, run From Base64 fi
 ### The Consultant and the CEO {#hints-finale}
 
 **Where:** Danny Foster's office, then back to Sterling in the conference room. The confrontation opens only once all four flags are in. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
+
+![The drop-site gate that accepts the four flags]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/12-finale-gate-dropsite.png)
 
 > Hint: Two people are still in the building at night. Danny Foster, the consultant who drew the hospital survey, is in the office across from Sterling's. Sterling is waiting in the conference room. See Danny before you settle with her.
 
