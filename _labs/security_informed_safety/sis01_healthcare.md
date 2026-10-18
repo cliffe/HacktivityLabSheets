@@ -478,6 +478,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** Ward 7, where you start. **To finish "Assess Ward 7":** talk to Sarah Mitchell and collect the paper medication charts.
 
+![Ransom note on the ward monitoring screen]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/02-ward7-ransom-monitor.png)
+
 > Hint: The opening briefing has finished and you are standing on the ward. What did Sarah ask you to look at before you go upstairs?
 
 <details markdown="1">
@@ -533,6 +535,8 @@ Sarah tells you what each answer means for the ward before you choose. Listen to
 ### Bed 2: The Morphine Infusion {#hints-bed2}
 
 **Where:** **Bed 2 — Infusion Pump Terminal**, at the foot of Ms Okafor's bed. **Lock:** the pump will not open until you have collected the paper charts. **Lock wants:** a rate in mg/hr. This task is optional, but Ms Okafor's bag is due to run out at about quarter to eight.
+
+![Pump warning: dose below the library minimum]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/04-bed2-conflict-modal.png)
 
 > Hint: Where is the rate written down? And what does the chart warn you about?
 
@@ -613,6 +617,8 @@ Ignore the severity column at first. Read each description and ask which stage o
 
 **Where:** **VPN Authentication Log Terminal**, in the IT Security office. **It wants:** the one login that is not the real user, flagged.
 
+![VPN account investigation showing impossible travel]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/05-vpn-account-investigation.png)
+
 > Hint: Fifty logins. Which columns would tell you that someone is not who they say they are?
 
 <details markdown="1">
@@ -664,6 +670,8 @@ Ravi signs when both the SIEM and the VPN log are done. If he says "I'm not sign
 
 **Where:** David Osei, in the Major Incident Room. **Lock:** the clinical safety sign-off. **Lock wants:** your judgement of CLAIM-HC-001, the SIEM triaged, and an answer to "what do the wards lose?".
 
+![Safety case extract for CLAIM-HC-001, HC-003 and HC-007]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/06-safety-case-extract.png)
+
 > Hint: David reads you a claim with a "provided that" in it. Is the "provided that" true at Northgate this morning?
 
 <details markdown="1">
@@ -700,6 +708,8 @@ Before you see David, you may also want to hear Dr Hartley on the same question:
 ### Isolating at the Network Map {#hints-isolation}
 
 **Where:** **Network Architecture Map**, the touchscreen on the wall of the IT Security office. **Lock:** the SEVER button. **Lock wants:** at least one risk path reviewed. It then checks for both signatures.
+
+![SEVER confirmation showing the dual authorisation status]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/08-sever-dual-authorisation.png)
 
 > Hint: The SEVER button is greyed out. What does the note beside it ask you to do?
 
@@ -760,6 +770,8 @@ See "Who Must Be Told, and When" in Concepts.
 
 **Where:** **Backup Recovery Console**, a laptop in the Major Incident Room. **Decision:** which source to restore from: the on-site NAS, the vendor's cloud copy or the tape library.
 
+![Backup Recovery Console with the vendor cloud copy selected]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/09-backup-cloud-consequences.png)
+
 > Hint: Each source has a cost. What is each one's restore time, how much data does it lose, and how sure can you be that it is clean?
 
 <details markdown="1">
@@ -786,6 +798,8 @@ Every source warns that restoring onto a network that is not isolated may bring 
 ### The Drug Library Integrity Check {#hints-drug-library}
 
 **Where:** **Drug Library Integrity Terminal**, a laptop in the Major Incident Room. **Lock:** the restore button. **Lock wants:** the correct value confirmed from two independent sources.
+
+![Drug library integrity check showing a hash mismatch on morphine]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/10-drug-library-hash-fail.png)
 
 > Hint: The console can tell you that the library has changed. How would you prove what the right value is?
 
@@ -825,6 +839,8 @@ The restore button stays disabled until you have confirmed the correct value fro
 ### The Finale: Priya S. and the Debrief {#hints-finale}
 
 **Where:** the Major Incident Room. Priya S. from the NCSC arrives once the restore has started and the drug library has been verified.
+
+![Priya S. asks about the pump at the debrief]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/12-debrief-priya-pump-question.png)
 
 > Hint: The debrief ends the game. Is there anything on your objectives list, or anyone you have not answered, that you want to finish first?
 

@@ -262,6 +262,8 @@ Find the lock you are on. Read the hint, then go back and try. If you are still 
 
 ### Before the First Lock {#hints-start}
 
+![The foyer at the start of the game]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/01-foyer-start.png)
+
 > Hint: If the briefing has finished and you do not know what to do, talk to the person at the CryptoSecure stand in the foyer, then look for a lecturer with a laptop.
 
 <details markdown="1">
@@ -283,6 +285,8 @@ The exhibits in the foyer (the Byte Wall, the plaque, the ASCII chart and the pa
 ### Trial I: The Foyer Lockbox {#hints-trial-1}
 
 **Clue:** the Keyholder Leaflet, in your notepad. **Lock wants:** a word.
+
+![The CryptoSecure lockbox password prompt]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/02-trial1-lockbox-prompt.png)
 
 > Hint: Each number on the leaflet stands for one character. What is the smallest number, and what is the biggest? Compare them with the ASCII table above.
 
@@ -311,6 +315,8 @@ The numbers are ASCII codes written in decimal. You can look each one up on the 
 **Clue:** the Trial II Card, from the lockbox. **Lock:** the end locker with a keypad, in the common room (east of the foyer). **Lock wants:** four digits.
 
 This is the first real trap. Allow some time for it.
+
+![The candidate locker 4 PIN keypad]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/04-trial2-locker4-pin.png)
 
 > Hint: The keypad wants four digits. You have eight. What does that suggest?
 
@@ -417,6 +423,8 @@ Copy and paste rather than retyping: in the game's font, a lower-case `l` and a 
 
 **Clue:** the Returns Slip, on the returns counter in the library. **Lock:** the safe in Special Collections, through the library's north door. **Lock wants:** a word.
 
+![The Special Collections safe password prompt]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/07-trial6-safe-prompt.png)
+
 > Hint: There are two layers here. What does the outside layer look like? And read the slip's description: it tells you something about a shift.
 
 <details markdown="1">
@@ -447,6 +455,8 @@ If you are not sure of the shift, add **ROT13 Brute Force** instead. It shows al
 **Clue:** `trial_vii.txt`, inside the safe. **Lock:** the pigeonholes in the corridor. **Lock wants:** a word, a hyphen and two digits.
 
 This lock gives you **three** things, and you need all of them later. Write them down.
+
+![The pigeonholes password prompt]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/08-trial7-pigeonholes-prompt.png)
 
 > Hint: This is the first clue where you need a key that is somewhere else. Read the file's description: where does it say the key is?
 
@@ -520,6 +530,8 @@ If you see "Invalid RSAES-OAEP padding" or "Encrypted message is invalid", check
 
 **Clue:** the Tag on the Drop Box, in your notepad. **Lock:** the drop box in the corridor. **Lock wants:** a word, a hyphen and two digits.
 
+![The CryptoSecure drop box password prompt]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/09-dropbox-aes-prompt.png)
+
 > Hint: The tag says what cipher it is, and that it needs two things. Where did each one come from?
 
 <details markdown="1">
@@ -562,6 +574,8 @@ If CyberChef shows an error, read its first words: "Invalid IV length" means the
 
 **Clue:** the Final Trial Card, from the drop box. **Lock:** the relay terminal in the workshop. **Lock wants:** eight hex characters.
 
+![The relay terminal password prompt]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/10-relay-terminal-prompt.png)
+
 > Hint: The terminal wants a fingerprint, not a password. Which of the ideas in this sheet is a fingerprint?
 
 <details markdown="1">
@@ -590,6 +604,8 @@ If you reloaded and lost the recipe, rebuild AES Decrypt from the key, IV and ta
 ### The Finale: The Call and the Report {#hints-finale}
 
 Once the relay terminal opens, someone calls you. After the call, open the relay terminal again: it holds a signed report. What you do with it is your decision, and there is no wrong ending. These hints help you understand what you have, not choose for you.
+
+![The Keyholder's secure video call]({{ site.baseurl }}/assets/images/cyber_security_landscape/4_encoding_encryption_v2/11-finale-ghost-call.png)
 
 > Hint: Whatever you have been handed, read it before you do anything with it.
 

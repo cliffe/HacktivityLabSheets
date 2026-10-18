@@ -550,6 +550,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the SCADA control room, where you start. **To finish "Understand the Facility State":** get Helen's briefing, review the readings on HMI-OPS-01, and read the Incident Response Folder.
 
+![SCADA live status text for Battery Hall 1]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/02-hmi-live-status.png)
+
 > Hint: The briefing has finished and Helen is back at her desk. What did she ask you to do, and what does the objectives list want before you go?
 
 <details markdown="1">
@@ -600,6 +602,8 @@ The **H₂ Gas Detector Panel** on the back wall is worth reading while you are 
 ### Helen's Question: The Dial or the Screen {#hints-gauge}
 
 **Where:** Helen Marsh, in the control room. **Decision:** which reading you believe: the dial or the screen.
+
+![Helen Marsh asking which reading to believe]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/03-hall-dial-gauge.png)
 
 Helen puts this question once the dial has been read, and before the hydrogen alarm. If the ESD is already in by then, she asks which one you went on rather than which one you would bet on. If the ESD went in before anyone read the dial, she skips it.
 
@@ -652,6 +656,8 @@ When you confirm, Helen radios you, the BATTERY HALL 1 lamp on the alarm panel t
 ### Shutting Down Hall 1: The Emergency Shutdown {#hints-esd}
 
 **Where:** three ESD stations, all wired to the same relays: **ESD Station: Battery Hall 1 (Hall Door)** on the control room wall by the hall door, **ESD Station: Control Room Console** on Helen's console, and **ESD Station: Inside Battery Hall 1** on the hall's west wall. **Decision:** when to press one, and whether to save the battery controller's registers first.
+
+![ESD station on the control room console]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/06-esd-isolated.png)
 
 This is a decision, not a puzzle. Every station works from the start of the game. Nobody has to give you permission.
 
@@ -725,6 +731,8 @@ Jay Patel's handover sheet is on top of the **Duty Officer Desk**. It says where
 
 **Where:** the **HMI-ENG-02 Engineering Workstation**, in the engineering workshop. **To finish:** flag the session that should not be there, and read the workstation's engineering tool history.
 
+![Jump server access log with the unexpected session]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/07-jump-log-session-detail.png)
+
 > Hint: Most of this log is engineers doing their jobs. One session fails all three questions: who, when and where from.
 
 <details markdown="1">
@@ -758,6 +766,8 @@ When it completes, Helen radios you and points you at the SIS panel, the "Invest
 
 **Where:** the **SIS Configuration Panel** and the **Filing Cabinet: ICS Documentation**, both in the engineering workshop. **Lock:** the cabinet is locked. **Lock wants:** the **Filing Cabinet Key**. **To finish "Investigate the SIS":** read the panel, find the certified setpoints, and report the changes.
 
+![SIS panel comparing live and certified setpoints]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/09-sis-compare.png)
+
 > Hint: The panel shows what the safety controller holds now. What would you compare it with, and where would a site keep that?
 
 <details markdown="1">
@@ -785,6 +795,8 @@ When you report it, the SIS STATUS lamp on the alarm panel turns red, and Helen 
 ### Isolating the Attacker {#hints-isolate}
 
 **Where:** the **Jump Server Ethernet Cable** in the engineering workshop, and Marcus and Tom on the phone. **To finish "Isolate the Attacker":** pull the jump server's cable, and get CastleTech to shut the enterprise side off from SCADA. **Decision:** how far to cut.
+
+![Facility alarm panel showing safe state]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/10-alarm-panel-safe-state.png)
 
 > Hint: There are two halves to this: a cable you can pull yourself, and a firewall that only CastleTech can change. Who is allowed to tell CastleTech to change it?
 
@@ -821,6 +833,8 @@ When CastleTech have acted, the NETWORK STATUS lamp turns red. If the ESD is als
 ### The NIS Notification {#hints-nis}
 
 **Where:** the **NIS Notification Form** on the clipboard by the workshop door, in the control room, and Marcus on the phone. **To finish "Send the NIS Notification":** read the form, then message Marcus, who signs it off and sends it. **Decision:** send now with what you know, or wait.
+
+![NIS notification form on the clipboard]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/11-nis-form.png)
 
 > Hint: Who signs it off, and what does he want you to have done first?
 
@@ -869,6 +883,8 @@ Tom works for both companies, so he needs Albion's consent to tell Trent Water. 
 ### The Finale: Priya S. and the Debrief {#hints-finale}
 
 **Where:** the control room. Priya S. from the NCSC arrives once Hall 1 is shut down and CastleTech have cut the attacker off. She says: "Priya, from the NCSC. I was the nearest when this came in. Finish what you're doing, then come and find me."
+
+![Priya S. opening the debrief]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/12-priya-debrief-start.png)
 
 > Hint: The debrief ends the game. Is there anything on your objectives list, or any message, that you want to deal with first?
 
