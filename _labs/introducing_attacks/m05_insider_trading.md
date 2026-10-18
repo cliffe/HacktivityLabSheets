@@ -366,7 +366,7 @@ Ask Dr Halloran about her spare badge being in the server hallway at night. She 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Patricia holds vetting files on the cryptography team. Ask for them; the option appears once you have read the badge log, spoken to Dr Halloran, or already suspect someone. There are two files, and they are deliberately different. Lisa Park in the break room is chatty and notices who is not coping. The **Noticeboard Flyer** in the main corridor is about a collection for a colleague's family, and the **TalentStack Leaflet** behind the break-room coffee machine has handwriting on the back that you may recognise from elsewhere.
+Patricia holds vetting files on the cryptography team. Ask for them on her hub, **[I need your help with something.]** then **[I need the vetting files...]**. The option is there early, once you have met her and the case is open, not only after the badge log or Dr Halloran. There are two files, and they are deliberately different. Lisa Park in the break room is chatty and notices who is not coping. The **Noticeboard Flyer** in the main corridor is about a collection for a colleague's family, and the **TalentStack Leaflet** behind the break-room coffee machine has handwriting on the back that you may recognise from elsewhere.
 
 **Learn it:** ==action: Read the two vetting files side by side== and list, for each person, what has changed in their circumstances and whether they declared it.
 
@@ -375,7 +375,7 @@ Patricia holds vetting files on the cryptography team. Ask for them; the option 
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Ask Patricia for the vetting files on the cryptography team==.
+1. \==action: On Patricia's hub, choose **[I need your help with something.]** then ask for the vetting files on the cryptography team==.
 2. \==action: Read both files==.
 3. \==action: Talk to Lisa Park in the break room and ask about the collection==.
 4. \==action: Read the Noticeboard Flyer and the TalentStack Leaflet==.

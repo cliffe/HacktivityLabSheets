@@ -821,12 +821,15 @@ Get Marcus's sign-off first. Telling him about the session gives it. If you aske
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Click the **Jump Server Ethernet Cable**== and confirm **Disconnect cable JS-SCADA-LAN?** when you are ready.
-2. \==action: Message Marcus== and tell him what HMI-ENG-02 showed. Then choose **[How far do we cut them off?]** and pick a scope.
-3. \==action: Message Tom Hadley== and choose **[I need the enterprise side shut off from SCADA.]** (or **[About the isolation.]** if you have asked before).
-4. \==action: Choose **[Marcus has signed it off. Ring him.]**== once he has. Tom rings Marcus, then blocks the enterprise side at the firewall.
+1. \==action: Message Marcus first== and tell him what HMI-ENG-02 showed (**[ENG-02 shows c.ellison on the jump server since 01:47.]**), so he knows before you touch the network.
+2. \==action: Click the **Jump Server Ethernet Cable**== and confirm **Disconnect cable JS-SCADA-LAN?** when you are ready.
+3. \==action: Back with Marcus, choose **[How far do we cut them off?]**== and pick a scope.
+4. \==action: Message Tom Hadley== and choose **[I need the enterprise side shut off from SCADA.]** (or **[About the isolation.]** if you have asked before).
+5. \==action: Choose **[Marcus has signed it off. Ring him.]**== once he has. Tom rings Marcus, then blocks the enterprise side at the firewall.
 
 </details>
+
+> Warning: Pull the cable before you have told Marcus about the session and he notes it ("tell me next time"), and it comes up again in the debrief. Message him first.
 
 When CastleTech have acted, the NETWORK STATUS lamp turns red. If the ESD is also in, Helen radios that the hall is safe and the attacker is out, the SAFE STATE lamp turns green, and Priya S. arrives.
 

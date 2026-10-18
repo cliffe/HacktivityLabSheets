@@ -612,7 +612,7 @@ Once the relay terminal opens, someone calls you. After the call, open the relay
 <details markdown="1">
 <summary>Nudge: reading the report</summary>
 
-`report_b64` is Base64. Decode it with **From Base64** and read every line, right to the end. The last line is HTML. Ask yourself what a web page or email client does when it shows that line, and who would find out.
+`report.b64` is Base64. Decode it with **From Base64** and read every line, right to the end. The last line is HTML. Ask yourself what a web page or email client does when it shows that line, and who would find out.
 
 </details>
 
@@ -621,9 +621,9 @@ Once the relay terminal opens, someone calls you. After the call, open the relay
 
 These checks are optional, and they tell you who signed the report and that it has not changed. They do not tell you whether it is safe to send.
 
-- **Hash:** copy `report_b64` with its Copy button, add **SHA2** with Size **256**, and compare with `report_sha256`.
-- **Signature:** put `report_sig` in Input, add **From Base64**, then **RSA Verify**. Use `keyholder_public_pem` as the public key, and the `report_b64` text **exactly as given** (still Base64, not decoded) as the Message. Set Message format **Raw** and Message Digest Algorithm **SHA-256**. You should see "Verified OK".
-- **Whose key is it?** The Keyholder Leaflet you got in the foyer has a key fingerprint in its description. Hash `keyholder_public_pem` with SHA-256 and compare the start.
+- **Hash:** copy `report.b64` with its Copy button, add **SHA2** with Size **256**, and compare with `report.sha256`.
+- **Signature:** put `report.sig` in Input, add **From Base64**, then **RSA Verify**. Use `keyholder_public.pem` as the public key, and the `report.b64` text **exactly as given** (still Base64, not decoded) as the Message. Set Message format **Raw** and Message Digest Algorithm **SHA-256**. You should see "Verified OK".
+- **Whose key is it?** The Keyholder Leaflet you got in the foyer has a key fingerprint in its description. Hash `keyholder_public.pem` with SHA-256 and compare the start.
 
 "Verification Failure" usually means the Message was the decoded text, there was a trailing new line, or the digest was left on SHA-1.
 
