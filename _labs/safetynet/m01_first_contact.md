@@ -41,9 +41,6 @@ By the end of this lab you should be able to:
 - gather evidence from a physical space and tell useful intelligence from background noise
 - recognise weak authentication, and explain why reused dates, names and short PINs make locks and logins easy to break
 - decode Base64 and ROT13 by hand and with CyberChef, and say why neither is a form of security
-- run an online password-guessing attack against SSH with a wordlist, and connect once it works
-- navigate a Linux filesystem from the command line, find files, and read them
-- use `sudo` to act as another account, and explain what that misconfiguration gives an attacker
 - describe how one operative fits into a wider network, and weigh up the choices a case like this forces
 
 The game teaches by doing. The questions are in this sheet, after the game.
@@ -62,6 +59,10 @@ The server steps (the four VM stages and the command-line attack exercises) are 
 ## Getting Started {#getting-started}
 
 You are a SAFETYNET field agent. SAFETYNET received a tip that Viral Dynamics Media, a social-media marketing company, is hosting an ENTROPY cell planning an attack called Operation Shatter. Your cover is an IT security contractor booked to audit the network. That cover gets you through the front door and into offices without a fight. Your job is to find out what Operation Shatter is, gather proof, and stop it. Agent HaX runs the operation from the end of a phone.
+
+![The reception area at the start, with your agent standing in the room]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/00-starting-room.png)
+
+![The main office, the first room to explore for clues]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/01-main-office-player.png)
 
 You do not need to know Linux or cryptography before you start. The office teaches the basics, and Agent HaX hands you field guides as you reach each challenge.
 
@@ -113,7 +114,7 @@ Most of the office locks are a PIN pad or a password box. The weakness is not th
 | A "secure but easy to remember" note | A phrase turned into initials plus a digit |
 | A counting pattern on a sticky note | The pattern itself |
 
-The same idea drives the server attack later. Derek's SSH password is one he would remember, and his own password list is sitting in a safe. That is why a wordlist attack works.
+The same habit shows up on the server later, which has its own companion sheet.
 
 > Question: Kevin's workstation password is written on a sticky note as "a secure password but is quite easy 2 remember". Look at the first letters of that sentence. What kind of password is this, and why is writing the reminder next to the machine the real mistake?
 
@@ -148,53 +149,6 @@ So `Derek is the leak` becomes `Qrerx vf gur yrnx`. The giveaway is text that ke
 
 > Note: How to tell the two apart quickly: letters, digits, `+`, `/` and a trailing `=` means Base64; normal spacing with scrambled letters and no `=` means a shift cipher like ROT13. Agent HaX's field guide covers this (see the decode stage below).
 
-### Online Password Guessing: SSH and Hydra {#ssh-hydra}
-
-**SSH** (Secure Shell) is how you log into a Linux machine over the network. It asks for a username and password. If the password is weak and there is no lockout, an attacker can try many passwords in turn until one works. This is an **online brute force** or, more precisely, a **dictionary attack** when you use a list of likely passwords rather than every combination.
-
-**Hydra** automates the guessing. You give it a username, a file of candidate passwords, the target address and the service:
-
-```bash
-hydra -l derek -P passwords.txt 172.16.0.2 ssh
-```
-
-Each line in `passwords.txt` is one guess. When one works, Hydra prints the username and the password it found. You then log in for real:
-
-```bash
-ssh derek@172.16.0.2
-```
-
-The attack only works because the password is weak and the list is short and well chosen. A long random password, or a lockout after a few failures, would defeat it. In this mission Derek's own password list is the perfect wordlist, because he reuses the habits on it.
-
-> Question: Why does a list of 27 likely passwords break into this account in seconds, when guessing an arbitrary 12-character random password could take longer than the age of the universe? What does that tell you about where the weakness actually is?
-
-### Moving Through a Linux System {#linux-nav}
-
-Once you have a shell, you explore with a handful of commands:
-
-| Command | What it does |
-| --- | --- |
-| `pwd` | Prints the directory you are in |
-| `ls` | Lists files; `ls -la` shows hidden files (those starting with a dot) and permissions |
-| `cd somewhere` | Moves into a directory; `cd ..` goes up one; `cd` alone goes home |
-| `cat file` | Prints a file's contents |
-
-Evidence is rarely in the first place you look. Check the home directory, then any subdirectories inside it. A folder named after the operation is worth opening, and the file inside it is a second piece of evidence a step down from the top level. Moving into a subdirectory to reach a file like `operation_shatter/deployment_notes` is **directory traversal**, and it is one of the flags.
-
-### Privilege Escalation with sudo {#sudo}
-
-A normal account can only read its own files. **Privilege escalation** is moving from the access you have to access you should not have. The common Linux route is `sudo`, which lets a permitted user run commands as another account, often root.
-
-```bash
-sudo -l                    # list what you are allowed to run, and as whom
-sudo -u shatter cat /home/shatter/somefile   # read a file as the shatter account
-sudo -u shatter bash       # open a shell as the shatter account
-```
-
-If Derek's account is allowed to act as the `shatter` account, you can read `shatter`'s files even though they are not yours. That is the misconfiguration: an operative account with sudo rights over the infrastructure account. The files it unlocks are the last two flags.
-
-> Question: Derek's account can become the `shatter` account with one command. In a properly set up system, why would a marketing manager's login never be allowed to do that? What principle is being broken?
-
 ### One Node in a Network {#entropy-network}
 
 The evidence you recover describes ENTROPY as a set of cells that do not know each other, each running its own operation, with a single unknown figure ("The Architect") holding the whole picture. Derek runs one cell. Stopping Operation Shatter stops this attack; it does not end ENTROPY. Keep that in mind when you reach the end: the mission closes one case and opens a larger one.
@@ -208,6 +162,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 ### Before the First Lock {#hints-start}
 
 **Where:** reception, at the start. **Goal:** get into the building and the main office.
+
+![Sarah O'Brien at reception, who checks you in and hands over the main office key]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/04-sarah-reception-npc.png)
 
 > Hint: You cannot get far without talking to the person at the desk. Who hands out keys in an office?
 
@@ -231,6 +187,8 @@ If you want the lie of the building first, the reception desk has a staff direct
 ### The IT Room PIN {#hints-it-room}
 
 **Where:** the IT room, east of the main office. **Lock wants:** four digits.
+
+![The IT room keypad before any digits are entered]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/02-it-room-pin-keypad.png)
 
 > Hint: Someone changed the code and left a message about it. Who looks after the IT room, and where would a reminder about a code live?
 
@@ -256,6 +214,8 @@ There is also a backup copy of the code written down in the storage closet, off 
 
 **Where:** the IT room. **Goal:** get the lockpick, the server room keycard and password advice.
 
+![Kevin Park in the IT room, who hands over the lockpick and the server room keycard]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/03-it-room-kevin.png)
+
 > Hint: Kevin is nervous and wants help. Offer to do the audit and see what he gives you.
 
 <details markdown="1">
@@ -279,6 +239,8 @@ Kevin is not ENTROPY. Treat him as a colleague, not a suspect, however the evide
 ### Into Derek's Office {#hints-derek-office}
 
 **Where:** Derek's office, off the east hallway. **Lock:** a key lock on the door. **Two ways in.**
+
+![Derek's office door, with the choice of a key or switching to the lockpick]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/05-dereks-door-lock.png)
 
 > Hint: A locked door with no key nearby has two answers in this building: find a spare key, or pick it. You already hold one of the tools for the second.
 
@@ -316,6 +278,8 @@ Either route works:
 
 **Where:** inside Derek's office. **Lock wants:** a password.
 
+![Inside Derek's office, with the computer, filing cabinet and safe in reach]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/06-dereks-office-player.png)
+
 > Hint: The sticky note on the monitor is the clue. What single thing is Derek sentimental about, and where have you already seen it?
 
 <details markdown="1">
@@ -336,6 +300,8 @@ The monitor's note says "Anniversary". You have already used that date on Patric
 ### The Encoded Notes and CyberChef {#hints-decode}
 
 **Where:** two notes on Derek's desk. **Clue:** one looks like random letters ending in `=`; the other reads as scrambled words.
+
+![The CyberChef workstation with an empty input, ready for an encoded note]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/07-cyberchef-workstation-blank.png)
 
 > Hint: These are not encrypted, only encoded. Look at the shape of each: one is Base64, one is a shift cipher. Both decode in seconds once you know which is which.
 
@@ -388,12 +354,14 @@ The filing cabinet uses the anniversary date again. The storage closet safe uses
 
 **Where:** south from the IT room. **Lock:** an RFID card reader.
 
+![Arriving at the server room through the IT room door]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/08-server-room-doorway.png)
+
 > Hint: This door does not take a code. What did Kevin hand you that a card reader would want?
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal and a SAFETYNET drop-site terminal for submitting flags. Before you start the VM work, make sure you have been to Derek's storage safe: the password list and the server details live there.
+Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal, which is the attack box for the server work, and a SAFETYNET drop-site terminal for submitting flags. The password list and server details come from Derek's storage safe, so collect them before you start the server work.
 
 </details>
 
@@ -449,7 +417,7 @@ Talk to Derek in the break room. If you have not read the ENTROPY archive, he br
 
 After the confrontation Derek's launch device comes to you. It is armed. The launch authorization code you read in the `shatter` account aborts it. Enter that code and choose to abort, and Operation Shatter is dead. The device also offers a launch option; the game lets you make that choice and shows you its consequences in the debrief.
 
-**To learn more:** the launch code is the file you read as the `shatter` account during privilege escalation. If you skipped it, go back and read it.
+**To learn more:** the launch code comes from the server work. The companion sheet covers that stage if you do not have it yet.
 
 </details>
 
@@ -474,9 +442,6 @@ After you decide, ==action: finish the launch device, then call Agent HaX and ch
 | "Incorrect" on a PIN or password lock | The value is not exact, or you have the wrong clue for this lock |
 | A lock stalls after several tries | You are guessing; work the value out from its clue and wait a moment |
 | Derek brushes you off in the break room | You have not read the ENTROPY archive yet; finish the VM stage first |
-| Hydra finishes with no password found | Wrong username, or the wordlist has blank lines or stray spaces |
-| `ssh` says "Permission denied" | The password is mistyped, or Hydra matched a different account |
-| `sudo -l` says you may run nothing | You are on the wrong account; log in as Derek, not Kali's own user |
 | CyberChef output is gibberish | You used the wrong recipe: Base64 text through ROT13, or the reverse |
 | A decoded value is rejected by a lock | You tidied the case or added a space; re-enter it exactly as decoded |
 
@@ -553,13 +518,7 @@ Work through these after you finish. Use your own run: the server values were ge
 
 ### 3. Attacking the Server {#q-server}
 
-> Question: Walk through the three technical stages (SSH brute force, directory traversal, privilege escalation). For each, say what you did, what made it possible, and what a defender could have changed to stop you.
-
-> Question: The wordlist that broke Derek's account was his own password list. In a real engagement you would not have that. Where do penetration testers get wordlists, and how do they tailor one to a target?
-
-> Question: Derek's account could become the `shatter` account with `sudo`. Name the security principle this breaks, and describe how the accounts should have been separated.
-
-> Action: On a lab VM you control, recreate the chain: create a user with a weak password, add a file in a subdirectory, and give that user sudo rights over a second account. Then attack it from another account using Hydra, navigation and sudo. Write up each command and its output.
+> Question: What made the server attack possible, and what could a defender have changed to stop it? The companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/), has reflection questions on the server work.
 
 ### 4. People, Evidence and Choices {#q-choices}
 
@@ -575,7 +534,7 @@ Work through these after you finish. Use your own run: the server values were ge
 
 ## Further Reading {#further-reading}
 
-- The SAFETYNET field guides handed out in this mission, published online: [SSH Access and Linux System Navigation](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/ssh-access-and-linux-basics/), [Privilege Escalation via Sudo](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/privilege-escalation/), [Encoding and Decoding with CyberChef](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/encoding-and-decoding-with-cyberchef/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
+- The SAFETYNET field guides handed out in this mission, published online: [Encoding and Decoding with CyberChef](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/encoding-and-decoding-with-cyberchef/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/) sheet, for the server work.
 - The CyberChef documentation and wiki, and its Magic operation for recognising unknown encodings.
-- The Hydra and OpenSSH manual pages (`man hydra`, `man ssh`, `man sudo`).
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Authentication, Authorisation and Accountability, and on Security Operations and Incident Management (Penetration Testing).

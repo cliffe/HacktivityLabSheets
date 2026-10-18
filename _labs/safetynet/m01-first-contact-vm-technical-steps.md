@@ -30,7 +30,85 @@ cybok:
 
 > Note: This is the technical companion to the [First Contact walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact/). Play the game there first, and come here for the server work.
 
-## Stuck? Hints — the Server Work
+## Purpose
+
+By the end of this companion you should be able to:
+
+- run an online password-guessing attack against SSH with a wordlist, and connect once it works
+- navigate a Linux filesystem from the command line, find files, and read them
+- use `sudo` to act as another account, and explain what that misconfiguration gives an attacker
+- explain why a short list of reused passwords is enough to break an account, and where the weakness actually is
+
+## How to Use This Companion
+
+The hints are layered. Read the **Hint** first, then open the **Nudge**, and open the **Recipe** only when you are stuck. Go back to the Kali terminal after each one and try the step yourself.
+
+Every answer in this mission is generated for your game. Values such as the flags and passwords are not written in this sheet, and the hints tell you where to find them in the game.
+
+## Getting Started: The Server Work
+
+Your attack box is the Kali terminal in the server room. You get into the server room with Kevin's server room keycard. The target is the attack server. Its address and the username you are targeting come from the Server Access Details note in Derek's storage safe.
+
+The game gives you the flags, and you submit each one at the SAFETYNET Drop-Site Terminal in the same room.
+
+1. \==action: Open the VM Access Terminal in the server room==. This is the Kali box.
+2. \==action: Log in using the login on the terminal's sticky note==. This sheet does not repeat it.
+3. \==action: Save Derek's password list to a file on Kali== (for example `passwords.txt`), one password per line.
+
+> Warning: The attack server is a different machine from Kali. Running a command on Kali does not change anything on the target.
+
+## Concepts: What You Are Attacking
+
+Each concept below has an illustrative example. Run the examples on your own Kali box or a lab VM you control, not on the game target, unless a hint tells you to.
+
+### SSH and online password guessing
+
+**SSH** (Secure Shell) is how you log into a Linux machine over the network. It asks for a username and password. If the password is weak and there is no lockout, an attacker can try many passwords in turn until one works. This is an **online brute force** or, more precisely, a **dictionary attack** when you use a list of likely passwords rather than every combination.
+
+**Hydra** automates the guessing. You give it a username, a file of candidate passwords, the target address and the service:
+
+```bash
+hydra -l derek -P passwords.txt 172.16.0.2 ssh
+```
+
+Each line in `passwords.txt` is one guess. When one works, Hydra prints the username and the password it found. You then log in for real:
+
+```bash
+ssh derek@172.16.0.2
+```
+
+The attack only works because the password is weak and the list is short and well chosen. A long random password, or a lockout after a few failures, would defeat it. In this mission Derek's own password list is the perfect wordlist, because he reuses the habits on it.
+
+> Question: Why does a list of 27 likely passwords break into this account in seconds, when guessing an arbitrary 12-character random password could take longer than the age of the universe? What does that tell you about where the weakness actually is?
+
+### A Linux shell and where your rights stop
+
+Once you have a shell, you explore with a handful of commands:
+
+| Command | What it does |
+| --- | --- |
+| `pwd` | Prints the directory you are in |
+| `ls` | Lists files; `ls -la` shows hidden files (those starting with a dot) and permissions |
+| `cd somewhere` | Moves into a directory; `cd ..` goes up one; `cd` alone goes home |
+| `cat file` | Prints a file's contents |
+
+Evidence is rarely in the first place you look. Check the home directory, then any subdirectories inside it. A folder named after the operation is worth opening, and the file inside it is a second piece of evidence a step down from the top level. Moving into a subdirectory to reach a file like `operation_shatter/deployment_notes` is **directory traversal**, and it is one of the flags.
+
+### Privilege escalation and sudo
+
+A normal account can only read its own files. **Privilege escalation** is moving from the access you have to access you should not have. The common Linux route is `sudo`, which lets a permitted user run commands as another account, often root.
+
+```bash
+sudo -l                    # list what you are allowed to run, and as whom
+sudo -u shatter cat /home/shatter/somefile   # read a file as the shatter account
+sudo -u shatter bash       # open a shell as the shatter account
+```
+
+If Derek's account is allowed to act as the `shatter` account, you can read `shatter`'s files even though they are not yours. That is the misconfiguration: an operative account with sudo rights over the infrastructure account. The files it unlocks are the last two flags.
+
+> Question: Derek's account can become the `shatter` account with one command. In a properly set up system, why would a marketing manager's login never be allowed to do that? What principle is being broken?
+
+## Stuck? Hints: The Server Work
 
 These four stages cover the server work in order: getting in, the SSH brute force, finding the flags, and privilege escalation. Read each hint and try, then open a Nudge, and the Recipe last.
 
@@ -149,6 +227,15 @@ sudo -u shatter cat /home/shatter/shatter_configuration
 
 </details>
 
+## What the Server Is Telling You
+
+| Message or symptom | Usual cause |
+| --- | --- |
+| Hydra finishes with no password found | Wrong username, or the wordlist has blank lines or stray spaces |
+| `ssh` says "Permission denied" | The password is mistyped, or Hydra matched a different account |
+| `sudo -l` says you may run nothing | You are on the wrong account; log in as Derek, not Kali's own user |
+| `Permission denied` when reading a file | Your account cannot read that file, or the file is not where you think |
+
 ## Try It on the Command Line (Optional)
 
 ### A dictionary attack you own {#cli-hydra}
@@ -177,3 +264,21 @@ sudo -u otheruser cat /home/otheruser/notes.txt
 ```
 
 > Question: If `sudo -l` showed you could run any command as any user, what would that let you do on the whole machine, and why is that the same risk as being root?
+
+## After the Game: Questions and Exercises
+
+### Attacking the Server
+
+> Question: The server work had three technical stages: SSH brute force, directory traversal and privilege escalation. For each, say what you did, what made it possible, and what a defender could have changed to stop you.
+
+> Question: The wordlist that broke Derek's account was his own password list. In a real engagement you would not have that. Where do penetration testers get wordlists, and how do they tailor one to a target?
+
+> Question: Derek's account could become the `shatter` account with `sudo`. Name the security principle this breaks, and describe how the accounts should have been separated.
+
+> Action: On a lab VM you control, recreate the chain: create a user with a weak password, add a file in a subdirectory, and give that user sudo rights over a second account. Then attack it from another account using Hydra, navigation and sudo. Write up each command and its output.
+
+## Further Reading
+
+- [SAFETYNET Field Guide: SSH Access and Linux System Navigation](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/ssh-access-and-linux-basics/)
+- [SAFETYNET Field Guide: Privilege Escalation via Sudo](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/privilege-escalation/)
+- The Hydra and OpenSSH manual pages (`man hydra`, `man ssh`, `man sudo`).
