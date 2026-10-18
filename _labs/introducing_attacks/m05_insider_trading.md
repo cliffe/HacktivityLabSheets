@@ -56,6 +56,8 @@ You are a SAFETYNET field agent, working as a security consultant at Quantum Dyn
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
+![The reception lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/00-starting-room.png)
+
 1. \==action: Start the Break Escape mission **Insider Trading**==.
 2. \==action: Watch the briefing from Director Netherton, Agent Nightshade and Agent HaX==, and ask any topics you want. Then choose how you want to play it.
 3. \==action: Go east from the reception lobby into Patricia Morgan's office and talk to her==. She gives you a visitor badge.

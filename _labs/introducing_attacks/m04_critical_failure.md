@@ -62,6 +62,8 @@ You are a SAFETYNET field agent. Albion Energy Storage stores 200 MWh of grid po
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
+![The entrance lobby at the start, with the guard by the desk and the checkpoint gates ahead]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/00-starting-room.png)
+
 1. \==action: Start the Break Escape mission **Critical Failure**==.
 2. \==action: Watch the briefing from Director Netherton, Nightshade and Agent HaX==, and ask any topics you want. Then choose how you want to play it.
 3. \==action: Talk to the security guard at the main entrance== and get past the checkpoint.

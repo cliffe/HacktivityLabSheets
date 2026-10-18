@@ -64,6 +64,8 @@ You are a SAFETYNET field agent. The firm WhiteHat Security Services runs legiti
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
+![The reception lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/00-starting-room.png)
+
 1. \==action: Start the Break Escape mission **Ghost in the Machine**==.
 2. \==action: Watch the briefing from Agent HaX and Director Netherton==, and ask any topics you want. Then choose how you want to play it.
 3. \==action: Sign in at reception with Ffion Rees== to get your visitor badge.

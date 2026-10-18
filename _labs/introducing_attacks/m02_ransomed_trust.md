@@ -70,6 +70,8 @@ The work on the hospital's backup server (the VM Access Terminal and the flags) 
 
 You are a SAFETYNET field agent. ENTROPY's Ransomware Incorporated cell has encrypted St. Catherine's Regional Medical Centre. Forty-seven patients are on generators with about twelve hours of fuel, and the board votes on paying the ransom in four. Dr. Sarah Kim, the hospital's CTO, called SAFETYNET in. She cannot authorise a single door, because the system that does that is behind the ransom screen with everything else. Agent HaX runs you by phone.
 
+![The reception lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/00-starting-room.png)
+
 ![The mission brief notebook page at the start of the game]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/02-mission-brief.png)
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.

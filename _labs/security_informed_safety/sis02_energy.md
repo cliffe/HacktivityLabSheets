@@ -145,6 +145,8 @@ You play a member of the response and engineering team, on site early for a main
 3. \==action: Read the **Incident Response Folder** on the duty desk before you head for the hall==. It holds the site's rules for the emergency shutdown, the hydrogen levels, the NIS notification and who may instruct CastleTech.
 4. \==action: Open the objectives list and keep an eye on it==. Aims open as you find things, and their tasks tell you which room to go to next.
 
+![The control room at the start]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/00-starting-room.png)
+
 The game takes about 70 minutes, including the debrief. In a 60-minute class, read Getting Started and do the warm-up before the session. If you run out of time, a good place to stop is once the emergency shutdown for Hall 1 is in and you have found who is on the jump server: the hall is safe, and what is left (isolation, the notification and the debrief) can wait for next time. Your progress is saved, and the game's clocks count only the time you spend playing, so they carry on from where they were when you come back.
 
 > Warning: The game models a real hazard. In a gas alarm, nobody goes into a battery hall, in the game or on a real site.
@@ -603,7 +605,7 @@ The **H₂ Gas Detector Panel** on the back wall is worth reading while you are 
 
 **Where:** Helen Marsh, in the control room. **Decision:** which reading you believe: the dial or the screen.
 
-![Helen Marsh asking which reading to believe]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/03-hall-dial-gauge.png)
+![Reading the analogue dial at Rack A2, far hotter than the screen]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/03-hall-dial-gauge.png)
 
 Helen puts this question once the dial has been read, and before the hydrogen alarm. If the ESD is already in by then, she asks which one you went on rather than which one you would bet on. If the ESD went in before anyone read the dial, she skips it.
 

@@ -142,6 +142,8 @@ By the end of the scenario, you should have a complete understanding of:
 
 You do not need a clinical background. The people you meet explain their side of things, and the documents lying around the hospital explain the rest. Everything happens in the browser. The log analysis, the network map and the drug library check are all consoles inside the game.
 
+![Ward 7 at the start]({{ site.baseurl }}/assets/images/security_informed_safety/sis01_healthcare/00-starting-room.png)
+
 1. \==action: Start the Break Escape mission **Northgate General: Code Black**==.
 2. \==action: Watch the opening briefing from Sarah Mitchell, the charge nurse==. She hands you the **Northgate IT Security — Visitor Access Card**, which opens the IT Security office.
 3. \==action: Read the scenario brief that follows==. It stays in your notepad.

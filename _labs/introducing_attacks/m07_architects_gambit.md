@@ -62,6 +62,8 @@ The server work on the attack host (the four challenges you submit at the relay 
 
 You are Agent 0x00, a SAFETYNET field agent. Four ENTROPY operations have gone live at once. You are the one agent in range of a grid control facility outside Portland, where a loaded sequence is waiting for a host inside the building to start it. The tactical team can reach one of the other three crises: Fracture in Washington, Trojan Horse in Austin, or Meltdown in San Francisco. You make that call. Two will go unanswered.
 
+![The checkpoint on arrival]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/00-starting-room.png)
+
 You do not need any prior knowledge to start. Agent HaX hands out short in-game field guides as you reach each obstacle.
 
 1. \==action: Start the Break Escape mission **The Architect's Gambit**==.

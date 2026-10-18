@@ -67,6 +67,8 @@ You do not need any prior knowledge before you start. The field guides teach eac
 3. \==action: Walk north to the security checkpoint== and meet the Checkpoint Guard.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
+![The reception at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/00-starting-room.png)
+
 Plan on a full session. For a 60-minute class, stop once you are through the server room door and have read the analyst's write-up in the Blockchain Analysis Lab, then pick up again next time. Your progress, evidence and unlocked rooms are kept between sessions.
 
 ### How to Play {#how-to-play}

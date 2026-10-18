@@ -232,6 +232,8 @@ Find the stage you are on. The stages are in the order most players meet them, a
 
 **Where:** the main lobby, then the Director's office, north. **Goal:** take the briefing.
 
+![The lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/00-starting-room.png)
+
 ![Director Netherton briefing Agent 0x00 in his office]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/01-lobby-director-briefing.png)
 
 > Hint: Everything starts with the Director. ATHENA at reception will tell you what she may and may not say, and she hints at two places worth remembering for later.
@@ -292,8 +294,6 @@ The Director will not hand over his keycard until you have talked to all three. 
 
 **Where:** the Break Room, west of the Crypto Lab. **Goal:** collect the two codes written down on a sticky note, a timeline for the leak, and a witness's account.
 
-![The Break Room, with the three staff lockers along the back wall]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/03b-breakroom-lockers-witness.png)
-
 > Hint: A building at Level Red still has a kettle. Facilities write things down, and ATHENA told you where they spend the night.
 
 <details markdown="1">
@@ -321,8 +321,6 @@ The Off-Duty Agent in the corner has a short account of the morning. Treat it as
 ### The Security Archives {#hints-archives}
 
 **Where:** the Security Archives, south of the Operations Floor. **Lock:** a password. **Goal:** find the door audit for the leak window.
-
-![The Badge Audit Printout for the leak window, open in the Archives]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/04-archives-door-audit.png)
 
 > Hint: This door wants a password, not a PIN. The person who set it also wrote it down, and you were just in the room where they did.
 
