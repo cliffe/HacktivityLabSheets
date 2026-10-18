@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to the Follow the Money walkthrough, for the HashChain backend: the step-by-step hints for scanning the backend, getting a foothold through an exposed analytics service, cracking offline password hashes, reusing a credential, and escalating with sudo, plus the command-line practice."
 tags: ["nmap", "reconnaissance", "apache-druid", "cve-2021-25646", "remote-code-execution", "password-cracking", "john-the-ripper", "unshadow", "credential-reuse", "sudo", "privilege-escalation", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m06-follow-the-money-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m06_follow_the_money/labsheet_vm_steps.md"
@@ -26,7 +28,7 @@ cybok:
     keywords: ["PRIVILEGE ESCALATION"]
 ---
 
-> Note: This is the technical companion to the [Follow the Money walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m06-follow-the-money/). Play the game there first, and come here for the backend hints.
+> Note: This is the technical companion to the [Follow the Money walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m06-follow-the-money/). Play the game there first, and come here for the backend hints.
 
 ## The Backend Estate {#estate}
 
@@ -376,4 +378,4 @@ sudo -l
 - The John the Ripper documentation, for `unshadow`, `--wordlist` and `--show`.
 - The `sudoers` man page (`man sudoers`), for how the rules are read.
 - [CVE-2021-25646](https://nvd.nist.gov/vuln/detail/CVE-2021-25646), the Apache Druid weakness behind the foothold.
-- The [Follow the Money walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m06-follow-the-money/), for the game around this work.
+- The [Follow the Money walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m06-follow-the-money/), for the game around this work.

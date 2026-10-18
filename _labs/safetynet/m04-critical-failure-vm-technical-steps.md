@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to the Critical Failure walkthrough, for the OT jump server work: step-by-step hints for scanning the server, reaching its FTP and SSH services, escalating to root with sudo and submitting the four flags, plus command-line practice."
 tags: ["nmap", "service-enumeration", "ftp", "ssh", "erlang", "privilege-escalation", "sudo", "scada", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m04-critical-failure-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m04_critical_failure/labsheet_vm_steps.md"
@@ -29,7 +31,7 @@ cybok:
     keywords: ["SCADA/ICS protection"]
 ---
 
-> Note: This is the technical companion to the [Critical Failure walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m04-critical-failure/). Play the game there first, and come here for the server work.
+> Note: This is the technical companion to the [Critical Failure walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m04-critical-failure/). Play the game there first, and come here for the server work.
 
 ## Concepts: the Server Work
 

@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to the Insider Trading walkthrough, for the Quantum Dynamics research server: the step-by-step hints for finding the research portal, getting a foothold, switching accounts and reaching root, plus the command-line practice."
 tags: ["web-reconnaissance", "bludit", "file-upload", "remote-code-execution", "metasploit", "sudo", "privilege-escalation", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m05-insider-trading-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m05_insider_trading/labsheet_vm_steps.md"
@@ -26,7 +28,7 @@ cybok:
     keywords: ["user authentication"]
 ---
 
-> Note: This is the technical companion to the [Insider Trading walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m05-insider-trading/). Play the game there first, and come here for the research server hints.
+> Note: This is the technical companion to the [Insider Trading walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m05-insider-trading/). Play the game there first, and come here for the research server hints.
 
 ## The Research Server {#server}
 

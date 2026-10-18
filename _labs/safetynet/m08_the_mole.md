@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each lock and each piece of evidence with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to the exact steps. The work on the repository server in the server room has its own companion sheet. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["insider-threat", "door-audit", "log-analysis", "rfid", "cloning", "lockpicking", "fingerprints", "base64", "rot13", "cyberchef", "encoding", "social-engineering", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m08-the-mole/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m08_the_mole/labsheet.md"
@@ -52,7 +54,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and the exact steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The work on the repository server in the server room is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m08-the-mole-vm-technical-steps/), so you can play the rest of the mission without it.
+The work on the repository server in the server room is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m08-the-mole-vm-technical-steps/), so you can play the rest of the mission without it.
 
 > Note: The codes and passwords in the building are the same every game, but you still work them out from clues in the building. This sheet says where each clue is and what shape the answer takes, never what it reads. The evidence you pull from the server is generated for your game, and the companion sheet covers how to get it.
 
@@ -232,9 +234,9 @@ Find the stage you are on. The stages are in the order most players meet them, a
 
 **Where:** the main lobby, then the Director's office, north. **Goal:** take the briefing.
 
-![The lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/00-starting-room.png)
+![The lobby at the start]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/00-starting-room.png)
 
-![Director Netherton briefing Agent 0x00 in his office]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/01-lobby-director-briefing.png)
+![Director Netherton briefing Agent 0x00 in his office]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/01-lobby-director-briefing.png)
 
 > Hint: Everything starts with the Director. ATHENA at reception will tell you what she may and may not say, and she hints at two places worth remembering for later.
 
@@ -263,7 +265,7 @@ His desk carries three **Suspect Dossiers**. Read them. They are short, and they
 
 **Where:** Vector on the Operations Floor (east of the lobby); Phantom in Intelligence Analysis (north of the Operations Floor); Nightshade in the Crypto Lab (west of the lobby). **Goal:** talk to all three.
 
-![Interview with Agent 0x23 Vector, with the dialogue choices shown]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/02-interview-vector.png)
+![Interview with Agent 0x23 Vector, with the dialogue choices shown]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/02-interview-vector.png)
 
 > Hint: Each of them gives you a claim you can test later. Where does each say they were? Which of those claims could a log confirm or contradict?
 
@@ -413,7 +415,7 @@ Once he has the name, he gives you the code for the interrogation suite and poin
 
 **Where:** the Server Room, east of the Operations Floor. **Lock:** an RFID card reader. **Goal:** get in.
 
-![The Server Room, with the server-room badge reader already passed]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/07-server-room-entry.png)
+![The Server Room, with the server-room badge reader already passed]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/07-server-room-entry.png)
 
 > Hint: The reader wants a card that opens the server zone. The Director has one, and he is not going to hand it over. There is also a quieter route from the lobby that someone left out in the open.
 
@@ -459,7 +461,7 @@ At reception, the **Visitor Badge Printer** has a **Printed Server-Zone Badge** 
 
 Inside the Server Room are the **Evidence Relay Terminal**, where recovered evidence is submitted, a **Server Access Log (excerpt)** left by the rack, and the repository server. The excerpt is an auth-log printout with the account redacted. It gives a terminal and a time, which is a second source for the minute the plan was opened.
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the repository server yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m08-the-mole-vm-technical-steps/) when you want the hints for it.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the repository server yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m08-the-mole-vm-technical-steps/) when you want the hints for it.
 
 ### Decoding the USB Stick {#hints-decode}
 
@@ -492,7 +494,7 @@ Take the stick and open it. HaX offers the decoding field guide. To get it, open
 
 **Where:** the Director's office safe (four digits), then the keypad south of the Crypto Lab. **Goal:** open the safe for the code card, or get the code from the Director.
 
-![The Director's Safe open, showing its contents]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/06-directors-safe-open.png)
+![The Director's Safe open, showing its contents]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/06-directors-safe-open.png)
 
 > Hint: The safe belongs to the Director and the policy says everyone uses the same kind of number for theirs. The page you want is on the Operations Floor, and its header says who requested it.
 
@@ -561,7 +563,7 @@ Several decisions run through the mission and show up in the ending:
 
 **Where:** the main lobby, after the confrontation. **Goal:** report to the Director.
 
-![The debrief with Agent HaX]({{ site.baseurl }}/assets/images/introducing_attacks/m08_the_mole/37-debrief-opening.png)
+![The debrief with Agent HaX]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/37-debrief-opening.png)
 
 > Hint: Once you have decided, the Director is waiting. The debrief opens straight away.
 
@@ -733,6 +735,6 @@ These questions are about the work you did in the server room. The steps are in 
 
 - The SAFETYNET field guide handed out for the decoding stage, published online: [Encoding and Decoding with CyberChef](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/encoding-and-decoding-with-cyberchef/).
 - Two guides for techniques this mission uses that the game does not hand out: [RFID Cloning](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/rfid-cloning/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m08-the-mole-vm-technical-steps/) sheet, for the work in the server room.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m08-the-mole-vm-technical-steps/) sheet, for the work in the server room.
 - The CyberChef documentation and wiki, and its Magic operation for recognising unknown encodings.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Adversarial Behaviours, Forensics, Authentication, Authorisation and Accountability, and Cryptography.

@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each lock with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to full steps. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get them. The server work has its own companion sheet. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["insider-threat", "social-engineering", "rfid", "badge-cloning", "biometrics", "fingerprints", "lockpicking", "access-logs", "authentication", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m05-insider-trading/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m05_insider_trading/labsheet.md"
@@ -46,7 +48,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and the full steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each: a lock you open on the first hint teaches you more than one you open on the last.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server work, once you reach the server room, is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m05-insider-trading-vm-technical-steps/), so you can play the rest of the mission without it.
+The server work, once you reach the server room, is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m05-insider-trading-vm-technical-steps/), so you can play the rest of the mission without it.
 
 > Note: Some values are generated for your game, and the server side is not the same as anyone else's, so this sheet never gives you one, only the way to find it. The things you find in the building are the same each game, but you still work them out from clues; this sheet says where each clue is and what shape the answer takes, not what it reads.
 
@@ -56,7 +58,7 @@ You are a SAFETYNET field agent, working as a security consultant at Quantum Dyn
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
-![The reception lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/00-starting-room.png)
+![The reception lobby at the start]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/00-starting-room.png)
 
 1. \==action: Start the Break Escape mission **Insider Trading**==.
 2. \==action: Watch the briefing from Director Netherton, Agent Nightshade and Agent HaX==, and ask any topics you want. Then choose how you want to play it.
@@ -201,7 +203,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the reception lobby and Patricia's office (east). **Goal:** meet your contact and get a visitor badge.
 
-![Patricia's office]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/01-patricia-office.png)
+![Patricia's office]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/01-patricia-office.png)
 
 > Hint: Your handler's briefing sends you to the person who wants this solved. She is east of the lobby, and she keeps her own records on her desk.
 
@@ -228,7 +230,7 @@ Talk to Patricia Morgan. She gives you a visitor badge and explains what Securit
 
 **Where:** the main corridor, east to the server hallway. **Clue:** the person with the lanyard in the open-plan office, north of the corridor. **Lock:** a staff badge reader. **Lock wants:** a staff badge.
 
-![The server hallway reader]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/02-server-hallway-reader-locked.png)
+![The server hallway reader]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/02-server-hallway-reader-locked.png)
 
 > Hint: A visitor badge gets you through the front, not past a staff reader. Who in the building carries a staff badge, and what is in your kit for copying one?
 
@@ -290,7 +292,7 @@ The **IT Notice: Server Room Access** by the door names who to contact. Ask Owen
 
 **Where:** the server room, north of the server hallway. **Goal:** get in and see what the room holds.
 
-![The server room]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/06-server-room-entry.png)
+![The server room]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/06-server-room-entry.png)
 
 > Hint: This room is more than a place to pass through. It holds two terminals, and a door on the north wall that leads on to the key vault.
 
@@ -303,13 +305,13 @@ The **IT Notice: Server Room Access** by the door names who to contact. Ask Owen
 
 </details>
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the server yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m05-insider-trading-vm-technical-steps/) when you want the hints for it.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the server yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m05-insider-trading-vm-technical-steps/) when you want the hints for it.
 
 ### Reading the Badge Log {#hints-badge-log}
 
 **Where:** Owen, in the open-plan office, once you have read Patricia's log. **Clue:** the **Server Hallway Badge Log**. **Goal:** work out whose badge was in the server hallway.
 
-![The server hallway badge log]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/05-badge-log-deduction.png)
+![The server hallway badge log]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/05-badge-log-deduction.png)
 
 > Hint: The incident log tells you a badge was there at night but not whose. Owen can print the swipes. When you have them, read the main-entrance lines as well as the hallway ones.
 
@@ -451,7 +453,7 @@ The option to ask for the office appears once your evidence points at one person
 
 **Where:** the Mug in the suspect's office, then the key vault north of the server room. **Lock:** a fingerprint reader. **Lock wants:** an enrolled print.
 
-![Dusting the mug for a print]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/08-mug-fingerprint-dusted.png)
+![Dusting the mug for a print]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/08-mug-fingerprint-dusted.png)
 
 > Hint: The vault reader is enrolled to two people. You can only lift one print in this building. Where does that person leave their fingers?
 
@@ -480,7 +482,7 @@ The Mug on the desk has a thumbprint on the glaze. Use the Fingerprint Kit to du
 
 **Where:** the key vault. **Clues:** the **Upload Schedule**, the **Data Package Manifest**, the **Sealed TalentStack Envelope** and the **Exfiltration Upload Terminal**. **Goal:** find proof of what is leaving and when.
 
-![Inside the key vault]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/11-key-vault-inside.png)
+![Inside the key vault]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/11-key-vault-inside.png)
 
 > Hint: The vault is the last place the data passes through. Look at every document on the desk and the terminal. They say when, what and who.
 
@@ -520,7 +522,7 @@ When your naming conversation closes, the Recruiter texts you. You can ring the 
 
 **Where:** the key vault, at the Exfiltration Upload Terminal. **Goal:** decide what happens to the insider and stop the upload. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![The confrontation in the server room]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/14-confrontation-reached.png)
+![The confrontation in the server room]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/14-confrontation-reached.png)
 
 > Hint: You have a motive, proof of what was staged, and the person's own words. What each choice costs, and who it protects, is what you decide on.
 
@@ -559,7 +561,7 @@ None of these is scored as right or wrong by the game; they change who is safe a
 
 **Where:** the key vault, then your phone. **Goal:** finish reading, then call HaX.
 
-![The HQ debrief after you call HaX in]({{ site.baseurl }}/assets/images/introducing_attacks/m05_insider_trading/32-debrief-hq-opening.png)
+![The HQ debrief after you call HaX in]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/32-debrief-hq-opening.png)
 
 > Hint: Whatever you have not read in the vault is still there. When you are ready to leave, HaX is the way out.
 
@@ -691,6 +693,6 @@ Work through these after you finish. Use your own run: your choices and your end
 ## Further Reading {#further-reading}
 
 - The SAFETYNET field guides handed out in this mission, published online: [RFID Cloning](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/rfid-cloning/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m05-insider-trading-vm-technical-steps/) sheet, for the server work.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m05-insider-trading-vm-technical-steps/) sheet, for the server work.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Adversarial Behaviours, on Authentication, Authorisation and Accountability, and on Physical Layer and Telecommunications Security.
 - National Protective Security Authority (NPSA) guidance on insider risk, and CERT Insider Threat Center material on the signs and patterns of insider incidents.

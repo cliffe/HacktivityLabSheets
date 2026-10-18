@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each lock with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to full steps. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get them. The work on the hospital's backup server has its own companion sheet. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["social-engineering", "lockpicking", "physical-security", "pin-codes", "information-leakage", "rot13", "cyberchef", "encoding", "ransomware", "incident-response", "insider-threat", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m02-ransomed-trust/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m02_ransomed_trust/labsheet.md"
@@ -62,7 +64,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and a full set of steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The work on the hospital's backup server (the VM Access Terminal and the flags) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m02-ransomed-trust-vm-technical-steps/), so you can play the rest without it.
+The work on the hospital's backup server (the VM Access Terminal and the flags) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust-vm-technical-steps/), so you can play the rest without it.
 
 > Note: The server challenge is generated for your game. The flag values are not the same as anyone else's, so this sheet never gives you one. A few codes in the building are fixed, but each is something you work out from clues in the hospital; this sheet says where a clue is and what shape the answer takes, not what it reads.
 
@@ -70,9 +72,9 @@ The work on the hospital's backup server (the VM Access Terminal and the flags) 
 
 You are a SAFETYNET field agent. ENTROPY's Ransomware Incorporated cell has encrypted St. Catherine's Regional Medical Centre. Forty-seven patients are on generators with about twelve hours of fuel, and the board votes on paying the ransom in four. Dr. Sarah Kim, the hospital's CTO, called SAFETYNET in. She cannot authorise a single door, because the system that does that is behind the ransom screen with everything else. Agent HaX runs you by phone.
 
-![The reception lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/00-starting-room.png)
+![The reception lobby at the start]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/00-starting-room.png)
 
-![The mission brief notebook page at the start of the game]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/02-mission-brief.png)
+![The mission brief notebook page at the start of the game]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/02-mission-brief.png)
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
@@ -263,7 +265,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** reception, at the start. **Goal:** get signed in, and get a way into the IT department.
 
-![Bernie Nwosu on the night desk, with the sign-in choices]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/04-bernie-key-npc.png)
+![Bernie Nwosu on the night desk, with the sign-in choices]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/04-bernie-key-npc.png)
 
 > Hint: No badge will open anything tonight, so the first lock is a person. Who has the key hook, and what would make her willing to use it?
 
@@ -325,7 +327,7 @@ Any red ransomware screen can be read. Reading one satisfies the task about iden
 
 **Where:** the IT Department, east of the Night Handover room. **Lock:** a key lock on the door (easy). **Goal:** get the **Server Room Keycard** from Gary.
 
-![Picking the IT Department door with the override key]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/09-it-door-key-lock.png)
+![Picking the IT Department door with the override key]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/09-it-door-key-lock.png)
 
 > Hint: The server room reader only takes a card that already exists, and Gary Whitlock holds the only one. What does a man who has been ignored for six months want from the next person through his door?
 
@@ -389,7 +391,7 @@ Read **Gary's Password Sticky Note**. It lists a short run of passwords he descr
 
 **Where:** the Main Corridor, then the **Security Office** at its west end, then the Server Room beyond. **Lock:** a key lock on the Security Office door (easy), with Val Okonkwo standing in front of it. **Goal:** get through the Security Office.
 
-![Val Okonkwo at the Security Office checkpoint, with the response choices]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/14-val-checkpoint.png)
+![Val Okonkwo at the Security Office checkpoint, with the response choices]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/14-val-checkpoint.png)
 
 > Hint: Whoever stands at that door decides if it opens tonight. A person can open it, a key can, a pick can. What does Val need to believe before she acts?
 
@@ -447,13 +449,13 @@ The Security Office is a key lock (easy). If Val sees the pick in your hands, sh
 
 > Warning: The reader only responds to a card that already exists. If it refuses you, check the Server Room Keycard is in your inventory.
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the network yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m02-ransomed-trust-vm-technical-steps/) when you want the hints for the backup server and its flags.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the network yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust-vm-technical-steps/) when you want the hints for the backup server and its flags.
 
 ### The Handwritten Note in the Rack {#hints-decode}
 
 **Where:** inside the rack door in the Server Room, with the CyberChef Workstation next to it. **Clue:** **Handwritten Note, Taped Inside the Rack**.
 
-![The handwritten note decoded with ROT13 in CyberChef]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/16-cyberchef-rot13.png)
+![The handwritten note decoded with ROT13 in CyberChef]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/16-cyberchef-rot13.png)
 
 > Hint: The letters are wrong, but the word lengths and the spaces look right. Whoever wrote it was hiding it from a passing glance, not from you.
 
@@ -483,7 +485,7 @@ Letters scrambled with normal word lengths and no `=` is a shift cipher, and thi
 
 **Where:** **Emergency Storage**, off the east side of the Patient Ward. **Lock:** the **PIN-Locked Safe** (a four-digit PIN). **Goal:** the **Offline Backup Encryption Keys**.
 
-![The four-digit PIN keypad on the emergency store safe]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/06-safe-pin-pad.png)
+![The four-digit PIN keypad on the emergency store safe]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/06-safe-pin-pad.png)
 
 > Hint: The code is something everyone in this building could recite. People have complained about it on notices and audit lists, and the hospital has written the clue on its own wall.
 
@@ -551,7 +553,7 @@ The badge number you need to compare against comes out of the server work, so yo
 
 **Where:** the **Hospital Recovery Console** in the Server Room. **Goal:** choose how St. Catherine's recovers.
 
-![The clinical recovery console, choosing a restore source]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/30-recovery-console-decision.png)
+![The clinical recovery console, choosing a restore source]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/30-recovery-console-decision.png)
 
 > Hint: The console shows what it still needs for each option. Read the list before you choose, and think about what each option costs, not only how fast it is.
 
@@ -576,13 +578,13 @@ Ghost may call you at the console with an offer. It is an option on the table, n
 
 > Warning: The console refuses to restore with "No verified restore manifest" until you hold one. Open the companion sheet if you are stuck there.
 
-> Note: What the console needs from the server work (the manifest and the other key material) is covered in the companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m02-ransomed-trust-vm-technical-steps/).
+> Note: What the console needs from the server work (the manifest and the other key material) is covered in the companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust-vm-technical-steps/).
 
 ### The Communications Terminal and the Debrief {#hints-finale}
 
 **Where:** the **Hospital Communications Terminal** in the Boardroom. **Goal:** the last decision, and the debrief with HaX. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![The HQ debrief with Agent HaX after reporting in]({{ site.baseurl }}/assets/images/introducing_attacks/m02_ransomed_trust/32-hq-debrief.png)
+![The HQ debrief with Agent HaX after reporting in]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/32-hq-debrief.png)
 
 > Hint: The terminal in the Boardroom decides what the public gets to read about tonight. It stays locked until the server work is done and the hospital has chosen how to recover.
 
@@ -771,7 +773,7 @@ Work through these after you finish. Use your own run: the server challenge was 
 ## Further Reading {#further-reading}
 
 - The SAFETYNET field guides handed out in this mission, published online: [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/), [Encoding and Decoding with CyberChef](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/encoding-and-decoding-with-cyberchef/) and [Information Leakage and the PIN Oracle](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/information-leakage-and-the-pin-oracle/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m02-ransomed-trust-vm-technical-steps/) sheet, for the work on the hospital's backup server.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust-vm-technical-steps/) sheet, for the work on the hospital's backup server.
 - The CyberChef documentation and wiki, and its Magic operation for recognising unknown encodings.
 - National Cyber Security Centre guidance on mitigating ransomware and on planning an incident response, for how real organisations prepare for a night like this one.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Malware and Attack Technology, on Security Operations and Incident Management, on Human Factors, on Physical Layer Security and on Applied Cryptography.

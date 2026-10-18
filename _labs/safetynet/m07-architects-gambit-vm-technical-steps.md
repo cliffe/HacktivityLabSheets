@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to The Architect's Gambit walkthrough: the step-by-step hints for the attack host's open file share, its listener, the operator login and the root escalation, plus the command-line practice and the server reflection questions."
 tags: ["nfs", "netcat", "nmap", "ssh", "sudo", "privilege-escalation", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m07-architects-gambit-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "advanced"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m07_architects_gambit/labsheet_vm_steps.md"
@@ -35,7 +37,7 @@ cybok:
     keywords: ["attack trees", "kill chains"]
 ---
 
-> Note: This is the technical companion to the [Architect's Gambit walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m07-architects-gambit/). Play the game there first. Come here when you reach the server room and want the server hints.
+> Note: This is the technical companion to the [Architect's Gambit walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m07-architects-gambit/). Play the game there first. Come here when you reach the server room and want the server hints.
 
 ## The Server Work {#server}
 

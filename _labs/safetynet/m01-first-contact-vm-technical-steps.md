@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to the First Contact walkthrough, for the server and VM work: the step-by-step hints for getting into the attack server, finding the flags and escalating privileges with sudo, plus the command-line attack exercises."
 tags: ["linux", "ssh", "hydra", "privilege-escalation", "sudo", "base64", "rot13", "cyberchef", "lockpicking", "password-security", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m01-first-contact-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m01_first_contact/labsheet_vm_steps.md"
@@ -26,7 +28,7 @@ cybok:
     keywords: ["Physical access control"]
 ---
 
-> Note: This is the technical companion to the [First Contact walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m01-first-contact/). Play the game there first, and come here for the server work.
+> Note: This is the technical companion to the [First Contact walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact/). Play the game there first, and come here for the server work.
 
 ## Stuck? Hints — the Server Work
 

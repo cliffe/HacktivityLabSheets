@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each in-game lock and puzzle with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to full steps. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get them. The work on the exchange's servers has its own companion sheet. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["rfid", "cloning", "lockpicking", "physical-security", "social-engineering", "passphrases", "fingerprints", "cryptocurrency", "blockchain", "mixers", "financial-forensics", "money-laundering", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m06-follow-the-money/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m06_follow_the_money/labsheet.md"
@@ -52,7 +54,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and a full set of steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server work (the backend terminal in the server room) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m06-follow-the-money-vm-technical-steps/), so you can play the rest without it.
+The server work (the backend terminal in the server room) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m06-follow-the-money-vm-technical-steps/), so you can play the rest without it.
 
 > Note: The server work is generated for your game, so this sheet never gives you a value from it. The door passphrase, the PINs and the custody slot are the same every game, but each one is something you work out from clues in the building. This sheet says where each clue is and what shape the answer takes, never what it reads.
 
@@ -67,7 +69,7 @@ You do not need any prior knowledge before you start. The field guides teach eac
 3. \==action: Walk north to the security checkpoint== and meet the Checkpoint Guard.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
-![The reception at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/00-starting-room.png)
+![The reception at the start]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/00-starting-room.png)
 
 Plan on a full session. For a 60-minute class, stop once you are through the server room door and have read the analyst's write-up in the Blockchain Analysis Lab, then pick up again next time. Your progress, evidence and unlocked rooms are kept between sessions.
 
@@ -201,7 +203,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the reception lobby, then the security checkpoint to the north. **Goal:** get past the Checkpoint Guard to the trading floor. **Lock wants:** a key lock, or a good enough story.
 
-![The security checkpoint and the guard's sight cone]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/02-checkpoint-guard-talked-past.png)
+![The security checkpoint and the guard's sight cone]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/02-checkpoint-guard-talked-past.png)
 
 > Hint: The trading-floor door is a key lock and you start with a Lock Pick Kit. The guard is the real obstacle. Who are you pretending to be, and who are you here to see?
 
@@ -244,7 +246,7 @@ Or pick it instead:
 
 **Where:** the trading floor. **Goal:** meet Dr Irina Volkova, and leave with her password wordlist. **Lock wants:** a conversation.
 
-![Dr Volkova's conversation menu on the trading floor]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/03-trading-floor-volkova.png)
+![Dr Volkova's conversation menu on the trading floor]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/03-trading-floor-volkova.png)
 
 > Hint: She is the CTO, she built the exchange's privacy tools, and she is proud of them. How you open the conversation decides how much she trusts you.
 
@@ -276,7 +278,7 @@ Agent HaX can help here: **[How do I play Volkova?]** explains how to turn her, 
 
 **Where:** the server room door, north off the trading floor. **Clues:** the **IT New Starter Checklist** (on the noticeboard at the security checkpoint) and the **Password Dictionary List** (from Dr Volkova). **Lock wants:** a typed passphrase.
 
-![The server room passphrase prompt]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/04-server-room-door-passphrase-lock.png)
+![The server room passphrase prompt]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/04-server-room-door-passphrase-lock.png)
 
 > Hint: The checklist describes the house rule for door passphrases and the list names the words staff pick. Neither is the answer alone. Put the rule and the list together.
 
@@ -309,7 +311,7 @@ The lock compares exactly what you type. No space between the parts, and no capi
 
 **Where:** the Blockchain Analysis Lab, east off the trading floor. **Clue:** the **ENTROPY Transaction Network Analysis**. **Goal:** take Priya Raghavan's write-up.
 
-![Priya Raghavan's transaction analysis, with the three deposits]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/07-blockchain-lab-writeup.png)
+![Priya Raghavan's transaction analysis, with the three deposits]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/07-blockchain-lab-writeup.png)
 
 > Hint: Priya has traced the money as far as the mixer and stopped. Her write-up lists what went in and when. It says where she gets stuck.
 
@@ -347,7 +349,7 @@ Priya is also happy to explain the method. In conversation, her option **[How wo
 
 </details>
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the backend yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m06-follow-the-money-vm-technical-steps/) when you want the hints. Come back here when the drop-site has paid out the document that opens the data centre.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the backend yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m06-follow-the-money-vm-technical-steps/) when you want the hints. Come back here when the drop-site has paid out the document that opens the data centre.
 
 ### The Data Centre Door {#hints-data-door}
 
@@ -375,7 +377,7 @@ Open the Door Controller Export from your inventory and look for the line that n
 
 **Where:** the data centre. **Clues:** the **Financial Transaction Server** (three files) and the three deposits from Priya's write-up. **Lock wants:** a four-digit slot number, **one try per opening**.
 
-![The custody console PIN pad]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/10-custody-console-pin-pad.png)
+![The custody console PIN pad]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/10-custody-console-pin-pad.png)
 
 > Hint: The transaction server has the numbers you need and the custody console wants one of them. Which slot received the money from all three deposits, after the mixer's fee, and no sooner than its hold?
 
@@ -438,7 +440,7 @@ Emulate the badge at the executive wing's RFID reader.
 
 **Where:** the executive wing. **Goal:** get through the CEO's door, past Kemal Aydin, who holds the key. **Lock wants:** a key lock, or the key.
 
-![Kemal Aydin at the executive wing]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/13-executive-wing-minder-kemal.png)
+![Kemal Aydin at the executive wing]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/13-executive-wing-minder-kemal.png)
 
 > Hint: Kemal walks a short loop between two doors and his cone of sight is drawn on the floor. The CEO's office is key-locked and he holds the key.
 
@@ -466,7 +468,7 @@ There are three ways through. **Talk:** with the cover held he accepts the FCA l
 
 **Where:** the CEO's office, then Dr Volkova on the trading floor. **Goal:** confront the man at the top, then make two decisions. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![Confronting Satoshi Nakamoto II in his office]({{ site.baseurl }}/assets/images/introducing_attacks/m06_follow_the_money/16-satoshi-confrontation.png)
+![Confronting Satoshi Nakamoto II in his office]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/16-satoshi-confrontation.png)
 
 > Hint: Two decisions close the mission: what happens to the money, and what happens to Dr Volkova. Read what you are holding before you decide either.
 
@@ -652,6 +654,6 @@ Work through these after you finish. Use your own run: the server work was gener
 ## Further Reading {#further-reading}
 
 - The SAFETYNET field guides handed out in this mission, published online: [RFID Cloning](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/rfid-cloning/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m06-follow-the-money-vm-technical-steps/) sheet, for the backend server work.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m06-follow-the-money-vm-technical-steps/) sheet, for the backend server work.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Authentication, Authorisation and Accountability, on Adversarial Behaviours, and on Applied Cryptography.
 - Public guidance on money laundering through cryptocurrency exchanges, such as the Financial Action Task Force's material on virtual assets.

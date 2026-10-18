@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each lock with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to a full recipe. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get them. The training-network work has its own companion sheet. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["rfid", "mifare", "cloning", "nmap", "reconnaissance", "proftpd", "backdoor", "distcc", "cve-2004-2687", "base64", "rot13", "hex", "cyberchef", "encoding", "lockpicking", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m03-ghost-in-the-machine/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m03_ghost_in_the_machine/labsheet.md"
@@ -54,7 +56,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and a full recipe hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server steps (the training-network stages and the four VM flags) are in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m03-ghost-in-the-machine-vm-technical-steps/), so you can play the rest without them.
+The server steps (the training-network stages and the four VM flags) are in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine-vm-technical-steps/), so you can play the rest without them.
 
 > Note: The network mission is generated for your game. The flag values on the training VMs are not the same as anyone else's, so this sheet never gives you one, only the way to find it. The office password and the safe code are the same each game, but they are still things you work out from clues in the building; this sheet says where each clue is and what shape the answer takes, not what it reads.
 
@@ -64,7 +66,7 @@ You are a SAFETYNET field agent. The firm WhiteHat Security Services runs legiti
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
-![The reception lobby at the start]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/00-starting-room.png)
+![The reception lobby at the start]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/00-starting-room.png)
 
 1. \==action: Start the Break Escape mission **Ghost in the Machine**==.
 2. \==action: Watch the briefing from Agent HaX and Director Netherton==, and ask any topics you want. Then choose how you want to play it.
@@ -228,7 +230,7 @@ Talk to Ffion Rees and sign in for your visitor badge. The conference-room door 
 
 **Where:** the conference room. **Goal:** clone Sterling's executive card while you interview.
 
-![RFID Flipper reading Sterling's custom-key card]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/03-card-copy-whiteboard.png)
+![RFID Flipper reading Sterling's custom-key card]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/03-card-copy-whiteboard.png)
 
 > Hint: Her card is custom-key, so it needs a longer read. The read runs while you are standing close to her. Where in the room can you stand next to her and keep her talking?
 
@@ -270,7 +272,7 @@ Finish anything you want to do by day first (there is little). When you walk int
 
 **Where:** the server room, north off the main hallway, at night. **Goal:** get in and reach the VM Access Terminal.
 
-![The server room at night]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/04-server-room-entry.png)
+![The server room at night]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/04-server-room-entry.png)
 
 > Hint: This door wants Sterling's executive card, not the receptionist's. Inside is a terminal onto their training network and a drop-site terminal where flags are submitted.
 
@@ -284,13 +286,13 @@ Finish anything you want to do by day first (there is little). When you walk int
 
 > Warning: The server room reader wants Sterling's executive card. If it refuses you, check you emulated the right saved card.
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the network yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m03-ghost-in-the-machine-vm-technical-steps/) when you want the hints for the training network and its four flags.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the network yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine-vm-technical-steps/) when you want the hints for the training network and its four flags.
 
 ### Decoding What You Find {#hints-decode}
 
 **Where:** the CyberChef workstation (a laptop in the server room). **Clues:** the web price list, the whiteboard note, the client roster, and the drive from Sterling's desk.
 
-![CyberChef decoding the whiteboard note with ROT13]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/05-cyberchef-rot13-decode.png)
+![CyberChef decoding the whiteboard note with ROT13]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/05-cyberchef-rot13-decode.png)
 
 > Hint: None of these is encrypted, only encoded. Look at the shape of each to tell ROT13 from Base64 from hex. If one decode still looks like nonsense, it is layered: decode again.
 
@@ -322,7 +324,7 @@ Take the CyberChef workstation, then paste each encoded thing into Input and add
 
 **Where:** the executive wing, at night. **Goal:** reach Sterling's office past Terry Mott.
 
-![Terry Mott challenges you in the executive wing]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/06-guard-challenge.png)
+![Terry Mott challenges you in the executive wing]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/06-guard-challenge.png)
 
 > Hint: At night the building is shut, so if the guard's torch finds you he stops you. You can talk your way out, but the clean route is to move while his back is turned.
 
@@ -348,7 +350,7 @@ Sterling's office is a key lock, so you need the pick kit, and picking takes tim
 
 **Where:** Sterling's office, north off the executive wing. **Locks:** a key lock on the door, a password on the computer.
 
-![Sterling's executive computer and its helpdesk slip]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/07-sterling-computer-unlocked.png)
+![Sterling's executive computer and its helpdesk slip]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/07-sterling-computer-unlocked.png)
 
 > Hint: The door is a pick. The computer password is not hidden: someone wrote the format down and left it on the monitor, and the missing piece is on a plaque you walked past.
 
@@ -375,7 +377,7 @@ Pick the office door. The helpdesk slip on the monitor says the password was res
 
 **Where:** the server-room wall safe (a four-digit PIN). **Goal:** open it for the exploit catalogue.
 
-![The wall safe and its contents panel]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/11-wall-safe-open.png)
+![The wall safe and its contents panel]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/11-wall-safe-open.png)
 
 > Hint: The code is not written on the whiteboard, and it is not the founding year. The whiteboard tells you who changed it and where the new code went. Follow that trail.
 
@@ -402,7 +404,7 @@ The chain: whiteboard (ROT13) tells you where → Sterling's computer (password 
 
 **Where:** the hidden drive in Sterling's desk drawer. **Goal:** decode it and tell HaX what it says.
 
-![CyberChef decoding the desk drive with Base64 and ROT13]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/09-cyberchef-usb-directive.png)
+![CyberChef decoding the desk drive with Base64 and ROT13]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/09-cyberchef-usb-directive.png)
 
 > Hint: The drive is one unbroken block of letters, digits, `+` and `/`, and one decode may not be enough. When you have it in plain English, HaX wants to hear it from you.
 
@@ -419,7 +421,7 @@ The drive is Base64 over ROT13. At the CyberChef workstation, run From Base64 fi
 
 **Where:** Danny Foster's office, then back to Sterling in the conference room. The confrontation opens only once all four flags are in. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![Confronting Victoria Sterling in the conference room]({{ site.baseurl }}/assets/images/introducing_attacks/m03_ghost_in_the_machine/30-sterling-confrontation-open.png)
+![Confronting Victoria Sterling in the conference room]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/30-sterling-confrontation-open.png)
 
 > Hint: Two people are still in the building at night. Danny Foster, the consultant who drew the hospital survey, is in the office across from Sterling's. Sterling is waiting in the conference room. See Danny before you settle with her.
 
@@ -565,6 +567,6 @@ Work through these after you finish. Use your own run: the network flags were ge
 ## Further Reading {#further-reading}
 
 - The SAFETYNET field guides handed out in this mission, published online: [RFID Cloning](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/rfid-cloning/), [Encoding and Decoding with CyberChef](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/encoding-and-decoding-with-cyberchef/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m03-ghost-in-the-machine-vm-technical-steps/) sheet, for the training-network stages.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine-vm-technical-steps/) sheet, for the training-network stages.
 - The CyberChef documentation and wiki, and its Magic operation for recognising unknown encodings.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Network Security, on Malware and Attack Technology, and on Applied Cryptography.

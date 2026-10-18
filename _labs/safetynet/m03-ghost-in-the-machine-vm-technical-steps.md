@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to the Ghost in the Machine walkthrough, for the training network: the step-by-step hints for scanning the network, getting past the FTP service and the distcc daemon, and reading the web host's encoded price list, plus the command-line practice."
 tags: ["nmap", "reconnaissance", "proftpd", "backdoor", "distcc", "cve-2004-2687", "rot13", "cyberchef", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m03-ghost-in-the-machine-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m03_ghost_in_the_machine/labsheet_vm_steps.md"
@@ -29,7 +31,7 @@ cybok:
     keywords: ["Social engineering", "Cover identity", "Trust exploitation"]
 ---
 
-> Note: This is the technical companion to the [Ghost in the Machine walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m03-ghost-in-the-machine/). Play the game there first, and come here for the training-network hints.
+> Note: This is the technical companion to the [Ghost in the Machine walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/). Play the game there first, and come here for the training-network hints.
 
 ## The Training Network {#network}
 
@@ -165,7 +167,7 @@ This ProFTPD build carries a hidden backdoor in its source release. It is a 2010
 <details markdown="1">
 <summary>Nudge</summary>
 
-Read the page source, not the rendered page. The list sits in an HTML comment. It reads like scrambled English with normal spacing, which is ROT13. The decoding ideas are in the main walkthrough at [Encoding Is Not Security](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m03-ghost-in-the-machine/#encoding) and [Decoding What You Find](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m03-ghost-in-the-machine/#hints-decode).
+Read the page source, not the rendered page. The list sits in an HTML comment. It reads like scrambled English with normal spacing, which is ROT13. The decoding ideas are in the main walkthrough at [Encoding Is Not Security](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#encoding) and [Decoding What You Find](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#hints-decode).
 
 **Learn it:** ==action: Practise on a made-up sentence first==. ROT13 turns `Hello` into `Uryyb`, and shifting `Uryyb` back 13 places gives `Hello` again. Then do the same with the real comment.
 

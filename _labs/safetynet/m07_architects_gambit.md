@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each in-game lock with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to full steps. The server work on the attack host has its own companion sheet. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["rfid", "badge cloning", "lockpicking", "insider threat", "weak authentication", "industrial control systems", "incident response", "triage", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m07-architects-gambit/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m07_architects_gambit/labsheet.md"
@@ -54,7 +56,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and a full set of steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server work on the attack host (the four challenges you submit at the relay terminal) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m07-architects-gambit-vm-technical-steps/), so you can play the rest without it.
+The server work on the attack host (the four challenges you submit at the relay terminal) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m07-architects-gambit-vm-technical-steps/), so you can play the rest without it.
 
 > Note: Some values in this mission are fixed and you work them out from clues in the building (a PIN, a keypad code, a door password). This sheet says where each clue is and what shape the answer takes, never what it reads. The flags on the attack host are generated for your game, so they are never printed here either.
 
@@ -62,7 +64,7 @@ The server work on the attack host (the four challenges you submit at the relay 
 
 You are Agent 0x00, a SAFETYNET field agent. Four ENTROPY operations have gone live at once. You are the one agent in range of a grid control facility outside Portland, where a loaded sequence is waiting for a host inside the building to start it. The tactical team can reach one of the other three crises: Fracture in Washington, Trojan Horse in Austin, or Meltdown in San Francisco. You make that call. Two will go unanswered.
 
-![The checkpoint on arrival]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/00-starting-room.png)
+![The checkpoint on arrival]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/00-starting-room.png)
 
 You do not need any prior knowledge to start. Agent HaX hands out short in-game field guides as you reach each obstacle.
 
@@ -213,7 +215,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the briefing, then the security checkpoint. **Goal:** commit the tactical team to one operation and start moving.
 
-![Director Netherton briefs Agent 0x00]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/01-briefing-netherton.png)
+![Director Netherton briefs Agent 0x00]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/01-briefing-netherton.png)
 
 > Hint: The Threat Desk Summary in your inventory holds the three briefs. The Director will talk through each one. You can ask for them side by side before you decide.
 
@@ -242,7 +244,7 @@ Whichever operation you pick, the game records it and the debrief reads it back.
 
 **Where:** the security checkpoint. **Goal:** deal with the guard and get through to the operations floor.
 
-![Ray Hollis challenges Agent 0x00 at the checkpoint]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/02-hollis-checkpoint.png)
+![Ray Hollis challenges Agent 0x00 at the checkpoint]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/02-hollis-checkpoint.png)
 
 > Hint: The building is being evacuated and one guard has not left his post. He is armed and frightened. You can talk, bluff, back off, or fight, and what each one gets you differs.
 
@@ -275,7 +277,7 @@ None of these is marked as wrong. They change what you hear and what the debrief
 
 **Where:** the checkpoint and the operations floor. **Lock:** the server hall reader (a card). **Lock wants:** a server-zone badge.
 
-![The Contractor Badge Station PIN pad]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/04-badge-station-pin.png)
+![The Contractor Badge Station PIN pad]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/04-badge-station-pin.png)
 
 > Hint: The reader wants a server-zone badge, not a visitor pass. There is more than one way to get one. Look at what is on the security desk and what is sitting in a tray on the operations floor.
 
@@ -341,7 +343,7 @@ The **Cabling Survey Note** on the rack door is hers. It says where the survey c
 
 </details>
 
-> Note: The server work has its own sheet, so you can play the rest of the building spoiler-free and tackle the attack host yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m07-architects-gambit-vm-technical-steps/) when you want the hints for the VM Access Terminal and the four flags you submit at the SAFETYNET Relay Terminal.
+> Note: The server work has its own sheet, so you can play the rest of the building spoiler-free and tackle the attack host yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m07-architects-gambit-vm-technical-steps/) when you want the hints for the VM Access Terminal and the four flags you submit at the SAFETYNET Relay Terminal.
 
 > Tip: Open the control room door before you go far into the server work. A visible fifteen-minute clock starts partway through it, and the console that takes the abort is in that room.
 
@@ -349,7 +351,7 @@ The **Cabling Survey Note** on the rack door is hers. It says where the survey c
 
 **Where:** anywhere, once you hold a second document or have spoken to Elena. **Goal:** decide whether the figures you committed on still hold.
 
-![Agent HaX's phone offering the option to move the team]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/12-hax-phone-redirect-option.png)
+![Agent HaX's phone offering the option to move the team]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/12-hax-phone-redirect-option.png)
 
 > Hint: Your phone gains an option, **[Their schedule doesn't match our brief.]**, once you hold the second document. Put your Threat Desk Summary next to it and compare row by row.
 
@@ -372,7 +374,7 @@ The option to move the team stays open for a limited time, about 40 minutes from
 
 **Where:** the SCADA control room, north of the server hall. **Lock:** a password door. **Lock wants:** a password.
 
-![The password prompt on the SCADA control room door]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/13-control-room-password-door.png)
+![The password prompt on the SCADA control room door]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/13-control-room-password-door.png)
 
 > Hint: The door wants a password and nobody has left it lying around. Two people know it, and one of them is not a person.
 
@@ -458,7 +460,7 @@ If you have not met either of them, open your phone and choose **[I'm stuck on s
 
 **Where:** the cable vault. **Goal:** deal with Thomas Park, who is cutting a cable run.
 
-![Thomas Park in the cable vault, with the cable run behind him]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/19-park-in-the-vault.png)
+![Thomas Park in the cable vault, with the cable run behind him]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/19-park-in-the-vault.png)
 
 > Hint: He has four minutes of work left and he will not stop for words alone. What does he believe he is doing, and what is the one piece of paper in the building that says otherwise?
 
@@ -489,7 +491,7 @@ The vault also holds the **Trunk Cable Runs** (the splice that is newer than eve
 
 **Where:** the SCADA control room. **Goal:** face Dr James Mercer, then put the abort in at the Cascade Control System.
 
-![The Cascade Control System after the sequence is aborted]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/31-cascade-console-open.png)
+![The Cascade Control System after the sequence is aborted]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/31-cascade-console-open.png)
 
 > Hint: Mercer will talk if you let him, and he cannot help explaining himself. The console behind him will not take an abort until the work on the attack host is done.
 
@@ -513,7 +515,7 @@ The **Cascade Control System** is the only place the abort goes in. It stays loc
 
 **Where:** your phone, then wherever you are standing. **Goal:** finish the night and hear the debrief.
 
-![Director Netherton's debrief]({{ site.baseurl }}/assets/images/introducing_attacks/m07_architects_gambit/35-debrief-opening.png)
+![Director Netherton's debrief]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/35-debrief-opening.png)
 
 > Hint: Once the abort is in, you can keep exploring. The plant and the vault stay open until you ask to be brought in. After that the building belongs to the police.
 
@@ -660,5 +662,5 @@ Work through these after you finish. Use your own run: your ending may differ fr
 ## Further Reading {#further-reading}
 
 - The SAFETYNET field guides handed out in this mission, published online: [RFID Cloning](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/rfid-cloning/) and [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m07-architects-gambit-vm-technical-steps/) sheet, for the attack host and its four flags.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m07-architects-gambit-vm-technical-steps/) sheet, for the attack host and its four flags.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Cyber-Physical Systems Security, on Authentication, Authorisation and Accountability, on Security Operations and Incident Management, and on Human Factors.

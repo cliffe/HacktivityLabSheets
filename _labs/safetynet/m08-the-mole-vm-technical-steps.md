@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to The Mole walkthrough, for the lab network: step-by-step hints for the repository server, the credentials in its history, the login, and the escalation to root, plus command-line practice."
 tags: ["gitlist", "cve-2018-1000533", "argument-injection", "git-history", "ssh", "sudo", "privilege-escalation", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m08-the-mole-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m08_the_mole/labsheet_vm_steps.md"
@@ -29,7 +31,7 @@ cybok:
     keywords: ["User authentication"]
 ---
 
-> Note: This is the technical companion to the [The Mole walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m08-the-mole/). Play the game there first, and come here for the repository server hints.
+> Note: This is the technical companion to the [The Mole walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m08-the-mole/). Play the game there first, and come here for the repository server hints.
 
 ## The Training Network {#network}
 

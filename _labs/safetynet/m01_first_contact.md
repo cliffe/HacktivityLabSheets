@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each lock and each VM stage with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to a full recipe. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get each one. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
 tags: ["linux", "ssh", "hydra", "privilege-escalation", "sudo", "base64", "rot13", "cyberchef", "lockpicking", "password-security", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m01-first-contact/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m01_first_contact/labsheet.md"
@@ -53,7 +55,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and the full recipe hidden behind "Show" buttons. Open one at a time, and go back to the game after each: a lock you open on the first hint teaches you more than one you open with the recipe.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server steps (the four VM stages and the command-line attack exercises) are in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m01-first-contact-vm-technical-steps/), so you can play the rest without them.
+The server steps (the four VM stages and the command-line attack exercises) are in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/), so you can play the rest without them.
 
 > Note: The server mission is generated for your game. The operative's SSH password and the flag values on the server are not the same as anyone else's, so this sheet never gives you one, only the way to find it. Physical PINs and passwords in the office are the same each game, but they are still things you work out in the game; this sheet says where each clue is, not what it reads.
 
@@ -403,7 +405,7 @@ Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal a
 
 </details>
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the box yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m01-first-contact-vm-technical-steps/) when you want the hints for getting in, finding the flags and escalating privileges.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the box yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/) when you want the hints for getting in, finding the flags and escalating privileges.
 
 ### Opening the Archive and Reporting In {#hints-archive}
 
@@ -512,7 +514,7 @@ Maya in her office is the person who tipped off SAFETYNET. Talking to her fills 
 
 ## Try It on the Command Line (Optional) {#command-line}
 
-The server stage already happens on a real Kali shell, and its attack exercises are in the [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m01-first-contact-vm-technical-steps/) sheet. These short exercises let you practise the decoding safely on your own machine or a lab VM, with your own data, not anything from the game. Use any current Linux distribution with `base64` and `tr` available.
+The server stage already happens on a real Kali shell, and its attack exercises are in the [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/) sheet. These short exercises let you practise the decoding safely on your own machine or a lab VM, with your own data, not anything from the game. Use any current Linux distribution with `base64` and `tr` available.
 
 ### Encoding by hand and by tool {#cli-encoding}
 

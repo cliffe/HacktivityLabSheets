@@ -4,7 +4,9 @@ author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to the Ransomed Trust walkthrough, for the server work on the hospital backup server: the concepts behind it, step-by-step hints for the foothold, the FTP and ProFTPD routes to the flags, plus command-line practice and reflection questions."
 tags: ["linux", "ssh", "ftp", "proftpd", "metasploit", "anonymous-login", "backdoor", "privilege-escalation", "cyberchef", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m02-ransomed-trust-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m02_ransomed_trust/labsheet_vm_steps.md"
@@ -38,7 +40,7 @@ cybok:
     keywords: ["Access control bypass", "RFID authentication"]
 ---
 
-> Note: This is the technical companion to the [Ransomed Trust walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m02-ransomed-trust/). Play the game up to the server room there first, and come here for the server work.
+> Note: This is the technical companion to the [Ransomed Trust walkthrough](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust/). Play the game up to the server room there first, and come here for the server work.
 
 ## Purpose
 

@@ -10,7 +10,9 @@ overview: |
 
   This sheet gets you started, explains the ideas behind each lock with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to a full recipe or set of steps. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get them. The server work has its own companion sheet. There are decisions with consequences and more than one way to finish; the hints help you understand what you hold, not which choice to make.
 tags: ["rfid", "proximity-card", "cloning", "lockpicking", "fingerprint", "biometrics", "scada", "critical-infrastructure", "base64", "cyberchef", "encoding", "break-escape"]
-categories: ["introducing_attacks"]
+categories: ["safetynet"]
+redirect_from:
+  - /labs/introducing_attacks/m04-critical-failure/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
 source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m04_critical_failure/labsheet.md"
@@ -52,7 +54,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and a full recipe or set of steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server work in the engineering workshop has its own companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m04-critical-failure-vm-technical-steps/), so you can play the rest without it. Open it only when you want the hints for that part.
+The server work in the engineering workshop has its own companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m04-critical-failure-vm-technical-steps/), so you can play the rest without it. Open it only when you want the hints for that part.
 
 > Note: Some values are generated for your game, so this sheet never gives you one. The fixed things you work out, such as which card opens which door, are described by where the clue is and what shape the answer takes, not what it is.
 
@@ -62,7 +64,7 @@ You are a SAFETYNET field agent. Albion Energy Storage stores 200 MWh of grid po
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
-![The entrance lobby at the start, with the guard by the desk and the checkpoint gates ahead]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/00-starting-room.png)
+![The entrance lobby at the start, with the guard by the desk and the checkpoint gates ahead]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/00-starting-room.png)
 
 1. \==action: Start the Break Escape mission **Critical Failure**==.
 2. \==action: Watch the briefing from Director Netherton, Nightshade and Agent HaX==, and ask any topics you want. Then choose how you want to play it.
@@ -196,7 +198,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the main entrance, then the operations office. **Goal:** get inside, and find a way past the card readers.
 
-![The security guard at the main entrance checkpoint]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/01-checkpoint-guard.png)
+![The security guard at the main entrance checkpoint]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/01-checkpoint-guard.png)
 
 > Hint: The guard is the one person on site doing his job properly. Your cover has paperwork. What are you holding that fits?
 
@@ -223,7 +225,7 @@ To learn more in game, open your phone and choose **[How do I get past the gate?
 
 **Where:** the operations office (Vance), or the security office (the locker). **Lock wanted by:** the card reader into Battery Hall 2. **Needs:** a Level 1 card.
 
-![The RFID cloner reading Vance's card]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/02-vance-card-clone.png)
+![The RFID cloner reading Vance's card]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/02-vance-card-clone.png)
 
 > Hint: The reader wants a Level 1 card, and you do not have one. The person who does is standing in front of you, talking about a site map.
 
@@ -332,7 +334,7 @@ To learn more in game, open your phone and choose **[Relay's got the workshop ca
 
 **Where:** the engineering workshop, south of Battery Hall 1. **Lock:** the OptiGrid Tool Case (a medium key lock). **Goal:** a Fingerprint Kit.
 
-![Picking the OptiGrid Tool Case with the lock pick kit]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/06-toolcase-lockpick.png)
+![Picking the OptiGrid Tool Case with the lock pick kit]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/06-toolcase-lockpick.png)
 
 > Hint: The crew's equipment is still in the room. One case is padlocked, and what it holds is what the plant-room door needs.
 
@@ -371,13 +373,13 @@ To learn more in game, open your phone, choose **[Send me a field guide.]** then
 
 </details>
 
-> Note: The server work has its own sheet, so you can play the rest spoiler-free and work it out yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m04-critical-failure-vm-technical-steps/) when you want the hints for the server.
+> Note: The server work has its own sheet, so you can play the rest spoiler-free and work it out yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m04-critical-failure-vm-technical-steps/) when you want the hints for the server.
 
 ### Lifting Vance's Print {#hints-print}
 
 **Where:** the Duty Round Panel in Battery Hall 1. **Goal:** a print the plant-room reader will accept.
 
-![The fingerprint kit compare step, with two reference cards]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/08-fingerprint-compare.png)
+![The fingerprint kit compare step, with two reference cards]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/08-fingerprint-compare.png)
 
 > Hint: The duty engineer logs every round on a small wall terminal. Somebody who touches it every two hours leaves more than a log entry.
 
@@ -407,7 +409,7 @@ This is quiet work that can be done before the server work, while nothing is cou
 
 **Where:** the plant room, south of Battery Hall 2. **Who:** Static and Voltage. **Goal:** get to the Emergency Shutdown pushbutton.
 
-![ENTROPY operative Static in the plant room]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/10-plant-room-static.png)
+![ENTROPY operative Static in the plant room]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/10-plant-room-static.png)
 
 > Hint: The man holding the live trigger is standing next to the button. You will not walk past him, and what you choose to do about him decides how the rest goes.
 
@@ -437,7 +439,7 @@ None of these is scored as right or wrong. They change what the debrief says abo
 
 **Where:** the plant room, then the loading dock. **Goal:** stop the runaway, then decide what else to read before you leave.
 
-![The emergency shutdown firing once the hazard is confirmed]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/33-esd-shutdown-firing.png)
+![The emergency shutdown firing once the hazard is confirmed]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/33-esd-shutdown-firing.png)
 
 > Hint: The button is behind a hinged flap. If it refuses you, it says which condition is missing.
 
@@ -457,7 +459,7 @@ None of these is scored as right or wrong. They change what the debrief says abo
 
 **Where:** the loading dock. **Lock:** a key lock on the go-bag (an easy one). **Clue:** a card with a long block of letters.
 
-![The CyberChef Workstation decoding the encoded safehouse card]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/14-cyberchef-decode.png)
+![The CyberChef Workstation decoding the encoded safehouse card]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/14-cyberchef-decode.png)
 
 > Hint: The card in the bag is one unbroken run of mixed-case letters and digits. You already have a tool for that.
 
@@ -485,7 +487,7 @@ To learn more in game, open your phone, choose **[Send me a field guide.]** then
 
 **Where:** HQ, once you are brought in. What you choose is your decision. No ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![The HQ debrief with Agent HaX]({{ site.baseurl }}/assets/images/introducing_attacks/m04_critical_failure/37-debrief-start.png)
+![The HQ debrief with Agent HaX]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/37-debrief-start.png)
 
 > Hint: The debrief reads back what you did and who you protected. You will be asked how much of the story to tell the public.
 
@@ -628,6 +630,6 @@ Work through these after you finish. Use your own run: your choices and your end
 ## Further Reading {#further-reading}
 
 - The SAFETYNET field guides handed out in this mission, published online: [RFID Cloning](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/rfid-cloning/), [Lockpicking](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/lockpicking/) and [Encoding and Decoding with CyberChef](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/encoding-and-decoding-with-cyberchef/).
-- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/introducing_attacks/m04-critical-failure-vm-technical-steps/) sheet, for the server work in the engineering workshop.
+- The companion [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m04-critical-failure-vm-technical-steps/) sheet, for the server work in the engineering workshop.
 - The CyberChef documentation and wiki, and its Magic operation for recognising unknown encodings.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Cyber-Physical Systems Security, on Authentication, Authorisation and Accountability, and on Applied Cryptography.
