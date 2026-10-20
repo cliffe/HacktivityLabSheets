@@ -49,6 +49,11 @@ Password: tiaspbiqe2r (**t**his **i**s **a** **s**ecure **p**assword **b**ut **i
 
 You won't login to the hackerbot_server, but the VM needs to be running to complete the lab.
 
+
+### For marks in the module {#for-marks-in-the-module}
+
+**You need to submit flags**. Note that the flags and the challenges in your VMs are different to other's in the class. Flags will be revealed to you as you complete challenges throughout the module. Flags look like this: `flag{somethingrandom}`. Submit your flags in Hacktivity to register your progress in the lab.
+
 {% include hackerbot-intro.md role="interact with you and challenge you with RSA encryption tasks" chat="full" %}
 
 ## Purpose {#purpose}

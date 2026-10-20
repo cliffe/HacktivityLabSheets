@@ -43,8 +43,7 @@ You won't log in to the hackerbot_server, but the VM needs to be running to comp
 
 ### For marks in the module {#for-marks-in-the-module}
 
-1. **You need to submit flags**. Note that the flags and the challenges in your VMs are different to other's in the class. Flags will be revealed to you as you complete challenges throughout the module. Flags look like this: `flag{somethingrandom}`. Submit your flags in Hacktivity to register your progress in the lab.
-2. **You need to document the work and your solutions in a Log Book**. This needs to include screenshots (including the flags) of how you solved each Hackerbot challenge and a writeup describing your solution to each challenge. The Log Book will be submitted later in the semester.
+**You need to submit flags**. Note that the flags and the challenges in your VMs are different to other's in the class. Flags will be revealed to you as you complete challenges throughout the module. Flags look like this: `flag{somethingrandom}`. Submit your flags in Hacktivity to register your progress in the lab.
 
 {% include hackerbot-intro.md role="attack your system" chat="full" %}
 
