@@ -69,6 +69,8 @@ You do not need any prior knowledge before you start. The one new decode (Base64
 
 The mission takes about 100 to 110 minutes. Your progress is kept between sessions.
 
+![The forward post at the gate, with Director Netherton, the raid team and your agent standing among the vans]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/00-forward-post-raid-team.png)
+
 > Note: Wall displays and your phone show a clock, in UTC, counting toward the release at 06:00 and the head start at 04:00. It starts at 01:45 and steps forward with the raid as you clear each stage, so it is story time, not a real countdown you can run out of. "Nothing went at six" in the credits means you disarmed the release, not that you beat a timer.
 
 > Tip: A natural stopping point for a 60-minute class is once you have cut the gallery's power and taken the release console and the hatch flags. The gallery, the core and the ending make a strong second session.
@@ -187,6 +189,8 @@ Find the stage you are on. The stages are in play order. Read the hint, then go 
 
 > Hint: Everything starts at Netherton's table. Take the briefing and the aside, answer his question about Nightshade, then start the gate console.
 
+![The gate console and the gate terminal on the right of the forward post, with your agent beside them]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/01-gate-console-and-terminal.png)
+
 <details markdown="1">
 <summary>Nudge</summary>
 
@@ -216,6 +220,8 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 > Hint: The inner door opens as you reach it. The duty handset rings; answer it.
 
+![The blast tunnel, with the guard post, the guard's green sight cone and your agent standing outside it]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/02-blast-tunnel-guard-post.png)
+
 <details markdown="1">
 <summary>Steps</summary>
 
@@ -231,6 +237,8 @@ Close the briefing and take the aside that follows; it opens the search for the 
 **Where:** the workshop and the power room. **Lock:** the power room takes a contractor's card. **Goal:** cut the power to the gallery.
 
 > Hint: The power room wants a contractor's card. Clone the contractor's, talk him into it, or pick the fitter's locker for the spare.
+
+![The power room, with the fitter beside the shutter isolator and the breaker row labelled for the gallery shutter]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/05-power-room-shutter-isolator.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -257,6 +265,8 @@ The workshop also holds a casualty sheet with a Base64 note in the margin (see *
 
 > Hint: Two flags here: the release console and the sealed hatch. The gallery stair opens once both are in and the power is cut.
 
+![The server hall, with your agent at the release console and a doctor and two patrolling guards in the room]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/06-server-hall-release-console.png)
+
 <details markdown="1">
 <summary>Steps</summary>
 
@@ -273,6 +283,8 @@ The workshop also holds a casualty sheet with a Base64 note in the margin (see *
 **Where:** the security office, the workshop bench, and the team. **Goal:** gather the door log, the alibis and the bench log, and decide whether to name the sleeper.
 
 > Hint: Three things point somewhere: the door log at the monitoring desk, the alibis you can check with the team, and the bench log. A badge in a log names a card, not a person.
+
+![The security office, with your agent at the monitoring desk where the door log is kept and a guard on watch]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/03-security-office-monitoring-desk.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -295,6 +307,8 @@ You can name the sleeper on the phone to the Director or face to face. Name them
 
 </details>
 
+![The workshop, with your agent beside the bench and its clipboard, and the contractor and a guard on the floor]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/04-workshop-bench-log.png)
+
 > Warning: Naming the wrong person has a cost and cannot be taken back cleanly. If the evidence does not point one way yet, you are allowed to leave it; the sleeper can also be dealt with at the core.
 
 ### Across the Gallery to the Core {#hints-gallery}
@@ -302,6 +316,8 @@ You can name the sleeper on the phone to the Director or face to face. Name them
 **Where:** the gallery. **Lock:** a four-digit outer lock. **Goal:** open the outer lock and reach the core.
 
 > Hint: The outer lock is four digits, and your handler's hints go quiet near the core. Dust the keypad to see which keys are used, then let the cracker finish.
+
+![The gallery seen from the server hall door, with the lock party, the guards and the keypad on the far wall]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/07-gallery-lock-party.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -321,6 +337,8 @@ Dust the outer lock's keypad plate with the Fingerprint Kit. The worn keys are t
 
 </details>
 
+![The outer lock's PIN keypad with four empty digits, before anything is entered]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/08-gallery-outer-lock-keypad.png)
+
 > Warning: HaX jams near the core, so her hints stop. Gather the sleeper evidence and anything else you want before you cross.
 
 ### The Core: The Case and the Three Exchanges {#hints-core}
@@ -328,6 +346,8 @@ Dust the outer lock's keypad plate with the Fingerprint Kit. The worn keys are t
 **Where:** the core. **Goal:** submit the last flag, hear the Architect out, and land points in the three exchanges.
 
 > Hint: The Architect is waiting. Submit the core flag, then hear him out. The three exchanges are where you land the points that shape how the end can go.
+
+![The core, with the Architect seated at his console and the gallery you came through to the left]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/09-core-tesseract.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -373,6 +393,8 @@ Joining ENTROPY is a real, signposted ending. It takes three deliberate picks at
 **Where:** the closing scene after your decisions. **Goal:** see the night out.
 
 > Hint: The ending you chose sets the closing scene. Let it play; the credits follow and list what you did.
+
+![The closing scene at the forward post a few minutes before six, with the Director and a short list of people to speak to]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/10-forward-post-before-six.png)
 
 <details markdown="1">
 <summary>Steps</summary>
