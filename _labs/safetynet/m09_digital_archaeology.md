@@ -66,7 +66,7 @@ You do not need any prior knowledge before you start. The Vigenere cipher is tau
 
 The mission takes about 75 to 85 minutes. Your progress, evidence and unlocked rooms are kept between sessions.
 
-> Note: A clock shows in the corner. It is story time in UTC, not a countdown you can run out of: it moves with the night and jumps to the morning at the debrief. Phone messages are stamped with it. Nothing fails if you take your time.
+> Note: A clock shows in the corner. It is story time in UTC, not a countdown you can run out of. It starts at 04:45 (that is 22:45 at night in Helena, Montana) and moves with the night, then jumps to 10:00 at the debrief. Phone messages are stamped with it. Nothing fails if you take your time.
 
 > Tip: A natural stopping point for a 60-minute class is once you have opened the director's office and hold the tape store card. The salvage cage, the confrontation and the debrief make a good second session.
 
@@ -148,18 +148,25 @@ A comparison goes in two passes, the way a real examiner works:
 1. **Class first.** The overall pattern is a **loop**, a **whorl** or an **arch**. A loop also opens to one side. If the lift is a whorl and a card is a loop, they are not the same finger, and you can stop there.
 2. **Then the small marks.** Around the centre of the print are **minutiae**: places where a ridge ends, and places where one ridge forks into two. Their type and their position relative to the centre have to line up. One mark of the right type in the wrong place, or missing, rules a card out.
 
-In the game the lift and the cards both show the pattern and a few marked minutiae, so you compare them by eye and the game names the feature that differs when a card is wrong.
+In the game the lift and each candidate card are drawn with the same markers, so you compare them by eye:
+
+- a green cross marks the **core**, the centre you measure everything from
+- triangles mark the **deltas**, the points where ridge flows meet
+- a red ring marks a **ridge ending**
+- a red square marks a **fork** (a bifurcation)
+
+Use **View large** on a card to see the markers close up, and press **V** to cycle the cards. Pick the one that agrees on pattern class first and then on every mark. If you pick wrong, the game names the feature that differs, so read that and look again.
 
 ```
-Lift:        whorl, centre at the core
-             a fork above and to the right of the centre
-             a ridge ending below the centre
+Lift:        whorl; green cross at the core
+             red square (a fork) above and to the right of the core
+             red ring (a ridge ending) below the core
 
-Card A:      loop opening left        -> wrong class, rule out
-Card B:      whorl; a ridge ending above the centre, no fork
-                                      -> the fork is missing, rule out
-Card C:      whorl; a fork above-right, a ridge ending below
-                                      -> class and both marks agree
+Card A:      loop opening left         -> wrong class, rule out
+Card B:      whorl; a red ring above the core, no red square
+                                       -> the fork is missing, rule out
+Card C:      whorl; red square above-right, red ring below
+                                       -> class and both marks agree
 ```
 
 The lesson HaX gives you says it best: the owner can change a PIN tomorrow, but she cannot change her thumb, and she has left it on every stamp she owns.
@@ -248,7 +255,7 @@ The other way is west: pick the dock office door (an easy key lock, or use the g
 
 > Note: How to get the catalogue and ledger flags off the server is its own sheet, so you can play the rest spoiler-free. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m09-digital-archaeology-vm-technical-steps/) when you want the server hints.
 
-> Warning: If you already have the server console open from a break, go back and click the Field Laptop anyway. The first objective only ticks off when you touch the laptop.
+> Tip: The **Field Laptop** in the reading room is the thing to click to set the drop terminal up. If you go to the terminal first, the game nudges you back to the laptop after a moment.
 
 ### The Hatch: Clone the Card and Lift the Print {#hints-hatch}
 
@@ -299,7 +306,7 @@ Her **Rubber Stamp** sits on the shelf by the hatch. Dust it with the Fingerprin
 <details markdown="1">
 <summary>Nudge</summary>
 
-At the cage gate, open the cloner, choose the director's stacks card from **Saved**, and emulate it. Inside, the **Plan Cabinet** has a fingerprint reader. Use the lifted print on it. The reader compares your lift against candidate prints, so you have to confirm it is the director's: match the pattern first, then the small marks around the centre, using **Concepts** if a card is close.
+At the cage gate, open the cloner, choose the director's stacks card from **Saved**, and emulate it. Inside, the **Plan Cabinet** has a fingerprint reader. Use the lifted print on it. The reader shows your lift beside candidate cards, all drawn with the same markers (green cross core, triangle deltas, a red ring for a ridge ending, a red square for a fork). Confirm which is the director's: match the pattern class first, then the marks around the core, pressing **V** to cycle the cards and **View large** to compare them closely. A wrong pick names the feature that differs, so read it and look again.
 
 Take the **Candidate Assessment, Intake 2011** from the cabinet. This is Nightshade's file.
 

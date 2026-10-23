@@ -69,7 +69,7 @@ You do not need any prior knowledge before you start. The one new decode (Base64
 
 The mission takes about 100 to 110 minutes. Your progress is kept between sessions.
 
-> Note: Wall displays and your phone show a clock, counting the release at six o'clock UTC and the head start at four. It is story time that moves with your progress, not a real countdown you can run out of. "Nothing went at six" in the credits means you disarmed the release, not that you beat a timer.
+> Note: Wall displays and your phone show a clock, in UTC, counting toward the release at 06:00 and the head start at 04:00. It starts at 01:45 and steps forward with the raid as you clear each stage, so it is story time, not a real countdown you can run out of. "Nothing went at six" in the credits means you disarmed the release, not that you beat a timer.
 
 > Tip: A natural stopping point for a 60-minute class is once you have cut the gallery's power and taken the release console and the hatch flags. The gallery, the core and the ending make a strong second session.
 
@@ -208,7 +208,7 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 > Note: How to get the gate flag off the monitoring host is in the companion, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m10-full-disclosure-vm-technical-steps/).
 
-> Warning: If you have the server console already open and submit the gate flag without clicking the gate console, the breach stalls and the blast door stays shut. Go back and click the console to recover it.
+> Tip: The **gate console** at the forward post is the thing to click to start the breach. If you go to the gate terminal first, the game nudges you back to the console; submitting the first flag also sets the breach going, so the blast door opens either way.
 
 ### Get Below Ground {#hints-below}
 
