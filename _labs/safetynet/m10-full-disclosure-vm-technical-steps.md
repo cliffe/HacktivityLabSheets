@@ -2,13 +2,13 @@
 title: "Full Disclosure: VM Technical Steps"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Technical companion to the Full Disclosure walkthrough, for the bunker network: step-by-step hints for the monitoring host, the staging schedule, the container escape to the release host and the chroot escape to the core host, plus command-line practice."
-overview: "This companion holds the whole server block for Mission 10. It has the VM concepts (network mapping, command injection, container and chroot confinement, privilege escalation, audit trails), stage-by-stage hints for the four flags, command-line practice on your own data, and the server reflection questions."
-tags: ["maltrail", "command-injection", "nmap", "docker", "privileged-container", "container-escape", "chroot", "privilege-escalation", "break-escape"]
+description: "Technical companion to the Full Disclosure walkthrough, for the bunker network: step-by-step hints for the command-injection foothold on the monitoring host, the credentialed staging login, the container escape to the release host and the chroot escape to the core host, plus command-line practice."
+overview: "This companion holds the whole server block for Mission 10. It has the VM concepts (network mapping, command injection, found credentials and credentialed access, container and chroot confinement, privilege escalation, audit trails), stage-by-stage hints for the four flags, command-line practice on your own data, and the server reflection questions."
+tags: ["maltrail", "command-injection", "nmap", "credentialed-access", "ssh", "docker", "privileged-container", "container-escape", "chroot", "privilege-escalation", "break-escape"]
 categories: ["safetynet"]
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "advanced"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m10_full_disclosure/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m10_full_disclosure/"
 cybok:
   - ka: "NS"
     topic: "Network Security Tools"
@@ -40,7 +40,7 @@ cybok:
 The raid on Tomb Gamma runs across a small network. You get one attack box, and there are three targets.
 
 - **The attack box** is a Kali Linux machine. It is the terminal at the forward post, the only box you attack from.
-- **The security monitoring host** is where the bunker's cameras and door systems report. Its monitoring platform holds the first two flags.
+- **The security monitoring host** is where the bunker's cameras and door systems report. It carries the first two flags, but on two separate accounts reached two different ways: the first by breaking into the monitoring platform, the second by a login you find in the bunker.
 - **The release host** runs the release service inside a container.
 - **The core host** runs a service inside an older confined area, and sits beneath Tesseract's own console.
 
@@ -53,7 +53,9 @@ There are four flags, one at each station, and each station takes one flag. The 
 
 The stations are gated by the bunker's room locks, so the order is fixed by the game, not by the network. Submit each flag at its own station: a flag put in at the wrong terminal is read as a hint, not an answer.
 
-The flag values are generated for each game, so this sheet never gives one. It says where each flag sits and how to reach it. Root login over SSH is turned off on the release host and the core host, so there is no shortcut to root on either: the way up is the escape.
+The flag values are generated for each game, so this sheet never gives one. It says where each flag sits and how to reach it.
+
+Two of the stages hand you a **found login** inside the bunker and two make you break in. The split matters, so keep it in mind as you go. The monitoring foothold (flag 1) and both climax hosts (flags 3 and 4) are **exploitation**: a flaw lets you in, no password needed. The staging schedule (flag 2) is **credentialed**: a sign-in card you pick up in the server hall opens a separate account. On the release host a second card (the operators' duty sheet) gives you a login too, but it lands you a plain, non-admin shell that cannot read the flag, so the escape still does the real work. Root login over SSH is turned off on the release host and the core host, so there is no shortcut to root on either: the way up is the escape.
 
 ## Concepts {#concepts}
 
@@ -99,6 +101,25 @@ uid=1000(cliffe) gid=1000(cliffe) groups=1000(cliffe),4(adm),24(cdrom),27(sudo)
 ```
 
 The `; id` after the name was meant to be part of a greeting. The shell ran it as a second command. Code you run this way runs as the service's own account, so it can read whatever that account can read.
+
+### Found Credentials and Credentialed Access {#credentials}
+
+Not every way in is a flaw. Sometimes you find a working username and password and simply sign in. On this network two of them turn up as cards in the bunker: a staging sign-in card and an operators' duty sheet. Using a credential you were not meant to have is its own class of access, separate from exploiting a bug.
+
+A found login matters because of **file permissions**. On Linux every file has an owner and a mode that says who may read it. A home directory set to mode `700` may be entered by its owner and by root, and by nobody else, so the files inside it follow the same rule. A file in one account's home is out of reach from a foothold on a different account, even on the same host. That is why a flag in one account's home cannot be read from a foothold on another: you need that account's login, or root.
+
+```
+$ ls -ld /home/staging
+drwx------ 2 staging staging 4096 Oct 20 09:14 /home/staging
+$ whoami
+secmon
+$ cat /home/staging/release_schedule_staging
+cat: /home/staging/release_schedule_staging: Permission denied
+```
+
+The `drwx------` means only `staging` (and root) may enter that home. Signed in as `secmon`, you are refused. Signing in as `staging` with the card reads it.
+
+A found credential is also a limit, not a master key. A non-admin login gives you only what that account may read. If what you want belongs to root, a working non-admin password does not reach it, and you are back to privilege escalation or an escape.
 
 ### Containers and a Privileged-Container Escape {#containers}
 
@@ -156,7 +177,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 > Tip: Before you open any hint, ask three things. Which hosts are up, and what does each one run? What does this service say when you connect? What can this account read?
 
-> Note: The bunker VMs are not built yet, and one decision is still open (**F27**). It changes how the foothold flags are reached, not the techniques you learn. On each affected stage below there is a note telling you what might change. HaX sends a field guide for each stage to your workstation in game; that guide matches the build you are playing, so follow it where it differs from the Recipe here.
+> Note: HaX sends a field guide for each stage to your workstation in game. Ask her on the phone and choose **[Field guide.]**; each guide matches the box you are playing, so follow it where it differs from the Recipe here.
 
 ### Getting Onto the Attack Box {#hints-vm-attack-box}
 
@@ -212,40 +233,41 @@ Fingerprint the monitoring platform and note the software name and version. Look
 
 </details>
 
-> Note (F27): The build may add a step. A credential found in the bunker, shown in game on the gate-console maintenance tag, could be needed to read flag 1, with the injection kept only as the way in. If your build works that way, run the injection for the foothold, then use the found login to read the flag. HaX's field guide names the exact route.
+> Note: This stage is pure exploitation, no login. The maintenance tag you see in game names the service account (`secmon`) and the host's address only, not a password. The injection is the way in, and the code you run lands as that account, so you read the status note straight away.
 
 > Warning: An injection request written for a different version may fail or do something you did not expect. Check the version you fingerprinted against the one the guide was written for.
 
 ### Stage 2: The Staging Schedule {#hints-vm-flag2}
 
-**Where:** the monitoring host, through the foothold from Stage 1. **Goal:** read the staging copy of the release schedule from the platform's threat-data store, and submit the flag at the release console.
+**Where:** the monitoring host, as a separate account you sign in to. **Goal:** sign in with the staging card's login, read the staging copy of the release schedule from that account's own home, and submit the flag at the release console.
 
-> Hint: The login page is not the only thing the platform holds. It keeps a store of threat data, and the schedule sits there on one line beside the flag.
+> Hint: The foothold from Stage 1 does not reach this one. Flag 2 is in a different account's home, and that home is readable only by its owner. You need its login, and the bunker hands you one.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-From the foothold you have, read the platform's threat-data store rather than the front page. The staging copy of the schedule is kept in a record there: the release channels, the cells' early-access orders, and the first entries by city. The flag is on the same line as that text. Read the whole record, not just the first field.
+This stage is credentialed, not an exploit. The staging schedule lives in its own account (`staging`), whose home is locked down so the Stage 1 foothold cannot read it. In the server hall, by the release console, you pick up a staging sign-in card with that account's username and password. Sign in to the monitoring host with it, and read the schedule from the account's home: the release channels, the cells' early-access orders, and the first entries by city. The flag sits beside that text in the home.
 
-**Learn it:** ==action: Read the record the platform stores== and say in one line what the schedule is for before you copy anything.
+**Learn it:** ==action: From the Stage 1 foothold, try to read the `staging` account's home== and watch it refuse with `Permission denied`. That is why you need the card, not the foothold.
 
-**To learn more in game:** on the phone, ask HaX and choose **[Field guide.]**. She sends the guide for the staging copy to your workstation.
+**To learn more in game:** on the phone, ask HaX and choose **[Field guide.]**. She sends the guide for the staging copy to your workstation, and tells you the card is on the console desk.
 
 </details>
 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: From the Stage 1 foothold, find the platform's threat-data store on the monitoring host==.
-2. \==action: Read the record that holds the staging schedule, in full==.
-3. \==action: Copy the flag from the same line as the schedule text==.
-4. \==action: Submit the flag at the release console in the server hall==.
+1. \==action: Collect the staging sign-in card from the console desk in the server hall==, and read the username and password off it.
+2. \==action: Sign in to the monitoring host with that login, for example `ssh staging@<monitoring host>`==.
+3. \==action: Read the staging copy of the release schedule from the account's home directory==.
+4. \==action: Copy the flag from that account's home==, kept beside the schedule.
+5. \==action: Submit the flag at the release console in the server hall==.
 
 </details>
 
-> Warning: The schedule line is long and holds spaces and punctuation. Copy the flag by itself, not the whole line, and do not drop a character off the end.
+> Warning: The Stage 1 foothold will not read this flag. The `staging` home is set so only its owner and root may enter it, so a `Permission denied` from the `secmon` foothold is expected, not a dead end. Use the card's login instead.
 
-> Tip: A natural stopping point for a 60-minute class is after this stage. Both of these flags are on one host, the monitoring host. The next two stages are the two climax boxes and take longer.
+> Tip: A natural stopping point for a 60-minute class is after this stage. Both of these flags are on one host, the monitoring host, but note that you reached them two different ways: a break-in for flag 1, a found login for flag 2. The next two stages are the two climax boxes and take longer.
 
 ### Stage 3: Out of the Container {#hints-vm-flag3}
 
@@ -256,7 +278,9 @@ From the foothold you have, read the platform's threat-data store rather than th
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan the release host and find the port the service listens on. Connect to it and you land in a shell inside the container, not on the host. Confirm that first: a Docker container leaves a marker file at the root, and the control-group line for process 1 names the runtime. The container is privileged, so it keeps the host's access, and from there you can reach the host's own filesystem. The flag is in root's home on the host beneath the container. There is no root login over SSH here, so the escape is the only way up.
+Scan the release host and find the port the service listens on. Connect to it and you land in a shell inside the container, not on the host. No password is asked for: the service drops you straight in, so this is exploitation, not a login. Confirm where you are first: a Docker container leaves a marker file at the root, and the control-group line for process 1 names the runtime. The container is privileged, so it keeps the host's access, and from there you can reach the host's own filesystem. The flag is in root's home on the host beneath the container, next to the release service's arming and kill configuration. There is no root login over SSH here, so the escape is the only way up.
+
+By the east racks in the server hall you may also find the operators' duty sheet, with an operative login (`relops`). That login does work over SSH, but it signs you in as a plain operator with no admin rights, so it cannot read root's home and does not give you the flag. It is worth a look to see the host from the inside, but the escape is still what gets you there. A valid password is not the same as being root.
 
 **Learn it:** ==action: Check whether you are inside a container== with `ls -la /.dockerenv` and `head -1 /proc/1/cgroup` before you try to escape.
 
@@ -271,11 +295,11 @@ Scan the release host and find the port the service listens on. Connect to it an
 2. \==action: Connect to the service with `nc <release host> <port>`==, and note that the shell is inside the container.
 3. \==action: Confirm the container with `ls -la /.dockerenv` and `head -1 /proc/1/cgroup`==.
 4. \==action: Use the privileged container's access to reach the host's filesystem, following the field guide==.
-5. \==action: Read the flag from root's home on the host==, and submit it at the sealed section's hatch.
+5. \==action: Read the flag from root's home on the host==, beside the arming and kill configuration, and submit it at the sealed section's hatch.
 
 </details>
 
-> Note (F27): The build may add a step. An operative credential found in the server hall, shown in game on the duty card, could be needed to reach the service before the escape. If your build works that way, use the found login to reach the service, then escape the container as above. HaX's field guide names the exact route.
+> Note: The `relops` login from the duty sheet is a side route, not the way to the flag. It gives a non-admin operator shell on the host, which cannot read root's home. Do not spend long on it. The container escape is what lands you as root, where the flag is.
 
 > Warning: The flag is not in the container. The container holds no flag. If you stop as soon as you have a shell, you have not finished this stage. The flag is in root's home on the host, after the escape.
 
@@ -288,7 +312,9 @@ Scan the release host and find the port the service listens on. Connect to it an
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan the core host and find the service port. Connect and you land inside a chroot jail: the filesystem is thin, a few directories and little else. A process that still holds enough privilege can change its root directory again from a point outside the jail and reach the real host root. The flag is in root's home on the host, not in the jail. As on the release host, there is no root login over SSH, so the escape is the only route.
+Scan the core host and find the service port. Connect and you land inside a chroot jail, with no password asked for, so this stage is exploitation like Stage 3. The filesystem is thin, a few directories and little else. A process that still holds enough privilege can change its root directory again from a point outside the jail and reach the real host root. The flag is in root's home on the host, not in the jail, next to the core host's file index and an unsent vendor notice for Carrow Controls. As on the release host, there is no root login over SSH, so the escape is the only route.
+
+The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`) is part of the story, not a box login. It is his invitation, and it opens nothing on the core host for you. Do not try to sign in with it: the way onto the box is the chroot escape.
 
 **Learn it:** ==action: List `/` inside the shell you land in== and compare it with a full host's root. A thin listing means you are confined.
 
@@ -303,11 +329,11 @@ Scan the core host and find the service port. Connect and you land inside a chro
 2. \==action: Connect to the service with `nc <core host> <port>`==, and note that the shell is in a jail.
 3. \==action: List `/` and confirm the filesystem is thin==.
 4. \==action: Escape the chroot onto the host root, following the field guide==.
-5. \==action: Read the flag from root's home on the host==, and submit it at the core host terminal.
+5. \==action: Read the flag from root's home on the host==, beside the file index and the vendor notice, and submit it at the core host terminal.
 
 </details>
 
-> Note (F27): The build may add a step. A core access key found in the bunker, shown in game on the access-key envelope at the gallery rail, could be needed to reach the service before the escape. If your build works that way, use the found key to reach the service, then escape the jail as above. HaX's field guide names the exact route.
+> Note: The core access code (`TSRCT-CORE-9F21`) is a story prop, not a credential. It logs in to nothing. The chroot escape is the only route onto this box.
 
 > Warning: The jail holds no flag either. Do not submit anything you read inside the jail. The flag is in root's home on the host, after the escape.
 
@@ -338,6 +364,19 @@ $ sh greet.sh "Ada; id"
 
 > Note: The service is made up. The point is to see that unchecked input joined into a command runs as a command.
 
+### A locked-down home {#cli-permissions}
+
+On your own box, make a file and lock its folder down, then read back what the permissions say.
+
+```
+$ mkdir -p ~/vaultdemo && echo "top secret" > ~/vaultdemo/note
+$ chmod 700 ~/vaultdemo
+$ ls -ld ~/vaultdemo
+$ stat -c '%A %U' ~/vaultdemo
+```
+
+\==action: Run the four lines, and write one sentence on who may read `~/vaultdemo/note`== (its owner and root, nobody else). Then \==action: say why a foothold on a different, non-root account on the same machine could not read it==. This exercise is reading only.
+
 ### Am I inside a container? {#cli-container}
 
 On your own box, which is not a container, run the two checks and see what "not confined" looks like.
@@ -361,13 +400,17 @@ On your own Kali box, run `sudo -l` and read the output line by line.
 
 > Question: The monitoring foothold needed no login. Why is a security monitoring platform a tempting first target, and what does a foothold on it give an attacker that a foothold elsewhere would not?
 
+> Question: Flag 1 and flag 2 both sat on the one monitoring host, yet the flag-1 foothold could not read flag 2. What stopped it, and why did a working staging login reach what the foothold could not?
+
+> Question: The duty-sheet login on the release host worked, but it still did not give you the flag. What is the difference between holding a valid account and holding root, and why is a found non-admin credential only a limited kind of access?
+
 > Question: Flags 3 and 4 both sat on the host, not in the confined area you first landed in. What is the difference between a privileged container and a chroot jail, and why is neither a safe boundary for a service an attacker can reach?
 
 > Question: Root login over SSH was turned off on the release host and the core host. What attack did that close off, and why was it not enough on its own?
 
 > Question: Of the four stages, which one would the bunker's own monitoring be least likely to record, and why?
 
-> Action: Write a short checklist for the administrator of the three bunker hosts. Give one line for each of the four stages, naming the control that would have stopped that stage: the monitoring foothold, the staging schedule read, the container escape and the chroot escape. Hand in the checklist.
+> Action: Write a short checklist for the administrator of the three bunker hosts. Give one line for each of the four stages, naming the control that would have stopped that stage: the monitoring foothold, the staging login and schedule read, the container escape and the chroot escape. Hand in the checklist.
 
 ## Further Reading {#further-reading}
 

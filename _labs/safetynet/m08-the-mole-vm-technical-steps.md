@@ -2,14 +2,14 @@
 title: "The Mole: VM Technical Steps"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Technical companion to The Mole walkthrough, for the lab network: step-by-step hints for the repository server, the credentials in its history, the login, and the escalation to root, plus command-line practice."
+description: "Technical companion to The Mole walkthrough, for the lab network: step-by-step hints for the repository server, the mole's credentials, the login to svc-planning, and the escalation to root, plus command-line practice."
 tags: ["gitlist", "cve-2018-1000533", "argument-injection", "git-history", "ssh", "sudo", "privilege-escalation", "break-escape"]
 categories: ["safetynet"]
 redirect_from:
   - /labs/introducing_attacks/m08-the-mole-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m08_the_mole/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m08_the_mole/"
 cybok:
   - ka: "NS"
     topic: "Networking Applications"
@@ -37,9 +37,11 @@ cybok:
 
 The Server Room has a **GitList Repository Server** terminal. It opens a Kali attack box on the lab network. From that box you reach SAFETYNET's internal repository server, the other host on the network. The repository server holds four flags, and you submit each one at the **Evidence Relay Terminal** in the same room. The main walkthrough covers the game around this work. This sheet covers the work on the repository server.
 
-1. **Exposure flag.** Get code running on the repository browser, with no login.
-2. **Credentials flag.** Find the password committed to the repository history.
-3. **Account flag.** Log in as the account that password belongs to, and read its home directory.
+The four flags all come off one host, and they all belong to one account. The exposed repository names the account, the mole left its password on the box, that account owns the home directory you log in to, and the same account's name is in the root-only access logs. The account is **svc-planning**. Keeping that in mind stops the four stages feeling like four separate puzzles: they are one person's trail.
+
+1. **Exposure flag.** Get at SAFETYNET's own repository browser, with no login, and read what it exposes.
+2. **Credentials flag.** Recover the mole's password, left on the box.
+3. **Account flag.** Log in as **svc-planning** with that password, and read its home directory.
 4. **Root flag.** Escalate to root through a sudo rule, then read the logs the server keeps for its users.
 
 The flag values are generated for each game, so this sheet never gives one. It says where each flag sits and how to reach it.
@@ -52,7 +54,7 @@ You do not need to read all of this before you start. Come back to it when a sta
 
 **SSH** (Secure Shell) gives you a command line on another machine over an encrypted connection. You give it an account name, a host and a password, or a key. The server checks the credentials against the account. If they match, you get a shell that runs as that account, and everything you type can read and write only what that account may.
 
-A Linux shell works on a set of directories and files. Each file has an owner and permissions. Your **home directory** is the part of the disk the account owns. Files outside it, such as system logs, usually belong to root.
+A Linux shell works on a set of directories and files. Each file has an owner and permissions. Your **home directory** is the part of the disk the account owns. Files outside it, such as another account's home or the system logs, usually belong to someone else, and the permissions decide whether you may read them.
 
 Worked example, on a practice machine of your own:
 
@@ -64,24 +66,26 @@ alice@host:~$ cat /var/log/auth.log
 cat: /var/log/auth.log: Permission denied
 ```
 
-### Git History {#git-history}
+### Exposed Repositories and Where Secrets Hide {#repos}
 
-A Git repository keeps every commit. A commit is a snapshot of the files, with a message and an author. Deleting a file in a later commit does not remove it from the earlier commits, so anyone who can read the history can still read the old content. A **stash** is a second place where Git keeps unfinished changes, and it also keeps old content.
+A source-code server such as GitList lets you browse a project's files and its commit history in a web page. If it is open with no login, anyone who can reach it reads the code, the configuration and every commit message. A commit message such as "temp creds for the planning sync job, will rotate" tells you a credential exists, which account it belongs to, and that nobody rotated it.
 
-Worked example:
+The history names the account. The password is a separate problem. A developer who was careless once is often careless twice: the secret the commit message hints at can be sitting in a file on the server's disk, outside the web root and outside any repository, where only someone who can run code on the box will find it. So you read the repository for the lead, then you read the filesystem for the secret.
+
+Worked example, reading a repository's log on a box you have a shell on:
 
 ```
 $ git log --oneline
-4f2a9c1 Tidy the README
-b71e02d Add sync job settings
+4f2a9c1 Tidy the config
+b71e02d Add planning sync job settings
 $ git show b71e02d
 ```
 
-The second commit's message says what the change was for. The diff under it shows what was removed. Read both.
+The second commit's message says what the change was for. Read it for the account name, then go looking for where the password itself ended up.
 
 ### Argument Injection {#argument-injection}
 
-A web application often passes what a visitor types into a command that runs on the server. If that input is joined into the command without checks, the visitor can add options or extra commands. This is **argument injection**, a form of injection flaw.
+A web application often passes what a visitor types into a command that runs on the server. If that input is joined into the command without checks, the visitor can add options or extra commands. This is **argument injection**, a form of injection flaw. It can give you the ability to run commands on the server with no login at all.
 
 Software versions that contain a flaw like this often have a published **CVE** (Common Vulnerabilities and Exposures) entry. The entry names the affected versions and describes the input that is not checked. You compare the version the service reports against that entry before you try anything.
 
@@ -89,14 +93,14 @@ Software versions that contain a flaw like this often have a published **CVE** (
 
 **Privilege escalation** means moving from a low-rights account to a higher one, usually root. **sudo** lets an account run a command as another user, if the sudo rules allow it. Only root may edit those rules. Running `sudo -l` lists what your account may run.
 
-A rule that lets an account run a tool which can start a shell, or run other programs, is a misconfiguration. The tool may have been meant for something harmless, and the rule still hands out a root shell.
+A rule that lets an account run a tool which can start a shell, or run other programs, is a misconfiguration. The tool may have been meant for something harmless, such as keeping packages up to date, and the rule still hands out a root shell.
 
 Worked example, with made-up output:
 
 ```
 $ sudo -l
-User alice may run the following commands:
-    (root) /usr/bin/tail
+User svc-planning may run the following commands:
+    (root) /usr/bin/apt-get
 ```
 
 ## Stuck? Hints, Stage by Stage {#hints}
@@ -131,16 +135,16 @@ The attack box and the repository server share a subnet. The attack box's own ad
 
 ### Stage 1: The Exposure Flag {#hints-vm-exposure}
 
-**Where:** the attack box's terminal, against the repository server. **Goal:** get code running on the repository browser without a login, and submit the flag that comes with it.
+**Where:** the attack box's terminal and browser, against the repository server. **Goal:** reach SAFETYNET's own repository browser with no login, read what it exposes, and submit the flag that comes with it.
 
-> Hint: The web service names a piece of software and a version. Work out which public CVE describes that software and that version, and what the attacker controls when the software takes input.
+> Hint: The web service names a piece of software and a version. One flaw in that version lets you run commands with no login, and the repository it serves is open to read anyway. Both routes reach the same exposed configuration.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Fingerprint the web service and note the software name and version. Look up that name and version in the CVE database, and read the affected versions and the input the description names. Find a public proof of concept for that CVE and read it before you run it, so you know what it does on the target. The flag shows up once the code runs. The configuration the exploit reads also names the service account you need in Stage 3.
+Fingerprint the web service and note the software name and version. Look up that name and version in the CVE database, and read the affected versions and the input the description names. The repository browser is open: you can read the committed files and commit messages straight from the web page. The exposed configuration names the service account, **svc-planning**, and carries the flag. It also carries a commit message about "temp creds for the planning sync job" that were never rotated. Hold on to both: the account name is for Stage 3, and the "never rotated" note points at Stage 2.
 
-**Learn it:** ==action: Write down the version and the CVE number before you run anything==, then check the proof of concept against the CVE description.
+**Learn it:** ==action: Write down the version and the CVE number before you run anything==, then check any proof of concept against the CVE description.
 
 **To learn more in game:** ask the phone for the Scanning and Exploitation field guide.
 
@@ -149,55 +153,58 @@ Fingerprint the web service and note the software name and version. Look up that
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Fetch the front page and read the headers and the page source: `curl -i http://<repository server>/`==.
+1. \==action: Fetch the front page and read the headers and the page source: `curl -i http://<repository server>/`==, and open the GitList browser in the attack box's browser.
 2. \==action: Search the CVE database for the software name and version, and read the entry's affected versions and its description==.
-3. \==action: Find a public proof of concept for that CVE, read it, and then run it against the repository server from the attack box's terminal==.
-4. \==action: Copy the flag from the output and submit it at the Evidence Relay Terminal==.
+3. \==action: Browse the exposed repository, or run a proof of concept for the CVE from the attack box, and read the exposed configuration==. Note the account name **svc-planning** and the commit message about credentials that were never rotated.
+4. \==action: Copy the flag from what you read and submit it at the Evidence Relay Terminal==.
 
 </details>
 
 > Warning: A proof of concept written for another version may fail, or do something you did not expect. Check its version notes against the version you found in step 1.
 
-### Stage 2: The Credentials Flag {#hints-vm-history}
+### Stage 2: The Credentials Flag {#hints-vm-credentials}
 
-**Where:** the repository server, through the access you got in Stage 1. **Goal:** find the password that was committed to the repository and then removed, and submit the flag that comes with it.
+**Where:** the repository server, through the foothold you got in Stage 1. **Goal:** recover the mole's password, and submit the flag that comes with it.
 
-> Hint: The current files are the first place to look, and the last place a secret is still kept. Someone who removed a secret from a file may have left it in an earlier commit. Look at what changed over time.
+> Hint: The commit message promised the credentials would be rotated, and named the account. The password itself is not printed in the repository. It was left in a file on the box, outside the web root, where only someone who can run code on the server will reach it.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Read the full history of the repository, every commit with its diff, and search it for the word a password would sit next to. Check the stash list too, because a stash is a second hiding place. Commit messages can say what a set of credentials was for, and that tells you which account they belong to.
+Stage 1 gave you the ability to run commands on the server as the web account. Use it to read the filesystem, not just the web pages. The git service account's home directory holds more than repositories: the mole left a file there with the login details, the word **Password** beside the value and the flag. List that home directory, then read the file that is not part of a repository.
 
-**Learn it:** ==action: Read a commit message before you read its diff== and say in one line what the author meant to do.
+The in-game **Secrets in Git History** field guide explains why a careless developer's secrets end up where they do, and it is worth reading. On this box the password was not scrubbed out of a commit, so the history gives you the account and the "never rotated" lead, and the password sits in a file you read with your foothold.
+
+**Learn it:** ==action: List a directory with `ls -la` before you open anything in it==, so you see every file, including the ones a plain `ls` hides, and can tell a repository folder from a loose file.
+
+**To learn more in game:** ask the phone for the Secrets in Git History field guide.
 
 </details>
 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Find the repository folders on the server with `find / -name .git -type d 2>/dev/null`==, and open the one that holds the project.
-2. \==action: List every commit with `git log --oneline`==.
-3. \==action: Search the whole history for the password: `git log -p | grep -i password`==. Note the commit the match came from.
-4. \==action: Check the stash with `git stash list`, then `git stash show -p` on each entry==.
-5. \==action: Copy the flag and submit it at the Evidence Relay Terminal==.
+1. \==action: From your Stage 1 foothold, get a shell or run commands on the server as the web account==.
+2. \==action: List the git service account's home directory: `ls -la /home/git`==.
+3. \==action: Read the loose file there (the one that is not a `.git` repository) with `cat`==, and find the word `Password`, the value beside it, and the flag.
+4. \==action: Copy the flag and submit it at the Evidence Relay Terminal==.
 
 </details>
 
-> Warning: Stopping at the current files misses this stage. Git never forgets, so a deleted password still sits in an older commit.
+> Warning: The login account **svc-planning** cannot read this file: it belongs to the web account and its permissions keep others out. If `cat` says "Permission denied", you are reading it as the wrong account. Read it from the foothold you got in Stage 1, before you log in.
 
-> Tip: A natural stopping point for a 60-minute class is after this stage. The next two stages use the same account.
+> Tip: A natural stopping point for a 60-minute class is after this stage. The next two stages use the account and password you now have.
 
 ### Stage 3: The Account Flag {#hints-vm-login}
 
-**Where:** the attack box's terminal, logging in to the repository server. **Goal:** log in as the account the password belongs to, find the flag in its home directory, and submit it.
+**Where:** the attack box's terminal, logging in to the repository server. **Goal:** log in as **svc-planning** with the recovered password, read its home directory, and submit the flag.
 
-> Hint: A password only works on the account it was made for. The account's name is in the configuration file you read in Stage 1. Try the password against that account, then look at what is in its home directory.
+> Hint: A password only works on the account it was made for. You have the account name from Stage 1 and the password from Stage 2. Log in, then look at what is in the home directory.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-SSH takes the account name before the host. Once you are in, the home directory belongs to that account. List everything in it, including hidden files, before you open any file. The flag is in one of the files there.
+SSH takes the account name before the host. Once you are in, the home directory belongs to svc-planning. List everything in it, including hidden files, before you open any file. One file holds the mole's correspondence with ENTROPY, sent under the alias **deep_state_drop** to an address at `entropy.onion`, and the flag sits with it. That mail is the same account you will see named in the root logs in Stage 4, which is the point of logging in properly.
 
 **Learn it:** ==action: List the home directory with `ls -la` before you open any file in it==. Names that start with a dot are hidden from a plain `ls`.
 
@@ -206,25 +213,25 @@ SSH takes the account name before the host. Once you are in, the home directory 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Log in with `ssh <account>@<repository server>`, and enter the password from Stage 2==.
+1. \==action: Log in with `ssh svc-planning@<repository server>`, and enter the password from Stage 2==.
 2. \==action: List the home directory: `ls -la`==.
-3. \==action: Open the files one at a time with `cat`, and look for the flag==.
+3. \==action: Open the files one at a time with `cat`==, and read the ENTROPY correspondence. The flag is with it.
 4. \==action: Submit the flag at the Evidence Relay Terminal==.
 
 </details>
 
-> Warning: If the password is rejected, check the account name first. A correct password on the wrong account fails in the same way as a wrong password.
+> Warning: If the password is rejected, check the account name first. A correct password on the wrong account fails in the same way as a wrong password. Copy the password rather than retyping it.
 
 ### Stage 4: The Root Flag {#hints-vm-root}
 
-**Where:** the attack box's terminal, from the account you logged in as in Stage 3. **Goal:** find out what that account may run as root, use it to get a root shell, read the logs and the cached files that only root can open, and submit the flag.
+**Where:** the attack box's terminal, from the svc-planning shell you got in Stage 3. **Goal:** find out what svc-planning may run as root, use it to get a root shell, read the logs and the cached files that only root can open, and submit the flag.
 
 > Hint: Ask what the account may do with sudo before you look for anything else. A rule that lets an account run a tool as root is a rule the account can abuse, if the tool can run other programs.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-`sudo -l` lists the rules for the account. For each tool it lists, check the tool's documentation for a way to start a shell or run another command. The Privilege Escalation field guide has a section on escaping an allowed command to a shell. Once you have root, the access logs and a cached document sit where only root can read them. The flag is in the same place.
+Run `sudo -l` as svc-planning. It lists one tool the account may run as root: a package manager. A package manager can run other programs, so it can be turned into a root shell. The Privilege Escalation field guide has a section on escaping an allowed command to a shell. Once you have root, the access logs and The Architect's cached authorisation sit where only root can read them. The log puts svc-planning at a Cryptography Lab terminal opening the Portland planning file, `pnw_contingency.enc`, and the flag is in the same place.
 
 **Learn it:** ==action: Before you run a command as root, write down what it will do and what it could change==.
 
@@ -235,10 +242,10 @@ SSH takes the account name before the host. Once you are in, the home directory 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Run `sudo -l` as the account you logged in as==. Note which tools may run as root, and whether they ask for a password.
-2. \==action: Open the Privilege Escalation guide at the section "Method 4: Escaping an Allowed Command to a Shell (GTFOBins)", and find the entry for the tool you noted==.
+1. \==action: Run `sudo -l` as svc-planning==. Note the tool you may run as root (a package manager such as `apt-get`), and whether it asks for a password.
+2. \==action: Open the Privilege Escalation guide at the section "Method 4: Escaping an Allowed Command to a Shell (GTFOBins)", and find the entry for that tool==.
 3. \==action: Follow that entry to a root shell, then confirm with `id`==.
-4. \==action: Read the access logs and the cached files kept for root. Find the flag, and submit it at the Evidence Relay Terminal==.
+4. \==action: Read the root-only access logs and The Architect's cached authorisation. Find the flag, and submit it at the Evidence Relay Terminal==.
 
 </details>
 
@@ -256,7 +263,7 @@ These exercises use a repository and an account of your own. Do not run them on 
 
 ### A secret you commit and then remove {#cli-git-history}
 
-Make a practice repository, commit a made-up secret, delete it, then search the history for it.
+Make a practice repository, commit a made-up secret, delete it, then search the history for it. This is the careless-developer habit the mission plays on, even though this particular box left its password in a loose file rather than a commit.
 
 ```
 $ mkdir practice-repo && cd practice-repo && git init
@@ -276,15 +283,25 @@ On your own Kali box, run `sudo -l` and read the output line by line.
 
 \==action: For each command the output lists, write one sentence saying what that command can do when it runs as root==. Ask whether the command can run another program or start a shell. This exercise is reading only. Do not try to escape a command on the lab server.
 
+## What the Tools and Locks Are Telling You {#symptoms}
+
+| What you see | What it usually means |
+|---|---|
+| The GitList page loads with no login prompt | The repository browser is open to anyone. Read the files and commit messages straight from it. |
+| `git log` shows the account but no password | The password was never committed here. It is a loose file on the box; read the filesystem with your foothold. |
+| `cat /home/git/<file>` says "Permission denied" | You are reading as the wrong account. The file belongs to the web account, not svc-planning. Read it from the Stage 1 foothold. |
+| SSH as svc-planning is rejected | Wrong account name or a mistyped password. Copy the password from Stage 2 rather than retyping it. |
+| `sudo -l` prints nothing you can run | You are not the account the sudo rule names. Check `id`; you want to be svc-planning. |
+
 ## After the Game: Questions and Exercises {#questions}
 
 ### Attacking the Server {#questions-server}
 
 > Question: The exposure needed no login. Which single change would have stopped it, and what would still be exposed after that change?
 
-> Question: Of the four stages, which one would a server administrator be least likely to notice from the logs? Give a reason.
+> Question: The commit message named the account and admitted the credentials were never rotated, but the password was in a separate file. Why does that split not help the defender here, and what should have happened to the credential the moment it was committed?
 
-> Question: Your login worked on the first try. What did the server check, and what did it leave unchecked?
+> Question: Four flags, one account. Which of the four would a server administrator be least likely to notice from the logs, and why?
 
 > Action: Write a short checklist for the administrator of the repository server. Give one line for each of the four stages, naming the control that would have stopped that stage. Hand in the checklist.
 
@@ -294,4 +311,3 @@ On your own Kali box, run `sudo -l` and read the output line by line.
 - [Git Tools: Searching](https://git-scm.com/book/en/v2/Git-Tools-Searching)
 - [The sudoers manual](https://www.sudo.ws/docs/man/sudoers.man/)
 - [GTFOBins](https://gtfobins.github.io/)
-

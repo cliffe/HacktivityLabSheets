@@ -222,7 +222,7 @@ The username in the note is also a Linux account on the server. The password may
 <details markdown="1">
 <summary>Nudge</summary>
 
-`sudo -l` lists the rules for the account you are in. Read every line. One rule lets the account run one program as root without a password. Think about what that program can do from inside itself, and look up the program's escape on GTFOBins.
+`sudo -l` lists the rules for the account you are in. Read every line. One rule lets the account run one program as root without a password. Think about what that program can do from inside itself, and look up the program's escape on GTFOBins. The file the flag sits in reads as one unbroken block of letters and digits: it is Base64, and you decode it once you are root.
 
 **Learn it:** ==action: Read a sudo rule before you run anything under it==. Write down which user it runs as, whether it needs a password, and which file it names.
 
@@ -234,7 +234,7 @@ The username in the note is also a Linux account on the server. The password may
 1. \==action: Run `sudo -l`==. If it asks for a password, enter the manager's password from the note.
 2. \==action: Note the file the permitted `less` rule names==.
 3. \==action: Run `sudo less <that file>`, then, inside `less`, type `!/bin/sh` and press Enter==. The escape only works inside an open `less`.
-4. \==action: Check you are root with `id`, list `/root` with `ls -la`, and read the flag file there==. Submit it at the SAFETYNET Drop-Site Terminal.
+4. \==action: Check you are root with `id`, list `/root` with `ls -la`, and read the Architect's authorisation file there==. Its contents are one block of Base64, so decode them with `base64 -d <file>` to reveal the authorisation and the flag at its end. Submit the flag at the SAFETYNET Drop-Site Terminal.
 
 </details>
 
@@ -266,6 +266,7 @@ The username in the note is also a Linux account on the server. The password may
 | `sudo -l` lists fewer rules than you expected | You are in a different account from the one you think. Run `id` to check |
 | `less` opens the file and gives you no shell | You have not typed `!` followed by a shell command inside `less` |
 | `Permission denied` on the manifest or on `/root` | The file belongs to another account. Check its permission string with `ls -l` first |
+| The root flag file is one unbroken block of letters and digits, often ending in `=` | The file is Base64-encoded. Decode it with `base64 -d` to read the authorisation and the flag |
 
 ## Try It on the Command Line (Optional) {#command-line}
 

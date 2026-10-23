@@ -171,7 +171,7 @@ The target is on the same network as the attack box, so the box's own address te
 <details markdown="1">
 <summary>Nudge</summary>
 
-The host publishes its exports to anyone who asks. Find the export, mount it read-only into an empty folder on the attack box, and list what is there. One of the files is a pointer to a second file, and the account name is in there too. Note the name. You will need it in stage 3.
+The host publishes its exports to anyone who asks. Find the export, mount it read-only into an empty folder on the attack box, and list what is there. The share holds a file that names the operator account and carries this stage's flag. Note the account name. You will need it in stage 3.
 
 **Learn it:** ==action: Make an empty folder and list it before you mount anything==. Then list it again after mounting and compare the two listings.
 
@@ -198,7 +198,7 @@ The host publishes its exports to anyone who asks. Find the export, mount it rea
 <details markdown="1">
 <summary>Nudge</summary>
 
-A default scan checks only the most common ports, so it can miss the one you want. Scan all 65,535 ports, then look at each open port that is not in the usual list. Connect with a plain TCP tool, read everything it sends, and only then decide what to do with it. The output carries the operator's password, and a second password that opens the control room door.
+A default scan checks only the most common ports, so it can miss the one you want. Scan all 65,535 ports, then look at each open port that is not in the usual list. Connect with a plain TCP tool, read everything it sends, and only then decide what to do with it. The output carries the operator's password, which you need in stage 3, and this stage's flag.
 
 **Learn it:** ==action: Connect to a listener you start yourself== and read the first line it sends. The command-line section below does this on your own machine.
 
@@ -209,7 +209,7 @@ A default scan checks only the most common ports, so it can miss the one you wan
 
 1. \==action: Scan every port on the target== with `nmap -p- <target address>`.
 2. \==action: Connect to the open high port== with `nc <target address> <port>`, and read all the output.
-3. \==action: Note the operator's password and the other password it carries==. You need the operator's password in stage 3. The other one opens a door in the game.
+3. \==action: Note the operator's password==. You need it in stage 3.
 4. \==action: Submit the flag at the SAFETYNET Relay Terminal==.
 
 </details>

