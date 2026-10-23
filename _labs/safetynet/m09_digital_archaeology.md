@@ -66,6 +66,8 @@ You do not need any prior knowledge before you start. The Vigenere cipher is tau
 
 The mission takes about 75 to 85 minutes. Your progress, evidence and unlocked rooms are kept between sessions.
 
+![The loading dock at the start, with your agent standing among the pallets]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/00-starting-room.png)
+
 > Note: A clock shows in the corner. It is story time in UTC, not a countdown you can run out of. It starts at 04:45 (that is 22:45 at night in Helena, Montana) and moves with the night, then jumps to 10:00 at the debrief. Phone messages are stamped with it. Nothing fails if you take your time.
 
 > Tip: A natural stopping point for a 60-minute class is once you have opened the director's office and hold the tape store card. The salvage cage, the confrontation and the debrief make a good second session.
@@ -92,6 +94,8 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 ### Warm-up: Your First CyberChef Vigenere Decode {#warm-up}
 
 Do this once you are at the **CyberChef Workstation** in the reading room. It uses made-up data, not anything from the game.
+
+![The CyberChef workstation with an empty recipe, input and output]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/11-cyberchef-workstation-blank.png)
 
 1. \==action: Open CyberChef and clear the recipe== if anything is in it.
 2. \==action: Type `LXFOPVEFRNHR` into **Input**==.
@@ -157,6 +161,8 @@ In the game the lift and each candidate card are drawn with the same markers, so
 
 Use **View large** on a card to see the markers close up, and press **V** to cycle the cards. Pick the one that agrees on pattern class first and then on every mark. If you pick wrong, the game names the feature that differs, so read that and look again.
 
+![The fingerprint kit at the compare step, asking which pattern your lift shows]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/06-fingerprint-compare.png)
+
 ```
 Lift:        whorl; green cross at the core
              red square (a fork) above and to the right of the core
@@ -220,6 +226,10 @@ Find the stage you are on. The stages are in the order most players meet them, a
 
 > Hint: There are two ways in. The shutter to the north is already open. The dock office to the west is locked, and leads to the front desk and the night clerk.
 
+![Cody Old Coyote, the night guard, stopping you in the open stacks with his torch on]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/01-open-stacks-guard.png)
+
+![Noor Haddad at the front desk, with three ways to answer her first question]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/02-noor-front-desk.png)
+
 <details markdown="1">
 <summary>Nudge</summary>
 
@@ -244,6 +254,8 @@ The other way is west: pick the dock office door (an easy key lock, or use the g
 
 > Hint: Set the field laptop up first. The drop terminal takes the flags from the catalogue server, and the first one opens the door north.
 
+![The reading room, with the field laptop on the desk and the drop terminal against the wall]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/03-reading-room.png)
+
 <details markdown="1">
 <summary>Steps</summary>
 
@@ -262,6 +274,10 @@ The other way is west: pick the dock office door (an easy key lock, or use the g
 **Where:** the restricted stacks. **Goal:** talk to the director across the hatch, clone her card, choose what to save from the bins, and lift her print.
 
 > Hint: The director is burning boxes on the far side of a counter. Keep her talking while the cloner reads her card. Her card has custom keys, so give it time.
+
+![Margaret Sorensen at the hatch, offering a chair and a conversation]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/04-sorensen-hatch.png)
+
+![The RFID cloner reading her stacks card, with no keys recovered yet]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/05-rfid-cloner-read.png)
 
 <details markdown="1">
 <summary>Nudge: the card</summary>
@@ -302,6 +318,8 @@ Her **Rubber Stamp** sits on the shelf by the hatch. Dust it with the Fingerprin
 
 
 > Hint: The gate wants the card you just cloned. The cabinet at the back wants a thumb, and you are carrying the director's.
+
+![The restricted cage, with Sorensen, the shredder and the plan cabinet at the back]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/07-restricted-cage.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -375,6 +393,10 @@ None is scored right or wrong. Answer, then make the deck choice she asks for. T
 
 > Hint: The safe is six digits. The director chose a date that means something to her, and she has written that date on her own paperwork in this room.
 
+![The director's office, with the floor safe in the corner]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/08-directors-office-safe.png)
+
+![The floor safe keypad with the PIN cracker fitted and no guesses yet]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/09-safe-pin-keypad.png)
+
 <details markdown="1">
 <summary>Nudge</summary>
 
@@ -402,6 +424,8 @@ Inside are the **Reading** (several pages), the **Key Card, Tape Store**, and th
 **Where:** the tape store, north of the restricted stacks, then the salvage cage past it. **Lock:** the salvage cage keypad wants a decoded password. **Goal:** decode the coded line with the shelf marks as the key.
 
 > Hint: The drop terminal gave you a coded line. The tape store wall gives you the key. Put them through CyberChef's Vigenère Decode.
+
+![The salvage cage, with the rack server, the two crates and the printouts on the benches]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/10-salvage-cage.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
