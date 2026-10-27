@@ -2,11 +2,11 @@
 title: "Phishing and Social Engineering (Break Escape)"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Play a browser-based engagement as a penetration tester at Tarnside Assurance: get the rules of engagement signed, research a client from public sources, write spear-phishing email, build a look-alike login page, work a pretext call past a service desk, report the gaps without naming anyone, then switch sides and defend against your own attack. No virtual machine."
+description: "Play a browser-based engagement as a penetration tester at Tarnside Assurance: get the rules of engagement signed, research a client from public sources, craft messages tailored to the people you find, report what the engagement showed, then switch sides and defend against your own attack. No virtual machine."
 overview: |
-  Ledgerwell Ltd has hired your consultancy to find out how far a phishing and social-engineering campaign could get against its staff, with one condition from the client: nobody gets named and shamed. You play the tester. You settle what is in scope and get it in writing, research Ledgerwell's people from public sources only, craft messages tailored to three targets, build a look-alike payroll page, and talk a friendly service desk into filling the gaps your research could not. Then you turn the engagement around: you triage a mixed inbox from the defender's chair, read the sender-authentication results, and turn each finding into a fix.
+  Ledgerwell Ltd has hired your consultancy to find out how far a phishing and social-engineering campaign could get against its staff, with one condition from the client: nobody gets named and shamed. You play the tester. You settle what is in scope and get it in writing, research Ledgerwell's people from public sources only, and work out what each person you find would trust. Then you turn the engagement around: you triage a mixed inbox from the defender's chair, read the sender-authentication results, and turn each finding into a fix.
 
-  The lab teaches social engineering at the level a defender needs: why open-source research makes a tailored message land, how a From line is only a label, what SPF, DKIM and DMARC actually check, how a look-alike domain is read letter by letter, and why the cheapest fixes are a report button and a call-back rule. Every outcome in the game is explained, including the ones that fail. There is no malware, no payload and no virtual machine; the companion [Human Factors and Social Engineering: Phishing]({{ site.baseurl }}/labs/cyber_security_landscape/3-phishing/) lab covers the hands-on delivery of malicious attachments on a Kali VM.
+  The lab teaches social engineering at the level a defender needs: why open-source research makes a tailored message land, what the email authentication standards actually check, how to read a web address, and which fixes give a small organisation the most for the least. Every outcome in the game is explained, including the ones that fail. There is no malware, no payload and no virtual machine; the companion [Human Factors and Social Engineering: Phishing]({{ site.baseurl }}/labs/cyber_security_landscape/3-phishing/) lab covers the hands-on delivery of malicious attachments on a Kali VM.
 
   This sheet gets you started, explains the ideas behind each stage, walks you through the engagement room by room with layered hints for when you are stuck, and ends with reflection questions. There are no real answers printed: the whole point is to find them in the game.
 tags: ["phishing", "spear-phishing", "social-engineering", "pretexting", "osint", "reconnaissance", "email-spoofing", "spf-dkim-dmarc", "look-alike-domains", "security-awareness", "rules-of-engagement", "computer-misuse-act", "blue-team", "break-escape", "game-based-learning"]
@@ -31,13 +31,13 @@ cybok:
 By the end of this lab you should be able to:
 
 - explain why an attack on people has to be authorised in writing first, and what the rules of engagement, the stop-rule and the Computer Misuse Act 1990 have to do with it
-- plan an engagement so it measures the process, not the people, and say why naming who fell for a test is both unfair and counter-productive
+- plan an engagement with an objective you can check and a fair measure of success, and justify what you chose to count
 - gather open-source intelligence (OSINT) about an organisation's staff, and name the kinds of tool a tester uses and what each one reveals
 - explain why a tailored (spear-phishing) message lands when a generic one does not: trust, relevance, a name, a plausible attachment and timing
 - describe what SPF, DKIM and DMARC each check, why a From line is only a label, and why a message that fails one check can still be genuine or still be delivered
 - read a web address letter by letter and spot a look-alike domain (typo-squat, homograph, extra word, misleading subdomain), and say why a padlock does not prove who you are talking to
-- recognise a pretext phone call, and explain why calling back on a number already on file defeats it
-- turn findings into mitigations a small organisation can actually afford, and explain why a report button and a call-back rule beat most of the alternatives
+- recognise a pretext phone call, and explain what kind of control defeats it
+- turn findings into mitigations a small organisation can actually afford, and justify your choice among them
 
 The game teaches by doing. The questions are in this sheet, after the game.
 
@@ -65,17 +65,17 @@ A first run takes about 60 to 90 minutes, depending on how much you read and how
 
 ### How to Play {#how-to-play}
 
-You move with the arrow keys or by clicking. Click objects, people, doors and workstations to interact. Keys you collect go to the inventory bar at the bottom of the screen. Each workstation runs one tool as a small on-screen app (the research browser, the mail client, the page builder, the phone, the report, the triage inbox and the defender board). The people are voiced, including Dev on the desk phone, so turn your sound on; every line is also shown as text.
+You move with the arrow keys or by clicking. Click objects, people, doors and workstations to interact. Keys you collect go to the inventory bar at the bottom of the screen. Each workstation runs one tool as a small on-screen app. The people are voiced, including on the phone, so turn your sound on; every line is also shown as text.
 
 The engagement runs through four rooms in all: the Engagement Office, and three rooms off it. You unlock the **Recon Room**, the **Operations Room** and the **Blue Team Room** in turn, each with a key Ruth hands you when the stage before it is done.
 
 > Tip: Most tools put a **Stuck? Show me where to look** link under anything you have not found yet: each missing row on the Case File, and each empty blank in the mail composer. Open it and it names the source to check, never the answer.
 
-> Tip: Stuck on a term? Research tools and the page builder have **What is this?** buttons that open a short concept card, and the triage inbox has a **What's this?** glossary for SPF, DKIM and DMARC.
+> Tip: Stuck on a term? Research tools and some of the other workstations have **What is this?** buttons that open a short concept card, and the triage inbox has a **What's this?** glossary for SPF, DKIM and DMARC.
 
 > Tip: Nothing in this game is scored by catching you out, and no choice is a dead end. A wrong pick comes back with the reason it was wrong, so read the feedback rather than guessing again. The "wrong" answers are there to teach, so it is worth reading why they are wrong even when you picked the right one.
 
-> Warning: Watch the people you are attacking as well as the machines. The service desk operator, Dev, is friendly and helpful, but push him too hard and he will get suspicious, stop helping, and report your call to his manager. That is realistic, and it is recoverable, but he will not take another call for about two minutes.
+> Warning: Watch the people you are dealing with as well as the machines. A friendly person on the phone will get suspicious if you push too hard, stop helping, and report your call. That is realistic, and it is recoverable, but they will not take another call from you for about two minutes.
 
 ## Concepts {#concepts}
 
@@ -214,13 +214,11 @@ Prefer controls that work when a person makes a mistake, and be wary of ones tha
 
 Find the stage you are on. Read the hint, then go back and try. If you are still stuck, open **Nudge**. Open **Steps** last. Ruth gives the same hints on your phone, one stage at a time.
 
-> Tip: Before you open any hint, ask yourself three questions. What check is this person or system making? What do I already know that would pass it? And where would I find what I am missing: a public page, a file's properties, or the service desk?
+> Tip: Before you open any hint, ask yourself three questions. What check is this person or system making? What do I already know that would pass it? And where could I find what I am missing?
 
 ### Before You Start: Getting It in Writing {#hints-authorise}
 
 **Where:** the Engagement Office, at the start. **Goal:** sort the scope, answer the stop-rule, and get Gareth to sign.
-
-![The Rules of Engagement scope sort]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/02-rules-of-engagement.png)
 
 > Hint: Nothing you do is lawful until the client signs the sheet. Read it, sort each card into in or out of scope, and think about what you would do if you found a real break-in mid-test.
 
@@ -231,42 +229,46 @@ Work email to named staff and the published service-desk line are the sort of th
 
 Answer Gareth's opening question how you honestly would. Neither answer blocks the game, and Ruth reacts to both.
 
+If a card keeps bouncing back, read the line it comes back with. It names the rule the card breaks.
+
 </details>
 
 <details markdown="1">
 <summary>Steps</summary>
 
+![The Rules of Engagement scope sort]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/02-rules-of-engagement.png)
+
 1. \==action: Read the Rules of Engagement sheet== on the table.
 2. \==action: Sort each scope card== into in scope or out of scope; a wrong pile bounces back with the reason.
 3. \==action: Answer the stop-rule question==.
-4. \==action: Take the sheet to Gareth by the window and let him sign it==. Listen for his one condition.
+4. \==action: Take the sheet to Gareth by the window and let him sign it==. Listen to what he says as he signs.
 
 </details>
 
-> Warning: Gareth signs in person, and he has a condition about names. Hear it; it shapes how you plan and how you write the report.
+> Warning: Ruth will not hand over the Recon Room key until Gareth has signed in person and your plan is done. If the door is locked, check you have been to see him.
 
 ### Planning the Engagement {#hints-plan}
 
 **Where:** the Planning Whiteboard, Engagement Office. **Goal:** pick the objective and the success measure.
 
-![The planning whiteboard]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/03-planning-whiteboard.png)
-
-> Hint: Pick the objective that ends in a report of the gaps, with nothing broken and nobody's password kept. For the measure, think about what you can count without naming a single person.
+> Hint: Decide what the engagement is for, and how you will tell afterwards whether it worked. Gareth's condition tells you something about what you should not be counting.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-The objective is about learning how far an attack gets, not about disrupting payroll or hoarding passwords. The measure is about the process, not the people: how far each attempt got. The measure that names who fell for it breaks Gareth's condition, and the measure about who reported sounds ideal but cannot be counted here, because there is no way to report yet. Noticing that gap is the point.
+The objective is about learning how far an attack gets and reporting the gaps, not about disrupting payroll or hoarding passwords. The measure is about the process, not the people: how far each attempt got. A measure that names who fell for it breaks Gareth's condition. A measure about who reported sounds ideal but cannot be counted here, because there is no way to report yet. Noticing that gap is the point.
 
 </details>
 
 <details markdown="1">
 <summary>Steps</summary>
 
+![The planning whiteboard]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/03-planning-whiteboard.png)
+
 1. \==action: Open the Planning Whiteboard== and read the choices under each heading.
-2. \==action: Pick the objective about finding and reporting the gaps==.
+2. \==action: Pick the objective about finding and reporting the gaps==, with nothing broken and no passwords kept.
 3. \==action: Pick the measure about how far each attempt got==.
-4. \==action: Talk to Ruth, and take the Recon Room key== once the plan holds and Gareth has signed.
+4. \==action: Talk to Ruth, and take the Recon Room key== once the plan holds and Gareth has signed. If she has nothing to give you, one of those two is still outstanding.
 
 </details>
 
@@ -278,16 +280,16 @@ The objective is about learning how far an attack gets, not about disrupting pay
 
 > Hint: The Case File has a card for each target with **Missing** rows. Each one says what you still don't know, and the **Stuck? Show me where to look** link under it names the source. Everything you need is public.
 
-![The Case File, with a Stuck? pointer open on Chris's card]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/05-case-file-board.png)
-
 <details markdown="1">
 <summary>Nudge: filling the cards</summary>
 
+![The Case File, with a Stuck? pointer open on Chris's card]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/05-case-file-board.png)
+
 Use the research browser on the OSINT Workstation. You record a fact by selecting the line that says it. The team page gives roles; the team notes and the staff social posts on Friendface give what each person trusts and is waiting for; the How to apply page says what files the careers inbox takes; a lookup under **Tools** gives the email pattern, so you can write any staff address (Hunter and the name search only appear in Tools once you have read Our Team). One card needs the company's **username** convention, not just the address pattern, and that comes from a different kind of source.
 
-Chris's Friendface profile is hidden at first. It appears once you select the careers inbox line on the company's Careers page, so a card that will not fill often means a line you read but did not select.
+Chris's Friendface profile is hidden at first. It appears once you select the careers inbox line on the company's Careers page, so a card that will not fill often means a line you read but did not select. The **Stuck?** pointer on Chris's card names that line and the profile.
 
-Watch for two decoys. The archived 2019 org chart is marked as old; the second J. Baker is a plumber in Leeds. A fact you confirm from a current source beats a fact that merely fits.
+Watch for decoys: a source that is marked as old, and a search result that only shares a name with someone you want. A fact you confirm from a current source beats a fact that merely fits.
 
 </details>
 
@@ -305,7 +307,7 @@ A published document keeps its author's name in its properties, whether or not t
 
 1. \==action: Open the OSINT Workstation and read the company site: Our Team, Team notes, Careers, How to apply and the Archive==, selecting each line you want to keep.
 2. \==action: On the Careers page, select the careers inbox line==, then read Chris's posts, which now show on Friendface, along with Melanie's and Sofia's.
-3. \==action: Once you have read Our Team, run the Hunter lookup for the email pattern under Tools==, and the name search (noticing the plumber).
+3. \==action: Once you have read Our Team, run the Hunter lookup for the email pattern under Tools==, and the name search. Check each result against the company's own pages; the archived org chart and the second J. Baker are the decoys.
 4. \==action: Open the published PDF and read its properties, including the author==.
 5. \==action: Check the Case File until all three cards are ready==, then take the Operations Room key from Ruth.
 
@@ -317,7 +319,7 @@ A published document keeps its author's name in its properties, whether or not t
 
 **Where:** the Operations Room (east), at the Mail Workstation. **Goal:** get the careers inbox and then Melanie Pierce to act on a message.
 
-> Hint: The careers inbox trusts anyone who looks like an applicant. Melanie only acts on mail from a colleague she trusts, so the question is how to look like that colleague.
+> Hint: Every inbox has its own idea of who is worth listening to. For each of these two people, ask who they would open a file from without a second thought, and what they would expect that person to send. Your recon notes say.
 
 <details markdown="1">
 <summary>Nudge: the careers inbox</summary>
@@ -342,38 +344,45 @@ One trap: the throwaway webmail account can only send as itself. To set the From
 
 1. \==action: Optionally, create a throwaway webmail account from the same drop-down, and send to the careers inbox from it as an applicant==, with the file type the How to apply page asks for.
 2. \==action: Switch to `Consultant <guest@workstation.example>` in the account drop-down==, the account that lets you set the From line.
-3. \==action: Compose to Melanie as the colleague she trusts==: his real address, her name, the file she expects.
+3. \==action: Compose to Melanie as the colleague she trusts==: his real address (first initial, dot, surname, at the company's domain, as the lookup showed), her first name, and the file she expects.
 4. \==action: Send, and read the reply or the factor feedback== if it did not land. **Edit & resend** keeps your message so you can change one part.
 
 </details>
 
 > Warning: "Delivered" is not "landed". A message lands only when the target would act on it the way they would a real one. If it fails, the feedback names which check it failed; fix that one thing.
 
-### Preparing for Sofia: the Page and the Call {#hints-prepare}
+### Preparing for Sofia {#hints-prepare}
 
-**Where:** the Operations Room, at the Desk Phone and the Page Builder. **Goal:** call the service desk for the portal's name, its sender and the payslip date, and build a look-alike payroll page. Do them in either order. Until you have called, the Page Builder's "What Sofia is expecting" box stays empty, but you can still build.
+**Where:** the Operations Room. **Goal:** find what Sofia would expect that your recon could not tell you, and have it ready. Her message cannot be written until you do.
 
-![The page builder refusing the company's real domain]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/07-page-builder.png)
-
-> Hint: Sofia the intern only trusts her payroll portal's own notices. Your recon knows she uses a portal, but not its name, its sender or when payslips go out. The service desk knows all three.
+> Hint: Sofia is new, and she only acts on things that look like they came from systems she has been told about. Open her card on the Case File and the blanks in her message: what do they say you still don't know, and who inside Ledgerwell would? Two things in this room besides the mail workstation are for exactly this, and you can do them in either order.
 
 <details markdown="1">
-<summary>Nudge: the look-alike page</summary>
+<summary>Nudge: what to find out, and from whom</summary>
 
-The Page Builder scores your page against what would convince Sofia: the service (the **Which service?** row lists only the portal she actually uses), what the page says it is for, the address, the logo, the wording, which details the form asks for, and the padlock. The address is the hard part. One that reads nothing like the real one, or has one obviously wrong letter, scores low; the convincing ones are the look-alikes that pass a quick glance. Match the wording to a real payslip notice, avoid the version riddled with spelling slips, and do not ask for more than the real portal does.
-
-The company's real address is on the list, drawn as a locked, dashed note: you cannot use it, because you do not own it. If you press **Score** with no address chosen, the Score panel says so and asks you to pick a look-alike. One look-alike is drawn almost the same as the real address (a letter from another alphabet), so if Score says you have no address, check which one you actually picked.
+Her payslip system's name, the address its notices come from, and the date payslips are released are all things only the company's own service desk will tell you. The **Stuck? Show me where to look** pointers on her card and in the mail composer say the same: ring the service desk from the Desk Phone. The other object is the Page Builder, where you make the page the message will link to. Until you have called, the Page Builder's "What Sofia is expecting" box stays empty, but you can still build.
 
 </details>
 
 <details markdown="1">
 <summary>Nudge: the pretext call</summary>
 
-Ring the service desk from the desk phone as a colleague helping the new intern. Know her name and team before you dial; Dev checks both against the new-starter list, and both are on the public pages. Then ask for what you are missing: the portal's name and sending address, and the release date.
+Ring the service desk from the desk phone as a colleague helping the new intern. Know her name and team before you dial; Dev checks both against the new-starter list, and both are on the public pages. Take the team from a current page, not the archived one. Then ask for what you are missing. There are two separate questions: one for the portal's name and sending address, one for the release date. Dev answers each on its own, so the call is not finished until you have had both. If you only got one, the phone and Ruth both say which is missing; ring back for it.
 
-Stay calm and candid. The influence meter at the top of the call shows how Dev feels, and asking can cost a little of it. False urgency or dropping a manager's name makes him wary; keep it up and he refuses and reports the call, and the phone tells you how long to wait (about two minutes) before he will talk again. If he refuses an ask but has not reported you, you can hang up and ring again. If you named the wrong team, own the correction straight away rather than arguing it.
+Stay calm and candid. The influence meter at the top of the call shows how Dev feels, and asking can cost a little of it. False urgency or dropping a manager's name makes him wary; keep it up and he refuses and reports the call, and then he will not take another call for about two minutes. The phone tells you how long is left. If he refuses an ask but has not reported you, you can hang up and ring again. If you named the wrong team, own the correction straight away rather than arguing it.
 
 ![The pretext call to Dev on the service desk]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/08-service-desk-call.png)
+
+</details>
+
+<details markdown="1">
+<summary>Nudge: the look-alike page</summary>
+
+![The page builder refusing the company's real domain]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/07-page-builder.png)
+
+The Page Builder scores your page against what would convince Sofia: the service (the **Which service?** row lists only the portal she actually uses), what the page says it is for, the address, the logo, the wording, which details the form asks for, and the padlock. The address is the hard part. One that reads nothing like the real one, or has one obviously wrong letter, scores low; the convincing ones are the look-alikes that pass a quick glance. Match the wording to a real payslip notice, avoid the version riddled with spelling slips, and do not ask for more than the real portal does.
+
+The company's real address is on the list, drawn as a locked, dashed note: you cannot use it, because you do not own it. If you press **Score** with no address chosen, the Score panel says why it cannot score the page and asks you to pick a look-alike. One look-alike is drawn almost the same as the real address (a letter from another alphabet), so if Score says you have no address, check which one you actually picked.
 
 </details>
 
@@ -381,55 +390,67 @@ Stay calm and candid. The influence meter at the top of the call shows how Dev f
 <summary>Steps</summary>
 
 1. \==action: Call the service desk from the desk phone==: fill in the **Prepare the call** card with her name and team, then choose **Make the call**, opening as the intern's colleague.
-2. \==action: Ask for the portal's name and sender, and the payslip release date==.
-3. \==action: Keep Dev calm==: avoid urgency and borrowed authority, and correct any mistake openly.
+2. \==action: Ask for the portal's name and sender==, then \==action: ask for the payslip release date==.
+3. \==action: Keep Dev calm==: avoid urgency and borrowed authority, and correct any mistake openly. If he reports the call, wait out the time the phone shows (about two minutes), then ring again with your facts straight.
 4. \==action: Open the Page Builder==, pick Sofia's portal, the payslip purpose, a convincing look-alike address, the right wording and only the details the real portal asks for, then press **Score** until it says the page is convincing enough for her, and finish with **Attach to email** (**Attach anyway** if the score is low). Only that marks the page as built.
 
 </details>
 
-> Warning: The Careers page names Ledgerwell's finance tools, and the mail composer may offer one of them in Sofia's "which system" blank. That is not her payslip portal, and a message naming it will not land. The desk knows the real one.
+> Warning: A system that sounds right is not necessarily the one she uses. If a send later fails on the system it names, go back to where you got the name and ask whether anything there says she signs in to it.
 
 ### The Hard Send: Sofia Lord {#hints-hard-send}
 
-**Where:** the Mail Workstation. **Goal:** put the page and the call facts together and land a message on Sofia.
+**Where:** the Mail Workstation. **Goal:** put what you have together and land a message on Sofia.
 
-> Hint: Now you have everything Sofia checks: the portal's sender, its name, the release date, and a page that looks like her portal. Use all of it in one message.
+> Hint: The blanks that were empty for Sofia should be filled in by now. A message lands when every part of it matches what she would expect, so use everything you found rather than most of it.
+
+<details markdown="1">
+<summary>Nudge: a blank will not fill</summary>
 
 ![Sofia's message before the call, with the Stuck? pointer under the sender]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/06-mail-composer.png)
 
-If a blank in the composer reads **no evidence yet** or offers nothing that fits, Send stays greyed out ("A blank needs evidence you haven't found yet") or the message fails. Open **Stuck? Show me where to look** under that blank: for Sofia's sender, sending address and release date it points you back to the desk phone.
+If a blank in the composer reads **no evidence yet** or offers nothing that fits, Send stays greyed out ("A blank needs evidence you haven't found yet") or the message fails. Open **Stuck? Show me where to look** under that blank: for Sofia's sender, sending address, system and release date it points you back to the desk phone. The Careers page also names some finance tools, and the composer may offer one in the "which system" blank. That is not her payslip portal, and a message naming it will not land. Only the desk knows the real one.
+
+</details>
+
+<details markdown="1">
+<summary>Nudge: the send fails</summary>
+
+Sofia checks the same kinds of thing as the others: whether the sender is who she expects (name and address together), whether it greets her the way her portal would, whether it reads like a payslip notice, and whether the link looks right. The factor feedback names the one that missed. A link that failed usually means the page was never built and attached, or it fell short when you scored it. Open the Page Builder and see which part lost the score.
+
+</details>
 
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Compose to Sofia as the portal's own notification sender==.
+1. \==action: Compose to Sofia as the portal's own notification sender==, using the name and address Dev gave you.
 2. \==action: Greet her by her first name, the way the portal would==.
 3. \==action: Write a payslip-ready pretext with the portal's name and the release date==.
 4. \==action: Check the page is built (**Attach to email** in the Page Builder), attach it as the link, and send==.
 
 </details>
 
-> Warning: Sofia will not act on a link with no page behind it, or a page that fell short in the builder. If the send fails on the link, open the page in the builder and see which part lost the score.
+> Warning: A failed send is information, not a penalty. Read which factor missed and change that one part.
 
 ### Writing the Report {#hints-report}
 
-**Where:** the Report Workstation, Engagement Office (it unlocks once all three targets have acted). **Goal:** answer two questions on the results, then pair each finding with a cause and a control. No names.
+**Where:** the Report Workstation, Engagement Office. **Goal:** answer two questions on the results, then pair each finding with a cause and a control.
 
-![The report workstation]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/09-report-workstation.png)
-
-> Hint: The results table counts sends, landings, page visits and the call outcome. One thing it cannot count is whether anyone reported the attack, because there is no way to report. For the findings, the right cause and control name a gap the organisation can close, never a person to blame.
+> Hint: The report only opens once all three targets have acted, in any order, so if it will not open, work out who is left. Once it does, read what the results table counts and ask what it cannot. For each finding, choose a cause and a control that fit the evidence.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
 For the first question, look at what the tables actually count and ask which thing is missing from all of them. The line just above the question, "Email and page reports received: none", says why. For the second, think about what a "first send landed" column tells you that "landed in the end" does not: a target who fell to the first try had no warning, and every failed send was a chance to spot it.
 
-For each finding, some wrong causes sound reasonable (a spam filter, a careless member of staff) and some wrong controls sound sensible (training, SPF alone, password expiry, checking the padlock). Read why each is wrong before you pick again; the explanations are the lesson.
+For each finding, some wrong causes sound reasonable (a spam filter, a careless member of staff) and some wrong controls sound sensible (training, SPF alone, password expiry, checking the padlock). Read why each is wrong before you pick again; the explanations are the lesson. A cause or control that blames a person is always a wrong one, because blame stops people owning up.
 
 </details>
 
 <details markdown="1">
 <summary>Steps</summary>
+
+![The report workstation]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/09-report-workstation.png)
 
 1. \==action: Read the results table==, then answer the two questions under it.
 2. \==action: Pair each of the three findings with a cause and a control==, reading the feedback on any wrong pick.
@@ -437,18 +458,18 @@ For each finding, some wrong causes sound reasonable (a spam filter, a careless 
 
 </details>
 
-> Warning: A cause or control that blames a person is always the wrong one. Blame on paper stops the whole floor owning up.
+> Warning: If the workstation says there is nothing to write up, one of the three targets has not acted yet. Ruth and your phone say which.
 
 ### Defending: the Blue Team Room {#hints-defend}
 
 **Where:** the Blue Team Room (north), at the Triage Workstation and the SOC Board, with Tomasz. **Goal:** triage a mixed inbox and choose a fix for each exposure.
 
-![The triage inbox with header results]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/10-triage-inbox.png)
-
-> Hint: Sort each message into trust, report or delete, reading the SPF, DKIM and DMARC results and the real addresses, not the display names. A passing check only proves which domain sent it; read the domain itself, letter by letter.
+> Hint: Sort each message into trust, report or delete. Work out what each of the SPF, DKIM and DMARC results does and does not prove, and what you can still check for yourself in the address.
 
 <details markdown="1">
 <summary>Nudge: the triage</summary>
+
+![The triage inbox with header results]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/10-triage-inbox.png)
 
 Two of these messages are your own earlier sends, and the headers give them away now. One genuine message fails SPF because a mailing list forwarded it, yet its DKIM signature still aligns, so it is real. Some phish pass every authentication check because a look-alike domain really sent them; the trick is in the address, not the headers. Read addresses letter by letter, and check for extra words. When you mark a message, a "What made you say that?" list may ask which signs you saw; tick only the ones you found, and scroll it to see every option. You need to clear the pass mark; if you fall short, **Try again** is offered and nothing is lost.
 
@@ -459,21 +480,19 @@ Two of these messages are your own earlier sends, and the headers give them away
 
 The board asks for one fix per exposure your recon exploited: the leaked address pattern, and the username leaking through file metadata. For each, one option actually closes the gap and the others only look busy. Read why the weak options fall short.
 
-![The SOC board defender choices]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/11-soc-board.png)
-
 </details>
 
 <details markdown="1">
 <summary>Steps</summary>
 
+![The SOC board defender choices]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/11-soc-board.png)
+
 1. \==action: Triage every message== in the inbox, reading the authentication results and the addresses.
 2. \==action: Pass the triage==, retrying if your first pass is short.
 3. \==action: Choose a mitigation for each exposure on the SOC Board==.
-4. \==action: Take Tomasz's debrief== to close the engagement.
+4. \==action: Take Tomasz's debrief== to close the engagement (see the next stage).
 
 </details>
-
-> Note: Tomasz warns you before the debrief, because it closes the engagement and rolls the credits. If you want to finish anything first, including hearing Gareth's reply to your report, choose "Not yet, I want to finish something."; the debrief waits.
 
 ### The Debrief {#hints-debrief}
 
@@ -483,23 +502,42 @@ The board asks for one fix per exposure your recon exploited: the leaked address
 
 > Hint: Tomasz asks which one fix he should spend his only budget on this year. There is no wrong answer, but each choice says something about where the real weakness is. Pick the one you would defend, then read what he says back.
 
+<details markdown="1">
+<summary>Nudge</summary>
+
+The **Debrief me.** option only appears once both the triage and the SOC board are done. Until then Tomasz says which half is missing. Before he starts he warns you that the debrief closes the engagement and rolls the credits, and offers a way back. If you want to hear Gareth's reply to your report or finish anything else first, take it; the debrief waits. His questions about SPF, DKIM and DMARC, and about Dev, are optional and repeatable.
+
+</details>
+
+<details markdown="1">
+<summary>Steps</summary>
+
+1. \==action: Finish the triage and the SOC board== if you have not, then \==action: talk to Tomasz==.
+2. \==action: Choose "Debrief me."== Tomasz warns you that this closes the engagement.
+3. \==action: Choose "Go ahead. Close it out."== (or "Not yet, I want to finish something." to go back).
+4. \==action: Pick the fix you would spend the budget on== and read his reply. The credits roll.
+
+</details>
+
+> Note: Tomasz warns you before the debrief, because it closes the engagement and rolls the credits. If you want to finish anything first, including hearing Gareth's reply to your report, choose "Not yet, I want to finish something."; the debrief waits.
+
 ## What the Tools and the Game Are Telling You {#error-messages}
 
 | You see | It usually means |
 | --- | --- |
 | A scope card bounces back | You sorted it into the wrong pile; the line tells you which rule it breaks |
-| The Recon Room / Operations Room / Blue Team Room door is locked | The stage before it is not finished; Ruth hands you each key when it is |
+| The Recon Room / Operations Room / Blue Team Room door is locked | The stage before it is not finished; Ruth hands you each key when it is, and the Recon Room key also waits for Gareth's signature |
 | The board says a target card is incomplete | A **Missing** row still needs a public source; **Stuck? Show me where to look** under it names the source |
-| Chris's posts are nowhere on Friendface | You have not selected the careers inbox line on the Careers page yet |
-| "You still don't know the name she signs in with" | You have not read the published PDF's properties yet; the Operations Room stays locked until you do |
+| A card will not fill and a person's posts are nowhere to be seen | A line you read but did not select, or a source you have not opened yet; see the Recon hints |
+| "You still don't know the name she signs in with" | A published file you have not examined closely enough yet; the Operations Room stays locked until you do (see the Recon hints) |
 | A send fails with a factor marked "✗" | That one check failed; read the line and fix only that part |
 | "The name and the address belong to two different people" | Your From name and From address do not match; use the trusted person's real address |
 | "You're still sending as yourself" | You are on an account that cannot spoof; switch to the one that sets the From line |
 | A blank reads "no evidence yet" and Send is greyed out | You have not found that fact yet; open **Stuck? Show me where to look** under the blank |
-| Sofia's send fails on the system it names | You picked a finance tool from the Careers page, not her payslip portal; the desk knows the real one |
-| "She won't act on a link with no site behind it" | Build the look-alike page in the Page Builder and attach it before sending to Sofia |
-| "Blocked address", and Score says the address belongs to the company | The real domain cannot be used; pick a look-alike address and press Score again |
+| A send fails on a system or link it names | The name you used is not the one the target uses, or the link has nothing behind it; see the hints for Sofia |
+| "Blocked address", and Score says the address belongs to the company | The page cannot use an address you do not own; read the message under Score and choose again |
 | Dev says he will run it past his manager, and the phone will not ring him | You pushed too hard; the message says how long to wait (about two minutes), then call back calmly with your facts straight |
+| Dev gave you only one of the two facts you need | Ring him back for the other; Ruth and your phone say which is missing |
 | The report workstation says there is nothing to write up | All three targets have to act on a message first |
 | A finding pick comes back "Not quite" or "Blaming staff" | The cause or control you chose misses the gap or blames a person; read the reason. (The SOC Board words its version "Not enough".) |
 | The triage ends below the pass mark | Re-read the authentication results and the addresses, then Try again |
@@ -510,9 +548,9 @@ Work through these after you finish.
 
 ### 1. Authorisation and Planning {#q-authorise}
 
-> Question: Explain, in your own words, what the signed rules of engagement protect, and name three things the game kept out of scope. For each, say why a tester might be tempted and why it stays out.
+> Question: Explain, in your own words, what the signed rules of engagement protect. Which things on the scope sheet did you have to sort out, and why might a tester be tempted by each one that stayed out?
 
-> Question: The game measures how far each attempt got and refuses to name who fell for it. Give the practical reason, not just the ethical one, that naming people would make Ledgerwell less safe.
+> Question: Gareth set one condition about how results are reported. Argue for or against it from a defender's point of view, using a practical reason as well as an ethical one.
 
 > Action: Write a one-page rules-of-engagement outline for a phishing and social-engineering test of a small company. Cover what is in and out of scope, the point of contact, the stop-rule, how results will be reported without naming individuals, and what happens to any simulated sign-ins. Map each point to something you saw in the game.
 
@@ -520,33 +558,33 @@ Work through these after you finish.
 
 > Question: List the public sources you used in the Recon Room and the single most useful fact each one gave up. Which fact did a defender leave exposed by accident rather than on purpose?
 
-> Question: Two of your leads were traps: an archived org chart and a namesake at another company. What general rule about OSINT do they teach, and how would you apply it on a real engagement?
+> Question: Some of your leads turned out to be unreliable. Which ones, and what general rule about OSINT do they teach? How would you apply it on a real engagement?
 
 > Action: Pick an organisation you are allowed to look at (your own university or a company that has published a responsible-research or bug-bounty policy). Without touching any of its systems, write down what you can learn from its public website alone about how it is structured and how it might be contacted. Note where it is careful and where it leaks. Do not contact anyone.
 
 ### 3. Spoofing and Sender Authentication {#q-authentication}
 
-> Question: Explain what SPF, DKIM and DMARC each check, in one sentence apiece. Then explain why your spoof of a trusted colleague was delivered anyway.
+> Question: Explain what SPF, DKIM and DMARC each check, in one sentence apiece. Then explain what the headers of your own spoofed message showed, and why it was or was not delivered.
 
-> Question: In the defender's inbox, one genuine message failed SPF and some phishing messages passed every check. Explain how each of those is possible, and what it tells you about trusting a single authentication result.
+> Question: Look back at the authentication results in the defender's inbox. Find cases where the results and the truth disagreed, and explain how each is possible. What does that tell you about trusting a single authentication result?
 
 > Action: Find out whether a domain you control, or your university's domain, publishes SPF and DMARC records, and what the DMARC policy is set to. (You can read a domain's published DNS `TXT` records with an online lookup tool.) Write down what you found and what, if anything, you would change.
 
 ### 4. Pretexting and the Human Layer {#q-pretext}
 
-> Question: Dev followed his policy and still gave away what the attack needed. Explain why "the operator should have known better" is the wrong finding, and name the control that actually closes the gap.
+> Question: Think about what came out of the service desk call. Whose problem was that: the operator's or the organisation's? Name the control you would put in place, and say why it works even when the person is helpful and well meaning.
 
-> Question: Describe the pressure techniques you could use on Dev and what each one cost you. Why does a calm, candid approach beat leaning on urgency or authority?
+> Question: Describe the approaches you tried on the phone and what each one cost you. What does that tell you about how people respond to pressure compared with a calm, honest approach?
 
-> Action: Write the short call-back script you would give a service desk so it can help genuine callers quickly while defeating a pretext like yours. Keep it to five steps or fewer.
+> Action: Write the short script you would give a service desk so it can help genuine callers quickly while defeating a pretext like yours. Keep it to five steps or fewer.
 
 ### 5. Defending and Choosing Fixes {#q-defend}
 
-> Question: For each of the three findings in the report, state the cause and the control the game treated as correct, and explain in one line why each rejected alternative fell short.
+> Question: For each finding in your report, state the cause and the control you chose, and explain in one line why you rejected each alternative.
 
 > Question: Tomasz can afford one fix. Say which you would pick and why, and name one fix from the list you would not spend the money on, with your reason.
 
-> Action: Turn your run into a short defender's note for Gareth: the three gaps the engagement found, the one fix you would do first, and one measurement Ledgerwell cannot take today but could after that fix. No names.
+> Action: Turn your run into a short defender's note for Gareth: the gaps the engagement found, the one fix you would do first, and one measurement Ledgerwell cannot take today but could after that fix. No names.
 
 ## Further Reading {#further-reading}
 
