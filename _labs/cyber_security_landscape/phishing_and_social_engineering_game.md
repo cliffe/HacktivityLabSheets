@@ -45,7 +45,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 
 1. Read **Getting Started** and launch the game. You do not need any prior knowledge; the engagement teaches each idea as you reach it.
 2. Play. Dip into **Concepts** when you reach a new idea, or come back to it afterwards.
-3. If you get stuck, open **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and full steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each. Ruth, your engagement lead, gives the same hints on your in-game phone.
+3. If you get stuck, open **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and full steps in collapsed sections headed **Nudge** and **Steps**. Open one at a time, and go back to the game after each. Ruth, your engagement lead, gives the same hints on your in-game phone.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
 > Note: This is a training exercise against a fictional company, Ledgerwell Ltd. Everything you do is authorised inside the game's story. Doing any of it to a real organisation without written permission is a criminal offence. The first stage of the game is about exactly that line.
@@ -67,9 +67,11 @@ A first run takes about 60 to 90 minutes, depending on how much you read and how
 
 You move with the arrow keys or by clicking. Click objects, people, doors and workstations to interact. Keys you collect go to the inventory bar at the bottom of the screen. Each workstation runs one tool as a small on-screen app (the research browser, the mail client, the page builder, the phone, the report, the triage inbox and the defender board). The people are voiced, including Dev on the desk phone, so turn your sound on; every line is also shown as text.
 
-The engagement runs through four rooms off the Engagement Office: you unlock the **Recon Room**, the **Operations Room** and the **Blue Team Room** in turn, each with a key Ruth hands you when the stage before it is done.
+The engagement runs through four rooms in all: the Engagement Office, and three rooms off it. You unlock the **Recon Room**, the **Operations Room** and the **Blue Team Room** in turn, each with a key Ruth hands you when the stage before it is done.
 
 > Tip: Most tools put a **Stuck? Show me where to look** link under anything you have not found yet: each missing row on the Case File, and each empty blank in the mail composer. Open it and it names the source to check, never the answer.
+
+> Tip: Stuck on a term? Research tools and the page builder have **What is this?** buttons that open a short concept card, and the triage inbox has a **What's this?** glossary for SPF, DKIM and DMARC.
 
 > Tip: Nothing in this game is scored by catching you out, and no choice is a dead end. A wrong pick comes back with the reason it was wrong, so read the feedback rather than guessing again. The "wrong" answers are there to teach, so it is worth reading why they are wrong even when you picked the right one.
 
@@ -187,7 +189,7 @@ The call is a balance. Being a calm, candid colleague keeps Dev helping. Leaning
 
 ### Defending: triage, and turning findings into fixes {#defending}
 
-The last room flips the engagement. From the defender's chair you **triage** a mixed inbox: for each message, decide whether to trust it, report it or delete it, reading the SPF, DKIM and DMARC results and the actual addresses rather than the display names. Two of the messages are your own sends from earlier, and from this side the headers give them away. The inbox also includes a genuine message that looks suspicious (the mailing-list forward) and a phish that looks normal (a clean-looking look-alike domain), so you practise not judging by first impressions.
+The last room flips the engagement. From the defender's chair you **triage** a mixed inbox: for each message, decide whether to trust it, report it or delete it, reading the SPF, DKIM and DMARC results and the actual addresses rather than the display names. Two of the messages are your own sends from earlier, and from this side the headers give them away. The inbox also includes a genuine message that looks suspicious (the mailing-list forward) and phish that look normal (clean-looking look-alike domains), so you practise not judging by first impressions.
 
 Then you turn each finding into a **mitigation**. The game is careful about what counts as a good fix, and the cheapest ones are often the best:
 
@@ -198,7 +200,7 @@ Then you turn each finding into a **mitigation**. The game is careful about what
 
 Fixes that sound sensible but miss the point get rejected with the reason: a padlock check does not help against a padlocked fake page, forced password changes do not stop someone typing today's password into a fake page, and blaming "careless staff" hides the control gap and stops people reporting.
 
-> Question: Tomasz, the security lead, says he will get budget for one fix this year. Which of the four above would you spend it on, and what does your choice say about where the real weakness is?
+> Question: Tomasz, the security lead, says he will get budget for one fix this year. Which of the three fixes he offers (a call-back rule, DMARC enforcement with an external-sender banner, or a report button) would you spend it on, and what does your choice say about where the real weakness is?
 
 ## Stuck? Hints, Stage by Stage {#hints}
 
@@ -219,7 +221,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 Work email to named staff and the published service-desk line are the sort of thing the client is paying you to test. Staff's personal addresses are not, however tempting, and nor is anything that touches real customers or a live service. The stop-rule is about a real compromise you did not cause: a real incident is not yours to touch, fix or ignore, so there is only one safe answer.
 
-When you answer Gareth's opening question, the honest answer is the one that keeps people reporting: the test is about the gaps in his process, not about catching anyone out.
+Answer Gareth's opening question how you honestly would. Neither answer blocks the game, and Ruth reacts to both.
 
 </details>
 
@@ -262,7 +264,7 @@ The objective is about learning how far an attack gets, not about disrupting pay
 
 ### Reconnaissance: the Recon Room {#hints-recon}
 
-**Where:** the Recon Room (west), at the OSINT Workstation and the Case File board. **Goal:** learn enough about three people to approach them, from public sources only.
+**Where:** the Recon Room (west), at the OSINT Workstation, and the Case File board in the Engagement Office (the research browser also opens it from its **Case file** button). **Goal:** learn enough about three people to approach them, from public sources only.
 
 ![The OSINT research browser]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/04-osint-workstation.png)
 
@@ -273,7 +275,7 @@ The objective is about learning how far an attack gets, not about disrupting pay
 <details markdown="1">
 <summary>Nudge: filling the cards</summary>
 
-Use the research browser on the OSINT Workstation. You record a fact by selecting the line that says it. The team page gives roles; the team notes and the staff social posts on Friendface give what each person trusts and is waiting for; the How to apply page says what files the careers inbox takes; a lookup under **Tools** gives the email pattern, so you can write any staff address. One card needs the company's **username** convention, not just the address pattern, and that comes from a different kind of source.
+Use the research browser on the OSINT Workstation. You record a fact by selecting the line that says it. The team page gives roles; the team notes and the staff social posts on Friendface give what each person trusts and is waiting for; the How to apply page says what files the careers inbox takes; a lookup under **Tools** gives the email pattern, so you can write any staff address (Hunter and the name search only appear in Tools once you have read Our Team). One card needs the company's **username** convention, not just the address pattern, and that comes from a different kind of source.
 
 Chris's Friendface profile is hidden at first. It appears once you select the careers inbox line on the company's Careers page, so a card that will not fill often means a line you read but did not select.
 
@@ -295,7 +297,7 @@ A published document keeps its author's name in its properties, whether or not t
 
 1. \==action: Open the OSINT Workstation and read the company site: Our Team, Team notes, Careers, How to apply and the Archive==, selecting each line you want to keep.
 2. \==action: On the Careers page, select the careers inbox line==, then read Chris's posts, which now show on Friendface, along with Melanie's and Sofia's.
-3. \==action: Under Tools, run the Hunter lookup for the email pattern==, and the name search (noticing the plumber).
+3. \==action: Once you have read Our Team, run the Hunter lookup for the email pattern under Tools==, and the name search (noticing the plumber).
 4. \==action: Open the published PDF and read its properties, including the author==.
 5. \==action: Check the Case File until all three cards are ready==, then take the Operations Room key from Ruth.
 
@@ -312,7 +314,7 @@ A published document keeps its author's name in its properties, whether or not t
 <details markdown="1">
 <summary>Nudge: the careers inbox</summary>
 
-An inbox whose whole job is to open files from strangers will open yours. Apply as a candidate, attach the kind of file the How to apply page asks for, and it lands. Real applicants write from a webmail address, so Ruth wants you to make a throwaway one first: choose **Create account** in the account list at the top of the mail client.
+An inbox whose whole job is to open files from strangers will open yours. Apply as a candidate, attach the kind of file the How to apply page asks for, and it lands. Real applicants write from a webmail address, so Ruth suggests making a throwaway one first (it is optional): choose **Create account** in the account drop-down at the top of the mail client.
 
 </details>
 
@@ -330,8 +332,8 @@ One trap: the throwaway webmail account can only send as itself. To set the From
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Create a throwaway webmail account in the mail client, and send to the careers inbox from it as an applicant==, with the file type the How to apply page asks for.
-2. \==action: Switch back to the guest workstation account==, the one that lets you set the From line.
+1. \==action: Optionally, create a throwaway webmail account from the same drop-down, and send to the careers inbox from it as an applicant==, with the file type the How to apply page asks for.
+2. \==action: Switch to `Consultant <guest@workstation.example>` in the account drop-down==, the account that lets you set the From line.
 3. \==action: Compose to Melanie as the colleague she trusts==: his real address, her name, the file she expects.
 4. \==action: Send, and read the reply or the factor feedback== if it did not land. **Edit & resend** keeps your message so you can change one part.
 
@@ -361,7 +363,7 @@ The company's real address is on the list, drawn as a locked, dashed note: you c
 
 Ring the service desk from the desk phone as a colleague helping the new intern. Know her name and team before you dial; Dev checks both against the new-starter list, and both are on the public pages. Then ask for what you are missing: the portal's name and sending address, and the release date.
 
-Stay calm and candid. The influence meter at the top of the call shows how Dev feels, and each ask costs a little of it. False urgency or dropping a manager's name makes him wary; keep it up and he refuses and reports the call, and the phone tells you how long to wait (about two minutes) before he will talk again. If he refuses an ask but has not reported you, you can hang up and ring again. If you named the wrong team, own the correction straight away rather than arguing it.
+Stay calm and candid. The influence meter at the top of the call shows how Dev feels, and asking can cost a little of it. False urgency or dropping a manager's name makes him wary; keep it up and he refuses and reports the call, and the phone tells you how long to wait (about two minutes) before he will talk again. If he refuses an ask but has not reported you, you can hang up and ring again. If you named the wrong team, own the correction straight away rather than arguing it.
 
 ![The pretext call to Dev on the service desk]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/08-service-desk-call.png)
 
@@ -370,10 +372,10 @@ Stay calm and candid. The influence meter at the top of the call shows how Dev f
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Call the service desk from the desk phone==, opening as the intern's colleague with her name and team.
+1. \==action: Call the service desk from the desk phone==: fill in the **Prepare the call** card with her name and team, then choose **Make the call**, opening as the intern's colleague.
 2. \==action: Ask for the portal's name and sender, and the payslip release date==.
 3. \==action: Keep Dev calm==: avoid urgency and borrowed authority, and correct any mistake openly.
-4. \==action: Open the Page Builder==, pick Sofia's portal, the payslip purpose, a convincing look-alike address, the right wording and only the details the real portal asks for, then press **Score** until it says the page is convincing enough for her.
+4. \==action: Open the Page Builder==, pick Sofia's portal, the payslip purpose, a convincing look-alike address, the right wording and only the details the real portal asks for, then press **Score** until it says the page is convincing enough for her, and finish with **Attach to email** (**Attach anyway** if the score is low). Only that marks the page as built.
 
 </details>
 
@@ -395,7 +397,7 @@ If a blank in the composer reads **no evidence yet** or offers nothing that fits
 1. \==action: Compose to Sofia as the portal's own notification sender==.
 2. \==action: Greet her by her first name, the way the portal would==.
 3. \==action: Write a payslip-ready pretext with the portal's name and the release date==.
-4. \==action: Attach the look-alike page as the link, and send==.
+4. \==action: Check the page is built (**Attach to email** in the Page Builder), attach it as the link, and send==.
 
 </details>
 
@@ -440,7 +442,7 @@ For each finding, some wrong causes sound reasonable (a spam filter, a careless 
 <details markdown="1">
 <summary>Nudge: the triage</summary>
 
-Two of these messages are your own earlier sends, and the headers give them away now. One genuine message fails SPF because a mailing list forwarded it, yet its DKIM signature still aligns, so it is real. One phish passes every authentication check because a look-alike domain really sent it; the trick is in the address, not the headers. Read addresses right to left and letter by letter. When you mark a message, a "What made you say that?" list may ask which signs you saw; tick only the ones you found, and scroll it to see every option. You need to clear the pass mark; if you fall short, **Try again** is offered and nothing is lost.
+Two of these messages are your own earlier sends, and the headers give them away now. One genuine message fails SPF because a mailing list forwarded it, yet its DKIM signature still aligns, so it is real. Some phish pass every authentication check because a look-alike domain really sent them; the trick is in the address, not the headers. Read addresses letter by letter, and check for extra words. When you mark a message, a "What made you say that?" list may ask which signs you saw; tick only the ones you found, and scroll it to see every option. You need to clear the pass mark; if you fall short, **Try again** is offered and nothing is lost.
 
 </details>
 
@@ -463,7 +465,7 @@ The board asks for one fix per exposure your recon exploited: the leaked address
 
 </details>
 
-> Note: Tomasz warns you before the debrief, because it closes the engagement and rolls the credits. If you want to finish anything first, including hearing Gareth's reply to your report, choose "Not yet"; the debrief waits.
+> Note: Tomasz warns you before the debrief, because it closes the engagement and rolls the credits. If you want to finish anything first, including hearing Gareth's reply to your report, choose "Not yet, I want to finish something."; the debrief waits.
 
 ### The Debrief {#hints-debrief}
 
@@ -491,7 +493,7 @@ The board asks for one fix per exposure your recon exploited: the leaked address
 | "Blocked address", and Score says the address belongs to the company | The real domain cannot be used; pick a look-alike address and press Score again |
 | Dev says he will run it past his manager, and the phone will not ring him | You pushed too hard; the message says how long to wait (about two minutes), then call back calmly with your facts straight |
 | The report workstation says there is nothing to write up | All three targets have to act on a message first |
-| A finding pick comes back "Not enough" | The cause or control you chose misses the gap or blames a person; read the reason |
+| A finding pick comes back "Not quite" or "Blaming staff" | The cause or control you chose misses the gap or blames a person; read the reason. (The SOC Board words its version "Not enough".) |
 | The triage ends below the pass mark | Re-read the authentication results and the addresses, then Try again |
 
 ## After the Game: Questions and Exercises {#after-the-game}
@@ -518,7 +520,7 @@ Work through these after you finish.
 
 > Question: Explain what SPF, DKIM and DMARC each check, in one sentence apiece. Then explain why your spoof of a trusted colleague was delivered anyway.
 
-> Question: In the defender's inbox, one genuine message failed SPF and one phishing message passed every check. Explain how each of those is possible, and what it tells you about trusting a single authentication result.
+> Question: In the defender's inbox, one genuine message failed SPF and some phishing messages passed every check. Explain how each of those is possible, and what it tells you about trusting a single authentication result.
 
 > Action: Find out whether a domain you control, or your university's domain, publishes SPF and DMARC records, and what the DMARC policy is set to. (You can read a domain's published DNS `TXT` records with an online lookup tool.) Write down what you found and what, if anything, you would change.
 
