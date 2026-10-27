@@ -65,13 +65,15 @@ A first run takes about 60 to 90 minutes, depending on how much you read and how
 
 ### How to Play {#how-to-play}
 
-You move with the arrow keys or by clicking. Click objects, people, doors and workstations to interact. Keys you collect go to the inventory bar at the bottom of the screen. Each workstation runs one tool as a small on-screen app (the research browser, the mail client, the page builder, the phone, the report, the triage inbox and the defender board).
+You move with the arrow keys or by clicking. Click objects, people, doors and workstations to interact. Keys you collect go to the inventory bar at the bottom of the screen. Each workstation runs one tool as a small on-screen app (the research browser, the mail client, the page builder, the phone, the report, the triage inbox and the defender board). The people are voiced, including Dev on the desk phone, so turn your sound on; every line is also shown as text.
 
 The engagement runs through four rooms off the Engagement Office: you unlock the **Recon Room**, the **Operations Room** and the **Blue Team Room** in turn, each with a key Ruth hands you when the stage before it is done.
 
+> Tip: Most tools put a **Stuck? Show me where to look** link under anything you have not found yet: each missing row on the Case File, and each empty blank in the mail composer. Open it and it names the source to check, never the answer.
+
 > Tip: Nothing in this game is scored by catching you out, and no choice is a dead end. A wrong pick comes back with the reason it was wrong, so read the feedback rather than guessing again. The "wrong" answers are there to teach, so it is worth reading why they are wrong even when you picked the right one.
 
-> Warning: Watch the people you are attacking as well as the machines. The service desk operator, Dev, is friendly and helpful, but push him too hard and he will get suspicious, stop helping, and report your call to his manager. That is realistic, and it is recoverable, but it costs you time.
+> Warning: Watch the people you are attacking as well as the machines. The service desk operator, Dev, is friendly and helpful, but push him too hard and he will get suspicious, stop helping, and report your call to his manager. That is realistic, and it is recoverable, but he will not take another call for about two minutes.
 
 ## Concepts {#concepts}
 
@@ -179,7 +181,7 @@ A **pretext** is the false identity and story you use to get someone to help you
 
 Dev, the service desk operator, is good at his job. His policy is to check a caller's claimed facts against the new-starter list: a name and a team. Both of those are on Ledgerwell's public pages, so an attacker can pass the check. What his policy does not tell him to do is call back on a number already on file, and that is the gap, not Dev.
 
-The call is a balance. Being a calm, candid colleague keeps Dev helping. Leaning on him with false **urgency** ("she's panicking, it's her first payslip") or **borrowed authority** ("her manager said you'd sort this") makes him wary; keep pushing and he refuses, then reports the call and will not take another for a while. If you get a fact wrong and own the correction early (**candour**), it costs you less than defending it. The lesson for a defender is at the end: an attacker can fake a name and a team, but not a call back to the number the company already holds.
+The call is a balance. Being a calm, candid colleague keeps Dev helping. Leaning on him with false **urgency** ("she's panicking, it's her first payslip") or **borrowed authority** ("her manager said you'd sort this") makes him wary; keep pushing and he refuses, then reports the call and will not take another for about two minutes. If you get a fact wrong and own the correction early (**candour**), it costs you less than defending it. The lesson for a defender is at the end: an attacker can fake a name and a team, but not a call back to the number the company already holds.
 
 > Question: Dev did nothing against his policy, yet he gave away enough to make the intern's email believable. Whose problem is that, and what one change to the policy would have stopped it without making Dev's job harder?
 
@@ -215,7 +217,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 <details markdown="1">
 <summary>Nudge</summary>
 
-Work email to named staff and the published service-desk line are the sort of thing the client is paying you to test. Personal accounts and anything that touches real customers or a live service are not, however tempting. The stop-rule is about a real compromise you did not cause: a real incident is not yours to touch, fix or ignore, so there is only one safe answer.
+Work email to named staff and the published service-desk line are the sort of thing the client is paying you to test. Staff's personal addresses are not, however tempting, and nor is anything that touches real customers or a live service. The stop-rule is about a real compromise you did not cause: a real incident is not yours to touch, fix or ignore, so there is only one safe answer.
 
 When you answer Gareth's opening question, the honest answer is the one that keeps people reporting: the test is about the gaps in his process, not about catching anyone out.
 
@@ -264,12 +266,16 @@ The objective is about learning how far an attack gets, not about disrupting pay
 
 ![The OSINT research browser]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/04-osint-workstation.png)
 
-> Hint: The Case File board has a card for each target with "missing" rows. Each gap tells you what is short, and a "Stuck?" link under it points you at the source. Everything you need is public.
+> Hint: The Case File has a card for each target with **Missing** rows. Each one says what you still don't know, and the **Stuck? Show me where to look** link under it names the source. Everything you need is public.
+
+![The Case File, with a Stuck? pointer open on Chris's card]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/05-case-file-board.png)
 
 <details markdown="1">
 <summary>Nudge: filling the cards</summary>
 
-Use the research browser on the OSINT Workstation. The team page gives roles; the team notes and the staff social posts give what each person trusts and is waiting for; a lookup tool gives the email pattern, so you can write any staff address. One card needs the company's **username** convention, not just the address pattern, and that comes from a different kind of source.
+Use the research browser on the OSINT Workstation. You record a fact by selecting the line that says it. The team page gives roles; the team notes and the staff social posts on Friendface give what each person trusts and is waiting for; the How to apply page says what files the careers inbox takes; a lookup under **Tools** gives the email pattern, so you can write any staff address. One card needs the company's **username** convention, not just the address pattern, and that comes from a different kind of source.
+
+Chris's Friendface profile is hidden at first. It appears once you select the careers inbox line on the company's Careers page, so a card that will not fill often means a line you read but did not select.
 
 Watch for two decoys. The archived 2019 org chart is marked as old; the second J. Baker is a plumber in Leeds. A fact you confirm from a current source beats a fact that merely fits.
 
@@ -278,7 +284,7 @@ Watch for two decoys. The archived 2019 org chart is marked as old; the second J
 <details markdown="1">
 <summary>Nudge: the username pattern</summary>
 
-A published document keeps its author's name in its properties, whether or not the author meant to leave it there. Open the company's published PDF and read its properties; the author field gives away how usernames are built. Ruth will nudge you towards it if the board says recon is otherwise complete.
+A published document keeps its author's name in its properties, whether or not the author meant to leave it there. Open the company's published PDF and read its properties; the author field gives away how usernames are built. Melanie's card keeps a "sign-in name" row open until you do, and Ruth will not hand over the Operations Room key without it.
 
 **Learn it:** ==action: Open the PDF's Document properties and read the Author field== before you let the game tick the card, so you see where the leak is.
 
@@ -287,10 +293,11 @@ A published document keeps its author's name in its properties, whether or not t
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Open the OSINT Workstation and read the company site, the social profiles and the team notes==.
-2. \==action: Run the lookup tool for the email pattern==, and the name search (noticing the plumber).
-3. \==action: Open the published PDF's properties and read the author==.
-4. \==action: Fill all three cards on the Case File board==, then take the Operations Room key from Ruth.
+1. \==action: Open the OSINT Workstation and read the company site: Our Team, Team notes, Careers, How to apply and the Archive==, selecting each line you want to keep.
+2. \==action: On the Careers page, select the careers inbox line==, then read Chris's posts, which now show on Friendface, along with Melanie's and Sofia's.
+3. \==action: Under Tools, run the Hunter lookup for the email pattern==, and the name search (noticing the plumber).
+4. \==action: Open the published PDF and read its properties, including the author==.
+5. \==action: Check the Case File until all three cards are ready==, then take the Operations Room key from Ruth.
 
 </details>
 
@@ -300,14 +307,12 @@ A published document keeps its author's name in its properties, whether or not t
 
 **Where:** the Operations Room (east), at the Mail Workstation. **Goal:** get the careers inbox and then Melanie Pierce to act on a message.
 
-![The mail composer, building a spear-phish]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/06-mail-composer.png)
-
 > Hint: The careers inbox trusts anyone who looks like an applicant. Melanie only acts on mail from a colleague she trusts, so the question is how to look like that colleague.
 
 <details markdown="1">
 <summary>Nudge: the careers inbox</summary>
 
-An inbox whose whole job is to open files from strangers will open yours. Apply as a candidate, attach the kind of file the careers page asks applicants to send, and it lands. Real applicants write from a webmail address, so a throwaway account looks the part; you can also create one in the mail client, though for a quick test the guest workstation works and Ruth will tell you what that costs.
+An inbox whose whole job is to open files from strangers will open yours. Apply as a candidate, attach the kind of file the How to apply page asks for, and it lands. Real applicants write from a webmail address, so Ruth wants you to make a throwaway one first: choose **Create account** in the account list at the top of the mail client.
 
 </details>
 
@@ -325,10 +330,10 @@ One trap: the throwaway webmail account can only send as itself. To set the From
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Send to the careers inbox as an applicant, with the file type the careers page asks for==.
-2. \==action: Switch to the account that lets you set the From line==.
+1. \==action: Create a throwaway webmail account in the mail client, and send to the careers inbox from it as an applicant==, with the file type the How to apply page asks for.
+2. \==action: Switch back to the guest workstation account==, the one that lets you set the From line.
 3. \==action: Compose to Melanie as the colleague she trusts==: his real address, her name, the file she expects.
-4. \==action: Send, and read the reply or the factor feedback== if it did not land.
+4. \==action: Send, and read the reply or the factor feedback== if it did not land. **Edit & resend** keeps your message so you can change one part.
 
 </details>
 
@@ -336,16 +341,18 @@ One trap: the throwaway webmail account can only send as itself. To set the From
 
 ### Preparing for Sofia: the Page and the Call {#hints-prepare}
 
-**Where:** the Operations Room, at the Desk Phone and the Page Builder. **Goal:** call the service desk for the portal's name, its sender and the payslip date, then build a look-alike payroll page. Call first: the Page Builder waits until you know what Sofia would expect to see.
+**Where:** the Operations Room, at the Desk Phone and the Page Builder. **Goal:** call the service desk for the portal's name, its sender and the payslip date, and build a look-alike payroll page. Do them in either order. Until you have called, the Page Builder's "What Sofia is expecting" box stays empty, but you can still build.
 
-![The page builder and its look-alike domain choices]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/07-page-builder.png)
+![The page builder refusing the company's real domain]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/07-page-builder.png)
 
 > Hint: Sofia the intern only trusts her payroll portal's own notices. Your recon knows she uses a portal, but not its name, its sender or when payslips go out. The service desk knows all three.
 
 <details markdown="1">
 <summary>Nudge: the look-alike page</summary>
 
-The Page Builder scores your page against what would convince Sofia: the brand (the portal she actually uses), the domain, the logo and the wording. The domain is the hard part. A domain that reads nothing like the real one, or has an obvious extra word, scores low; the convincing ones are the look-alikes that pass a quick glance. Match the wording to a real payslip notice, and avoid the version riddled with spelling slips.
+The Page Builder scores your page against what would convince Sofia: the service (the **Which service?** row lists only the portal she actually uses), what the page says it is for, the address, the logo, the wording, which details the form asks for, and the padlock. The address is the hard part. One that reads nothing like the real one, or has one obviously wrong letter, scores low; the convincing ones are the look-alikes that pass a quick glance. Match the wording to a real payslip notice, avoid the version riddled with spelling slips, and do not ask for more than the real portal does.
+
+The company's real address is on the list, drawn as a locked, dashed note: you cannot use it, because you do not own it. If you press **Score** with no address chosen, the Score panel says so and asks you to pick a look-alike. One look-alike is drawn almost the same as the real address (a letter from another alphabet), so if Score says you have no address, check which one you actually picked.
 
 </details>
 
@@ -354,7 +361,7 @@ The Page Builder scores your page against what would convince Sofia: the brand (
 
 Ring the service desk from the desk phone as a colleague helping the new intern. Know her name and team before you dial; Dev checks both against the new-starter list, and both are on the public pages. Then ask for what you are missing: the portal's name and sending address, and the release date.
 
-Stay calm and candid. False urgency or dropping a manager's name makes Dev wary; keep it up and he refuses and reports the call, and you wait before he will talk again. If you named the wrong team, own the correction straight away rather than arguing it.
+Stay calm and candid. The influence meter at the top of the call shows how Dev feels, and each ask costs a little of it. False urgency or dropping a manager's name makes him wary; keep it up and he refuses and reports the call, and the phone tells you how long to wait (about two minutes) before he will talk again. If he refuses an ask but has not reported you, you can hang up and ring again. If you named the wrong team, own the correction straight away rather than arguing it.
 
 ![The pretext call to Dev on the service desk]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/08-service-desk-call.png)
 
@@ -366,17 +373,21 @@ Stay calm and candid. False urgency or dropping a manager's name makes Dev wary;
 1. \==action: Call the service desk from the desk phone==, opening as the intern's colleague with her name and team.
 2. \==action: Ask for the portal's name and sender, and the payslip release date==.
 3. \==action: Keep Dev calm==: avoid urgency and borrowed authority, and correct any mistake openly.
-4. \==action: Open the Page Builder==, match the brand, a convincing look-alike domain and the right wording, and build to its pass score.
+4. \==action: Open the Page Builder==, pick Sofia's portal, the payslip purpose, a convincing look-alike address, the right wording and only the details the real portal asks for, then press **Score** until it says the page is convincing enough for her.
 
 </details>
 
-> Warning: The careers page names Ledgerwell's finance tools, but that is not Sofia's payslip portal. If a system blank will not take what you tried, you have the wrong system; ask the desk for the real one.
+> Warning: The Careers page names Ledgerwell's finance tools, and the mail composer may offer one of them in Sofia's "which system" blank. That is not her payslip portal, and a message naming it will not land. The desk knows the real one.
 
 ### The Hard Send: Sofia Lord {#hints-hard-send}
 
 **Where:** the Mail Workstation. **Goal:** put the page and the call facts together and land a message on Sofia.
 
 > Hint: Now you have everything Sofia checks: the portal's sender, its name, the release date, and a page that looks like her portal. Use all of it in one message.
+
+![Sofia's message before the call, with the Stuck? pointer under the sender]({{ site.baseurl }}/assets/images/cyber_security_landscape/phishing_and_social_engineering_game/06-mail-composer.png)
+
+If a blank in the composer reads **no evidence yet** or offers nothing that fits, Send stays greyed out ("A blank needs evidence you haven't found yet") or the message fails. Open **Stuck? Show me where to look** under that blank: for Sofia's sender, sending address and release date it points you back to the desk phone.
 
 <details markdown="1">
 <summary>Steps</summary>
@@ -401,7 +412,7 @@ Stay calm and candid. False urgency or dropping a manager's name makes Dev wary;
 <details markdown="1">
 <summary>Nudge</summary>
 
-For the first question, look at what the tables actually count and ask which thing is missing from all of them. For the second, think about what a "first send landed" column tells you that "landed in the end" does not: a target who fell to the first try had no warning, and every failed send was a chance to spot it.
+For the first question, look at what the tables actually count and ask which thing is missing from all of them. The line just above the question, "Email and page reports received: none", says why. For the second, think about what a "first send landed" column tells you that "landed in the end" does not: a target who fell to the first try had no warning, and every failed send was a chance to spot it.
 
 For each finding, some wrong causes sound reasonable (a spam filter, a careless member of staff) and some wrong controls sound sensible (training, SPF alone, password expiry, checking the padlock). Read why each is wrong before you pick again; the explanations are the lesson.
 
@@ -429,7 +440,7 @@ For each finding, some wrong causes sound reasonable (a spam filter, a careless 
 <details markdown="1">
 <summary>Nudge: the triage</summary>
 
-Two of these messages are your own earlier sends, and the headers give them away now. One genuine message fails SPF because a mailing list forwarded it, yet its DKIM signature still aligns, so it is real. One phish passes every authentication check because a look-alike domain really sent it; the trick is in the address, not the headers. Read addresses right to left and letter by letter. You need to clear the pass mark; if you fall short, Try again is offered and nothing is lost.
+Two of these messages are your own earlier sends, and the headers give them away now. One genuine message fails SPF because a mailing list forwarded it, yet its DKIM signature still aligns, so it is real. One phish passes every authentication check because a look-alike domain really sent it; the trick is in the address, not the headers. Read addresses right to left and letter by letter. When you mark a message, a "What made you say that?" list may ask which signs you saw; tick only the ones you found, and scroll it to see every option. You need to clear the pass mark; if you fall short, **Try again** is offered and nothing is lost.
 
 </details>
 
@@ -468,14 +479,17 @@ The board asks for one fix per exposure your recon exploited: the leaked address
 | --- | --- |
 | A scope card bounces back | You sorted it into the wrong pile; the line tells you which rule it breaks |
 | The Recon Room / Operations Room / Blue Team Room door is locked | The stage before it is not finished; Ruth hands you each key when it is |
-| The board says a target card is incomplete | A "missing" row still needs a public source; the "Stuck?" link points at it |
-| The board says recon is done but Ruth asks about the PDF | You have not read the published PDF's properties yet, so the username card is still open |
+| The board says a target card is incomplete | A **Missing** row still needs a public source; **Stuck? Show me where to look** under it names the source |
+| Chris's posts are nowhere on Friendface | You have not selected the careers inbox line on the Careers page yet |
+| "You still don't know the name she signs in with" | You have not read the published PDF's properties yet; the Operations Room stays locked until you do |
 | A send fails with a factor marked "✗" | That one check failed; read the line and fix only that part |
 | "The name and the address belong to two different people" | Your From name and From address do not match; use the trusted person's real address |
 | "You're still sending as yourself" | You are on an account that cannot spoof; switch to the one that sets the From line |
-| The "which system" blank will not take your answer | You used a finance tool, not Sofia's payslip portal; ask the desk for the real one |
-| "There's no page behind that link" | Build the look-alike page in the Page Builder and attach it before sending to Sofia |
-| Dev says he will run it past his manager, and the phone locks out | You pushed too hard; wait a little, then call back calmly with your facts straight |
+| A blank reads "no evidence yet" and Send is greyed out | You have not found that fact yet; open **Stuck? Show me where to look** under the blank |
+| Sofia's send fails on the system it names | You picked a finance tool from the Careers page, not her payslip portal; the desk knows the real one |
+| "She won't act on a link with no site behind it" | Build the look-alike page in the Page Builder and attach it before sending to Sofia |
+| "Blocked address", and Score says the address belongs to the company | The real domain cannot be used; pick a look-alike address and press Score again |
+| Dev says he will run it past his manager, and the phone will not ring him | You pushed too hard; the message says how long to wait (about two minutes), then call back calmly with your facts straight |
 | The report workstation says there is nothing to write up | All three targets have to act on a message first |
 | A finding pick comes back "Not enough" | The cause or control you chose misses the gap or blames a person; read the reason |
 | The triage ends below the pass mark | Re-read the authentication results and the addresses, then Try again |
