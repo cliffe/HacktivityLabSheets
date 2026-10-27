@@ -79,27 +79,31 @@ The engagement runs through four rooms in all: the Engagement Office, and three 
 
 ## Concepts {#concepts}
 
-You do not need to read all of this before you play. Use it when you reach each idea, and again when you answer the questions afterwards.
+You do not need to read all of this before you play. Use it when you reach each idea, and again when you answer the questions afterwards. The examples use made-up companies and people, so you can check the reasoning by hand without it giving away anything in the game.
 
 ### Authorisation: the line between a test and a crime {#authorisation}
 
-Attacking an organisation's people and systems is a criminal offence under the **Computer Misuse Act 1990**, unless the organisation has agreed to it in writing first. A signed **scope** is what makes a penetration test lawful. It says what is in scope (what you may attack) and what is out of scope (what you must leave alone), who the point of contact is, and what you do if something goes wrong.
+Attacking an organisation's people and systems is a criminal offence under the **Computer Misuse Act 1990**, unless the organisation has agreed to it in writing first. A signed **scope** is what makes a penetration test lawful. Rules of engagement normally cover:
 
-In this engagement the signed sheet puts work email to named staff, the published service-desk phone line and public OSINT in scope, and keeps personal accounts, physical entry, real customers and anything that disrupts a live service out of scope. Ruth's line sums it up: the client's signature is the difference between a test and a crime.
+- what is in scope (the systems, channels and kinds of public information you may use) and what is out of scope (what you must leave alone);
+- who the point of contact is, and how to reach them;
+- what you do if something goes wrong.
 
-A good scope also has a **stop-rule**: if you stumble on a real compromise, or a real person in distress, you stop and escalate to the named contact rather than carrying on, fixing it yourself or sitting on it. A real incident is not yours to touch, and touching it could destroy evidence.
+Scope tends to be drawn around the client's own estate and the channels the client controls. Things that belong to someone else or could hurt a third party, such as staff personal accounts, physical entry, real customers and anything that could disrupt a live service, are usually excluded unless the client has specifically agreed and has the right to agree. Your work is only as lawful as the signature behind it, so a test starts with the paperwork, not the tools.
+
+A good scope also has a **stop-rule**: if you stumble on evidence of a real compromise, or a real person in distress, you stop and escalate to the named contact rather than carrying on, fixing it yourself or sitting on it. A real incident is not yours to touch, and touching it could destroy evidence.
 
 > Question: The engagement is authorised by the company that owns the systems and the staff accounts. The individual members of staff never agreed to be tested. Is it right to test people who did not personally consent? What makes it acceptable, and where would it stop being acceptable?
 
 ### Planning: measure the process, not the people {#planning}
 
-Before you send anything, you decide what the engagement is for and what you will measure. The point here is not "disrupt payroll to prove the risk" and not "collect as many passwords as you can"; it is to find how far email and a phone pretext get, and report the gaps. A simulated sign-in is recorded as having happened and then dropped. No password leaves the test.
+Before you send anything, you decide what the engagement is for and what you will measure. A useful objective is one you can check at the end. "Find out how far an email campaign gets against a small team" can be measured; "prove the company is vulnerable" cannot, because nothing could ever show you had failed to prove it. Agree up front, too, what happens to anything you capture, so that a test of the process never turns into collecting real credentials.
 
-How you measure matters just as much. Counting **which named staff fell for it** is the tempting measure and the wrong one. Gareth's one condition is that no names appear in anything he reads, and there is a hard reason behind it: the moment people are named and blamed, they stop reporting their mistakes, and reporting is the single most useful thing a defender has. So you measure **how far each attempt got**: sent, failed, landed, page visits, and what the call gave away. That shows the risk without pointing at a person.
+How you measure matters just as much as what. Counting **which named staff fell for it** is the tempting measure and the usually wrong one. When people are named and blamed, they stop reporting their mistakes, and reporting is one of the most useful things a defender has. A measure that counts **how far each attempt got** (delivered, opened, clicked, what a phone call gave away) shows the risk without pointing at a person.
 
-There is a neat twist in this stage. You might want to measure **whether staff reported the attack**, which really is the best signal there is. The problem is that Ledgerwell has no button or inbox for staff to report a suspect email, so there is nothing to count. That missing channel is itself a finding, and you will meet it again in the report.
+A worked example. A tester at an invented firm, Harbourline Ltd, plans a campaign of 40 messages. Afterwards she records: 40 sent, 3 bounced, 37 delivered, 12 links clicked, 5 forms submitted and then discarded. Check it by hand: 37 of 40 delivered is 92.5%, 12 of 37 clicked is about 32%, and 5 of 12 submitted is about 42%. Each figure describes the process (filtering, link caution, form caution) and none of them names a person. One more measure is worth planning for if the organisation gives you a way to take it: how many recipients **reported** the message. If there is no way to report, that rate is simply unavailable, and the missing channel is itself something to put in the findings.
 
-> Question: "Reporting rate is the best measure, but we can't measure it because there's no way to report." Explain why a report button is worth more to a defender than another round of awareness training.
+> Question: "Reporting rate is the best measure, but we can't measure it because there's no way to report." Explain why a way to report suspicious mail is worth more to a defender than another round of awareness training.
 
 ### Reconnaissance and OSINT {#osint}
 
@@ -109,20 +113,20 @@ In the Recon Room you work three kinds of source:
 
 | Source | What it gives up |
 | --- | --- |
-| The company website (team page, careers page, team notes, an old archived page) | Who works there, their roles, how to contact them, what they are busy with, and stale facts that no longer hold |
+| The company website (team and careers pages, news and notes, old archived pages) | Who works there, their roles, how to contact them, what they are busy with, and stale facts that no longer hold |
 | Staff social-media posts | Who a person trusts, what they are waiting for, and small personal details that make a message feel personal |
-| A published document's properties (metadata) | The author's username, the software used and file paths, left in the file because nobody cleared them |
+| A published document's properties (metadata) | The software used, file paths and often the name of whoever made it, left in the file because nobody cleared them |
 
 Real testers run tools to do this at scale. You meet them as concept cards in the game:
 
-- **Hunter** reports the address pattern a company uses, such as first-initial then surname. Read the pattern and you can write a working address for anyone you can name.
+- **Hunter** reports the address pattern a company uses. Companies tend to follow one convention, for example an initial and a surname (`a.nwosu@`) or first name, dot, surname (`amara.nwosu@`). Learn the pattern and you can write a plausible address for anyone you can name.
 - **theHarvester** collects names, addresses and sub-domains from public sources. Its results are noisy: two people can share a name, so each hit has to be checked against what the company's own site says.
 - **Recon-ng** runs many such lookups from one place. A lookup that returns nothing is a result too; it tells you not to waste time on that lead.
-- **exiftool** reads a file's metadata, including the author field, which often gives away the username convention.
+- **exiftool** reads a file's metadata, which can reveal who created a document and with what, and sometimes how the organisation names its accounts.
 
-Two of Ledgerwell's leads are traps, and spotting them is the lesson. An **archived 2019 org chart** shows an old structure that no longer holds; acting on it sends your message to the wrong team. A **name search** turns up a second J. Baker at a plumbing firm in Leeds, no relation to the Ledgerwell colleague of the same name. Stale and mistaken-identity results are normal in OSINT, which is why you confirm a fact against a second, current source before you rely on it.
+Not every result is a good one, and spotting the bad ones is part of the skill. An **archived page marked as old** shows a structure that may no longer hold, and acting on it sends your message to the wrong place. A **search hit that shares a name** with someone at a different company is a mistaken identity, however neat the match looks. Stale and mistaken-identity results are normal in OSINT, which is why you confirm a fact against a second, current source before you rely on it.
 
-> Question: Ledgerwell's team page gives outsiders a single role inbox, `careers@ledgerwell.example`, rather than each recruiter's personal address. Why is that better for them, and what does the Hunter result tell you about the addresses they have leaked elsewhere over the years?
+> Question: Many organisations publish a single role inbox for outsiders, such as `careers@` or `info@`, rather than each person's personal address. Why is that better for them, and what could an attacker still work out about the addresses they use internally?
 
 ### Why a tailored message lands {#spear-phishing}
 
@@ -136,71 +140,75 @@ A message lands when it clears the checks the target makes, usually without noti
 - **A plausible attachment or link** — the right kind of file from the right kind of sender, or a link that looks like the real site.
 - **Timing and a little pressure** — a believable reason it matters now, pitched so it does not feel forced.
 
-The three targets in the game show a range. An open careers inbox trusts anyone who looks like an applicant, so it is easy. A finance officer acts on mail from a colleague she trusts, so you have to borrow that colleague's identity and send the file she was expecting. A new intern only trusts notices from the payroll portal itself, so you have to get the portal's details exactly right, which your OSINT cannot give you. Each target teaches a different lever.
+Different targets are persuaded by different levers. A shared inbox that exists to hear from strangers will trust anything that looks like its normal traffic. Someone who routinely acts on mail from a named colleague can be reached by borrowing that colleague's identity and sending what they were expecting. Someone new, who only knows the official notices from the systems they have been told about, needs those systems' details to be right, and public research alone may not supply every detail. As you play, ask of each target which of the checks above they rely on most.
 
 > Question: For each of the three targets, name the single thing that made the message believable. Which of the three would be hardest to defend, and why?
 
 ### Email spoofing and sender authentication: SPF, DKIM and DMARC {#authentication}
 
-The From line you see in an email is just text. Nothing about plain email stops someone writing `Jed Baker <j.baker@ledgerwell.example>` in a message they sent from anywhere. **Spoofing** is exactly that: setting the From line to someone you are not. Three standards exist to catch it, and the game uses them accurately.
+The From line you see in an email is just text. Nothing about plain email stops someone writing `Dana Okafor <d.okafor@brightwater.example>` in a message they sent from anywhere. **Spoofing** is exactly that: setting the From line to someone you are not. Three standards exist to catch it.
 
 - **SPF** (Sender Policy Framework) answers one question: was the server that sent this message allowed to send for that domain? The domain owner publishes a list of permitted servers; the receiver checks the sending server against it.
 - **DKIM** (DomainKeys Identified Mail) answers a different one: did the domain actually sign this message, and arrive unchanged? The sending domain adds a cryptographic signature; the receiver checks it with the domain's published key.
 - **DMARC** (Domain-based Message Authentication, Reporting and Conformance) ties the two to the visible From address. It checks that a passing SPF or DKIM result **aligns** with the domain in the From line, and it tells receivers what to do when nothing aligns: `p=none` (deliver anyway), `p=quarantine` (send to junk) or `p=reject` (refuse it).
 
-The catch in the game is that Ledgerwell publishes `p=none`. So your spoof of Jed Baker fails SPF and has no DKIM signature, DMARC fails, and the receiver delivers it anyway, looking as if it came from inside the company. SPF and DKIM only report; DMARC's policy decides what happens, and a policy of `none` decides nothing.
+SPF and DKIM only report; DMARC's policy decides what happens. Take the invented Brightwater above. Someone sends the Dana Okafor message from their own server. The server is not on Brightwater's SPF list, so SPF fails. They hold no signing key, so there is no DKIM signature. Nothing aligns, so DMARC fails. If Brightwater publishes `p=none`, the receiver delivers it anyway, looking as if it came from inside the company. With `p=quarantine` it goes to junk, and with `p=reject` it never arrives. A policy of `none` decides nothing.
 
-A passing check does not prove a message is safe, and a failing one does not prove it is an attack. In the defender half you meet a genuine message forwarded by a finance mailing list: SPF **fails** because the list re-sent it from its own server, but the original sender's DKIM signature survived and still aligns, so DMARC **passes**. It is real. The headers, not a gut feeling, are what tell the two apart.
+A passing check does not prove a message is safe, and a failing one does not prove it is an attack. Forwarding is the classic case. Suppose a genuine message from `accounts@northfield-supplies.example` is forwarded by a mailing list run by an invented trade body. The list re-sends it from its own server, which is not on Northfield's SPF list, so SPF **fails**. But the list left the message body and signed headers untouched, so Northfield's DKIM signature is still valid and still aligns with the From domain, and DMARC **passes**. It is real, and the headers, not a gut feeling, are what show it. The reverse also happens: an attacker who registers their own look-alike domain can set up SPF, DKIM and DMARC for it correctly, and every check passes for a message that is still a phish, because the checks say who sent it, not whether the sender is who you think.
 
 ```
-Message              SPF    DKIM   DMARC   Verdict
-Your Jed Baker spoof  fail   none   fail    phish, but delivered (p=none)
-Real mail via a list  fail   pass   pass    genuine (DKIM still aligns)
+Message                                  SPF    DKIM   DMARC   Verdict
+Spoof of d.okafor@brightwater.example    fail   none   fail    phish (delivered if p=none)
+Genuine mail forwarded by a list         fail   pass   pass    genuine (DKIM still aligns)
+Phish from a look-alike domain the
+attacker set up properly                 pass   pass   pass    still a phish
 ```
 
-> Question: A colleague says "the email passed DMARC, so it must be safe." Give one reason that is not quite right. Then explain what moving Ledgerwell from `p=none` to `p=quarantine` would have done to your spoof.
+> Question: A colleague says "the email passed DMARC, so it must be safe." Give one reason that is not quite right. Then explain what moving a domain from `p=none` to `p=quarantine` does to a spoof of that domain.
 
 ### Look-alike domains and links {#lookalike}
 
-When you cannot send from the real domain, the next best thing is one that reads like it. These are the tricks, in roughly rising order of nastiness:
+When you cannot send from the real domain, the next best thing is one that reads like it. These are the tricks, in roughly rising order of nastiness. The examples are against an invented brand whose real address is `examplebank.example`:
 
-| Trick | Example against ledgerwell.example | How to catch it |
+| Trick | Example | How to catch it |
 | --- | --- | --- |
-| Unrelated name | payroll-online.example | It has no connection to the real name at all |
-| One wrong letter | ledgerwall.example | Read every letter |
-| An extra word | ledgerwell-hr.example | The real name is not the whole address |
-| A misleading subdomain | login.ledgerwell.account-help.example | Read right to left: the real site is the label just before `.example`, here `account-help.example` |
-| Typo-squat with look-alike pairs | ledgervvell.example (two v's for a w) | Read letter by letter |
+| Unrelated generic name | secure-banking-portal.example | It has no connection to the real name at all |
+| One wrong letter | examplebnak.example | Read every letter |
+| An extra word | examplebank-support.example | The real name is not the whole address |
+| A misleading subdomain | login.examplebank.verify-now.example | Read right to left: the registered site is the label just before `.example`, here `verify-now.example` |
+| Look-alike letter pairs | exarnplebank.example (r and n for an m) | Read letter by letter; `rn` and `vv` pass for `m` and `w` |
 | Homograph | a letter from another alphabet that looks identical | Some browsers show the `xn--` punycode form to give it away |
+
+Check the subdomain row by hand. Split `login.examplebank.verify-now.example` at the dots and read from the right: `example` is the top-level label, `verify-now` sits immediately left of it, and everything further left (`examplebank`, `login`) is a sub-domain the owner of `verify-now.example` chose for themselves. They could call it `examplebank` just as easily as anything else. The address belongs to whoever owns `verify-now.example`, not to the bank.
 
 Two habits matter for links. **Hover** before you click: the words of a link and where it actually goes are two different things, and the status bar shows the real destination. And remember that a **padlock** only means the connection is private, not that the site is who it claims to be; a look-alike page gets a padlock just as easily as the real one.
 
-> Question: The address `login.ledgerwell.account-help.example` is designed to make you relax when you see "ledgerwell" near the front. Which part is the real registered site, and why does reading right to left defeat the trick?
+> Question: Using the invented brand above, the address `login.examplebank.verify-now.example` is designed to make you relax when you see the brand name near the front. Which part is the real registered site, and why does reading right to left defeat the trick?
 
 ### Pretexting: social engineering by phone {#pretexting}
 
-A **pretext** is the false identity and story you use to get someone to help you: here, a busy colleague helping a nervous new intern. Pretexting over the phone works because a helpful person on a service desk wants to solve your problem, and the checks they make are only as good as the policy they were given.
+A **pretext** is the false identity and story you use to get someone to help you, such as a busy colleague helping a nervous new starter. Pretexting over the phone works because a helpful person on a service desk wants to solve your problem, and the checks they make are only as good as the policy they were given.
 
-Dev, the service desk operator, is good at his job. His policy is to check a caller's claimed facts against the new-starter list: a name and a team. Both of those are on Ledgerwell's public pages, so an attacker can pass the check. What his policy does not tell him to do is call back on a number already on file, and that is the gap, not Dev.
+Verification that relies on facts an outsider can find, such as a name and a team that appear on public pages, proves little. If the policy never asks for something an attacker cannot supply, the operator can follow it perfectly and still hand over what the attack needs. The gap is in the policy, not in the person. The control that closes it is one the caller cannot fake, such as calling back on a number the organisation already holds.
 
-The call is a balance. Being a calm, candid colleague keeps Dev helping. Leaning on him with false **urgency** ("she's panicking, it's her first payslip") or **borrowed authority** ("her manager said you'd sort this") makes him wary; keep pushing and he refuses, then reports the call and will not take another for about two minutes. If you get a fact wrong and own the correction early (**candour**), it costs you less than defending it. The lesson for a defender is at the end: an attacker can fake a name and a team, but not a call back to the number the company already holds.
+How you handle the call matters. Being a calm, candid colleague keeps the operator helping. Leaning on them with false **urgency** or **borrowed authority** makes them wary, and a wary operator may refuse and report the call. If you get a fact wrong, owning the correction early (**candour**) costs you less than defending it. This is realistic: people are a defence too, and a good one when they are not being rushed.
 
-> Question: Dev did nothing against his policy, yet he gave away enough to make the intern's email believable. Whose problem is that, and what one change to the policy would have stopped it without making Dev's job harder?
+> Question: The service desk operator did nothing against his policy, yet he gave away enough to make the intern's email believable. Whose problem is that, and what one change to the policy would have stopped it without making his job harder?
 
 ### Defending: triage, and turning findings into fixes {#defending}
 
-The last room flips the engagement. From the defender's chair you **triage** a mixed inbox: for each message, decide whether to trust it, report it or delete it, reading the SPF, DKIM and DMARC results and the actual addresses rather than the display names. Two of the messages are your own sends from earlier, and from this side the headers give them away. The inbox also includes a genuine message that looks suspicious (the mailing-list forward) and phish that look normal (clean-looking look-alike domains), so you practise not judging by first impressions.
+The last room flips the engagement. From the defender's chair you **triage** a mixed inbox: for each message, decide whether to trust it, report it or delete it, reading the SPF, DKIM and DMARC results and the actual addresses rather than the display names. Some of the messages are your own sends from earlier, and from this side the headers give them away. Expect genuine mail that looks suspicious and phish that looks perfectly normal, so you practise not judging by first impressions.
 
-Then you turn each finding into a **mitigation**. The game is careful about what counts as a good fix, and the cheapest ones are often the best:
+Then you turn each finding into a **mitigation**. Match the kind of control to the kind of gap:
 
-- A **report button** turns a staff member's doubt into a warning for everyone, and makes the best measure (reporting rate) possible at last.
-- A **call-back rule** on the service desk defeats every pretext call, because an attacker cannot answer a call to the number on file.
-- **Moving DMARC to enforcement** (quarantine or reject) plus an **external-sender banner** stops the spoof at the gateway and marks look-alike mail that DMARC cannot catch.
-- **Keeping staff addresses out of published material** and **stripping metadata** from files reduce what the next attacker can learn for free.
+- A gap where **people notice but have nowhere to send the doubt** is a detection and reporting gap. The control is a simple way to report, so one person's suspicion becomes a warning for everyone.
+- A gap where **a process can be talked round** is a policy gap. The control is a step the attacker cannot fake, such as verifying out of band, rather than a stricter script or a sterner reminder.
+- A gap where **a message can claim to be from your own domain or one that looks like it** is a technical email-authentication gap. Policy at the receiving end and visible marking of outside mail address it, because authentication results alone cannot catch look-alike domains.
+- A gap where **an attacker learned too much for free** is an exposure gap. Reduce what is published and what files carry with them.
 
-Fixes that sound sensible but miss the point get rejected with the reason: a padlock check does not help against a padlocked fake page, forced password changes do not stop someone typing today's password into a fake page, and blaming "careless staff" hides the control gap and stops people reporting.
+Prefer controls that work when a person makes a mistake, and be wary of ones that sound sensible but miss the point. A padlock on a page tells you nothing about who runs it. Forcing password changes does not help if someone types the new password into a fake page. And **blaming staff** as "careless" hides the control gap, makes people afraid to report, and so removes the best early warning you had.
 
-> Question: Tomasz, the security lead, says he will get budget for one fix this year. Which of the three fixes he offers (a call-back rule, DMARC enforcement with an external-sender banner, or a report button) would you spend it on, and what does your choice say about where the real weakness is?
+> Question: A security lead says there is budget for one fix this year. Think of the kinds of control above (a way to report, an out-of-band check for sensitive requests, tighter email authentication with marking of outside mail). Which would you spend it on in an organisation like the one you attacked, and what does your choice say about where the real weakness is?
 
 ## Stuck? Hints, Stage by Stage {#hints}
 
