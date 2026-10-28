@@ -3,7 +3,7 @@ title: "The Mole: VM Technical Steps"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
 description: "Technical companion to The Mole walkthrough, for the lab network: step-by-step hints for the repository server, the credential buried in git history, the login to svc-planning, and the escalation to root, plus command-line practice."
-tags: ["gitlist", "cve-2018-1000533", "argument-injection", "git-history", "ssh", "sudo", "privilege-escalation", "break-escape"]
+tags: ["gitlist", "cve-2014-4511", "argument-injection", "git-history", "ssh", "sudo", "privilege-escalation", "break-escape"]
 categories: ["safetynet"]
 redirect_from:
   - /labs/introducing_attacks/m08-the-mole-vm-technical-steps/
@@ -160,7 +160,7 @@ Point the attack box's browser at the repository server and open the repository 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Open the repository browser in the attack box's browser, at `http://<repository server>/`==, and read the project it serves.
+1. \==action: Open the repository browser in the attack box's browser, at `http://<repository server>/gitlist/`==, and read the project it serves.
 2. \==action: Read the readme and the other committed files, and the commit messages==. Note the account name **svc-planning** and the line that says a credential was committed then removed and never rotated.
 3. \==action: Copy the flag from what you read and submit it at the Evidence Relay Terminal==.
 
@@ -259,7 +259,7 @@ From the www-data shell, run `sudo -l`. It lists one tool the account may run as
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Fingerprint the web service and confirm the software name and version== (`curl -i http://<repository server>/` and the page source).
+1. \==action: Fingerprint the web service and confirm the software name and version== (`curl -i http://<repository server>/gitlist/` and the page source).
 2. \==action: Search the CVE database for that name and version, and read the entry's affected versions and description==.
 3. \==action: Run a proof of concept for the CVE from the attack box to get command execution as the web account==, and open a shell as `www-data`.
 4. \==action: Run `sudo -l` as www-data==. Note the tool you may run as root (a package manager such as `apt-get`), and whether it asks for a password.
@@ -334,7 +334,7 @@ On your own Kali box, run `sudo -l` and read the output line by line.
 
 ## Further Reading {#further-reading}
 
-- [CVE-2018-1000533 in the NVD](https://nvd.nist.gov/vuln/detail/CVE-2018-1000533)
+- [CVE-2014-4511 in the NVD](https://nvd.nist.gov/vuln/detail/CVE-2014-4511)
 - [Git Tools: Searching](https://git-scm.com/book/en/v2/Git-Tools-Searching)
 - [The sudoers manual](https://www.sudo.ws/docs/man/sudoers.man/)
 - [GTFOBins](https://gtfobins.github.io/)
