@@ -455,7 +455,7 @@ Key exchange leaves one problem open. Diffie-Hellman lets you agree a secret wit
 
 ## Chains of trust {#chains-of-trust}
 
-A **certificate** is a public key plus an identity (such as a website's domain name), signed by a CA. During the key exchange, the website signs its part of the exchange with the private key that belongs to its certificate, so your browser knows the key exchange really is with the bank and not with someone in the middle.
+A **certificate** is a public key plus an identity (such as a website's domain name), signed by a **Certification Authority** (CA): an organisation that browsers and operating systems trust to vouch for a website's public key, after checking that whoever asked for the certificate really controls that website. During the key exchange, the website signs its part of the exchange with the private key that belongs to its certificate, so your browser knows the key exchange really is with the bank and not with someone in the middle.
 
 Your browser trusts a few hundred **root CAs**, whose self-signed certificates ship with the browser or the operating system in a **root store**. Roots are too valuable to use every day, so their private keys are kept offline, and a root instead signs a small number of **intermediate CAs**, which sign the certificates for websites (**leaf** certificates):
 
@@ -465,7 +465,7 @@ Root CA              in your browser's root store (it signs itself)
                 └─ signs ─▶ www.example.com   the website's (leaf) certificate
 ```
 
-When you visit a website, it sends its leaf certificate and the intermediate; your browser checks each signature up the chain until it reaches a root it already trusts. So whoever holds an intermediate CA's private key can issue a certificate for any website, and every browser that trusts the root will accept it.
+When you visit a website, it sends its leaf certificate and the intermediate, then your browser checks every signature up the chain until it reaches a root it already trusts. So whoever holds an intermediate CA's private key can issue a certificate for any website, and every browser that trusts the root will accept it.
 
 ### Build a chain of your own {#build-a-chain-of-your-own}
 
@@ -504,6 +504,30 @@ openssl x509 -in leaf.crt -noout -subject -issuer
 `-CAfile` names the certificate you trust and `-untrusted` names the intermediate, which is checked rather than trusted. The first command prints `leaf.crt: OK`.
 
 > Question: Run `openssl verify -CAfile root.crt leaf.crt` (without the intermediate). Why does it fail?
+
+### Inspect a real certificate {#inspect-a-real-certificate}
+
+Your own browser does exactly this check every time you open an `https://` site. ==VM: On your own computer== (not the lab VMs, which have no internet access), ==action: open https://www.leedsbeckett.ac.uk and click the icon to the left of the address bar, then "Connection is secure":==
+
+![The site information menu, then the "Connection is secure" panel]({{ site.baseurl }}/assets/images/cyber_security_landscape/7_asymmetric_enc_rsa/lbu_site_info.png)
+
+![The connection security panel, showing the certificate is valid]({{ site.baseurl }}/assets/images/cyber_security_landscape/7_asymmetric_enc_rsa/lbu_connection_secure.png)
+
+==action: Open the certificate (the exact wording varies by browser: look for "Certificate is valid", "Certificate", or "More information").== The General tab shows who the certificate is for and who signed it:
+
+![The certificate's General tab: issued to *.leedsbeckett.ac.uk, issued by GlobalSign GCC R3 DV TLS CA 2020]({{ site.baseurl }}/assets/images/cyber_security_landscape/7_asymmetric_enc_rsa/lbu_certificate_general.png)
+
+- **Issued To** is the leaf: `*.leedsbeckett.ac.uk` (the `*` is a wildcard, so one certificate covers every `x.leedsbeckett.ac.uk`).
+- **Issued By** is the intermediate CA that signed it: `GlobalSign GCC R3 DV TLS CA 2020`. This is the same role as the intermediate you built above, run by a real CA.
+- The **SHA-256 Fingerprints** are hashes of the certificate and of its public key, the same kind of hash you used to sign in challenge 8.
+
+==action: Open the Details tab== to see the whole chain and the signature:
+
+![The certificate's Details tab: the GlobalSign root, intermediate and leaf hierarchy, and the signature algorithm PKCS #1 SHA-256 With RSA Encryption]({{ site.baseurl }}/assets/images/cyber_security_landscape/7_asymmetric_enc_rsa/lbu_certificate_details.png)
+
+The **Certificate Hierarchy** is the chain of trust, from a real root store: `GlobalSign` (the root) signs `GlobalSign GCC R3 DV TLS CA 2020` (the intermediate), which signs `*.leedsbeckett.ac.uk` (the leaf), exactly the shape of the chain you built. Selecting the **Certificate Signature Algorithm** field shows `PKCS #1 SHA-256 With RSA Encryption`: the leaf was signed with RSA over a SHA-256 hash, which is the signature you made by hand in challenge 8.
+
+> Question: Your browser trusts this certificate without ever contacting Leeds Beckett's own CA. Which public key does it use to check the leaf's signature, and where did your browser get it?
 
 ## When a CA gets key generation wrong {#when-a-ca-gets-key-generation-wrong}
 
