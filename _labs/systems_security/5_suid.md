@@ -123,7 +123,7 @@ ps -o ruser,euser,comm -C passwd
 Or you can list all processes (`-e`) and use `awk` to filter it down to *any* lines where the first two entries (ruid and euid) don't match:
 
 ```bash
-ps -eo ruser,euser,comm \| awk '$1 != $2'
+ps -eo ruser,euser,comm | awk '$1 != $2'
 ```
 
 Make sure you understand the significance of the ruser and euser outputs not matching.

@@ -201,7 +201,7 @@ You can also revert to the old methods of searching log files, by using journalc
 \==action: List all the attempts to gain root privileges:==
 
 ```bash
-sudo journalctl --no-pager \| grep "root"
+sudo journalctl --no-pager | grep "root"
 ```
 
 \==action: Open a new Konsole tab, and run any command using sudo, typing the wrong password 3 times.==
@@ -209,7 +209,7 @@ sudo journalctl --no-pager \| grep "root"
 \==action: List just the failed attempts to gain root privileges:==
 
 ```bash
-sudo journalctl --no-pager \| grep "incorrect password attempts"
+sudo journalctl --no-pager | grep "incorrect password attempts"
 ```
 
 It is sometimes very helpful to use the `-f` or `--follow` switches, which show only the most recent journal entries, and continuously print new entries as they are added to the journal.

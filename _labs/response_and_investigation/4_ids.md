@@ -180,7 +180,7 @@ kdesudo wireshark &
 And in another command tab:
 
 ```bash
-sudo tcpdump -A -i ens19 \| grep "GET"
+sudo tcpdump -A -i ens19 | grep "GET"
 ```
 
 In Wireshark, ==action: choose the network interface card== (such as ens19) then click the start icon, to ==action: start monitoring traffic==. Generate some traffic and explore how to ==action: view it using Wireshark==.
