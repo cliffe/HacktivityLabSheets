@@ -412,7 +412,9 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Key exchange {#key-exchange}
 
-Public-key encryption can deliver a symmetric key: one side picks the key, encrypts it and sends it. Modern protocols usually use **key exchange** instead. Both parties contribute to the key, and the key itself is never sent at all. **Diffie-Hellman** (DH), published in 1976, was the first public-key scheme of any kind.
+Whilst public-key encryption solves the problem of eavesdropping, symmetric-key approaches require less computational resources and are faster. Public-key encryption can be used to deliver a symmetric key, where one side picks the key, encrypts it, then sends it, but modern protocols usually use **key exchange** instead. 
+
+With key exchange algorithms, both parties contribute to the key, and the key itself is never sent at all. **Diffie-Hellman** (DH), published in 1976, was the first public-key scheme of any kind.
 
 **The idea, with paint.** Alice and Bob agree publicly on a starting colour, say yellow. Each secretly picks their own colour and mixes it with the yellow. They swap their mixtures in public. Each then adds their own secret colour to the mixture they received. Both end up with the same colour: yellow + Alice's secret + Bob's secret. An eavesdropper has seen yellow and both mixtures, but unmixing paint to find the secret colours is too hard.
 
