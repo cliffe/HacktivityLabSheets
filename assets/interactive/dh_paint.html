@@ -235,6 +235,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   function css(c) { return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; }
   function paint(el, c) { el.style.backgroundColor = css(c); }
 
+  // tell the embedding page how tall we are, so it can size the iframe and avoid an inner scrollbar
+  function postHeight() {
+    var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    try { parent.postMessage({ type: "dh-paint-height", height: h }, "*"); } catch (ex) {}
+  }
+
   var a = 6, b = 15, step = 0, animating = false;
   var ids = ["base","aSlider","bSlider","aVal","bVal","aSecret","bSecret","aOp1","aMixSlot","aMix","aMixVal",
     "aOp2","aRecvSlot","aRecv","aRecvVal","aOp3","aShSlot","aShared","aShVal","bOp1","bMixSlot","bMix","bMixVal",
@@ -314,6 +320,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
     e.nextBtn.textContent = NEXT_TEXT[step];
     e.nextBtn.disabled = step >= 3 || animating;
     e.crackOut.textContent = ""; e.crackBtn.disabled = false;
+    postHeight();
   }
 
   // animate a copy of fromEl's swatch to toEl's position (the "crossing")
@@ -370,6 +377,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
       if (k >= 22) clearInterval(timer);
     }, 170);
   });
+
+  if (window.ResizeObserver) { try { new ResizeObserver(postHeight).observe(document.body); } catch (ex) {} }
+  var mathsEl = document.getElementById("maths");
+  if (mathsEl) mathsEl.addEventListener("toggle", postHeight);
+  window.addEventListener("load", postHeight);
 
   render();
 })();

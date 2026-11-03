@@ -428,9 +428,17 @@ With key exchange algorithms, both parties contribute to the key, and the key it
     f.src = m.getAttribute("data-src");
     f.title = "Interactive Diffie-Hellman paint-mixing demo";
     f.loading = "lazy";
-    f.style.cssText = "width:100%;max-width:720px;height:840px;border:1px solid var(--panelborder-color);border-radius:12px;display:block;margin:0 auto;";
+    f.style.cssText = "width:100%;max-width:720px;height:560px;border:1px solid var(--panelborder-color);border-radius:12px;display:block;margin:0 auto;";
     m.appendChild(f);
   }
+  // the demo reports its height so the iframe grows to fit and never shows an inner scrollbar
+  window.addEventListener("message", function (ev) {
+    var m = document.getElementById("dh-demo-mount");
+    var f = m && m.querySelector("iframe");
+    if (f && ev.source === f.contentWindow && ev.data && ev.data.type === "dh-paint-height") {
+      f.style.height = Math.ceil(ev.data.height) + "px";
+    }
+  });
   if (document.readyState === "complete") mount();
   else window.addEventListener("load", mount);
 })();
