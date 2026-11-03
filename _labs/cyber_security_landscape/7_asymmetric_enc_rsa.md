@@ -418,9 +418,29 @@ With key exchange algorithms, both parties contribute to the key, and the key it
 
 **The idea, with paint.** Alice and Bob agree publicly on a starting colour, say yellow. Each secretly picks their own colour and mixes it with the yellow. They swap their mixtures in public. Each then adds their own secret colour to the mixture they received. Both end up with the same colour: yellow + Alice's secret + Bob's secret. An eavesdropper has seen yellow and both mixtures, but unmixing paint to find the secret colours is too hard.
 
+<div id="dh-demo-mount" data-src="{{ site.baseurl }}/assets/interactive/dh_paint.html?v={{ site.time | date: '%s' }}" style="margin:1.5rem 0;"></div>
+<script>
+(function () {
+  function mount() {
+    var m = document.getElementById("dh-demo-mount");
+    if (!m || m.querySelector("iframe")) return;
+    var f = document.createElement("iframe");
+    f.src = m.getAttribute("data-src");
+    f.title = "Interactive Diffie-Hellman paint-mixing demo";
+    f.loading = "lazy";
+    f.style.cssText = "width:100%;max-width:720px;height:840px;border:1px solid var(--panelborder-color);border-radius:12px;display:block;margin:0 auto;";
+    m.appendChild(f);
+  }
+  if (document.readyState === "complete") mount();
+  else window.addEventListener("load", mount);
+})();
+</script>
+
+==tip: Try the demo above: set each secret, step through the mixing and swap, show the numbers, and let Eve try to crack the tiny keyspace.==
+
 **The real thing, with numbers.** DH does the same thing with modular arithmetic: "mod p" means "take the remainder after dividing by p", as in RSA. Raising a number to a power is the "mixing", and it is easy to do but very hard to undo.
 
-1. Alice and Bob publicly agree on two numbers: a prime *p* and a **generator** *g* (a number whose powers mod *p* reach every value from 1 to *p* − 1). Example: p = 23, g = 5.
+1. Alice and Bob publicly agree on two numbers: a prime *p* and a **generator** *g* (a number whose powers mod *p* reach every value from 1 to *p* − 1). Example: p = 23, g = 5. These two are public, not secret: Eve knows them as well, and in practice they are standard published values that everyone reuses, or one side sends them in the clear. Only the secret numbers *a* and *b* that each side picks next are kept private.
 2. Alice picks a secret number *a* and sends Bob A = g^a mod p. Alice picks 6 and sends 5^6 mod 23 = 8.
 3. Bob picks a secret number *b* and sends Alice B = g^b mod p. Bob picks 15 and sends 5^15 mod 23 = 19.
 4. Each raises what they received to their own secret. Alice computes 19^6 mod 23 = 2. Bob computes 8^15 mod 23 = 2.

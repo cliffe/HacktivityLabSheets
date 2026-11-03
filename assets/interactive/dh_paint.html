@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diffie-Hellman Paint Mixer</title>
+<style>
+/* Layout: Alice on top, Bob on the bottom, the public line and Eve between them. Each runs a left-to-right
+   strip: secret -> mixture -> received-from-the-other -> shared. On swap, the mixtures cross the line. */
+:root {
+  --bg: #f4f1ea; --surface: #fffdf8; --ink: #23201b; --muted: #6b6456; --line: #ddd6c8;
+  --accent: #2f6f5e; --accent-soft: #dcece6; --good: #1f7a46; --leak: #b3541e; --leak-soft: #f6e6d8; --wire: #c9b98f;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1a1813; --surface: #221f19; --ink: #ece7db; --muted: #a39b89; --line: #3a362c;
+  --accent: #6fc0a7; --accent-soft: #223029; --good: #6bd091; --leak: #e0945c; --leak-soft: #332218; --wire: #5a5236;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #1a1813; --surface: #221f19; --ink: #ece7db; --muted: #a39b89; --line: #3a362c;
+  --accent: #6fc0a7; --accent-soft: #223029; --good: #6bd091; --leak: #e0945c; --leak-soft: #332218; --wire: #5a5236;
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink); font: 15px/1.5 var(--sans);
+  padding: 18px max(16px, env(safe-area-inset-right, 0px)) 26px max(16px, env(safe-area-inset-left, 0px));
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+h1 { font: 600 22px/1.2 var(--sans); margin: 0 0 4px; }
+.lede { color: var(--muted); margin: 0 0 16px; max-width: 60ch; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.public { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+.public .tag { font: 600 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 5px 8px; border-radius: 5px; }
+.public .nums { font: 500 13px/1 var(--mono); color: var(--muted); }
+.publicnote { font: 500 12.5px/1.45 var(--sans); color: var(--muted); margin: 2px 0 14px; max-width: 62ch; }
+
+.strip { display: grid; gap: 8px; }
+.strip > h2 { font: 600 16px/1 var(--sans); margin: 0; }
+.flow { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 6px 10px; }
+.slot { display: grid; gap: 4px; justify-items: center; min-width: 64px; }
+.swatch { width: 60px; height: 60px; border-radius: 10px; border: 1px solid rgba(0,0,0,.16); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); transition: background-color .4s ease; }
+.swatch.big { width: 72px; height: 72px; }
+.cap { font: 500 11px/1.25 var(--sans); color: var(--muted); text-align: center; max-width: 92px; }
+.cap b { color: var(--ink); font-weight: 600; }
+.val { font: 600 12px/1 var(--mono); color: var(--accent); }
+.val.wire { color: var(--leak); }
+.op { align-self: center; font: 500 12px/1.2 var(--muted); text-align: center; padding-bottom: 20px; white-space: nowrap; }
+.op .big { font-size: 18px; color: var(--ink); }
+.secretline { display: grid; gap: 4px; justify-items: center; }
+.secretline label { font: 500 11px/1 var(--muted); }
+input[type=range] { width: 100px; accent-color: var(--accent); }
+
+.band { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; text-align: center;
+  margin: 12px 0; padding: 10px; border-top: 1px dashed var(--wire); border-bottom: 1px dashed var(--wire); }
+.band .eve { font: 600 12px/1.2 var(--leak); }
+.band .eve .face { font-size: 20px; display: block; }
+.band .dir { font: 500 12px/1.3 var(--ink); }
+.band .dir .mono { font-family: var(--mono); color: var(--leak); font-weight: 600; }
+.band.idle { color: var(--muted); border-color: var(--line); }
+.band.idle .eve { color: var(--muted); }
+
+.match { margin-top: 12px; text-align: center; }
+.match .badge { font: 600 13px/1 var(--mono); color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); padding: 7px 12px; border-radius: 999px; display: inline-block; }
+
+.steplabel { font: 500 13.5px/1.45 var(--sans); color: var(--muted); margin-top: 14px; min-height: 2.2em; }
+.steplabel b { color: var(--ink); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+button { font: 600 14px/1 var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+button.ghost { background: transparent; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.evepanel { margin-top: 14px; border: 1px dashed var(--leak); border-radius: 10px; padding: 12px; background: var(--leak-soft); }
+.evepanel h3 { font: 600 13px/1 var(--sans); margin: 0 0 6px; color: var(--leak); }
+.evepanel p { margin: 0 0 8px; font-size: 13px; }
+.evewire { font: 500 13px/1.5 var(--mono); color: var(--ink); }
+.crackout { font: 500 12.5px/1.5 var(--mono); color: var(--ink); margin-top: 8px; white-space: pre-wrap; }
+.maths { margin-top: 14px; }
+.maths > summary { cursor: pointer; font: 600 14px/1 var(--sans); color: var(--accent); padding: 8px 0; list-style: none; }
+.maths > summary::-webkit-details-marker { display: none; }
+.maths > summary::before { content: "\25B8  "; }
+.maths[open] > summary::before { content: "\25BE  "; }
+.numtable { width: 100%; border-collapse: collapse; margin-top: 8px; font: 500 13px/1.4 var(--mono); }
+.numtable th, .numtable td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.numtable th { color: var(--muted); font-weight: 600; width: 1%; white-space: nowrap; }
+.numtable .hl { color: var(--good); font-weight: 700; }
+.numtable .wire-val { color: var(--leak); }
+.note { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+
+.flyer { position: fixed; border-radius: 10px; border: 1px solid rgba(0,0,0,.18); z-index: 50; pointer-events: none;
+  transition: transform .65s cubic-bezier(.45,.05,.3,1); }
+@media (prefers-reduced-motion: reduce) { .swatch { transition: none; } .flyer { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Diffie-Hellman, in paint</h1>
+  <p class="lede">Alice and Bob agree a shared secret over a line anyone can listen on, without ever sending the secret. Mixing paint is easy; separating it again is not. Set each secret and step through.</p>
+
+  <div class="panel">
+    <div class="public">
+      <span class="tag">Public</span>
+      <span>Base paint</span>
+      <span class="swatch" id="base" style="width:30px;height:30px" aria-label="base paint"></span>
+      <span class="nums">and the numbers p = 23, g = 5</span>
+    </div>
+    <p class="publicnote">These are agreed in the open before Alice and Bob start, so they are not secret: Eve knows p, g and the base paint too. Real systems reuse standard published values for p and g. Only each side's secret (a and b) stays private.</p>
+
+    <!-- ALICE -->
+    <div class="strip">
+      <h2>Alice</h2>
+      <div class="flow">
+        <div class="slot">
+          <span class="swatch" id="aSecret" aria-label="Alice's secret paint"></span>
+          <span class="cap">her secret<br><b>a = <span id="aVal">6</span></b></span>
+          <span class="secretline"><label for="aSlider">change a</label>
+            <input type="range" id="aSlider" min="1" max="22" value="6" aria-label="Alice's secret value a"></span>
+        </div>
+        <div class="op" id="aOp1" style="display:none"><span class="big">+</span><br>base</div>
+        <div class="slot" id="aMixSlot" style="display:none">
+          <span class="swatch" id="aMix" aria-label="Alice's mixture"></span>
+          <span class="cap">she mixes<br><span class="val" id="aMixVal"></span></span>
+        </div>
+        <div class="op" id="aOp2" style="display:none"><span class="big">&rarr;</span><br>gets</div>
+        <div class="slot" id="aRecvSlot" style="display:none">
+          <span class="swatch" id="aRecv" aria-label="mixture Alice received from Bob"></span>
+          <span class="cap">from Bob<br><span class="val wire" id="aRecvVal"></span></span>
+        </div>
+        <div class="op" id="aOp3" style="display:none"><span class="big">+</span><br>her secret</div>
+        <div class="slot" id="aShSlot" style="display:none">
+          <span class="swatch big" id="aShared" aria-label="Alice's shared secret paint"></span>
+          <span class="cap"><b>shared</b><br><span class="val" id="aShVal"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIRE -->
+    <div class="band idle" id="band">
+      <span class="eve"><span class="face">&#128066;</span>Eve listens</span>
+      <span class="dir" id="bandText">Nothing has crossed the line yet.</span>
+    </div>
+
+    <!-- BOB -->
+    <div class="strip">
+      <h2>Bob</h2>
+      <div class="flow">
+        <div class="slot">
+          <span class="swatch" id="bSecret" aria-label="Bob's secret paint"></span>
+          <span class="cap">his secret<br><b>b = <span id="bVal">15</span></b></span>
+          <span class="secretline"><label for="bSlider">change b</label>
+            <input type="range" id="bSlider" min="1" max="22" value="15" aria-label="Bob's secret value b"></span>
+        </div>
+        <div class="op" id="bOp1" style="display:none"><span class="big">+</span><br>base</div>
+        <div class="slot" id="bMixSlot" style="display:none">
+          <span class="swatch" id="bMix" aria-label="Bob's mixture"></span>
+          <span class="cap">he mixes<br><span class="val" id="bMixVal"></span></span>
+        </div>
+        <div class="op" id="bOp2" style="display:none"><span class="big">&rarr;</span><br>gets</div>
+        <div class="slot" id="bRecvSlot" style="display:none">
+          <span class="swatch" id="bRecv" aria-label="mixture Bob received from Alice"></span>
+          <span class="cap">from Alice<br><span class="val wire" id="bRecvVal"></span></span>
+        </div>
+        <div class="op" id="bOp3" style="display:none"><span class="big">+</span><br>his secret</div>
+        <div class="slot" id="bShSlot" style="display:none">
+          <span class="swatch big" id="bShared" aria-label="Bob's shared secret paint"></span>
+          <span class="cap"><b>shared</b><br><span class="val" id="bShVal"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="match" id="matchRow" style="display:none"><span class="badge">Both reached the same colour, and the same number, without sending a secret</span></div>
+
+    <p class="steplabel" id="stepLabel" aria-live="polite"></p>
+    <div class="controls">
+      <button class="primary" id="nextBtn" type="button">Mix the paints</button>
+      <button class="ghost" id="resetBtn" type="button">Reset</button>
+    </div>
+
+    <div class="evepanel" id="evePanel" style="display:none">
+      <h3>&#128066; What Eve has heard</h3>
+      <p>Everything sent across the line, and nothing else:</p>
+      <div class="evewire" id="eveWire"></div>
+      <button id="crackBtn" type="button" style="margin-top:10px">Eve: try to crack Alice's secret</button>
+      <div class="crackout" id="crackOut"></div>
+    </div>
+
+    <details class="maths" id="maths" open>
+      <summary>The same thing, with numbers</summary>
+      <table class="numtable">
+        <tr><th>Public</th><td>p = 23, g = 5</td></tr>
+        <tr><th>Alice</th><td>secret a = <span id="nA">6</span> &nbsp;&rarr;&nbsp; sends A = g<sup>a</sup> mod p = <span class="wire-val" id="nBigA">8</span></td></tr>
+        <tr><th>Bob</th><td>secret b = <span id="nB">15</span> &nbsp;&rarr;&nbsp; sends B = g<sup>b</sup> mod p = <span class="wire-val" id="nBigB">19</span></td></tr>
+        <tr><th>Alice</th><td>takes Bob's B, computes B<sup>a</sup> mod p = <span class="hl" id="nSharedA">2</span></td></tr>
+        <tr><th>Bob</th><td>takes Alice's A, computes A<sup>b</sup> mod p = <span class="hl" id="nSharedB">2</span></td></tr>
+      </table>
+      <p class="note">Both land on g<sup>ab</sup> mod p. Eve sees p, g, A and B, but to get the secret she needs a from A, the discrete logarithm problem. Here p = 23 is tiny, so she can just try every power (the Eve button above). Real Diffie-Hellman uses a p hundreds of digits long, where no known method is fast enough.</p>
+    </details>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var P = 23, G = 5;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $ = function (id) { return document.getElementById(id); };
+  function modpow(base, exp, mod) { var r = 1; base %= mod; while (exp > 0) { if (exp & 1) r = (r * base) % mod; base = (base * base) % mod; exp >>= 1; } return r; }
+
+  function hslToRgb(h, s, l) {
+    s /= 100; l /= 100;
+    var c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2, r = 0, g = 0, b = 0;
+    if (h < 60) { r = c; g = x; } else if (h < 120) { r = x; g = c; } else if (h < 180) { g = c; b = x; }
+    else if (h < 240) { g = x; b = c; } else if (h < 300) { r = x; b = c; } else { r = c; b = x; }
+    return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)];
+  }
+  var BASE = hslToRgb(46, 95, 55);
+  function secretColour(n) { return hslToRgb(Math.round((n - 1) / 21 * 300), 68, 54); }
+  function mix(pigs) { var r = 0, g = 0, b = 0, i, n = pigs.length; for (i = 0; i < n; i++) { r += pigs[i][0]; g += pigs[i][1]; b += pigs[i][2]; } return [Math.round(r / n), Math.round(g / n), Math.round(b / n)]; }
+  function css(c) { return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; }
+  function paint(el, c) { el.style.backgroundColor = css(c); }
+
+  var a = 6, b = 15, step = 0, animating = false;
+  var ids = ["base","aSlider","bSlider","aVal","bVal","aSecret","bSecret","aOp1","aMixSlot","aMix","aMixVal",
+    "aOp2","aRecvSlot","aRecv","aRecvVal","aOp3","aShSlot","aShared","aShVal","bOp1","bMixSlot","bMix","bMixVal",
+    "bOp2","bRecvSlot","bRecv","bRecvVal","bOp3","bShSlot","bShared","bShVal","band","bandText","matchRow",
+    "stepLabel","nextBtn","resetBtn","evePanel","eveWire","crackBtn","crackOut","nA","nB","nBigA","nBigB","nSharedA","nSharedB"];
+  var e = {}; ids.forEach(function (id) { e[id] = $(id); });
+
+  var STEP_TEXT = [
+    "Each picks a secret colour and a secret number. Press <b>Mix the paints</b>.",
+    "Each has mixed the base into their secret. Now <b>send</b> the mixtures across the line: Alice's goes down to Bob, Bob's goes up to Alice. They cross where Eve is listening.",
+    "They have swapped. Alice now holds Bob's mixture, Bob holds Alice's, and Eve copied both. Now each <b>adds their own secret again</b>.",
+    "Alice added her secret to Bob's mixture; Bob added his to Alice's. Same three paints, so the <b>same colour</b> and the same number. Eve, with only the two public mixtures, cannot get there."
+  ];
+  var NEXT_TEXT = ["Mix the paints", "Send across the line", "Add own secret again", "Done"];
+
+  function bigA() { return modpow(G, a, P); }
+  function bigB() { return modpow(G, b, P); }
+  function sharedNum() { return modpow(bigB(), a, P); }
+
+  function show(el, on) { el.style.display = on ? "" : "none"; }
+
+  function render() {
+    paint(e.base, BASE);
+    e.aVal.textContent = a; e.bVal.textContent = b;
+    paint(e.aSecret, secretColour(a)); paint(e.bSecret, secretColour(b));
+    e.nA.textContent = a; e.nB.textContent = b;
+    e.nBigA.textContent = bigA(); e.nBigB.textContent = bigB();
+    e.nSharedA.textContent = sharedNum(); e.nSharedB.textContent = sharedNum();
+
+    var mixed = step >= 1, swapped = step >= 2, combined = step >= 3;
+    var mixA = mix([BASE, secretColour(a)]), mixB = mix([BASE, secretColour(b)]);
+
+    [e.aOp1, e.aMixSlot, e.bOp1, e.bMixSlot].forEach(function (x) { show(x, mixed); });
+    if (mixed) {
+      paint(e.aMix, mixA); paint(e.bMix, mixB);
+      e.aMixVal.textContent = "A = " + bigA(); e.bMixVal.textContent = "B = " + bigB();
+    }
+
+    // received: Alice gets Bob's mixture (B), Bob gets Alice's mixture (A).
+    // Keep the received slots on screen (empty) during the flight, so the flying paint has a real target
+    // to land in; a hidden element reports a zero rect at (0,0), which sent the animation to the corner.
+    [e.aOp2, e.aRecvSlot, e.bOp2, e.bRecvSlot].forEach(function (x) { show(x, swapped); });
+    if (swapped) {
+      e.aRecvVal.textContent = "B = " + bigB(); e.bRecvVal.textContent = "A = " + bigA();
+      if (animating) {
+        e.aRecv.style.backgroundColor = "transparent"; e.bRecv.style.backgroundColor = "transparent";
+      } else {
+        paint(e.aRecv, mixB); paint(e.bRecv, mixA);
+      }
+    }
+
+    e.band.className = swapped ? "band" : "band idle";
+    e.bandText.innerHTML = swapped
+      ? "Alice sent <span class='mono'>A = " + bigA() + "</span> down, Bob sent <span class='mono'>B = " + bigB() + "</span> up. Eve copied both."
+      : (mixed ? "Ready to send the two mixtures across." : "Nothing has crossed the line yet.");
+
+    [e.aOp3, e.aShSlot, e.bOp3, e.bShSlot].forEach(function (x) { show(x, combined); });
+    if (combined) {
+      var s = mix([BASE, secretColour(b), secretColour(a)]);
+      paint(e.aShared, s); paint(e.bShared, s);
+      e.aShVal.innerHTML = "B<sup>a</sup> mod p = " + sharedNum();
+      e.bShVal.innerHTML = "A<sup>b</sup> mod p = " + sharedNum();
+    }
+    show(e.matchRow, combined);
+
+    show(e.evePanel, swapped);
+    if (swapped) e.eveWire.innerHTML = "base paint &nbsp;&middot;&nbsp; Alice's mixture (A = " + bigA() + ") &nbsp;&middot;&nbsp; Bob's mixture (B = " + bigB() + ")";
+
+    e.aSlider.disabled = step !== 0; e.bSlider.disabled = step !== 0;
+    e.stepLabel.innerHTML = STEP_TEXT[step];
+    e.nextBtn.textContent = NEXT_TEXT[step];
+    e.nextBtn.disabled = step >= 3 || animating;
+    e.crackOut.textContent = ""; e.crackBtn.disabled = false;
+  }
+
+  // animate a copy of fromEl's swatch to toEl's position (the "crossing")
+  function fly(fromEl, toEl, colour, done) {
+    var r1 = fromEl.getBoundingClientRect(), r2 = toEl.getBoundingClientRect();
+    var f = document.createElement("div");
+    f.className = "flyer";
+    f.style.left = r1.left + "px"; f.style.top = r1.top + "px";
+    f.style.width = r1.width + "px"; f.style.height = r1.height + "px";
+    f.style.backgroundColor = css(colour);
+    document.body.appendChild(f);
+    var dx = r2.left - r1.left, dy = r2.top - r1.top;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { f.style.transform = "translate(" + dx + "px," + dy + "px)"; }); });
+    var fin = function () { if (f.parentNode) f.parentNode.removeChild(f); done(); };
+    f.addEventListener("transitionend", fin, { once: true });
+    setTimeout(fin, 900);
+  }
+
+  function doSwap() {
+    animating = true; render();                // received slots hidden while the paint is in flight
+    if (reduce) { animating = false; render(); return; }
+    var mixA = mix([BASE, secretColour(a)]), mixB = mix([BASE, secretColour(b)]);
+    var pending = 2;
+    var oneDone = function () { pending--; if (pending === 0) { animating = false; render(); } };
+    fly(e.aMix, e.bRecv, mixA, oneDone);       // Alice's mixture down to Bob's "from Alice" slot
+    fly(e.bMix, e.aRecv, mixB, oneDone);       // Bob's mixture up to Alice's "from Bob" slot
+  }
+
+  function toStep0() { animating = false; step = 0; a = +e.aSlider.value; b = +e.bSlider.value; render(); }
+
+  e.aSlider.addEventListener("input", function () { a = +e.aSlider.value; if (step === 0) render(); });
+  e.bSlider.addEventListener("input", function () { b = +e.bSlider.value; if (step === 0) render(); });
+  e.nextBtn.addEventListener("click", function () {
+    if (animating || step >= 3) return;
+    step++;
+    if (step === 2) { doSwap(); } else { render(); }
+  });
+  e.resetBtn.addEventListener("click", toStep0);
+
+  e.crackBtn.addEventListener("click", function () {
+    e.crackBtn.disabled = true;
+    var target = bigA(), lines = [], k = 0;
+    var timer = setInterval(function () {
+      k++;
+      var val = modpow(G, k, P);
+      if (val === target) {
+        lines.push("try a = " + k + ":  5^" + k + " mod 23 = " + val + "   <- match!");
+        lines.push(""); lines.push("Found Alice's secret: a = " + k + " (in " + k + " tries).");
+        lines.push("Only possible because p = 23 is tiny.");
+        e.crackOut.textContent = lines.join("\n"); clearInterval(timer); return;
+      }
+      lines.push("try a = " + k + ":  5^" + k + " mod 23 = " + val);
+      e.crackOut.textContent = lines.join("\n");
+      if (k >= 22) clearInterval(timer);
+    }, 170);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
