@@ -77,6 +77,10 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .evepanel { margin-top: 14px; border: 1px dashed var(--leak); border-radius: 10px; padding: 12px; background: var(--leak-soft); }
 .evepanel h3 { font: 600 13px/1 var(--sans); margin: 0 0 6px; color: var(--leak); }
 .evepanel p { margin: 0 0 8px; font-size: 13px; }
+.lede strong { color: var(--ink); }
+.oneway { font-size: 13px; }
+.oneway strong { color: var(--leak); }
+.eveguess { display: flex; align-items: flex-end; justify-content: center; gap: 12px; margin: 4px 0 2px; }
 .evewire { font: 500 13px/1.5 var(--mono); color: var(--ink); }
 .crackout { font: 500 12.5px/1.5 var(--mono); color: var(--ink); margin-top: 8px; white-space: pre-wrap; }
 .maths { margin-top: 14px; }
@@ -99,7 +103,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 <body>
 <div class="wrap">
   <h1>Diffie-Hellman, in paint</h1>
-  <p class="lede">Alice and Bob agree a shared secret over a line anyone can listen on, without ever sending the secret. Mixing paint is easy; separating it again is not. Set each secret and step through.</p>
+  <p class="lede">Alice and Bob agree a shared secret over a line anyone can listen on, without ever sending the secret. Mixing paint is easy; <strong>pulling it apart again is practically impossible</strong>, and that one-way step is the whole trick. Set each secret and step through.</p>
 
   <div class="panel">
     <div class="public">
@@ -184,6 +188,14 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
       <h3>&#128066; What Eve has heard</h3>
       <p>Everything sent across the line, and nothing else:</p>
       <div class="evewire" id="eveWire"></div>
+      <div id="eveUnmix" style="display:none">
+        <p class="oneway" style="margin-top:12px">Mixing is <strong>one-way</strong>: easy to combine, practically impossible to pull back apart. Eve's best move is to combine the two public mixtures, but that just gives her the base paint twice over, a different colour from the shared secret:</p>
+        <div class="eveguess">
+          <div class="slot"><span class="swatch" id="eveMix"></span><span class="cap">Eve's best mix</span></div>
+          <div class="op">vs</div>
+          <div class="slot"><span class="swatch" id="eveReal"></span><span class="cap"><b>the real shared</b></span></div>
+        </div>
+      </div>
       <button id="crackBtn" type="button" style="margin-top:10px">Eve: try to crack Alice's secret</button>
       <div class="crackout" id="crackOut"></div>
     </div>
@@ -227,7 +239,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   var ids = ["base","aSlider","bSlider","aVal","bVal","aSecret","bSecret","aOp1","aMixSlot","aMix","aMixVal",
     "aOp2","aRecvSlot","aRecv","aRecvVal","aOp3","aShSlot","aShared","aShVal","bOp1","bMixSlot","bMix","bMixVal",
     "bOp2","bRecvSlot","bRecv","bRecvVal","bOp3","bShSlot","bShared","bShVal","band","bandText","matchRow",
-    "stepLabel","nextBtn","resetBtn","evePanel","eveWire","crackBtn","crackOut","nA","nB","nBigA","nBigB","nSharedA","nSharedB"];
+    "stepLabel","nextBtn","resetBtn","evePanel","eveWire","eveUnmix","eveMix","eveReal","crackBtn","crackOut","nA","nB","nBigA","nBigB","nSharedA","nSharedB"];
   var e = {}; ids.forEach(function (id) { e[id] = $(id); });
 
   var STEP_TEXT = [
@@ -290,6 +302,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 
     show(e.evePanel, swapped);
     if (swapped) e.eveWire.innerHTML = "base paint &nbsp;&middot;&nbsp; Alice's mixture (A = " + bigA() + ") &nbsp;&middot;&nbsp; Bob's mixture (B = " + bigB() + ")";
+    // the "can't unmix" point: Eve's best mix (both public mixtures together -> base counted twice) vs the real shared
+    show(e.eveUnmix, combined);
+    if (combined) {
+      paint(e.eveMix, mix([BASE, secretColour(a), BASE, secretColour(b)]));
+      paint(e.eveReal, mix([BASE, secretColour(a), secretColour(b)]));
+    }
 
     e.aSlider.disabled = step !== 0; e.bSlider.disabled = step !== 0;
     e.stepLabel.innerHTML = STEP_TEXT[step];

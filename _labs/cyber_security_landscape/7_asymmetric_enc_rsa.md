@@ -438,28 +438,21 @@ With key exchange algorithms, both parties contribute to the key, and the key it
 
 ==tip: Try the demo above: set each secret, step through the mixing and swap, show the numbers, and let Eve try to crack the tiny keyspace.==
 
-**The real thing, with numbers.** DH does the same thing with modular arithmetic: "mod p" means "take the remainder after dividing by p", as in RSA. Raising a number to a power is the "mixing", and it is easy to do but very hard to undo.
-
-1. Alice and Bob publicly agree on two numbers: a prime *p* and a **generator** *g* (a number whose powers mod *p* reach every value from 1 to *p* − 1). Example: p = 23, g = 5. These two are public, not secret: Eve knows them as well, and in practice they are standard published values that everyone reuses, or one side sends them in the clear. Only the secret numbers *a* and *b* that each side picks next are kept private.
-2. Alice picks a secret number *a* and sends Bob A = g^a mod p. Alice picks 6 and sends 5^6 mod 23 = 8.
-3. Bob picks a secret number *b* and sends Alice B = g^b mod p. Bob picks 15 and sends 5^15 mod 23 = 19.
-4. Each raises what they received to their own secret. Alice computes 19^6 mod 23 = 2. Bob computes 8^15 mod 23 = 2.
-
-They match because both have calculated *g* raised to the power *a* × *b*: Alice did "b, then a" and Bob did "a, then b". That number, 2, is their shared secret.
-
-An eavesdropper sees *p*, *g*, *A* and *B* (23, 5, 8 and 19). To find the secret, they would need to work out *a* from *A*, that is, find the power that turns 5 into 8 mod 23. This is called the **discrete logarithm problem**. With p = 23 you could just try every power, but real DH uses a *p* that is hundreds of digits long, and no known method can solve it in a reasonable time.
+**The real thing, with numbers.** DH does the same thing with modular arithmetic: "mod p" means "take the remainder after dividing by p", as in RSA. Raising a number to a power is the "mixing": easy to do, very hard to undo. Alice and Bob publicly agree on a prime *p* and a **generator** *g* (a number whose powers mod *p* reach every value from 1 to *p* − 1). These are public, not secret: Eve knows them too, and in practice they are standard published values that everyone reuses, or one side sends them in the clear; only the secret numbers *a* and *b* that each side picks stay private. Each sends the other *g* raised to their own secret (mod *p*), then raises what they receive to their secret again. Both land on *g* raised to the power *a* × *b* (mod *p*), the same shared secret, because Alice computes (g^b)^a and Bob computes (g^a)^b.
 
 ==action: Try it in Python:==
 
 ```python
 p, g = 23, 5         # public: agreed in the open
 a, b = 6, 15         # private: Alice's and Bob's secret values
-A = pow(g, a, p)     # Alice sends A to Bob
-B = pow(g, b, p)     # Bob sends B to Alice
+A = pow(g, a, p)     # Alice sends A to Bob (g^a mod p)
+B = pow(g, b, p)     # Bob sends B to Alice (g^b mod p)
 print(A, B, pow(B, a, p), pow(A, b, p))
 ```
 
 Alice sends 8, Bob sends 19, and both arrive at the shared secret 2.
+
+An eavesdropper sees *p*, *g*, *A* and *B* (23, 5, 8 and 19). To find the secret, they would need to work out *a* from *A*, that is, find the power that turns 5 into 8 mod 23. This is called the **discrete logarithm problem**. With p = 23 you could just try every power, but real DH uses a *p* that is hundreds of digits long, and no known method can solve it in a reasonable time.
 
 #### Hackerbot Attack #9 {#hackerbot-attack-9}
 
