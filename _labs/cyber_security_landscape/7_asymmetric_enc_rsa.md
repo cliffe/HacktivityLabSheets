@@ -458,7 +458,7 @@ B = pow(g, b, p)     # Bob sends B to Alice (g^b mod p)
 print(A, B, pow(B, a, p), pow(A, b, p))
 ```
 
-Alice sends 8, Bob sends 19, and both arrive at the shared secret 2.
+Alice sends 8, Bob sends 19, and both arrive at the shared secret 2. By hand: Alice picks 6 and sends 5^6 mod 23 = 8; Bob picks 15 and sends 5^15 mod 23 = 19. Alice then computes 19^6 mod 23 = 2 and Bob computes 8^15 mod 23 = 2.
 
 An eavesdropper sees *p*, *g*, *A* and *B* (23, 5, 8 and 19). To find the secret, they would need to work out *a* from *A*, that is, find the power that turns 5 into 8 mod 23. This is called the **discrete logarithm problem**. With p = 23 you could just try every power, but real DH uses a *p* that is hundreds of digits long, and no known method can solve it in a reasonable time.
 
