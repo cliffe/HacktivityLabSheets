@@ -99,15 +99,13 @@ This will launch a 'connect' pop up.
 
 \==action: When prompted for your IP address, open a new terminal and get the IP by running this command:==
 
-![Attacker IP prompt][attacker_ip_prompt]
-
 ```bash
 hostname -I
 ```
 
 ![hostname -I output][hostname_i]
 
-\==edit: Enter **your** IP address, not the one in these images.==
+\==edit: Enter **your** IP address, not the one in this image.==
 
 ## Hacking Step 1: Information Gathering {#step-1-information-gathering}
 
@@ -255,7 +253,6 @@ Congratulations!
 [msfdb_reinit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/msfdb_reinit.png
 [armitage_connect]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_connect.png
 [start_metasploit_rpc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/start_metasploit_rpc.png
-[attacker_ip_prompt]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/attacker_ip_prompt.png
 [hostname_i]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/hostname_i.png
 [intense_scan]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/intense_scan.png
 [ip_range]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/ip_range.png
