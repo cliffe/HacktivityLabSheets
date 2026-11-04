@@ -33,8 +33,6 @@ You can stay logged in to the machine in the open day lab room, or open a privat
 
 \==action: On Hacktivity, click Experience; Open Day Workshop; Open Day Proxmox.==
 
-![Experience menu][experience_menu]
-
 ![Open Day Proxmox][open_day_proxmox]
 
 \==action: Click "Assign VMs" or (if using the shared open day lab machine) click "Give me another set of VMs".==
@@ -236,7 +234,6 @@ This is the end of this short exercise, in which you have:
 
 Congratulations!
 
-[experience_menu]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/experience_menu.png
 [open_day_proxmox]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/open_day_proxmox.png
 [assign_vms]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/assign_vms.png
 [give_another_set]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/give_another_set.png
