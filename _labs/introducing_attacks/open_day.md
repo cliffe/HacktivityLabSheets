@@ -169,7 +169,12 @@ Once your attack succeeds, red colouring and lightning bolts indicate you have s
 
 ![Compromised host][compromised_bolts]
 
-> Note: If after a couple of minutes the target has not been compromised, you might need to try another payload.
+If you can see the red colouring and lightning bolts, the attack worked: **skip ahead to [Hacking Step 3](#step-3-post-exploitation)**.
+
+If a couple of minutes have passed and the server still has not been compromised, open the section below and try a different payload. Only do this if the first attack did not work.
+
+<details markdown="1">
+<summary>Only if the attack did not work: try another payload</summary>
 
 \==action: First, show the list of available payloads by executing:==
 
@@ -196,6 +201,8 @@ exploit
 Wait until the target is compromised:
 
 ![Compromised host][compromised_bolts]
+
+</details>
 
 ## Hacking Step 3: Post-exploitation {#step-3-post-exploitation}
 
