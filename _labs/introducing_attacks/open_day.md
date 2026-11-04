@@ -231,7 +231,7 @@ This will list the files in the `/home` directory ("folder"), change to the irc 
 
 ![Login, ssh][ssh_login]
 
-After you provide the login credentials, you will now be able to **interact** with the third system:
+After you provide the login credentials, you will now be able to **interact** with the third system (which ends in .2):
 
 ![Interact with the third system][interact_third]
 
