@@ -51,7 +51,7 @@ You can stay logged in to the machine in the open day lab room, or open a privat
 
 ## Hacking scenario {#hacking-scenario}
 
-In this hacktivity you will go through the most common steps that hackers do every day ;-) using popular hacking tools (the Metasploit Framework, the Nmap scanner, the Armitage GUI) and various Linux commands: `ls`, `cd`, `cat`, `ssh`, and so on.
+In this hacktivity you will go through the most common steps that hackers do every day using popular hacking tools (the Metasploit Framework, the Nmap scanner, the Armitage GUI) and various Linux commands: `ls`, `cd`, `cat`, `ssh`, and so on.
 
 **First**, you will scan the network and search for potential victims. As part of this you will check the services running on those PCs and search for vulnerabilities known in those services.
 
