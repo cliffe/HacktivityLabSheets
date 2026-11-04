@@ -33,15 +33,21 @@ You can stay logged in to the machine in the open day lab room, or open a privat
 
 \==action: On Hacktivity, click Experience; Open Day Workshop; Open Day Proxmox.==
 
+![Experiences page][experiences_page]
+
 ![Open Day Proxmox][open_day_proxmox]
 
 \==action: Click "Assign VMs" or (if using the shared open day lab machine) click "Give me another set of VMs".==
 
-![Assign VMs][assign_vms] ![Give me another set of VMs][give_another_set]
+![Give me another set of VMs][give_another_set]
 
-\==action: Click "Activate and start challenge". Click the startup icon== ![Startup servers icon][startup_servers_icon] ==action: to start up the servers.==
+\==action: Click "Activate and start challenge", then click the startup icon to start up the servers.==
 
-\==VM: Interact with the Kali VM.== (Click the launch icon ![Interact icon][interact_icon] after the VMs have started.)
+![Activate and start challenge][activate_challenge] ![Startup servers icon][startup_servers_icon]
+
+\==VM: Interact with the Kali VM.== (Click the launch icon after the VMs have started.)
+
+![Interact icon][interact_icon]
 
 ## Hacking scenario {#hacking-scenario}
 
@@ -63,9 +69,9 @@ The whole scenario looks like this:
 
 > Note: *You don't need to login to the other victim target VMs* (you don't need to know their login passwords), just make sure the VMs are running.
 
-\==action: Open the command prompt by clicking the terminal icon:== ![Terminal icon][terminal_icon]
+\==action: Open the command prompt by clicking the terminal icon in the top bar:==
 
-![Terminal window][terminal_window]
+![Kali desktop][kali_desktop]
 
 \==action: Run this command:==
 
@@ -89,9 +95,11 @@ This will launch a 'connect' pop up.
 
 \==action: Click "Connect" and "Yes":==
 
-![Armitage connect][armitage_connect] ![Armitage progress][armitage_progress]
+![Armitage connect][armitage_connect] ![Start Metasploit RPC server][start_metasploit_rpc]
 
 \==action: When prompted for your IP address, open a new terminal and get the IP by running this command:==
+
+![Attacker IP prompt][attacker_ip_prompt]
 
 ```bash
 hostname -I
@@ -124,6 +132,8 @@ This will take a little time to run. You will get the "Scan Complete!" message o
 Once that's finished some hosts will show up, one of which is your own attacking system.
 
 \==action: Right click and browse the results of each scan by clicking "Services".==
+
+![Host menu, Services][host_services_menu]
 
 \==hint: Look for the server with an IRC server (on port 6667).==
 
@@ -187,7 +197,7 @@ exploit
 
 Wait until the target is compromised:
 
-![Compromised shell][compromised_shell]
+![Compromised host][compromised_bolts]
 
 ## Hacking Step 3: Post-exploitation {#step-3-post-exploitation}
 
@@ -214,7 +224,7 @@ This will list the files in the `/home` directory ("folder"), change to the irc 
 
 \==hint: In this scenario you have uncovered some additional credentials, which you can use to login to the 3rd system in the scenario, either at the desktop, or remotely using ssh.==
 
-![cat credentials][cat_credentials]
+![Login, ssh][ssh_login]
 
 After you provide the login credentials, you will now be able to **interact** with the third system:
 
@@ -234,21 +244,23 @@ This is the end of this short exercise, in which you have:
 
 Congratulations!
 
+[experiences_page]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/experiences_page.png
 [open_day_proxmox]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/open_day_proxmox.png
-[assign_vms]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/assign_vms.png
 [give_another_set]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/give_another_set.png
+[activate_challenge]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/activate_challenge.png
 [startup_servers_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/startup_servers_icon.png
 [interact_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/interact_icon.png
 [scenario_diagram]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/scenario_diagram.png
-[terminal_icon]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/terminal_icon.png
-[terminal_window]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/terminal_window.png
+[kali_desktop]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/kali_desktop.png
 [msfdb_reinit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/msfdb_reinit.png
 [armitage_connect]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_connect.png
-[armitage_progress]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/armitage_progress.png
+[start_metasploit_rpc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/start_metasploit_rpc.png
+[attacker_ip_prompt]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/attacker_ip_prompt.png
 [hostname_i]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/hostname_i.png
 [intense_scan]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/intense_scan.png
 [ip_range]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/ip_range.png
 [scan_complete]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/scan_complete.png
+[host_services_menu]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/host_services_menu.png
 [services_irc]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/services_irc.png
 [set_exploit_rank]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/set_exploit_rank.png
 [find_attacks]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/find_attacks.png
@@ -258,7 +270,6 @@ Congratulations!
 [show_payloads_cmd]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/show_payloads_cmd.png
 [payloads_list]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/payloads_list.png
 [set_payload_exploit]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/set_payload_exploit.png
-[compromised_shell]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/compromised_shell.png
 [shell_interact]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/shell_interact.png
-[cat_credentials]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/cat_credentials.png
+[ssh_login]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/ssh_login.png
 [interact_third]: {{ site.baseurl }}/assets/images/introducing_attacks/open_day/interact_third.png
