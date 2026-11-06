@@ -2,14 +2,14 @@
 title: "Phishing and Social Engineering (Break Escape)"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Play a browser-based engagement as a penetration tester at Tarnside Assurance: get the rules of engagement signed, research a client from public sources, craft messages tailored to the people you find, report what the engagement showed, then switch sides and defend against your own attack. No virtual machine."
+description: "Play a browser-based engagement as a penetration tester at Tarnside Assurance: get the rules of engagement signed, research a client from public sources, craft messages tailored to the people you find, then see what a landed attack actually gets you — a captured sign-in, a foothold when someone opens your file, a remote desktop on the victim's machine. Report what the engagement showed, then switch sides and defend against your own attack. All simulated, no virtual machine."
 overview: |
   Ledgerwell Ltd has hired your consultancy to find out how far a phishing and social-engineering campaign could get against its staff, with one condition from the client: nobody gets named and shamed. You play the tester. You settle what is in scope and get it in writing, research Ledgerwell's people from public sources only, and work out what each person you find would trust. Then you turn the engagement around: you triage a mixed inbox from the defender's chair, read the sender-authentication results, and turn each finding into a fix.
 
-  The lab teaches social engineering at the level a defender needs: why open-source research makes a tailored message land, what the email authentication standards actually check, how to read a web address, and which fixes give a small organisation the most for the least. Every outcome in the game is explained, including the ones that fail. There is no malware, no payload and no virtual machine; the companion [Human Factors and Social Engineering: Phishing]({{ site.baseurl }}/labs/cyber_security_landscape/3-phishing/) lab covers the hands-on delivery of malicious attachments on a Kali VM.
+  The lab teaches social engineering at the level a defender needs: why open-source research makes a tailored message land, what the email authentication standards actually check, how to read a web address, and which fixes give a small organisation the most for the least. Every outcome in the game is explained, including the ones that fail. This version is written for technical students, so it shows what a landed attack gets you: a captured sign-in you can read back, a foothold the moment someone opens your attachment, and a remote desktop on the victim's own machine where one reused password reaches further still. All of it is simulated. No real malware runs, nothing real is captured, and there is no virtual machine to break. It teaches the compromise that the old hands-on VM lab taught, without the box that half the time would not boot. The companion [Human Factors and Social Engineering: Phishing]({{ site.baseurl }}/labs/cyber_security_landscape/3-phishing/) lab goes further on the attacker's craft, building and delivering real payloads on a Kali VM.
 
   This sheet gets you started, explains the ideas behind each stage, walks you through the engagement room by room with layered hints for when you are stuck, and ends with reflection questions. There are no real answers printed: the whole point is to find them in the game.
-tags: ["phishing", "spear-phishing", "social-engineering", "pretexting", "osint", "reconnaissance", "email-spoofing", "spf-dkim-dmarc", "look-alike-domains", "security-awareness", "rules-of-engagement", "computer-misuse-act", "blue-team", "break-escape", "game-based-learning"]
+tags: ["phishing", "spear-phishing", "social-engineering", "pretexting", "osint", "reconnaissance", "email-spoofing", "spf-dkim-dmarc", "look-alike-domains", "credential-harvesting", "payloads", "foothold", "password-reuse", "security-awareness", "rules-of-engagement", "computer-misuse-act", "blue-team", "break-escape", "game-based-learning"]
 categories: ["cyber_security_landscape"]
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
@@ -20,7 +20,7 @@ cybok:
     keywords: ["Social engineering", "Phishing", "Pretexting", "Security awareness", "Usable security"]
   - ka: "AB"
     topic: "Adversarial Behaviours"
-    keywords: ["Reconnaissance and OSINT", "Email spoofing", "Look-alike domains", "SPF DKIM DMARC"]
+    keywords: ["Reconnaissance and OSINT", "Email spoofing", "Look-alike domains", "SPF DKIM DMARC", "Credential harvesting", "Payloads and footholds", "Password reuse"]
   - ka: "LR"
     topic: "Law and Regulation"
     keywords: ["Computer Misuse Act 1990", "Rules of engagement", "Authorisation"]
@@ -34,6 +34,9 @@ By the end of this lab you should be able to:
 - plan an engagement with an objective you can check and a fair measure of success, and justify what you chose to count
 - gather open-source intelligence (OSINT) about an organisation's staff, and name the kinds of tool a tester uses and what each one reveals
 - explain why a tailored (spear-phishing) message lands when a generic one does not: trust, relevance, a name, a plausible attachment and timing
+- describe what a look-alike login page captures when the target signs in, and why one reused password turns a single capture into access to many accounts
+- explain what opening an attachment actually does — a file is opened by a program, and a booby-trapped file or a talked-into installer is where an attacker's code starts to run — and what a foothold on someone's machine then gives you
+- explain why a crude payload nobody would normally run still runs when enough borrowed authority and urgency land on the right person, so that the person, not the file, is the exploit
 - describe what SPF, DKIM and DMARC each check, why a From line is only a label, and why a message that fails one check can still be genuine or still be delivered
 - read a web address letter by letter and spot a look-alike domain (typo-squat, homograph, extra word, misleading subdomain), and say why a padlock does not prove who you are talking to
 - recognise a pretext phone call, and explain what kind of control defeats it
@@ -77,6 +80,8 @@ The engagement runs through four rooms in all: the Engagement Office, and three 
 
 > Warning: Watch the people you are dealing with as well as the machines. A friendly person on the phone will get suspicious if you push too hard, stop helping, and report your call. That is realistic, and it is recoverable, but they will not take another call from you for about two minutes.
 
+> Tip: There is an optional **Escalate** objective. After the main campaign you can push a test program onto a staff machine under pressure, take a foothold, and see how far one reused password reaches. The engagement finishes without it, so treat it as the harder, hands-on part if you want it.
+
 ## Concepts {#concepts}
 
 You do not need to read all of this before you play. Use it when you reach each idea, and again when you answer the questions afterwards. The examples use made-up companies and people, so you can check the reasoning by hand without it giving away anything in the game.
@@ -90,6 +95,8 @@ Attacking an organisation's people and systems is a criminal offence under the *
 - what you do if something goes wrong.
 
 Scope tends to be drawn around the client's own estate and the channels the client controls. Things that belong to someone else or could hurt a third party, such as staff personal accounts, physical entry, real customers and anything that could disrupt a live service, are usually excluded unless the client has specifically agreed and has the right to agree. Your work is only as lawful as the signature behind it, so a test starts with the paperwork, not the tools.
+
+This engagement goes further than many. Gareth has signed off sending test payloads to his own named staff and using any foothold they give, on the understanding that it is simulated, reported and kept by nobody. That line belongs in the scope sheet on purpose: taking a foothold on a staff machine is in scope here because the client owns those machines and asked you to prove the risk; it would not be lawful without that signature. One of the scope cards in the game is exactly this card, and it is in scope for this test.
 
 A good scope also has a **stop-rule**: if you stumble on evidence of a real compromise, or a real person in distress, you stop and escalate to the named contact rather than carrying on, fixing it yourself or sitting on it. A real incident is not yours to touch, and touching it could destroy evidence.
 
@@ -143,6 +150,34 @@ A message lands when it clears the checks the target makes, usually without noti
 Different targets are persuaded by different levers. A shared inbox that exists to hear from strangers will trust anything that looks like its normal traffic. Someone who routinely acts on mail from a named colleague can be reached by borrowing that colleague's identity and sending what they were expecting. Someone new, who only knows the official notices from the systems they have been told about, needs those systems' details to be right, and public research alone may not supply every detail. As you play, ask of each target which of the checks above they rely on most.
 
 > Question: For each of the three targets, name the single thing that made the message believable. Which of the three would be hardest to defend, and why?
+
+### When the message lands: captured sign-ins {#capture}
+
+A look-alike login page is not there to look nice. It is a **credential harvester**: a page that copies a real sign-in screen so that someone who types their username and password hands them to the attacker instead of the real site. The moment the target signs in, the attacker holds a working username and password. In the game, landing the payslip-page message on the new starter is that moment: her portal sign-in is captured, and from then on you are holding her login.
+
+Because this is a technical lab, the game lets you read the captured sign-in back: the **Harvested Credentials** terminal in the Operations Room collects what the campaign has taken so far, and shows the address and the password the page captured. Awareness-only versions of the same exercise stop at an acknowledgement that a sign-in happened and never reveal the password, because their audience does not need the concrete value. Nothing real is captured either way. The page has no form you type into; the shown password is authored fiction, there so you see what a credential phish actually steals.
+
+Holding a working login matters because of what it opens. A password is rarely used in only one place. That is the next idea below.
+
+> Question: Your report counts "form submitted and then discarded" rather than keeping the sign-in. Why does a professional engagement discard a captured credential instead of using it, even though a real attacker would not?
+
+### Opening the file: payloads and footholds {#foothold}
+
+The reason an attacker attaches a file is not the file itself. A file is opened by a program — a PDF by a reader, a document by an office suite, an installer by the operating system — and a **payload** is a file crafted so that opening it makes that program run the attacker's code. A booby-trapped PDF that exploits a flaw in the reader, or a setup program someone has been talked into clicking, is where the attacker's code starts running on that person's machine.
+
+Once code runs as that person, the attacker has whatever that person has: their files, their saved logins, their open sessions. That access is a **foothold**. It is the real prize of a phishing attachment, and in the game you see it directly: open an attachment and you gain a foothold on the opener's machine (the report names the host), and the executable route ends at a **remote desktop** on the victim's workstation, with her files in front of you. On a real engagement this is where the old hands-on lab had you get a shell on a VM; the lesson is the same, shown here without a box to break.
+
+Two caveats keep this current. First, the threat is in the **reader or the installer**, not in document macros, which modern tooling mostly strips or blocks; a flaw in a PDF viewer or a talked-into installer is the realistic route. Second, a bare `.exe` attachment gets stripped by most mail gateways today, so real payloads arrive disguised: a zipped installer, a shortcut file, a signed-looking setup. The game uses an obvious `Setup.exe` so the mechanism is visible; read it as a stand-in for the disguised real thing, which is exactly the point Tomasz makes in the debrief.
+
+> Question: Opening an attachment feels harmless, and often is. Describe the chain of events, from double-clicking a file to an attacker having a foothold, that turns "I just opened it to see what it was" into a compromise.
+
+### The person is the exploit, and password reuse {#exe-reuse}
+
+A crude payload that no sensible person would run is still run if the right person is pushed hard enough. Nobody opens a `Setup.exe` from a stranger on an ordinary day. But a nervous junior, told by someone who sounds like authority that it is urgent and must be done before a deadline, opens it. In the game, Finance and the careers inbox refuse the executable outright; only the pressured new starter runs it, and only when enough **borrowed authority** and **urgency** have been applied. The file did not get better. The pressure did the work. The person, not the file, is the exploit.
+
+The foothold then pays off through a habit almost everyone has: **password reuse**. One password used in more than one place means a single captured credential is not one account, it is every account that password opens. On the victim's remote desktop you find a reused password and a password-protected archive that opens to the very password you captured earlier. Capturing one sign-in quietly became access to everything that sign-in is reused on.
+
+> Question: The same password unlocked the portal sign-in and a protected archive on her machine. Name two controls — one for the person and one for the organisation — that each break the chain from "one password captured" to "many accounts open".
 
 ### Email spoofing and sender authentication: SPF, DKIM and DMARC {#authentication}
 
@@ -225,7 +260,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 <details markdown="1">
 <summary>Nudge</summary>
 
-Work email to named staff and the published service-desk line are the sort of thing the client is paying you to test. Staff's personal addresses are not, however tempting, and nor is anything that touches real customers or a live service. The stop-rule is about a real compromise you did not cause: a real incident is not yours to touch, fix or ignore, so there is only one safe answer.
+Work email to named staff and the published service-desk line are the sort of thing the client is paying you to test. Sending those staff a test file and using any foothold it gives is in scope too for this engagement: the client owns those machines and has signed off a simulated, reported, nothing-kept test. Staff's personal addresses are not, however tempting, and nor is anything that touches real customers or a live service. The stop-rule is about a real compromise you did not cause: a real incident is not yours to touch, fix or ignore, so there is only one safe answer.
 
 Answer Gareth's opening question how you honestly would. Neither answer blocks the game, and Ruth reacts to both.
 
@@ -351,6 +386,8 @@ One trap: the throwaway webmail account can only send as itself. To set the From
 
 > Warning: "Delivered" is not "landed". A message lands only when the target would act on it the way they would a real one. If it fails, the feedback names which check it failed; fix that one thing.
 
+> Note: When one of these two opens your attachment, that is a foothold: opening the file is where a payload would run. The report names the host it landed on later. The idea is in [Opening the file: payloads and footholds](#foothold), and the optional [Escalate](#hints-escalate) stage takes the executable version of it much further.
+
 ### Preparing for Sofia {#hints-prepare}
 
 **Where:** the Operations Room. **Goal:** find what Sofia would expect that your recon could not tell you, and have it ready. Her message cannot be written until you do.
@@ -432,6 +469,42 @@ Sofia checks the same kinds of thing as the others: whether the sender is who sh
 
 > Warning: A failed send is information, not a penalty. Read which factor missed and change that one part.
 
+> Note: When her message lands, her portal sign-in is captured. Open the **Harvested Credentials** terminal in the Operations Room to read what the campaign has taken, including her password. Keep that password in mind: the optional [Escalate](#hints-escalate) stage reuses it.
+
+### Optional: Escalate — the Executable, the Foothold and the Archive {#hints-escalate}
+
+**Where:** the Operations Room (the Mail Workstation, then the **Remote Session** terminal that appears on Sofia's machine). **Goal:** get a payload run on a staff machine, then open the archive on her desktop with a password you already have. Both are optional; the engagement finishes without them.
+
+> Hint: A file nobody would normally run still runs if you push the right person hard enough. Then a foothold is only as contained as the passwords on the machine are unique.
+
+<details markdown="1">
+<summary>Nudge: getting the executable run</summary>
+
+Attach the `Setup.exe` test program and send it to the new starter. On its own she will not run it, and Finance and the careers inbox never will — nobody runs a bare executable on an ordinary day. What runs it is pressure: compose the send with high urgency and borrowed authority (lean on a manager's instruction and a deadline), using the ask that tells her to run the attached setup before payroll closes. The file did not get safer; the pressure did the work. When she runs it, a **Remote Session** terminal appears on her machine.
+
+**Learn it:** ==action: Before you send, say which lever is doing the work here — not the file, but the authority and the deadline==.
+
+</details>
+
+<details markdown="1">
+<summary>Nudge: the remote desktop and the archive</summary>
+
+Open the **Remote Session** terminal once it appears (until the executable has run it says "No session yet"). It is a remote desktop on her workstation, with her files on it: a payroll draft, a plain-text password note, and a password-protected archive, `payroll_backup.zip`. The archive asks for a password. You are not meant to guess it or crack it: you already captured one. Try the password the **Harvested Credentials** terminal shows for her. People reuse passwords, so the one that opened her portal opens her archive.
+
+</details>
+
+<details markdown="1">
+<summary>Steps</summary>
+
+1. \==action: On the Mail Workstation, attach **Setup.exe** and compose to the new starter== with high urgency and borrowed authority, choosing the ask that tells her to run the attached setup before payroll closes.
+2. \==action: Send, and read the reply==. Finance and the careers inbox refuse the executable; only the pressured junior runs it.
+3. \==action: Open the **Remote Session** terminal on her machine== once it appears, and read the files on her desktop.
+4. \==action: Open `payroll_backup.zip` with the password from the Harvested Credentials terminal==, and read what is inside.
+
+</details>
+
+> Warning: If the executable send is refused, check who you sent it to and how hard you pushed: the executable needs both borrowed authority and high urgency, and only the new starter will ever run it. If the Remote Session terminal says "No session yet", the executable has not been run on her machine yet.
+
 ### Writing the Report {#hints-report}
 
 **Where:** the Report Workstation, Engagement Office. **Goal:** answer two questions on the results, then pair each finding with a cause and a control.
@@ -459,6 +532,8 @@ For each finding, some wrong causes sound reasonable (a spam filter, a careless 
 </details>
 
 > Warning: If the workstation says there is nothing to write up, one of the three targets has not acted yet. Ruth and your phone say which.
+
+> Note: The report shows what the campaign captured as well as what landed: any captured sign-ins and any footholds from opened attachments appear in it, role-labelled and with no staff named, consistent with the "simulated, nothing kept" stance you set in planning.
 
 ### Defending: the Blue Team Room {#hints-defend}
 
@@ -535,6 +610,9 @@ The **Debrief me.** option only appears once both the triage and the SOC board a
 | "You're still sending as yourself" | You are on an account that cannot spoof; switch to the one that sets the From line |
 | A blank reads "no evidence yet" and Send is greyed out | You have not found that fact yet; open **Stuck? Show me where to look** under the blank |
 | A send fails on a system or link it names | The name you used is not the one the target uses, or the link has nothing behind it; see the hints for Sofia |
+| The executable send is refused | Only the pressured new starter runs it, and only under high urgency and borrowed authority; Finance and the careers inbox always refuse it |
+| "No session yet. Get the executable run on her machine first." | The Remote Session terminal is locked until the executable has run on her machine; land the `Setup.exe` send on the new starter first |
+| The archive on her desktop asks for a password | Try the password the Harvested Credentials terminal captured; people reuse passwords, so you already hold it |
 | "Blocked address", and Score says the address belongs to the company | The page cannot use an address you do not own; read the message under Score and choose again |
 | Dev says he will run it past his manager, and the phone will not ring him | You pushed too hard; the message says how long to wait (about two minutes), then call back calmly with your facts straight |
 | Dev gave you only one of the two facts you need | Ring him back for the other; Ruth and your phone say which is missing |
@@ -578,7 +656,15 @@ Work through these after you finish.
 
 > Action: Write the short script you would give a service desk so it can help genuine callers quickly while defeating a pretext like yours. Keep it to five steps or fewer.
 
-### 5. Defending and Choosing Fixes {#q-defend}
+### 5. Payloads, Footholds and Password Reuse {#q-payloads}
+
+> Question: The careers inbox and Finance both opened an attachment, while the new starter is the only one who ran the executable. Explain what made the difference. What does it tell you about where a defender should spend effort: on the file, or on the conditions that get it run?
+
+> Question: Describe, step by step, how opening a single attachment could turn into a foothold on a machine, and then into access to accounts on other systems. Name the point in that chain where password reuse does the damage, and the point where a reader or installer flaw does.
+
+> Action: Take a service you use that offers it, and turn on a second factor and a unique password for it (a password manager makes the unique part easy). Write a short note on which step in the game's capture-to-archive chain each of those two changes would have broken, and why reusing one password made the foothold reach so much further.
+
+### 6. Defending and Choosing Fixes {#q-defend}
 
 > Question: For each finding in your report, state the cause and the control you chose, and explain in one line why you rejected each alternative.
 
@@ -588,7 +674,7 @@ Work through these after you finish.
 
 ## Further Reading {#further-reading}
 
-- The companion lab [Human Factors and Social Engineering: Phishing]({{ site.baseurl }}/labs/cyber_security_landscape/3-phishing/), which takes the attacker's side further on a Kali VM: crafting malicious attachments and payloads and delivering them to simulated victims. This game sheet covers the human factors, reconnaissance, sender authentication and defence without any malware; the two together make a fuller picture.
+- The companion lab [Human Factors and Social Engineering: Phishing]({{ site.baseurl }}/labs/cyber_security_landscape/3-phishing/), which takes the attacker's craft further on a Kali VM: building real malicious attachments and payloads and delivering them to live victims. This game shows what a landed payload gets you — a captured sign-in, a foothold, a remote desktop — in simulation, with no real malware or VM; the companion lab is where you build and fire the real thing.
 - The National Cyber Security Centre guidance on phishing attacks and on using DMARC, SPF and DKIM to protect a domain, for how real organisations defend against a day like this one.
 - The APWG and the NCSC "Suspicious Email Reporting Service" as examples of the report channel the game keeps asking for.
 - The Cyber Security Body of Knowledge (CyBOK) chapters on Human Factors, on Adversarial Behaviours, and on Law and Regulation.
