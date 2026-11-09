@@ -173,8 +173,6 @@ Right click the Web traffic, and select *Follow TCP Stream*.
 
 Note that you can also view the unzipped version of the content in Wireshark. In the view below the list of packets, ==action: expand the "Line-based text data: text/html" heading==.
 
-> Log Book Question: What is the difference between these views?
-
 Also experiment with using Wireshark display filters of `http` and `irc`.
 
 ## Writing your own Snort rules {#writing-your-own-snort-rules}
