@@ -77,7 +77,7 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 - Contextual topics, such as **[Where do I stand?]**, which is always there and gives a read of where you are, and ones that appear when you are in the right situation.
 - Field guides, the in-universe lab sheets. When you meet the challenge a guide covers, HaX mentions it in a message. Choose **[Send me a field guide.]** and pick the one you want. The exact options are listed in the stages below.
-- Patricia's mobile, once your first conversation with her closes. She can be rung from your phone from then on.
+- Patricia's mobile, once your first conversation with her closes. From then on you can ring her with the call button in her thread.
 
 The map is a single office block. From the reception lobby, Patricia's office is east and the main corridor is north. The corridor leads west to the break room, east to the server hallway, and north to the open-plan office. Off the open-plan office are the research lab (west) and the suspect's office (north). Past the server hallway is the server room, and past that, the key vault.
 
@@ -210,7 +210,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 <details markdown="1">
 <summary>Nudge</summary>
 
-Talk to Patricia Morgan. She gives you a visitor badge and explains what Security has found. When the conversation closes she texts you her mobile number, and from then on you can ring her from your phone. Her desk holds the **Security Incident Log**. Read it. You will need what it says when you talk to the administrator, and it tells you the badge in question is always one of eight.
+Talk to Patricia Morgan. She gives you a visitor badge and explains what Security has found. When the conversation closes she texts you her mobile number, and from then on you can ring her with the call button in her thread. Her desk holds the **Security Incident Log**. Read it. You will need what it says when you talk to the administrator, and it tells you the badge in question is always one of eight.
 
 **Learn it:** ==action: Read the log's list of flagged activity== and ask yourself which entries say who did something and which only say when.
 
@@ -514,7 +514,7 @@ The **Upload Schedule** gives the window for tonight's upload and who is operati
 <details markdown="1">
 <summary>Nudge</summary>
 
-When your naming conversation closes, the Recruiter texts you. You can ring the number back from the phone and she makes you an offer, or you can ignore the text. If you confront the insider first and ring her afterwards, she no longer makes an offer. There is no right answer here. The game records what you do, and the credits reflect it.
+When your naming conversation closes, the Recruiter calls you. Answer and she makes you an offer; decline it or let it ring out and she leaves a text, with a call-back button in her thread if you change your mind. You can ignore her either way. If you confront the insider first and ring her afterwards, she no longer makes an offer. There is no right answer here. The game records what you do, and the credits reflect it.
 
 </details>
 
@@ -569,7 +569,7 @@ None of these is scored as right or wrong by the game; they change who is safe a
 <summary>Steps</summary>
 
 1. \==action: Finish reading anything left in the vault== (the schedule, the manifest, the envelope).
-2. \==action: Ring Agent HaX and choose **[I'm done here. Bring me in.]**==. He names anything you have not read.
+2. \==action: Open Agent HaX's thread and choose **[I'm done here. Bring me in.]**==; the phone rings her. She names anything you have not read.
 3. \==action: Choose **[Bring me in.]**== when you are ready.
 
 </details>
