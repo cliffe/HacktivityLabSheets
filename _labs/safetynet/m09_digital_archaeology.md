@@ -366,7 +366,7 @@ Take the **Candidate Assessment, Intake 2011** from the cabinet. This is Nightsh
 <details markdown="1">
 <summary>Nudge</summary>
 
-Submit the ledger flag at the drop terminal (the server work is in the companion). Soon after, the recruiter rings on a voiced, forced call. She offers WREN's codename in exchange for letting a tape deck wipe. You have four answers, and the game states the cost of each before you commit:
+Submit the ledger flag at the drop terminal (the server work is in the companion), then open HaX's text about the ledger. Soon after, the recruiter rings on a voiced, forced call. She offers WREN's codename in exchange for letting a tape deck wipe. You have four answers, and the game states the cost of each before you commit:
 
 - take the name and let the deck wipe
 - take the name and pull her file anyway (a double-cross)
@@ -475,7 +475,7 @@ HaX hands out an archive-codes field guide once you reach the keypad.
 <details markdown="1">
 <summary>Nudge</summary>
 
-The owner flag opens the identity scene: HaX confesses that she had the Architect's name the night two agents died. You answer in one of three ways, and none is scored right or wrong. The control flag brings a text from HaX about the hour read, then the Architect's own call.
+The owner flag opens the identity scene: HaX confesses that she had the Architect's name the night two agents died. You answer in one of three ways, and none is scored right or wrong. The control flag brings a text from HaX about the hour read, then the Architect ringing HaX.
 
 You can also decide the vendor notice. Sending it starts a fix for the four hundred sites that run the flaw; holding it keeps the flaw open. HaX's phone carries the choice as "[His notice.]".
 
@@ -485,7 +485,7 @@ You can also decide the vendor notice. Sending it starts a fix for the four hund
 <summary>Steps</summary>
 
 1. \==action: Submit the owner flag and hear the identity scene==, then answer your handler.
-2. \==action: Submit the control flag==, open HaX's text about the hour read, and listen to the Architect's call.
+2. \==action: Submit the control flag==, open HaX's text about the hour read, and stay on while HaX takes the Architect's call.
 3. \==action: Decide the vendor notice on HaX's phone==.
 
 </details>

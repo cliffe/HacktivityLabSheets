@@ -653,7 +653,7 @@ The **dZ/dt** button overlays the rate of change, which is exactly zero where th
 
 </details>
 
-When you confirm, Helen radios you, the BATTERY HALL 1 lamp on the alarm panel turns amber, the NIS notification clock starts, and the "Call Marcus Webb and Investigate" aim opens.
+When you confirm, Helen radios you, the BATTERY HALL 1 lamp on the alarm panel turns amber, the NIS notification clock starts, and the "Message Marcus Webb and Investigate" aim opens.
 
 ### Shutting Down Hall 1: The Emergency Shutdown {#hints-esd}
 
