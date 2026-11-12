@@ -68,7 +68,7 @@ You do not need to know Linux or cryptography before you start. The office teach
 
 1. \==action: Start the Break Escape mission **First Contact**==.
 2. \==action: Watch the briefing from Agent HaX==, then ==action: talk to Sarah at reception== to get your visitor badge and the main office key.
-3. \==action: Unlock the main office and explore==. Read desks, bins, notice boards and filing cabinets. People leave more behind than they mean to.
+3. \==action: Unlock the main office and explore==. Read desks, bins, notice boards and filing cabinets. People leave more behind than they mean to. The first time you walk into the main office, Agent HaX rings your phone once: tap **Answer** (or **Decline**, then use **Call back** in her thread). After that she works by text.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
 The mission takes about 75 to 90 minutes. In a 60-minute class, stop once you have the server room keycard and the password list (around the halfway mark), and resume next time. Your progress, evidence and unlocked rooms are kept between sessions.
@@ -433,7 +433,7 @@ None of these are scored as right or wrong by the game; they change who is safe 
 
 </details>
 
-After you decide, ==action: finish the launch device, then call Agent HaX and choose to be debriefed==.
+After you decide, ==action: finish the launch device, then open Agent HaX's thread and choose to be debriefed==. That rings her for a short call: choose **On my way** to end the mission and she hands you over to the debrief in person. If you still have optional objectives open, the game asks whether to end the mission now or keep going; keep going and the call ends with no debrief, and the same choice is still in her thread.
 
 ### What the Tools and Locks Are Telling You {#error-messages}
 
