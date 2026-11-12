@@ -84,6 +84,7 @@ Your kit at the start is the phone (Agent HaX), an **RFID cloner**, and a **lock
 Agent HaX's phone is your help system. Open it and you will see options that appear only once you have reached the thing they explain:
 
 - Contextual hints, such as **[How do I clone these keycards?]**, **[How do I get past the locked doors?]**, **[How do I get into Sterling's computer?]**, **[Where do I start on their network?]** and **[How do I read what I've found?]**. Each appears once you are in the right situation, and there is always **[Where do I stand?]** for a read of where you are.
+- Calls. When the distcc flag is in, HaX texts that she has the logs and wants a call. Ring her: tap the call button in her thread, or choose **[You wanted to talk about the distcc logs.]**. If you do nothing for two minutes, she rings you instead; answer it, or ring her back from her thread if you missed it. When you are ready to leave, choose **[I'm done in here. Bring me in.]** and she calls you: **[Not yet. I'm still looking.]** ends the call and you can ring again later.
 - Field guides, the in-universe lab sheets. Choose **[Send me a field guide.]** and pick the one you want. Each guide appears on that menu only once you have reached the challenge it covers. The exact options are listed in the stages below.
 
 > Tip: The RFID flow is always the same three steps: read the card, crack the keys, then emulate the saved card at the reader. If a door will not open, check you emulated the right card: the conference door wants the receptionist's badge, the server room wants Sterling's executive card.
@@ -453,7 +454,7 @@ None of these is scored as right or wrong by the game; they change who is safe a
 
 </details>
 
-After you decide, ==action: finish anything you still want to read, then call HaX to be brought in and hear the debrief==.
+After you decide, ==action: finish anything you still want to read, then choose **[I'm done in here. Bring me in.]** in HaX's thread, answer **[Bring me in.]** and **[On my way.]** on the call, and hear the debrief==. If optional objectives are still open, the game asks before it ends the mission; **Keep going** leaves the call open and you hang up to carry on.
 
 ### What the Tools and Locks Are Telling You {#error-messages}
 
