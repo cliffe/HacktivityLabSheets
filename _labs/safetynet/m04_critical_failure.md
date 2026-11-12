@@ -79,7 +79,7 @@ You move with the arrow keys or by clicking. Click objects, people and doors to 
 
 Your kit at the start is:
 
-- the phone (Agent HaX, and later a line to Robert Vance)
+- the phone (Agent HaX, and later Robert Vance, whom you can ring from his thread)
 - an **RFID Cloner**
 - a **Lock Pick Kit**
 - the **Grid Regulator Credentials** for your cover
@@ -278,7 +278,7 @@ Walk through the SCADA control room into Battery Hall 1. Look at the **Analogue 
 
 1. \==action: Read the SCADA HMI — Main Display in the control room==.
 2. \==action: Go east into Battery Hall 1 and click the Analogue Thermometer — Rack Bank C Wall==.
-3. \==action: Take the call from Agent HaX about the reading==, if you want HaX's read on it.
+3. \==action: Answer the call from Agent HaX about the reading== if you want HaX's read on it. If you decline or miss it, ring her back from her thread.
 
 </details>
 
@@ -449,7 +449,7 @@ None of these is scored as right or wrong. They change what the debrief says abo
 1. \==action: Lift the flap on the Emergency Shutdown Pushbutton== and press it.
 2. \==action: Read Voltage's Operation Log and the marked blueprints== in the plant room.
 3. \==action: Go east to the loading dock== and look at the **Abandoned Extraction Go-Bag**.
-4. \==action: Open your phone and choose **[I'm done here. Bring me in.]**== when you are ready to leave.
+4. \==action: Open your phone and choose **[I'm done here. Bring me in.]**== when you are ready to leave. The phone rings HaX and she picks up; choose **[Bring me in.]**, then **[On my way.]**. If anything optional is still open, the game asks whether to end the mission now.
 
 </details>
 
@@ -506,7 +506,7 @@ None of these is scored as right or wrong. They change who is safe at the end an
 
 </details>
 
-After you decide, ==action: finish anything you still want to read, then call HaX to be brought in==.
+After you decide, ==action: finish anything you still want to read, then ring HaX from her thread to be brought in==.
 
 ## What the Tools and Locks Are Telling You {#error-messages}
 
