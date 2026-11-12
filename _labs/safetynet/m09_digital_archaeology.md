@@ -361,7 +361,7 @@ Take the **Candidate Assessment, Intake 2011** from the cabinet. This is Nightsh
 
 **Where:** the drop terminal, then wherever you are when the call comes. **Goal:** submit the ledger flag, then answer the recruiter.
 
-> Hint: The second flag is the Initiative's ledger. Once it is in, a recruiter rings, and the call is forced. She offers a name for a price.
+> Hint: The second flag is the Initiative's ledger. Once it is in, HaX texts you about the ledger. Open her text and read it; after that a recruiter rings, and the call is forced. She offers a name for a price.
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -475,7 +475,7 @@ HaX hands out an archive-codes field guide once you reach the keypad.
 <details markdown="1">
 <summary>Nudge</summary>
 
-The owner flag opens the identity scene: HaX confesses that she had the Architect's name the night two agents died. You answer in one of three ways, and none is scored right or wrong. The control flag brings the hour read and the Architect's own call.
+The owner flag opens the identity scene: HaX confesses that she had the Architect's name the night two agents died. You answer in one of three ways, and none is scored right or wrong. The control flag brings a text from HaX about the hour read, then the Architect's own call.
 
 You can also decide the vendor notice. Sending it starts a fix for the four hundred sites that run the flaw; holding it keeps the flaw open. HaX's phone carries the choice as "[His notice.]".
 
@@ -485,7 +485,7 @@ You can also decide the vendor notice. Sending it starts a fix for the four hund
 <summary>Steps</summary>
 
 1. \==action: Submit the owner flag and hear the identity scene==, then answer your handler.
-2. \==action: Submit the control flag== and listen to the hour read and the call.
+2. \==action: Submit the control flag==, open HaX's text about the hour read, and listen to the Architect's call.
 3. \==action: Decide the vendor notice on HaX's phone==.
 
 </details>
