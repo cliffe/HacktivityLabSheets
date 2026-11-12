@@ -522,7 +522,7 @@ The **Cascade Control System** is the only place the abort goes in. It stays loc
 <details markdown="1">
 <summary>Nudge</summary>
 
-When the abort is in, open your phone and choose **[Bring me in.]**. HaX picks up and, once all four flags are in, puts you through; if a flag is still outstanding she tells you to finish the relay first and call again. If you do not, the game starts the debrief by itself after about nine minutes. Finish anything you still want to read first: the plant and the vault, the Tomb Gamma printout and the intercepted email, Dr Mercer's page.
+When the abort is in, open your phone and choose **[Bring me in.]**. HaX picks up and, once all four flags are in, puts you through; if a flag is still outstanding she tells you to finish the relay; once the last flag is in, the game offers to end the mission the next time you go through a door or close a screen. If you do not, the game starts the debrief by itself after about nine minutes. Finish anything you still want to read first: the plant and the vault, the Tomb Gamma printout and the intercepted email, Dr Mercer's page.
 
 The debrief reads back what you chose and what you left unread, then rolls the credits.
 
