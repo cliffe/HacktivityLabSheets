@@ -425,6 +425,8 @@ Take **The Architect's Fund Allocation** and read it. It lists what each cell wa
 
 Emulate the badge at the executive wing's RFID reader.
 
+Once you have read the allocation, open your phone and choose **[I've found The Architect's Fund.]**: the phone rings HaX and you talk the fund through on a call, where she sets out what freezing the wallet would cost against watching it. If you hang up early, the option stays on the menu and you can ring again.
+
 </details>
 
 <details markdown="1">
@@ -501,7 +503,7 @@ None of these is scored as right or wrong by the game. They change who is safe a
 
 </details>
 
-After you decide, ==action: finish anything you still want to read, then open your phone and choose **[I'm done here. Bring me in.]**== to hear the debrief. That option appears once both decisions are made and the server work is complete.
+After you decide, ==action: finish anything you still want to read, then open your phone and choose **[I'm done here. Bring me in.]**== to hear the debrief. That option appears once both decisions are made and the server work is complete. The phone then rings HaX and you are on a call: choose **[Bring me in.]** and then **[On my way.]** to leave. **[Not yet. I'm still looking.]** ends the call and leaves you in the building, and you can ring again from the same menu. If optional objectives are still open when you say **[On my way.]**, the game lists them and asks whether to end the mission now or keep going. Keeping going leaves you on the call, and hanging up returns you to the thread.
 
 ### What the Tools and Locks Are Telling You {#error-messages}
 

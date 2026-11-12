@@ -407,7 +407,7 @@ Each question has one answer that follows the evidence. The wrong ones are the t
 
 > Warning: Three wrong answers close the check, and the Director takes it over. Done before the server work, that gets noticed on the floor; done after, he reads it against the server evidence himself. Both are on the record. "Let me read it again" never counts as a wrong answer.
 
-If the Director is out of action, HaX will hear the same reading from you instead.
+If the Director is out of action, HaX hears the same reading from you instead. Open your phone and choose **[I can name the leak.]**: the phone rings her and you are on a call. She asks two questions, the minute the plan was opened and then who was still behind the lab door at that minute. A wrong answer ends the call, and choosing **[I can name the leak.]** again redials for another try, as many times as you need. **[Let me read it again.]** also ends the call without counting against you.
 
 Once he has the name, he gives you the code for the interrogation suite and points you at his safe. **[The suite code again, sir?]** repeats it.
 
