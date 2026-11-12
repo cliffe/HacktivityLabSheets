@@ -384,7 +384,7 @@ Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal, 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Submit the decryption key at the ENTROPY Encrypted Archive to open it. Inside are the two top-secret documents: the final authorization and the network architecture. Reading the network architecture is the reveal that ENTROPY is far bigger than Derek. Then call Agent HaX and report Operation Shatter.
+Submit the decryption key at the ENTROPY Encrypted Archive to open it. Inside are the two top-secret documents: the final authorization and the network architecture. Reading the network architecture is the reveal that ENTROPY is far bigger than Derek. Then open your phone and message Agent HaX to report Operation Shatter; she rings you back to bring you in.
 
 </details>
 
