@@ -60,7 +60,7 @@ You are Agent 0x00, a SAFETYNET field agent. SAFETYNET read ENTROPY's order to b
 You do not need any prior knowledge before you start. The Vigenere cipher is taught in the warm-up and in **Concepts**; everything else builds on skills from earlier missions.
 
 1. \==action: Start the Break Escape mission **Digital Archaeology**==.
-2. \==action: Watch the opening briefing, then close it==. Agent HaX rings the dock a couple of seconds later.
+2. \==action: Watch the opening briefing, then close it==. Agent HaX opens your phone with her first text a couple of seconds later.
 3. \==action: Go north through the shutter into the open stacks==, or pick the dock office door to the west and go through the front desk.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
