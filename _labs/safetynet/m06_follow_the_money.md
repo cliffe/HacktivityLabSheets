@@ -425,8 +425,6 @@ Take **The Architect's Fund Allocation** and read it. It lists what each cell wa
 
 Emulate the badge at the executive wing's RFID reader.
 
-Once you have read the allocation, open your phone and choose **[I've found The Architect's Fund.]**: the phone rings HaX and you talk the fund through on a call, where she sets out what freezing the wallet would cost against watching it. If you hang up early, the option stays on the menu and you can ring again.
-
 </details>
 
 <details markdown="1">
@@ -477,7 +475,7 @@ There are three ways through. **Talk:** with the cover held he accepts the FCA l
 <details markdown="1">
 <summary>Nudge: Satoshi Nakamoto II</summary>
 
-His office holds a manifesto, a signing case and a safe. When you confront him, his reaction depends on what you have found. With the fund in hand you can make him answer to the name on the authorisation line. If you arrest him without evidence, he resists. The money decision comes up in his conversation: the options are to freeze the fund, to watch it, or to say not yet. Freezing is available only when you hold the recovery keys from the server work; watching is always available, and "not yet" lets you go and get what you are missing. The game explains what each choice costs in the debrief.
+His office holds a manifesto, a signing case and a safe. When you confront him, his reaction depends on what you have found. With the fund in hand you can make him answer to the name on the authorisation line. If you arrest him without evidence, he resists. The money decision comes up in his conversation: the options are to freeze the fund, to watch it, or to say not yet. Freezing is available only when you hold the recovery keys from the server work; watching is always available, and "not yet" lets you go and get what you are missing. The game explains what each choice costs in the debrief. You can also talk the fund through with HaX first: once you have read the allocation, open your phone and choose **[I've found The Architect's Fund.]**, and the phone rings her. She can set out what freezing the wallet would cost against watching it. If you hang up early, the option stays on the menu and you can ring again.
 
 </details>
 
