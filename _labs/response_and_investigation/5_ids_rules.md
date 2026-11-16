@@ -66,7 +66,7 @@ sudo vi /etc/snort/snort.conf
 
 > Note: Editing using vi involves pressing "i" to insert/edit text, then *Esc*, then ":wq" to write changes and quit.
 
-\==action: Add the following line:==
+\==action: Check for the following line:==
 
 ```
 output alert_fast
