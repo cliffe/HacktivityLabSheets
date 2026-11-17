@@ -291,7 +291,7 @@ If she gets back while you are reading, she says "That's my laptop. Can I help y
 
 **Where:** the conference room. **Goal:** clone Sterling's executive card while you interview.
 
-![RFID Flipper reading Sterling's custom-key card]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/03-card-copy-whiteboard.png)
+![RFID cloner reading Sterling's custom-key card]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/03-card-copy-whiteboard.png)
 
 > Hint: Her card is custom-key, so it needs a longer read. The read runs while you are standing close to her. Where in the room can you stand next to her and keep her talking?
 
@@ -309,8 +309,9 @@ Ask her about the training lab on the whiteboard. Going to the board puts you ne
 
 1. \==action: Talk to Victoria Sterling== (this meets her).
 2. \==action: Choose **[Is that your training lab on the whiteboard?]**== to go to the board and start the read.
-3. \==action: Keep picking the lab questions to keep her talking== until the cloner finishes.
-4. \==action: Press Save in the cloner== to keep the Executive Keycard.
+3. \==action: Keep picking the lab questions to keep her talking== until the cloner opens.
+4. \==action: In the cloner, choose **Crack keys first**, then **Darkside Attack** (about 30 seconds)== while she keeps talking.
+5. \==action: Press Save in the cloner== to keep the Executive Keycard.
 
 </details>
 
@@ -335,7 +336,7 @@ The day staff are gone by then. Zainab and Yusuf vanish the moment Sterling's ca
 
 **Where:** the server room, north off the main hallway, at night. **Goal:** get in and reach the VM Access Terminal.
 
-![The server room at night]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/04-server-room-entry.png)
+![The server room, lit by its motion sensor]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/04-server-room-entry.png)
 
 > Hint: This door wants Sterling's executive card, not the receptionist's. Inside is a terminal onto their training network and a drop-site terminal where flags are submitted.
 
