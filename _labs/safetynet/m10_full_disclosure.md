@@ -270,13 +270,14 @@ The workshop also holds a casualty sheet with a Base64 note in the margin (see *
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Submit the flag at the release console==.
-2. \==action: Submit the flag at the sealed hatch==.
-3. \==action: Optionally use the release console controls== to close the backdoor.
+1. \==action: Pick up the **Schedule Copy Sign-in Card** from under the release console==. Read it; its login opens the staging copy. How to use it is in the companion.
+2. \==action: Submit the flag at the release console==.
+3. \==action: Submit the flag at the sealed hatch==.
+4. \==action: Optionally use the release console controls== to close the backdoor.
 
 </details>
 
-> Note: How to take the server hall's two flags is in the companion. The staging schedule you read here names the cities and the head-start buyers.
+> Note: You pick up the **Schedule Copy Sign-in Card** here, tucked under the release console. How to use its login and take the server hall's two flags is in the companion. The staging schedule you read here names the cities and the head-start buyers.
 
 ### Finding the Sleeper {#hints-sleeper}
 
