@@ -217,6 +217,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 **Where:** the briefing room, at the start. **Goal:** take Ruth's briefing, read the Rules of Engagement board, and collect your kit.
 
+![The Rules of Engagement board in the briefing room, with the scope and the letter of authority]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/01-authorise-rules-of-engagement.png)
+
 > Hint: Nothing you do is lawful until you have read the scope. Take the briefing, read the board, and pick your kit up off the table before you leave.
 
 <details markdown="1">
@@ -234,6 +236,8 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 ### The Hardware Keylogger {#hints-keylogger}
 
 **Where:** the open-plan floor, at **Chris's PC** (staff_pc). **Goal:** plant the keylogger, capture Chris's password when she unlocks, then use it at the **Hot desk PC**.
+
+![Chris at the coffee station with a coffee cup over her head, and her empty desk with its locked screen]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/02-keylogger-chris-away.png)
 
 > Hint: Chris locks her screen every time she goes for coffee, so you cannot use her session. A keylogger does not need her session: it reads the keyboard. Plant it while she is away, then wait for her to come back and type.
 
@@ -262,6 +266,8 @@ Watch for the coffee cup over Chris's head: that means she has stepped away. Pla
 
 **Where:** the open-plan floor. **Goal:** drop the BadUSB and watch what Sofia Lord does with it.
 
+![The BadUSB on the floor and Sofia Lord reaching for it: "Someone's dropped a memory stick. Whose is this?"]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/03-badusb-sofia-finds-it.png)
+
 > Hint: The test is not whether you can drop a device, it is what a member of staff does when they find one. Sofia tidies up stray devices, one at a time, when she is free. Drop it and get on with something else.
 
 <details markdown="1">
@@ -285,6 +291,8 @@ Click the **BadUSB (keystroke injector)** in your inventory and choose **Drop he
 ### Tailgating the Records Door {#hints-tailgate}
 
 **Where:** the records door, between the open-plan floor and the records office (secure_area). **Goal:** get through the badge-only door without a badge of your own.
+
+![Waiting by the ledger shelves as Len opens the records door]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/04-tailgate-records-door.png)
 
 > Hint: The door needs a badge, and you have none. Two routes get you through: follow a member of staff in on their badge read, or present a copy of their badge. The board says the courier hi-vis is required cover for following someone in.
 
@@ -319,6 +327,8 @@ The other route needs no following. Carry the **RFID cloner** and chat to Len cl
 
 **Where:** the stationery cupboard (store_room), off the corridor. **Goal:** pick the lock and see what Ledgerwell keeps behind a cheap cylinder.
 
+![The lockpicking minigame on the stationery cupboard door]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/05-lockpick-stationery-cupboard.png)
+
 > Hint: No key was ever issued for the stationery cupboard, so a lockpick is the only way in, and it is in scope. Carry the lockpick set and work the lock.
 
 <details markdown="1">
@@ -335,6 +345,8 @@ The other route needs no following. Carry the **RFID cloner** and chat to Len cl
 ### Optional: The Pocket Rogue AP {#hints-rogue-ap}
 
 **Where:** reception. **Goal:** stand up a copy of the staff Wi-Fi and harvest either the Wi-Fi key or Kieran's staff sign-in.
+
+![The rogue AP console set to copy Ledgerwell-Staff with the Wi-Fi key page]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/06-rogue-ap-clone-staff-network.png)
 
 > Hint: A rogue access point copies a network's name, but nobody's laptop joins an open copy on its own; it needs a person to pick it. Hide the box in reception, pick which page it shows, and wait for Kieran's laptop to bite.
 
@@ -363,6 +375,8 @@ Hide the **Pocket rogue AP** in one of the reception plants, then click it to op
 
 **Where:** the comms cupboard (P3), with the patch panel. **Goal:** plant the drop box on a live port and see what the office network exposes, then reach the door controller.
 
+![The drop box view listing the machines, file share and printer it can reach]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/07-drop-box-network-view.png)
+
 > Hint: A wall port is only as useful as the VLAN it is patched to. The patch panel is labelled by VLAN. Plant the box on the right one, then open its view from anywhere, because the box calls home over its own mobile link.
 
 <details markdown="1">
@@ -387,6 +401,8 @@ In the comms cupboard, carry the **Network drop box** and use the patch panel (o
 ### The Debrief {#hints-debrief}
 
 **Where:** Ruth, in the records office (secure_area). **Goal:** close the engagement.
+
+![Ruth Adeyemi in the records office, opening the debrief]({{ site.baseurl }}/assets/images/cyber_security_landscape/physical_penetration_testing_game/08-debrief-ruth-records-office.png)
 
 > Hint: Once the four core beats are done, find Ruth in the records office to turn the morning into findings. Gareth Fairbairn, the owner who signed the test off, is in there with her when you arrive, so it is worth hearing him out before the debrief closes. She warns you before she starts, because the debrief closes the engagement.
 
