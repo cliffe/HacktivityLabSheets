@@ -494,7 +494,7 @@ Take the stick and open it. HaX offers the decoding field guide. To get it, open
 
 **Where:** the Director's office safe (four digits), then the keypad south of the Crypto Lab. **Goal:** open the safe for the code card, or get the code from the Director.
 
-![The Director's Safe open, showing its contents]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/06-directors-safe-open.png)
+![The Director's Safe, opened in its own window, with its five items]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/06-directors-safe-open.png)
 
 > Hint: The safe belongs to the Director and the policy says everyone uses the same kind of number for theirs. The page you want is on the Operations Floor, and its header says who requested it.
 
@@ -503,7 +503,7 @@ Take the stick and open it. HaX offers the decoding field guide. To get it, open
 
 The **Personnel Print Job -- Director's Investigation Request** in the Operations Floor tray lists several service numbers. The header carries the one that matters, and the margin note says what everyone uses it for. The safe is the Director's, so it wants the Director's own number, not a suspect's. A suspect's number is the common wrong answer.
 
-Inside the safe are the **Interrogation Suite Code Card** and sealed files on each of the three suspects. The card carries the code for the keypad. The pick kit cannot open a PIN lock, so there is no skipping this.
+The safe opens in its own framed window and holds five items: the **Portland Intercept**, the **Interrogation Suite Code Card** and a sealed file on each of the three suspects. The card carries the code for the keypad. The pick kit cannot open a PIN lock, so there is no skipping this.
 
 If the Director already named the leak on the evidence, he has given you the code aloud, and **[The suite code again, sir?]** repeats it. You do not need the safe for that.
 
