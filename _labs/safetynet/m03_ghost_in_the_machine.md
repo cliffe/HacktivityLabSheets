@@ -93,6 +93,21 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 > Warning: Save the cloned card. The read is not kept until you press Save in the cloner; close it early and you have to read the card again.
 
+### Who Is in the Building, and When {#who-is-around}
+
+The building is not empty by day, and the people in it are not frozen at their posts.
+
+| When | Who | What they are doing |
+| --- | --- | --- |
+| Afternoon, reception | **Ffion Rees** at the desk | Stays at the desk all day. She is your badge source, and she is back at the desk when you return at night |
+| Afternoon, reception and hallway | **Zainab Hussain** (a field engineer working from the sofa) and **Yusuf Demir** (a senior consultant waiting for a late client, in the club chair) | Ordinary WhiteHat staff who know nothing about Zero Day. They sit, then take coffee at the reception coffee station and water at the hallway cooler, and chat while they do it |
+| Afternoon, conference room | **Victoria Sterling** | Waits for you; her card is the second clone |
+| Night | **Terry Mott** (guard), **Danny Foster** (consultant), and Ffion for one question | Zainab and Yusuf have gone home. They disappear the moment Sterling's card is saved, while you are still in the conference room, so you never watch them leave |
+
+Zainab and Yusuf do not carry cards or keys, and nothing they say or do opens a door for you. They are there to make the afternoon feel like a real office, and to show you what people do when nobody is checking. If you attack either of them, or knock out Ffion, the coffee station and the cooler stop working for the rest of the day and the laptop in reception is shut, so the openings below close; the debrief and credits record it.
+
+> Tip: Listen. Staff chatter carries across the lobby and through an open door, and some of what they say is a hint about the building: who the "after-hours lot" are, who held a door open for a stranger.
+
 ### Warm-up: Your First CyberChef Recipe {#warm-up}
 
 Do this once you have taken the CyberChef workstation (a laptop in the server room, at night). It uses made-up data, not anything from the game.
@@ -136,6 +151,8 @@ ROT13   A v t u g   g r n z
 ```
 
 So `Night team` becomes `Avtug grnz`. The giveaway is text that keeps normal spacing but reads as gibberish, with no `=` padding.
+
+A shift does not have to be 13. A shift of 5 turns `Lab results` into `Qfg wjxzqyx`, and you undo it by moving every letter back 5. ROT13 is the special case where forward and back are the same trip, which is why it undoes itself. For any other shift you need the number, or you try all 25. Hiding the number in a place only the right people can read is the only protection such a scheme has, and it is a weak one.
 
 **Base64** rewrites any data as printable text, using `A`–`Z`, `a`–`z`, `0`–`9`, `+` and `/`. It groups the bytes into blocks and writes each as one of 64 symbols, so its length is a multiple of four and it often ends in one or two `=` signs as padding.
 
@@ -188,6 +205,14 @@ Sterling's office computer was reset to a default built from two public facts: h
 
 > Question: The helpdesk slip tells an attacker the exact format of the password. Even if Sterling had picked a strong, random password instead, what one habit in this office would still have undone it?
 
+### Unattended Screens and Everyday Habits {#unattended}
+
+Most real intrusions use a habit, not a clever trick. Two are on show in reception. A laptop left unlocked for the two minutes it takes to fetch a coffee shows its owner's calendar and chat to anyone who walks past. A colleague who holds a door for a stranger with a lanyard and a coffee has let the stranger in. Neither person broke a rule they would have remembered breaking.
+
+The fix for the first is cheap: lock the screen every time you stand up, however short the trip. The game makes the difference visible. A short trip to the coffee station leaves Zainab's laptop open for about twenty seconds; the longer walk to the hallway cooler is about half a minute, and she locks it for that one ("Old habit, that," she says at the cooler). What the open laptop shows is deliberately modest: her week of client-site jobs, a company reminder that client data stays on client kit, and a message to her team asking who the after-hours lot are. It holds nothing that opens a door, and you do not need it to finish.
+
+> Question: Zainab locks her screen for the cooler but not for the coffee station. Where would you draw the line for your own laptop, and why is "just a minute" the case that matters most?
+
 ### One Supplier in a Network {#entropy}
 
 The records you recover describe Zero Day as a supplier, not an attacker: it arms the cells that run the attacks, and it answers to figures above it ("0day", and above them "The Architect"). The transaction log and the catalogue show a Phase 2 aimed at infrastructure. Taking Sterling off the board closes this supplier's front; it does not end the network behind her. Keep that in mind at the end.
@@ -226,6 +251,41 @@ Talk to Ffion Rees and sign in for your visitor badge. The conference-room door 
 </details>
 
 > Warning: The clone only counts once you press Save. If you close the cloner first, come back to Ffion and the lean-in option is offered again.
+
+### Reception by Day: The Waiting Area (Optional) {#hints-reception-staff}
+
+**Where:** reception, in the afternoon. **Goal:** none required. This is where you can watch how the day staff behave, and read what an unlocked screen shows.
+
+> Hint: Zainab on the sofa and Yusuf in the club chair are not going to stay put. Give them a few minutes, and watch what they do when they want a drink.
+
+<details markdown="1">
+<summary>Nudge</summary>
+
+Staff leave their seats on a schedule you can nudge. When you finish talking to Ffion, Yusuf heads for the coffee station and Zainab follows a moment later. When you come back into reception from the hallway, Zainab goes for water at the hallway cooler and Yusuf joins her. Left alone, they get round to coffee after four or five minutes and to water after about a quarter of an hour. You can wait, or just carry on with your plan and notice it when it happens.
+
+What each trip does to her laptop on the glass table:
+
+- **Coffee** (a short trip inside reception): the screen stays open for about twenty seconds. Walk to the laptop while she is at the machine and read it.
+- **Cooler** (a long trip out to the hallway): she locks the screen, and you see a login box over a photo of the Yorkshire Dales.
+- **Zainab at her seat**: the text only says she tips the screen away from you.
+
+If she gets back while you are reading, she says "That's my laptop. Can I help you?" and that is all that happens.
+
+**Learn it:** ==action: Read the open laptop, then say what the habit that left it open cost her==. Nothing on it is a password or a code, so the lesson is the habit, not a shortcut.
+
+</details>
+
+<details markdown="1">
+<summary>Steps</summary>
+
+1. \==action: Talk to Ffion, then close the conversation== so Yusuf is sent for coffee and Zainab follows.
+2. \==action: Watch the coffee station== and listen to the pair chat there.
+3. \==action: Walk to Zainab's laptop on the glass coffee table while she is away== and read it.
+4. \==action: Return from the hallway== to send her to the cooler, and note that the laptop locks on that longer trip.
+
+</details>
+
+> Note: The staff also play one-off exchanges you can overhear, each only once: about Sterling's door "always" being open, someone who followed Zainab in with a lanyard and a coffee, and Danny being back "evenings only". They are flavour, not clues you need.
 
 ### Meeting Sterling and Cloning Her Card {#hints-clone-victoria}
 
@@ -267,6 +327,8 @@ Ask her about the training lab on the whiteboard. Going to the board puts you ne
 
 Finish anything you want to do by day first (there is little). When you walk into the main hallway, a short scene plays: you leave with the afternoon's visitors and come back at eleven that night. From here on the building is shut, a guard is on patrol, and the server room and offices are the job.
 
+The day staff are gone by then. Zainab and Yusuf vanish the moment Sterling's card is saved, and the laptop in reception reads as lid shut, left for the night. The coffee station and cooler are unattended. Ffion is back at the desk "for her charger", and when you speak to her she asks whether Sterling is expecting you this late. Your answer is read back in the credits. It does not change the way through.
+
 </details>
 
 ### The Server Room {#hints-server-room}
@@ -295,12 +357,14 @@ Finish anything you want to do by day first (there is little). When you walk int
 
 ![CyberChef decoding the whiteboard note with ROT13]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/05-cyberchef-rot13-decode.png)
 
-> Hint: None of these is encrypted, only encoded. Look at the shape of each to tell ROT13 from Base64 from hex. If one decode still looks like nonsense, it is layered: decode again.
+> Hint: None of these is encrypted, only encoded. Look at the shape of each to tell ROT13 from Base64 from hex. If one decode still looks like nonsense, it is layered: decode again. If a plain ROT13 gives you nonsense with normal word shapes, someone picked a different shift, and the number is written down somewhere in the building.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
 Take the CyberChef workstation, then paste each encoded thing into Input and add the matching operation. Scrambled words with normal spacing are ROT13; mixed-case letters, digits, `+`/`/` and maybe `=` are Base64; pairs of `0`–`9` and `a`–`f` are hex. The drive from Sterling's desk is two layers (Base64 over ROT13), so run From Base64 first, then ROT13.
+
+The web price list is the odd one out. Sable moved it off ROT13 onto her own shift, a different number of places. HaX and the runbook both say the number is in her mail: it is in the unsent email on Sterling's computer, the same one that carries the wall-safe code. So do the office stage first. ROT13 is only a shift of 13, and the CyberChef operation lets you set the amount, so a shift of any size needs only its number. With 25 possible shifts you could also try them all.
 
 **Learn it:** ==action: Decode the first word of the whiteboard note by hand==, shifting each letter back 13, then check it in CyberChef.
 
@@ -312,7 +376,7 @@ Take the CyberChef workstation, then paste each encoded thing into Input and add
 <summary>Recipe</summary>
 
 1. \==action: Take the CyberChef workstation==.
-2. \==action: For the web price list, paste it and add **ROT13**==.
+2. \==action: For the web price list, first read the unsent email on Sterling's computer== (see the wall safe stage) for the shift number. ==action: Paste the price list, add **ROT13** and change its **Amount** to that number==. Undoing a shift of N means moving each letter back N places. If the output is still nonsense, try the other direction (an Amount of 26 minus the number).
 3. \==action: For the client roster, paste it and add **From Hex**==.
 4. \==action: For the whiteboard note, paste it and add **ROT13**==.
 5. \==action: For the desk drive, paste it, add **From Base64**, then add **ROT13**==.
@@ -358,7 +422,7 @@ Sterling's office is a key lock, so you need the pick kit, and picking takes tim
 <details markdown="1">
 <summary>Nudge</summary>
 
-Pick the office door. The helpdesk slip on the monitor says the password was reset to the house default: her surname plus the year the firm was founded. The founding year is on the plaque in reception (and HaX said it in the briefing). Put them together, matching the capital letter. On the computer you will find the client roster, stored as raw hex, and an unsent email you will want for the safe.
+Pick the office door. The helpdesk slip on the monitor says the password was reset to the house default: her surname plus the year the firm was founded. The founding year is on the plaque in reception (and HaX said it in the briefing). Put them together, matching the capital letter. On the computer you will find the client roster, stored as raw hex, and an unsent email you will want for the safe. That email also gives the shift number for the web price list, so read it all the way through.
 
 **Learn it:** ==action: Read the plaque in reception for the year== if you have not already, then combine it with the surname from the slip.
 
@@ -447,7 +511,7 @@ Several decisions run through the night and show up in the ending:
 
 - **Danny.** He was deceived, then paid to stay quiet. Protect, expose or leave him; the credits name the outcome.
 - **The approach and Sterling's recruitment test.** The briefing approach you picked, and your answer to the NHS question she asks in the interview, are both read back at her, and they appear in the credits.
-- **Civilians and the guard.** Ffion and Terry are not Zero Day. You can knock them out to save trouble, but the debrief and credits record it, and Sterling notices an empty front desk.
+- **Civilians and the guard.** Ffion, Terry, Zainab and Yusuf are not Zero Day. You can knock them out to save trouble, but the debrief and credits record it, HaX tells you to leave the staff alone, and Sterling notices an empty front desk.
 - **How much you read.** The filing cabinet, the wall-safe catalogue and the desk drive are optional, but leaving them unread is noted, and a Victoria you knock out ends the confrontation with that paper still in the building.
 
 None of these is scored as right or wrong by the game; they change who is safe at the end and what SAFETYNET walks away with.
@@ -465,6 +529,10 @@ After you decide, ==action: finish anything you still want to read, then choose 
 | A clone did not stick | You closed the cloner before pressing Save; read the card again |
 | Sterling steps away mid-interview and the read drops | She is suspicious; drift back to the whiteboard and keep the questions to the work |
 | The office computer rejects the password | The value is not exact; match the surname's capital and the year with no spaces |
+| The web price list is still gibberish after ROT13 | It is on a different shift. The number is in Sterling's unsent email; set the ROT13 **Amount** to it (or to 26 minus it) |
+| Zainab's laptop only says she tips the screen away | She is at her seat. Wait until she leaves for coffee, then read it |
+| Zainab's laptop shows a login box | She went to the hallway cooler and locked it; nothing is gained from this one |
+| The coffee station and cooler stop being used, and the laptop is shut | Someone attacked a day member of staff or knocked out Ffion, so the routines have stopped |
 | CyberChef output is still gibberish after one operation | It is layered; add the next operation (for the desk drive, From Base64 then ROT13) |
 | The wall safe rejects a four-digit code | The code is from the decoded unsent email, not the founding year |
 | The confrontation will not open | You do not have all four flags in yet; the distcc flag is usually the missing one |
@@ -534,6 +602,8 @@ Work through these after you finish. Use your own run: the network flags were ge
 > Question: Describe the three steps of cloning a card (read, crack, emulate). Why did the receptionist's badge fall in seconds while Sterling's took a recovery attack?
 
 > Question: Sterling set custom keys on her card and still had it cloned during a friendly interview. What would actually have protected it, and what does that say about relying on the card alone for access control?
+
+> Question: Zainab left her laptop open for a coffee, and she tells Yusuf that someone followed her in with a lanyard and a coffee. What does each habit give an intruder, and what small, cheap rule would stop each one? Which did you actually use in the game, if either?
 
 > Action: Write a half-page access-control review for a small office, covering what card technology to use, how to handle visitors, and one control that would catch a cloned card being used (for example, tying the card to a PIN or to the time of day). Map each point to something you exploited in the game.
 
