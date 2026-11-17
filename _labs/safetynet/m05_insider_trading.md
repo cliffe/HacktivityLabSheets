@@ -87,6 +87,10 @@ The map is a single office block. From the reception lobby, Patricia's office is
 
 > Warning: Not every character is a suspect. Knocking people out, or accusing someone the evidence does not support, is recorded and shows up in the debrief and the credits.
 
+> Note: The office has working staff in it besides the people you need. In the break room, two colleagues, Niamh Doherty (internal comms) and Thandiwe Moyo (office manager), sit at the second table, and now and then they get up for coffee or a drink at the corridor water cooler and chat there. They have no connection to the insider and hold nothing you can take, and nothing they say is a clue, so you can skip them. Thandiwe goes home once you have been into the server room. Niamh stays late, and an evening cleaner, Bernadette Lyons, comes on shift in the break room. Do not knock any of them out. Agent HaX tells you to stand down, and the debrief and the credits record it.
+
+> Note: Lisa Park may leave her seat for a minute. After you have talked to her and walked away, she sometimes crosses the break room to the staff fridge for milk and then returns. She can be talked to wherever she is, and she is back at her seat within about fifteen seconds.
+
 ### Warm-up: Your First Badge Log {#warm-up}
 
 You will read a real badge log in the game. Practise on a made-up one first. This one is from an imaginary building and has nothing to do with QDC.
@@ -549,6 +553,7 @@ Several decisions run through the night and show up in the ending:
 
 - **The insider.** A man under real pressure, with a child and a spouse in treatment. The Recruiter's argument is that he chose, and that he is one of many. Hold him, turn him, expose him or fight him; the credits record the outcome.
 - **Dr Halloran.** Accusing her wrongly costs her and the company. The debrief says so.
+- **The staff.** Lisa, Niamh, Thandiwe and Bernadette are not involved and carry nothing you need. You can knock them out, but the credits record a member of staff hurt on your account, and the debrief counts it against how you handled the night.
 - **The administrator.** You cloned a colleague's badge, and he may notice. What you say to him is up to you.
 - **The CEO's email.** Patricia kept a copy of the order that stopped her investigation. Whether you have read it changes a line in the debrief.
 - **The deal.** The Recruiter offers one. Taking it or refusing it changes who is warned.
@@ -589,6 +594,9 @@ None of these is scored as right or wrong by the game; they change who is safe a
 | "No match" at the vault | You lifted someone else's print; match the lift against the references |
 | Patricia refuses a name | You do not have both a motive and proof of exfiltration, or your reason does not follow from the evidence |
 | The naming call ends after a reason | The reason fits anyone; try again with one that follows from the log |
+| Lisa is not in her seat when you come back to the break room | She has gone to the staff fridge for a minute; talk to her where she is, or wait for her to return |
+| Thandiwe is not in the break room any more | She goes home once you have been into the server room; she holds nothing you need |
+| The water cooler and espresso machine stop working and the staff stop their breaks | Someone on staff was attacked; the room is upset and the break routines stay off |
 | Documents and terminals do nothing when clicked | Your fists are up; press Q until the open hand shows |
 | The debrief does not open | The server work is not finished, or you have not called HaX to bring you in |
 
@@ -607,6 +615,13 @@ A locked pin-tumbler filing cabinet behind Patricia's desk holds a printed email
 <summary>Lisa Park and the collection tin</summary>
 
 Lisa Park in the break room organises a collection for a colleague's family. She tells you who the tin is for if you ask, and how the office has been. She is optional, and her interview shows the insider as a person rather than a name.
+
+</details>
+
+<details markdown="1">
+<summary>The break room and corridor staff</summary>
+
+Niamh Doherty and Thandiwe Moyo, who work in the building, sit in the break room by day. Talk to either and you get a few polite lines and nothing else. Go for a coffee or past the corridor water cooler and you may catch the two of them chatting, which is atmosphere rather than evidence. After you have been into the server room Thandiwe has gone home, Niamh is still drafting tomorrow's all-staff note, and Bernadette Lyons, the evening cleaner, is doing the bins and sometimes shares the espresso machine with her. None of them is a clue, a suspect or a way round a lock.
 
 </details>
 
@@ -687,6 +702,8 @@ Work through these after you finish. Use your own run: your choices and your end
 > Question: The Recruiter argued that the insider made an informed choice, and that others in her pipeline would follow. Did that change how you thought about the person in front of you? Why or why not?
 
 > Question: If you accused anyone the evidence did not support, or knocked anyone out, what did the game record, and what did it cost? What does that say about real investigations?
+
+> Question: Niamh, Thandiwe and Bernadette were ordinary staff with nothing to give you. What did you gain, and what could you have lost, by treating them as part of the scene rather than as obstacles? What would a real investigator owe to bystanders on site?
 
 > Action: Write a short debrief of your own run, as if to Agent HaX. State the ending you reached, who was protected or harmed, what evidence you secured and what you left behind, and one thing you would do differently in a real investigation.
 
