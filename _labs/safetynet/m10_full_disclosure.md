@@ -238,7 +238,7 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 > Hint: The power room wants a contractor's card. Clone the contractor's, talk him into it, or pick the fitter's locker for the spare.
 
-![The power room, with the fitter beside the shutter isolator and the breaker row labelled for the gallery shutter]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/05-power-room-shutter-isolator.png)
+![The power room, with the fitter beside the shutter isolator panel and its key switch]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/05-power-room-shutter-isolator.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -318,7 +318,7 @@ You can name the sleeper on the phone to the Director or face to face. Name them
 
 > Hint: The outer lock is four digits, and your handler's hints go quiet near the core. Dust the keypad to see which keys are used, then let the cracker finish.
 
-![The gallery seen from the server hall door, with the lock party, the guards and the keypad on the far wall]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/07-gallery-lock-party.png)
+![The gallery on its own, with the lock party, the guards and the keypad on the far wall]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/07-gallery-lock-party.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -348,7 +348,7 @@ Dust the outer lock's keypad plate with the Fingerprint Kit. The worn keys are t
 
 > Hint: The Architect is waiting. Submit the core flag, then hear him out. The three exchanges are where you land the points that shape how the end can go.
 
-![The core, with the Architect seated at his console and the gallery you came through to the left]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/09-core-tesseract.png)
+![The core, with the Architect seated at his console]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/09-core-tesseract.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
