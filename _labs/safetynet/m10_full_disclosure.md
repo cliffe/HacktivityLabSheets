@@ -318,7 +318,7 @@ You can name the sleeper on the phone to the Director or face to face. Name them
 
 > Hint: The outer lock is four digits, and your handler's hints go quiet near the core. Dust the keypad to see which keys are used, then let the cracker finish.
 
-![The gallery on its own, with the lock party, the guards and the keypad on the far wall]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/07-gallery-lock-party.png)
+![The gallery, with the lock party and the guards in the middle and the keypad on the right-hand wall]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/07-gallery-lock-party.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
