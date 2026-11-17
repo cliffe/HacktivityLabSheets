@@ -36,7 +36,7 @@ By the end of this lab you should be able to:
 - explain why a physical penetration test has to be authorised in writing first, and what the rules of engagement, the challenge rule and the Computer Misuse Act 1990 have to do with it
 - describe the layered access control on a door (a badge plus a PIN) and say why reading the PIN alone never opened it
 - explain what a hardware keylogger captures, why a screen lock does not stop it, and what does
-- explain why a dropped USB, a malicious charging cable or a QR card works: the finder, not the file, is the way in
+- explain why a dropped USB, a malicious charging cable or a QR-code card works: the finder, not the file, is the way in
 - describe what cloning a staff badge gets an attacker, and why copying a card in place beats pocketing it
 - explain why a cupboard behind a cheap cylinder lock can matter as much as the room it protects
 - explain how a rogue access point copies a Wi-Fi network's name, why it needs a person to pick it, and why a shared Wi-Fi key is one secret for the whole office
@@ -57,7 +57,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 
 ## Getting Started {#getting-started}
 
-You are a penetration tester at Tarnside Assurance. Ledgerwell Ltd, a small finance firm, has already had its staff tested by email, and has now signed off a physical test: can someone walk in off the street and reach the records office and the systems behind it? Your engagement lead, Ruth Adeyemi, briefs you in the briefing room and is on your phone whenever you are stuck. The client's one condition carries over from last time: report the gaps, name no individuals.
+You are a penetration tester at Tarnside Assurance. Ledgerwell Ltd, a small finance firm, has already had its staff tested by email, and has now signed off a physical test: can someone walk in off the street and reach the records office and the systems behind it? Gareth Fairbairn, the firm's owner, signed the engagement off and wants to see the gaps for himself. Your engagement lead, Ruth Adeyemi, briefs you in the briefing room and is on your phone whenever you are stuck. The client's one condition carries over from last time: report the gaps, name no individuals.
 
 1. \==action: Start the Break Escape scenario **Physical Penetration Testing**==, and choose an avatar when asked.
 2. \==action: Take Ruth's briefing== in the briefing room.
@@ -107,7 +107,7 @@ A professional engagement also has a challenge rule: if a member of staff stops 
 
 ### Physical access control: badges, PINs and layers {#access-control}
 
-A door like the records door uses two things: a **badge** (something you have) and a **PIN** (something you know). The badge is what opens the door; the PIN alone will not. That is a layer, and it is why shoulder-surfing the PIN from the ledger shelves is a finding on its own but never opens the door for you. To get through you still need the badge, or someone else's badge read, which is what tailgating borrows.
+A door like the records door uses two things: a **badge** (something you have) and a **PIN** (something you know). The badge is what opens the door; the PIN alone will not. In practice Ledgerwell's reader treats the PIN as a nominal second step that the badge alone already satisfies, so a cloned badge with no PIN opens the door, and that is itself the weakness. It is why shoulder-surfing the PIN from the ledger shelves is a finding on its own but never opens the door for you. To get through you still need the badge, or someone else's badge read, which is what tailgating borrows.
 
 The lesson cuts both ways. A layer only helps if both parts are really required and really independent. If staff prop the door, lend a badge, or let a stranger walk in on their read, the layers collapse to nothing. Good physical access control is as much about the habits around the door as the reader on it.
 
@@ -138,9 +138,9 @@ Leaving a device for someone to find turns the finder into your way in. The game
 | BadUSB (keystroke injector) | A stick that pretends to be a keyboard and types commands the moment it is plugged in | Someone plugs it in |
 | Storage USB stick (a lure) | An ordinary-looking stick; the finder opens a file on it to find the owner | A curious double-click on the file |
 | Malicious charging cable | A cable with electronics hidden inside; it acts while it charges a phone | Someone charges a device on it |
-| QR card | A printed code that leads to a look-alike sign-in page | Someone scans it and signs in |
+| QR-code card | A printed code that leads to a look-alike sign-in page | Someone scans it and signs in |
 
-None of these is clever on its own. Each needs a person: Sofia Lord tidies up stray devices and, when she finds one, decides whether to hand it to IT or plug it in. The defence is **device control** on the endpoints (so an unknown keyboard or stick is blocked), macros off by default, and staff who hand a found device to IT instead of plugging it in or scanning it.
+None of these is clever on its own. Each needs a person: Sofia Lord tidies up stray devices, and when she finds the BadUSB she plugs it in to see whose it is, which is the gap. A trained member of staff would hand a found device to IT instead. The defence is **device control** on the endpoints (so an unknown keyboard or stick is blocked), macros off by default, and that habit of handing a found device in rather than plugging it in or scanning it.
 
 > Question: A BadUSB and a found storage stick both start from "someone picked up a device", yet they compromise the machine in different ways. Describe each route, and name one control that stops both.
 
@@ -224,7 +224,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 1. \==action: Talk to Ruth== and hear the briefing.
 2. \==action: Read the **Rules of Engagement** board== on the wall. It lists every in-scope method and every out-of-scope limit; the warm-up above asks you to match three of them.
-3. \==action: Collect your kit from the table==: the **Hardware keylogger** at least, and the rest of the devices while you are there (the **Lockpick set**, **BadUSB**, **Storage USB stick**, **RFID cloner**, **Malicious charging cable**, **Network drop box**, **Pocket rogue AP**, **Visitor lanyard**, courier hi-vis and the **Harvested Credentials** tablet).
+3. \==action: Collect your kit from the table==: the **Hardware keylogger** at least, and the rest of the devices while you are there (the **Lockpick set**, **BadUSB**, **Storage USB stick**, **RFID cloner**, **Malicious charging cable**, **QR-code card**, **Network drop box**, **Pocket rogue AP**, **Visitor lanyard**, courier hi-vis and the **Harvested Credentials** tablet).
 4. \==action: Head east through reception onto the floor==.
 
 </details>
@@ -267,7 +267,7 @@ Watch for the coffee cup over Chris's head: that means she has stepped away. Pla
 <details markdown="1">
 <summary>Nudge</summary>
 
-Click the **BadUSB (keystroke injector)** in your inventory and choose **Drop here** anywhere on the open-plan floor, near Sofia's desk (below Chris's). Sofia takes dropped devices when she is free, so leave it and do another beat; come back to see whether she handed it in or plugged it in. If she plugs it in, a remote session lands in your inventory, which is the foothold.
+Click the **BadUSB (keystroke injector)** in your inventory and choose **Drop here** anywhere on the open-plan floor, near Sofia's desk (below Chris's). Sofia takes dropped devices when she is free, so leave it and do another beat. She will plug the BadUSB in to see whose it is, and a remote session lands in your inventory: that is the foothold, and it is what the finding needs.
 
 </details>
 
@@ -276,7 +276,7 @@ Click the **BadUSB (keystroke injector)** in your inventory and choose **Drop he
 
 1. \==action: Click the **BadUSB** in your inventory and choose **Drop here**== on the open-plan floor.
 2. \==action: Go and do another beat== while Sofia gets to it.
-3. \==action: Come back and read what happened==: a foothold (a remote session) arrives if she plugged it in.
+3. \==action: Come back and read what happened==: Sofia plugs the BadUSB in, so a foothold (a remote session) lands in your inventory.
 
 </details>
 
@@ -291,7 +291,7 @@ Click the **BadUSB (keystroke injector)** in your inventory and choose **Drop he
 <details markdown="1">
 <summary>Nudge: tailgating behind Len</summary>
 
-Put the courier hi-vis on first (click it in your kit and choose **Put on**); the visitor lanyard on its own is not enough. Then wait a few steps to the right of the records door, by the ledger shelves. Len Okafor badges in about every fifteen to seventeen seconds. When the door opens for him, walk in behind him. If he turns away, that is staff not badging in with a stranger at their shoulder; step back by the shelves and let him come round again.
+Put the courier hi-vis on first (click it in your kit and choose **Put on**); the visitor lanyard on its own is not enough. Then wait a few steps to the right of the records door, by the ledger shelves. Len Okafor badges in about every 17 seconds. When the door opens for him, walk in behind him. If he turns away, that is staff not badging in with a stranger at their shoulder; step back by the shelves and let him come round again.
 
 </details>
 
@@ -388,7 +388,7 @@ In the comms cupboard, carry the **Network drop box** and use the patch panel (o
 
 **Where:** Ruth, in the records office (secure_area). **Goal:** close the engagement.
 
-> Hint: Once the four core beats are done, find Ruth in the records office to turn the morning into findings. She warns you before she starts, because the debrief closes the engagement.
+> Hint: Once the four core beats are done, find Ruth in the records office to turn the morning into findings. Gareth Fairbairn, the owner who signed the test off, is in there with her when you arrive, so it is worth hearing him out before the debrief closes. She warns you before she starts, because the debrief closes the engagement.
 
 <details markdown="1">
 <summary>Steps</summary>
@@ -446,9 +446,9 @@ Chris leaves her ID badge on the desk when she goes for coffee. Pocketing it is 
 </details>
 
 <details markdown="1">
-<summary>Dropped storage USB, charging cable and QR card</summary>
+<summary>Dropped storage USB, charging cable and QR-code card</summary>
 
-Beyond the BadUSB, drop the plain **Storage USB stick** (a found-media lure someone opens a file on), the **Malicious charging cable** (it acts while Sofia charges her phone), or the QR card (a look-alike sign-in reached from a scanned code). Each is a different route from "someone found a device" to a capture. See [Dropped devices](#dropped-devices).
+Beyond the BadUSB, drop the plain **Storage USB stick** (a found-media lure someone opens a file on), the **Malicious charging cable** (it acts while Sofia charges her phone), or the **QR-code card** (a look-alike sign-in reached from a scanned code). Each is a different route from "someone found a device" to a capture. See [Dropped devices](#dropped-devices).
 </details>
 
 <details markdown="1">
