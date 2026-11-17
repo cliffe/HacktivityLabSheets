@@ -690,7 +690,7 @@ If you tell Marcus you are about to shut down, he raises this himself and asks w
 2. \==action: Click one of the ESD stations==. The panel says "Flip guard to arm ESD control."
 3. \==action: Click the guard==. The panel says "Guard open. Press button to continue."
 4. \==action: Press the red button==, read **CONFIRM EMERGENCY SHUTDOWN?**, and press **CONFIRM - INITIATE SHUTDOWN**.
-5. The panel shows "ISOLATED - COOLING ACTIVE", and the RACKS ISOLATED lamp on the alarm panel reads ESD ACTIVATED.
+5. The panel shows "ISOLATED - COOLING ACTIVE", and the RACKS ISOLATED lamp on the alarm panel reads ESD ACTIVATED. If you open a station again afterwards, it reads "Emergency shutdown already active. Racks A1 to A4 are isolated."
 
 </details>
 
