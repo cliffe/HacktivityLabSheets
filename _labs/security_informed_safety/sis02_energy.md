@@ -659,7 +659,7 @@ When you confirm, Helen radios you, the BATTERY HALL 1 lamp on the alarm panel t
 
 **Where:** three ESD stations, all wired to the same relays: **ESD Station: Battery Hall 1 (Hall Door)** on the control room wall by the hall door, **ESD Station: Control Room Console** on Helen's console, and **ESD Station: Inside Battery Hall 1** on the hall's west wall. **Decision:** when to press one, and whether to save the battery controller's registers first.
 
-![ESD station on the control room console]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/06-esd-isolated.png)
+![The control room ESD station after the press, reading "Emergency shutdown already active"]({{ site.baseurl }}/assets/images/security_informed_safety/sis02_energy/06-esd-isolated.png)
 
 This is a decision, not a puzzle. Every station works from the start of the game. Nobody has to give you permission.
 
