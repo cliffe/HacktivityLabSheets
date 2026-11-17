@@ -194,7 +194,7 @@ ROT13   A v t u g   f u v s g
 
 So `Night shift` becomes `Avtug fuvsg`. The giveaway is text that keeps normal spacing but reads as gibberish.
 
-**Base64** rewrites any data as printable text, using `A`–`Z`, `a`–`z`, `0`–`9`, `+` and `/`. It reads the bytes three at a time (24 bits), cuts them into four groups of 6 bits, and writes each group as one of 64 symbols. Its length is a multiple of four and it often ends in one or two `=` signs as padding.
+**Base64** rewrites any data as printable text, using `A` to `Z`, `a` to `z`, `0` to `9`, `+` and `/`. It reads the bytes three at a time (24 bits), cuts them into four groups of 6 bits, and writes each group as one of 64 symbols. Its length is a multiple of four and it often ends in one or two `=` signs as padding.
 
 ```
 L        a        n
