@@ -149,6 +149,8 @@ Lifting a print has two parts. First you **dust** a surface: powder sticks to th
 
 A comparison goes in two passes, the way a real examiner works:
 
+![The fingerprint kit at the first compare step, asking which pattern class your lift shows]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/06-fingerprint-compare.png)
+
 1. **Class first.** The overall pattern is a **loop**, a **whorl** or an **arch**. A loop also opens to one side. If the lift is a whorl and a card is a loop, they are not the same finger, and you can stop there.
 2. **Then the small marks.** Around the centre of the print are **minutiae**: places where a ridge ends, and places where one ridge forks into two. Their type and their position relative to the centre have to line up. One mark of the right type in the wrong place, or missing, rules a card out.
 
@@ -160,8 +162,6 @@ In the game the lift and each candidate card are drawn with the same markers, so
 - a red square marks a **fork** (a bifurcation)
 
 Use **View large** on a card to see the markers close up, and press **V** to cycle the cards. Pick the one that agrees on pattern class first and then on every mark. If you pick wrong, the game names the feature that differs, so read that and look again.
-
-![The fingerprint kit at the compare step, asking which pattern your lift shows]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/06-fingerprint-compare.png)
 
 ```
 Lift:        whorl; green cross at the core
@@ -226,7 +226,7 @@ Find the stage you are on. The stages are in the order most players meet them, a
 
 > Hint: There are two ways in. The shutter to the north is already open. The dock office to the west is locked, and leads to the front desk and the night clerk.
 
-![Cody Old Coyote, the night guard, stopping you in the open stacks with his torch on]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/01-open-stacks-guard.png)
+![Cody Old Coyote, the night guard, challenges you as you enter the open stacks]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/01-open-stacks-guard.png)
 
 ![Noor Haddad at the front desk, with three ways to answer her first question]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/02-noor-front-desk.png)
 
