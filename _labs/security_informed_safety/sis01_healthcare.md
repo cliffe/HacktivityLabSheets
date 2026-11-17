@@ -731,6 +731,7 @@ The map will let you cut the link without both signatures. If you do, the box wa
 2. \==action: Click **SEVER ENTERPRISE → CLINICAL LINK**==.
 3. \==action: Read the confirmation box, including the authorisation status==.
 4. \==action: Click **YES — SEVER LINK**== when you are ready, or **NO — CANCEL** to go and get a missing signature.
+5. \==action: Read the results, then click **CONTINUE**== to close the map. The map stays open on the severed state until you do; the X also closes it.
 
 Several people react once the link is cut. Talk to them: new options appear.
 
