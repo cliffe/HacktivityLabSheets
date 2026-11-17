@@ -439,9 +439,9 @@ None of these is scored as right or wrong. They change what the debrief says abo
 
 **Where:** the plant room, then the loading dock. **Goal:** stop the runaway, then decide what else to read before you leave.
 
-![The emergency shutdown firing once the hazard is confirmed]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/33-esd-shutdown-firing.png)
+![The emergency shutdown control, ready to arm]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/33-esd-shutdown-firing.png)
 
-> Hint: The button is behind a hinged flap. If it refuses you, it says which condition is missing.
+> Hint: The control opens in its own window. The button is behind a hinged guard: flip the guard to arm it. If it refuses you, it says which condition is missing.
 
 <details markdown="1">
 <summary>Steps</summary>
