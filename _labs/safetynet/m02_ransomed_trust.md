@@ -384,7 +384,7 @@ If you talk to either of them, they take you for whoever you say you are. They k
 <details markdown="1">
 <summary>Nudge: getting in and getting the card</summary>
 
-Use the override key on the door, or pick it. Gary has four ways to the card, and none of them is a dead end. Warmth and respect for his work get you the card plus more. A cold, transactional approach gets the card and nothing else. A blunt accusation makes him defensive, though he still hands it over. If you take the card by force, it drops with the spare lanyard. Whichever way you choose, you leave with the card.
+Use the override key on the door, or pick it. Gary hands over the card whichever way you approach him, so none of them is a dead end. Warmth and respect for his work get you the card plus more. A cold, transactional approach gets the card and nothing else. A blunt accusation makes him defensive, though he still hands it over. If you take the card by force, it drops with the spare lanyard. Whichever way you choose, you leave with the card.
 
 Walking out without the card costs nothing and starts nothing. He is still there when you come back.
 
@@ -458,7 +458,7 @@ Read **Gary's Password Sticky Note**. It lists a short run of passwords he descr
 <details markdown="1">
 <summary>Nudge: what changes once you hold the card</summary>
 
-Before Gary's card changes hands, Val is friendly and tells you to come back with it. Once it has changed hands, your booking is pulled from the visitor system and she meets you with a very different question: security control says no consultant was ever booked. HaX calls to warn you, and on your way back through the Night Handover room the porter and the domestic hear the same news over their radio. The challenge is not a failure of the mission, and none of the ways past her costs you the mission.
+Before Gary's card changes hands, a plain first meeting with Val gives you different options: the consultant line gets a friendly answer and a pointer back to Gary's card, while an evasive answer gets a standoff. Once the card has changed hands, your booking is pulled from the visitor system. The challenge comes the first time you enter the Main Corridor after that, and she meets you with a very different question: security control says no consultant was ever booked. HaX calls to warn you, and on your way back through the Night Handover room the porter and the domestic hear the same news over their radio. The challenge is not a failure of the mission, and none of the ways past her costs you the mission.
 
 Ways past her:
 
