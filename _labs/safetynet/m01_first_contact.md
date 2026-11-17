@@ -88,6 +88,8 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 > Warning: Each lock allows a limited number of tries before it stalls for a moment. Work the value out from the clue; do not guess digit by digit.
 
+> Note: The office has working staff in it. Two of them, Fatima Begum (recruitment) and Graham Whitfield (finance), sit at their desks in the main office. Both are bystanders with no connection to ENTROPY and nothing to give you. You can talk to them (they politely brush you off), but nothing they say is a clue, so you can skip them. They also take short breaks at the water cooler and chat there; that is atmosphere, not evidence. They leave the floor once you have read the ENTROPY archive. Do not knock them out. Agent HaX tells you to stand down, and the debrief records each one as a bystander you attacked.
+
 ### Warm-up: Your First CyberChef Recipe {#warm-up}
 
 Do this once you have found the CyberChef workstation (a laptop in the former manager's office). It uses made-up data, not anything from the game.
@@ -427,7 +429,7 @@ After the confrontation Derek's launch device comes to you. It is armed. The lau
 Two decisions run through the mission and show up in the ending:
 
 - **Kevin.** Derek's contingency plan frames Kevin for the breach. Once you have read it, you can warn Kevin, leave the evidence for investigators to clear him, or do nothing. The forensic details on the planted files (a flagged header mismatch, two sessions at once, a marketing manager filing IT reports) show the frame is Derek's work. Agent HaX will tell you the logs were filed by Derek if you go to accuse Kevin.
-- **Civilians.** Sarah, Kevin and Maya are not ENTROPY. You can knock them out to take their items, but the debrief records it, and Maya is the informant whose intelligence you lose if she goes down.
+- **Civilians.** Sarah, Kevin, Maya and the two staff in the main office, Fatima Begum and Graham Whitfield, are not ENTROPY. You can knock Sarah, Kevin and Maya out to take their items, but the debrief records it, and Maya is the informant whose intelligence you lose if she goes down. Fatima and Graham carry nothing you need, so knocking them out gains you nothing. Agent HaX tells you to stand down, the staff stop using the water cooler, and the debrief lists them as bystanders you knocked out.
 
 None of these are scored as right or wrong by the game; they change who is safe at the end.
 
@@ -441,6 +443,7 @@ After you decide, ==action: finish the launch device, then open Agent HaX's thre
 | --- | --- |
 | "Incorrect" on a PIN or password lock | The value is not exact, or you have the wrong clue for this lock |
 | A lock stalls after several tries | You are guessing; work the value out from its clue and wait a moment |
+| Maya only offers "Not here. I'll come to your office." | She is away from her office, on a short walk; talk to her again once she is back at her desk |
 | Derek brushes you off in the break room | You have not read the ENTROPY archive yet; finish the VM stage first |
 | CyberChef output is gibberish | You used the wrong recipe: Base64 text through ROT13, or the reverse |
 | A decoded value is rejected by a lock | You tidied the case or added a space; re-enter it exactly as decoded |
@@ -474,6 +477,8 @@ The storage closet holds a backup copy of the IT room code and, for completeness
 <summary>Maya, the informant</summary>
 
 Maya in her office is the person who tipped off SAFETYNET. Talking to her fills in Patricia's story and Derek's behaviour, and Agent HaX asks you to protect her identity. Her notes are extra evidence.
+
+Maya is not always at her desk. After your first conversation with her, she may leave her office for a short walk to the water cooler in the main office, and come back. If you find her away from her office, she will not discuss Derek in the open. Choose **Not here. I'll come to your office.**, then talk to her again once she is back at her desk. If she is not there yet, check another room for a minute and return.
 
 </details>
 
@@ -526,7 +531,7 @@ Work through these after you finish. Use your own run: the server values were ge
 
 > Question: What did you decide to do about Kevin, and what did you know when you decided? If you played it again, would you choose differently?
 
-> Question: You could have knocked out Sarah, Kevin or Maya to save time. What did the game record when a civilian went down, and what did you lose if that was Maya? What does that cost model say about real operations?
+> Question: You could have knocked out Sarah, Kevin, Maya or the staff in the main office to save time. What did the game record when a civilian went down, and what did you lose if that was Maya? What does that cost model say about real operations?
 
 > Question: The ENTROPY network architecture document showed Derek is one node of many. How did reading that change how you felt about the ending you chose? What does stopping one cell actually achieve?
 
