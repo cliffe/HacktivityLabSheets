@@ -522,7 +522,7 @@ When your naming conversation closes, the Recruiter calls you. Answer and she ma
 
 **Where:** the key vault, at the Exfiltration Upload Terminal. **Goal:** decide what happens to the insider and stop the upload. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
 
-![The confrontation in the server room]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/14-confrontation-reached.png)
+![The confrontation in the key vault]({{ site.baseurl }}/assets/images/safetynet/m05_insider_trading/14-confrontation-reached.png)
 
 > Hint: You have a motive, proof of what was staged, and the person's own words. What each choice costs, and who it protects, is what you decide on.
 
