@@ -53,6 +53,7 @@ By the end of this lab you should be able to:
 - spot a default or reused secret (a founding year, a name plus a year, a note on a monitor) and say why it is weak
 - show how a lock that reports "how close you got" leaks its code, and work through the deductions by hand
 - recognise ROT13, Base64 and hex on sight, decode each, and say why none of them is a form of security
+- say what a busy room teaches an attacker: staff who do not challenge a stranger, equipment and passes left lying about, and paper that fills the gap when the IT fails
 - weigh up the choices the case forces, about the people you meet, the evidence you hold and how a hospital recovers
 
 The game teaches by doing. The questions are in this sheet, after the game.
@@ -98,7 +99,21 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 > Tip: Lock types in this hospital are few. A **key lock** opens with a key or a pick. A **PIN pad** wants four digits. A **password** box is case-sensitive, with no extra spaces. The **server room reader** wants a card that already exists, and nothing else will do.
 
-> Warning: Walking past a problem is free, but hitting people is not. Anyone you knock out is recorded, it changes how some characters treat you, and it shows up in the debrief and credits. No ending is a failure, but you should know what you are choosing.
+> Warning: Walking past a problem is free, but hitting people is not. Anyone you knock out is recorded, it changes how some characters treat you, and it shows up in the debrief and credits. That includes the two night staff in the Night Handover room. No ending is a failure, but you should know what you are choosing.
+
+### Who Is Around Tonight {#who-is-around}
+
+Most of the hospital's people stay where the story needs them. Two night workers and Gary add a little life to the rooms you cross most. None of them holds a key, a card or a code, and none of their routines locks or unlocks anything, so you can ignore them and finish. They are worth watching, because what they do and do not do is the awareness lesson of the mission.
+
+| Who | Where | What they do |
+| --- | --- | --- |
+| Bernie Nwosu, Dr. Kim, Sister Doyle | Reception, the CTO Office, the Patient Ward | Stay at their posts |
+| Val Okonkwo, the security officer | Main Corridor and the Security Office | Patrols near her checkpoint (see the Val stage) |
+| Gary Whitlock | IT Department | Never leaves his chair. Sips from a cold mug at his desk |
+| Ernesto Bautista, night porter | Night Handover room (east table) | Waits there for radio calls. Breaks at the boiler, the water cooler and the microwave |
+| Hodan Warsame, night domestic | Night Handover room (centre table) | The same, and joins Ernesto at the boiler and the cooler |
+
+Ernesto and Hodan get up about two seconds after you walk into the Night Handover room, meet at the boiler on the north wall and talk for about fifty seconds, then go back to their seats. After that they take a break about every five or six minutes of game time, or sooner when you come out of Dr. Kim's office or arrive from the ward. A pass through the room is only a few seconds, so stay a moment if you want to hear them. They talk only to each other, and only when you are in the room.
 
 ### Warm-up: Your First CyberChef Recipe {#warm-up}
 
@@ -144,6 +159,10 @@ A lot of what opens doors tonight is a person's belief. Three ideas are worth ha
 **Rapport and leverage.** People give more to someone who treats them as a professional. They also respond to evidence that you have read their file. Both work because they rest on something real about the person you are talking to. Which you use, and what you do with what you learn, is your decision.
 
 The hospital's own weakness here is a normal one. Everyone is exhausted, the systems that check people are gone, and the habit of being helpful is still there.
+
+**Nobody asks.** Watch the two night staff in the Night Handover room. A stranger walks in, picks up the ward clerk's laptop and a blank contractor lanyard, and neither of them challenges you. Ernesto says "You with IT? Somebody ought to be", and takes whatever you answer on trust. This is the everyday version of tailgating and pretexting: people assume that anyone who is already inside belongs there, and loose equipment and spare passes are as good as a key. The overheard radio talk teaches a second point, that a name security is looking for becomes ordinary gossip within a minute.
+
+> Question: Hodan says "Good. I clean floors. I don't do lists." Why is a member of staff who does not check a stranger's story a weakness, and what could the hospital have done so that she did not have to?
 
 > Question: Val Okonkwo says "Tonight I am the access control system. Me, a torch and a radio." What does that sentence tell you about where the risk moves when automated checks disappear?
 
@@ -323,6 +342,37 @@ Any red ransomware screen can be read. Reading one satisfies the task about iden
 
 > Warning: The Visitor Badge (Countersigned) Dr. Kim gives you proves a person vouched for you. It opens nothing. Do not spend time trying it on readers.
 
+### The Night Handover Room: Two Staff on a Break {#hints-staff-room}
+
+**Where:** the Night Handover room, which you cross to reach IT, the CTO Office and the Boardroom. **Who:** Ernesto Bautista (night porter) and Hodan Warsame (night domestic). **Goal:** optional. Take the free equipment, read the board and the snag list, and notice what the two staff do and do not do.
+
+> Hint: Two people are in the room and neither one stops you. Notice what you can pick up in front of them.
+
+<details markdown="1">
+<summary>Nudge: what they do and when</summary>
+
+They start a break about two seconds after you come in, and again every few minutes. The boiler break lasts about fifty seconds, the cooler break about half a minute, and Ernesto sometimes goes to the microwave alone. Nothing opens because they are away from their seats. The clues in the room (the **Night Handover Board**, the **Estates Audit Snag List**, the **Ward Clerk's Laptop** and the **Wrapped Contractor Lanyard**) are free to take and read whether they are sitting or standing at the counter.
+
+Their talk is the sort a night shift has, about lab runs on foot and a bed list on the back of a menu. It holds no code and no clue. Two things are worth hearing. Once Gary has handed over the card, the radio says security want a visitor, which is the booking being pulled (the Val stage explains why that matters). Once Val has cleared you, the radio says the visitor checks out, and Hodan asks "Checks out with who, though?". Each of these plays once, only if you are in the room.
+
+If you talk to either of them, they take you for whoever you say you are. They know nothing about the booking, the override or the badges, and they give you nothing.
+
+**Learn it:** ==action: Write down every object in the room you could walk out with== and who, if anyone, would have noticed. Hodan comments once when you take the laptop ("Clerk'll want that back. Just saying."), and that is all.
+
+</details>
+
+<details markdown="1">
+<summary>Steps</summary>
+
+1. \==action: Walk into the Night Handover room and stay for a few seconds== to see the pair meet at the boiler.
+2. \==action: Read the Night Handover Board and the Estates Audit Snag List==.
+3. \==action: Take the Ward Clerk's Laptop and the Wrapped Contractor Lanyard== if you want them. The lanyard is one way past Val later.
+4. \==action: Optionally talk to Ernesto and Hodan==.
+
+</details>
+
+> Warning: If you hit one of them, both stop their breaks, the one you hit turns on you whenever you are close in this room, and the credits record it. The Boardroom, IT and Dr. Kim's office are all off this room, so you cross it often.
+
 ### Gary Whitlock and the Server Room Card {#hints-gary}
 
 **Where:** the IT Department, east of the Night Handover room. **Lock:** a key lock on the door (easy). **Goal:** get the **Server Room Keycard** from Gary.
@@ -350,12 +400,22 @@ The **IT Filing Cabinet** in the room is a key lock (easy). It holds **Gary's Em
 </details>
 
 <details markdown="1">
+<summary>Nudge: Gary, his mug and the copier</summary>
+
+Gary does not leave his chair all night. He sips from a cold mug on his desk and nothing else in the room moves him, so his view of the room and of anyone with a pick in their hands is the same as ever.
+
+Once the conversation in which the keycard changes hands has closed, wait a few seconds. The photocopier by the wall runs, and a **Downtime Fault Log** lands on its tray. It is a blank form for wards to fill in by hand while the systems are down. It holds no code and no clue and you can leave it. It shows what staff do when the IT fails: they fall back on paper, and paper ends up on trays and desks. If Gary is knocked out before that conversation ends, the copier does not run.
+
+</details>
+
+<details markdown="1">
 <summary>Steps</summary>
 
 1. \==action: Unlock the IT Department door== with the override key (or pick it).
 2. \==action: Talk to Gary Whitlock== and ask about the server room.
 3. \==action: Take the Server Room Keycard== when he gives it, or by whatever route you chose.
 4. \==action: Optionally, pick the IT Filing Cabinet and read what is in it==.
+5. \==action: Optionally, wait a few seconds after the card changes hands== and pick up the Downtime Fault Log from the photocopier tray.
 
 </details>
 
@@ -398,7 +458,7 @@ Read **Gary's Password Sticky Note**. It lists a short run of passwords he descr
 <details markdown="1">
 <summary>Nudge: what changes once you hold the card</summary>
 
-Before Gary's card changes hands, Val is friendly and tells you to come back with it. Once it has changed hands, your booking is pulled from the visitor system and she meets you with a very different question: security control says no consultant was ever booked. HaX calls to warn you. The challenge is not a failure of the mission, and none of the ways past her costs you the mission.
+Before Gary's card changes hands, Val is friendly and tells you to come back with it. Once it has changed hands, your booking is pulled from the visitor system and she meets you with a very different question: security control says no consultant was ever booked. HaX calls to warn you, and on your way back through the Night Handover room the porter and the domestic hear the same news over their radio. The challenge is not a failure of the mission, and none of the ways past her costs you the mission.
 
 Ways past her:
 
@@ -593,6 +653,8 @@ Ghost may call you at the console with an offer. It is an option on the table, n
 
 You can transmit everything or keep it internal. If you found optional evidence on the way, the transmission carries it. The terminal asks you to confirm either choice and lets you back out first. If you have not yet named the insider, expect to meet them here. Afterwards, HaX debriefs you, and the credits read back what you did.
 
+If optional tasks are still open when the mission is ready to end, a box titled **Before the mission ends** lists them and offers **End the mission now** or **Keep going**. Keep going leaves the debrief waiting. The objectives panel then shows an **End the mission** button, and the debrief starts by itself once nothing optional is open. Nothing is lost by choosing Keep going, and you can reload and still end it later.
+
 </details>
 
 <details markdown="1">
@@ -604,7 +666,7 @@ Several decisions run through the night, and each shows up in the ending:
 - **Dr. Kim and the board vote.** What you tell her to do about the ransom is remembered and read back against what you do at the console.
 - **The recovery console.** Time, money, patient risk and who keeps a way in all pull in different directions. Ghost's offer, if you take it, comes with a promise you can keep or break at the terminal.
 - **The insider.** You can arrest them quietly, name them publicly, hand them to SAFETYNET or fight them. If you never name them, they confront you at the terminal and walk out. You can also accuse the wrong person.
-- **Civilians and staff.** You can knock out Bernie, Dr. Kim, Gary, Val, the nurses or a patient. The debrief and credits record each.
+- **Civilians and staff.** You can knock out Bernie, Dr. Kim, Gary, Val, the nurses, the night porter, the night domestic or a patient. The debrief and credits record each. HaX tells you at once if you hit one of the night staff. They stay hostile in that room until knocked out, and neither takes a break again.
 - **Exposure.** Whether the hospital's failures reach the public, and whether Gary's warnings do.
 
 None of these is scored right or wrong by the game. They change who is safe at the end, what gets said in public, and what SAFETYNET walks away with.
@@ -629,6 +691,9 @@ After you decide, ==action: finish anything you still want to read, then take th
 | Gary says "Get out" | You accused him. A seventh warning from his cabinet can still bring him round |
 | The console says "No verified restore manifest" | You have not recovered one yet. It comes from the server work |
 | The console says the offline escrow keys are not loaded | The Emergency Storage safe is still shut |
+| Ernesto or Hodan will not talk and one chases you in the Night Handover room | You hit one of them. They stay hostile in that room and neither takes a break again |
+| Nobody is at the boiler and you hear nothing | Both are between breaks, sitting at their tables. Breaks come every few minutes, and you hear them only while you are in the room |
+| A box titled "Before the mission ends" appears | Optional tasks are still open. End the mission now, or Keep going and use the End the mission button on the objectives panel later |
 | The Communications Terminal will not open | The server work is not finished, or you have not yet chosen a recovery option |
 
 ## Optional Side Content {#optional}
@@ -653,6 +718,13 @@ Val has been logging an unscheduled fire drill and a man nobody can place for we
 <summary>The ward and its patients</summary>
 
 Sister Doyle, Nurse Raval, Mr Pryce in Bed 4, Mrs Hargreaves in Bed 2 and Ms Chen in Bed 5 each have a short conversation. There are paper charts, a Manual BP Cuff and the Bed 4 Ventilator Panel. None of it is needed to finish, but it shows what the outage is costing.
+
+</details>
+
+<details markdown="1">
+<summary>The night staff and the Downtime Fault Log</summary>
+
+Ernesto and Hodan in the Night Handover room each have a short conversation about the paper night, and Gary's photocopier prints a blank Downtime Fault Log once the keycard has changed hands. None of it is needed. Together they show how a hospital with no IT works by radio, legs and paper, and what that does to checking people.
 
 </details>
 
