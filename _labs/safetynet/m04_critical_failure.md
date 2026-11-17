@@ -267,17 +267,17 @@ There is a **Security Equipment Locker** in the security office, south of the op
 <details markdown="1">
 <summary>Nudge</summary>
 
-Walk through the SCADA control room into Battery Hall 1. Look at the **Analogue Thermometer — Rack Bank C Wall**. It is an old mechanical dial. Compare what it says with what the SCADA display says. If they disagree, only one of them can be trusted, and only one of them can be changed from a keyboard.
+Walk through the SCADA control room into Battery Hall 1. Look at the **Analogue Thermometer: Rack Bank C Wall**. It is an old mechanical dial. Compare what it says with what the SCADA display says. If they disagree, only one of them can be trusted, and only one of them can be changed from a keyboard.
 
-**Learn it:** ==action: Read the SCADA HMI — Main Display first==, then read the dial, and write down both numbers. The gap is the lie.
+**Learn it:** ==action: Read the SCADA HMI: Main Display first==, then read the dial, and write down both numbers. The gap is the lie.
 
 </details>
 
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Read the SCADA HMI — Main Display in the control room==.
-2. \==action: Go east into Battery Hall 1 and click the Analogue Thermometer — Rack Bank C Wall==.
+1. \==action: Read the SCADA HMI: Main Display in the control room==.
+2. \==action: Go east into Battery Hall 1 and click the Analogue Thermometer: Rack Bank C Wall==.
 3. \==action: Answer the call from Agent HaX about the reading== if you want HaX's read on it. If you decline or miss it, ring her back from her thread.
 
 </details>
@@ -446,7 +446,7 @@ None of these is scored as right or wrong. They change what the debrief says abo
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Lift the flap on the Emergency Shutdown Pushbutton== and press it.
+1. \==action: Flip the guard on the Emergency Shutdown Pushbutton== and press the button.
 2. \==action: Read Voltage's Operation Log and the marked blueprints== in the plant room.
 3. \==action: Go east to the loading dock== and look at the **Abandoned Extraction Go-Bag**.
 4. \==action: Open your phone and choose **[I'm done here. Bring me in.]**== when you are ready to leave. The phone rings HaX and she picks up; choose **[Bring me in.]**, then **[On my way.]**. If anything optional is still open, the game asks whether to end the mission now.
