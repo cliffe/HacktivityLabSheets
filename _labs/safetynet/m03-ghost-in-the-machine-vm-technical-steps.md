@@ -167,9 +167,9 @@ This ProFTPD build carries a hidden backdoor in its source release. It is a 2010
 <details markdown="1">
 <summary>Nudge</summary>
 
-Read the page source, not the rendered page. The list sits in an HTML comment. It reads like scrambled English with normal spacing, which is ROT13. The decoding ideas are in the main walkthrough at [Encoding Is Not Security](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#encoding) and [Decoding What You Find](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#hints-decode).
+Read the page source, not the rendered page. The list sits in an HTML comment. It reads like scrambled English with normal spacing, so it is a shift cipher. It used to be plain ROT13, but it has been moved onto a different shift, and you need that shift's number to read it. The number is in Sterling's unsent email, the same one that carries the wall-safe code. The decoding ideas, and where to read that email, are in the main walkthrough at [Encoding Is Not Security](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#encoding) and [Decoding What You Find](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#hints-decode).
 
-**Learn it:** ==action: Practise on a made-up sentence first==. ROT13 turns `Hello` into `Uryyb`, and shifting `Uryyb` back 13 places gives `Hello` again. Then do the same with the real comment.
+**Learn it:** ==action: Practise on a made-up sentence first==. A shift of 13 (ROT13) turns `Hello` into `Uryyb`, and moving each letter back 13 places gives `Hello` again. The web list is on a different shift, so you move each letter back by that many places instead. Then do the same with the real comment.
 
 </details>
 
@@ -177,7 +177,7 @@ Read the page source, not the rendered page. The list sits in an HTML comment. I
 <summary>Recipe</summary>
 
 1. \==action: Fetch the page source: `curl -s http://<host>/`==, and copy the whole HTML comment that holds the list.
-2. \==action: In CyberChef, paste it into **Input** and add **ROT13**==.
+2. \==action: In CyberChef, paste it into **Input**, add **ROT13** and set its **Amount** to the shift from Sterling's unsent email== (the main walkthrough's office stage covers reading that email). If the output is still scrambled, try an **Amount** of 26 minus that number.
 3. \==action: Read the whole decoded text to the end==. The flag comes after the price list. Copy it and submit it at the drop-site terminal.
 
 </details>
