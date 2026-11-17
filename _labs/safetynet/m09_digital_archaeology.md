@@ -147,9 +147,9 @@ A fingerprint reader trusts a thumb. A thumb is left on everything the owner tou
 
 Lifting a print has two parts. First you **dust** a surface: powder sticks to the oils a finger leaves, and a brush clears the rest. A textured handle takes powder differently from smooth glass, so the game tells you the surface and which lifter suits it. Then you **compare** the lift against candidate cards to decide whose it is.
 
-A comparison goes in two passes, the way a real examiner works:
-
 ![The fingerprint kit at the first compare step, asking which pattern class your lift shows]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/06-fingerprint-compare.png)
+
+A comparison goes in two passes, the way a real examiner works:
 
 1. **Class first.** The overall pattern is a **loop**, a **whorl** or an **arch**. A loop also opens to one side. If the lift is a whorl and a card is a loop, they are not the same finger, and you can stop there.
 2. **Then the small marks.** Around the centre of the print are **minutiae**: places where a ridge ends, and places where one ridge forks into two. Their type and their position relative to the centre have to line up. One mark of the right type in the wrong place, or missing, rules a card out.
