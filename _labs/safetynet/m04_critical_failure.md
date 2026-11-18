@@ -64,7 +64,7 @@ You are a SAFETYNET field agent. Albion Energy Storage stores 200 MWh of grid po
 
 You do not need any prior knowledge before you start. The field guides teach each idea as you reach it.
 
-![The entrance lobby at the start, with the guard by the desk and the checkpoint gates ahead]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/00-starting-room.png)
+![The entrance lobby at the start, with the guard by the desk, two office staff on the sofa and the checkpoint gates ahead]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/00-starting-room.png)
 
 1. \==action: Start the Break Escape mission **Critical Failure**==.
 2. \==action: Watch the briefing from Director Netherton, Nightshade and Agent HaX==, and ask any topics you want. Then choose how you want to play it.
@@ -85,11 +85,11 @@ Your kit at the start is:
 - the **Grid Regulator Credentials** for your cover
 - the **CyberChef Workstation**, a field laptop for decoding
 
-There is no PIN cracker this time. Some people in the plant are dangerous, and combat is real: hits cost health and there is no healing item.
+There is no PIN cracker this time. Some people in the plant are dangerous, and combat is real: hits cost health and there is no healing item. To fight, press **F** (or the Punch button) to punch, and keep pressing for a harder hit. Hold **Q** (or the Block button) to block. HaX reminds you of both when a fight starts.
 
 Agent HaX's phone is your help system. Open it and you will see options that appear only once you have reached the thing they explain:
 
-- Contextual hints, such as **[How do I get past the gate?]**, **[How do I get through the card readers?]**, **[How do I prove the screens are lying?]**, **[Relay's got the workshop card. How do I get it?]**, **[How do I get through the plant-room reader?]** and **[Voltage. How do I play this?]**. Each appears once you are in the right situation, and there is always **[Where do I stand?]** for a read of where you are.
+- Contextual hints, such as **[How do I get past the gate?]**, **[How do I get through the card readers?]**, **[How do I prove the screens are lying?]**, **[Relay's got the workshop card. How do I get it?]**, **[How do I get through the plant-room reader?]** and **[Voltage. How do I play this?]**. Each appears once you are in the right situation, and there is always **[Where do I stand?]** for a read of where you are. Once you have put operatives out of the fight, by any route, it also gives a head count of who is left.
 - Field guides, the in-universe lab sheets. Choose **[Send me a field guide.]** and pick the one you want. Each guide appears on that menu only once you have reached the challenge it covers.
 
 > Tip: There are three kinds of door in this plant. Card readers want an access card (you can copy one with the cloner). Key locks want the pick kit. The plant-room door is different from both and wants something else. If a door will not open, work out which kind it is before you try anything.
@@ -262,14 +262,14 @@ There is a **Security Equipment Locker** in the security office, south of the op
 
 **Where:** Battery Hall 1, east of the SCADA control room. **Goal:** check what the SCADA screens say against an instrument that is not on their feed.
 
-> Hint: Every screen says everything is fine. Somewhere in the first battery hall is a gauge that is not connected to any of them.
+> Hint: Every screen says everything is fine. Somewhere in the first battery hall is a gauge that is not connected to any of them. When you click it, the reading appears as a pop-up message.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
 Walk through the SCADA control room into Battery Hall 1. Look at the **Analogue Thermometer: Rack Bank C Wall**. It is an old mechanical dial. Compare what it says with what the SCADA display says. If they disagree, only one of them can be trusted, and only one of them can be changed from a keyboard.
 
-**Learn it:** ==action: Read the SCADA HMI: Main Display first==, then read the dial, and write down both numbers. The gap is the lie.
+**Learn it:** ==action: Read the SCADA HMI: Main Display first==, then read the dial (the number is in the pop-up), and write down both numbers. The gap is the lie.
 
 </details>
 
@@ -386,7 +386,7 @@ To learn more in game, open your phone, choose **[Send me a field guide.]** then
 <details markdown="1">
 <summary>Nudge</summary>
 
-Use the **Fingerprint Kit** on the **Duty Round Panel** in Battery Hall 1. The kit's minigame dusts the surface, lifts the pattern and then compares it with a small set of candidate prints. If the compare step offers you two cards, one is the real owner and one is a decoy. The compare is a forensic flourish and the reader opens on a good lift of his print either way, but identifying it properly teaches you the habit.
+Use the **Fingerprint Kit** on the **Duty Round Panel** in Battery Hall 1. The panel's description says the keypad is smudged with prints, and tells you to choose **Dust for prints** to lift one. The kit's minigame dusts the surface, lifts the pattern and then compares it with a small set of candidate prints. If the compare step offers you two cards, one is the real owner and one is a decoy. The compare is a forensic flourish and the reader opens on a good lift of his print either way, but identifying it properly teaches you the habit.
 
 This is quiet work that can be done before the server work, while nothing is counting down.
 
@@ -397,7 +397,7 @@ This is quiet work that can be done before the server work, while nothing is cou
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Use the Fingerprint Kit on the Duty Round Panel== in Battery Hall 1.
+1. \==action: Use the Fingerprint Kit on the Duty Round Panel== in Battery Hall 1 and choose **Dust for prints**.
 2. \==action: Dust, lift and compare in the minigame==.
 3. \==action: Walk to the plant-room door in Battery Hall 2 and try it==.
 
@@ -416,7 +416,7 @@ This is quiet work that can be done before the server work, while nothing is cou
 <details markdown="1">
 <summary>Nudge</summary>
 
-You have more than one way to resolve Voltage, and every one of them finishes the mission. Static is with him, which limits some of your options. Read what each choice offers before you pick one. Talk to him first if you want to understand what you are dealing with.
+You have more than one way to resolve Voltage, and every one of them finishes the mission. Static is with him, which limits some of your options. Read what each choice offers before you pick one. Talk to him first if you want to understand what you are dealing with. Static's replies are tagged with their tone in brackets, such as "(Press him.)" or "(Stand down.)", so you can tell a push from a retreat before you choose.
 
 The button will not arm until the hazard has been confirmed, the attack proven, and Voltage dealt with. Anything missing is listed on the refusal message.
 
@@ -427,13 +427,13 @@ To learn more in game, open your phone and choose **[Voltage. How do I play this
 <details markdown="1">
 <summary>Spoiler: how the options differ</summary>
 
-With Static still up, you can fight or go for the button. With Static down, an arrest is also offered, and the arrest has its own sub-menu. If you fight, there is a short race to his laptop shown on screen as a countdown, and Agent HaX will tell you to drop him. If you go for the button, Voltage escapes through the loading dock. If you are too slow in the race, one bank is lost but the shutdown still protects the others.
+With Static still up, you can fight or go for the button. With Static down, an arrest is also offered, and the arrest has its own sub-menu. If you fight, Voltage warns you that fighting him starts a clock on the laptop. There is a short race to it shown on screen as a countdown, and Agent HaX will tell you to drop him. If you put him down, he stays down: a knocked-out Voltage cannot be talked to, and HaX tells you where that leaves you. If you go for the button, Voltage escapes through the loading dock. If you are too slow in the race, one bank is lost but the shutdown still protects the others.
 
 None of these is scored as right or wrong. They change what the debrief says about the night.
 
 </details>
 
-> Warning: The game gives you no way to heal. If a fight is going badly, fall back before your health runs out.
+> Warning: The game gives you no way to heal. If a fight is going badly, fall back before your health runs out. Once Static turns hostile he stays a threat until he is down, and HaX warns you when it happens.
 
 ### The Shutdown and the Sweep {#hints-esd}
 
@@ -441,13 +441,13 @@ None of these is scored as right or wrong. They change what the debrief says abo
 
 ![The emergency shutdown control, ready to arm]({{ site.baseurl }}/assets/images/safetynet/m04_critical_failure/33-esd-shutdown-firing.png)
 
-> Hint: The control opens in its own window. The button is behind a hinged guard: flip the guard to arm it. If it refuses you, it says which condition is missing.
+> Hint: The control opens in its own window. The button is behind a hinged guard: flip the guard to arm it. If it refuses you, it says which condition is missing. The button is on the wall, so stand right up against it.
 
 <details markdown="1">
 <summary>Steps</summary>
 
 1. \==action: Flip the guard on the Emergency Shutdown Pushbutton== and press the button.
-2. \==action: Read Voltage's Operation Log and the marked blueprints== in the plant room.
+2. \==action: Read Voltage's Operation Log, the marked blueprints and the ENTROPY Command Laptop== in the plant room. The laptop opens as text in the game window.
 3. \==action: Go east to the loading dock== and look at the **Abandoned Extraction Go-Bag**.
 4. \==action: Open your phone and choose **[I'm done here. Bring me in.]**== when you are ready to leave. The phone rings HaX and she picks up; choose **[Bring me in.]**, then **[On my way.]**. If anything optional is still open, the game asks whether to end the mission now.
 
@@ -497,9 +497,9 @@ To learn more in game, open your phone, choose **[Send me a field guide.]** then
 Several choices run through the night and show up in the debrief and credits:
 
 - **Voltage.** Whether he is in custody or got away through the dock.
-- **Robert Vance.** Whether you told him the truth and whether he is on your side at the end.
+- **Robert Vance.** Whether you told him the truth and whether he is on your side at the end. If you told him but the evacuation alarm stayed on his desk, the credits say so.
 - **The night crew.** Whether anyone warned them, and whether a bank was lost.
-- **Civilians and the guard.** The debrief records anyone you knocked out.
+- **Civilians and the guard.** The debrief records anyone you knocked out, including the two office staff in reception. The head count in the debrief and credits includes them.
 - **Disclosure.** At the end you choose between telling everyone, keeping it classified, or saying there was an incident and holding the details back.
 
 None of these is scored as right or wrong. They change who is safe at the end and what SAFETYNET walks away with.
@@ -513,7 +513,7 @@ After you decide, ==action: finish anything you still want to read, then ring Ha
 | You see | It usually means |
 | --- | --- |
 | The cloner screen says "No keycards" | You have not copied any card yet; get a Level 1 card from Vance, the locker, or a drop |
-| A reader refuses a card | Wrong card for that door: Hall 2 wants Level 1, the workshop wants Level 2 |
+| A reader refuses a card and shows "The reader wants a Level 1 facility card." or "The reader wants a Level 2 workshop card." | Wrong card for that door: Hall 2 wants Level 1, the workshop wants Level 2 |
 | The cloner says it "didn't get a clean read" | The read was cancelled or interrupted; the conversation usually offers the choice again |
 | An operative turns hostile after a clone | They heard the cloner buzz; back off and keep your distance |
 | The plant-room door refuses you | It is a fingerprint reader, not a card reader; you need a lifted print |
@@ -544,6 +544,15 @@ The **BMS Interlock-Bypass Module** in Battery Hall 2 can also take a print. It 
 <summary>Warning the night crew</summary>
 
 Nine people are working in Hall 2. There is a way to get them out, but it needs someone with the evacuation alarm, and the phone will tell you what sounding it costs before you decide. It is your call.
+
+The alarm is on Robert Vance's desk, so he has to trust you first. Once he is on your side and you have found out something is wrong, **[Can we get the night crew out of Hall 2?]** on HaX's phone points you to him. In his own thread, Vance offers **[Is anyone working in the halls tonight?]** and then **[Sound the evacuation. Get the night crew out.]**. If a bank has already vented, it is too late and HaX says so.
+
+</details>
+
+<details markdown="1">
+<summary>The two people on the reception sofa</summary>
+
+Ibrahim Diallo (office IT) and Joanne Pell (inductions) are in early and are not on the night rota, so they are not on anyone's list. They give you no clue, no item and no task. Talk to them if you like, and watch the kettle in the operations office once you are inside: they go there for a brew, and you may overhear them. They react if trouble starts or the alarm sounds, and the debrief and credits count them among the people on site. Hurting them is recorded.
 
 </details>
 
