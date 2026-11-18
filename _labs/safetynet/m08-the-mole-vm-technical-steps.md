@@ -35,7 +35,7 @@ cybok:
 
 ## The Training Network {#network}
 
-The Server Room has a **GitList Repository Server** terminal. It opens a Kali attack box on the lab network. From that box you reach SAFETYNET's internal repository server, the other host on the network. The repository server holds four flags, and you submit each one at the **Evidence Relay Terminal** in the same room. The main walkthrough covers the game around this work. This sheet covers the work on the repository server.
+The Server Room has a **Field Console (Kali)** terminal. It opens a Kali attack box on the lab network. From that box you reach SAFETYNET's internal repository server, the other host on the network. The repository server holds four flags, and you submit each one at the **Evidence Relay Terminal** in the same room. The main walkthrough covers the game around this work. This sheet covers the work on the repository server.
 
 Three of the four flags are one person's trail. The exposed repository names a service account, the credential buried in that repository's history is the account's password, the same account owns the home directory you log in to, and its name is in the root-only access logs. The account is **svc-planning**. The fourth flag, root, comes a different way. The web service runs as its own account, **www-data**, and that account, not svc-planning, holds the sudo rule to root. So you follow svc-planning's trail for the first three flags, and you go through the web account for the fourth.
 
@@ -120,7 +120,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 ### Getting Onto the Attack Box {#hints-vm-attack-box}
 
-**Where:** the GitList Repository Server terminal, in the Server Room. **Goal:** a working terminal on the attack box, and the address of the repository server.
+**Where:** the Field Console (Kali) terminal, in the Server Room. **Goal:** a working terminal on the attack box, and the address of the repository server.
 
 > Hint: The terminal opens the attack box, not the repository server. Before you aim anything, find your own address and the lab's subnet.
 
