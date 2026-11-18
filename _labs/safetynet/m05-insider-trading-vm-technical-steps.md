@@ -34,7 +34,7 @@ cybok:
 
 The research server holds the evidence for the case. The **Bludit CMS Server Terminal** in the server room opens a Kali attack box on your own machine, and the research portal sits on the same network as that box. The network holds four flags. You submit each one at the **SAFETYNET Drop-Site Terminal**, also in the server room. The main walkthrough covers the game around this work. This sheet covers the work on the server.
 
-1. **Recon flag.** Find the portal, read what it leaves in plain view, and find the admin login it holds.
+1. **Recon flag.** Find the portal, read the handover note it leaves in plain view, and submit the flag from that note. The note does not hold the admin login; it points to where that login is kept.
 2. **Foothold flag.** Use the admin login to get a shell through the portal's image upload, and read the file the web service keeps.
 3. **Staging flag.** Switch to the manager account from the note, and read the staging manifest in its home directory.
 4. **Root flag.** Find what the manager account may run as root, use that to get a root shell, and read the Architect's authorisation in `/root`.
@@ -134,12 +134,14 @@ The attack box's own address tells you the subnet. Print it and note the number 
 
 **Where:** the attack box's terminal, against the research portal. **Goal:** find the portal, find the note it leaves in plain view, and submit the flag from that note.
 
-> Hint: The portal is a web server, and the CMS it runs keeps its admin login where a scan can find it. The note you need is also a web file, and no page links to it. Look for files the scan finds that the pages do not mention.
+> Hint: The portal is a web server running a CMS. The handover note you need is a web file that no page links to, so a scan finds it when the pages do not. Read it to the end: it carries the recon flag and says where the admin login is kept.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan the subnet for live hosts, then scan the host you find for web services. Then run a directory scan against the portal to find files it serves but does not link. Compare the responses you get back. The note is a plain text file. Read the whole of it, past the first lines, and find the section headed with the credentials.
+Scan the subnet for live hosts, then scan the host you find for web services. Then run a directory scan against the portal to find files it serves but does not link. Compare the responses you get back. The note is a plain text file. Read the whole of it, past the first lines: it carries the recon flag, and it tells you where the admin login is kept rather than printing the login.
+
+The note says the admin login is on a card in the IT on-call lockbox in the server room, and that the lockbox keypad code is Owen's badge number, which is on the after-hours door log. The card is a game item, not a file on the server: open the lockbox in the game, read the login from the card, and bring it back here to use against the portal.
 
 **Learn it:** ==action: Before you scan, write down the paths you expect a CMS to use for its login==, then check the scan's results against your list.
 
@@ -153,18 +155,18 @@ Scan the subnet for live hosts, then scan the host you find for web services. Th
 1. \==action: Find the live hosts with `nmap -sn <subnet>`==.
 2. \==action: Scan the portal for its web service and version: `nmap -sV -p 80 <host>`==. The portal serves on port 80.
 3. \==action: Run a directory scan against the portal: `dirb http://<host>/`==, and note every path it reports.
-4. \==action: Fetch the text file the scan found: `curl -s http://<host>/<file>`==, and read the whole file to the end. The admin username and password are the two lines under the **Creds** heading. The flag is in the same note, after the password.
+4. \==action: Fetch the text file the scan found: `curl -s http://<host>/<file>`==, and read the whole file to the end. The note carries the recon flag, and it points to the IT on-call lockbox for the admin login rather than printing the login itself.
 5. \==action: Copy the flag and submit it at the SAFETYNET Drop-Site Terminal==.
 
 </details>
 
-> Warning: Guessing the login is the slow fallback. The note is already on the portal, so start there.
+> Warning: Do not sit and guess the admin login. The note tells you where it is kept, so follow it to the lockbox in the game.
 
 ### Stage 2: The Foothold Flag {#hints-vm-foothold}
 
 **Where:** the attack box's terminal, then the portal's server. **Goal:** a shell on the portal's server, and the flag the web service keeps.
 
-> Hint: The note gave you a login, but a login to the admin side is not a shell on the server. Which feature of the portal stores files you send it? Which account does the server run those files as?
+> Hint: The lockbox card gave you a login, but a login to the admin side is not a shell on the server. Which feature of the portal stores files you send it? Which account does the server run those files as?
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -180,7 +182,7 @@ Check the admin login by hand in a browser on the attack box before you use it i
 
 1. \==action: Start Metasploit with `msfconsole`==.
 2. \==action: Load the module with `use exploit/linux/http/bludit_upload_images_exec`==.
-3. \==action: Set `RHOSTS` to the portal's address, and set `BLUDITUSER` and `BLUDITPASS` to the username and password from the note's **Creds** section==. Check the rest with `show options`, then run it with `run`.
+3. \==action: Set `RHOSTS` to the portal's address, and set `BLUDITUSER` and `BLUDITPASS` to the username and password from the lockbox card==. Check the rest with `show options`, then run it with `run`.
 4. \==action: Once the shell opens, make it a proper terminal: `python3 -c 'import pty; pty.spawn("/bin/bash")'`==.
 5. \==action: List the CMS's temporary content folder under the Bludit install directory, `/var/www/bludit-3-9-2/bl-content/tmp`, with `ls -la`, then read the file the flag is in==. Submit the flag at the SAFETYNET Drop-Site Terminal.
 
@@ -206,7 +208,7 @@ The username in the note is also a Linux account on the server. The password may
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Switch to the account named in the note with `su - <username>`==, and enter the password from the note's **Creds** section when asked.
+1. \==action: Switch to the account named in the note with `su - <username>`==, and enter the password from the lockbox card when asked, since the manager reused it.
 2. \==action: List the home directory with `ls -la`==, then read the manifest it holds. The flag is in the manifest. Submit it at the SAFETYNET Drop-Site Terminal.
 
 </details>
@@ -231,7 +233,7 @@ The username in the note is also a Linux account on the server. The password may
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Run `sudo -l`==. If it asks for a password, enter the manager's password from the note.
+1. \==action: Run `sudo -l`==. If it asks for a password, enter the manager's password from the lockbox card, the same one you used in Stage 3.
 2. \==action: Note the file the permitted `less` rule names==.
 3. \==action: Run `sudo less <that file>`, then, inside `less`, type `!/bin/sh` and press Enter==. The escape only works inside an open `less`.
 4. \==action: Check you are root with `id`, list `/root` with `ls -la`, and read the Architect's authorisation file there==. Its contents are one block of Base64, so decode them with `base64 -d <file>` to reveal the authorisation and the flag at its end. Submit the flag at the SAFETYNET Drop-Site Terminal.
@@ -260,7 +262,7 @@ The username in the note is also a Linux account on the server. The password may
 
 | What you see | Usual cause |
 | --- | --- |
-| The login is refused, or the portal sends you back to its login page | A typo in the username or password, or a trailing space copied from the note |
+| The login is refused, or the portal sends you back to its login page | A typo in the username or password, or a trailing space copied from the card |
 | The exploit module stops with a missing option | `BLUDITUSER` or `BLUDITPASS` is blank. Both are required, not just `RHOSTS` |
 | `su` fails straight away, or the shell shows no prompt for a password | No proper terminal is attached. Make the shell a proper terminal first |
 | `sudo -l` lists fewer rules than you expected | You are in a different account from the one you think. Run `id` to check |
