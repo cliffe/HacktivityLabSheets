@@ -95,6 +95,8 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 > Warning: Some people here can be knocked out, and the game records it. Nothing in this sheet tells you whether to fight. The error table lists what each route costs you.
 
+> Tip: If a fight does start, face the person and press **F** to punch (keep pressing for a harder punch). **Hold Q** to block. You cannot walk while you are blocking, so let go of Q before you click away. Agent HaX reminds you of these keys when someone comes at you.
+
 ### Warm-up: Read a Rule, Then Apply It {#warm-up}
 
 One lock in this mission wants a code that is never written down. Instead you are told a rule, and you apply it to something you can read in the room. Practise that with made-up data here.
@@ -253,7 +255,7 @@ Whichever operation you pick, the game records it and the debrief reads it back.
 
 Hollis challenges you on sight. A bluff about being on a contractor list fails. Pressing him on the money rattles him but does not move him. The thing that does move him is paperwork that names him: the **Shift Handover Sheet** on the operations floor holds a line about a badge print history that could only have come from his login. The **Audited Visitor Log** on the checkpoint desk asks the same question without answering it.
 
-If you back off ("Back off. I'm leaving.") he lets you go for now and is jumpier when you return. You can still read the sheet and come back.
+If you back off ("Back off. I'm leaving.") he lets you go for now and is jumpier when you return. You can still read the sheet and come back. If he is cornered and you tell him you are stepping back, that counts as dealing with him for the objective, but he stays at his desk and nothing is resolved between you.
 
 **Learn it:** ==action: Read the visitor log first, then the handover sheet==. Note what each one lets you say to him that you could not say before.
 
@@ -279,7 +281,7 @@ None of these is marked as wrong. They change what you hear and what the debrief
 
 ![The Contractor Badge Station PIN pad]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/04-badge-station-pin.png)
 
-> Hint: The reader wants a server-zone badge, not a visitor pass. There is more than one way to get one. Look at what is on the security desk and what is sitting in a tray on the operations floor.
+> Hint: The reader wants a server-zone badge, not a visitor pass. There is more than one way to get one. Look at what is on the security desk and what is sitting on the supervisor's desk on the operations floor.
 
 <details markdown="1">
 <summary>Nudge: finding the other routes</summary>
@@ -287,6 +289,8 @@ None of these is marked as wrong. They change what you hear and what the debrief
 Besides Hollis's own badge or a copy of it, the **Contractor Badge Station** behind the desk prints server-zone badges from the site's own stock. It is locked with a four-digit PIN. The **Shift Handover Sheet** on the operations floor says what the PIN is: it is the same as a date it also mentions. Read the sheet for which date.
 
 **Learn it:** ==action: Write the date from the sheet as month then day, two digits each==, before you try the keypad. Check it against the worked example in the warm-up.
+
+If you would rather be pointed at the sheet by a person, one of the operators on the operations floor (Adaeze Okafor) will tell you that the supervisor wrote his handover on paper and left it on a desk out there. She does not tell you what is on it.
 
 **To learn more in game:** on the operations floor, Agent HaX offers a field guide. Open your phone, choose **[Send me a field guide.]** then **[The RFID cloning guide.]**.
 
@@ -298,8 +302,8 @@ Besides Hollis's own badge or a copy of it, the **Contractor Badge Station** beh
 1. \==action: Go to the operations floor and read the Shift Handover Sheet==. Pick it up if you want it for Hollis.
 2. \==action: Work out the PIN== from the date the sheet mentions (month and day, four digits).
 3. \==action: Return to the Contractor Badge Station== behind the checkpoint desk and enter the PIN.
-4. \==action: Take the Printed Contractor Badge== from the tray.
-5. \==action: Emulate or use the badge at the server hall reader== on the east side of the operations floor.
+4. \==action: Check your inventory==. The station prints the badge as soon as the PIN is accepted and puts the **Printed Contractor Badge** straight into it. There is no tray to look in.
+5. \==action: Use the badge at the server hall reader== on the east side of the operations floor.
 
 </details>
 
@@ -313,6 +317,8 @@ Besides Hollis's own badge or a copy of it, the **Contractor Badge Station** beh
 
 <details markdown="1">
 <summary>Nudge</summary>
+
+Two operators, Adaeze Okafor and Gwen Pritchard, are still at their desks. They are optional and you can ignore them, but they react to you, so what you do near them is noticed. They have small things to say, and each has a "who is still here" or "anything I should look at" question worth a try. They leave the floor for good once you first enter the generator hall or the SCADA control room.
 
 The **Plant Maintenance Key** sits in the tray on the supervisor's desk with a tag that says PLANT / GEN HALL. It opens the generator hall. You also have a lock pick kit, so this is a convenience, not a requirement. The **Abandoned Operator Workstation** and the **Grid Situation Board** are read-only; they tell you the site is under remote control and nothing more.
 
@@ -469,7 +475,7 @@ If you have not met either of them, open your phone and choose **[I'm stuck on s
 
 Park was told the job was a building, empty, with nobody in it. The control room holds a page that says what the grid feeds. Read it first. If you hold that page in your hand when you go back down, you can put it in front of him. If you show up without it, backing off buys you a second visit, and he warns you there is no third.
 
-If you want the pointer again, open your phone, choose **[I'm stuck on something.]** then **[The man in the vault won't stop. What would reach him?]**.
+If you talk to him without the page, the narration nudges you towards it: a page with a number on it might move him, and somebody in the building signed one. If you want the pointer again, open your phone, choose **[I'm stuck on something.]** then **[The man in the vault won't stop. What would reach him?]**.
 
 The vault also holds the **Trunk Cable Runs** (the splice that is newer than everything around it), a **Tomb Gamma** printout and an intercepted email. They are optional, and they matter to the debrief.
 
@@ -487,6 +493,8 @@ The vault also holds the **Trunk Cable Runs** (the splice that is newer than eve
 
 > Warning: Talking him down and fighting him both stop him, but the state of the transfer switch and the debrief differ. The game records which you chose.
 
+> Tip: If he swings at you, face him and press F to punch (keep pressing for a harder one) or hold Q to block. Clicking open floor to walk away works as long as you are not blocking; he is slower than you and will not follow you out of the vault.
+
 ### The Control Room and the Console {#hints-console}
 
 **Where:** the SCADA control room. **Goal:** face Dr James Mercer, then put the abort in at the Cascade Control System.
@@ -498,14 +506,14 @@ The vault also holds the **Trunk Cable Runs** (the splice that is newer than eve
 <details markdown="1">
 <summary>Nudge: the conversation</summary>
 
-Mercer has several things he wants to say, and you choose what you ask. Some options only appear once you hold the right evidence: the Signed Casualty Projection on the console, Elena's account (if she helped), or the second document about the four operations. At the end you choose how to leave him: arrest, record, fight, or let him walk. The game records which, and none is marked as wrong.
+Mercer has several things he wants to say, and you choose what you ask. Some options only appear once you hold the right evidence: the Signed Casualty Projection on the console, Elena's account (if she helped), or the second document about the four operations. At the end you choose how to leave him: arrest, record, fight, or let him walk. The game records which, and none is marked as wrong. The "Face the man at the master console" objective is optional, and it ticks off when you finish that choice, not when the conversation opens. If he comes at you, the same F and hold-Q controls apply as with Park.
 
 </details>
 
 <details markdown="1">
 <summary>Nudge: the console</summary>
 
-The **Cascade Control System** is the only place the abort goes in. It stays locked until the host that drives the sequence is dealt with, which is the server work in the companion sheet. After that it opens by itself and prints a confirmation. The **Cascade Countdown Display** in the same room shows the clock.
+The **Cascade Control System** is the only place the abort goes in. It stays locked until the host that drives the sequence is dealt with, which is the server work in the companion sheet. After that it opens by itself and prints a confirmation. When the abort lands, Agent HaX messages you to say it was accepted and the breakers are holding, so you do not have to guess from the clock alone. The **Cascade Countdown Display** in the same room shows the clock.
 
 </details>
 
@@ -522,7 +530,7 @@ The **Cascade Control System** is the only place the abort goes in. It stays loc
 <details markdown="1">
 <summary>Nudge</summary>
 
-When the abort is in, open your phone and choose **[Bring me in.]**. HaX picks up and, once all four flags are in, puts you through; if a flag is still outstanding she tells you to finish the relay; once the last flag is in, the game offers to end the mission the next time you go through a door or close a screen. If you never ask, the game starts the debrief by itself after about nine minutes. Finish anything you still want to read first: the plant and the vault, the Tomb Gamma printout and the intercepted email, Dr Mercer's page.
+When the abort is in, open your phone and choose **[Bring me in.]**. HaX picks up and tells you Netherton is on the link and that once he is on, the night is finished. You then choose: put him through (offered once all four flags are in), accept that she will bring you in once the last flag is through (offered while a flag is outstanding), or **[Not yet. I'm still looking.]**, which leaves the debrief closed so you can carry on and ask again later. If a flag is outstanding she tells you to finish the relay; once the last flag is in, the game offers to end the mission the next time you go through a door or close a screen. If you never ask, the game starts the debrief by itself after about nine minutes. Finish anything you still want to read first: the plant and the vault, the Tomb Gamma printout and the intercepted email, Dr Mercer's page.
 
 The debrief reads back what you chose and what you left unread, then rolls the credits.
 
@@ -559,6 +567,11 @@ None of these is scored as right or wrong by the game. They change who is safe a
 | The control room door rejects the password | The keypad is case-sensitive; copy it exactly |
 | Elena has left | She was pressured; she is gone for good and the control room password has to come from the other source |
 | Park swings at you on the second visit | He warned you; show him the page or expect a fight |
+| You click and nothing opens, or you cannot walk, during a fight | You are blocking; release Q |
+| Punches do nothing | Face the person squarely and press F; keep pressing for the harder punch |
+| HaX warns that going live as the operator locks the team assignment | Logging in on the host as the operator is seen, and the team can no longer be moved; move the team first if you mean to (the 40-minute window is the timer on your screen) |
+| Netherton asks to be put through and you want longer | Choose **[Not yet. I'm still looking.]**; the debrief only starts once you choose to bring it in, or after the quiet-time fallback |
+| The operators on the operations floor are gone | They leave once you have entered the generator hall or the SCADA control room; they are optional |
 | The Cascade Control System will not open | The attack host is still running; finish the server work (see the companion sheet) |
 | HaX says the redirect window is shut | The 40 minutes ended, or the cascade clock started; it goes in the report as found |
 
