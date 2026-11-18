@@ -232,9 +232,9 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 <details markdown="1">
 <summary>Nudge</summary>
 
-Talk to Ffion Rees and sign in for your visitor badge. The conference-room door off the main hallway is a staff card reader, and a visitor badge will not open it. Your RFID cloner can copy her **Staff Access Badge** from arm's length while you chat. The clone option appears after you have either tried the reader once or asked HaX about cloning.
+Talk to Ffion Rees and sign in for your visitor badge. The conference-room door off the main hallway is a staff card reader, and a visitor badge will not open it. Your RFID cloner can copy her **Staff Access Badge** from arm's length while you chat. The clone option appears once the cloner has been explained to you (in the briefing, or when you ask HaX about cloning) or after you have tried the reader once.
 
-**Learn it:** ==action: Try the conference-room reader first with just your visitor badge== so you see it refuse, then go back to Ffion. The option to lean in and copy her badge is now on her menu.
+**Learn it:** ==action: Try the conference-room reader first with just your visitor badge== so you see it refuse, then go back to Ffion. The option to lean in and copy her badge is on her menu, and the optional **copy the staff badge** task shows in your objectives.
 
 **To learn more in game:** open your phone, choose **[Send me a field guide.]** then **[The RFID cloning guide.]**.
 
@@ -244,9 +244,9 @@ Talk to Ffion Rees and sign in for your visitor badge. The conference-room door 
 <summary>Steps</summary>
 
 1. \==action: Talk to Ffion Rees and sign in== to get your visitor badge.
-2. \==action: Choose **[Lean in by her lanyard and let the cloner read her badge.]**== (after trying the reader or asking HaX about cloning).
+2. \==action: Choose **[Lean in by her lanyard and let the cloner read her badge.]**== (after the briefing's cloner explanation, trying the reader, or asking HaX about cloning).
 3. \==action: In the cloner, read the badge, run the dictionary attack, and press Save==.
-4. \==action: Emulate the saved Staff Access Badge at the conference-room reader== to open the door.
+4. \==action: Emulate the saved Staff Access Badge at the conference-room reader== to open the door. The main objective (a way past the reader) completes when the door opens, not when you press Save.
 
 </details>
 
@@ -365,9 +365,9 @@ The day staff are gone by then. Zainab and Yusuf vanish the moment Sterling's ca
 
 Take the CyberChef workstation, then paste each encoded thing into Input and add the matching operation. Scrambled words with normal spacing are ROT13; mixed-case letters, digits, `+`/`/` and maybe `=` are Base64; pairs of `0`–`9` and `a`–`f` are hex. The drive from Sterling's desk is two layers (Base64 over ROT13), so run From Base64 first, then ROT13.
 
-The web price list is the odd one out. Sable moved it off ROT13 onto her own shift, a different number of places. HaX and the runbook both say the number is in her mail: it is in the unsent email on Sterling's computer, the same one that carries the wall-safe code. So do the office stage first. ROT13 is only a shift of 13, and the CyberChef operation lets you set the amount, so a shift of any size needs only its number. With 25 possible shifts you could also try them all.
+The web price list is the odd one out. Sable moved it off ROT13 onto her own shift, a different number of places. HaX and the runbook both say the number is in her mail: it is in the unsent email on Sterling's computer, the same one that carries the wall-safe code. So do the office stage first. ROT13 is only a shift of 13, and the CyberChef operation lets you set the amount, so a shift of any size needs only its number. With no number you can still try them all: a letter shift has only 25 possible keys, and the **ROT13 Brute Force** operation lists every one so you can pick the line that reads as English. The whiteboard and the Training Lab Runbook both point at it.
 
-**Learn it:** ==action: Decode the first word of the whiteboard note by hand==, shifting each letter back 13, then check it in CyberChef.
+**Learn it:** ==action: Decode the first word of the whiteboard note by hand==, shifting each letter back 13, then check it in CyberChef. ==action: Then run **ROT13 Brute Force** on the same note== and find the 13 line among the 25.
 
 **To learn more in game:** open your phone, choose **[Send me a field guide.]** then **[The CyberChef guide.]**.
 
@@ -377,7 +377,7 @@ The web price list is the odd one out. Sable moved it off ROT13 onto her own shi
 <summary>Recipe</summary>
 
 1. \==action: Take the CyberChef workstation==.
-2. \==action: For the web price list, first read the unsent email on Sterling's computer== (see the wall safe stage) for the shift number. ==action: Paste the price list, add **ROT13** and change its **Amount** to that number==. Undoing a shift of N means moving each letter back N places. If the output is still nonsense, try the other direction (an Amount of 26 minus the number).
+2. \==action: For the web price list, first read the unsent email on Sterling's computer== (see the wall safe stage) for the shift number. ==action: Paste the price list, add **ROT13** and change its **Amount** to that number==. Undoing a shift of N means moving each letter back N places. If the output is still nonsense, try the other direction (an Amount of 26 minus the number). With no number to hand, ==action: search for **ROT13 Brute Force**, add it, and scan the 25 lines for the one that reads as English==.
 3. \==action: For the client roster, paste it and add **From Hex**==.
 4. \==action: For the whiteboard note, paste it and add **ROT13**==.
 5. \==action: For the desk drive, paste it, add **From Base64**, then add **ROT13**==.
@@ -397,7 +397,7 @@ The web price list is the odd one out. Sable moved it off ROT13 onto her own shi
 <details markdown="1">
 <summary>Nudge: getting past him</summary>
 
-Terry patrols a short loop. He stands at his post facing the office door, then walks west with his back to it and stands a while before coming back. Watch the loop and move while he is facing away. If he does challenge you, you can give a cover story, pay him off, or tell him you are SAFETYNET, but each of those means he knows your face and you lose any claim to a clean night.
+Terry patrols a short loop. He stands at his post facing the office door, then walks west with his back to it and stands a while before coming back. Watch the loop and move while he is facing away. If he does challenge you, you can give a cover story, pay him off, or tell him you are SAFETYNET, but each of those means he knows your face and you lose any claim to a clean night. The pay-off option is marked **[(Offer him something.) ...]**, so you can see it is a bribe before you pick it.
 
 </details>
 
@@ -501,7 +501,7 @@ Danny's office holds his hospital assessment, the email he sent with it, and his
 <details markdown="1">
 <summary>Nudge: Victoria Sterling</summary>
 
-Once all four flags are in, HaX tells you she is ready and the confrontation opens; before that she is on a call with her back to the door and you back out. When you face her you can offer her a deal in exchange for the Architect's comms (this needs the Phase 2 drive from her desk as leverage), arrest her, or let her go now you have the evidence. Reading the transaction log and the catalogue first gives you more to put to her. Each path reaches an ending, and the debrief and credits reflect what you did and who you protected.
+Once all four flags are in, HaX tells you she is ready and the confrontation opens; before that she is on a call with her back to the door and you back out. When you face her you can offer her a deal in exchange for the Architect's comms (this needs the Phase 2 drive from her desk as leverage), arrest her, or let her go now you have the evidence. There is also **[Not yet. There's something I want to finish first.]**: it closes the conversation without choosing, and when you speak to her again you go straight back to the decision. Use it to read or collect anything you have left. Reading the transaction log and the catalogue first gives you more to put to her. Each path reaches an ending, and the debrief and credits reflect what you did and who you protected.
 
 </details>
 
@@ -519,7 +519,7 @@ None of these is scored as right or wrong by the game; they change who is safe a
 
 </details>
 
-After you decide, ==action: finish anything you still want to read, then choose **[I'm done in here. Bring me in.]** in HaX's thread, answer **[Bring me in.]** and **[On my way.]** on the call, and hear the debrief==. If optional objectives are still open, the game asks before it ends the mission; **Keep going** leaves the call open and you hang up to carry on.
+After you decide, ==action: finish anything you still want to read, then choose **[I'm done in here. Bring me in.]** in HaX's thread, answer **[Bring me in.]** and **[On my way.]** on the call, and hear the debrief==. If optional objectives are still open, the game asks before you commit, both at Sterling's final choice and at the bring-in; **Keep going** puts you back at the same choices (or leaves the call open, and you hang up to carry on).
 
 ### What the Tools and Locks Are Telling You {#error-messages}
 
@@ -538,6 +538,7 @@ After you decide, ==action: finish anything you still want to read, then choose 
 | The wall safe rejects a four-digit code | The code is from the decoded unsent email, not the founding year |
 | The confrontation will not open | You do not have all four flags in yet; the distcc flag is usually the missing one |
 | The guard turns hostile | He saw the pick in your hands; start a pick only when his back is turned |
+| The game asks whether you want to keep going before Sterling's choice or the bring-in | Optional objectives are still open; **Keep going** returns you to the choices, so read or collect what is left first |
 
 ## Optional Side Content {#optional}
 
