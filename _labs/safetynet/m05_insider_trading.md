@@ -15,7 +15,7 @@ redirect_from:
   - /labs/introducing_attacks/m05-insider-trading/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m05_insider_trading/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m05_insider_trading"
 cybok:
   - ka: "OSV"
     topic: "Primitives for Isolation and Mediation"
@@ -83,7 +83,7 @@ The map is a single office block. From the reception lobby, Patricia's office is
 
 > Tip: Conversations carry the game. When a lock needs a person's help, such as a password or a spare card, the option to ask usually appears only after you have seen the lock or have something to say. If a menu looks thin, go and look at the problem first, then come back.
 
-> Tip: The cursor can turn into a fist if you have been fighting. Press Q until the open hand shows again, or clicks on documents and terminals will do nothing.
+> Tip: Fighting is only for the finale, and only if you choose it. Press **F** (or right-click) to punch, and keep pressing for a jab, a jab and then a harder cross. Hold **Q** to block. Clicking and **E** still work on documents and terminals the rest of the time.
 
 > Warning: Not every character is a suspect. Knocking people out, or accusing someone the evidence does not support, is recorded and shows up in the debrief and the credits.
 
@@ -195,6 +195,8 @@ Evidence is a set of facts, and each one proves something narrow. A badge log pr
 
 Good reasoning combines them. The questions to ask of each piece are: what does this actually show, who else could it fit, and what would have to be true for the opposite explanation to work? A badge log that pairs one person's entrance with a second badge a few minutes later is strong, because it takes a coincidence three times over. A badge with an alibi is weak against that person.
 
+A lead is not a case. Someone who is short of money and works nights fits the story, but so does half the building. Treat a lead as a reason to go and test one specific claim: do that person's own swipes ever line up with the times that matter? If they do not, the lead has told you something useful by failing.
+
 > Question: The log shows a spare badge in the server hallway at night. Name two innocent explanations, and one thing in the building that would let you test each.
 
 ## Stuck? Hints, Stage by Stage {#hints}
@@ -241,11 +243,11 @@ Talk to Patricia Morgan. She gives you a visitor badge and explains what Securit
 <details markdown="1">
 <summary>Nudge</summary>
 
-Try the server-hallway door first. HaX will mention the cloning guide. The nearest staff badge is on Owen Gallagher's lanyard. He is the IT administrator in the open-plan office, north of the main corridor. Talk to him, and the option to lean over his log screen so your cloner reaches his lanyard appears. When the cloner finishes, he may notice the beep, and you can answer him however you like.
+Try the server-hallway door first. HaX will mention the cloning guide. The nearest staff badge is on Owen Gallagher's lanyard. He is the IT administrator in the open-plan office, north of the main corridor. Talk to him, and the option to lean over his log screen so your cloner reaches his lanyard appears. When the cloner finishes, he may notice the beep, and you can answer him however you like. The cloned card reports a card number. Make a note of it: it is Owen's badge number, and you will meet it again in his swipes on the badge log.
 
 There is a second way in. Dr Ruth Halloran in the research lab (west of the open-plan office) can hand over her lab's visitor spare badge if you ask for the server hallway after getting to know her. If Owen has been knocked out, HaX relays a copy.
 
-**Learn it:** ==action: Say out loud what the reader checks== before you copy anything. If it only checks a number, what does a copy of the number let you do?
+**Learn it:** ==action: Say out loud what the reader checks== before you copy anything. If it only checks a number, what does a copy of the number let you do? Then ==action: look at the card number the cloner shows and find the same number in a log==, once you have one. A cloned card and a log line that agree prove the number is the identity.
 
 **To learn more in game:** open your phone, choose **[Send me a field guide.]** then **[The badge-cloning guide.]**.
 
@@ -256,7 +258,7 @@ There is a second way in. Dr Ruth Halloran in the research lab (west of the open
 
 1. \==action: Try the server-hallway door once with your visitor badge== so HaX offers the guide.
 2. \==action: Talk to Owen Gallagher and choose the option that leans over his log screen==.
-3. \==action: Let the RFID Cloner finish==.
+3. \==action: Let the RFID Cloner finish and note the card number it reports==.
 4. \==action: Go back to the server-hallway door and use the cloned badge==.
 5. \==action: Read the IT Notice: Server Room Access== taped by the server-room door.
 
@@ -311,6 +313,32 @@ The **IT Notice: Server Room Access** by the door names who to contact. Ask Owen
 
 > Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the server yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m05-insider-trading-vm-technical-steps/) when you want the hints for it.
 
+### The On-Call Lockbox {#hints-lockbox}
+
+**Where:** the server room, a small key safe screwed to the rack frame. **Lock:** a four-digit keypad. **Lock wants:** a number that belongs to a person.
+
+> Hint: The lid says IT on-call, and the code is something Owen carries with him all day. Where have you seen a number that is his?
+
+<details markdown="1">
+<summary>Nudge</summary>
+
+HaX points you at the lockbox when the server work reaches it. The code is a badge number, and a badge number is one of the things the building writes down. Read Owen's own swipes in the **Server Hallway Badge Log**, or look back at the card number your cloner reported when you copied his badge. If you would rather ask, Owen gives the code once, after you have been into the server room.
+
+**Learn it:** ==action: Compare the card number your cloner showed with the number beside Owen's name in the log== and check that they agree.
+
+</details>
+
+<details markdown="1">
+<summary>Steps</summary>
+
+1. \==action: Find Owen's badge number== on his Sunday swipes in the badge log, or on the cloned card's read-out.
+2. \==action: Type it into the lockbox keypad==.
+3. \==action: Take the card inside and read it==. The server sheet picks up from there.
+
+</details>
+
+> Warning: Owen's number is the one with his name on it. The log also holds Dr Halloran's spare and the cryptography lead's badge, and those are not the code.
+
 ### Reading the Badge Log {#hints-badge-log}
 
 **Where:** Owen, in the open-plan office, once you have read Patricia's log. **Clue:** the **Server Hallway Badge Log**. **Goal:** work out whose badge was in the server hallway.
@@ -322,7 +350,7 @@ The **IT Notice: Server Room Access** by the door names who to contact. Ask Owen
 <details markdown="1">
 <summary>Nudge</summary>
 
-With Patricia's log read, ask Owen whose badge was in the server hallway at 23:47. He hands over the **Server Hallway Badge Log**. It lists badge numbers, names and times. Look for a badge that keeps appearing in the server hallway, and check who came in through the main entrance just before it each time. His pencilled note at the bottom is worth reading too.
+With Patricia's log read, ask Owen whose badge was in the server hallway at 23:47. He hands over the **Server Hallway Badge Log**. It lists badge numbers, names and times. Look for a badge that keeps appearing in the server hallway, and check who came in through the main entrance just before it each time. His pencilled note at the bottom is worth reading too. The log has more than one story in it: a few other badges appear on other evenings, one of them only once, and a different pair of badges turns up in the small hours.
 
 **Learn it:** ==action: Copy the swipes onto a sheet of paper and work out the gap between each pair of swipes==, as you did in the warm-up. Does the gap change?
 
@@ -374,9 +402,9 @@ Ask Dr Halloran about her spare badge being in the server hallway at night. She 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Patricia holds vetting files on the cryptography team. Ask for them on her hub, **[I need your help with something.]** then **[I need the vetting files...]**. The option is there early, once you have met her and the case is open, not only after the badge log or Dr Halloran. There are two files, and they are deliberately different. Lisa Park in the break room is chatty and notices who is not coping. The **Noticeboard Flyer** in the main corridor is about a collection for a colleague's family, and the **TalentStack Leaflet** behind the break-room coffee machine has handwriting on the back that you may recognise from elsewhere.
+Patricia holds vetting files on the cryptography team. Ask for them on her hub, **[I need your help with something.]** then **[I need the vetting files...]**. The option is there early, once you have met her and the case is open, not only after the badge log or Dr Halloran. There are three files, one each on Dr Halloran, David Torres and Ben Ashworth, a junior engineer on the overnight rota, and they are deliberately different. Lisa Park in the break room is chatty and notices who is not coping. The **Noticeboard Flyer** in the main corridor is about a collection for a colleague's family, and the **TalentStack Leaflet** behind the break-room coffee machine has handwriting on the back that you may recognise from elsewhere. In the open-plan office, a **Final Reminder: B. Ashworth** is lying at the end of a desk in the junior engineers' row, with a note stuck to it. Reading it, or his vetting file, makes HaX text you a short message: it is a lead, not a name.
 
-**Learn it:** ==action: Read the two vetting files side by side== and list, for each person, what has changed in their circumstances and whether they declared it.
+**Learn it:** ==action: Read the three vetting files side by side== and list, for each person, what has changed in their circumstances, whether they declared it, and what each one's access would let them do. Money trouble alone fits more than one of them.
 
 </details>
 
@@ -384,9 +412,10 @@ Patricia holds vetting files on the cryptography team. Ask for them on her hub, 
 <summary>Steps</summary>
 
 1. \==action: On Patricia's hub, choose **[I need your help with something.]** then ask for the vetting files on the cryptography team==.
-2. \==action: Read both files==.
+2. \==action: Read all three files==.
 3. \==action: Talk to Lisa Park in the break room and ask about the collection==.
 4. \==action: Read the Noticeboard Flyer and the TalentStack Leaflet==.
+5. \==action: Read the Final Reminder on the junior engineers' desk in the open-plan office==, if you have not already.
 
 </details>
 
@@ -400,6 +429,8 @@ Patricia holds vetting files on the cryptography team. Ask for them on her hub, 
 <summary>Nudge</summary>
 
 Naming is a choice from a list of names. The list only offers names you have a reason for. After a name, Patricia asks why, and the reason menu is the real test. Some reasons are accepted because they follow from the log (who came in at the front door, and when), and some are refused because they fit anyone (a job title, a bad mood, "he is clever"). A wrong reason ends that conversation, but you can try again. If you do not yet have both halves, a partial naming still helps: it opens the next part of the case.
+
+Ben Ashworth is on the list once you hold his folder, his notice or the badge log. Patricia asks why, and the reasons on offer are "He's broke, and he works nights" and, once you hold the log, "His badge is on the server hallway on the log." Without the log she tells you to check his times with Owen and come back, and Patricia does not mark it against you. With the log in your hands, naming him is a guess like any other. HaX also texts a nudge if you walk into the key vault before anyone has been named: take a name, a motive and the way the data is leaving to Patricia, or ring HaX if she is out.
 
 **Learn it:** ==action: Write your reason in a sentence== that someone who has never seen the log could check. If it needs the log to make sense, say which line.
 
@@ -415,13 +446,20 @@ Naming is a choice from a list of names. The list only offers names you have a r
 </details>
 
 <details markdown="1">
+<summary>Spoiler: why Ben Ashworth is not the answer</summary>
+
+The log has Ben through the front door once, at about eight on a Thursday evening, and in the server hallway six minutes later on his own badge. The transfers Patricia flagged run between two and four in the morning, and the first night went in on a spare, not on his badge. Money trouble and night work make him a lead. His own swipes do not make him the insider.
+
+</details>
+
+<details markdown="1">
 <summary>Spoiler: who the log points at</summary>
 
 The badge log pairs the cryptography lead's front-door swipe with the spare badge a few minutes later, every time. The spare is the research lab's, and its signed-out owner was abroad on the first night. The cryptography lead is David Torres. Whether you reach that by the log, or by the money, or by the notes, the game accepts it once you have a motive and proof of exfiltration to go with it.
 
 </details>
 
-> Warning: A wrong reason ends the call, and you can try again. Naming Dr Halloran without having checked her alibi has a recorded cost, so look at her alibi first.
+> Warning: A wrong reason ends the call, and you can try again. Naming Dr Halloran without having checked her alibi has a recorded cost, so look at her alibi first. Naming Ben Ashworth is recorded as well, and the debrief notes whether you held that lead without spending a name on him.
 
 ### The Suspect's Office {#hints-office}
 
@@ -493,7 +531,7 @@ The Mug on the desk has a thumbprint on the glaze. Use the Fingerprint Kit to du
 <details markdown="1">
 <summary>Nudge</summary>
 
-The **Upload Schedule** gives the window for tonight's upload and who is operating it. The **Data Package Manifest** says what is being staged and which badge is staging it. The **Sealed TalentStack Envelope** under the keyboard is the part nobody asked you to look for. The terminal's `transfer_queue.log` shows how far the upload has got. Reading these gives you the proof of exfiltration that Patricia needs, if you have not already got it from the server.
+The **Upload Schedule** gives the window for tonight's upload and who is operating it. The **Data Package Manifest** says what is being staged and which badge is staging it. The **Sealed TalentStack Envelope** under the keyboard is the part nobody asked you to look for. The terminal's `transfer_queue.log` shows how far the upload has got. Reading these gives you the proof of exfiltration that Patricia needs, if you have not already got it from the server. The objective **Find out when the final upload runs** ticks as soon as you have read either the Upload Schedule or the `transfer_queue.log`, so you do not need both for it.
 
 **Learn it:** ==action: Compare the badge number on the manifest with the badge numbers in the log you read earlier==.
 
@@ -533,7 +571,7 @@ When your naming conversation closes, the Recruiter calls you. Answer and she ma
 <details markdown="1">
 <summary>Nudge: what the options are</summary>
 
-Once the insider is named, they appear at the upload terminal. When you speak to them, the conversation offers several approaches: bring them in as a cooperating source, hand them to the police, expose the programme publicly, or fight. Some choices need evidence you have collected, and the menu shows only those you can support. After a knockout you get a further decision. The upload itself is stopped by a choice you make, such as pulling the drive or having them cancel it.
+Once the insider is named, they appear at the upload terminal. When you speak to them, the conversation offers several approaches: bring them in as a cooperating source, hand them to the police, expose the programme publicly, or fight. Some choices need evidence you have collected, and the menu shows only those you can support. After a knockout you get a further decision. The upload itself is stopped by a choice you make, such as pulling the drive or having them cancel it. If you reload the game partway through the scene, it picks up where you were rather than starting the conversation again.
 
 **Learn it:** ==action: Before you choose, write down what you know about the person== from the journal, the bills and the log, and what each approach would do to those facts.
 
@@ -542,7 +580,7 @@ Once the insider is named, they appear at the upload terminal. When you speak to
 <details markdown="1">
 <summary>Nudge: if the fight goes badly</summary>
 
-The insider is a scientist, not a fighter, but you can still lose. Ask HaX to send Security from the phone's hub if you cannot win the fight. Press Q to put your fists down afterwards, so your clicks open documents again.
+The insider is a scientist, not a fighter, but you can still lose. Press **F** (or right-click) to punch, keep pressing for a harder cross, hold **Q** to block, and face him squarely. If you cannot win, leave the room and ask HaX to send Security from the phone's hub; he swings while you are on your phone, so get clear first.
 
 </details>
 
@@ -553,6 +591,7 @@ Several decisions run through the night and show up in the ending:
 
 - **The insider.** A man under real pressure, with a child and a spouse in treatment. The Recruiter's argument is that he chose, and that he is one of many. Hold him, turn him, expose him or fight him; the credits record the outcome.
 - **Dr Halloran.** Accusing her wrongly costs her and the company. The debrief says so.
+- **Ben Ashworth.** A junior engineer in money trouble who works nights. He is a lead, and what you do with a lead is recorded: the debrief has a line for a player who held it and did not spend a name on him.
 - **The staff.** Lisa, Niamh, Thandiwe and Bernadette are not involved and carry nothing you need. You can knock them out, but the credits record a member of staff hurt on your account, and the debrief counts it against how you handled the night.
 - **The administrator.** You cloned a colleague's badge, and he may notice. What you say to him is up to you.
 - **The CEO's email.** Patricia kept a copy of the order that stopped her investigation. Whether you have read it changes a line in the debrief.
@@ -597,7 +636,9 @@ None of these is scored as right or wrong by the game; they change who is safe a
 | Lisa is not in her seat when you come back to the break room | She has gone to the staff fridge for a minute; talk to her where she is, or wait for her to return |
 | Thandiwe is not in the break room any more | She goes home once you have been into the server room; she holds nothing you need |
 | The water cooler and espresso machine stop working and the staff stop their breaks | Someone on staff was attacked; the room is upset and the break routines stay off |
-| Documents and terminals do nothing when clicked | Your fists are up; press Q until the open hand shows |
+| Patricia tells you to check Ben Ashworth's times with Owen | You named him on money and night work alone; the log holds his own swipes, so test them |
+| The lockbox keypad does not open | The code is a badge number, Owen's, not the spare's or the lead's; check the log or your cloner's read-out |
+| HaX texts you about a name when you enter the key vault | Nobody has been named yet; take a name, the motive and the proof to Patricia |
 | The debrief does not open | The server work is not finished, or you have not called HaX to bring you in |
 
 ## Optional Side Content {#optional}
@@ -614,7 +655,7 @@ A locked pin-tumbler filing cabinet behind Patricia's desk holds a printed email
 <details markdown="1">
 <summary>Lisa Park and the collection tin</summary>
 
-Lisa Park in the break room organises a collection for a colleague's family. She tells you who the tin is for if you ask, and how the office has been. She is optional, and her interview shows the insider as a person rather than a name.
+Lisa Park in the break room organises a collection for a colleague's family. She tells you who the tin is for if you ask, and how the office has been. She is optional, and her interview shows the insider as a person rather than a name. Her last choice, "I won't ask who", closes the question of who the collection is for.
 
 </details>
 
