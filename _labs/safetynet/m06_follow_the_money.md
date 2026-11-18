@@ -259,7 +259,7 @@ Her wordlist comes from the option **[I'll need to test your password strength. 
 
 Agent HaX can help here: **[How do I play Volkova?]** explains how to turn her, and the debrief will talk about what you did.
 
-**Learn it:** ==action: Open the Password Dictionary List and read it as a person would==. Staff here pick words from one industry. The first word on the list is the most common choice.
+**Learn it:** ==action: Open the Password Dictionary List and read it as a person would==. Staff here pick words from one industry. The list is ranked most-picked first, so the word at the top is the most common choice.
 
 </details>
 
@@ -285,7 +285,7 @@ Agent HaX can help here: **[How do I play Volkova?]** explains how to turn her, 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Read Step 4 of the IT New Starter Checklist. It gives the convention as two parts and tells you the case of the first part. The second part is a year, and the checklist has a revision date on it. The first part is whatever tops Dr Volkova's list. The convention is the same for every restricted door in the building and nobody changed this one after it was set.
+Read Step 4 of the IT New Starter Checklist. It gives the convention as two parts and tells you the case of the first part. The second part is a year, and the checklist has a revision date on it. The checklist says the term is whichever one Dr Volkova's audit finds staff pick most, and her list is ranked: it is headed "Most-picked first". The first part is whatever tops it. The convention is the same for every restricted door in the building and nobody changed this one after it was set.
 
 The lock compares exactly what you type. No space between the parts, and no capital letters unless the convention says so.
 
@@ -305,7 +305,7 @@ The lock compares exactly what you type. No space between the parts, and no capi
 
 </details>
 
-> Warning: A refusal usually means the wrong word from the list, not the wrong convention. Try the next word before you change the rule.
+> Warning: A refusal usually means the wrong word from the list, not the wrong convention. The list is ranked most-picked first, so check you took the top word and not one you recognised lower down.
 
 ### The Blockchain Analysis Lab {#hints-lab}
 
@@ -482,7 +482,7 @@ His office holds a manifesto, a signing case and a safe. When you confront him, 
 <details markdown="1">
 <summary>Nudge: Dr Volkova</summary>
 
-You can turn her or detain her. Turning works best when you have shown her what her work pays for, and her own research notes give a low-trust player a way in. Detaining her hands her to the police. Her conversation also offers "Think about it" once. A turned Dr Volkova opens the mixer to you tonight and nothing she does carries into later missions.
+You can turn her or detain her. Trust alone does not turn her: she wants proof. Show her Priya's write-up first (once you hold it and she trusts you, her menu offers **[There's something you need to see, Dr Volkova.]**). If you cannot get that far, her own research notes or the Ledger Hold Log give you other ways in. Being pleasant without proof gets "Show me where the money went." Detaining her hands her to the police. Her conversation also offers "Think about it" once. A turned Dr Volkova opens the mixer to you tonight and nothing she does carries into later missions.
 
 </details>
 
@@ -494,7 +494,7 @@ Several decisions run through the night and show up in the debrief and the credi
 - **The fund.** Freeze it and the pending balances stop, but the advances are already gone and ENTROPY learns its bank is burned. Watch it and the balances reach the cells, and SAFETYNET maps every recipient. The debrief states the cost of each plainly.
 - **Dr Volkova.** She built the system and wrote that she cannot walk away. You can recruit her or hand her to the police.
 - **The cover.** Whether your FCA story held all night, or strained, is recorded.
-- **Civilians and staff.** The guard, Dani Okonkwo and Priya Raghavan are not ENTROPY. You can knock them out to save trouble, but the game records it.
+- **Civilians and staff.** The guard, Dani Okonkwo, Priya Raghavan and the floor staff (Lerato Dlamini on the phones, Tomasz Wisniewski on support) are not ENTROPY. Lerato and Tomasz only chat; they hold no clues. You can knock them out to save trouble, but the game records it.
 - **How much you read.** The executive safe, the signing case and several documents are optional, and the debrief acknowledges what you left unread.
 
 None of these is scored as right or wrong by the game. They change who is safe at the end and what SAFETYNET walks away with.
@@ -512,6 +512,7 @@ After you decide, ==action: finish anything you still want to read, then open yo
 | The data centre door rejects the PIN | The PIN comes from the Door Controller Export, not from a guess |
 | The Custody Console closes after one wrong slot | It takes one try per opening. Work the arithmetic out first, then reopen it |
 | Dr Volkova will not hand over the wordlist | Trust is low. Ask a second time, or repair the conversation first |
+| Dr Volkova says being pleasant is not proof | Trust alone will not turn her. Show her Priya's write-up, or use her research notes or the Ledger Hold Log |
 | Kemal will not take the FCA line | Your cover is strained. Use Dr Volkova's word or pick the door |
 | The executive wing reader refuses a card | You emulated the wrong card. The wing wants the Executive Access Badge, not the CTO one |
 | **[I'm done here. Bring me in.]** is not on the menu | One of the two decisions is outstanding, or the server work is unfinished |
@@ -530,7 +531,7 @@ Her office is west off the trading floor and the door wants her CTO Access Badge
 <details markdown="1">
 <summary>The executive safe</summary>
 
-A four-digit safe in the CEO's office. The clue is spread across three rooms. The **Framed Press Clipping** in the executive wing gives his motto. The Architect's email in Dr Volkova's office says what year the safe is set to, without giving the number. Priya's **Privacy Coin Mixing Analysis** has a margin line that supplies the number. Read all three and the safe's four digits follow. Inside is a file on The Architect's identity, and skipping the safe means the debrief acknowledges the gap.
+A four-digit safe in the CEO's office. The clue is spread across three rooms. The **Framed Press Clipping** in the executive wing gives his motto. The Architect's email in Dr Volkova's office says what year the safe is set to, without giving the number. Priya's **Privacy Coin Mixing Analysis** has a margin line that supplies the number. Read all three and the safe's four digits follow. If you reach Satoshi without them, Agent HaX's phone nudge points at the same three places. Inside is a file on The Architect's identity, and skipping the safe means the debrief acknowledges the gap.
 
 **Learn it:** ==action: Work out the year yourself== from the margin line before you enter anything.
 
