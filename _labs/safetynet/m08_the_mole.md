@@ -69,7 +69,7 @@ You do not need any prior knowledge before you start. The first encoding is taug
 3. \==action: Go north to the Director's office and talk to Director Magnus Netherton==.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
-The mission takes about 60 to 75 minutes. Your progress, evidence and unlocked rooms are kept between sessions.
+The mission takes about 70 minutes. Your progress, evidence and unlocked rooms are kept between sessions.
 
 > Tip: A natural stopping point for a 60-minute class is once you have named the leak to the Director and hold the code for the interrogation suite. The server-room work and the confrontation make a good second session.
 
@@ -86,11 +86,11 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 - Contextual hints, such as **[What does the Director need from me?]**, **[Where would the door logs be?]**, **[How do I get into the server room?]** and **[How do I get into the interrogation suite?]**. HaX answers from where you are in the investigation, so asking again later gives a different answer.
 - Field guides, the in-universe lab sheets. Choose **[I need a field guide.]** and pick the one you want. A guide appears on that menu only once you have reached the challenge it covers. The decoding guide is covered in the stages below.
 
-> Tip: Press **Q** to switch between your fists and your open hand. You need the open hand to use things. If you strike someone by accident, HaX texts you how to put the fists away.
+> Tip: Combat is real but rarely needed. To fight, press **F** (or the Punch button) to punch, and keep pressing for a harder hit. Hold **Q** (or the Block button) to block. HaX reminds you of both the first time you strike someone. Anyone you knock out stays down and will not talk to you again, and you cannot undo it.
 
 > Tip: The locks in this building want exact values. A password is case-sensitive, with no extra spaces. A PIN is four digits. Copy decoded text with the mouse rather than retyping it.
 
-> Warning: The Director wants this done quietly. Accusing someone out loud, being seen picking a locker, or knocking out a bystander gets round the floor, and the person you are hunting hears it. Several choices in the game carry this cost, and the stages below say where. None of them locks you out of finishing the mission.
+> Warning: The Director wants this done quietly. Accusing someone out loud, being seen picking a locker, or knocking out a bystander (including the night-duty officers on the Operations Floor) gets round the floor, and the person you are hunting hears it. Several choices in the game carry this cost, and the stages below say where. None of them locks you out of finishing the mission.
 
 ### Warm-up: Your First CyberChef Recipe {#warm-up}
 
@@ -385,9 +385,11 @@ The lockers hold a hardware token, a boarding-pass stub and a folded sheet, a pa
 <details markdown="1">
 <summary>Nudge</summary>
 
-HaX's **[What does the Director need from me?]** option checks your progress for you and tells you the first thing missing: the audit, a clock, or a confirmed row.
+HaX's **[What does the Director need from me?]** option checks your progress for you and tells you the first thing missing: the audit, a clock, or a confirmed row. The mission task says the same thing: get the suspects to confirm their door rows, then name the leak on evidence.
 
-When you have all three, choose **[I can name the leak, sir.]** and the Director asks four questions: when the plan was opened, which of the three was behind the lab door at that minute, why not the other man who badged through the same door, and why trust Phantom's printout.
+If you go to the Director too early, he turns you away with a different line each time, and the later ones name Vector and Nightshade and say where to find them (Vector on the Operations Floor, Nightshade in the Crypto Lab). Phantom will tell you his own printout is not proof, but he is not on the lab door, so asking him gets you nowhere.
+
+When you have all three, choose **[I can name the leak, sir.]** and the Director asks four questions: when the plan was opened, which of the three was behind the lab door at that minute, why not the other man who badged through the same door, and why a second printout from Phantom agrees with it.
 
 Each question has one answer that follows the evidence. The wrong ones are the tempting readings: the nearest time, the person you already suspect, or a person's desk. **[Let me read it again.]** is free at every step, so use it and go back to the printout.
 
@@ -415,7 +417,7 @@ Once he has the name, he gives you the code for the interrogation suite and poin
 
 **Where:** the Server Room, east of the Operations Floor. **Lock:** an RFID card reader. **Goal:** get in.
 
-![The Server Room, with the server-room badge reader already passed]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/07-server-room-entry.png)
+![The Server Room, reached with the Printed Server-Zone Badge now in the inventory bar; the night-duty officers stand at the cooler on the Operations Floor]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/07-server-room-entry.png)
 
 > Hint: The reader wants a card that opens the server zone. The Director has one, and he is not going to hand it over. There is also a quieter route from the lobby that someone left out in the open.
 
@@ -433,7 +435,7 @@ HaX's **[How do I get into the server room?]** option explains the card and the 
 <details markdown="1">
 <summary>Nudge: the Visitor Badge Printer</summary>
 
-At reception, the **Visitor Badge Printer** has a **Printed Server-Zone Badge** in its output tray, behind a four-digit facilities PIN. The PIN is on the sticky note in the Break Room. This route needs no interview and no cloning, and it is a bit of a joke about how the building looks after its own secrets.
+At reception, the **Visitor Badge Printer** is still logged in from the day shift and has printed a server-zone badge, behind a four-digit facilities PIN. The PIN is on the sticky note in the Break Room. A correct PIN prints the **Printed Server-Zone Badge** straight into your inventory; there is no tray to open. This route needs no interview and no cloning, and it is a bit of a joke about how the building looks after its own secrets.
 
 </details>
 
@@ -452,14 +454,14 @@ At reception, the **Visitor Badge Printer** has a **Printed Server-Zone Badge** 
 <summary>Steps: the printer</summary>
 
 1. \==action: Read the Post-It On The Coffee Machine== for the facilities PIN.
-2. \==action: Enter the PIN at the Visitor Badge Printer in the main lobby== and take the **Printed Server-Zone Badge**.
+2. \==action: Enter the PIN at the Visitor Badge Printer in the main lobby==. The **Printed Server-Zone Badge** goes straight into your inventory.
 3. \==action: Use the badge at the Server Room reader==.
 
 </details>
 
 > Warning: The clone only counts once you press Save. If you close the cloner early, the Director's menu offers the clone again and you can redo it. He says plainly that whatever you carry, he did not see it.
 
-Inside the Server Room are the **Evidence Relay Terminal**, where recovered evidence is submitted, a **Server Access Log (excerpt)** left by the rack, and the repository server. The excerpt is an auth-log printout with the account redacted. It gives a terminal and a time, which is a second source for the minute the plan was opened.
+Inside the Server Room are the **Evidence Relay Terminal**, where recovered evidence is submitted, a **Server Access Log (excerpt)** left by the rack, and the **Field Console (Kali)** racked beside the repository server. The excerpt is an auth-log printout with the account redacted. It gives a terminal and a time, which is a second source for the minute the plan was opened.
 
 > Note: The server work has its own sheet, so you can play the rest spoiler-free and tackle the repository server yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m08-the-mole-vm-technical-steps/) when you want the hints for it.
 
@@ -505,7 +507,7 @@ The **Personnel Print Job -- Director's Investigation Request** in the Operation
 
 The safe opens in its own framed window and holds five items: the **Portland Intercept**, the **Interrogation Suite Code Card** and a sealed file on each of the three suspects. The card carries the code for the keypad. The pick kit cannot open a PIN lock, so there is no skipping this.
 
-If the Director already named the leak on the evidence, he has given you the code aloud, and **[The suite code again, sir?]** repeats it. You do not need the safe for that.
+If the Director already named the leak on the evidence, he has given you the code aloud, and **[The suite code again, sir?]** repeats it. You do not need the safe for that. The sealed evaluation of Nightshade in the safe is Dr Okafor's; the Director points you to it before you face him, and stops mentioning it once you have it.
 
 **Learn it:** ==action: Read the margin note on the printout aloud== and ask who it blames. Then ask why a policy that tells people to choose their own code ends in this.
 
@@ -541,7 +543,9 @@ HaX's **[Why isn't he in the interrogation room yet?]** option explains why the 
 <details markdown="1">
 <summary>Nudge: the conversation</summary>
 
-The scene cannot be closed once it starts. A RECORDING lamp over the door lights for the scene. You can ask the questions in any order. At the end you choose what happens to the leak. The Detention Disposition Screen on the wall only shows the result.
+The scene cannot be closed once it starts. A RECORDING lamp over the door lights for the scene. You can ask the questions in any order. At the end you choose what happens to the leak. The Detention Disposition Screen on the wall only shows the result. If you reload the page mid-scene, you come back to the list of topics rather than the opening.
+
+The final choice includes **[Not yet. There is something I want to finish first.]**. Nightshade waits, and you can walk out, finish anything else in the building and come back to the same choice. Once you pick an ending, the case closes and anything left undone stays undone.
 
 </details>
 
@@ -551,13 +555,13 @@ The scene cannot be closed once it starts. A RECORDING lamp over the door lights
 Several decisions run through the mission and show up in the ending:
 
 - **Who you accused, and when.** Accusing a suspect aloud, the wrong one or the right one, is recorded. So are apologies. Both appear in the debrief and credits.
-- **Force.** You can knock out colleagues and bystanders. The game records it, and the debrief and credits reflect it.
+- **Force.** You can knock out colleagues and bystanders, including the two night-duty officers on the Operations Floor. The game records it, and the debrief and credits reflect it. A knock-down before you have named the leak can tip the mole off, and the Director's debrief mentions the night watch if you put them down.
 - **The fate.** You can have the leak detained and handed to the police with the case file, or keep them in place as a controlled asset on the Director's signature. They lead to different futures. Neither is scored as right or wrong.
 - **The debrief.** The Director asks about the warning he sealed a year ago. You can say he is not the one at fault, or press him to own the gap. Neither is scored as right or wrong.
 
 </details>
 
-> Warning: The confrontation has no close button. If you want to read anything else first, do it before you walk in.
+> Warning: The confrontation has no close button. If you want to read anything else first, do it before you walk in, or step out at the final choice with **[Not yet.]**.
 
 ### The Debrief {#hints-debrief}
 
@@ -585,10 +589,10 @@ Several decisions run through the mission and show up in the ending:
 | The Server Room reader refuses | Open the cloner at the reader, choose **Director Netherton Keycard** from **Saved**, and emulate it |
 | The Director says "Doors keep their own records. Bring me the door's." | You have not read the Badge Audit Printout yet |
 | The Director says "You've brought me a door. Bring me a clock." | You need the minute the plan was opened; read the Leak Timeline in the Break Room |
-| The Director says "take it to the men who went through that lab door" | You need one of the two people on the lab door to confirm their own row |
+| The Director says "Not yet. A row nobody has owned is only paper." (or a similar line) | You need one of the two people on the lab door, Vector or Nightshade, to confirm their own row. Phantom is not on that door. He rephrases each time you ask |
 | The Director corrects your answer with a line like "Read the door against the minute, not the man." | One of the four answers is wrong; go back to the audit and use "Let me read it again" |
 | The Security Archives door rejects the password | The password is case-sensitive with no spaces; it is on the sticky note in the Break Room |
-| The Visitor Badge Printer rejects the PIN | It is a four-digit facilities PIN, from the sticky note, and is not the safe's code |
+| The Visitor Badge Printer rejects the PIN | It is a four-digit facilities PIN, from the sticky note, and is not the safe's code. A correct PIN hands you the badge straight away |
 | The Director's Safe stays shut | The safe wants the Director's own service number, not a suspect's |
 | The Interrogation Suite keypad refuses and no pick option appears | It is a PIN lock; the code comes from the safe's card or from the Director |
 | The pick stops and the Off-Duty Agent says "Oi. That's not yours." | He saw you; word will get round. Use a suspect's key next time |
@@ -626,6 +630,17 @@ The **Past Leak Investigations** file lists earlier leaks, all accidents or outs
 <summary>The sealed files in the Director's safe</summary>
 
 Three sealed files sit in the safe, one on each suspect, each stopped by an order with the Director's initials on it. Reading them tells you what SAFETYNET knew about each of the three and what it chose to do about it. They also give you something to put to the person at the table.
+
+</details>
+
+<details markdown="1">
+<summary>The night-duty officers on the Operations Floor</summary>
+
+![The Operations Floor once the door audit is found: two night-duty officers seated at the duty desk]({{ site.baseurl }}/assets/images/safetynet/m08_the_mole/10-operations-floor-night-watch.png)
+
+Once you have found the door audit, a relief watch comes on at the duty desk: Julian Sallow (senior duty officer) and Agnieszka Duda (watch log-keeper). They give you no clue, item or task, and they are not suspects. Talk to them if you like. Every so often they walk to the water cooler together, and you may overhear them. Julian's **Duty Officer's Console** shows a short digest of the night's log if he has stepped away without locking it, and a lock screen otherwise. Neither opens anything you need.
+
+They react if trouble starts on the floor and go quiet. If you knock either out, they stay down, the cooler trips stop for good, and the Director's debrief and the credits mention it.
 
 </details>
 
