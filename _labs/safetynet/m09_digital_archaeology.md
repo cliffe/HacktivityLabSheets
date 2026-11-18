@@ -13,7 +13,7 @@ tags: ["insider-threat", "physical-access", "rfid", "cloning", "fingerprints", "
 categories: ["safetynet"]
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "advanced"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m09_digital_archaeology/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m09_digital_archaeology"
 cybok:
   - ka: "AAA"
     topic: "Authentication"
@@ -76,7 +76,7 @@ The mission takes about 75 to 85 minutes. Your progress, evidence and unlocked r
 
 You move with the arrow keys or by clicking. Click objects, people and doors to interact. Items you take go to the inventory bar at the bottom of the screen; documents you pick up open as readable pages you can reopen at any time.
 
-Your kit at the start is the phone (Agent HaX), a **Lock Pick Kit**, an **RFID Cloner**, a **Fingerprint Kit**, a **PIN Cracker (Kowalczyk's)** and a **CyberChef Workstation** in the reading room.
+Your kit at the start is the phone (Agent HaX), a **Lock Pick Kit**, an **RFID Cloner**, a **Fingerprint Kit**, a **PIN Cracker (Kowalczyk's)** and a **CyberChef Workstation**. All of them are in your inventory from the start.
 
 The archive is one floor. The loading dock is the start. The open stacks are north; the front desk is west of the dock. The reading room is past the stacks. Beyond a card-locked door lie the restricted stacks, and off them the restricted cage, the director's office, and the tape store, with the salvage cage past the tape store.
 
@@ -93,7 +93,7 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 ### Warm-up: Your First CyberChef Vigenere Decode {#warm-up}
 
-Do this once you are at the **CyberChef Workstation** in the reading room. It uses made-up data, not anything from the game.
+Do this any time you like, using the **CyberChef Workstation** from your inventory. It uses made-up data, not anything from the game.
 
 ![The CyberChef workstation with an empty recipe, input and output]({{ site.baseurl }}/assets/images/safetynet/m09_digital_archaeology/11-cyberchef-workstation-blank.png)
 
@@ -233,9 +233,9 @@ Find the stage you are on. The stages are in the order most players meet them, a
 <details markdown="1">
 <summary>Nudge</summary>
 
-The quick way is north through the open shutter into the open stacks. The night guard, Cody Old Coyote, challenges you on sight; any cover story passes, and telling him the truth sends him off and is remembered kindly later.
+The quick way is north through the open shutter into the open stacks. The night guard, Cody Old Coyote, challenges you on sight; any cover story passes, and telling him the truth sends him off to his truck.
 
-The other way is west: pick the dock office door (an easy key lock, or use the guard's key ring), go through the front desk, and talk to the clerk, Noor Haddad. She hands over a staff card for the card-locked door to the reading room. Either route reaches the reading room.
+The other way is west: pick the dock office door (an easy key lock; Cody carries the only key) and talk to the clerk, Noor Haddad, at the front desk. The staff door behind the desk is card-locked. Noor's card is a simple EM4100 badge: choose the option to lean in over her list and the cloner copies it from her belt, then emulate it at the staff door. If you warned her in time in an earlier mission she hands you the card instead. Warning her off (the option about her bonus) sends her home for the night, so get what you need from her first. Either route reaches the reading room.
 
 </details>
 
@@ -244,7 +244,7 @@ The other way is west: pick the dock office door (an easy key lock, or use the g
 
 1. \==action: Go north through the shutter into the open stacks==, and give the guard any answer when he challenges you.
 2. \==action: Carry on into the reading room==.
-3. \==action: Or, from the dock, pick the west door and talk to Noor Haddad at the front desk==, take her staff card, and use it on the card door to the reading room.
+3. \==action: Or, from the dock, pick the west door and talk to Noor Haddad at the front desk==, clone (or take) her staff card, and use it on the staff door to the reading room.
 
 </details>
 
@@ -282,7 +282,7 @@ The other way is west: pick the dock office door (an easy key lock, or use the g
 <details markdown="1">
 <summary>Nudge: the card</summary>
 
-Talk to Margaret Sorensen at the hatch. While she talks, the cloner reads her stacks card. It is a MIFARE Classic with custom keys, so the cloner runs a recovery attack first, about half a minute, and you have to keep her there. When the keys crack, press **Save**.
+Talk to Margaret Sorensen at the hatch and choose the option to lean on the counter, close to her card reel. The cloner reads her stacks card while she goes on stamping. It is a MIFARE Classic with custom keys, so the cloner runs a recovery attack first, about half a minute, and you have to keep her there. When the keys crack, press **Save**.
 
 HaX's field guide and the Concepts section on RFID both cover read, crack and emulate.
 
@@ -293,9 +293,9 @@ HaX's field guide and the Concepts section on RFID both cover read, crack and em
 <details markdown="1">
 <summary>Nudge: the bins and the print</summary>
 
-At the hatch she is feeding a shredder, and you can pull one thing from the bins before it goes in. That is a choice with a cost, and the game tells you the cost: an asset's file, a set of letters, or a copy cleared from a locker. Pick the one you want to save.
+At the hatch she is feeding a shredder, and you can pull one thing from the bins before it goes in. HaX names the two bins: Derek Lawson's file, and either the Social Fabric letters or, if Nightshade tidied his locker in an earlier mission, his own copy. One goes into the shredder. Pick the one you want to save; if you never choose, the game hands you Derek's file.
 
-Her **Rubber Stamp** sits on the shelf by the hatch. Dust it with the Fingerprint Kit and lift her print. The handle is textured, so the magnetic wand suits it. You use the print at the cage's plan cabinet.
+Her **Rubber Stamp** sits on the shelf by the hatch. Dust it with the Fingerprint Kit and lift her print. The handle is textured, and the game tells you which lifter suits the surface. You use the print at the cage's plan cabinet.
 
 **Learn it:** ==action: Dust the stamp and look at the lift== before you move on. Note the pattern (loop, whorl or arch) so you can recognise it at the cabinet.
 
@@ -310,7 +310,7 @@ Her **Rubber Stamp** sits on the shelf by the hatch. Dust it with the Fingerprin
 
 </details>
 
-> Warning: Knocking the director out skips the conversation, but her shredder runs on, and the credits record it. The clone and the print are both reachable without a fight.
+> Warning: Knocking the director out skips the conversation and the credits record it. The clone and the print are both reachable without a fight.
 
 ### The Restricted Cage and the Plan Cabinet {#hints-cage}
 
@@ -345,15 +345,16 @@ Take the **Candidate Assessment, Intake 2011** from the cabinet. This is Nightsh
 
 ### Match the Hand {#hints-hand}
 
-**Where:** the reading room, with HaX's case file. **Goal:** confirm the notebook and the file are the same hand.
+**Where:** the reading room, with HaX's case file. **Goal:** compare the hand on Nightshade's file with the notebook scan, then tell HaX what you see.
 
-> Hint: HaX scanned an old training notebook. The file you just took is assessed in the same hand. Hold them together.
+> Hint: HaX scanned an old training notebook. Read it, then look again at the file you took from the cabinet.
 
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Read the **Training Notebook (scan)** in the reading room==.
-2. \==action: Open HaX's phone and choose the option about the hand on the file==, then confirm it is the same hand.
+1. \==action: Read the **Training Notebook (scan)** in the reading room== (the **Case File, Helena** points to it). Look at the margin hand.
+2. \==action: Open HaX's phone and choose **[The hand on Nightshade's file.]**==. If you have not read the notebook yet she sends you back to it.
+3. \==action: Give your honest answer==. The option is a three-way answer; say what you see.
 
 </details>
 
@@ -366,7 +367,7 @@ Take the **Candidate Assessment, Intake 2011** from the cabinet. This is Nightsh
 <details markdown="1">
 <summary>Nudge</summary>
 
-Submit the ledger flag at the drop terminal (the server work is in the companion), then open HaX's text about the ledger. Soon after, the recruiter rings on a voiced, forced call. She offers WREN's codename in exchange for letting a tape deck wipe. You have four answers, and the game states the cost of each before you commit:
+Submit the ledger flag at the drop terminal (the server work is in the companion), then open HaX's text about the ledger. Once you have opened HaX's ledger text and the cage is open, the recruiter rings on a voiced, forced call. She offers WREN's codename in exchange for letting a tape deck wipe. You have four answers, and the game states the cost of each before you commit:
 
 - take the name and let the deck wipe
 - take the name and pull her file anyway (a double-cross)
@@ -430,25 +431,25 @@ Inside are the **Reading** (several pages), the **Key Card, Tape Store**, and th
 <details markdown="1">
 <summary>Nudge</summary>
 
-Use the tape store card to get in. The **Shelf Marks** chart on the wall is the key for the cipher. The coded line is the one HaX sent you at the first flag (it is on the drop terminal screen and in your notes). At the CyberChef Workstation, paste the coded line, add **Vigenère Decode**, and set the key to the word the shelf marks spell. The decoded word opens the salvage cage keypad.
+Use the tape store card to get in. The **Shelf Marks** chart on the wall is the key for the cipher. The coded line is the **Catalogue: salvage cage** note HaX gives you after the first flag (it is also at the foot of the drop terminal screen, and she quotes it if you ask about the keypad). The chart lists a word for each bay and says each keypad's code is keyed to its own bay's word. The keypad guards the salvage cage, which is Bay 12. At the CyberChef Workstation, paste the coded line, add **Vigenère Decode**, and set the key to that bay's word. The decoded word opens the salvage cage keypad.
 
-HaX hands out an archive-codes field guide once you reach the keypad.
+HaX offers an archive-codes field guide once you have reached the keypad.
 
-**Learn it:** ==action: Read the shelf marks and write the key word down== before you touch CyberChef. The key is a word, not the marks themselves.
+**Learn it:** ==action: Read the shelf marks and write the Bay 12 word down== before you touch CyberChef. Other bays have words too, and they are wrong keys.
 
 </details>
 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Enter the tape store with the tape store card== and read the **Shelf Marks** for the key.
+1. \==action: Enter the tape store with the tape store card== and read the **Shelf Marks** beside the keypad for the key.
 2. \==action: Paste the coded line from the drop terminal screen into **Input** at the CyberChef Workstation==.
-3. \==action: Add **Vigenère Decode** and set the **Key** to the word the shelf marks spell==.
+3. \==action: Add **Vigenère Decode** and set the **Key** to the salvage bay's word (Bay 12)==.
 4. \==action: Type the decoded word into the salvage cage keypad==.
 
 </details>
 
-> Warning: A wrong key gives wrong letters, not an error. If the output is gibberish, check the key against the shelf marks letter for letter.
+> Warning: A wrong key gives wrong letters, not an error. If the output is gibberish, check the key against the Bay 12 row letter for letter.
 
 ### The Server Work in the Salvage Cage {#hints-tomb-beta}
 
@@ -459,8 +460,9 @@ HaX hands out an archive-codes field guide once you reach the keypad.
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Submit the Tomb Beta owner flag at the drop link==.
-2. \==action: Submit the Tomb Beta control flag at the drop link==.
+1. \==action: Use the **Field Kit Link** to set up your kit at the rack==.
+2. \==action: Submit the Tomb Beta owner flag at the **Tomb Beta Drop Link**==.
+3. \==action: Submit the Tomb Beta control flag at the drop link==.
 
 </details>
 
@@ -493,7 +495,7 @@ You can also decide the vendor notice. Sending it starts a fix for the four hund
 <details markdown="1">
 <summary>Spoiler: the decisions that carry into the finale</summary>
 
-Twelve choices from this night carry into Mission 10: the recruiter's sale, the tape or the recordings you pulled, whether WREN is named or still a shortlist, your answer to the confession, the notice sent or held, the bin you saved, the legacy files, and the Alpha annotations. Each changes who is in the bunker and what is said. None locks you out of finishing.
+Many choices from this night carry into Mission 10, including the recruiter's sale, the tape or the recordings you pulled, whether WREN is named or still a shortlist, your answer to the confession, the notice sent or held, the bin you saved, the legacy files, and the Alpha annotations. Each changes who is in the bunker and what is said. None locks you out of finishing.
 
 </details>
 
@@ -534,14 +536,21 @@ None of these is needed to finish. Each adds evidence or context.
 <details markdown="1">
 <summary>The Harwick &amp; Lowe dead-files box</summary>
 
-In the open stacks, a sealed box of dead files has a password lock. The reference it wants is printed on the placement record inside the bay. The record ties two members of Task Force Null to a recruitment agency, which matters in the finale.
+In the open stacks, a sealed box of dead files has a password lock. The file number it wants comes from the ledger you pull for the second flag. Inside is a placement record from a search firm that no longer exists. It names two people, which bears on the recruiter's offer.
 
 </details>
 
 <details markdown="1">
 <summary>The Alpha recordings and annotations</summary>
 
-The tape store holds a reel deck of ALPHA recordings and a set of annotation sheets. One is a coded line with its own key (`ALPHA`), decoded the same way as the salvage code. They are the Architect's teaching, in his own voice and hand.
+If you pulled the Alpha recordings from the recruiter's deck, the tape store's reel deck holds a loaded spool and, once the confrontation has played, the annotation sheets carry one enciphered line. Its key is named on the sheet; decode it the same way as the salvage code. They are the Architect's teaching, in his own voice and hand.
+
+</details>
+
+<details markdown="1">
+<summary>The shredder and the tape wipe</summary>
+
+Two more things burn tonight, and neither is needed to finish. In the cage the director is shredding a box of legacy files; talking her down needs Nightshade's file in your hand, and knocking her out or leaving carries its own cost. In the server closet off the open stacks, the contractor Jesse Tran is wiping old interview reels; what you saved from the bins decides what you can say to him. The optional tasks "Stop Sorensen's shredding" and "Stop the tape wipe" track both. Neither choice is scored right or wrong.
 
 </details>
 
