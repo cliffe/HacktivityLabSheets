@@ -550,7 +550,7 @@ If you pulled the Alpha recordings from the recruiter's deck, the tape store's r
 <details markdown="1">
 <summary>The shredder and the tape wipe</summary>
 
-Two more things burn tonight, and neither is needed to finish. In the cage the director is shredding a box of legacy files; talking her down needs Nightshade's file in your hand, and knocking her out or leaving carries its own cost. In the server closet off the open stacks, the contractor Jesse Tran is wiping old interview reels; what you saved from the bins decides what you can say to him. The optional tasks "Stop Sorensen's shredding" and "Stop the tape wipe" track both. Neither choice is scored right or wrong.
+Two more things burn tonight, and neither is needed to finish. In the cage the director is shredding a box of legacy files; talking her down needs Nightshade's file in your hand, and knocking her out or leaving carries its own cost. In the server closet off the open stacks, the contractor Jesse Tran is wiping old interview reels; what you saved from the bins decides what you can say to him: the Social Fabric letters let you talk him off it, and without them you can knock him out. The wipe console itself is locked to his session. The optional tasks "Stop Sorensen's shredding" and "Stop Jesse Tran's tape wipe in the server closet" track both. Neither choice is scored right or wrong.
 
 </details>
 
