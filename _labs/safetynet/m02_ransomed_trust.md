@@ -195,7 +195,7 @@ Shared and reused credentials are the same problem at scale. One password used a
 
 ### A Lock That Talks Back {#oracle}
 
-Some devices tell you more than "right" or "wrong". An **oracle** is any system whose answers leak information about a secret. In this mission an ENTROPY device called the PIN Cracker clamps onto a four-digit keypad and shows two numbers for each guess: how many digits are the right digit in the right place, and how many are right but in the wrong place. While it is clamped on, the keypad cannot lock you out.
+Some devices tell you more than "right" or "wrong". An **oracle** is any system whose answers leak information about a secret. In this mission an ENTROPY device called the PIN Cracker clamps onto a four-digit keypad and shows two numbers for each guess: how many digits are the right digit in the right place, and how many are right but in the wrong place. While you carry it, the keypad never locks you out. Without it, a keypad in this mission locks after five wrong codes (the pad shows LOCKED and closes), though opening it again gives you five more and your earlier guesses stay in its log.
 
 You can see how powerful this is with a made-up safe. The secret is a four-digit code you do not know. Here are three guesses against a code of `5039`, with the lights you would see (green means right place, amber means right digit in the wrong place):
 
@@ -462,7 +462,7 @@ Before Gary's card changes hands, a plain first meeting with Val gives you diffe
 
 Ways past her:
 
-- a real hospital pass, blank and without a name. One that Gary or Sister Doyle hands you themselves is checked by radio with them, and passes. A contractor pass you simply picked up (the wrapped one in the Night Handover room, or Gary's from the floor) needs a story that fits it: Val asks what you are doing with an IT pass, and only "IT sent me for the server room reader" fits. A wrong story costs you the pass and she hears no second one. An agency pass taken from Doyle's drawer without her say-so is refused
+- a real hospital pass, blank and without a name. One that Gary or Sister Doyle hands you themselves is checked by radio with them, and passes. Once your booking has been pulled, both have a line for it ("Someone's pulled my booking with security" for Gary, "Security think I was never booked in" for Doyle). Gary needs you to have earned some goodwill and says no once if you have not, and Doyle only agrees if you have already shown real care for the patients. A contractor pass you simply picked up (the wrapped one in the Night Handover room, or Gary's from the floor) needs a story that fits it: Val asks what you are doing with an IT pass, and only "IT sent me for the server room reader" fits. A wrong story costs you the pass and she hears no second one. An agency pass taken from Doyle's drawer without her say-so is refused
 - somebody she trusts vouching for you: Bernie will put her own name against you, but only if she trusts you
 - earning it by how you have treated Val yourself, which takes a good deal of goodwill (picking her door in front of her spends it)
 - picking her door while she is walking away from it
@@ -501,7 +501,7 @@ The Security Office is a key lock (easy). If Val sees the pick in your hands, sh
 <details markdown="1">
 <summary>Nudge</summary>
 
-This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behind the rack in the Server Room, take the cracker and bring it back here. Clamp it on and use the lights as in the emergency safe stage. Without the cracker, wrong codes lock the pad out. HaX has an option for it ("There's a keypad safe in Val's office") once you have seen it. Inside are a drill override form with one man's name on both overrides, and a stack of blank contractor passes.
+This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behind the rack in the Server Room, take the cracker and bring it back here. Clamp it on and use the lights as in the emergency safe stage. Without the cracker, five wrong codes lock the pad (it closes; open it again for five more, and your earlier guesses are kept). With the cracker in your inventory the pad has no limit and shows the lights. HaX has an option for it ("There's a keypad safe in Val's office") once you have seen it. Inside are a drill override form with one man's name on both overrides, and a stack of blank contractor passes.
 
 </details>
 
@@ -625,11 +625,11 @@ The badge number you need to compare against comes out of the server work, so yo
 1. \==action: Read the Night Handover Board, the Night Rota and the Night Security Post Log==.
 2. \==action: Talk to Val and take her notebook==.
 3. \==action: Compare the badge numbers== once you have the one from Ghost's records.
-4. \==action: Open your phone and choose the option about whose badge it is== (it appears once the number is found), or tell them to their face.
+4. \==action: Open your phone and choose "I know whose badge SC-4471 is."== (it appears once the number is found), pick a name, then give your reason. Or go to the Boardroom and tell the man on the post to his face (that option needs the Night Security Post Log read as well).
 
 </details>
 
-> Warning: Accusing the wrong person is recorded as a wrong suspect. Gary and Dr. Kim will not take it well, and if you push Gary he turns hostile. A name has to be backed by a document, not a feeling.
+> Warning: On the phone, HaX only pushes back on a wrong name or a weak reason, and it costs nothing. The reason that closes it is that Ghost's badge matches the one on the Night Security Post Log, so read that log first. Accusing someone to their face is different. Put it to Val, Dr. Kim or Gary without a document behind it and it is recorded as a wrong suspect. Dr. Kim and Gary both turn hostile and end the conversation, and Val ends the conversation.
 
 ### The Recovery Console {#hints-recovery}
 
@@ -642,7 +642,9 @@ The badge number you need to compare against comes out of the server work, so yo
 <details markdown="1">
 <summary>Nudge</summary>
 
-The console will not restore anything without a **Verified Restore Manifest**, which is the restore point it can trust. That item comes from the server work. The options differ by which key sets you give it. The offline escrow keys come from the Emergency Storage safe, and other key material comes from the server work too. The console lists each slot as loaded or missing, so you can see why an option is greyed out.
+The console lists three slots: the **Verified restore manifest**, the **Offline escrow keys** and the **ENTROPY key material**, each shown as loaded or missing. It will not restore anything without the manifest, which is the restore point it can trust and comes from the server work. The escrow keys come from the Emergency Storage safe. The ENTROPY key material is in a locked cache inside the rack and also comes from the server work.
+
+There are up to four ways to restore. Paying the ransom needs only the manifest and is the quickest (about 30 minutes, £150,000 to the attackers). The offline keys alone take 12 hours and pay nobody. Both key sets together take 4 hours and pay nobody. A fourth, Ghost's own keys, appears only if you accepted Ghost's offer and takes under an hour, but Ghost keeps a way into the network. An option you cannot use yet says which slot is missing.
 
 Ghost may call you at the console with an offer. It is an option on the table, not a trap you have to avoid. After you choose, keep an eye on your phone: if the ward needs you, HaX tells you. HaX will not say which option is right.
 
@@ -673,9 +675,11 @@ Ghost may call you at the console with an offer. It is an option on the table, n
 <details markdown="1">
 <summary>Nudge</summary>
 
-You can transmit everything or keep it internal. If you found optional evidence on the way, the transmission carries it. The terminal asks you to confirm either choice and lets you back out first. If you have not yet named the insider, expect to meet them here. Afterwards, HaX debriefs you, and the credits read back what you did.
+You can transmit everything or keep it internal. If you found optional evidence on the way, the transmission carries it. The terminal asks you to confirm either choice and lets you back out first. If you have not yet named the insider, expect to meet them here. Afterwards, HaX debriefs you in person at headquarters. You choose the questions (who Ghost was, the link to ENTROPY, the phone call that pulled your booking, and the PIN Cracker if you found it, which brings in a hardware specialist), and then the cost of your choices is read back before the credits.
 
-If optional tasks are still open when the mission is ready to end, a box titled **Before the mission ends** lists them and offers **End the mission now** or **Keep going**. Keep going leaves the debrief waiting. The objectives panel then shows an **End the mission** button, and the debrief starts by itself once nothing optional is open. Nothing is lost by choosing Keep going, and you can reload and still end it later.
+If optional tasks are still open when you confirm a choice at the terminal, or when the debrief reaches its end, a box titled **Before the mission ends** lists them and offers **End the mission now** or **Keep going**. At the terminal, Keep going leaves you on the same confirm screen, so you can go and finish something and come back. At the end of the debrief, Keep going leaves the credits waiting: the objectives panel shows an **End the mission** button, and the credits start by themselves once nothing optional is open. Nothing is lost by choosing Keep going, and you can reload and still end it later.
+
+One optional task appears late: **Tell Val what you found**. Once Val's booking trouble is behind you and you have either owned the backup server or named the insider, she has a new option ("I said I'd tell you what I found."). It is worth a moment of goodwill and clears the box.
 
 </details>
 
