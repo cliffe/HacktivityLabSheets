@@ -293,7 +293,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 Read the **Crisis Protocol Notice** and the **Reception Desk Visitor Log** before you talk to her. The notice explains why no card works. The log has your booking on it, with a line scored through in a different pen and no initials against the change. Note that, because it matters later.
 
-Bernie Nwosu is the night coordinator, and she holds every mechanical override key on a hook behind the desk. You get the **IT Department Override Key** whichever way you talk to her. How you talk to her is still up to you, and she remembers it. Later in the night you may need somebody to speak for you, and that is only possible for someone who trusts you.
+Bernie Nwosu is the night coordinator, and she holds every mechanical override key on a hook behind the desk. She signs you in however you talk to her, but the **IT Department Override Key** is another matter. If you are curt or pushy with her, she keeps the key on her hook and you pick the IT door instead (it is an easy lock), or come back with Dr. Kim's signed badge (see the next stage) and she hands it over on Kim's name. Being straight with her gets you the key, and she remembers it. Later in the night you may need somebody to speak for you, and that is only possible for someone who trusts you.
 
 **Learn it:** ==action: Read the visitor log slowly== and say who could have scored out your booking, given who has been behind the desk all night. Then ask Bernie.
 
@@ -306,12 +306,12 @@ Bernie Nwosu is the night coordinator, and she holds every mechanical override k
 
 1. \==action: Read the Crisis Protocol Notice and the Reception Desk Visitor Log==.
 2. \==action: Talk to Bernie Nwosu== and answer in your own way. She signs you into her log.
-3. \==action: Take the IT Department Override Key==.
+3. \==action: Take the IT Department Override Key== if she gives it. If she does not, pick the IT door or return with Kim's badge.
 4. \==action: Head through the ward vestibule, the ward approach and the Patient Ward==, then along the Ward Link to the Main Corridor.
 
 </details>
 
-> Warning: The override key opens the IT department and nothing else. The server room is not on any key, and nobody can cut you a card.
+> Warning: Bernie may refuse the key if you were rude, and it is not a dead end (pick the door). The override key opens the IT department and nothing else. The server room is not on any key, and nobody can cut you a card.
 
 ### Dr. Kim and the Way Through the Hospital {#hints-kim}
 
@@ -324,7 +324,7 @@ Bernie Nwosu is the night coordinator, and she holds every mechanical override k
 
 From reception the route is east through the Ward Vestibule and Ward Approach, then north into the Patient Ward. Leave the ward by the west door to the Ward Link, go north up the Main Corridor, and north again into the Night Handover room. The doors off it are the Boardroom (west), the CTO Office (north) and the IT Department (east).
 
-Dr. Kim cannot authorise you, but she signs your paper badge and points you at Gary. Ask her about the boardroom, a keypad you will want later, and about anything still offline in the building. Sister Doyle in the ward is optional. She is also the first person you meet who is not asking you for anything.
+Dr. Kim cannot authorise you, but she signs your paper badge and points you at Gary. Ask her about anything still offline in the building. She will not tell you the Boardroom keypad code ("Security asked me to keep that room shut"), but her eyes go to the **Dr. Kim's Desk Diary** on her desk, which has it. The Estates Audit Snag List (item 20) says the same: the CTO keeps the code in her diary. Sister Doyle in the ward is optional. She is also the first person you meet who is not asking you for anything.
 
 Any red ransomware screen can be read. Reading one satisfies the task about identifying who you are up against.
 
@@ -340,7 +340,7 @@ Any red ransomware screen can be read. Reading one satisfies the task about iden
 
 </details>
 
-> Warning: The Visitor Badge (Countersigned) Dr. Kim gives you proves a person vouched for you. It opens nothing. Do not spend time trying it on readers.
+> Warning: The Visitor Badge (Countersigned) Dr. Kim gives you proves a person vouched for you. No reader will honour it, but Bernie will: if she kept the IT key from you, choose the option about Kim's signature when you talk to her again.
 
 ### The Night Handover Room: Two Staff on a Break {#hints-staff-room}
 
@@ -462,9 +462,9 @@ Before Gary's card changes hands, a plain first meeting with Val gives you diffe
 
 Ways past her:
 
-- a real hospital pass, blank and without a name: Gary has a spare contractor lanyard if he trusts you enough, Sister Doyle keeps agency lanyards in a drawer and may share one if she trusts you, and there is a wrapped contractor lanyard lying in the Night Handover room
+- a real hospital pass, blank and without a name. One that Gary or Sister Doyle hands you themselves is checked by radio with them, and passes. A contractor pass you simply picked up (the wrapped one in the Night Handover room, or Gary's from the floor) needs a story that fits it: Val asks what you are doing with an IT pass, and only "IT sent me for the server room reader" fits. A wrong story costs you the pass and she hears no second one. An agency pass taken from Doyle's drawer without her say-so is refused
 - somebody she trusts vouching for you: Bernie will put her own name against you, but only if she trusts you
-- earning it by how you have treated Val yourself
+- earning it by how you have treated Val yourself, which takes a good deal of goodwill (picking her door in front of her spends it)
 - picking her door while she is walking away from it
 - force, which Val will answer
 
@@ -485,12 +485,34 @@ The Security Office is a key lock (easy). If Val sees the pick in your hands, sh
 <summary>Steps</summary>
 
 1. \==action: Go to the Main Corridor and talk to Val Okonkwo==.
-2. \==action: Show her a lanyard, ask Bernie to vouch, or pick the route you prefer==.
+2. \==action: Show her a lanyard (with a story that fits it), ask Bernie to vouch, or pick the route you prefer==.
 3. \==action: Walk through the Security Office to the west door==, the Server Room.
 
 </details>
 
 > Warning: If you start a fight with Val she stops talking to you for the rest of the night. The Security Office door can still be picked once she has walked away from it.
+
+### The Supervisor's Wall Safe (Optional) {#hints-wall-safe}
+
+**Where:** the Security Office, once you are through. **Lock:** the **Supervisor's Wall Safe**, a four-digit PIN. **Goal:** optional evidence about who ordered the drills.
+
+> Hint: No note, rota or diary in the building gives this code, and Val does not have it. Something that reads a keypad back to you does.
+
+<details markdown="1">
+<summary>Nudge</summary>
+
+This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behind the rack in the Server Room, take the cracker and bring it back here. Clamp it on and use the lights as in the emergency safe stage. Without the cracker, wrong codes lock the pad out. HaX has an option for it ("There's a keypad safe in Val's office") once you have seen it. Inside are a drill override form with one man's name on both overrides, and a stack of blank contractor passes.
+
+</details>
+
+<details markdown="1">
+<summary>Steps</summary>
+
+1. \==action: Pick the Sealed Equipment Case and take the PIN Cracker==.
+2. \==action: Return to the Security Office and clamp the cracker onto the wall safe==.
+3. \==action: Read the Drill Override Authorisation==. It counts as insider evidence.
+
+</details>
 
 ### The Server Room {#hints-server-room}
 
@@ -589,7 +611,7 @@ If you cannot find the code, there is a second route. Behind the rack in the Ser
 <details markdown="1">
 <summary>Nudge: the trail</summary>
 
-Start with Bernie. Ask whether anyone has come through tonight who does not belong. Then read the **Night Handover Board** in the Night Handover room: look at Friday's fire drill and who authorised it. Ask Val about drills, and take her notebook (**Val's Pocket Notebook**). In the Security Office the **Night Rota** shows who is on the books and which badge number they carry. The **Night Security Post Log** is in the Boardroom; its door is a keypad, and **Dr. Kim's Desk Diary** and Dr. Kim herself both know the code.
+Start with Bernie. Ask whether anyone has come through tonight who does not belong. Then read the **Night Handover Board** in the Night Handover room: look at Friday's fire drill and who authorised it. Ask Val about drills, and take her notebook (**Val's Pocket Notebook**). In the Security Office the **Night Rota** shows who is on the books and which badge number they carry. The **Night Security Post Log** is in the Boardroom; its door is a four-digit keypad (medium), and the code is written in **Dr. Kim's Desk Diary** (Kim herself will not say it).
 
 The badge number you need to compare against comes out of the server work, so you will not be able to finish this stage until you have made progress there.
 
@@ -679,7 +701,7 @@ After you decide, ==action: finish anything you still want to read, then take th
 
 | You see | It usually means |
 | --- | --- |
-| The IT department door does not open | You need the IT Department Override Key from Bernie, or to pick it |
+| The IT department door does not open | You need the IT Department Override Key (Bernie keeps it back if you were rude; show her Kim's signed badge), or pick it |
 | The Security Office door does not open | Val has not opened it. Pass her, or pick it while she is walking away from it |
 | The server room reader refuses | You do not hold the Server Room Keycard. No key or pick works on that door |
 | Gary's Workstation rejects the password | An entry is mistyped or in the wrong case. Copy it exactly as it is written on the note |
@@ -704,6 +726,13 @@ None of these is needed to finish. Each adds evidence or context.
 <summary>Dr. Kim's Safe</summary>
 
 A small safe in the CTO Office, set into the wall behind a framed certificate. It uses the same kind of code as the one in Emergency Storage. Inside is a Zero Day Syndicate invoice, which itemises what the attackers paid for the way into this hospital.
+
+</details>
+
+<details markdown="1">
+<summary>Handing Dr. Kim the escrow keys</summary>
+
+Once you hold the Offline Backup Encryption Keys, Dr. Kim has an option to take them from you. She says she now has something to put in front of the board besides a cheque. It is optional and does not change which recovery options open.
 
 </details>
 
