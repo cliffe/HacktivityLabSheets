@@ -397,7 +397,7 @@ The web price list is the odd one out. Sable moved it off ROT13 onto her own shi
 <details markdown="1">
 <summary>Nudge: getting past him</summary>
 
-Terry patrols a short loop. He stands at his post facing the office door, then walks west with his back to it and stands a while before coming back. Watch the loop and move while he is facing away. If he does challenge you, you can give a cover story, pay him off, or tell him you are SAFETYNET, but each of those means he knows your face and you lose any claim to a clean night. The pay-off option is marked **[(Offer him something.) ...]**, so you can see it is a bribe before you pick it.
+Terry patrols a short loop. He stands at his post facing the office door, then walks west with his back to it and stands a while before coming back. Watch the loop and move while he is facing away. If he does challenge you, you can give a cover story, pay him off, or tell him you are SAFETYNET, but each of those means he knows your face and you lose any claim to a clean night. If he believes your cover story, the debrief and the credits still record that you lied to the guard and were believed. The pay-off option is marked **[(Offer him something.) ...]**, so you can see it is a bribe before you pick it.
 
 </details>
 
@@ -501,7 +501,7 @@ Danny's office holds his hospital assessment, the email he sent with it, and his
 <details markdown="1">
 <summary>Nudge: Victoria Sterling</summary>
 
-Once all four flags are in, HaX tells you she is ready and the confrontation opens; before that she is on a call with her back to the door and you back out. When you face her you can offer her a deal in exchange for the Architect's comms (this needs the Phase 2 drive from her desk as leverage), arrest her, or let her go now you have the evidence. There is also **[Not yet. There's something I want to finish first.]**: it closes the conversation without choosing, and when you speak to her again you go straight back to the decision. Use it to read or collect anything you have left. Reading the transaction log and the catalogue first gives you more to put to her. Each path reaches an ending, and the debrief and credits reflect what you did and who you protected.
+Once all four flags are in, HaX tells you she is ready and the confrontation opens; before that she is on a call with her back to the door and you back out. When you face her you can offer her a deal in exchange for the Architect's comms (this needs the Phase 2 drive from her desk as leverage), arrest her, or let her go now you have the evidence. While something optional is still open (the whiteboard, the client roster, Danny, or the drive once you have found it) there is also **[Not yet. There's something I want to finish first.]**: it closes the conversation without choosing, and when you speak to her again you go straight back to the decision. Once nothing optional is left it no longer appears. Reloading the game while she is waiting for your answer also puts you back at the decision. Use it to read or collect anything you have left. Reading the transaction log and the catalogue first gives you more to put to her. Each path reaches an ending, and the debrief and credits reflect what you did and who you protected.
 
 </details>
 

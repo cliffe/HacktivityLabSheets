@@ -539,14 +539,12 @@ This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behin
 
 ![The handwritten note decoded with ROT13 in CyberChef]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/16-cyberchef-rot13.png)
 
-> Hint: The letters are wrong, but the word lengths and the spaces look right. Whoever wrote it was hiding it from a passing glance, not from you.
+> Hint: The letters are wrong, but the word lengths and the spaces look right. Whoever wrote it was hiding it from a passing glance, not from you. The word lengths look normal but the letters do not. Think about what simple cipher keeps word lengths.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Letters scrambled with normal word lengths and no `=` is a shift cipher, and thirteen is the usual shift. Take the **CyberChef Workstation** (or use the Ward Clerk's Laptop), paste the note into **Input** and add **ROT13**. The note is not a lock input. It tells you something about what the person who wrote it expects the hospital to do.
-
-**Learn it:** ==action: Decode the first word of the note by hand==, shifting each letter back 13 places, then check it in CyberChef.
+CyberChef's **Magic** operation will not crack this one. A fixed shift of the whole alphabet is one of the oldest ciphers; the CyberChef guide lists its common names. The note is not a lock input. It tells you something about what the person who wrote it expects the hospital to do.
 
 **To learn more in game:** open your phone, choose **[Send me a field guide.]** then **[The CyberChef guide.]**.
 
@@ -557,7 +555,9 @@ Letters scrambled with normal word lengths and no `=` is a shift cipher, and thi
 
 1. \==action: Take the CyberChef Workstation== from the Server Room.
 2. \==action: Paste the note into **Input**==.
-3. \==action: Add **ROT13**== and read the output.
+3. \==action: Add **ROT13**== (search for it) and read the output. Thirteen is the usual shift.
+
+**Learn it:** ==action: Decode the first word of the note by hand==, shifting each letter back 13 places, then check it in CyberChef.
 
 </details>
 

@@ -49,7 +49,7 @@ Every answer in this mission is generated for your game. Values such as the flag
 
 Your attack box is the Kali terminal in the server room. You get into the server room with Kevin's server room keycard. The target is the attack server. Its address and the username you are targeting come from the Server Access Details note in Derek's storage safe.
 
-The game gives you the flags, and you submit each one at the SAFETYNET Drop-Site Terminal in the same room.
+The game gives you the flags. The directory-traversal and deployment flags go in at the SAFETYNET Drop-Site Terminal in the same room; the decryption key goes into the ENTROPY archive, and the launch code into Derek's launch device at the end.
 
 1. \==action: Open the IT Audit Station (Kali) in the server room==. This is the Kali box.
 2. \==action: Log in using the login on the terminal's sticky note==. This sheet does not repeat it.

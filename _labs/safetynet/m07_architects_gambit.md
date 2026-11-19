@@ -468,14 +468,14 @@ If you have not met either of them, open your phone and choose **[I'm stuck on s
 
 ![Thomas Park in the cable vault, with the cable run behind him]({{ site.baseurl }}/assets/images/safetynet/m07_architects_gambit/19-park-in-the-vault.png)
 
-> Hint: He has four minutes of work left and he will not stop for words alone. What does he believe he is doing, and what is the one piece of paper in the building that says otherwise?
+> Hint: He has four minutes of work left and he will not stop for words alone. Think about what he was told the job was, and what nobody told him.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Park was told the job was a building, empty, with nobody in it. The control room holds a page that says what the grid feeds. Read it first. If you hold that page in your hand when you go back down, you can put it in front of him. If you show up without it, backing off buys you a second visit, and he warns you there is no third.
+Park was told the job was a building, empty, with nobody in it. Someone in this building signed a document about what the building holds when the plan runs. He has not seen it.
 
-If you talk to him without the page, the narration nudges you towards it: a page with a number on it might move him, and somebody in the building signed one. If you want the pointer again, open your phone, choose **[I'm stuck on something.]** then **[The man in the vault won't stop. What would reach him?]**.
+If you talk to him with nothing in your hands, the narration nudges you towards it: a page with a number on it might move him, and somebody in the building signed one. If you want the pointer again, open your phone, choose **[I'm stuck on something.]** then **[The man in the vault won't stop. What would reach him?]**.
 
 The vault also holds the **Trunk Cable Runs** (the splice that is newer than everything around it), a **Tomb Gamma** printout and an intercepted email. They are optional, and they matter to the debrief.
 
@@ -483,6 +483,8 @@ The vault also holds the **Trunk Cable Runs** (the splice that is newer than eve
 
 <details markdown="1">
 <summary>Steps</summary>
+
+Read the signed casualty projection on the console in the control room, then go back to the vault and put it in front of him from his talk menu. If you show up without it, backing off buys you a second visit, and he warns you there is no third. HaX will point you at the console if you ask.
 
 1. \==action: Open the control room first and read the Signed Casualty Projection== on the console beside Dr Mercer. Pick it up.
 2. \==action: Go back down to the vault== with it in your inventory.

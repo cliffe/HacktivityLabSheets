@@ -635,9 +635,9 @@ Think about what each reading depends on. The screen shows the battery controlle
 <details markdown="1">
 <summary>Nudge</summary>
 
-The viewer opens on the last 12 hours for Racks A1 to A4. Follow the lines from left to right. Look for a step to a new value, followed by a line that never moves again. Then point at a reading on that flat part: hover over it for three seconds, or click it. If you click a reading that is still moving, the viewer says "Still moving like a real sensor reading. Keep looking."
+The viewer opens on the last 12 hours for Racks A1 to A4 (use 12h or 24h: on 1h, 3h and 6h the step is off the chart). Follow the lines from left to right and look for a step followed by a line that never moves again. Click or tap a reading at the start of the flat part (hovering only shows the number). If you mark too early the viewer says "Still moving like a real sensor reading. The moment is later."; too late, "Not moving, but it was already like this before. Find where it starts."; and if the start is off the left edge of a short range, "The start is before this time range: widen the range."
 
-The **dZ/dt** button overlays the rate of change, which is exactly zero where the data is being written. **COMPARE RACKS** puts all four racks side by side. **COMPARE RACKS** also finds the moment for you and unlocks **[ANNOTATE FINDING]**. The dZ/dt overlay only shows you where the rate drops to zero, so you still point at a flat reading yourself. See "A Flat Line: Data That Is Written, Not Measured" in Concepts.
+The **dZ/dt** button overlays the rate of change, which is exactly zero where the data is being written. **COMPARE RACKS** puts all four racks side by side. **COMPARE RACKS** puts all four racks side by side so you can see they all stop at once; it does not mark the moment for you. You still mark it yourself, and only then does **[ANNOTATE FINDING]** unlock. The dZ/dt overlay only shows you where the rate drops to zero. See "A Flat Line: Data That Is Written, Not Measured" in Concepts.
 
 **Learn it:** ==action: Hover over five readings in a row, before the flat part, and write them down==. Subtract each from the next. Then do the same for five readings on the flat part, and compare.
 
@@ -647,9 +647,9 @@ The **dZ/dt** button overlays the rate of change, which is exactly zero where th
 <summary>Recipe</summary>
 
 1. \==action: Click **HMI-OPS-01 Workstation** and open **Historian Trend Viewer**==.
-2. \==action: Find where the lines step and go flat, and click a reading on the flat part== (or hover for three seconds, or press **COMPARE RACKS**).
-3. The hint above the chart changes to "Finding ready: press [ANNOTATE FINDING] on the left." \==action: Press **[ANNOTATE FINDING ►]**==.
-4. \==action: Read the **HISTORIAN ANOMALY REPORT**, then press the **[CONFIRM: MARK AS INJECTION EVENT AT ...]** button==.
+2. \==action: Find where the lines step and go flat, and click or tap a reading at the start of the flat part== (hovering and **COMPARE RACKS** do not count).
+3. The hint above the chart changes to "Marked 23:12:07. Now say what the data shows: press [ANNOTATE FINDING] on the left." \==action: Press **[ANNOTATE FINDING ►]**==.
+4. \==action: Answer "What does the data show from that moment?" with **[Written in: values were put into the system, not read from the sensor.]**== (the other two, real cooling and sensor dropout, are ruled out with a reason; choose again). \==action: Then read the **HISTORIAN ANOMALY REPORT** and press the **[CONFIRM: MARK AS INJECTION EVENT AT ...]** button==.
 
 </details>
 
@@ -922,8 +922,10 @@ The closing credits list what you decided at each point. ==action: Note them dow
 | The filing cabinet is locked | The **Filing Cabinet Key** is on the workshop desk, on a keyring labelled ICS Docs |
 | "Flip guard to arm ESD control." | Click the guard over the button first, then press the button |
 | "Emergency shutdown already active. Racks A1 to A4 are isolated." | Someone has already pressed a station: you, or Helen during an evacuation. All three stations work the same relays |
-| "Still moving like a real sensor reading. Keep looking." | The historian reading you clicked is real. Look further along, where the lines go flat |
-| "Inspect the chart to find something to annotate." and **[ANNOTATE FINDING]** greyed out | You have not yet pointed at a flat reading for three seconds, or clicked one |
+| "Still moving like a real sensor reading. The moment is later." | The reading you marked is still real data. Look further along, where the lines go flat |
+| "Not moving, but it was already like this before. Find where it starts." | You marked too late into the flat part: go back to where the step happens |
+| "The start is before this time range: widen the range." | The step is off the left edge of the range: use 12h or 24h |
+| "Mark the moment on the chart first." and **[ANNOTATE FINDING]** locked | You have not marked the start of the flat part yet: click or tap it on the chart |
 | "NOT THIS ONE" on HMI-ENG-02 | The row you flagged is a normal session. Use **[LOOK UP IP]** and **[INVESTIGATE ACCOUNT]** |
 | "Session flagged. Open the ENG TOOL HISTORY tab to see what that session did to the safety system." | Half done. Open the **ENG TOOL HISTORY** tab |
 | "Retrieve the SIS certification document to unlock side-by-side comparison." | Read the **SIS Safety Requirements Specification (extract)** from the filing cabinet, then reopen the panel |
