@@ -9,7 +9,7 @@ redirect_from:
   - /labs/introducing_attacks/m07-architects-gambit-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "advanced"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m07_architects_gambit/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m07_architects_gambit"
 cybok:
   - ka: "NS"
     topic: "Networking Applications"

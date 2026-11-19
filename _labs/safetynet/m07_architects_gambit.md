@@ -15,7 +15,7 @@ redirect_from:
   - /labs/introducing_attacks/m07-architects-gambit/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m07_architects_gambit/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m07_architects_gambit"
 cybok:
   - ka: "AAA"
     topic: "Authentication"

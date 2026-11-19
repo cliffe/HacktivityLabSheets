@@ -8,7 +8,7 @@ tags: ["credentialed-access", "ssh", "nostromo", "unauthenticated-rce", "nmap", 
 categories: ["safetynet"]
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "advanced"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m09_digital_archaeology/scenario.json.erb"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m09_digital_archaeology"
 cybok:
   - ka: "NS"
     topic: "Networking Applications"

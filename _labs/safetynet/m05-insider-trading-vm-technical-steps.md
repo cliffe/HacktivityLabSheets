@@ -9,7 +9,7 @@ redirect_from:
   - /labs/introducing_attacks/m05-insider-trading-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m05_insider_trading/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m05_insider_trading"
 cybok:
   - ka: "NS"
     topic: "Networking Applications"

@@ -13,7 +13,7 @@ tags: ["vulnerability-disclosure", "responsible-disclosure", "insider-threat", "
 categories: ["safetynet"]
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "advanced"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m10_full_disclosure/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m10_full_disclosure"
 cybok:
   - ka: "AB"
     topic: "Characterisation of Adversaries"

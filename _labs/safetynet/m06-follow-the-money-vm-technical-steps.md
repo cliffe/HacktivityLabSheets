@@ -9,7 +9,7 @@ redirect_from:
   - /labs/introducing_attacks/m06-follow-the-money-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m06_follow_the_money/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m06_follow_the_money"
 cybok:
   - ka: "NS"
     topic: "Networking Applications"

@@ -9,7 +9,7 @@ redirect_from:
   - /labs/introducing_attacks/m01-first-contact-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m01_first_contact/labsheet_vm_steps.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m01_first_contact"
 cybok:
   - ka: "NS"
     topic: "Network Protocols and Vulnerability"

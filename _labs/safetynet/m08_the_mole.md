@@ -15,7 +15,7 @@ redirect_from:
   - /labs/introducing_attacks/m08-the-mole/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m08_the_mole/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m08_the_mole"
 cybok:
   - ka: "AB"
     topic: "Characterisation of Adversaries"

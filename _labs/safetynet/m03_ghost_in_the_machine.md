@@ -15,7 +15,7 @@ redirect_from:
   - /labs/introducing_attacks/m03-ghost-in-the-machine/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m03_ghost_in_the_machine/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m03_ghost_in_the_machine"
 cybok:
   - ka: "NS"
     topic: "Network Security"

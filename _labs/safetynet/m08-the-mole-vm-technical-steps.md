@@ -9,7 +9,7 @@ redirect_from:
   - /labs/introducing_attacks/m08-the-mole-vm-technical-steps/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m08_the_mole/"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m08_the_mole"
 cybok:
   - ka: "NS"
     topic: "Networking Applications"

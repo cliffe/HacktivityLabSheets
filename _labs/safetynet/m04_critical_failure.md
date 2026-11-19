@@ -15,7 +15,7 @@ redirect_from:
   - /labs/introducing_attacks/m04-critical-failure/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "intermediate"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m04_critical_failure/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m04_critical_failure"
 cybok:
   - ka: "CPS"
     topic: "Cyber-Physical Systems / Physical Security"
