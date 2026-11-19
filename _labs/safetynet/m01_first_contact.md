@@ -2,20 +2,20 @@
 title: "First Contact (Break Escape Mission 1)"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Play a browser-based infiltration mission to learn the basics of a security investigation: physical access, PIN and password locks, lockpicking, decoding Base64 and ROT13 in CyberChef, and attacking a Linux server over SSH with Hydra, directory traversal and sudo privilege escalation."
+description: "Play a browser-based infiltration mission to learn the basics of a security investigation: physical access, PIN and password locks, lockpicking, decoding Base64 and ROT13 in CyberChef, weighing evidence, and the choices an investigation forces. The server work has its own companion sheet."
 overview: |
   A security investigation is a mix of physical and digital work. You walk a building, read what people leave lying around, open locks, and then move onto the network to pull evidence off a server. First Contact puts all of that into one mission.
 
-  You play a SAFETYNET agent sent undercover into Viral Dynamics Media, a marketing firm that is a front for an ENTROPY cell running a disinformation campaign called Operation Shatter. Your handler, Agent HaX, guides you by phone. You gather evidence from desks and safes, decode notes the cell left behind, pick a lock or find a spare key, and then use a Kali Linux box in the server room to break into the attack server over SSH, navigate its filesystem, and escalate privileges. The technical work unlocks the evidence that lets you confront the operative and stop the attack.
+  You play a SAFETYNET agent sent undercover into Viral Dynamics Media, a marketing firm that is a front for an ENTROPY cell running a disinformation campaign called Operation Shatter. Your handler, Agent HaX, guides you by phone. You gather evidence from desks and safes, decode notes the cell left behind, pick a lock or find a spare key, and then move on to the server room, where the technical work unlocks the evidence that lets you confront the operative and stop the attack. The server work has its own companion sheet, so you can play the rest spoiler-free.
 
-  This sheet gets you started, explains the ideas behind each lock and each VM stage with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to a full recipe. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get each one. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
-tags: ["linux", "ssh", "hydra", "privilege-escalation", "sudo", "base64", "rot13", "cyberchef", "lockpicking", "password-security", "break-escape"]
+  This sheet gets you started, explains the ideas behind each lock with small worked examples you can check by hand, and has a stage-by-stage set of hints for when you are stuck, from a gentle nudge up to a full recipe. Agent HaX hands out short in-game field guides as you reach each challenge; this sheet tells you how to get the ones for the office. There are moral choices and more than one ending; the hints help you understand what you hold, not which choice to make.
+tags: ["base64", "rot13", "cyberchef", "lockpicking", "password-security", "physical-security", "break-escape"]
 categories: ["safetynet"]
 redirect_from:
   - /labs/introducing_attacks/m01-first-contact/
 type: ["game-based-learning", "lab-sheet"]
 difficulty: "beginner"
-source: "https://github.com/cliffe/BreakEscape/blob/main/scenarios/m01_first_contact/labsheet.md"
+source: "https://github.com/cliffe/BreakEscape/tree/main/scenarios/m01_first_contact"
 cybok:
   - ka: "NS"
     topic: "Network Protocols and Vulnerability"
@@ -52,9 +52,9 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and the full recipe hidden behind "Show" buttons. Open one at a time, and go back to the game after each: a lock you open on the first hint teaches you more than one you open with the recipe.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The server steps (the four VM stages and the command-line attack exercises) are in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/), so you can play the rest without them.
+The server steps (the hint stages and command-line exercises for the attack server) are in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/), so you can play the rest without them.
 
-> Note: The server mission is generated for your game. The operative's SSH password and the flag values on the server are not the same as anyone else's, so this sheet never gives you one, only the way to find it. Physical PINs and passwords in the office are the same each game, but they are still things you work out in the game; this sheet says where each clue is, not what it reads.
+> Note: The server mission is generated for your game. The operative's server password and the flag values on the server are not the same as anyone else's, so this sheet never gives you one, only the way to find it. Physical PINs and passwords in the office are the same each game, but they are still things you work out in the game; this sheet says where each clue is, not what it reads.
 
 ## Getting Started {#getting-started}
 
@@ -68,10 +68,10 @@ You do not need to know Linux or cryptography before you start. The office teach
 
 1. \==action: Start the Break Escape mission **First Contact**==.
 2. \==action: Watch the briefing from Agent HaX==, then ==action: talk to Sarah at reception== to get your visitor badge and the main office key.
-3. \==action: Unlock the main office and explore==. Read desks, bins, notice boards and filing cabinets. People leave more behind than they mean to. The first time you walk into the main office, Agent HaX rings your phone once: tap **Answer** (or **Decline**, then use **Call back** in her thread). After that she works by text.
+3. \==action: Unlock the main office and explore==. Read desks, bins, notice boards and filing cabinets. People leave more behind than they mean to. Your objectives panel (top left) lists the current task. The first time you walk into the main office, Agent HaX rings your phone once: tap **Answer** (or **Decline**, then use **Call back** in her thread). After that she works by text.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
-The mission takes about 75 to 90 minutes. In a 60-minute class, stop once you have the server room keycard and the password list (around the halfway mark), and resume next time. Your progress, evidence and unlocked rooms are kept between sessions.
+The mission takes about 75 to 90 minutes. In a 60-minute class, stop once you have the server room keycard and have opened Derek's storage safe (around the halfway mark), and resume next time. Your progress, evidence and unlocked rooms are kept between sessions.
 
 ### How to Play {#how-to-play}
 
@@ -79,7 +79,7 @@ You move with the arrow keys or by clicking. Click objects, people and doors to 
 
 Agent HaX's phone is your help system. Open it and you will see options that appear only once you have reached the thing they explain:
 
-- Contextual hints, such as **[SSH brute force help]**, **[Linux navigation tips]**, **[Privilege escalation guidance]**, **[Lockpicking guidance]** and **[How do I decode these notes?]**. Each appears once you are in the right situation.
+- Contextual hints, such as **[Derek's office is locked, how do I get in?]**, **[Lockpicking guidance]** and **[How do I decode these notes?]**. Each appears once you are in the right situation. More appear once you reach the server room; the companion sheet covers those.
 - Field guides, the in-universe lab sheets. Each is offered by a phone message when you reach the relevant challenge, then handed over when you ask for it. The exact options are listed in the stages below.
 
 > Tip: The locks in the office want an exact value. A PIN is four digits. A password is case-sensitive, with no extra spaces or words. If you are sure you decoded something correctly and the lock still refuses it, check what you actually typed.
@@ -88,11 +88,11 @@ Agent HaX's phone is your help system. Open it and you will see options that app
 
 > Warning: Each lock allows a limited number of tries before it stalls for a moment. Work the value out from the clue; do not guess digit by digit.
 
-> Note: The office has working staff in it. Two of them, Fatima Begum (recruitment) and Graham Whitfield (finance), sit at their desks in the main office. Both are bystanders with no connection to ENTROPY and nothing to give you. You can talk to them (they politely brush you off), but nothing they say is a clue, so you can skip them. They also take short breaks at the water cooler and chat there; that is atmosphere, not evidence. They leave the floor once you have read the ENTROPY archive. Do not knock them out. Agent HaX tells you to stand down, and the debrief records each one as a bystander you attacked.
+> Note: The office has working staff in it. Two of them, Fatima Begum (recruitment) and Graham Whitfield (finance), sit at their desks in the main office. Both are bystanders with no connection to ENTROPY and nothing to give you. You can talk to them and they politely brush you off. Once you have spoken to Kevin or Maya, each has one extra line of office gossip about Derek, which is colour rather than a clue you need. They also take short breaks at the water cooler and chat there; that is atmosphere, not evidence. They leave the floor once you have read the ENTROPY Network Architecture document. Do not knock them out. Agent HaX tells you to stand down, and the end credits list each one as a bystander you knocked out.
 
 ### Warm-up: Your First CyberChef Recipe {#warm-up}
 
-Do this once you have found the CyberChef workstation (a laptop in the former manager's office). It uses made-up data, not anything from the game.
+Do this once you have found the CyberChef workstation (a laptop kept in Patricia's briefcase, in the former manager's office). It uses made-up data, not anything from the game.
 
 1. \==action: Open CyberChef and clear the recipe== if anything is in it.
 2. \==action: Type `Q2F0` into **Input**==.
@@ -115,6 +115,8 @@ Most of the office locks are a PIN pad or a password box. The weakness is not th
 | The company name everywhere | The company name, with or without a year |
 | A "secure but easy to remember" note | A phrase turned into initials plus a digit |
 | A counting pattern on a sticky note | The pattern itself |
+
+The game also shows how one person keys a date: Derek writes dates month first, then day, so 19 April is `0419`.
 
 The same habit shows up on the server later, which has its own companion sheet.
 
@@ -197,7 +199,7 @@ If you want the lie of the building first, the reception desk has a staff direct
 <details markdown="1">
 <summary>Nudge</summary>
 
-A maintenance note in the main office points you at a voicemail. The reception desk phone has an unheard message from Kevin giving the new PIN out loud. Listen to it.
+The Maintenance Checklist in the main office recycling bin points you at a voicemail. The reception desk phone has an unheard message from Kevin giving the new PIN out loud. Listen to it.
 
 There is also a backup copy of the code written down in the storage closet, off the east hallway, if you would rather read it.
 
@@ -206,7 +208,7 @@ There is also a backup copy of the code written down in the storage closet, off 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Read the Maintenance Checklist in the main office== (it tells you to check the reception phone).
+1. \==action: Read the Maintenance Checklist in the main office recycling bin== (it tells you to check the reception phone).
 2. \==action: Play the voicemail on the reception desk phone== and note the IT room code.
 3. \==action: Enter that code on the IT room keypad==.
 
@@ -214,7 +216,7 @@ There is also a backup copy of the code written down in the storage closet, off 
 
 ### Meeting Kevin: Tools for the Job {#hints-kevin}
 
-**Where:** the IT room. **Goal:** get the lockpick, the server room keycard and password advice.
+**Where:** the IT room. **Goal:** get the lockpick, the server room keycard and password advice. **Lock wants:** nothing, just the right choices.
 
 ![Kevin Park in the IT room, who hands over the lockpick and the server room keycard]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/03-it-room-kevin.png)
 
@@ -223,7 +225,9 @@ There is also a backup copy of the code written down in the storage closet, off 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Talk to Kevin and take him up on the audit. He hands over a lockpick kit and his server room keycard, and he will talk about how people here choose passwords if you ask. All of it matters later: the lockpick and keycard open rooms, and the password habits point at how the server falls.
+Talk to Kevin and take him up on the audit. He offers a lockpick kit and his server room keycard, and a document with instructions for the lockpicks. Take the lockpick: the route to Derek's office needs it. If you only took the keycard, come back and choose **About those lockpicks...**.
+
+Once you hold something from him, **I'd like to give you a preliminary security audit update** starts a short five-question audit. Pick the finding that matches what you have actually seen in the building. How well your answers match decides how much Kevin trusts you, and he will talk about how people here choose passwords once he does. The password habits point at how the server falls.
 
 Kevin is not ENTROPY. Treat him as a colleague, not a suspect, however the evidence later tries to frame him.
 
@@ -233,32 +237,32 @@ Kevin is not ENTROPY. Treat him as a colleague, not a suspect, however the evide
 <summary>Recipe</summary>
 
 1. \==action: Talk to Kevin Park== and agree to run the security audit.
-2. \==action: Choose to take everything he offers==: the lockpick kit, the keycard and the password advice.
-3. \==action: Ask him about password security== to hear how staff here reuse dates and names.
+2. \==action: Choose **I'll take all of it**==: the lockpick kit, the keycard and the instructions.
+3. \==action: Optionally give him the preliminary audit update==, then ask him about password security to hear how staff here reuse dates and names.
 
 </details>
 
 ### Into Derek's Office {#hints-derek-office}
 
-**Where:** Derek's office, off the east hallway. **Lock:** a key lock on the door. **Two ways in.**
+**Where:** Derek's office, off the east hallway. **Lock:** a key lock on the door. **Two ways in, and both need the lockpick.**
 
 ![Derek's office door, with the choice of a key or switching to the lockpick]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/05-dereks-door-lock.png)
 
-> Hint: A locked door with no key nearby has two answers in this building: find a spare key, or pick it. You already hold one of the tools for the second.
+> Hint: A locked door with no key nearby has two answers in this building: find a spare key, or pick it. Where does a manager who was escorted out leave her things?
 
 <details markdown="1">
 <summary>Nudge: the spare key</summary>
 
-The former manager, Patricia, kept a spare key to Derek's office in a safe in her office (off the west hallway). The safe is a PIN pad. Patricia's own note says Derek is sentimental about dates; a tossed anniversary card in the break room has a date circled. Use that date as the safe's PIN.
+The former manager, Patricia, left her briefcase in her office (off the west hallway). It has no key, so it only opens to the lockpick. Inside are Derek's office key, her investigation notes and the CyberChef workstation, so it is worth opening whichever way you get into Derek's office.
 
-**Learn it:** ==action: Before you try the safe, read the card and write the date as four digits both ways== (day then month, and month then day). One order opens it.
+**Learn it:** ==action: Before you pick anything, read the labels on the lock panel== and say which part you are setting, which part is pushing back, and what the shear line is.
 
 </details>
 
 <details markdown="1">
 <summary>Nudge: picking the lock</summary>
 
-You do not need the key at all. The lockpick kit from Kevin opens Derek's door, and Patricia's briefcase too. Ask Agent HaX for the lockpicking field guide if you want the technique.
+You do not need the key at all. The lockpick kit from Kevin opens Derek's door directly. The same kit opens Patricia's briefcase. Ask Agent HaX for the lockpicking field guide if you want the technique.
 
 **To learn more in game:** when you pick up the lockpick, Agent HaX offers a guide. Open your phone and choose **[Send me the lockpicking field guide]**. It covers tension, finding the binding pin, and setting pins one at a time.
 
@@ -269,7 +273,7 @@ You do not need the key at all. The lockpick kit from Kevin opens Derek's door, 
 
 Either route works:
 
-1. \==action: Open Patricia's safe with the anniversary date== and take Derek's office key, then use it on the door.
+1. \==action: Pick Patricia's briefcase with the lockpick== and take Derek's office key, then use it on the door.
 2. \==action: Or select the lockpick and use it on Derek's office door==, working one pin at a time with light tension.
 
 </details>
@@ -282,12 +286,12 @@ Either route works:
 
 ![Inside Derek's office, with the computer, filing cabinet and safe in reach]({{ site.baseurl }}/assets/images/safetynet/m01_first_contact/06-dereks-office-player.png)
 
-> Hint: The sticky note on the monitor is the clue. What single thing is Derek sentimental about, and where have you already seen it?
+> Hint: The sticky note on the monitor is the clue. What single thing is Derek sentimental about, and where might someone throw away a card about it?
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-The monitor's note says "Anniversary". You have already used that date on Patricia's safe. The same date, as four digits, is the password here. This is the lesson of the mission in one object: reuse one memorable secret and it opens everything.
+The monitor's note says "Anniversary". An anniversary card in the break room recycling bin has April 19th circled, and says Derek keys dates month first, then day. Those four digits are the password here. This is the lesson of the mission in one object: reuse one memorable secret and it opens everything.
 
 </details>
 
@@ -310,7 +314,7 @@ The monitor's note says "Anniversary". You have already used that date on Patric
 <details markdown="1">
 <summary>Nudge</summary>
 
-Encoded Note (1) ends in `=` and uses only letters and digits: that is Base64. Encoded Note (2) keeps normal word lengths but the letters are wrong: that is ROT13. You need the CyberChef workstation, a laptop in the former manager's office. Decode each note and act on what it says: one reveals a safe code, the other confirms the computer and cabinet password.
+Encoded Note (1) ends in `=` and uses only letters and digits: that is Base64. Encoded Note (2) keeps normal word lengths but the letters are wrong: that is ROT13. You need the CyberChef workstation, a laptop in Patricia's briefcase. Decode each note and act on what it says: one reveals a safe code (and a username for later), the other confirms the computer and cabinet password.
 
 **Learn it:** ==action: Decode the first word of the ROT13 note by hand== by shifting each letter back 13 places, then check it in CyberChef.
 
@@ -321,7 +325,7 @@ Encoded Note (1) ends in `=` and uses only letters and digits: that is Base64. E
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Take the CyberChef workstation from the former manager's office==.
+1. \==action: Take the CyberChef workstation from Patricia's briefcase== (you need the lockpick to open it).
 2. \==action: Paste the Base64 note into Input and add **From Base64**==. Read the safe code it reveals.
 3. \==action: Clear the recipe, paste the ROT13 note, and add **ROT13**==. Read the reminder it gives.
 4. \==action: Use the values in the game== on the matching safe and the computer or cabinet.
@@ -339,7 +343,7 @@ Encoded Note (1) ends in `=` and uses only letters and digits: that is Base64. E
 <details markdown="1">
 <summary>Nudge</summary>
 
-The filing cabinet uses the anniversary date again. The storage closet safe uses the code from the decoded Base64 note. The personal safe under the desk uses his birthday, which a note in a desktop folder spells out (the day and month, reversed from the anniversary). Collect the operational documents inside: the casualty projections, the manifesto and the campaign materials are the evidence that gates the rest of the mission.
+The filing cabinet uses the anniversary date again. The storage closet safe uses the code from the decoded Base64 note. The personal safe under the desk uses his birthday, which a note in a desktop folder spells out (19 March, keyed month first, then day). Collect the operational documents inside: the casualty projections, the manifesto and the campaign materials are the evidence that gates the rest of the mission.
 
 </details>
 
@@ -363,7 +367,7 @@ The filing cabinet uses the anniversary date again. The storage closet safe uses
 <details markdown="1">
 <summary>Nudge</summary>
 
-Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal, which is the attack box for the server work, and a SAFETYNET drop-site terminal for submitting flags. The password list and server details come from Derek's storage safe, so collect them before you start the server work.
+Use Kevin's server room keycard on the reader. Inside is the IT Audit Station, the workstation for the server work, and the SAFETYNET Drop-Site Terminal. The password list and server details come from Derek's storage safe, so collect them before you start the server work.
 
 </details>
 
@@ -371,7 +375,7 @@ Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal, 
 <summary>Recipe</summary>
 
 1. \==action: Use the **Server Room Keycard** on the RFID reader==.
-2. \==action: Approach the VM Access Terminal== to begin the technical stage.
+2. \==action: Approach the IT Audit Station== to begin the technical stage.
 
 </details>
 
@@ -381,19 +385,19 @@ Use Kevin's server room keycard on the reader. Inside is a Kali Linux terminal, 
 
 **Where:** the server room and your phone. **Goal:** unlock the ENTROPY archive and report Operation Shatter.
 
-> Hint: The archive opens with the decryption key you pulled from Derek's account, not a PIN. Submit it where the archive asks.
+> Hint: The archive opens with a decryption key from the server work, not a PIN. Submit it where the archive asks.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Submit the decryption key at the ENTROPY Encrypted Archive to open it. Inside are the two top-secret documents: the final authorization and the network architecture. Reading the network architecture is the reveal that ENTROPY is far bigger than Derek. Then open your phone and message Agent HaX to report Operation Shatter. You call her in later to be debriefed.
+Submit the decryption key at the ENTROPY Encrypted Archive to open it. Inside are three documents: the Architect's authorisation, the ENTROPY Network Architecture and the Operation Shatter Target Database. Reading the network architecture is the reveal that ENTROPY is far bigger than Derek. Then open your phone and choose **I discovered what ENTROPY is planning - Operation Shatter** in Agent HaX's thread to report it. You must report before she will take your debrief call.
 
 </details>
 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Submit the decryption key at the ENTROPY archive== and take both documents.
+1. \==action: Submit the decryption key at the ENTROPY archive== and take the three documents.
 2. \==action: Read the ENTROPY Network Architecture document== for the full picture.
 3. \==action: Open your phone and report Operation Shatter to Agent HaX==.
 
@@ -403,21 +407,21 @@ Submit the decryption key at the ENTROPY Encrypted Archive to open it. Inside ar
 
 ### The Finale: Confronting Derek and the Launch Device {#hints-finale}
 
-**Where:** the break room, then the launch device. The confrontation only opens once you have read the ENTROPY archive. What you choose is your decision; no ending is a failure, and these hints help you understand what you hold, not pick for you.
+**Where:** the break room, then the launch device. The confrontation only opens once you have read the ENTROPY Network Architecture document. What you choose is your decision, and these hints help you understand what you hold, not pick for you.
 
 > Hint: Derek is in the break room. He will only engage once you have the full picture from the archive. When you talk to him, you are deciding how this ends.
 
 <details markdown="1">
 <summary>Nudge: the confrontation</summary>
 
-Talk to Derek in the break room. If you have not read the ENTROPY archive, he brushes you off; go back and finish that first. Once you confront him, you can arrest him, call it in, try to turn him, expose him publicly, or demand his surrender. You can also fight him. Each path reaches an ending; the debrief and credits reflect what you did and who you protected along the way.
+Talk to Derek in the break room. If you have not read that document, he brushes you off; go back and finish the server work first. Once you confront him, you can fight him, arrest him, ask him to work with you, expose him publicly or demand his surrender. Each path reaches an ending; the debrief and credits reflect what you did and who you protected along the way.
 
 </details>
 
 <details markdown="1">
 <summary>Nudge: stopping the attack</summary>
 
-After the confrontation Derek's launch device comes to you. It is armed. The launch authorization code you read in the `shatter` account aborts it. Enter that code and choose to abort, and Operation Shatter is dead. The device also offers a launch option; the game lets you make that choice and shows you its consequences in the debrief.
+After the confrontation Derek's launch device comes to you. It is armed. The launch authorisation code from the server work aborts it. Enter that code and choose to abort, and Operation Shatter is dead. The device also offers a launch option; the game lets you make that choice, and the end credits and debrief record what followed. Launching shows as a failed mission.
 
 **To learn more:** the launch code comes from the server work. The companion sheet covers that stage if you do not have it yet.
 
@@ -429,13 +433,13 @@ After the confrontation Derek's launch device comes to you. It is armed. The lau
 Two decisions run through the mission and show up in the ending:
 
 - **Kevin.** Derek's contingency plan frames Kevin for the breach. Once you have read it, you can warn Kevin, leave the evidence for investigators to clear him, or do nothing. The forensic details on the planted files (a flagged header mismatch, two sessions at once, a marketing manager filing IT reports) show the frame is Derek's work. Agent HaX will tell you the logs were filed by Derek if you go to accuse Kevin.
-- **Civilians.** Sarah, Kevin, Maya and the two staff in the main office, Fatima Begum and Graham Whitfield, are not ENTROPY. You can knock Sarah, Kevin and Maya out to take their items, but the debrief records it, and Maya is the informant whose intelligence you lose if she goes down. Fatima and Graham carry nothing you need, so knocking them out gains you nothing. Agent HaX tells you to stand down, the staff stop using the water cooler, and the debrief lists them as bystanders you knocked out.
+- **Civilians.** Sarah, Kevin, Maya and the two staff in the main office, Fatima Begum and Graham Whitfield, are not ENTROPY. You can knock Sarah, Kevin and Maya out to take their items, but the end credits record it, and Maya is the informant whose intelligence you lose if she goes down. Fatima and Graham carry nothing you need, so knocking them out gains you nothing. Agent HaX tells you to stand down, the staff stop using the water cooler, and the end credits list them as bystanders you knocked out.
 
 None of these are scored as right or wrong by the game; they change who is safe at the end.
 
 </details>
 
-After you decide, ==action: finish the launch device, then open Agent HaX's thread and choose to be debriefed==. That rings her for a short call: choose **On my way** to end the mission and she hands you over to the debrief in person. If you still have optional objectives open, the game asks whether to end the mission now or keep going; keep going and the call ends with no debrief, and the same choice is still in her thread.
+After you decide, ==action: finish the launch device==. Agent HaX rings you with a short stay-put call. When you have reported Operation Shatter (see the archive stage), ==action: open her thread and choose **Operation Shatter resolved, I'm ready for debrief**==. That rings her again: choose **On my way** to end the mission and she hands you over to the debrief in person, or **Not yet. I want to finish up first.** to keep playing; the same choice stays in her thread. If you still have optional objectives open, the game asks whether to end the mission now or keep going.
 
 ### What the Tools and Locks Are Telling You {#error-messages}
 
@@ -444,7 +448,8 @@ After you decide, ==action: finish the launch device, then open Agent HaX's thre
 | "Incorrect" on a PIN or password lock | The value is not exact, or you have the wrong clue for this lock |
 | A lock stalls after several tries | You are guessing; work the value out from its clue and wait a moment |
 | Maya only offers "Not here. I'll come to your office." | She is away from her office, on a short walk; talk to her again once she is back at her desk |
-| Derek brushes you off in the break room | You have not read the ENTROPY archive yet; finish the VM stage first |
+| Derek brushes you off in the break room | You have not read the ENTROPY Network Architecture document yet; finish the server work first |
+| Agent HaX has no debrief option | You have not reported Operation Shatter yet, or have not finished the launch device |
 | CyberChef output is gibberish | You used the wrong recipe: Base64 text through ROT13, or the reverse |
 | A decoded value is rejected by a lock | You tidied the case or added a space; re-enter it exactly as decoded |
 
@@ -460,16 +465,23 @@ A chalkboard in the main office hints at the code ("think election year"). Openi
 </details>
 
 <details markdown="1">
-<summary>Patricia's briefcase (lockpick only)</summary>
+<summary>Patricia's briefcase: the notes inside</summary>
 
-Patricia's briefcase in her office has no key; it only opens to the lockpick. Inside is her reconstruction of how ENTROPY infiltrated the company over eighteen months. It is the clearest single account of the back story.
+Besides Derek's office key and the CyberChef workstation, the briefcase holds Patricia's investigation notes, her own note on the encoding methods, and her reconstruction of how ENTROPY infiltrated the company over eighteen months. It is the clearest single account of the back story.
 
 </details>
 
 <details markdown="1">
-<summary>The storage closet practice safe</summary>
+<summary>The storage closet backup log</summary>
 
-The storage closet holds a backup copy of the IT room code and, for completeness, a reference note. Useful if you missed the voicemail.
+Besides Derek's safe, the storage closet holds a backup copy of the maintenance codes, including the IT room code. Useful if you missed the voicemail.
+
+</details>
+
+<details markdown="1">
+<summary>Kevin's office</summary>
+
+Kevin's own workstation is in his office off the west hallway, with a sticky note beside the password. His out-of-office note and IT incident log are there too. The files on his machine are part of the frame-up that the moral-threads spoiler describes.
 
 </details>
 
@@ -484,7 +496,7 @@ Maya is not always at her desk. After your first conversation with her, she may 
 
 ## Try It on the Command Line (Optional) {#command-line}
 
-The server stage already happens on a real Kali shell, and its attack exercises are in the [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/) sheet. These short exercises let you practise the decoding safely on your own machine or a lab VM, with your own data, not anything from the game. Use any current Linux distribution with `base64` and `tr` available.
+The server stage already happens on a real shell, and its attack exercises are in the [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m01-first-contact-vm-technical-steps/) sheet. These short exercises let you practise the decoding safely on your own machine or a lab VM, with your own data, not anything from the game. Use any current Linux distribution with `base64` and `tr` available.
 
 ### Encoding by hand and by tool {#cli-encoding}
 
@@ -517,7 +529,7 @@ Work through these after you finish. Use your own run: the server values were ge
 
 > Question: Derek hid notes in Base64 and ROT13. Neither needed a key to read. Explain, to a non-technical colleague, the difference between hiding data and protecting it.
 
-> Question: You decoded a note and the value still failed the lock until you entered it exactly. What does that tell you about how the lock checks the value, and why does the same care matter when you type a password into SSH?
+> Question: You decoded a note and the value still failed the lock until you entered it exactly. What does that tell you about how the lock checks the value, and why does the same care matter when you type a password into any login?
 
 > Action: Take a sentence of your own. Encode it in Base64, then run that through ROT13. Swap the result with a classmate and race to recover each other's sentence. Note which clue told you the order to undo them in.
 
