@@ -305,16 +305,16 @@ By the east racks in the server hall you may also find the operators' duty sheet
 
 ### Stage 4: Out of the Jail {#hints-vm-flag4}
 
-**Where:** the attack box's terminal, against the core host, after the clock is stopped. **Goal:** reach the service running in a chroot jail, escape onto the host, read the flag in root's home, and submit it at the core host terminal.
+**Where:** the attack box's terminal, against the core host, after the clock is stopped. **Goal:** reach the service running in a chroot jail, escape onto the host, open the sealed archive in root's home with the core access code, read the flag inside, and submit it at the core host terminal.
 
 > Hint: The core service runs in an older confined area, a chroot jail. It is weaker than a container. Reach the service, see that the filesystem around you is thin, and break out to the real root.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan the core host and find the service port. Connect and you land inside a chroot jail, with no password asked for, so this stage is exploitation like Stage 3. The filesystem is thin, a few directories and little else. A process that still holds enough privilege can change its root directory again from a point outside the jail and reach the real host root. The flag is in root's home on the host, not in the jail, next to the core host's file index and an unsent vendor notice for Carrow Controls. As on the release host, there is no root login over SSH, so the escape is the only route.
+Scan the core host and find the service port. Connect and you land inside a chroot jail, with no password asked for, so this stage is exploitation like Stage 3. The filesystem is thin, a few directories and little else. A process that still holds enough privilege can change its root directory again from a point outside the jail and reach the real host root. In root's home on the host, not in the jail, you find the core host's file index, an unsent vendor notice for Carrow Controls, and a sealed archive he left for the agent. The flag is inside that archive. As on the release host, there is no root login over SSH, so the escape is the only route onto the box.
 
-The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`) is part of the story, not a box login. It is his invitation, and it opens nothing on the core host for you. Do not try to sign in with it: the way onto the box is the chroot escape.
+The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`) is not a box login, so it will not sign you in over SSH: the way onto the box is the chroot escape. What it does open is the sealed archive in root's home, where flag 4 sits. You need both, the escape to reach the archive and the code to open it.
 
 **Learn it:** ==action: List `/` inside the shell you land in== and compare it with a full host's root. A thin listing means you are confined.
 
@@ -329,11 +329,11 @@ The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`)
 2. \==action: Connect to the service with `nc <core host> <port>`==, and note that the shell is in a jail.
 3. \==action: List `/` and confirm the filesystem is thin==.
 4. \==action: Escape the chroot onto the host root, following the field guide==.
-5. \==action: Read the flag from root's home on the host==, beside the file index and the vendor notice, and submit it at the core host terminal.
+5. \==action: Open the sealed archive in root's home with the core access code and read the flag inside==, beside the file index and the vendor notice, and submit it at the core host terminal.
 
 </details>
 
-> Note: The core access code (`TSRCT-CORE-9F21`) is a story prop, not a credential. It logs in to nothing. The chroot escape is the only route onto this box.
+> Note: The core access code (`TSRCT-CORE-9F21`) is not a login, so it will not sign you in: the chroot escape is the only route onto the box. It is the password to the sealed archive in root's home, and flag 4 is inside that archive, so you need both the escape and the code.
 
 > Warning: The jail holds no flag either. Do not submit anything you read inside the jail. The flag is in root's home on the host, after the escape.
 
