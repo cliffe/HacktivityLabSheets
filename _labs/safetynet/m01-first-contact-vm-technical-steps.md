@@ -51,7 +51,7 @@ Your attack box is the Kali terminal in the server room. You get into the server
 
 The game gives you the flags, and you submit each one at the SAFETYNET Drop-Site Terminal in the same room.
 
-1. \==action: Open the VM Access Terminal in the server room==. This is the Kali box.
+1. \==action: Open the IT Audit Station (Kali) in the server room==. This is the Kali box.
 2. \==action: Log in using the login on the terminal's sticky note==. This sheet does not repeat it.
 3. \==action: Save Derek's password list to a file on Kali== (for example `passwords.txt`), one password per line.
 
