@@ -2,7 +2,7 @@
 title: "Full Disclosure (Break Escape Mission 10)"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Play the browser-based Season 1 finale: raid a Cold War bunker with a team, clone a card and pick a locker for a spare, dust a keypad to narrow a PIN and crack it, decode a Base64 margin note, read a door log against an alibi to find the sleeper on your own team, and decide at the Architect's console what happens to the database and to him."
+description: "Play the browser-based Season 1 finale: raid a Cold War bunker with a team, clone a card and pick a locker for a spare, dust a keypad to narrow a PIN and crack it, decode a Base64 margin note, read a door log against an alibi and a bench log to find the sleeper on your own team, and decide at the Architect's console what happens to the database and to him."
 overview: |
   Tomb Gamma, a converted Cold War bunker under the Montana hills. At six o'clock the man behind ENTROPY's plan releases every weakness SAFETYNET ever catalogued to every city at once, with two cells given a head start at four. You go in with Task Force Null, take his systems one host at a time, and reach his console before the clock does. One of the team beside you is a sleeper, placed years ago, and you have to find them without naming the wrong person.
 
@@ -58,14 +58,14 @@ The work on the three servers is in the linked companion sheet, [VM Technical St
 
 ## Getting Started {#getting-started}
 
-You are Agent 0x00, back with SAFETYNET for the last night of the season. Director Netherton runs the raid from a folding table at the gate with Task Force Null. Your handler, Agent HaX, is on the line to the end; the Architect trained her, and she has told you so. Mission 9 told you a sleeper is on tonight's team. Your job is to get a foothold on the bunker's systems, work down to the core, find the sleeper, and reach the Architect before his release goes out.
+You are Agent 0x00, back with SAFETYNET for the last night of the season. Director Netherton runs the raid from a folding table at the gate with Task Force Null. Your handler, Agent HaX, is on the line to the end; the Architect trained her, and she has told you so. Mission 9 told you a sleeper is on tonight's team (the hunt runs unless Mission 9 ended with you taking the Recruiter's offer or double-crossing her, in which case the sleeper question is already settled for you). Your job is to get a foothold on the bunker's systems, work down to the core, find the sleeper, and reach the Architect before his release goes out.
 
 You do not need any prior knowledge before you start. The one new decode (Base64) is taught in the warm-up and covered in **Concepts**; everything else reinforces skills from earlier missions.
 
 1. \==action: Start the Break Escape mission **Full Disclosure**==.
 2. \==action: Watch the briefing at the forward post, then close it==. Take the aside that follows; it opens the search for the sleeper.
 3. \==action: Talk to Director Netherton== about Nightshade in the van, and make the tether choice.
-4. \==action: Open your phone whenever you are unsure==. Agent HaX reads your progress and answers from where you are.
+4. \==action: Open your phone whenever you are unsure==. Agent HaX reads your progress and answers from where you are. Her first text says: "If you're stuck, open this chat and pick from my list." The list is her hub of topics, and it changes as the night goes on.
 
 The mission takes about 100 to 110 minutes. Your progress is kept between sessions.
 
@@ -83,7 +83,7 @@ Your kit is the phone (Agent HaX), a **Lock Pick Kit**, an **RFID Cloner**, a **
 
 The raid moves room by room: the forward post at the gate, down the blast tunnel to the security office, the stair down to the workshop and the power room, the server hall, across the gallery and into the core. Task Force Null moves with you.
 
-Agent HaX's phone reads your progress. Her hints change as the night moves, and she volunteers what the clues point at once you have them. She jams near the core, so gather what you can before you go in.
+Agent HaX's phone reads your progress. Her list of topics changes as the night moves, and she volunteers what the clues point at once you have them. She jams near the core, so gather what you can before you go in.
 
 > Tip: Press **Q** to switch between your fists and your open hand. You need the open hand to use things. Striking a member of your own team has a cost that shows in the credits.
 
@@ -121,7 +121,7 @@ Alibi:      Malhotra was on the line with the handler at 02:10.
 
 Both cannot be true of the same person at once. Either the alibi is wrong, or the badge was not Malhotra's to use at 02:10. A planted badge is the classic way an insider throws the log at a colleague. The lesson is that a log narrows the field and names a card; a second source, an alibi or a bench log, is what turns a card into a person.
 
-In the game three things point somewhere: the door log at the security office, the alibis you can check, and a bench log. Your handler tells you when you have all three and reminds you that the call is yours and that you do not have to make it.
+In the game three things point somewhere: the door log at the security office, the alibis you can check, and the bench log in the workshop. The door log and the bench log are the two you must have read before any accusation is on the table; HaX can then walk you through who was where. Your handler reminds you that the call is yours and that you do not have to make it.
 
 | What you see in a log | What it probably means | What to try |
 | --- | --- | --- |
@@ -133,7 +133,7 @@ In the game three things point somewhere: the door log at the security office, t
 
 ### Naming a Suspect, and the Cost of a Wrong Name {#naming}
 
-You can name the sleeper on the phone to the Director or face to face. A name you can support with the door log, an alibi and the bench log holds up. A name on instinct does not, and a wrong accusation has a cost: an officer is sent back, the real sleeper hears that you are looking, and the credits record it. This is the difference between an investigation and a hunch, and the game makes you feel it.
+You can name the sleeper on the phone to HaX ("I know who WREN is.") or face to face, with a teammate who offers "You're WREN." as a line. Both routes appear only once you have read the door log and the bench log. A name you can support with the door log, an alibi and the bench log holds up. A name on instinct does not, and a wrong accusation has a cost: an officer is sent back, the real sleeper hears that you are looking, and the credits record it. This is the difference between an investigation and a hunch, and the game makes you feel it.
 
 > Question: What is the smallest set of evidence you would want before you named a colleague as a traitor on an open line, and why is instinct the worst of the things you could use?
 
@@ -141,9 +141,9 @@ You can name the sleeper on the phone to the Director or face to face. A name yo
 
 The bunker reuses the physical attacks from earlier missions, so most of this is recognition.
 
-- **A cloned card.** A contractor's card opens the power room. Clone it the usual way: read, crack if needed, save, then emulate at the reader. If the owner will not stand for it, the spare card is in a fitter's locker.
-- **A picked locker.** The fitter's locker is a key lock. The Lock Pick Kit opens it one pin at a time under light tension, and the spare power-room card is inside.
-- **A keypad and a smudge.** The gallery's outer lock is a four-digit PIN. Dust the keypad plate with the Fingerprint Kit first: the keys that are worn or marked are the ones in the PIN, which cuts the number of combinations the **PIN Cracker (Kowalczyk's)** has to try. The cracker then finishes it. There are other ways through the outer lock too (a teammate's card or code), but the dust-and-crack route needs nobody.
+- **A cloned card.** A contractor's card (Imran Siddiqui's, in the workshop) opens the power room. Clone it the usual way: read, crack if needed, save, then emulate at the reader. If the owner will not stand for it, the spare card is in a fitter's locker.
+- **A picked locker.** The Fitter's Locker, in the security office, is a key lock. The Lock Pick Kit opens it one pin at a time under light tension, and the spare power-room card is inside.
+- **A keypad and a smudge.** The outer lock at the east end of the gallery is a four-digit PIN. Dust the Keypad Face Plate with the Fingerprint Kit first: the keys that are worn or marked are the ones in the PIN, which cuts the number of combinations the **PIN Cracker (Kowalczyk's)** has to try. The cracker then finishes it. There are other ways through (a teammate's card or code, and a maintenance slip you can find in the server hall), but the dust-and-crack route needs no teammate. It does need the lock guard, Sione Fonoti, not to be watching: his sight cone is drawn on the floor, so you can see when the keypad is clear.
 
 A dusted keypad is a real attack. A four-digit PIN has ten thousand combinations, but if the dust shows only four keys are ever pressed, the PIN uses those four digits, and the count drops sharply. If the dust shows four distinct keys, the PIN is some arrangement of those four: twenty-four orderings. The cracker walks that short list in seconds.
 
@@ -151,13 +151,13 @@ A dusted keypad is a real attack. A four-digit PIN has ten thousand combinations
 
 ### Encoding Is Not Protection {#encoding}
 
-A note in the workshop margin is written in **Base64**, the scheme Mission 2 taught. Base64 rewrites any data as printable text using `A`-`Z`, `a`-`z`, `0`-`9`, `+` and `/`, often ending in one or two `=` signs. It has no key, so it protects nothing; it only changes the alphabet the note is written in. One unbroken block of mixed-case letters and digits with no spaces is Base64, not English, and From Base64 reads it.
+A strip pinned beside the Casualty Sheet in the workshop (the **Margin Strip**) is written in **Base64**, the scheme Mission 2 taught. Base64 rewrites any data as printable text using `A`-`Z`, `a`-`z`, `0`-`9`, `+` and `/`, often ending in one or two `=` signs. It has no key, so it protects nothing; it only changes the alphabet the note is written in. One unbroken block of mixed-case letters and digits with no spaces is Base64, not English, and From Base64 reads it.
 
 ```
 True range is higher.   ->   VHJ1ZSByYW5nZSBpcyBoaWdoZXIu
 ```
 
-The margin note decodes to a sentence and a password for a bench terminal. Its content matters to the story: the Architect's own analyst corrected his casualty figure and he knew. The encoding did not hide it from anyone with a decoder.
+The strip decodes to a few sentences and a password for a bench terminal. Its content matters to the story: the Architect's own analyst corrected his casualty figure and he knew. If you read her corrected model, Dr Abena Asante in the server hall has a line about it, and so does the Architect at the core. The encoding did not hide it from anyone with a decoder.
 
 > Question: The analyst wrote the correction in Base64 in a margin. Who was that meant to keep the note from, and who could still read it? What would she have needed to actually protect it?
 
@@ -175,7 +175,7 @@ There is a fourth idea in the background, the one the Architect champions: **ful
 
 ### The Endings and Their Cost {#endings}
 
-The night ends with three decisions: what happens at his console, what happens to the database, and what happens to him. There are six endings. One, joining ENTROPY, is reached by three deliberate picks, each with a warning and a way back, and it ends the mission as a failure by design. The others (arrest, talking him into surrender, lethal force as he reaches for the key, and shooting him where he sits) are not scored right or wrong. The game states the cost of each before you commit. The hints help you understand what each holds; they do not pick for you.
+The night ends with up to three decisions: what happens at his console, what happens to the database, and what happens to him. There are six endings. One, joining ENTROPY, is reached by deliberate picks at the console, each with a warning and a way back, and it ends the mission as a failure by design. Wiping both copies of the database is itself an ending, and the other four (arrest, talking him into surrender, lethal force as he reaches for the key, and shooting him where he stands or sits) come from what you do about him. None of those five is scored right or wrong. The game states the cost of each before you commit. The hints help you understand what each holds; they do not pick for you.
 
 ## Stuck? Hints, Stage by Stage {#hints}
 
@@ -187,16 +187,16 @@ Find the stage you are on. The stages are in play order. Read the hint, then go 
 
 **Where:** the forward post at the gate. **Goal:** take the briefing, make the tether choice, submit the first flag, and get through the blast door.
 
-> Hint: Everything starts at Netherton's table. Take the briefing and the aside, answer his question about Nightshade, then start the gate console.
+> Hint: Everything starts at Netherton's table. Take the briefing and the aside, answer his question about Nightshade, then start the field console by the gate.
 
 ![The gate console and the gate terminal on the right of the forward post, with your agent beside them]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/01-gate-console-and-terminal.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Close the briefing and take the aside that follows; it opens the search for the sleeper. Talk to Director Netherton about Nightshade in the van and make the tether choice. Then click the gate console; that is what starts the breach, Arakawa's call and the split. Submit the first flag at the gate terminal, and HaX opens the blast door.
+Close the briefing and take the aside that follows; it opens the search for the sleeper. Talk to Director Netherton about Nightshade in the van and make the tether choice. Then click the field console by the gate. That is what brings on the split line and Arakawa's call. Submit the first flag at the gate terminal. The blast door opens once the table business is settled, the flag is in and Arakawa's call is done, and HaX opens it.
 
-**Learn it:** ==action: Click the gate console before you submit the flag==. The first objective only moves once you touch the console.
+**Learn it:** ==action: Click the field console before you submit the flag==. HaX nudges you back to it if you go to the terminal first, and the split line and Arakawa's call follow from it.
 
 </details>
 
@@ -205,18 +205,18 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 1. \==action: Close the briefing and take the aside==.
 2. \==action: Talk to Netherton== and make the tether choice.
-3. \==action: Click the gate console==, then submit the first flag at the gate terminal.
+3. \==action: Click the field console by the gate==, then submit the first flag at the gate terminal.
 4. \==action: Go through the blast door== when HaX opens it.
 
 </details>
 
 > Note: How to get the gate flag off the monitoring host is in the companion, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m10-full-disclosure-vm-technical-steps/).
 
-> Tip: The **gate console** at the forward post is the thing to click to start the breach. If you go to the gate terminal first, the game nudges you back to the console; submitting the first flag also sets the breach going, so the blast door opens either way.
+> Tip: The **Field Console (Gate)** at the forward post is what you click to start the first server task. If you go to the Gate Terminal first, HaX nudges you back to the console. If the door stays shut after the flag, the table business or Arakawa's call is not finished yet; "Their monitoring first" and "Netherton won't call it till the table's settled" are the game telling you which.
 
 ### Get Below Ground {#hints-below}
 
-**Where:** the blast tunnel and the security office. **Goal:** reach the security office and answer the duty handset.
+**Where:** the blast tunnel and the security office. **Goal:** reach the security office, answer the duty handset and take the stair down.
 
 > Hint: The inner door opens as you reach it. The duty handset rings; answer it.
 
@@ -230,29 +230,29 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 </details>
 
-> Note: This is also where the sleeper hunt starts. Read the door log at the monitoring desk; the hints for that are under **Finding the Sleeper** below.
+> Note: This is also where the sleeper hunt starts. The Monitoring Desk: Door Log is "locked to their desk's own login" until the gate flag is in, then it reads out to you. The hints for the hunt are under **Finding the Sleeper** below. The Fitter's Locker and the Records Cupboard are in this room too.
 
 ### Cut the Gallery's Power {#hints-cut}
 
 **Where:** the workshop and the power room. **Lock:** the power room takes a contractor's card. **Goal:** cut the power to the gallery.
 
-> Hint: The power room wants a contractor's card. Clone the contractor's, talk him into it, or pick the fitter's locker for the spare.
+> Hint: The power room wants a contractor's card. Clone the contractor's in the workshop, talk him into it, or pick the Fitter's Locker in the security office for the spare.
 
 ![The power room, with the fitter beside the shutter isolator panel and its key switch]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/05-power-room-shutter-isolator.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Clone Imran's card the usual way (read, crack if needed, save, emulate at the reader), or talk him into opening it. If neither works for you, pick the fitter's locker in the workshop; the spare power-room card is inside. In the power room, the fitter Wendell cuts the power if you tell him to; if he will not, cut it by hand. Either way, HaX confirms the gallery shutter is down.
+Clone Imran's card the usual way (read, crack if needed, save, emulate at the reader), or talk him into opening it. If neither works for you, pick the Fitter's Locker back in the security office; the Spare Power-Room Card is inside. In the power room, the fitter Wendell cuts the power if you tell him to; if he will not, cut it by hand. Either way, HaX confirms the gallery shutter is down.
 
-The workshop also holds a casualty sheet with a Base64 note in the margin (see **The Margin Note** below). It is optional.
+The workshop also holds a Casualty Sheet and, pinned beside it, a Margin Strip that is Base64 (see **Optional Side Content** below). It is optional.
 
 </details>
 
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Clone Imran's card, or pick the fitter's locker for the spare==.
+1. \==action: Clone Imran's card in the workshop, or pick the Fitter's Locker in the security office for the spare==.
 2. \==action: Open the power room and tell Wendell to cut the power==, or cut it by hand.
 
 </details>
@@ -270,7 +270,7 @@ The workshop also holds a casualty sheet with a Base64 note in the margin (see *
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Pick up the **Schedule Copy Sign-in Card** from under the release console==. Read it; its login opens the staging copy. How to use it is in the companion.
+1. \==action: Pick up the **Schedule Copy Sign-in Card** from under the release console==. Read it; its login opens the staging copy. How to use it is in the companion. The **Operator's Duty Sheet** by the racks is the second find, for the hatch.
 2. \==action: Submit the flag at the release console==.
 3. \==action: Submit the flag at the sealed hatch==.
 4. \==action: Optionally use the release console controls== to close the backdoor.
@@ -283,16 +283,16 @@ The workshop also holds a casualty sheet with a Base64 note in the margin (see *
 
 **Where:** the security office, the workshop bench, and the team. **Goal:** gather the door log, the alibis and the bench log, and decide whether to name the sleeper.
 
-> Hint: Three things point somewhere: the door log at the monitoring desk, the alibis you can check with the team, and the bench log. A badge in a log names a card, not a person.
+> Hint: Three things point somewhere: the door log at the monitoring desk, the alibis you can check with the team, and the Bench Log: Outgoing in the workshop. A badge in a log names a card, not a person.
 
 ![The security office, with your agent at the monitoring desk where the door log is kept and a guard on watch]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/03-security-office-monitoring-desk.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Read the door log at the security office monitoring desk. It names a badge at the core's service door at a key minute. Check that badge's owner against where they were: your handler can confirm an alibi. The bench log is a third source. When you have all three, HaX tells you they point somewhere and reminds you the call is yours.
+Read the door log at the security office monitoring desk once the gate flag is in. It names a badge at the core's service door at a key minute. Check that badge's owner against where they were: HaX's "Who was where at ten past?" gives the alibi. The Bench Log: Outgoing, on a clipboard in the workshop, is the third source, and "Who signed for the case?" follows from it. No accusation is offered until you have read both the door log and the bench log. HaX then reminds you the call is yours.
 
-You can name the sleeper on the phone to the Director or face to face. Name them from the evidence, not from a face. A wrong name sends an officer back and warns the real sleeper.
+You can name the sleeper on the phone to HaX or face to face. Name them from the evidence, not from a face. A wrong name sends an officer back and warns the real sleeper.
 
 **Learn it:** ==action: Write down the badge the door log names, and the alibi that contradicts it==, before you decide. The gap between the two is the whole clue.
 
@@ -303,27 +303,29 @@ You can name the sleeper on the phone to the Director or face to face. Name them
 
 1. \==action: Read the door log at the security office monitoring desk==.
 2. \==action: Check the named badge's owner against their alibi== with the team or your handler.
-3. \==action: Read the bench log==.
-4. \==action: Name the sleeper on the phone or face to face== when the evidence supports it, or leave it.
+3. \==action: Read the Bench Log: Outgoing in the workshop==.
+4. \==action: Name the sleeper with "I know who WREN is." on the phone, or "You're WREN." face to face== when the evidence supports it, or leave it.
 
 </details>
 
 ![The workshop, with your agent beside the bench and its clipboard, and the contractor and a guard on the floor]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/04-workshop-bench-log.png)
 
-> Warning: Naming the wrong person has a cost and cannot be taken back cleanly. If the evidence does not point one way yet, you are allowed to leave it; the sleeper can also be dealt with at the core.
+> Warning: Naming the wrong person has a cost and cannot be taken back cleanly. If the evidence does not point one way yet, you are allowed to leave it; the sleeper can also be dealt with at the core. If Mission 9 settled the question for you, the hunt does not run and these options never appear.
 
 ### Across the Gallery to the Core {#hints-gallery}
 
-**Where:** the gallery. **Lock:** a four-digit outer lock. **Goal:** open the outer lock and reach the core.
+**Where:** the gallery. **Lock:** the core's four-digit outer lock, at the east end. **Goal:** open the outer lock and reach the core.
 
-> Hint: The outer lock is four digits, and your handler's hints go quiet near the core. Dust the keypad to see which keys are used, then let the cracker finish.
+> Hint: The outer lock is four digits, and your handler goes quiet near the core. Several routes lead through it. Dust the keypad to see which keys are used and let the cracker finish, or look for a code written down.
 
 ![The gallery, with the lock party and the guards in the middle and the keypad on the right-hand wall]({{ site.baseurl }}/assets/images/safetynet/m10_full_disclosure/07-gallery-lock-party.png)
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Dust the outer lock's keypad plate with the Fingerprint Kit. The worn keys are the digits in the PIN, which cuts the cracker's work to a short list of orderings. Run the **PIN Cracker (Kowalczyk's)** on it. A teammate's card or code also opens it, and so does Victoria if she is helping you, but the dust-and-crack route needs nobody. Decide what to do about the head-start share at the lock before you go through.
+Dust the Keypad Face Plate with the Fingerprint Kit. The worn keys are the digits in the PIN, which cuts the cracker's work to a short list of orderings. Run the **PIN Cracker (Kowalczyk's)** on it. The lock guard, Sione Fonoti, challenges you if his sight cone is on you at the keypad, so wait until the cone is clear.
+
+A written code also works. The **Lock Maintenance Slip**, near the east racks in the server hall, gives the outer lock's code, and the guard's own code card and a teammate's note carry it too. Victoria or Vos can open it from inside if they are helping you. Decide what to do about the head-start share at the lock before you go through.
 
 **Learn it:** ==action: Count the worn keys on the plate== before you run the cracker. Four worn keys means the PIN is an ordering of those four.
 
@@ -332,8 +334,8 @@ Dust the outer lock's keypad plate with the Fingerprint Kit. The worn keys are t
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Dust the outer lock's keypad plate== and note which keys are worn.
-2. \==action: Run the PIN Cracker on the outer lock==; it tries the orderings of the worn digits.
+1. \==action: Dust the Keypad Face Plate== and note which keys are worn.
+2. \==action: Wait until Fonoti's sight cone is clear, then run the PIN Cracker on the outer lock==; it tries the orderings of the worn digits.
 3. \==action: Go through to the core== once it opens.
 
 </details>
@@ -376,14 +378,14 @@ When you reach the core the Architect arrives. Submit the core flag at the core 
 <details markdown="1">
 <summary>Nudge</summary>
 
-At the console you stop the release or take the key. The database choice is secure it, coordinated disclosure, or wipe both copies, each with the cost named in **Concepts**. His end is arrest, surrender, lethal force as he reaches for the key, or shooting him where he sits. The closing scene follows: six o'clock, or a hearing, or the Citadel.
+At the console you stop the release or take the key. The database choice is secure it, coordinated disclosure, or wipe both copies, each with the cost named in **Concepts**. Wiping both ends the night there. If you choose either of the others, his end follows: arrest, surrender, lethal force as he reaches for the key, or shooting him where he stands or sits. The closing scene follows: six o'clock, or a hearing, or the Citadel.
 
 </details>
 
 <details markdown="1">
 <summary>Spoiler: the way to join, and the failure ending</summary>
 
-Joining ENTROPY is a real, signposted ending. It takes three deliberate picks at the console, each with a warning and a way back, and nothing else leads to it. The credits mark it MISSION FAILED. You will not reach it by accident; every step asks you to confirm.
+Joining ENTROPY is a real, signposted ending. It takes deliberate picks at the console (asking how it works, taking the key, then a final confirmation), each with a warning and a way back, and nothing else leads to it. The credits mark it MISSION FAILED. You will not reach it by accident; every step asks you to confirm.
 
 </details>
 
@@ -410,14 +412,17 @@ Joining ENTROPY is a real, signposted ending. It takes three deliberate picks at
 
 | You see | It usually means |
 | --- | --- |
-| The blast door stays shut after the gate flag | You submitted the flag without clicking the gate console; go back and click it |
+| The blast door stays shut after the gate flag | The table business or Arakawa's call is not finished; check the objectives and your phone |
 | The power room reader refuses the card | Emulate the saved contractor card, or use the spare from the fitter's locker |
 | The fitter's locker will not pick | Keep light tension and work one pin at a time, as in earlier missions |
 | The outer lock cracker runs long | Dust the plate first so the cracker only tries the worn digits |
+| The lock guard challenges you at the keypad | His sight cone was on you; wait until it is clear |
+| The door log says "Locked to their desk's own login" | The gate flag is not in yet |
 | The gallery stair stays shut | The two server-hall flags are not both in yet, or the power is not cut |
 | A Base64 note reads as nonsense after decoding | Check you copied the whole block, with no stray spaces or line breaks |
 | HaX stops answering near the core | She jams there by design; gather what you need before you cross |
-| The sleeper beat says you named the wrong person | The door log names a card, not a person; check the badge against an alibi |
+| The sleeper beat says you named the wrong person | The door log names a card, not a person; check the badge against an alibi and the bench log |
+| No accusation option appears | You have not read both the door log and the bench log, or Mission 9 settled the question |
 
 ## Optional Side Content {#optional}
 
@@ -426,14 +431,14 @@ None of these is needed to finish. Each adds evidence or context.
 <details markdown="1">
 <summary>The margin note and the bench terminal</summary>
 
-The casualty sheet in the workshop has a Base64 note in its margin. Decode it at the CyberChef Workstation: it is the Architect's analyst correcting his casualty figure, and it carries the password for a bench terminal that holds her corrected model. If you completed Mission 2, HaX nudges you to recognise the Base64 shape.
+The Margin Strip pinned beside the Casualty Sheet in the workshop is Base64. Decode it at the CyberChef Workstation: it is the Architect's analyst correcting his casualty figure, and it carries the password for the Bench Terminal: Casualty Model, which holds her corrected model. Once you have read the model, Dr Abena Asante in the server hall has a line about it ("You left your corrected figures on the bench terminal."), and you can use it with the Architect. If you completed Mission 2, HaX nudges you to recognise the Base64 shape.
 
 </details>
 
 <details markdown="1">
 <summary>The records cupboard</summary>
 
-A records cupboard off the security office is a four-digit PIN lock. A teammate's code opens it, or the cracker. Inside are incident files that fill in how the bunker was built and what the purge circuit does.
+The Records Cupboard in the security office is a four-digit PIN lock. The **Keypad Reset Slip** on the floor beside it carries the code, a teammate's note does too, or you can use the cracker. Inside are a Gallery Shift Rota, which tells you who carries the outer lock's code card, and an Alarm Log.
 
 </details>
 
