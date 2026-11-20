@@ -230,6 +230,8 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 </details>
 
+> Note: On most runs the inner door opens as you reach it. If you agreed to use Agent 0x47 "Nightshade's" map for the way in and did not challenge his note for the inner door, that door is rigged: opening it trips a wire that sounds in the guardroom and warns the sleeper you are coming. HaX then points you to the **Guard Post Ladder** in the blast tunnel, which takes you up and round into the security office. To keep the quiet approach, go by Helena's plans instead, or put the discrepancy to Nightshade before you set out (his note calls the 1962 inner door plain steel with no interlock; the drawings show an interlock).
+
 > Note: This is also where the sleeper hunt starts. The Monitoring Desk: Door Log is "locked to their desk's own login" until the gate flag is in, then it reads out to you. The hints for the hunt are under **Finding the Sleeper** below. The Fitter's Locker and the Records Cupboard are in this room too.
 
 ### Cut the Gallery's Power {#hints-cut}
@@ -259,6 +261,8 @@ The workshop also holds a Casualty Sheet and, pinned beside it, a Margin Strip t
 
 > Warning: Knocking out either fighter in the power room still cuts the power by hand, but it has a cost in the credits. The locker route needs nobody.
 
+> Note: Who stands in the power room depends on Mission 4. By default it is the fitter, Wendell. If Voltage got away at the end of Mission 4, he is here instead, at his own switchgear, and the shutter stays live until he stands down. You can talk him down with the **Casualty Sheet** (he is the engineer who knows its figure is wrong), or, if you lifted his thumbprint from the **Bypass Panel** with the Fingerprint Kit, by naming it. Either way he isolates the shutter himself and goes out quietly. Knocking him down and cutting it by hand works too, at a cost in the credits.
+
 ### Find the Release {#hints-release}
 
 **Where:** the server hall. **Goal:** submit the release console flag and the hatch flag.
@@ -278,6 +282,8 @@ The workshop also holds a Casualty Sheet and, pinned beside it, a Margin Strip t
 </details>
 
 > Note: You pick up the **Schedule Copy Sign-in Card** here, tucked under the release console. How to use its login and take the server hall's two flags is in the companion. The staging schedule you read here names the cities and the head-start buyers.
+
+> Note: Two guards watch the console rows here, and one challenges you on sight ("Off the console row"). If the raid team has come up into the hall behind you, you can wave them up and both guards stand down with no fight. Without the team, each guard gives one warning before it comes to blows; you can back off once and come back when the row is clear. A fight in the hall has a cost in the credits, so the team route is the clean one.
 
 ### Finding the Sleeper {#hints-sleeper}
 
