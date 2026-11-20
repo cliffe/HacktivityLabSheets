@@ -47,7 +47,7 @@ The CSL Café network has been set up for you as follows:
 | Item | Details |
 |---|---|
 | Café Wi-Fi network (SSID) | `CSL-Cafe`, open (no password), 2.4 GHz only |
-| Café router | `192.168.75.1` or `192.168.75.249`, depending on the room, hands out addresses in `192.168.75.0/24` |
+| Café router | `192.168.75.1` or `192.168.75.254`, depending on the room, hands out addresses in `192.168.75.0/24` |
 | Café web server and DNS server | `192.168.75.10` (your tutor's PC) |
 | Websites on the café network | `intranet.csl.internal`, `shop.csl.internal`, `bank.csl.internal`, `health.csl.internal`, `jobs.csl.internal` |
 | "Attacker" web server (stretch task only) | `192.168.75.11` (also your tutor's PC) |
