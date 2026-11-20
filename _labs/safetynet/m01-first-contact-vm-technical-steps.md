@@ -166,7 +166,7 @@ hydra -l derek -P passwords.txt 172.16.0.2 ssh
 ssh derek@172.16.0.2
 ```
 
-3. \==action: Find the decryption key file in Derek's home directory== and submit it to unlock the ENTROPY archive.
+3. \==action: Find the decryption key file in Derek's home directory==. It is a short key record: submit only the flag on the line after `KEY:` (not the whole record) to unlock the ENTROPY archive.
 
 </details>
 
@@ -191,7 +191,7 @@ In Derek's home directory, `ls -la` shows the files. One is the archive decrypti
 <summary>Recipe</summary>
 
 1. \==action: List the home directory with `ls -la`==.
-2. \==action: `cat` the decryption key file== and submit its contents at the ENTROPY archive.
+2. \==action: `cat` the decryption key file== and submit the flag on the line after `KEY:` at the ENTROPY archive. Submit just the flag, not the record around it.
 3. \==action: `cd` into the operation subdirectory and `cat` the deployment notes==, then submit that flag at the drop-site.
 
 </details>
@@ -205,7 +205,7 @@ In Derek's home directory, `ls -la` shows the files. One is the archive decrypti
 <details markdown="1">
 <summary>Nudge</summary>
 
-Run `sudo -l` to see what Derek's account may do. It can act as the `shatter` account. Use that to read the files in `shatter`'s home directory: one is the encoded deployment configuration (Base64, submit it at the drop-site), and one is the launch authorization code (you enter that into Derek's launch device at the end).
+Run `sudo -l` to see what Derek's account may do. `sudo` asks for a password: it wants Derek's own password, the one Hydra found, not the `shatter` account's. Derek's account can act as the `shatter` account. Use that to read the files in `shatter`'s home directory: one is the encoded deployment configuration (Base64, submit it at the drop-site), and one is the launch authorization code (you enter that into Derek's launch device at the end).
 
 **To learn more in game:** after your first server flag, Agent HaX offers the privilege escalation guide. Open your phone and choose **[I need the privilege escalation guide]**, or **[Privilege escalation guidance]** for a quick steer.
 
@@ -234,6 +234,8 @@ sudo -u shatter cat /home/shatter/shatter_configuration
 | Hydra finishes with no password found | Wrong username, or the wordlist has blank lines or stray spaces |
 | `ssh` says "Permission denied" | The password is mistyped, or Hydra matched a different account |
 | `sudo -l` says you may run nothing | You are on the wrong account; log in as Derek, not Kali's own user |
+| `[sudo] password for derek:` | `sudo` wants Derek's own password (the one Hydra found), not the `shatter` account's |
+| The archive or drop-site rejects a flag | You pasted more than the flag. Submit only the flag itself, not the text around it |
 | `Permission denied` when reading a file | Your account cannot read that file, or the file is not where you think |
 
 ## Try It on the Command Line (Optional)

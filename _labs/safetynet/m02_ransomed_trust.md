@@ -65,7 +65,7 @@ The game teaches by doing. The questions are in this sheet, after the game.
 3. If you get stuck, go to **Stuck? Hints, Stage by Stage** and find the stage you are on. Each stage has a hint you can read straight away, then a stronger nudge and a full set of steps hidden behind "Show" buttons. Open one at a time, and go back to the game after each.
 4. After the game, work through **After the Game: Questions and Exercises**.
 
-The work on the hospital's backup server (the VM Access Terminal and the flags) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust-vm-technical-steps/), so you can play the rest without it.
+The work on the hospital's backup server (the SAFETYNET Field Console and the flags) is in the linked companion sheet, [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m02-ransomed-trust-vm-technical-steps/), so you can play the rest without it.
 
 > Note: The server challenge is generated for your game. The flag values are not the same as anyone else's, so this sheet never gives you one. A few codes in the building are fixed, but each is something you work out from clues in the hospital; this sheet says where a clue is and what shape the answer takes, not what it reads.
 
@@ -462,7 +462,7 @@ Before Gary's card changes hands, a plain first meeting with Val gives you diffe
 
 Ways past her:
 
-- a real hospital pass, blank and without a name. One that Gary or Sister Doyle hands you themselves is checked by radio with them, and passes. Once your booking has been pulled, both have a line for it ("Someone's pulled my booking with security" for Gary, "Security think I was never booked in" for Doyle). Gary needs you to have earned some goodwill and says no once if you have not, and Doyle only agrees if you have already shown real care for the patients. A contractor pass you simply picked up (the wrapped one in the Night Handover room, or Gary's from the floor) needs a story that fits it: Val asks what you are doing with an IT pass, and only "IT sent me for the server room reader" fits. A wrong story costs you the pass and she hears no second one. An agency pass taken from Doyle's drawer without her say-so is refused
+- a real hospital pass, blank and without a name. One that Gary or Sister Doyle hands you themselves is checked by radio with them, and passes. Once your booking has been pulled, both have a line for it ("Someone's pulled my booking with security" for Gary, "Security think I was never booked in" for Doyle). Gary needs you to have earned some goodwill and says no once if you have not, and Doyle only agrees if you have already shown real care for the patients. A contractor pass you simply picked up (the wrapped one in the Night Handover room, or Gary's from the floor) needs a story that fits it: Val asks what you are doing with an IT pass, and only "IT sent me for the server room reader" fits. A wrong story costs you the pass and she hears no second one. An agency pass (the Bank Staff Lanyard) that you take from Sister Doyle by force is refused
 - somebody she trusts vouching for you: Bernie will put her own name against you, but only if she trusts you
 - earning it by how you have treated Val yourself, which takes a good deal of goodwill (picking her door in front of her spends it)
 - picking her door while she is walking away from it
@@ -501,7 +501,7 @@ The Security Office is a key lock (easy). If Val sees the pick in your hands, sh
 <details markdown="1">
 <summary>Nudge</summary>
 
-This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behind the rack in the Server Room, take the cracker and bring it back here. Clamp it on and use the lights as in the emergency safe stage. Without the cracker, five wrong codes lock the pad (it closes; open it again for five more, and your earlier guesses are kept). With the cracker in your inventory the pad has no limit and shows the lights. HaX has an option for it ("There's a keypad safe in Val's office") once you have seen it. Inside are a drill override form with one man's name on both overrides, and a stack of blank contractor passes.
+This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behind the rack in the Server Room, take the cracker and bring it back here. Clamp it on and use the lights as in the emergency safe stage. Without the cracker, five wrong codes lock the pad (it closes; open it again for five more, and your earlier guesses are kept). With the cracker in your inventory the pad has no limit and shows the lights. HaX has an option for it (**[There's a keypad safe in Val's office. No code anywhere.]**) once you have seen it. Inside are a drill override form with one man's name on both overrides, and a stack of blank contractor passes.
 
 </details>
 
@@ -516,15 +516,15 @@ This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behin
 
 ### The Server Room {#hints-server-room}
 
-**Where:** the Server Room, west of the Security Office. **Goal:** get in and reach the VM Access Terminal.
+**Where:** the Server Room, west of the Security Office. **Goal:** get in and reach the SAFETYNET Field Console.
 
-> Hint: This door wants Gary's card, not a key and not a pick. Inside is a field box wired to the one network segment that reaches the backup server, a drop-site terminal, a recovery console and a rack.
+> Hint: This door wants Gary's card, not a key and not a pick. Inside is a field box (the SAFETYNET Field Console) wired to the one network segment that reaches the backup server, a drop-site terminal, a recovery console and a rack.
 
 <details markdown="1">
 <summary>Steps</summary>
 
 1. \==action: Use the Server Room Keycard on the reader==.
-2. \==action: Walk in and approach the VM Access Terminal==.
+2. \==action: Walk in and approach the SAFETYNET Field Console==.
 3. \==action: Look around the room== (the CyberChef Workstation, the Hospital Recovery Console, the rack and its contents).
 
 </details>
@@ -539,7 +539,7 @@ This is the PIN Cracker's other target. Pick the **Sealed Equipment Case** behin
 
 ![The handwritten note decoded with ROT13 in CyberChef]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/16-cyberchef-rot13.png)
 
-> Hint: The letters are wrong, but the word lengths and the spaces look right. Whoever wrote it was hiding it from a passing glance, not from you. The word lengths look normal but the letters do not. Think about what simple cipher keeps word lengths.
+> Hint: The letters are wrong, but the word lengths and the spaces look right. Whoever wrote it was hiding it from a passing glance, not from you. Think about what simple cipher keeps word lengths.
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -578,6 +578,8 @@ Four places name the kind of code it is: the **Estates Audit Snag List** in the 
 
 The same code opens **Dr. Kim's Safe**, which is optional.
 
+**To learn more in game:** once the flag from the backup server's public files is in at the drop-site, HaX has **[I need the offline backup keys]**.
+
 </details>
 
 <details markdown="1">
@@ -611,7 +613,7 @@ If you cannot find the code, there is a second route. Behind the rack in the Ser
 <details markdown="1">
 <summary>Nudge: the trail</summary>
 
-Start with Bernie. Ask whether anyone has come through tonight who does not belong. Then read the **Night Handover Board** in the Night Handover room: look at Friday's fire drill and who authorised it. Ask Val about drills, and take her notebook (**Val's Pocket Notebook**). In the Security Office the **Night Rota** shows who is on the books and which badge number they carry. The **Night Security Post Log** is in the Boardroom; its door is a four-digit keypad (medium), and the code is written in **Dr. Kim's Desk Diary** (Kim herself will not say it).
+Once your booking has been pulled, go back to Bernie and ask whether anyone has come through tonight who does not belong; she has no such question for you before then. Her **Reception Desk Visitor Log** also has a security entry nobody signed. Then read the **Night Handover Board** in the Night Handover room: look at Friday's fire drill and who authorised it. Ask Val about drills, and take her notebook (**Val's Pocket Notebook**). In the Security Office the **Night Rota** shows who is on the books and which badge number they carry. The **Night Security Post Log** is in the Boardroom; its door is a four-digit keypad (medium), and the code is written in **Dr. Kim's Desk Diary** (Kim herself will not say it).
 
 The badge number you need to compare against comes out of the server work, so you will not be able to finish this stage until you have made progress there.
 
@@ -642,9 +644,9 @@ The badge number you need to compare against comes out of the server work, so yo
 <details markdown="1">
 <summary>Nudge</summary>
 
-The console lists three slots: the **Verified restore manifest**, the **Offline escrow keys** and the **ENTROPY key material**, each shown as loaded or missing. It will not restore anything without the manifest, which is the restore point it can trust and comes from the server work. The escrow keys come from the Emergency Storage safe. The ENTROPY key material is in a locked cache inside the rack and also comes from the server work.
+The console lists three slots: the **Verified restore manifest**, the **Offline escrow keys** and the **ENTROPY key material**, each shown as loaded or missing. It will not restore anything without the manifest, which is the restore point it can trust and comes from the server work. The escrow keys come from the Emergency Storage safe. The ENTROPY key material is in the **ENTROPY Staging Cache** inside the rack, which opens through the server work.
 
-There are up to four ways to restore. Paying the ransom needs only the manifest and is the quickest (about 30 minutes, £150,000 to the attackers). The offline keys alone take 12 hours and pay nobody. Both key sets together take 4 hours and pay nobody. A fourth, Ghost's own keys, appears only if you accepted Ghost's offer and takes under an hour, but Ghost keeps a way into the network. An option you cannot use yet says which slot is missing.
+There are up to four ways to restore. Paying the ransom needs only the manifest and is the quickest (about 30 minutes, £150,000 to the attackers). The offline keys alone take 12 hours and pay nobody. Both key sets together take 4 hours and pay nobody. A fourth, Ghost's own keys, is always listed but stays locked unless you accepted Ghost's offer; it takes under an hour, but Ghost keeps a way into the network. An option you cannot use yet says which slot is missing.
 
 Ghost may call you at the console with an offer. It is an option on the table, not a trap you have to avoid. After you choose, keep an eye on your phone: if the ward needs you, HaX tells you. HaX will not say which option is right.
 
@@ -670,7 +672,7 @@ Ghost may call you at the console with an offer. It is an option on the table, n
 
 ![The HQ debrief with Agent HaX after reporting in]({{ site.baseurl }}/assets/images/safetynet/m02_ransomed_trust/32-hq-debrief.png)
 
-> Hint: The terminal in the Boardroom decides what the public gets to read about tonight. It stays locked until the server work is done and the hospital has chosen how to recover.
+> Hint: The terminal in the Boardroom decides what the public gets to read about tonight. It stays locked until the server work is done and the hospital has chosen how to recover. The Boardroom door itself is a four-digit keypad: the code is in **Dr. Kim's Desk Diary** in the CTO Office (she will not say it aloud). If you are lost, ask HaX **[Remind me where we are.]**
 
 <details markdown="1">
 <summary>Nudge</summary>

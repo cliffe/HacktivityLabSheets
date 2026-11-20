@@ -116,7 +116,7 @@ Most of the office locks are a PIN pad or a password box. The weakness is not th
 | A "secure but easy to remember" note | A phrase turned into initials plus a digit |
 | A counting pattern on a sticky note | The pattern itself |
 
-The game also shows how one person keys a date: Derek writes dates month first, then day, so 19 April is `0419`.
+The game also shows how one person keys a date: Derek writes dates month first, then day, so 7 November is `1107`.
 
 The same habit shows up on the server later, which has its own companion sheet.
 
@@ -136,7 +136,7 @@ C        a        t
 Q      2      F      0          looked up in the Base64 alphabet
 ```
 
-So `Cat` becomes `Q2F0`. A short string shows the padding: `1337` encodes to `MTMzNw==`. Anyone who recognises the alphabet can reverse it; there is no key and no secret. In CyberChef the **From Base64** operation does it. On a Linux shell, `base64 -d` does the same.
+So `Cat` becomes `Q2F0`. A short string shows the padding: `1234` encodes to `MTIzNA==`. Anyone who recognises the alphabet can reverse it; there is no key and no secret. In CyberChef the **From Base64** operation does it. On a Linux shell, `base64 -d` does the same.
 
 > Question: You find a note that reads `TWVldCBhdCB0aGUgc2VydmVyIHJvb20=`. Without decoding it, give two reasons you can be confident it is Base64. What single clue tells you it is not a form of encryption?
 
@@ -176,7 +176,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 
 Talk to Sarah at reception. She gives you a visitor badge and the main office key. Both go to your inventory. Then take the key to the locked door to the north.
 
-If you want the lie of the building first, the reception desk has a staff directory and a sign-in log worth reading.
+If you want the lie of the building first, the reception desk has a Building Directory and a sign-in log worth reading.
 
 </details>
 
@@ -227,9 +227,9 @@ There is also a backup copy of the code written down in the storage closet, off 
 
 Talk to Kevin and take him up on the audit. He offers a lockpick kit and his server room keycard, and a document with instructions for the lockpicks. Take the lockpick: the route to Derek's office needs it. If you only took the keycard, come back and choose **About those lockpicks...**.
 
-Once you hold something from him, **I'd like to give you a preliminary security audit update** starts a short five-question audit. Pick the finding that matches what you have actually seen in the building. How well your answers match decides how much Kevin trusts you, and he will talk about how people here choose passwords once he does. The password habits point at how the server falls.
+Once you hold something from him, **I'd like to give you a preliminary security audit update** starts a short five-question audit. Pick the finding that matches what you have actually seen in the building. How well your answers match decides how much Kevin trusts you, and he will talk about how people here choose passwords once he does.
 
-Kevin is not ENTROPY. Treat him as a colleague, not a suspect, however the evidence later tries to frame him.
+What Kevin says changes as you find more evidence, so come back to him later.
 
 </details>
 
@@ -291,7 +291,7 @@ Either route works:
 <details markdown="1">
 <summary>Nudge</summary>
 
-The monitor's note says "Anniversary". An anniversary card in the break room recycling bin has April 19th circled, and says Derek keys dates month first, then day. Those four digits are the password here. This is the lesson of the mission in one object: reuse one memorable secret and it opens everything.
+The monitor's note says "Anniversary". An anniversary card in the break room recycling bin has the date circled, and says Derek keys dates month first, then day. Those four digits are the password here. This is the lesson of the mission in one object: reuse one memorable secret and it opens everything.
 
 </details>
 
@@ -343,7 +343,7 @@ Encoded Note (1) ends in `=` and uses only letters and digits: that is Base64. E
 <details markdown="1">
 <summary>Nudge</summary>
 
-The filing cabinet uses the anniversary date again. The storage closet safe uses the code from the decoded Base64 note. The personal safe under the desk uses his birthday, which a note in a desktop folder spells out (19 March, keyed month first, then day). Collect the operational documents inside: the casualty projections, the manifesto and the campaign materials are the evidence that gates the rest of the mission.
+The filing cabinet uses the anniversary date again. The storage closet safe uses the code from the decoded Base64 note. The personal safe under the desk uses his birthday, which a note in a desktop folder spells out, keyed the same way (month first, then day). Collect the operational documents inside: the casualty projections, the manifesto and the campaign materials are the key physical evidence, and the end credits record whether you secured them.
 
 </details>
 
@@ -392,6 +392,8 @@ Use Kevin's server room keycard on the reader. Inside is the IT Audit Station, t
 
 Submit the decryption key at the ENTROPY Encrypted Archive to open it. Inside are three documents: the Architect's authorisation, the ENTROPY Network Architecture and the Operation Shatter Target Database. Reading the network architecture is the reveal that ENTROPY is far bigger than Derek. Then open your phone and choose **I discovered what ENTROPY is planning - Operation Shatter** in Agent HaX's thread to report it. You must report before she will take your debrief call.
 
+The mission only closes once every server flag is in: the archive key, the two flags you submit at the SAFETYNET Drop-Site Terminal, and the launch code at the end. The companion sheet covers finding them.
+
 </details>
 
 <details markdown="1">
@@ -432,14 +434,14 @@ After the confrontation Derek's launch device comes to you. It is armed. The lau
 
 Two decisions run through the mission and show up in the ending:
 
-- **Kevin.** Derek's contingency plan frames Kevin for the breach. Once you have read it, you can warn Kevin, leave the evidence for investigators to clear him, or do nothing. The forensic details on the planted files (a flagged header mismatch, two sessions at once, a marketing manager filing IT reports) show the frame is Derek's work. Agent HaX will tell you the logs were filed by Derek if you go to accuse Kevin.
-- **Civilians.** Sarah, Kevin, Maya and the two staff in the main office, Fatima Begum and Graham Whitfield, are not ENTROPY. You can knock Sarah, Kevin and Maya out to take their items, but the end credits record it, and Maya is the informant whose intelligence you lose if she goes down. Fatima and Graham carry nothing you need, so knocking them out gains you nothing. Agent HaX tells you to stand down, the staff stop using the water cooler, and the end credits list them as bystanders you knocked out.
+- **Kevin.** Derek's contingency plan frames Kevin for the breach. Once you have read it, talk to Kevin again: in his conversation you can warn him, leave the evidence for investigators to clear him, or report what the planted files say. Doing nothing is also a choice, and it is settled at the debrief. The forensic details on the planted files (a flagged header mismatch, two sessions at once, a marketing manager filing IT reports) show the frame is Derek's work. Agent HaX will tell you the logs were filed by Derek if you go to accuse Kevin.
+- **Civilians.** Sarah, Kevin, Maya and the two staff in the main office, Fatima Begum and Graham Whitfield, are not ENTROPY. You can knock Sarah and Kevin out to take their items (and Maya too, though she carries nothing), but the end credits record it, and Maya is the informant whose intelligence you lose if she goes down. Fatima and Graham carry nothing you need, so knocking them out gains you nothing. Agent HaX tells you to stand down, the staff stop using the water cooler, and the end credits list them as bystanders you knocked out.
 
 None of these are scored as right or wrong by the game; they change who is safe at the end.
 
 </details>
 
-After you decide, ==action: finish the launch device==. Agent HaX rings you with a short stay-put call. When you have reported Operation Shatter (see the archive stage), ==action: open her thread and choose **Operation Shatter resolved, I'm ready for debrief**==. That rings her again: choose **On my way** to end the mission and she hands you over to the debrief in person, or **Not yet. I want to finish up first.** to keep playing; the same choice stays in her thread. If you still have optional objectives open, the game asks whether to end the mission now or keep going.
+After you decide, ==action: finish the launch device==. If you abort, Agent HaX rings you with a short stay-put call; if you launch, she sends a text. Either way, when you have reported Operation Shatter (see the archive stage), ==action: open her thread and choose **Operation Shatter resolved, I'm ready for debrief**==. That rings her again: choose **On my way** to end the mission and she hands you over to the debrief in person, or **Not yet. I want to finish up first.** to keep playing; the same choice stays in her thread. If you still have optional objectives open, the game asks whether to end the mission now or keep going.
 
 ### What the Tools and Locks Are Telling You {#error-messages}
 
@@ -450,6 +452,7 @@ After you decide, ==action: finish the launch device==. Agent HaX rings you with
 | Maya only offers "Not here. I'll come to your office." | She is away from her office, on a short walk; talk to her again once she is back at her desk |
 | Derek brushes you off in the break room | You have not read the ENTROPY Network Architecture document yet; finish the server work first |
 | Agent HaX has no debrief option | You have not reported Operation Shatter yet, or have not finished the launch device |
+| The mission will not close after the debrief call | A server flag is still missing. The ending needs all four: the archive key, the two flags for the SAFETYNET Drop-Site Terminal, and the launch code. Check your objectives |
 | CyberChef output is gibberish | You used the wrong recipe: Base64 text through ROT13, or the reverse |
 | A decoded value is rejected by a lock | You tidied the case or added a space; re-enter it exactly as decoded |
 
@@ -519,7 +522,7 @@ Work through these after you finish. Use your own run: the server values were ge
 
 > Question: List every lock and login you opened in the office. For each, say what the secret was based on (a date, a name, a pattern). Which was the hardest to work out, and why?
 
-> Question: Derek reused one anniversary date across his computer, his filing cabinet and a safe. Explain the risk of reusing one memorable secret, using what happened in the game as the example.
+> Question: Derek reused one anniversary date for his computer and his filing cabinet, and his birthday for his personal safe. Explain the risk of reusing one memorable secret, using what happened in the game as the example.
 
 > Question: Kevin's "secure but easy to remember" password was an initialism with a digit. Is that a good scheme on its own? What one thing made it insecure here, and how would you fix it without making it unmemorable?
 
