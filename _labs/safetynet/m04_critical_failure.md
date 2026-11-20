@@ -68,7 +68,7 @@ You do not need any prior knowledge before you start. The field guides teach eac
 
 1. \==action: Start the Break Escape mission **Critical Failure**==.
 2. \==action: Watch the briefing from Director Netherton, Nightshade and Agent HaX==, and ask any topics you want. Then choose how you want to play it.
-3. \==action: Talk to the security guard at the main entrance== and get past the checkpoint.
+3. \==action: Get past the security guard at the main entrance==. He greets you himself right after the briefing, so the conversation opens on its own — present your credentials and choose the routine lines.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints and field guides as you go.
 
 Allow about 75 to 90 minutes. In a 60-minute class, stop once you are inside the engineering workshop and before you begin the server work, then resume next time. Your progress, evidence and unlocked rooms are kept between sessions.
@@ -232,7 +232,7 @@ To learn more in game, open your phone and choose **[How do I get past the gate?
 <details markdown="1">
 <summary>Nudge: the cloner route</summary>
 
-Vance wears his card on a lanyard. Your cloner reads old prox cards from close range, and he does not notice while he is busy talking about the site map. Choose the line that has you lean in over the map. If the read is cancelled or fails, the same choice comes back. After you reveal who you really are, you can instead ask him to let you copy it.
+Vance wears his card on a lanyard. Your cloner reads old prox cards from close range, and he does not notice while he is busy talking about the site map. The cloner line is not in his opening menu: ask him a question first (about the maintenance work, or the staff records), and then the choice that has you lean in over the map appears. Choose it. If the read is cancelled or fails, the same choice comes back. After you reveal who you really are, you can instead ask him to let you copy it.
 
 **Learn it:** ==action: Note what the cloner shows when it works==. The card is read, then saved, then played back at a reader. That is the whole attack.
 
@@ -250,7 +250,7 @@ There is a **Security Equipment Locker** in the security office, south of the op
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Talk to Robert Vance and choose the cloner line== where you lean in over the site map.
+1. \==action: Talk to Robert Vance, ask him a question== (the maintenance work, or the staff records) so the cloner line appears, then \==choose the cloner line== where you lean in over the site map.
 2. \==action: Let the cloner finish and save the card==.
 3. \==action: Walk to the Battery Hall 2 reader and emulate your saved Level 1 Facility Card==.
 
