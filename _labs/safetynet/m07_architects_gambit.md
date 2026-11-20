@@ -73,7 +73,7 @@ You do not need any prior knowledge to start. Agent HaX hands out short in-game 
 3. \==action: Read the Threat Desk Summary in your inventory== before you commit the team. It holds the three briefs.
 4. \==action: Open your phone whenever you are unsure==. Agent HaX offers hints, a progress check and field guides as you go.
 
-The mission takes about 90 minutes. In a 60-minute class, stop once you are inside the server hall and have met Elena Rodriguez, before you start the server work at the VM Access Terminal (around the halfway mark), and resume next time. Your progress, evidence and unlocked rooms are kept between sessions.
+The mission takes about 90 minutes. In a 60-minute class, stop once you are inside the server hall and have met Elena Rodriguez, before you start the server work at the Field Console (Kali) (around the halfway mark), and resume next time. Your progress, evidence and unlocked rooms are kept between sessions.
 
 ### How to Play {#how-to-play}
 
@@ -328,7 +328,7 @@ The **Plant Maintenance Key** sits in the tray on the supervisor's desk with a t
 
 **Where:** the server hall, east of the operations floor. **Goal:** get inside and meet Elena Rodriguez.
 
-> Hint: Two people care about this room: an engineer kneeling at the rack, and you. The VM Access Terminal and the SAFETYNET Relay Terminal are where the server work happens.
+> Hint: Two people care about this room: an engineer kneeling at the rack, and you. The Field Console (Kali) and the SAFETYNET Relay Terminal are where the server work happens.
 
 <details markdown="1">
 <summary>Nudge</summary>
@@ -345,11 +345,11 @@ The **Cabling Survey Note** on the rack door is hers. It says where the survey c
 1. \==action: Walk in and talk to Elena Rodriguez== at the backup rack.
 2. \==action: Ask what she was told== and listen. The other options appear as she answers.
 3. \==action: Read the Cabling Survey Note== on the rack door.
-4. \==action: Approach the VM Access Terminal== when you are ready for the server work.
+4. \==action: Approach the Field Console (Kali)== when you are ready for the server work.
 
 </details>
 
-> Note: The server work has its own sheet, so you can play the rest of the building spoiler-free and tackle the attack host yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m07-architects-gambit-vm-technical-steps/) when you want the hints for the VM Access Terminal and the four flags you submit at the SAFETYNET Relay Terminal.
+> Note: The server work has its own sheet, so you can play the rest of the building spoiler-free and tackle the attack host yourself. Open [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m07-architects-gambit-vm-technical-steps/) when you want the hints for the Field Console (Kali) and the four flags you submit at the SAFETYNET Relay Terminal.
 
 > Tip: Open the control room door before you go far into the server work. A visible fifteen-minute clock starts partway through it, and the console that takes the abort is in that room.
 
@@ -571,7 +571,7 @@ None of these is scored as right or wrong by the game. They change who is safe a
 | Park swings at you on the second visit | He warned you; show him the page or expect a fight |
 | You click and nothing opens, or you cannot walk, during a fight | You are blocking; release Q |
 | Punches do nothing | Face the person squarely and press F; keep pressing for the harder punch |
-| HaX warns that going live as the operator locks the team assignment | Logging in on the host as the operator is seen, and the team can no longer be moved; move the team first if you mean to (the 40-minute window is the timer on your screen) |
+| HaX warns that going live as the operator locks the team assignment | Submitting the operator login flag at the relay is seen, and the team can no longer be moved; move the team first if you mean to (the 40-minute window is the timer on your screen) |
 | Netherton asks to be put through and you want longer | Choose **[Not yet. I'm still looking.]**; the debrief only starts once you choose to bring it in, or after the quiet-time fallback |
 | The operators on the operations floor are gone | They leave once you have entered the generator hall or the SCADA control room; they are optional |
 | The Cascade Control System will not open | The attack host is still running; finish the server work (see the companion sheet) |

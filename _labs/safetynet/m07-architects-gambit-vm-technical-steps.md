@@ -41,7 +41,7 @@ cybok:
 
 ## The Server Work {#server}
 
-The VM Access Terminal in the server room opens an attack box. From that box you reach the host that runs the cascade. The host gives up four flags, and you submit each one at the SAFETYNET Relay Terminal. The main walkthrough covers the game around this work. This sheet covers the work on the host.
+The **Field Console (Kali)** in the server hall opens an attack box. From that box you reach the host that runs the cascade. The host gives up four flags, and you submit each one at the SAFETYNET Relay Terminal. The main walkthrough covers the game around this work. This sheet covers the work on the host.
 
 1. **Share flag.** Mount the open file share, read what it holds and submit its flag.
 2. **Listener flag.** Scan every port, find the one that answers anyone and submit its flag.
@@ -137,11 +137,11 @@ It prints your own user name, because `system()` runs the command as you. If the
 
 Find the stage you are on. Read the hint, then go back and try. If you are still stuck, open **Nudge**. Open **Recipe** last. The Recipe names the tools and the steps, never a flag value.
 
-> Tip: Every command in this section runs in the attack box's terminal, which the VM Access Terminal opens. Nothing here needs you to leave the server room, except the Relay Terminal, where the flags go.
+> Tip: Every command in this section runs in the attack box's terminal, which the Field Console (Kali) opens. Nothing here needs you to leave the server hall, except the Relay Terminal, where the flags go.
 
 ### Getting Onto the Attack Box {#hints-vm-attack-box}
 
-**Where:** the VM Access Terminal, in the server room. **Goal:** a working terminal on the attack box, and the address of the host you are going after.
+**Where:** the Field Console (Kali), in the server hall. **Goal:** a working terminal on the attack box, and the address of the host you are going after.
 
 > Hint: The terminal opens the attack box, not the target. Before you scan anything, find out which network the attack box sits on.
 
@@ -225,7 +225,7 @@ A default scan checks only the most common ports, so it can miss the one you wan
 <details markdown="1">
 <summary>Nudge</summary>
 
-Log in over SSH with the name and password you have. Once you are in, check who you are and where you are, then list the home folder with its hidden files. The flag is in a file in that folder. The game counts this as the moment the host notices you, so do the other things you want first.
+Log in over SSH with the name and password you have. Once you are in, check who you are and where you are, then list the home folder with its hidden files. The flag is in a file in that folder. The game counts submitting this flag as the moment the host notices you, so do the other things you want first.
 
 **Learn it:** ==action: Run `id -un`, `pwd` and `ls -la ~` on your own machine== and compare the output with what you expect. That is the check you will run at the prompt after you log in.
 
@@ -234,14 +234,14 @@ Log in over SSH with the name and password you have. Once you are in, check who 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Open the control room door in the game first.== Logging in starts a clock in the game, and the door is easier to open before it does.
+1. \==action: Open the control room door in the game first.== Submitting this flag at the relay starts a fifteen-minute clock in the game, and the door is easier to open before it does.
 2. \==action: Log in from the attack box with `ssh <account name>@<target address>`==, and type the password when asked.
 3. \==action: List the home folder with `ls -la ~`, then read the file that holds the flag==.
 4. \==action: Submit the flag at the SAFETYNET Relay Terminal==.
 
 </details>
 
-> Warning: Logging in starts the clock in the game and the team cannot be moved after that. Do your other work first. If the login is refused, check the account name and the password against your notes. Copy them rather than retyping them from memory.
+> Warning: Submitting this flag starts the clock in the game and the team cannot be moved after that. Do your other work first. If the login is refused, check the account name and the password against your notes. Copy them rather than retyping them from memory.
 
 ### Stage 4: The Root Flag {#hints-vm-root}
 
