@@ -1,15 +1,15 @@
 ---
-title: "Live Analysis: Investigating a Compromised Server"
+title: "Live Analysis: Memory Forensics of a Compromised Server"
 author: ["Z. Cliffe Schreuders"]
 license: "CC BY-SA 4.0"
-description: "Investigate a live, compromised server using standard Unix commands, statically linked binaries, and rootkit detection tools, while fending off Hackerbot's challenges."
+description: "Capture and analyse the RAM of a compromised Linux server with Volatility 3: recover a hidden backdoor, a process whose executable has been deleted, and secrets that never touched disk, and see why a capture taken from a running kernel cannot be trusted the way an atomic one can."
 overview: |
-  In this lab, you will dive into the world of digital forensics and incident response by investigating a potentially compromised server. Security breaches and compromises are a common occurrence in the digital age, and it's essential to understand how to analyse and gather evidence from a compromised system to determine the extent of the intrusion and identify potential threats. This lab will walk you through the process of live system analysis, using both standard Unix commands and tools provided by the FIRE (Forensic and Incident Response Environment) CD/DVD ISO, in order to collect volatile data and assess the system's security.
+  A server on your network has been compromised. The intruder has planted a backdoor, is running processes they would rather you did not see, and has loaded a rootkit that lies to the usual command-line tools (ps, ss and the like), so the live system hides its own compromise. Your job is to find out what is really running on that machine and to recover the evidence the attacker tried to conceal. You will do it with memory forensics. RAM holds what the disk and the live tools do not: the full command line of every process, the environment a daemon was started with, a process whose binary has been deleted, the in-memory history of a shell that was told not to save it. A RAM capture is also beyond the reach of a rootkit that hooks the running kernel's tools.
 
-  Throughout this hands-on lab, you will learn essential techniques for live system analysis, such as collecting information about running processes, network connections, kernel modules, and system state. You will also explore the use of static binaries to avoid potential tampering with dynamically linked executables. Additionally, you will employ tools like Chkrootkit to detect rootkits and perform offline analysis to uncover any suspicious activity or security breaches. By completing tasks such as creating a list of suspicious open ports, identifying unreported processes, and analysing the output of data collection scripts, you will gain practical experience in investigating compromised systems, a crucial skill for cyber security professionals and digital forensics experts.
+  The lab has two halves. First you capture memory from the compromised server yourself, from inside the running system, and try to analyse it. There you meet the central problem of live acquisition: a capture taken while the kernel keeps running is not one consistent moment, so the plugins that walk the kernel's own lists give unreliable results. Then you analyse an atomic capture of the same system, taken with the virtual machine paused from the hypervisor so every structure is consistent, and recover the artefacts cleanly with Volatility 3. Along the way you see why atomic acquisition matters, and which techniques (string search, pool scanning) still work when it is not available.
 
   This is a Hackerbot lab. Work through the lab sheet, then interact with Hackerbot to complete the challenges.
-tags: ["live-analysis", "forensics", "incident-response", "rootkits", "chkrootkit", "static-binaries", "hackerbot"]
+tags: ["live-analysis", "memory-forensics", "volatility", "forensics", "incident-response", "rootkits", "hackerbot"]
 categories: ["response_and_investigation"]
 type: ["ctf-lab", "hackerbot-lab", "lab-sheet"]
 difficulty: "intermediate"
@@ -17,9 +17,6 @@ cybok:
   - ka: "F"
     topic: "Main Memory Forensics"
     keywords: ["process information", "file information", "network connections", "artifacts and fragments", "challenges of live forensics"]
-  - ka: "OSV"
-    topic: "OS Hardening"
-    keywords: ["anomaly detection"]
   - ka: "AAA"
     topic: "Accountability"
     keywords: ["The fallibility of digital evidence to tampering"]
@@ -36,7 +33,7 @@ cybok:
 - desktop
 - compromised_server
 
-All of these VMs need to be running to complete the lab.
+All three VMs need to be running to complete the lab.
 
 ### Your login details for the VMs {#your-login-details-for-the-vms}
 
@@ -47,27 +44,33 @@ All of these VMs need to be running to complete the lab.
 
 You won't log in to the hackerbot_server, but all the VMs need to be running to complete the lab.
 
-Take a note of the IP address of the compromised_server VM (given to you when you claimed the VMs), and ==action: set it as a variable== on the desktop VM for convenience, in any terminal you use for this lab:
+The same username exists on the desktop and on the compromised_server. ==VM: On the desktop VM==, ==action: confirm your username==:
+
+```bash
+whoami
+```
+
+Take a note of the IP address of the compromised_server VM (given to you when you claimed the VMs), and ==action: set it as a variable== on the desktop VM, in any terminal you use for this lab:
 
 ```bash
 export COMPROMISED_IP===edit: IP address of the compromised_server VM==
 ```
 
-> Note: Because the same username exists on both the desktop and compromised_server VMs, `ssh $COMPROMISED_IP` will log you straight in without needing to specify a username.
+> Note: Because the same username exists on both VMs, `ssh $COMPROMISED_IP` logs you straight in without a username. Commands below use `~` and `$USER` for your home directory and username; your own shell expands them.
 
-{% include hackerbot-intro.md role="task you to investigate the system" %}
+{% include hackerbot-intro.md role="task you to investigate a compromised server and recover evidence from its memory" %}
 
 ## Introduction {#introduction}
 
-So you have reason to believe one of your servers has experienced a security compromise... What next? For this lab you investigate a server that has been compromised.
+You have reason to believe one of your servers has been compromised. The order of volatility says to collect the most volatile evidence first: the contents of RAM, the live state of processes and connections, before you ever power the machine down. That is what you do here, and memory is where the answers are.
 
-The investigation of a potential security compromise is closely related to digital forensics topics. As with forensic investigations, we also aim to maintain the integrity of our "evidence", *wherever possible* not modifying access times or other information. However, in a business incident response setting maintaining a chain of evidence may not be our highest priority, since we may be more concerned with other business objectives, such as assuring the confidentiality, integrity, and availability of data and services.
+A rootkit changes what the live tools report. If the kernel, the shell, or the libraries behind `ps`, `ss` and `ls` have been tampered with, then those tools tell you whatever the attacker wants you to hear. A memory capture sidesteps that. It is a copy of the raw bytes of RAM, read out whole, and you analyse it on a trusted machine with tools the compromised system never touched.
 
-During analysis, it is good practice to follow the order of volatility (OOV): collecting the most volatile evidence first (such as the contents of RAM, details of processes running, and so on) from a live system, then collecting less volatile evidence (such as data stored on disk) using offline analysis.
+The analysis tool for this lab is [Volatility 3](https://github.com/volatilityfoundation/volatility3), an open-source memory forensics framework. It is already installed on your desktop VM as the command `vol`.
 
-## Live analysis {#live-analysis}
+## Part 1: capture the live server (and see why it is not enough) {#part-1-capture-the-live-server}
 
-After suspecting a compromise, before powering down the server for offline analysis, the first step is typically to perform some initial investigation of the live system. Live analysis aims to investigate suspicions that a compromise has occurred, and gather volatile information, which may potentially include evidence that would be lost by powering down the computer.
+First look at the compromise with the live tools you would normally trust, then capture memory yourself and see where that capture falls short.
 
 \==VM: On the desktop VM==, ==action: ssh into the compromised server==:
 
@@ -75,399 +78,286 @@ After suspecting a compromise, before powering down the server for offline analy
 ssh $COMPROMISED_IP
 ```
 
-> Tip: Because the same users exist on both systems you can leave off the username (normally `ssh username@server_ip`).
+### A first look with the live tools {#a-first-look-with-the-live-tools}
 
-\==VM: On the compromised_server VM (ssh)==: To keep a record of what we are doing on the system, start the `script` command:
-
-```bash
-mkdir evid
-script -f evid/invst.log
-```
-
-> Note: *If you do this lab over multiple sessions*, be sure to save a copy of the log of your progress (`evid/invst.log`), and restart `script`.
-
-> Log Book Question: Make a note of the risks and benefits associated with storing a record of what we are doing locally on the computer that we are investigating.
-
-Consider the advantages of *handwritten* documentation of what investigators are doing.
-
-### Using a Live CD/DVD {#using-a-live-cd-dvd}
-
-Many of the commands used to investigate what is happening on a system are standard Unix commands. However, it is advisable to run these from a read-only source, since software on your system may have been tampered with. Also, using read-only media minimises the changes made to your local filesystem, such as executable file access times.
-
-Next you will configure the compromised_server VM to have access to the FIRE (Forensic and Incident Response Environment) CD/DVD ISO (which is equivalent to inserting the optical disk into your server's DVD-tray). FIRE is an example of a Linux Live Disk that includes tools for forensic investigation. In addition to tools to boot to a version of Linux for offline investigation of evidence, the disk contains Linux tools for live analysis.
-
-Add the FIRE IR CD disk:
-
-\==action: In Hacktivity, click on the compromised_server VM's settings (gear) icon and choose 'Change CD/DVD'==.
-
-\==action: Select the "fire-0.3.5b.iso" file== from the dropdown box. ==action: Click "Attach disk"==.
-
-\==VM: On the compromised_server VM (ssh)==, ==action: mount the disk==, so that we can access its contents:
+\==VM: On the compromised_server VM (ssh)==, ==action: look at the running processes and the listening ports==:
 
 ```bash
-sudo mount /media/cdrom0/ -o exec
+ps aux
+ss -tlnp
 ```
 
-On a typical system, many binary executables are dynamically linked; that is, these programs do not physically contain all the libraries (shared code) they use, and instead load that code from shared library files when the program runs. On Unix systems the shared code is typically contained in ".so" files, while on Windows ".dll" files contain shared code. The risks associated with using dynamically linked executables to investigate security breaches is that access times on the shared objects will be updated, and the shared code may also have been tampered with. For this reason it is safest to use programs that are statically linked; that is, have been compiled to physically contain a copy of all of the shared code that it uses.
+Nothing here looks obviously wrong, and that is the point. The system has been tampered with to hide the intrusion from exactly these tools. Make a note of what you see; you will compare it against the memory capture, where the hidden processes reappear.
 
-\==VM: On your desktop VM (in a separate console tab)==, ==action: look at which libraries are dynamically loaded== when you run a typical command:
+> Log Book Question: Why can you not rely on `ps` and `ss`, run on the compromised machine itself, to tell you what is really running on it?
+
+### Capture the memory with LiME {#capture-the-memory-with-lime}
+
+On a modern 64-bit Linux system you cannot simply read `/proc/kcore`. Instead you capture RAM with a kernel module, [LiME](https://github.com/504ensicsLabs/LiME) (Linux Memory Extractor), which is already built on the compromised server. Loading it writes the contents of RAM straight to a file.
+
+\==VM: On the compromised_server VM (ssh)==, ==action: capture the live memory==:
 
 ```bash
-ldd /bin/ls
+mkdir -p ~/evidence
+sudo insmod /root/LiME/src/lime-$(uname -r).ko "path=$HOME/evidence/live_capture.raw format=raw"
+sudo rmmod lime
+sudo chown $USER:$USER ~/evidence/live_capture.raw
+ls -lh ~/evidence/live_capture.raw
 ```
 
-Examine the output, and determine how many external libraries are involved.
+> Note: The capture is roughly the size of the server's RAM (about 1.5 GB), so the file is large and the copy in the next step takes a little while.
 
-\==VM: On the compromised_server VM (ssh)==: The FIRE disk contains a number of statically compiled programs to be used for investigations.
-
-\==action: Look at the commands available:==
+The evidence should not stay on the machine you are investigating. ==VM: On the desktop VM (a separate terminal tab, not the ssh session)==, ==action: copy the capture to your desktop==:
 
 ```bash
-ls /media/cdrom0/statbins/linux2.2_x86/
+mkdir -p ~/evidence
+scp $COMPROMISED_IP:evidence/live_capture.raw ~/evidence/live_capture.raw
 ```
 
-\==action: Check that these are indeed statically linked:==
+### Try to analyse the live capture {#try-to-analyse-the-live-capture}
+
+Volatility reconstructs the kernel's data structures from the raw bytes. The first thing to ask of any Linux memory image is the process list.
+
+\==VM: On the desktop VM==, ==action: list the processes from your live capture==:
 
 ```bash
-ldd /media/cdrom0/statbins/linux2.2_x86/ls
+vol -f ~/evidence/live_capture.raw linux.pslist
 ```
 
-\==action: Compare the output to the previous command== run on your own desktop system. The output will be distinctly different, stating that the program is not dynamically compiled.
+`linux.pslist` walks the kernel's linked list of processes, following one pointer to the next. ==action: Look closely at the output.== It may stop short, repeat entries, or miss processes you know are running. Run it twice and you may not get the same list. This is not a bug in Volatility. You captured RAM while the kernel kept scheduling, allocating and freeing: the pointers the plugin follows were being rewritten underneath it, so the snapshot is not one consistent moment. This is the **smear** of live acquisition.
 
-Note that, although an improvement, using statically linked programs such as these still do not guarantee that you can trust the output of the programs you run.
+Now try two techniques that do not depend on walking a live list.
 
-> Log Book Question: Why can't you fully trust the output of statically linked programs run on a compromised system?
-
-## First look around {#first-look-around}
-
-Run `ls` to view the contents of the home directory on the compromised_server:
+\==action: Scan for processes by signature instead of walking the list==:
 
 ```bash
-cd
-ls
+vol -f ~/evidence/live_capture.raw linux.psscan
 ```
 
-Run the static version:
+\==action: Search the raw bytes for a known string==:
 
 ```bash
-/media/cdrom0/statbins/linux2.2_x86/ls
+strings -a ~/evidence/live_capture.raw | grep -a 'TELEMETRY_TOKEN='
 ```
 
-Note the presence of a "u_r\_powned" file in the output from the live disk version of `ls`! Running the local version of `ls` is not accurately reporting the files that exist! Lucky we thought to run another copy of `ls`.
+`linux.psscan` scans memory for the signature of a process structure rather than following the list, so it survives a smeared capture far better. `strings` ignores kernel structures entirely and reads the bytes. Both recover information the list-walk could not. Even an imperfect capture holds evidence, as long as you use a technique that does not assume the memory is consistent.
 
-## Collecting live state manually {#collecting-live-state-manually}
+> Log Book Question: `linux.pslist` and `linux.psscan` both list processes. Why does one cope with a live capture far better than the other?
 
-The next step is to use various tools to capture information about the live system, for later analysis. One approach to storing the resulting evidence is to send results over the network via Netcat or SSH, without storing them locally. This has the advantage of not changing local files, and is less likely to tip off an attacker, rather than storing the evidence you are collecting on the compromised machine itself.
+## Why atomic acquisition matters {#why-atomic-acquisition-matters}
 
-\==VM: On your desktop VM (not from the console still sshed into the server)==, ==action: create a directory for the evidence you are about to collect==:
+The cleanest way to avoid the smear is to stop the machine from changing while you read its memory. In a physical incident this is hard. On a virtual machine it is straightforward: the hypervisor can pause the guest's CPU and dump guest RAM to a file while nothing inside the guest runs. Every pointer and every structure is then from the same instant, and the list-walking plugins work.
+
+Your analyst VM has been given exactly such a capture. It is an **atomic** image of the same compromised system, taken with the virtual machine paused from the hypervisor, placed in your evidence directory as part of this lab. The rest of the challenges use it.
+
+> Note (how Volatility knows the layout): Volatility needs a **symbol table** (an ISF, Intermediate Symbol Format) that matches the exact kernel of the captured machine. The offsets of fields inside kernel structures change from one kernel build to the next. The ISF is generated from the kernel's debug symbols with a tool called `dwarf2json`, and the one matching this server's kernel ships with the lab, so `vol` finds it automatically. If you ever analyse a capture and Volatility reports it cannot find a matching symbol table, that is the problem to fix first.
+
+## Part 2: analyse the atomic capture {#part-2-analyse-the-atomic-capture}
+
+\==VM: On the desktop VM==, ==action: confirm the atomic capture is present==:
 
 ```bash
-mkdir evidence
+ls -lh ~/evidence/compromised_server.raw
 ```
 
-### Saving output from the compromised server to your desktop {#saving-output-from-the-compromised-server-to-your-desktop}
-
-\==VM: On the desktop VM (not from the sshed server)==, ==action: test sending the results of some commands over SSH to your desktop VM==:
+\==action: List the processes again, this time from the atomic capture==:
 
 ```bash
-ssh $COMPROMISED_IP "echo this command is running on the server"
-
-ssh $COMPROMISED_IP "echo this command is running on the server" | tee evidence/test_output
-
-ls evidence
-
-cat evidence/test_output
+vol -f ~/evidence/compromised_server.raw linux.pslist
 ```
 
-> Tip: Take the time to make sure you understand which system each command above is running on.
->
-> Note: `tee` prints to the screen as well as saving the output to disk (you can instead redirect the output to a file with `>`, but you won't see the output while the program runs.)
+The list comes back clean and complete. Everything from here uses `~/evidence/compromised_server.raw`.
 
-### Comparing process lists {#comparing-process-lists}
+> Tip: Volatility plugins are slow: they parse a lot of memory. Each one takes a little while to run; let it finish. To avoid re-running a slow plugin, save its output to a file, for example `vol -f ~/evidence/compromised_server.raw linux.psscan > ~/evidence/psscan.txt`, and then read or `grep` the file.
 
-Collect results of a process listing using `ps` over SSH to the compromised VM:
+Now work through Hackerbot's challenges. For each one, you recover a piece of evidence from the capture, save it to a file on your desktop VM under `~/evidence/` (Hackerbot tells you the exact filename in the chat), and then say `ready`.
+
+## The challenges {#the-challenges}
+
+### Challenge 1: the backdoor's session marker {#challenge-1}
+
+A backdoor is listening on the server. The live tools hide it, but the memory image does not. The listener was started with a marker on its command line of the form `BACKDOOR_SESSION_ID=<token>`.
+
+A process name is easy to fake, but the full command line is not. ==VM: On the desktop VM==, ==action: list each process with its arguments==:
 
 ```bash
-ssh -t $COMPROMISED_IP "sudo ps aux" | tee evidence/local_ps_output
+vol -f ~/evidence/compromised_server.raw linux.psaux
 ```
 
-\==VM: On your desktop VM==, find the newly created files and view the contents.
+`linux.psaux` reads each process's argument vector (argv), the actual command line it was launched with, which a misleading process name cannot disguise. Find the backdoor listener in the output and read off the value after `BACKDOOR_SESSION_ID=`.
 
-> Tip: you may wish to use the Dolphin graphical file browser, then navigate to `$HOME/evidence`.
+> Tip: The command lines are long. Pipe the output through `grep`: `vol -f ~/evidence/compromised_server.raw linux.psaux | grep -a BACKDOOR_SESSION_ID`.
 
-Run the statically compiled version of `ls` from the incident response disk to list the contents of `/proc` (this is provided dynamically by the kernel: a directory exists for every process on the system), and once again send the results to your desktop VM.
-
-Run the command:
+\==action: Save the token== (the value after the `=` sign, on its own) to the filename Hackerbot gives you in the chat, under `~/evidence/`. For example:
 
 ```bash
-ssh $COMPROMISED_IP "/media/cdrom0/statbins/linux2.2_x86/ls /proc" | tee evidence/proc_ls_static
+echo '<the token>' > ~/evidence/<filename Hackerbot gives you>
 ```
 
-\==VM: On your desktop VM==, find the newly created files and ==action: compare the list of pids (numbers representing processes) output from the previous commands==. This is the second column of output in `local_ps_output`, with the numbers in `proc_ls_static`.
-
-> Hint: you can do the comparison manually, or using commands such as `cut` (or `awk`), `sort`, and `diff`. For example, `cat local_ps_output | awk '{ print $2 }'` will pipe the contents of the file `local_ps_output` into the `awk` command, which will split on spaces, and only display the second field. Ensure this is displaying the list of pids, if not try selecting a different field. You could pipe this through to `sort`. Then save that to a file (by appending `> pids_ps_out`). Remember `man awk`, `man sort`, and `man diff` will tell you about how to use the commands (and a search engine may also come in handy).
-
-Are the same processes shown each time? Can you explain why the outputs from different tools are giving you a different picture of the system? If not, that is very suspicious, and likely indicates a break-in, and that we probably shouldn't trust the output of local commands.
-
-> Note: Some changes are to be expected simply due to timing, such as short running processes, including the commands you are actually running to do your investigation. However, you wouldn't expect processes that are consistently running to not be visible in `ps`, etc.
-
-## Gathering live state using statically compiled programs {#gathering-live-state-using-statically-compiled-programs}
-
-Note that this section involves running a lot of commands **on your desktop VM**, that execute on the server and save state to your desktop.
-
-Save a list of the files currently being accessed by programs:
-
-```bash
-ssh $COMPROMISED_IP "/media/cdrom0/statbins/linux2.2_x86/lsof" | tee evidence/lsof_out
-```
-
-> Log Book Question: Are any of the files in `evidence/lsof_out` marked as "(deleted)"? What does this indicate?
-
-Save a list of network connections:
-
-```bash
-ssh -t $COMPROMISED_IP "sudo netstat -apn" | tee evidence/netstat_out
-
-ssh -t $COMPROMISED_IP "sudo /media/cdrom0/statbins/linux2.2_x86/netstat -apn" | tee evidence/netstat_static_out
-```
-
-> Note: Some commands such as this one may take a while to run, wait until the Bash prompt returns.
-
-Save a list of the network resources currently being accessed by programs:
-
-```bash
-ssh -t $COMPROMISED_IP "sudo /media/cdrom0/statbins/linux2.2_x86/lsof -P -i -n" | tee evidence/lsof_net_out
-```
-
-Save a copy of the routing table:
-
-```bash
-ssh $COMPROMISED_IP "/media/cdrom0/statbins/linux2.2_x86/route" | tee evidence/route_out
-```
-
-Save a copy of the ARP cache:
-
-```bash
-ssh $COMPROMISED_IP "/media/cdrom0/statbins/linux2.2_x86/arp -a" | tee evidence/arp_out
-```
-
-Save a list of the kernel modules currently loaded (as reported by the kernel):
-
-```bash
-ssh -t $COMPROMISED_IP "sudo /media/cdrom0/statbins/linux2.2_x86/cat /proc/modules" | tee evidence/lsmod_out
-```
-
-Save a copy of the Bash history:
-
-```bash
-ssh -t $COMPROMISED_IP "sudo /media/cdrom0/statbins/linux2.2_x86/cat /root/.bash_history" | tee evidence/bash_history
-```
-
-**Creating images of the system state**
-
-We can take a snapshot of the live state of the computer by dumping the entire contents of memory (what is in RAM/swap) into a file. First, check whether we are running a 32-bit or 64-bit operating system:
-
-```bash
-ssh -t $COMPROMISED_IP "uname -m"
-```
-
-On a **32-bit** Linux system `/proc/kcore` contains an ELF-formatted core dump of the kernel. Only if the compromised_server is 32-bit, save a snapshot of the kernel state:
-
-```bash
-ssh -t $COMPROMISED_IP "sudo /media/cdrom0/statbins/linux2.2_x86/dd if=/proc/kcore conv=noerror,sync" | tee evidence/kcore
-```
-
-\==action: After 10 seconds or so press Ctrl-C to stop.==
-
-On a **64-bit** Linux system, since kernel version 4.8 we cannot dump `/proc/kcore` directly as there has been randomisation added to the start of the memory mapping. Instead we can dump the contents of live memory with an open source tool called LiME (Linux Memory Extractor) and then copy them to our desktop VM for analysis.
-
-```bash
-ssh -t $COMPROMISED_IP 'sudo insmod /root/LiME/src/lime-$(uname -r).ko "path=/home/'$USER'/lime_dump format=raw"'
-sudo scp $USER@$COMPROMISED_IP:/home/$USER/lime_dump evidence/kcore
-```
-
-Next, we can copy entire partitions to our other system, to preserve the exact state of stored data, and so that we can conduct offline analysis without modifying the filesystem.
-
-Start by identifying the device files for the partitions on the compromised system:
-
-```bash
-ssh -t $COMPROMISED_IP "df"
-```
-
-Note that on this system the root partition (mounted on "/"), is `/dev/sda1`.
-
-> Hint: on some VMs, you may need to replace `sda1` with `hda1`.
-
-Then **you could** copy byte-for-byte the contents of the entire root ("/") partition over the network (where `/dev/sda1` was identified from the previous command):
-
-```bash
-ssh -t $COMPROMISED_IP "sudo /media/cdrom0/statbins/linux2.2_x86/dd if=/dev/sda1 bs=1M count=5 conv=noerror,sync" | tee evidence/sda1.img
-```
-
-> Tip: Doing a full copy of the disk would take quite some time, so for demonstration purposes we are only copying 5MB of the disk.
-
-This command could be repeated for each partition including swap partitions. For now, let's accept that we have all we need.
-
-\==VM: On your desktop VM==, list all the files you have created:
-
-```bash
-ls -la $HOME/evidence
-```
-
-At this stage ==action: take a closer look through== some of the information you have collected.
-
-> Log Book Question: Examine the contents of the various output files and identify anything that may indicate that the computer has been compromised by an attacker. Hint: does the network usage seem suspicious?
-
-### Collecting live state using scripts {#collecting-live-state-using-scripts}
-
-As you may have concluded from the previous tasks, manually collecting all this information from a live system can be a fairly time consuming process. Incident response data collection scripts can automate much of this process. A common data collection script `linux-ir.sh`, is included on the FIRE disk, and is also found on the popular Helix IR disk.
-
-\==VM: On the compromised_server VM (ssh console tab from earlier)==, have a look through the script:
-
-```bash
-less /media/cdrom0/statbins/linux-ir.sh
-```
-
-Note that this is a Bash script, and each line contains commands that you could type into the Bash shell. Bash provides the command prompt on most Unix systems, and a Bash script is an automated way of running commands. This script is quite simple, with a series of commands (similar to some of those you have already run) to display information about the running system.
-
-Identify some commands within the script that collect information you have not already collected above.
-
-Exit viewing the script (press q).
-
-\==VM: On your desktop VM==, run the data collection script, redirecting output to your desktop VM:
-
-```bash
-ssh -t $COMPROMISED_IP "cd /media/cdrom0/statbins; sudo /media/cdrom0/statbins/linux-ir.sh" | tee evidence/ir_out
-```
-
-\==VM: On your desktop VM==, have a look at the output from the script:
-
-```bash
-less $HOME/evidence/ir_out
-```
-
-Use what you have learnt to spot some evidence of a security compromise.
-
-### Checking for rootkits {#checking-for-rootkits}
-
-An important concern when investigating an incident, is that the system (including user-space programs, libraries, and possibly even the OS kernel) may have been modified to hide the presence of changes made by an attacker. For example, the `ps` and `ls` commands may be modified, so that certain processes and files (respectively) are not displayed. The libraries used by various commands may have been modified, so that any programs using those libraries are provided with deceptive information. If the kernel has been modified, it can essentially change the behaviour of *any* program on the system, by changing the kernel's response to instructions from processes. For example, if a program attempts to *open* a file for viewing, the kernel could provide one set of content, while an attempt to *execute* the file may result in a completely different program running.
-
-Detecting the presence of rootkits is tricky, and prone to error. However, there are a number of techniques that, while not foolproof, can detect a number of rootkits. Methods of detection include: looking for inconsistencies between different ways of gathering data about the system state, and looking for known instances of malicious files.
-
-Chkrootkit is a Bash script that performs a number of tests for the presence of various rootkits.
-
-\==VM: On the compromised_server VM (ssh)==, have a quick look through the script, it is much more complex than the previous `linux-ir.sh` script:
-
-```bash
-less /media/cdrom0/statbins/chkrootkit-linux/chkrootkit
-```
-
-> Tip: Exit `less` by pressing q.
-
-Confirm that if we were to run `ls`, we would be running the local (dynamic) version, probably `/bin/ls`:
-
-```bash
-which ls
-```
-
-To understand why, look at the value of the environment variable `$PATH`, which tells Bash where to look for programs:
-
-```bash
-echo $PATH
-```
-
-Set the `$PATH` environment variable to use our static binaries wherever possible, so that when chkrootkit calls external programs it will (wherever possible) use the ones stored on the IR disk:
-
-```bash
-export PATH=/media/cdrom0/statbins/linux2.2_x86:$PATH
-```
-
-Confirm that now if we were to run `ls`, we would be running the static version:
-
-```bash
-which ls
-```
-
-This should report the path to our static binary on the FIRE disk.
-
-It is now safe to run chkrootkit[^1]:
-
-\==VM: On your desktop VM==, run:
-
-```bash
-ssh -t $COMPROMISED_IP 'sudo bash -c "export PATH=/media/cdrom0/statbins/linux2.2_x86:$PATH; /media/cdrom0/statbins/chkrootkit-linux/chkrootkit"' | tee evidence/chkrootkit_out
-```
-
-> Hint: you may get a message in the terminal before you type the password. You should still type the password for the script to run. The script should not take long to run.
-
-\==VM: On your desktop VM==, have a look at the output:
-
-```bash
-less $HOME/evidence/chkrootkit_out
-```
-
-From the output, identify any files or directories reported as "INFECTED", or suspicious.
-
-If this is an unknown rootkit there may not be anything detected by chkrootkit; however, at this stage you should be convinced that this system is compromised, and infected with some form of rootkit.
-
-\==VM: On the compromised_server VM (ssh console tab)==
-
-**You could**, power down the compromised system, so that we can continue analysis offline:
-
-```bash
-/media/cdrom0/statbins/linux2.2_x86/sync; /media/cdrom0/statbins/linux2.2_x86/sync
-```
-
-> Note: If you do not know what the `sync` command does, on your desktop VM, run `info coreutils 'sync invocation'` for more information.
->
-> Tip: At this point you could tell Hacktivity to force a Power Off. However, you might want to wait until you finish the Hackerbot challenges.
-
-Why might we want to force a power off (effectively "pulling the plug"), rather than going through the normal shutdown process (by running `halt` or `shutdown`)?
-
-## Offline analysis of live data collection {#offline-analysis-of-live-data-collection}
-
-Note that even if the `bash_history` was not saved, we can still recover commands that were run while the computer was running. This is possible by searching through the saved RAM (the kcore ELF dump we saved earlier).
-
-\==VM: On your desktop VM==, run:
-
-```bash
-sudo -u "$USER" bash -c "strings -n 10 $HOME/evidence/kcore > $HOME/evidence/kcore_strings"
-```
-
-The above `strings` command extracts ASCII text from the binary core dump.
-
-Open the extracted strings, and look for evidence of the commands you ran before saving the kernel core dump:
-
-```bash
-less $HOME/evidence/kcore_strings
-```
-
-Now press the '/' key, and type a regex to search for commands you previously ran to collect information about the system. For example, try searching for "statbins/linux2.2_x86" (press 'n' for next).
+> Note (a common slip): submit the token only (the part after `=`), not the whole `BACKDOOR_SESSION_ID=...` string and not the surrounding command line.
 
 #### Hackerbot Attack #1 {#hackerbot-attack-1}
 
 You can skip the bot to here, by saying **goto 1**.
 
-> Hackerbot: Create a list of suspicious ports that are open on the compromised system, and save it to your desktop VM in the file Hackerbot gives you in the chat, under `~/evidence/`.
+> Hackerbot: Recover the backdoor listener's session marker (the value after `BACKDOOR_SESSION_ID=`) from the memory image, and save it to the file Hackerbot names, under `~/evidence/`.
 
-When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
+When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
 
-Hackerbot will then quiz you: "What was the full command that was used to start nc listening on the compromised server?" ==action: say 'the answer is ...'== once you know it.
+Hackerbot will then quiz you about which part of a process `linux.psaux` reads to show the real command line. ==action: say 'the answer is ...'== once you know it.
 
 Don't forget to ==action: save and submit any flags!==
+
+### Challenge 2: the hidden processes {#challenge-2}
+
+The rootkit hides some processes from the live tools. The memory capture shows them all, so the hidden ones are those present in the capture but missing from the live `ps`.
+
+\==VM: On the desktop VM==, ==action: get the full process list from the capture==:
+
+```bash
+vol -f ~/evidence/compromised_server.raw linux.psscan
+```
+
+\==VM: On the compromised_server VM (ssh)==, ==action: get the process list the live machine admits to==:
+
+```bash
+ps -e
+```
+
+\==action: Compare the two.== The processes that appear in the capture but not in the live `ps` are the ones the rootkit is hiding. Save **only those PIDs** (the process ID numbers) to the file Hackerbot names, under `~/evidence/`.
+
+> Note (a common slip): save only the hidden PIDs, not the whole process list. In particular do not include the low-numbered kernel threads (PIDs 2, 3, 4 and so on). They are not hidden, and listing them tells Hackerbot your list is wrong.
 
 #### Hackerbot Attack #2 {#hackerbot-attack-2}
 
 You can skip the bot to here, by saying **goto 2**.
 
-> Hackerbot: Create a list of processes (PIDs) running on the system that are not reported by the local version of `ps`. Save it to your desktop VM in the file Hackerbot gives you in the chat, under `~/evidence/`.
+> Hackerbot: List the PIDs of the processes that are running on the system but are not reported by the live `ps`, and save them to the file Hackerbot names, under `~/evidence/`.
 
-When you are ready for the bot to run the attack, ==action: say 'ready'== to Hackerbot.
+When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
 
-Hackerbot will then quiz you: "What kind of malware hides processes, etc.?" ==action: say 'the answer is ...'== once you know it.
+Hackerbot will then quiz you on what kind of malware hides processes. ==action: say 'the answer is ...'== once you know it.
 
 Don't forget to ==action: save and submit any flags!==
 
-## Footnotes {#footnotes}
+### Challenge 3: the deleted binary's real name {#challenge-3}
 
-1. Note that it would be better to not have to include `$PATH`, and only use static versions. Unfortunately, FIRE does not include statically compiled versions of all of the commands that chkrootkit requires. [↩](#user-content-fnref-1)
+One process is running from a binary that has been deleted from disk. In the process list it is disguised to look like a kernel worker thread, shown as `[kworker/...]`. That disguise is only the argument vector the live tools print. The kernel's own name for the task, its `comm` field, still holds the name the binary was launched under.
+
+\==VM: On the desktop VM==, ==action: scan the processes and read their real names==:
+
+```bash
+vol -f ~/evidence/compromised_server.raw linux.psscan
+```
+
+`linux.psscan` reads each task's `comm` directly, so it is not fooled by the `[kworker/...]` argv disguise. One entry has a `comm` that is plainly not a normal system process. That is the deleted binary's real name. ==action: Save that name== to the file Hackerbot names, under `~/evidence/`.
+
+> Note (a common slip): `[kworker/...]` is the disguise, shown by argument-based views like `linux.psaux`. The answer is the `comm` value from `linux.psscan`, not the `[kworker/...]` string.
+
+#### Hackerbot Attack #3 {#hackerbot-attack-3}
+
+You can skip the bot to here, by saying **goto 3**.
+
+> Hackerbot: Recover the real process name (the `comm` field) of the process running from a deleted binary, and save it to the file Hackerbot names, under `~/evidence/`.
+
+When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
+
+Hackerbot will then quiz you on why this program's executable cannot be recovered from the server's filesystem. ==action: say 'the answer is ...'== once you know it.
+
+Don't forget to ==action: save and submit any flags!==
+
+### Challenge 4: the backdoor process's name {#challenge-4}
+
+The backdoor you found in Challenge 1 runs as a process, and the rootkit hides that process from `ps` and `top` just as it hid the port from `ss`. The memory image is not fooled. This is the same listener whose session marker you recovered in Challenge 1; now read the name the kernel knows it by.
+
+\==VM: On the desktop VM==, ==action: find the backdoor process in the scan==:
+
+```bash
+vol -f ~/evidence/compromised_server.raw linux.psscan
+```
+
+Identify the backdoor process, the listener you already fingerprinted by its `BACKDOOR_SESSION_ID` marker, and read its `comm` (its process name). ==action: Save that name== to the file Hackerbot names, under `~/evidence/`.
+
+> Tip: To tie a listening socket to the process that owns it, `vol -f ~/evidence/compromised_server.raw linux.sockstat` lists sockets with their owning process, which helps confirm you have the right one.
+
+#### Hackerbot Attack #4 {#hackerbot-attack-4}
+
+You can skip the bot to here, by saying **goto 4**.
+
+> Hackerbot: Recover the process name (the `comm` field) of the hidden backdoor process from the memory image, and save it to the file Hackerbot names, under `~/evidence/`.
+
+When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
+
+Hackerbot will then quiz you on why this process is missing from the live `ps` and `top` yet visible in the capture. ==action: say 'the answer is ...'== once you know it.
+
+Don't forget to ==action: save and submit any flags!==
+
+### Challenge 5: the secret in the environment {#challenge-5}
+
+A daemon on the server holds a secret in its process environment: an environment variable named `TELEMETRY_TOKEN`. It was never written to a file, so it lives only in the process's memory. That memory is in the capture.
+
+You can read it two ways. ==VM: On the desktop VM==, ==action: read the process environments with Volatility==:
+
+```bash
+vol -f ~/evidence/compromised_server.raw linux.envars | grep -a TELEMETRY_TOKEN
+```
+
+Or search the raw bytes directly:
+
+```bash
+strings -a ~/evidence/compromised_server.raw | grep -a 'TELEMETRY_TOKEN='
+```
+
+\==action: Save the token== (the value after the `=` sign) to the file Hackerbot names, under `~/evidence/`.
+
+> Note (a common slip): there is no file on disk to find this in. It is in the daemon's environment in memory. If you went looking in `/etc` or a config file on the server, that is why you came up empty.
+
+#### Hackerbot Attack #5 {#hackerbot-attack-5}
+
+You can skip the bot to here, by saying **goto 5**.
+
+> Hackerbot: Recover the value of the `TELEMETRY_TOKEN` environment variable from the memory image, and save it to the file Hackerbot names, under `~/evidence/`.
+
+When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
+
+Hackerbot will then quiz you on where a running Linux process keeps its environment variables. ==action: say 'the answer is ...'== once you know it.
+
+Don't forget to ==action: save and submit any flags!==
+
+### Challenge 6: the shell command that was never saved {#challenge-6}
+
+An interactive shell is still running on the server. One command it ran carries a token, but the shell was told not to write its history to disk (its `HISTFILE` was unset), so the command is in no `~/.bash_history` file. It is still in the shell's in-memory history, inside the capture.
+
+\==VM: On the desktop VM==, ==action: recover the shell history from memory==:
+
+```bash
+vol -f ~/evidence/compromised_server.raw linux.bash
+```
+
+`linux.bash` reconstructs the command history held in the memory of running `bash` processes. Find the command that carries the token and read the token out of it. (A raw `strings` search of the image works too, if you know roughly what the token looks like.)
+
+\==action: Save the token== to the file Hackerbot names, under `~/evidence/`.
+
+> Note (a common slip): `cat ~/.bash_history` on the server shows nothing useful: the history was never written there. That is the whole reason you go to memory for it.
+
+#### Hackerbot Attack #6 {#hackerbot-attack-6}
+
+You can skip the bot to here, by saying **goto 6**.
+
+> Hackerbot: Recover the token from the running shell's in-memory command history, and save it to the file Hackerbot names, under `~/evidence/`.
+
+When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
+
+Hackerbot will then quiz you on why this command is absent from the on-disk `~/.bash_history` yet recoverable from memory. ==action: say 'the answer is ...'== once you know it.
+
+Don't forget to ==action: save and submit any flags!==
+
+## Wrapping up {#wrapping-up}
+
+You have now reconstructed the compromise from memory alone: a hidden backdoor and the processes the rootkit lied about, a process running from a deleted binary, a secret held only in a daemon's environment, and a command a shell was told to forget. None of it was reliable from the live tools on the machine itself, and the deleted binary and the unsaved history were never on disk to begin with.
+
+Keep in mind the limitation you met at the start. The clean recoveries in Part 2 came from an atomic capture. Your own live capture in Part 1 was smeared, and the list-walking plugins could not be trusted on it, though string search and pool scanning still pulled real evidence out of it. In an incident where you cannot pause the machine, that trade-off is the one you work with.
+
+> Log Book Question: You recovered the same kind of evidence in two ways in this lab: with a Volatility plugin that understands kernel structures, and with a plain `strings` search. When would you reach for each, and what can the structured plugin tell you that `strings` cannot?
+
+Once you have finished the Hackerbot challenges, you can power off the VMs from Hacktivity.
