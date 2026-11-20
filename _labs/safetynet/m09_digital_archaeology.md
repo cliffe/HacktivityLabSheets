@@ -260,8 +260,9 @@ The other way is west: pick the dock office door (an easy key lock; Cody carries
 <summary>Steps</summary>
 
 1. \==action: Click the **Field Laptop** in the reading room== to set up the drop terminal. HaX offers the catalogue field guide.
-2. \==action: Submit the catalogue flag at the **SAFETYNET Drop Terminal**==. The server work for the flag is in the companion sheet.
-3. \==action: When the catalogue flag goes in, HaX opens the restricted stacks to the north==. Read the drop terminal screen: it ends with a coded line you will need at the salvage cage.
+2. \==action: Read the **Login Slip** stuck to the drop desk==. Keep it: the server work needs it, and HaX points you to it if you ask about the catalogue.
+3. \==action: Submit the catalogue flag at the **SAFETYNET Drop Terminal**==. The server work for the flag is in the companion sheet.
+4. \==action: When the catalogue flag goes in, HaX opens the restricted stacks to the north==. Read the drop terminal screen: it ends with a coded line you will need at the salvage cage.
 
 </details>
 
@@ -461,8 +462,9 @@ HaX offers an archive-codes field guide once you have reached the keypad.
 <summary>Steps</summary>
 
 1. \==action: Use the **Field Kit Link** to set up your kit at the rack==.
-2. \==action: Submit the Tomb Beta owner flag at the **Tomb Beta Drop Link**==.
-3. \==action: Submit the Tomb Beta control flag at the drop link==.
+2. \==action: Pick the padlock on the **Crate, Stencilled BETA** and read the **Enrolment Binder, Tomb Beta**== inside. The note in its back cover is what the companion's server work starts from.
+3. \==action: Submit the Tomb Beta owner flag at the **Tomb Beta Drop Link**==.
+4. \==action: Submit the Tomb Beta control flag at the drop link==.
 
 </details>
 

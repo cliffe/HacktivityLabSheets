@@ -39,7 +39,7 @@ cybok:
 
 The raid on Tomb Gamma runs across a small network. You get one attack box, and there are three targets.
 
-- **The attack box** is a Kali Linux machine. It is the terminal at the forward post, the only box you attack from.
+- **The attack box** is a Kali Linux machine, the only box you attack from. HaX's field console is racked in three places (**Field Console (Gate)** at the forward post, **Field Console (Server Hall)** and **Field Console (Core)**), and all three open the same attack box. The desktop login is on HaX's sticky note on the console.
 - **The security monitoring host** is where the bunker's cameras and door systems report. It carries the first two flags, but on two separate accounts reached two different ways: the first by breaking into the monitoring platform, the second by a login you find in the bunker.
 - **The release host** runs the release service inside a container.
 - **The core host** runs a service inside an older confined area, and sits beneath Tesseract's own console.
@@ -214,7 +214,7 @@ The attack box and the three targets share one network. Your own address tells y
 <details markdown="1">
 <summary>Nudge</summary>
 
-Fingerprint the monitoring platform and note the software name and version. Look that name and version up, and read how its login handler takes input. The flaw is an unauthenticated command injection: input sent at the login runs as a command before any sign-in. The code you run lands as the platform's service account, and the status note it holds is the flag. Read the field guide HaX sends before you run anything, so you know what the request does on the host.
+Fingerprint the monitoring platform and note the software name and version. Look that name and version up, and read how its login handler takes input. The flaw is an unauthenticated command injection: input sent at the login runs as a command before any sign-in. The code you run lands as the platform's service account, and the status note it holds is the flag. The **Maintenance Tag** on the gate terminal's power lead gives you the host's address and the console port, so you know where to aim; the port is not one a default scan of the most common ports always lists. Read the field guide HaX sends before you run anything, so you know what the request does on the host.
 
 **Learn it:** ==action: Write down the platform name and version, and the one input the login handler passes to a command==, before you send anything.
 
@@ -225,7 +225,7 @@ Fingerprint the monitoring platform and note the software name and version. Look
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Fingerprint the monitoring host's web service and read the version: `nmap -sV <monitoring host>` and `curl -i http://<monitoring host>:<port>/`==.
+1. \==action: Read the **Maintenance Tag** at the gate terminal for the host and the console port, then fingerprint that service and read the version: `nmap -sV -p <port> <monitoring host>` and `curl -i http://<monitoring host>:<port>/`==.
 2. \==action: Look up the platform and version, and read how the login handler takes input==.
 3. \==action: Send the unauthenticated command-injection request at the login, following the field guide, to run a command as the service account==.
 4. \==action: Read the service account's status note from its home directory==, and copy the flag.
@@ -233,7 +233,7 @@ Fingerprint the monitoring platform and note the software name and version. Look
 
 </details>
 
-> Note: This stage is pure exploitation, no login. The maintenance tag you see in game names the service account (`secmon`) and the host's address only, not a password. The injection is the way in, and the code you run lands as that account, so you read the status note straight away.
+> Note: This stage is pure exploitation, no login. The maintenance tag you see in game names the host's address, the monitoring console's port and the service account (`secmon`), but no password. The injection is the way in, and the code you run lands as that account, so you read the status note straight away.
 
 > Warning: An injection request written for a different version may fail or do something you did not expect. Check the version you fingerprinted against the one the guide was written for.
 
@@ -278,9 +278,9 @@ This stage is credentialed, not an exploit. The staging schedule lives in its ow
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan the release host and find the port the service listens on. Connect to it and you land in a shell inside the container, not on the host. No password is asked for: the service drops you straight in, so this is exploitation, not a login. Confirm where you are first: a Docker container leaves a marker file at the root, and the control-group line for process 1 names the runtime. The container is privileged, so it keeps the host's access, and from there you can reach the host's own filesystem. The flag is in root's home on the host beneath the container, next to the release service's arming and kill configuration. There is no root login over SSH here, so the escape is the only way up.
+First find the port the release service listens on. It changes with every build, so a default scan of common ports usually misses it. The **Operator's Duty Sheet** by the east racks in the server hall gives the release host's address and the shift operator's login (`relops`), and says the port is in the handover log in that account's home. Sign in, read the log, and you have the port (a full-range port scan finds it too). Connect to it and you land in a shell inside the container, not on the host. No password is asked for: the service drops you straight in, so this is exploitation, not a login. Confirm where you are first: a Docker container leaves a marker file at the root, and the control-group line for process 1 names the runtime. The container is privileged, so it keeps the host's access, and from there you can reach the host's own filesystem. The flag is in root's home on the host beneath the container, next to the release service's arming and kill configuration. There is no root login over SSH here, so the escape is the only way up.
 
-By the east racks in the server hall you may also find the operators' duty sheet, with an operative login (`relops`). That login does work over SSH, but it signs you in as a plain operator with no admin rights, so it cannot read root's home and does not give you the flag. It is worth a look to see the host from the inside, but the escape is still what gets you there. A valid password is not the same as being root.
+The `relops` login signs you in as a plain operator with no admin rights, so it cannot read root's home and does not give you the flag. It tells you where the service is; the escape is still what gets you to root. A valid password is not the same as being root.
 
 **Learn it:** ==action: Check whether you are inside a container== with `ls -la /.dockerenv` and `head -1 /proc/1/cgroup` before you try to escape.
 
@@ -291,7 +291,7 @@ By the east racks in the server hall you may also find the operators' duty sheet
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Scan the release host and find the service port: `nmap -sV <release host>`==.
+1. \==action: Sign in to the release host over SSH with the duty sheet's login, and read the handover log in that account's home for the release service's port==. (Or find it with a full-range scan: `nmap -p- <release host>`.)
 2. \==action: Connect to the service with `nc <release host> <port>`==, and note that the shell is inside the container.
 3. \==action: Confirm the container with `ls -la /.dockerenv` and `head -1 /proc/1/cgroup`==.
 4. \==action: Use the privileged container's access to reach the host's filesystem, following the field guide==.
@@ -299,7 +299,7 @@ By the east racks in the server hall you may also find the operators' duty sheet
 
 </details>
 
-> Note: The `relops` login from the duty sheet is a side route, not the way to the flag. It gives a non-admin operator shell on the host, which cannot read root's home. Do not spend long on it. The container escape is what lands you as root, where the flag is.
+> Note: The `relops` login from the duty sheet finds you the port, not the flag. It gives a non-admin operator shell on the host, which cannot read root's home. The container escape is what lands you as root, where the flag is.
 
 > Warning: The flag is not in the container. The container holds no flag. If you stop as soon as you have a shell, you have not finished this stage. The flag is in root's home on the host, after the escape.
 
@@ -312,9 +312,9 @@ By the east racks in the server hall you may also find the operators' duty sheet
 <details markdown="1">
 <summary>Nudge</summary>
 
-Scan the core host and find the service port. Connect and you land inside a chroot jail, with no password asked for, so this stage is exploitation like Stage 3. The filesystem is thin, a few directories and little else. A process that still holds enough privilege can change its root directory again from a point outside the jail and reach the real host root. In root's home on the host, not in the jail, you find the core host's file index, an unsent vendor notice for Carrow Controls, and a sealed archive he left for the agent. The flag is inside that archive. As on the release host, there is no root login over SSH, so the escape is the only route onto the box.
+Scan the core host and find the service port. Nothing in the bunker names this port and it changes with every build, so scan the full port range, not only the common ports. Connect and you land inside a chroot jail, with no password asked for, so this stage is exploitation like Stage 3. The filesystem is thin, a few directories and little else. A process that still holds enough privilege can change its root directory again from a point outside the jail and reach the real host root. In root's home on the host, not in the jail, you find the core host's file index, an unsent vendor notice for Carrow Controls, and a sealed archive he left for the agent. The flag is inside that archive. As on the release host, there is no root login over SSH, so the escape is the only route onto the box.
 
-The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`) is not a box login, so it will not sign you in over SSH: the way onto the box is the chroot escape. What it does open is the sealed archive in root's home, where flag 4 sits. You need both, the escape to reach the archive and the code to open it.
+The access code on the **Core Access Code** envelope beside Tesseract's terminal is not a box login, so it will not sign you in over SSH: the way onto the box is the chroot escape. What it does open is the sealed archive in root's home, where flag 4 sits. You need both, the escape to reach the archive and the code to open it.
 
 **Learn it:** ==action: List `/` inside the shell you land in== and compare it with a full host's root. A thin listing means you are confined.
 
@@ -325,7 +325,7 @@ The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`)
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Scan the core host and find the service port: `nmap -sV <core host>`==.
+1. \==action: Scan the core host's full port range and find the service port: `nmap -p- <core host>`==, then fingerprint that port with `nmap -sV -p <port> <core host>`.
 2. \==action: Connect to the service with `nc <core host> <port>`==, and note that the shell is in a jail.
 3. \==action: List `/` and confirm the filesystem is thin==.
 4. \==action: Escape the chroot onto the host root, following the field guide==.
@@ -333,7 +333,7 @@ The access code you find in game beside Tesseract's terminal (`TSRCT-CORE-9F21`)
 
 </details>
 
-> Note: The core access code (`TSRCT-CORE-9F21`) is not a login, so it will not sign you in: the chroot escape is the only route onto the box. It is the password to the sealed archive in root's home, and flag 4 is inside that archive, so you need both the escape and the code.
+> Note: The core access code from the envelope is not a login, so it will not sign you in: the chroot escape is the only route onto the box. It is the password to the sealed archive in root's home, and flag 4 is inside that archive, so you need both the escape and the code.
 
 > Warning: The jail holds no flag either. Do not submit anything you read inside the jail. The flag is in root's home on the host, after the escape.
 

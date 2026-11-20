@@ -152,7 +152,7 @@ Find the stage you are on. Read the hint, then go back and try. If you are still
 <details markdown="1">
 <summary>Nudge</summary>
 
-The attack box and both targets share one subnet. Your own address and its prefix length tell you the range to sweep. A ping sweep of that range lists the live hosts; the two that are not your own box are the catalogue server and the Tomb Beta server. Note both addresses now, because you will come back to the second one later in the night.
+The desktop login for the attack box is on the sticky note the launcher shows. The attack box and both targets share one subnet. Your own address and its prefix length tell you the range to sweep. A ping sweep of that range lists the live hosts; the two that are not your own box are the catalogue server and the Tomb Beta server. Note both addresses now, because you will come back to the second one later in the night.
 
 **Learn it:** ==action: Work out the subnet by hand== from an address and a prefix length, then check it against the sweep.
 
@@ -209,7 +209,7 @@ The reading-room duty-desk slip carries the catalogue service account's login: a
 <details markdown="1">
 <summary>Nudge</summary>
 
-Run `sudo -l` from the catalogue service account. It may run a pager as root against a file in root's home. That pager can escape to a root shell. Run the exact command the rule allows, then drop to a shell from the pager's prompt. The ledger names placements, candidates and a legacy section, and a source-file reference; read it, do not change it.
+Run `sudo -l` from the catalogue service account. It may run a pager as root against a file in root's home: the overnight index run's log, which the slip's "If it stalls, read its log" line points at. That pager can escape to a root shell. Run the exact command the rule allows, then drop to a shell from the pager's prompt. The ledger is a separate file in root's home; you read it from the root shell, not in the pager. The ledger names placements, candidates and a legacy section, and a source-file reference; read it, do not change it.
 
 **Learn it:** ==action: Before you run a command as root, write down what it will do and what it could change==.
 
@@ -221,9 +221,9 @@ Run `sudo -l` from the catalogue service account. It may run a pager as root aga
 <summary>Recipe</summary>
 
 1. \==action: Run `sudo -l` as the catalogue service account==. Note the pager it may run as root, the file it is allowed to open, and that it needs no password.
-2. \==action: Run that exact allowed command==, for example `sudo /bin/more /root/<the file it names>`. The ledger opens in the pager.
+2. \==action: Run that exact allowed command==, for example `sudo /bin/more /root/<the file it names>`. The night run's log opens in the pager. If the whole log prints without a prompt, make the terminal window shorter and run it again.
 3. \==action: Escape the pager to a root shell by typing `!/bin/sh` at its prompt==, then confirm with `id`. (See the Privilege Escalation guide, "Escaping an Allowed Command to a Shell (GTFOBins)".)
-4. \==action: Read the ledger and submit the flag at the SAFETYNET Drop Terminal==.
+4. \==action: List root's home, read the ledger and submit the flag at the SAFETYNET Drop Terminal==.
 
 </details>
 
@@ -235,12 +235,12 @@ Run `sudo -l` from the catalogue service account. It may run a pager as root aga
 
 **Where:** the attack box's terminal, against the Tomb Beta server, once you have reached the salvage cage and used the Field Kit Link. **Goal:** get code running on the Tomb Beta web server with no login, read the flag, and submit it at the Tomb Beta Drop Link in the cage.
 
-> Hint: This box has no login to recover. Scan it. A small, old web server answers on a high port. Match its name and version to a public CVE, then exploit it.
+> Hint: This box has no login to recover. A small, old web server answers on a high port, and the salvage cage tells you where. Match its name and version to a public CVE, then exploit it.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-Fingerprint the web server and note that it is Nostromo (nhttpd), with its version. Look the version up in the CVE database and read the flaw. Find a public proof of concept for the Nostromo RCE, read it, and run it from the attack box. A harmless command such as `id` confirms it works and shows you landed as the web service account. That account's home holds the flag, a staff credential that proves who owns the server, a memo about a control-equipment flaw, an unsent vendor notice, and a holdings record. Read all of them.
+The **Enrolment Binder, Tomb Beta**, in the padlocked crate stencilled BETA in the salvage cage (pick the padlock), gives the server's address and the port its enrolment site answers on. Without it, a full-range port scan finds the same port. Fingerprint the web server and note that it is Nostromo (nhttpd), with its version. Look the version up in the CVE database and read the flaw. Find a public proof of concept for the Nostromo RCE, read it, and run it from the attack box. A harmless command such as `id` confirms it works and shows you landed as the web service account. That account's home holds the flag, a staff credential that proves who owns the server, a memo about a control-equipment flaw, an unsent vendor notice, and a holdings record. Read all of them.
 
 **Learn it:** ==action: Name the web server and its version, and the CVE, before you run anything==.
 
@@ -251,7 +251,7 @@ Fingerprint the web server and note that it is Nostromo (nhttpd), with its versi
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Port-scan the Tomb Beta server with service detection: `nmap -sV -p- <tomb beta server>`==, and note the Nostromo port and version.
+1. \==action: Read the address and port in the Enrolment Binder from the BETA crate, then port-scan the Tomb Beta server with service detection: `nmap -sV -p- <tomb beta server>`==, and note the Nostromo port and version.
 2. \==action: Search the CVE database for the Nostromo version==, and read the affected versions and the description.
 3. \==action: Find a public proof of concept for the Nostromo RCE, read it, and run it against the Tomb Beta server==. Confirm with a harmless command first and read which account you landed as.
 4. \==action: Read the flag and the documents in the web service account's home, and submit the flag at the Tomb Beta Drop Link in the salvage cage==.

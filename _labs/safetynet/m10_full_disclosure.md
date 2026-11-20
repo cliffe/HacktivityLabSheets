@@ -205,7 +205,7 @@ Close the briefing and take the aside that follows; it opens the search for the 
 
 1. \==action: Close the briefing and take the aside==.
 2. \==action: Talk to Netherton== and make the tether choice.
-3. \==action: Click the field console by the gate==, then submit the first flag at the gate terminal.
+3. \==action: Click the field console by the gate==, read the **Maintenance Tag** hanging off the gate terminal's power lead (the companion uses it), then submit the first flag at the gate terminal.
 4. \==action: Go through the blast door== when HaX opens it.
 
 </details>
@@ -362,7 +362,7 @@ When you reach the core the Architect arrives. Submit the core flag at the core 
 <details markdown="1">
 <summary>Steps</summary>
 
-1. \==action: Submit the core flag at the core terminal==.
+1. \==action: Read the **Core Access Code** envelope on the desk beside the host terminal== (the companion explains what it opens), and submit the core flag at the core terminal.
 2. \==action: Hear the Architect's case==, then work through the three exchanges.
 
 </details>
