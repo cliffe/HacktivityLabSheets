@@ -334,7 +334,7 @@ The day staff are gone by then. Zainab and Yusuf vanish the moment Sterling's ca
 
 ### The Server Room {#hints-server-room}
 
-**Where:** the server room, north off the main hallway, at night. **Goal:** get in and reach the VM Access Terminal.
+**Where:** the server room, north off the main hallway, at night. **Goal:** get in and reach the Training Lab Terminal.
 
 ![The server room, lit by its motion sensor]({{ site.baseurl }}/assets/images/safetynet/m03_ghost_in_the_machine/04-server-room-entry.png)
 
@@ -344,7 +344,7 @@ The day staff are gone by then. Zainab and Yusuf vanish the moment Sterling's ca
 <summary>Steps</summary>
 
 1. \==action: Emulate the saved Executive Keycard at the server-room reader==.
-2. \==action: Walk in and approach the VM Access Terminal==.
+2. \==action: Walk in and approach the Training Lab Terminal==.
 
 </details>
 
@@ -377,7 +377,7 @@ The web price list is the odd one out. Sable moved it off ROT13 onto her own shi
 <summary>Recipe</summary>
 
 1. \==action: Take the CyberChef workstation==.
-2. \==action: For the web price list, first read the unsent email on Sterling's computer== (see the wall safe stage) for the shift number. ==action: Paste the price list, add **ROT13** and change its **Amount** to that number==. Undoing a shift of N means moving each letter back N places. If the output is still nonsense, try the other direction (an Amount of 26 minus the number). With no number to hand, ==action: search for **ROT13 Brute Force**, add it, and scan the 25 lines for the one that reads as English==.
+2. \==action: For the web price list, first read the unsent email on Sterling's computer== (see the wall safe stage) for the shift number. ==action: Paste the price list, add **ROT13** and set its **Amount** to 26 minus that number==. The email says each letter moved on N places, so you undo it by moving each letter back N. CyberChef's ROT13 only moves letters forward, and moving forward 26 minus N lands on the same letter as moving back N. With no number to hand, ==action: search for **ROT13 Brute Force**, add it, and scan the 25 lines for the one that reads as English==.
 3. \==action: For the client roster, paste it and add **From Hex**==.
 4. \==action: For the whiteboard note, paste it and add **ROT13**==.
 5. \==action: For the desk drive, paste it, add **From Base64**, then add **ROT13**==.
@@ -530,7 +530,7 @@ After you decide, ==action: finish anything you still want to read, then choose 
 | A clone did not stick | You closed the cloner before pressing Save; read the card again |
 | Sterling steps away mid-interview and the read drops | She is suspicious; drift back to the whiteboard and keep the questions to the work |
 | The office computer rejects the password | The value is not exact; match the surname's capital and the year with no spaces |
-| The web price list is still gibberish after ROT13 | It is on a different shift. The number is in Sterling's unsent email; set the ROT13 **Amount** to it (or to 26 minus it) |
+| The web price list is still gibberish after ROT13 | It is on a different shift. The number is in Sterling's unsent email; set the ROT13 **Amount** to 26 minus it, because the operation moves letters forward |
 | Zainab's laptop only says she tips the screen away | She is at her seat. Wait until she leaves for coffee, then read it |
 | Zainab's laptop shows a login box | She went to the hallway cooler and locked it; nothing is gained from this one |
 | The coffee station and cooler stop being used, and the laptop is shut | Someone attacked a day member of staff or knocked out Ffion, so the routines have stopped |
@@ -597,7 +597,7 @@ printf 'VGV2cSBzdmVmZw==' | base64 -d | tr 'A-Za-z' 'N-ZA-Mn-za-m'; echo
 
 ## After the Game: Questions and Exercises {#after-the-game}
 
-Work through these after you finish. Use your own run: the network flags were generated for you, and your ending may differ from a classmate's.
+Work through these after you finish. Your ending may differ from a classmate's. The questions on attacking the training network are in the [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine-vm-technical-steps/#after-the-game) companion.
 
 ### 1. Physical Access and RFID {#q-rfid}
 
@@ -617,17 +617,7 @@ Work through these after you finish. Use your own run: the network flags were ge
 
 > Action: Take a sentence of your own. ROT13 it, then Base64 the result. Swap with a classmate and race to recover each other's sentence. Note which clue told you the order to undo them in.
 
-### 3. Attacking the Network {#q-network}
-
-> Question: Walk through the four flags (scan, FTP, pricing, distcc). For each, say what you did, what made it possible, and what a defender could have changed to stop you.
-
-> Question: The FTP flag came from a backdoor in a tampered 2010 release of ProFTPD. This is a supply-chain attack. How would a team find out that a release they had installed was compromised, and what practices reduce the risk of installing a poisoned release in the first place?
-
-> Question: The distcc daemon ran compile jobs for anyone who could reach it on the network. Name the assumption the service makes about its network, and describe two ways to stop it being reachable by an attacker.
-
-> Action: On a lab network you control, stand up a service with a known version-based vulnerability, scan it with `nmap -sV`, and confirm the version from the banner. Write up how the banner alone narrowed down the attack.
-
-### 4. People, Evidence and Choices {#q-choices}
+### 3. People, Evidence and Choices {#q-choices}
 
 > Question: Danny Foster drew the hospital survey believing it was for a security-awareness client. What did you decide to do about him, and what did you know when you decided? Would you choose differently on a second run?
 

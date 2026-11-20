@@ -35,7 +35,7 @@ cybok:
 
 ## The Training Network {#network}
 
-The VM Access Terminal in the server room opens a Kali attack box on your own machine. From that box you scan a training network that Zero Day Syndicate uses to rehearse its exploits. The network holds four flags, and you submit each one at the drop-site terminal in the same room. The main walkthrough covers the game around this work. This sheet covers the work on the network.
+The Training Lab Terminal in the server room opens a Kali attack box on your own machine. From that box you scan a training network that Zero Day Syndicate uses to rehearse its exploits. The network holds four flags, and you submit each one at the drop-site terminal in the same room. The main walkthrough covers the game around this work. This sheet covers the work on the network.
 
 1. **Scan flag.** Map the network and read what the services say.
 2. **FTP flag.** Get past the FTP service and read the notes it keeps.
@@ -74,16 +74,18 @@ The two field guides have the step-by-step workflow for each. In game, open your
 
 Find the stage you are on. Read the hint, then go back and try. If you are still stuck, open **Nudge**. Open **Recipe** last. The Recipe names the tools and the steps, never a flag value.
 
-> Tip: Every command in this section runs in the attack box's terminal, which the VM Access Terminal opens. Nothing here needs you to leave the server room except the drop-site, where the flags go.
+> Tip: Every command in this section runs in the attack box's terminal, which the Training Lab Terminal opens. Nothing here needs you to leave the server room except the drop-site, where the flags go.
 
 ### Getting Onto the Attack Box {#hints-vm-attack-box}
 
-**Where:** the VM Access Terminal, in the server room. **Goal:** a working terminal on the attack box, and its subnet.
+**Where:** the Training Lab Terminal, in the server room. **Goal:** a working terminal on the attack box, and its subnet.
 
 > Hint: The terminal opens the attack box, not the training network. Before you scan anything, find out what network the attack box sits on.
 
 <details markdown="1">
 <summary>Nudge</summary>
+
+If the attack box asks you to sign in, the login is on the sticky note on the Training Lab Terminal in game.
 
 The training network is on the same subnet as the attack box, so the attack box's own address tells you where to look. Print that address and note the prefix length after the slash. The prefix length tells you how many addresses the subnet holds.
 
@@ -169,7 +171,7 @@ This ProFTPD build carries a hidden backdoor in its source release. It is a 2010
 
 Read the page source, not the rendered page. The list sits in an HTML comment. It reads like scrambled English with normal spacing, so it is a shift cipher. It used to be plain ROT13, but it has been moved onto a different shift, and you need that shift's number to read it. The number is in Sterling's unsent email, the same one that carries the wall-safe code. The decoding ideas, and where to read that email, are in the main walkthrough at [Encoding Is Not Security](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#encoding) and [Decoding What You Find](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m03-ghost-in-the-machine/#hints-decode).
 
-**Learn it:** ==action: Practise on a made-up sentence first==. A shift of 13 (ROT13) turns `Hello` into `Uryyb`, and moving each letter back 13 places gives `Hello` again. The web list is on a different shift, so you move each letter back by that many places instead. Then do the same with the real comment.
+**Learn it:** ==action: Practise on a made-up sentence first==. A shift of 13 (ROT13) turns `Hello` into `Uryyb`, and moving each letter back 13 places gives `Hello` again. The web list is on a different shift, so you move each letter back by that many places instead. With a tool that only moves letters forward, move them on 26 minus that number. Then do the same with the real comment.
 
 </details>
 
@@ -177,7 +179,7 @@ Read the page source, not the rendered page. The list sits in an HTML comment. I
 <summary>Recipe</summary>
 
 1. \==action: Fetch the page source: `curl -s http://<host>/`==, and copy the whole HTML comment that holds the list.
-2. \==action: In CyberChef, paste it into **Input**, add **ROT13** and set its **Amount** to the shift from Sterling's unsent email== (the main walkthrough's office stage covers reading that email). If the output is still scrambled, try an **Amount** of 26 minus that number.
+2. \==action: In CyberChef, paste it into **Input**, add **ROT13** and set its **Amount** to 26 minus the shift from Sterling's unsent email== (the main walkthrough's office stage covers reading that email). The board was moved forward by that number, and CyberChef's ROT13 only moves letters forward, so going forward 26 minus the number undoes it. If you have no number, use **ROT13 Brute Force** and pick the line that reads as English.
 3. \==action: Read the whole decoded text to the end==. The flag comes after the price list. Copy it and submit it at the drop-site terminal.
 
 </details>
@@ -252,6 +254,20 @@ curl -s http://<your-lab-host>/ | grep -n '<!--'
 ```
 
 > Note: A browser does not show HTML comments on the rendered page, but they are still in the source. Anything a site author hides in a comment is there for anyone who reads the source.
+
+## After the Game: Questions and Exercises {#after-the-game}
+
+Work through these after you finish. Use your own run: the network flags were generated for you.
+
+### Attacking the Network {#q-network}
+
+> Question: Walk through the four flags (scan, FTP, pricing, distcc). For each, say what you did, what made it possible, and what a defender could have changed to stop you.
+
+> Question: The FTP flag came from a backdoor in a tampered 2010 release of ProFTPD. This is a supply-chain attack. How would a team find out that a release they had installed was compromised, and what practices reduce the risk of installing a poisoned release in the first place?
+
+> Question: The distcc daemon ran compile jobs for anyone who could reach it on the network. Name the assumption the service makes about its network, and describe two ways to stop it being reachable by an attacker.
+
+> Action: On a lab network you control, stand up a service with a known version-based vulnerability, scan it with `nmap -sV`, and confirm the version from the banner. Write up how the banner alone narrowed down the attack.
 
 ## Further Reading {#further-reading}
 
