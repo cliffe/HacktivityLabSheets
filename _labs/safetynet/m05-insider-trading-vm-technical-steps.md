@@ -243,8 +243,6 @@ The username on the lockbox card is also a Linux account on the server. The pass
 
 > Warning: Reading the permitted file gives you its text and no root shell. The shell comes from the escape, not from reading the file.
 
-> Note: The `/root` folder also holds a password-protected archive. It is an optional bonus. The case needs only the four flags on this sheet.
-
 ### Submitting the Four Flags {#hints-vm-submit}
 
 **Where:** the SAFETYNET Drop-Site Terminal, in the server room. **Goal:** submit each flag once.
