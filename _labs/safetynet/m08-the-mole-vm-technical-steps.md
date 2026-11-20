@@ -40,9 +40,9 @@ The Server Room has a **Field Console (Kali)** terminal. It opens a Kali attack 
 Three of the four flags are one person's trail. The exposed repository names a service account, the credential buried in that repository's history is the account's password, the same account owns the home directory you log in to, and its name is in the root-only access logs. The account is **svc-planning**. The fourth flag, root, comes a different way. The web service runs as its own account, **www-data**, and that account, not svc-planning, holds the sudo rule to root. So you follow svc-planning's trail for the first three flags, and you go through the web account for the fourth.
 
 1. **Exposure flag.** Reach SAFETYNET's own repository browser, with no login, and read what it exposes.
-2. **Credentials flag.** Recover the mole's password from the repository's own history, after it was committed and then removed.
-3. **Account flag.** Log in as **svc-planning** with that password, and read its home directory.
-4. **Root flag.** Exploit the web service to a shell as its own account, escalate through that account's sudo rule, then read the logs the server keeps for its users.
+2. **Credentials flag.** Exploit the web service to a shell as its own account, then recover the mole's password from the repository's own history, after it was committed and then removed.
+3. **Account flag.** Log in as **svc-planning** with that password, and open the sealed dead drop in its home directory with the seal from the Director's safe.
+4. **Root flag.** From the web account's shell, escalate through that account's sudo rule, then read and decode what root keeps about the server's users.
 
 The flag values are generated for each game, so this sheet never gives one. It says where each flag sits and how to reach it.
 
@@ -153,7 +153,7 @@ The attack box and the repository server share a subnet. The attack box's own ad
 
 Point the attack box's browser at the repository server and open the repository it serves. The committed files read as a real project: a readme, a small sync script, an example settings file. The readme carries the flag, names the service account **svc-planning**, and says a credential was committed to the settings file for testing and later removed, that the history was never cleared, and that the credential was never actually rotated. Hold on to all of it: the account name is for Stage 3, and "committed then removed, check the history" is the whole of Stage 2.
 
-**Learn it:** ==action: Write down the software name and version the web service reports==. You do not need it here, but you will want it at Stage 4.
+**Learn it:** ==action: Write down the software name and version the web service reports==. You do not need it here, but you will want it at Stage 2.
 
 </details>
 
@@ -166,18 +166,20 @@ Point the attack box's browser at the repository server and open the repository 
 
 </details>
 
-> Warning: Do not reach for an exploit here. This flag is a plain read of an open web page. The version you noted matters at Stage 4, not now.
+> Warning: Do not reach for an exploit here. This flag is a plain read of an open web page. The version you noted matters at Stage 2, not now.
 
 ### Stage 2: The Credentials Flag {#hints-vm-credentials}
 
-**Where:** the repository server's history, through the open browser or a shell. **Goal:** recover the mole's password from a commit that was later removed, and submit the flag that comes with it.
+**Where:** the attack box, against the web service, then the repository's history on the server. **Goal:** get a shell on the repository server through the web service, recover the mole's password from a commit that was later removed, and submit the flag that comes with it.
 
-> Hint: Stage 1 told you a credential was committed and then removed. Removing a file from the current project does not remove it from the history. The commit that added it still holds it, with the password and the flag.
+> Hint: Stage 1 told you a credential was committed and then removed. Removing a file from the current project does not remove it from the history. The commit that added it still holds it, with the password and the flag. To read that history you need to be on the server, and the only way in so far is the web service itself.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-The settings file is gone from the current files, so browsing the project at its latest state shows nothing. Look at the commit history instead. One commit adds the service credentials, a later commit removes them. The adding commit still contains the file in full, with the line that starts `SYNC_PASSWORD=`, the password, and the flag. You can read the history two ways: through the repository browser's commits or diff view in the web page, or from a shell with `git log` and `git show` once you have one. Either reaches the same old commit.
+The settings file is gone from the current files, so browsing the project at its latest state in the web page shows nothing. The history is in the repository on the server's disk, and you read it from a shell there. You do not have a login yet, so the shell comes from the web service: it is a known version with a flaw that needs no login (see **Nudge: getting a shell as the web account** under Stage 4, and do that part now). The shell runs as the web service account, **www-data**, which owns the repository.
+
+Once you have the shell, find the repository folder the web service serves and read its history. One commit adds the service credentials, a later commit removes them. The adding commit still contains the file in full, with the line that starts `SYNC_PASSWORD=`, the password, and the flag.
 
 The in-game **Secrets in Git History** field guide explains why a careless developer's secrets survive a "removal", and how to dig them back out. This box is exactly that lesson: the password was scrubbed from the working tree but not from the history.
 
@@ -190,27 +192,30 @@ The in-game **Secrets in Git History** field guide explains why a careless devel
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Open the repository's commit history==, in the browser's commits or diff view, or with `git log --oneline` from a shell on the box.
-2. \==action: Find the commit that added the planning sync credentials== (its message is about adding the temporary credential), and the later one that removed it.
-3. \==action: Show that adding commit==: open its diff in the browser, or run `git show <that commit>` from a shell. Read the file it added and find the line that starts `SYNC_PASSWORD=`, the password beside it, and the flag.
-4. \==action: Copy the flag and submit it at the Evidence Relay Terminal==.
+1. \==action: Get a shell as www-data through the web service==, following steps 1 to 3 of the Stage 4 Recipe. Keep that shell open: Stage 4 uses it again.
+2. \==action: Find the repository on disk==: the web service keeps its repositories under one folder, and `find / -name "*.git" -o -name ".git" 2>/dev/null` lists the candidates.
+3. \==action: Change into the repository and run `git log --oneline`==. Find the commit that added the planning sync credentials (its message is about adding the temporary credential), and the later one that removed it.
+4. \==action: Show that adding commit with `git show <that commit>`==. Read the file it added and find the line that starts `SYNC_PASSWORD=`, the password beside it, and the flag.
+5. \==action: Copy the flag and submit it at the Evidence Relay Terminal==.
 
 </details>
 
-> Warning: Looking at the project's current files will not show the credential: the file was removed. You have to read the earlier commit in the history, not the latest state.
+> Warning: Looking at the project's current files will not show the credential: the file was removed. You have to read the earlier commit in the history, not the latest state. The password and the flag sit on one line with nothing between them, so compare the line with the flag shape before you split it.
 
 > Tip: A natural stopping point for a 60-minute class is after this stage. The next two stages use the account and password you now have.
 
 ### Stage 3: The Account Flag {#hints-vm-login}
 
-**Where:** the attack box's terminal, logging in to the repository server. **Goal:** log in as **svc-planning** with the recovered password, read its home directory, and submit the flag.
+**Where:** the attack box's terminal, logging in to the repository server. **Goal:** log in as **svc-planning** with the recovered password, open the sealed dead drop in its home directory, and submit the flag.
 
-> Hint: A password only works on the account it was made for. You have the account name from Stage 1 and the password from Stage 2. Log in over SSH, then look at what is in the home directory.
+> Hint: A password only works on the account it was made for. You have the account name from Stage 1 and the password from Stage 2. Log in over SSH, then look at what is in the home directory. What you find there is sealed, and the seal is not on the server.
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-SSH takes the account name before the host. Once you are in, the home directory belongs to svc-planning. List everything in it, including hidden files, before you open any file. One file holds the mole's correspondence with ENTROPY, sent under the alias **deep_state_drop** to an address at `entropy.onion`, and the flag sits with it. That mail is the same account you will see named in the root logs in Stage 4, which is the point of logging in properly.
+SSH takes the account name before the host. Once you are in, the home directory belongs to svc-planning. List everything in it, including hidden files, before you open any file. The mole's dead drop is there: a file named for the ENTROPY alias **deep_state_drop**, ending `.zip.b64`. The name says what it is: a zip archive written out as Base64 text. Decode the Base64 back into a zip, then open the zip. The zip has a password. It is the seal ENTROPY's own drop protocol put on it, and you read it in the game: the **Portland Intercept -- Full Decrypt** in the Director's Safe ends with the line the drop was sealed under. Inside is the mole's correspondence with ENTROPY, sent to an address at `entropy.onion`, and the flag sits with it. That mail is the same account you will see named in the root logs in Stage 4, which is the point of logging in properly.
+
+HaX says the same on the phone once the credentials flag is in: if anything is sealed, the Director has held the key for nine days.
 
 **Learn it:** ==action: List the home directory with `ls -la` before you open any file in it==. Names that start with a dot are hidden from a plain `ls`.
 
@@ -219,20 +224,24 @@ SSH takes the account name before the host. Once you are in, the home directory 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Log in with `ssh svc-planning@<repository server>`, and enter the password from Stage 2==.
-2. \==action: List the home directory: `ls -la`==.
-3. \==action: Open the files one at a time with `cat`==, and read the ENTROPY correspondence. The flag is with it.
-4. \==action: Submit the flag at the Evidence Relay Terminal==.
+1. \==action: Read the Portland Intercept -- Full Decrypt from the Director's Safe in the game== and note the phrase on its "Drop sealed under:" line.
+2. \==action: Log in with `ssh svc-planning@<repository server>`, and enter the password from Stage 2==.
+3. \==action: List the home directory: `ls -la`==, and find the `deep_state_drop` file.
+4. \==action: Log out, and copy the file to the attack box== with `scp svc-planning@<repository server>:deep_state_drop.zip.b64 .` (same password). The attack box has every tool you need for the next steps.
+5. \==action: Decode it back into a zip==: `base64 -d deep_state_drop.zip.b64 > drop.zip`.
+6. \==action: Open the zip with `unzip drop.zip`== and enter the seal phrase from step 1 when asked for the password.
+7. \==action: Read the file it extracts with `cat`==. The flag is at the end of the ENTROPY correspondence.
+8. \==action: Submit the flag at the Evidence Relay Terminal==.
 
 </details>
 
-> Warning: The mail file is owned by svc-planning and set so only its owner can read it. The web service account cannot open it, so a foothold on the web service is not enough: this flag needs the svc-planning login. If the password is rejected, check the account name first; a correct password on the wrong account fails the same way as a wrong one. Copy the password rather than retyping it.
+> Warning: If `unzip` reports a wrong password, copy the seal exactly as the intercept prints it, hyphens and all. The drop file is owned by svc-planning and set so only its owner can read it. The web service account cannot open it, so a foothold on the web service is not enough: this flag needs the svc-planning login. If the password is rejected, check the account name first; a correct password on the wrong account fails the same way as a wrong one. Copy the password rather than retyping it.
 
 ### Stage 4: The Root Flag {#hints-vm-root}
 
 **Where:** the attack box, against the web service on the repository server. **Goal:** exploit the web service to a shell as its own account, escalate that account to root, read the logs and cached files only root can open, and submit the flag.
 
-> Hint: The account you logged in as for Stage 3 has no sudo rights. Root is reached through the web service account instead. Get a shell as that account first, then ask what it may run as root.
+> Hint: The account you logged in as for Stage 3 has no sudo rights. Root is reached through the web service account instead. Go back to the web account's shell from Stage 2, then ask what it may run as root.
 
 <details markdown="1">
 <summary>Nudge: getting a shell as the web account</summary>
@@ -248,7 +257,7 @@ The web service is a known version with an argument-injection flaw that needs no
 <details markdown="1">
 <summary>Nudge: escalating to root</summary>
 
-From the www-data shell, run `sudo -l`. It lists one tool the account may run as root: a package manager. A package manager can run other programs, so it can be turned into a root shell. The Privilege Escalation field guide has a section on escaping an allowed command to a shell. Once you have root, the access logs and The Architect's cached authorisation sit where only root can read them. The log puts svc-planning at a Cryptography Lab terminal opening the Portland planning file, `pnw_contingency.enc`, and the flag is in the same place.
+From the www-data shell, run `sudo -l`. It lists one tool the account may run as root: a package manager. A package manager can run other programs, so it can be turned into a root shell. The Privilege Escalation field guide has a section on escaping an allowed command to a shell. Once you have root, the access logs and The Architect's cached authorisation sit where only root can read them, Base64-encoded, so decode them before you read. The log puts svc-planning at a Cryptography Lab terminal opening the Portland planning file, `pnw_contingency.enc`, and the flag is in the same place.
 
 **Learn it:** ==action: Before you run a command as root, write down what it will do and what it could change==.
 
@@ -265,7 +274,8 @@ From the www-data shell, run `sudo -l`. It lists one tool the account may run as
 4. \==action: Run `sudo -l` as www-data==. Note the tool you may run as root (a package manager such as `apt-get`), and whether it asks for a password.
 5. \==action: Open the Privilege Escalation guide at the section "Method 4: Escaping an Allowed Command to a Shell (GTFOBins)", and find the entry for that tool==.
 6. \==action: Follow that entry to a root shell, then confirm with `id`==.
-7. \==action: Read the root-only access logs and The Architect's cached authorisation. Find the flag, and submit it at the Evidence Relay Terminal==.
+7. \==action: List `/root` and read the file there==. It is one long block of Base64, not plain text.
+8. \==action: Decode it==, with `base64 -d <that file>` or **From Base64** in CyberChef, and read the access-log correlation and The Architect's authorisation. Find the flag, and submit it at the Evidence Relay Terminal.
 
 </details>
 
@@ -312,10 +322,13 @@ On your own Kali box, run `sudo -l` and read the output line by line.
 | What you see | What it usually means |
 |---|---|
 | The repository page loads with no login prompt | The repository browser is open to anyone. Read the files and commit messages straight from it. |
-| The current files do not contain the credential | It was removed in a later commit. Read the history: find the adding commit and show it, in the web diff view or with `git show`. |
+| The current files do not contain the credential | It was removed in a later commit. Read the history from a shell on the server: find the adding commit and show it with `git show`. |
 | `git log` shows an "add credentials" commit and a later "remove" commit | The password is in the adding commit. Open that commit, not the latest state of the file. |
 | `ssh svc-planning` is rejected | Wrong account name or a mistyped password. Copy the password from Stage 2 rather than retyping it. |
-| `cat ~/flag` (the mail) says "Permission denied" | You are the web account, not svc-planning. The file is owner-only. Log in as svc-planning over SSH to read it. |
+| The dead drop in svc-planning's home says "Permission denied" | You are the web account, not svc-planning. The file is owner-only. Log in as svc-planning over SSH to read it. |
+| `cat` on the drop file prints a wall of letters and digits | It is a zip written out as Base64. Decode it with `base64 -d` into a `.zip` file, then `unzip` it. |
+| `unzip` asks for a password, or says it is incorrect | The drop is sealed. The seal is on the Portland Intercept -- Full Decrypt in the Director's Safe. Copy it exactly. |
+| The file in `/root` is one long block of letters and digits | It is Base64-encoded. Decode it to read the logs and find the flag. |
 | `sudo -l` as svc-planning prints nothing you can run | svc-planning has no sudo rule. The rule is on the web account; reach it through the web-service exploit, then run `sudo -l` as www-data. |
 
 ## After the Game: Questions and Exercises {#questions}

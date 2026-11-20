@@ -505,7 +505,7 @@ Take the stick and open it. HaX offers the decoding field guide. To get it, open
 
 The **Personnel Print Job -- Director's Investigation Request** in the Operations Floor tray lists several service numbers. The header carries the one that matters, and the margin note says what everyone uses it for. The safe is the Director's, so it wants the Director's own number, not a suspect's. A suspect's number is the common wrong answer.
 
-The safe opens in its own framed window and holds five items: the **Portland Intercept**, the **Interrogation Suite Code Card** and a sealed file on each of the three suspects. The card carries the code for the keypad. The pick kit cannot open a PIN lock, so there is no skipping this.
+The safe opens in its own framed window and holds five items: the **Portland Intercept -- Full Decrypt**, the **Interrogation Suite Code Card** and a sealed file on each of the three suspects. The card carries the code for the keypad. Read the intercept too: its last lines say what ENTROPY's drop was sealed under, and the server work needs that phrase later (the companion sheet's Stage 3 says where). The pick kit cannot open a PIN lock, so there is no skipping this.
 
 If the Director already named the leak on the evidence, he has given you the code aloud, and **[The suite code again, sir?]** repeats it. You do not need the safe for that. The sealed evaluation of Nightshade in the safe is Dr Okafor's; the Director points you to it before you face him, and stops mentioning it once you have it.
 
