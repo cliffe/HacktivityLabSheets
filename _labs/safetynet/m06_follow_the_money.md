@@ -377,6 +377,8 @@ Open the Door Controller Export from your inventory and look for the line that n
 
 **Where:** the data centre. **Clues:** the **Financial Transaction Server** (three files) and the three deposits from Priya's write-up. **Lock wants:** a four-digit slot number, **one try per opening**.
 
+> Note: There are two routes to the slot, and both lead to the same number. The one on this sheet is the arithmetic: match the three deposits to the credits on the Financial Transaction Server and read off the slot they share. If you take the server attack on the backend instead, its documents name the fund's slot outright, so finishing that work gives you the slot as well. The in-game match is the intended puzzle and a cross-check; the server route is the hands-on one. Either way you reach the console with the same answer. The server route has its own [VM Technical Steps](https://cliffe.github.io/HacktivityLabSheets/labs/safetynet/m06-follow-the-money-vm-technical-steps/) sheet.
+
 ![The custody console PIN pad]({{ site.baseurl }}/assets/images/safetynet/m06_follow_the_money/10-custody-console-pin-pad.png)
 
 > Hint: The transaction server has the numbers you need and the custody console wants one of them. Which slot received the money from all three deposits, after the mixer's fee, and no sooner than its hold?
