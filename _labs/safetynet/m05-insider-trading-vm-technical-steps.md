@@ -36,7 +36,7 @@ The research server holds the evidence for the case. The **Bludit CMS Server Ter
 
 1. **Recon flag.** Find the portal, read the handover note it leaves in plain view, and submit the flag from that note. The note does not hold the admin login; it points to where that login is kept.
 2. **Foothold flag.** Use the admin login to get a shell through the portal's image upload, and read the file the web service keeps.
-3. **Staging flag.** Switch to the manager account from the note, and read the staging manifest in its home directory.
+3. **Staging flag.** Switch to the Linux account that shares the portal admin's name and password (from the lockbox card), and read the staging manifest in its home directory.
 4. **Root flag.** Find what the manager account may run as root, use that to get a root shell, and read the Architect's authorisation in `/root`.
 
 The flag values are generated for each game, so this sheet never gives one. It says where each flag appears and how to reach it.
@@ -125,8 +125,9 @@ The attack box's own address tells you the subnet. Print it and note the number 
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Run `ip -4 addr` in the attack box's terminal==.
-2. \==action: Note the address and the prefix length on the interface that holds the lab address==. You will use them as `<subnet>` in the next stage.
+1. \==action: Log in to the attack box using the login on the terminal's sticky note==. This sheet does not repeat it.
+2. \==action: Run `ip -4 addr` in the attack box's terminal==.
+3. \==action: Note the address and the prefix length on the interface that holds the lab address==. You will use them as `<subnet>` in the next stage.
 
 </details>
 
@@ -194,12 +195,12 @@ Check the admin login by hand in a browser on the attack box before you use it i
 
 **Where:** the attack box's terminal, on the portal's server. **Goal:** switch to the manager's Linux account and read the staging manifest in its home directory.
 
-> Hint: The web service's account is not the one that holds the file. Which account does the note name, and what does a Linux account need in order to log in to it?
+> Hint: The web service's account is not the one that holds the file. Which account name does the lockbox card give you, and what does a Linux account need in order to log in to it?
 
 <details markdown="1">
 <summary>Nudge</summary>
 
-The username in the note is also a Linux account on the server. The password may be the same for both logins. Try the switch, then read the permission string on the home directory before you open anything inside it.
+The username on the lockbox card is also a Linux account on the server. The password may be the same for both logins. Try the switch, then read the permission string on the home directory before you open anything inside it.
 
 **Learn it:** ==action: Read the permission string from `ls -l` before you try to open a file in a home directory==. The owner's letters tell you who can get in.
 
@@ -208,7 +209,7 @@ The username in the note is also a Linux account on the server. The password may
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Switch to the account named in the note with `su - <username>`==, and enter the password from the lockbox card when asked, since the manager reused it.
+1. \==action: Switch to the account named on the lockbox card with `su - <username>`==, and enter the password from the same card when asked, since the manager reused it.
 2. \==action: List the home directory with `ls -la`==, then read the manifest it holds. The flag is in the manifest. Submit it at the SAFETYNET Drop-Site Terminal.
 
 </details>
@@ -241,6 +242,8 @@ The username in the note is also a Linux account on the server. The password may
 </details>
 
 > Warning: Reading the permitted file gives you its text and no root shell. The shell comes from the escape, not from reading the file.
+
+> Note: The `/root` folder also holds a password-protected archive. It is an optional bonus. The case needs only the four flags on this sheet.
 
 ### Submitting the Four Flags {#hints-vm-submit}
 
@@ -313,11 +316,11 @@ Inside `less`, type `!id` and press Enter, then `q` to quit.
 
 ## Attacking the Server: Questions and Exercises {#attacking-the-server}
 
-> Question: Why was the note on the portal a bigger problem than a weak password would have been?
+> Question: The note on the portal did not hold the login, only where it was kept. Why was that still a problem, and what did it add to the default password nobody rotated?
 
 > Question: The web service's account could not read the manifest, but the manager's account could. What does that tell you about where a secret should be kept?
 
-> Question: Which stages depend only on the note, and which also depend on the upload feature?
+> Question: Which stages depend on the login from the lockbox card, and which also depend on the upload feature?
 
 > Action: ==action: Write a short note for the portal's owner that lists the four weaknesses in the order an attacker meets them, with one fix for each.== Hand in the note with your answers to the three questions above.
 

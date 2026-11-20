@@ -141,8 +141,9 @@ The backend sits on the same subnet as the attack box. The box's own address and
 <details markdown="1">
 <summary>Recipe</summary>
 
-1. \==action: Run `ip -4 addr` in the attack box's terminal==.
-2. \==action: Note the address and the prefix length on the interface that holds the lab address==. You will use them as `<subnet>` in the next stage.
+1. \==action: Log in to the attack box using the login on the terminal's sticky note==. This sheet does not repeat it.
+2. \==action: Run `ip -4 addr` in the attack box's terminal==.
+3. \==action: Note the address and the prefix length on the interface that holds the lab address==. You will use them as `<subnet>` in the next stage.
 
 </details>
 
@@ -227,7 +228,7 @@ Two files hold what you need. The account names are in one, and the hashes are i
 1. \==action: Print both files on the backend: `cat /etc/passwd` and `cat /etc/shadow`==.
 2. \==action: Copy both into a new, empty folder on your attack box==, as `passwd.txt` and `shadow.txt`.
 3. \==action: Join them: `unshadow passwd.txt shadow.txt > hashes.txt`==.
-4. \==action: Crack them against a wordlist: `john --wordlist=<your wordlist> hashes.txt`==.
+4. \==action: Type Dr Volkova's Password Dictionary List into a file on your attack box, one bare word per line, and crack against it: `john --wordlist=<your wordlist> hashes.txt`==. The suffixes on her list are for door passphrases. The backend accounts use the bare words.
 5. \==action: Read what has cracked: `john --show hashes.txt`==. Note the account name and the password.
 6. \==action: Sign in as that account on the backend, over SSH, and read the file called `flag` in its home folder==. Then submit the flag at the drop-site terminal.
 
@@ -309,7 +310,7 @@ John cracks every hash in the file you give it, not only the first one it finds.
 1. \==action: Sign in as the operator account over SSH==, using its password.
 2. \==action: Run `sudo -l`== and read the rule for your account.
 3. \==action: List the vault account's cold storage folder: `sudo -u <vault account> ls -l /home/<vault account>/cold_storage`==. Get the vault account's name from `/etc/passwd`.
-4. \==action: Read the file in that folder with `sudo -u <vault account> cat`==, then submit the flag at the drop-site terminal.
+4. \==action: Read the files in that folder with `sudo -u <vault account> cat`==. The flag is in the file named for full access. Submit it at the drop-site terminal.
 
 </details>
 
