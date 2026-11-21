@@ -101,7 +101,7 @@ Before you reach for memory, look at what the live tools are actually doing, bec
 type ps
 ```
 
-It tells you `ps` is an alias, not `/usr/bin/ps`. The `alias` command itself has been pointed at `true`, so listing the aliases the normal way shows nothing. To read the file they live in you need a tool the attacker did not wrap, because a plain `cat` filters out its own giveaway lines. A statically linked copy of BusyBox has been placed on the machine for exactly this. It carries its own `cat`, `ps`, `ss` and dozens of other applets in one binary, and nothing in the shell rewrites `busybox`.
+It tells you `ps` is an alias, not `/usr/bin/ps`. The `alias` command itself has been pointed at `true`, so listing the aliases the normal way shows nothing. To read the file they live in you need a tool the attacker did not wrap, because a plain `cat` filters out its own giveaway lines. A statically linked copy of BusyBox has been placed on the machine for exactly this. It carries its own `cat`, `ps`, `netstat` and dozens of other applets in one binary, and nothing in the shell rewrites `busybox`.
 
 \==action: read the shell startup file through BusyBox==:
 
@@ -113,7 +113,7 @@ The alias block is there in full. Now run the real tools through BusyBox and com
 
 ```bash
 busybox ps
-busybox netstat -tlnp
+busybox netstat -tln
 ```
 
 You can also reach the untouched binaries directly: `command ps` skips the alias, and so does the absolute path `/usr/bin/ps`.
