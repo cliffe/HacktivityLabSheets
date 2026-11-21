@@ -62,15 +62,20 @@ export COMPROMISED_IP===edit: IP address of the compromised_server VM==
 
 ## Introduction {#introduction}
 
-You have reason to believe one of your servers has been compromised. The order of volatility says to collect the most volatile evidence first: the contents of RAM, the live state of processes and connections, before you ever power the machine down. That is what you do here, and memory is where the answers are.
+So you have reason to believe one of your servers has experienced a security compromise... What next? For this lab you investigate a server that has been compromised whilst it is still running.
+
+The investigation of a potential security compromise is closely related to digital forensics topics. As with forensic investigations, we also aim to maintain the integrity of our "evidence", *wherever possible* not modifying access times or other information. However, in a business incident response setting maintaining a chain of evidence may not be our highest priority, since we may be more concerned with other business objectives, such as assuring the confidentiality, integrity, and availability of data and services.
+
+During analysis, it is good practice to follow the order of volatility (OOV): collecting the most volatile evidence first (such as the contents of RAM, details of processes running, and so on) from a live system, then collecting less volatile evidence (such as data stored on disk) using offline analysis.
+
+
+## Live analysis {#live-analysis}
+
+After suspecting a compromise, before powering down the server for offline analysis, the first step is typically to perform some initial investigation of the live system. Live analysis aims to investigate suspicions that a compromise has occurred, and gather volatile information, which may potentially include evidence that would be lost by powering down the computer.
 
 A rootkit changes what the live tools report. If the kernel, the shell, or the libraries behind `ps`, `ss` and `ls` have been tampered with, then those tools tell you whatever the attacker wants you to hear. A memory capture sidesteps that. It is a copy of the raw bytes of RAM, read out whole, and you analyse it on a trusted machine with tools the compromised system never touched.
 
-The analysis tool for this lab is [Volatility 3](https://github.com/volatilityfoundation/volatility3), an open-source memory forensics framework. It is already installed on your desktop VM as the command `vol`.
-
-## Part 1: capture the live server (and see why it is not enough) {#part-1-capture-the-live-server}
-
-First look at the compromise with the live tools you would normally trust, then capture memory yourself and see where that capture falls short.
+First look at the compromise with the live tools you would normally trust, then capture memory yourself and see where that capture falls short. 
 
 \==VM: On the desktop VM==, ==action: ssh into the compromised server==:
 
@@ -90,6 +95,7 @@ ss -tlnp
 Nothing here looks obviously wrong, and that is the point. The system has been tampered with to hide the intrusion from exactly these tools. Make a note of what you see; you will compare it against the memory capture, where the hidden processes reappear.
 
 > Log Book Question: Why can you not rely on `ps` and `ss`, run on the compromised machine itself, to tell you what is really running on it?
+
 
 ### Trusted tools: how far they get you {#trusted-tools}
 
