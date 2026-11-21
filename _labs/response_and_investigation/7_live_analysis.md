@@ -84,6 +84,21 @@ First look at the compromise with the live tools you would normally trust, then 
 ssh $COMPROMISED_IP
 ```
 
+Before you touch anything, start a record of the session. In forensics and in incident response you have to be able to show afterwards exactly what you did and when, so that your own actions can be told apart from the attacker's. The `script` command keeps that record for you: it writes every command you run, and everything the machine prints back, to a log file.
+
+\==VM: On the compromised_server VM (ssh)==, ==action: start recording your session==:
+
+```bash
+mkdir -p ~/evidence
+script -a ~/evidence/investigation.log
+```
+
+Everything you do from now on is appended to `investigation.log`. Type `exit` when you have finished the investigation to close the log.
+
+> Note: If you come back to the lab in a later sitting, your commands are appended to the same file, so nothing already in it is lost. Copy the log somewhere safe once you are done.
+
+> Log Book Question: What are the risks and the benefits of keeping this log on the compromised machine itself, rather than on a separate machine or on paper? When might a handwritten note of what you did be worth more than a file on the system you are investigating?
+
 ### A first look with the live tools {#a-first-look-with-the-live-tools}
 
 \==VM: On the compromised_server VM (ssh)==, ==action: look at the running processes and the listening ports==:
@@ -100,34 +115,11 @@ Nothing here looks obviously wrong, and that is the point. The system has been t
 
 ### Trusted tools: how far they get you {#trusted-tools}
 
-Before you reach for memory, look at what the live tools are actually doing, because this rootkit is shallow enough to expose from the shell. The attacker has dropped a set of aliases into the account's `.bashrc`. When you type `ps`, your shell runs the real `ps` and then strips the attacker's own processes out of the output before it reaches you. The same wrapper sits on `ss`, `ls`, `netstat` and `cat`. The programs on disk are untouched; the editing happens in your shell.
+A first principle of live investigation is that you do not trust the compromised machine's own programs. If an attacker can change what `ps`, `ss` or `ls` report, those tools tell you whatever the attacker wants you to hear, and nothing in their output lets you know you are being lied to. So a responder does not run the target's own copies. They bring known-good tools on read-only media and run those instead.
 
-\==VM: On the compromised_server VM (ssh)==, ==action: ask your shell what `ps` really is==:
+Those tools are statically linked, and that is a deliberate choice. A normal program like `/usr/bin/ps` loads the system's shared C library when it runs, and obeys the dynamic loader while it does so. That gives an attacker a second place to hide. Setting `LD_PRELOAD`, or writing a library into `/etc/ld.so.preload`, makes every dynamically linked program load an attacker's library first, and that library can strip a process from the output of every tool at once without changing a single binary on disk. Real userland rootkits such as Jynx and Azazel work this way. A statically linked tool carries its own copy of that library and never consults the loader, so neither trick reaches it.
 
-```bash
-type ps
-```
-
-It tells you `ps` is an alias, not `/usr/bin/ps`. The `alias` command itself has been pointed at `true`, so listing the aliases the normal way shows nothing. To read the file they live in you need a tool the attacker did not wrap, because a plain `cat` filters out its own giveaway lines. A statically linked copy of BusyBox has been placed on the machine for exactly this. It carries its own `cat`, `ps`, `netstat` and dozens of other applets in one binary, and nothing in the shell rewrites `busybox`.
-
-\==action: read the shell startup file through BusyBox==:
-
-```bash
-busybox cat ~/.bashrc
-```
-
-The alias block is there in full. Now run the real tools through BusyBox and compare them against what the aliased versions told you:
-
-```bash
-busybox ps
-busybox netstat -tln
-```
-
-You can also reach the untouched binaries directly: `command ps` skips the alias, and so does the absolute path `/usr/bin/ps`.
-
-This is a real incident-response habit rather than a lab trick. A responder does not trust the compromised machine's own programs, so they bring known-good tools on read-only media and run those. BusyBox stands in for that kit here. The tools are statically linked for a concrete reason. A normal program like `/usr/bin/ps` loads the system's shared C library at run time and obeys the dynamic loader while it does so, and that gives an attacker a second place to hide. Setting `LD_PRELOAD`, or writing a library into `/etc/ld.so.preload`, makes every dynamically linked program load an attacker library first, and that library can hide a process from every tool at once without altering a single binary on disk. Real userland rootkits such as Jynx and Azazel work this way. A static binary carries its own C library and never consults the loader, so neither trick touches it.
-
-The habit has a ceiling, and knowing where it sits is the point of the rest of this lab. Every tool, static or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the lie moves below the C library, and the kernel hands BusyBox the same edited answers it hands everything else. Nothing running on the live machine can be trusted then, because the component answering all of them is the one that has been subverted. What remains is to read the machine's memory from outside and analyse it somewhere safe.
+The habit has a ceiling, and knowing where it sits is the point of the rest of this lab. Every tool, static or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the lie moves below the C library, and the kernel hands even a trusted static tool the same edited answers it hands everything else. Nothing running on the live machine can be trusted then, because the component answering all of them is the one that has been subverted. What remains is to read the machine's memory from outside and analyse it somewhere safe.
 
 ### Capture the memory with LiME {#capture-the-memory-with-lime}
 
