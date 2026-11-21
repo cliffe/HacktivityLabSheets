@@ -53,7 +53,8 @@ whoami
 Take a note of the IP address of the compromised_server VM (given to you when you claimed the VMs), and ==action: set it as a variable== on the desktop VM, in any terminal you use for this lab:
 
 ```bash
-export COMPROMISED_IP===edit: IP address of the compromised_server VM==
+# replace the middle two octets with the IP address on your systems
+export COMPROMISED_IP=10.x.x.4
 ```
 
 > Note: Because the same username exists on both VMs, `ssh $COMPROMISED_IP` logs you straight in without a username. Commands below use `~` and `$USER` for your home directory and username; your own shell expands them.
