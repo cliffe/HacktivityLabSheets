@@ -6,7 +6,7 @@ description: "Capture and analyse the RAM of a compromised Linux server with Vol
 overview: |
   A server on your network has been compromised. The intruder has planted a backdoor, is running processes they would rather you did not see, and has loaded a rootkit that lies to the usual command-line tools (ps, ss and the like), so the live system hides its own compromise. Your job is to find out what is really running on that machine and to recover the evidence the attacker tried to conceal. You will do it with memory forensics. RAM holds what the disk and the live tools do not. It is the complete working state of every process on the machine, including the code it is running, the data it holds, the connections it has open, and the secrets it decrypted and never wrote to disk. Capturing live memory provides a rich source of forensically valuable information for incident responders to analyse and gain an understanding of what occurred during an attack.
 
-  The lab has two halves. First you capture memory from the compromised server yourself, from inside the running system, and see where that capture falls short. This is the acquisition you can nearly always perform, and often the only one available. It comes with a limitation: a capture taken while the kernel keeps running is not one consistent moment, so the plugins that walk the kernel's own lists give inconsistent results, and even the techniques that cope better cannot promise to find a given artefact in it. Then you analyse an atomic capture of the same system, taken with the virtual machine paused from the hypervisor so every structure is consistent, and recover the artefacts cleanly with Volatility 3. Along the way you see why atomic acquisition matters, and why a capture taken from a running machine, though almost always available to you, cannot be fully trusted.
+  The main lab works from a capture of the compromised server's memory that was taken atomically, with the virtual machine paused from the hypervisor so every kernel structure in it is from the same instant. You analyse it with Volatility 3 and recover what the attacker hid: the backdoor and its listener, the processes the rootkit lies about, a process running from a deleted binary, and secrets that never touched disk. An optional section at the end has you take the other kind of capture, the one you can nearly always get in a real incident but cannot fully trust. You read the memory from inside the running server with LiME, try the same analysis on it, and see where it falls short.
 
   This is a Hackerbot lab. Work through the lab sheet, then interact with Hackerbot to complete the challenges.
 tags: ["live-analysis", "memory-forensics", "volatility", "forensics", "incident-response", "rootkits", "hackerbot"]
@@ -76,7 +76,7 @@ After suspecting a compromise, before powering down the server for offline analy
 
 A rootkit changes what the live tools report. If the kernel, the shell, or the libraries behind `ps`, `ss` and `ls` have been tampered with, then those tools tell you whatever the attacker wants you to hear. A memory capture sidesteps that. It is a copy of the raw bytes of RAM, read out whole, and you analyse it on a trusted machine with tools the compromised system never touched.
 
-First look at the compromise with the live tools you would normally trust, then capture memory yourself and see where that capture falls short. 
+First look at the compromise with the live tools you would normally trust, then with a trusted toolkit the attacker never touched, and see how far each gets you before you turn to the memory capture itself. 
 
 \==VM: On the desktop VM==, ==action: ssh into the compromised server==:
 
@@ -125,60 +125,23 @@ busybox uname -a
 
 That reads the kernel version straight through BusyBox. Make a note of it; you need the exact kernel to analyse the memory capture later. `uname` is not one of the tampered commands, so this only shows you how BusyBox is invoked.
 
-Now do the same with the commands the attacker *did* interfere with. Run BusyBox's own `ps`, `netstat` and `cat` and compare them against what the machine's own `ps` and `ss` told you a moment ago. The trusted copies show processes, and a listening port, that the live tools kept from you. One of those processes is the backdoor, and one of the ports is its hidden listener: the live tools concealed both, and the trusted copies reveal them. You have caught the machine lying to you. In Part 2 you pull the same evidence out of a memory capture, where a rootkit's edits to the running system cannot reach, and it is there that Hackerbot's challenges begin.
+Now do the same with the commands the attacker *did* interfere with. Run BusyBox's own `ps`, `netstat` and `cat` and compare them against what the machine's own `ps` and `ss` told you a moment ago. The trusted copies show processes, and a listening port, that the live tools kept from you. One of those processes is the backdoor, and one of the ports is its hidden listener: the live tools concealed both, and the trusted copies reveal them. You have caught the machine lying to you. Next you pull the same evidence out of a memory capture, where a rootkit's edits to the running system cannot reach, and it is there that Hackerbot's challenges begin.
 
 Those trusted tools are statically linked, and that is a deliberate choice. A normal program like `/usr/bin/ps` loads the system's shared C library when it runs, and obeys the dynamic loader while it does so. That gives an attacker a second place to hide. Setting `LD_PRELOAD`, or writing a library into `/etc/ld.so.preload`, makes every dynamically linked program load an attacker's library first, and that library can strip a process from the output of every tool at once without changing a single binary on disk. Real userland rootkits such as Jynx and Azazel work this way. A statically linked tool carries its own copy of that library and never consults the loader, so neither trick reaches it.
 
 Here, BusyBox was enough to see through the deception, but you could not have known that before you looked, and a deeper rootkit would defeat it. Even trusted static tools have a limit, and knowing where it lies is the point of the rest of this lab. Every tool, static or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the lie moves below the C library, and the kernel hands even a trusted static tool the same edited answers it hands everything else. Nothing running on the live machine can be trusted then, because the component answering all of them is the one that has been subverted. What remains is to read the machine's memory from outside and analyse it somewhere safe.
 
-### Capture the memory with LiME {#capture-the-memory-with-lime}
-
-On a modern 64-bit Linux system you cannot simply read `/proc/kcore`. Instead you capture RAM with a kernel module, [LiME](https://github.com/504ensicsLabs/LiME) (Linux Memory Extractor), which is already built on the compromised server. Loading it writes the contents of RAM straight to a file.
-
-\==VM: On the compromised_server VM (ssh)==, ==action: capture the live memory==:
-
-```bash
-sudo insmod /root/LiME/src/lime-$(uname -r).ko "path=$HOME/evidence/live_capture.raw format=raw"
-sudo rmmod lime
-sudo chown $USER:$USER ~/evidence/live_capture.raw
-ls -lh ~/evidence/live_capture.raw
-```
-
-> Note: The capture is roughly the size of the server's RAM (about 1.5 GB), so the file is large and the copy in the next step takes a little while.
-
-The evidence should not stay on the machine you are investigating. ==VM: On the desktop VM (a separate terminal tab, not the ssh session)==, ==action: copy the capture to your desktop==:
-
-```bash
-scp $COMPROMISED_IP:evidence/live_capture.raw ~/evidence/live_capture.raw
-```
-
-### Try to analyse the live capture {#try-to-analyse-the-live-capture}
-
-Volatility reconstructs the kernel's data structures from the raw bytes. The first thing to ask of any Linux memory image is the process list.
-
-\==VM: On the desktop VM==, ==action: list the processes from your live capture==:
-
-```bash
-vol -f ~/evidence/live_capture.raw linux.pslist
-```
-
-`linux.pslist` walks the kernel's linked list of processes, following one pointer to the next. ==action: Look closely at the output.== It may stop short, repeat entries, or miss processes you know are running. Run it twice and you may not get the same list. This is not a bug in Volatility. You captured RAM while the kernel kept scheduling, allocating and freeing: the pointers the plugin follows were being rewritten underneath it, so the snapshot is not one consistent moment. This is the **smear** of live acquisition.
-
-Some tools degrade more gracefully than `linux.pslist` on a smeared capture. `linux.psscan` scans memory for the signature of a process structure instead of following the list, and a plain `strings` search ignores kernel structures and reads the bytes directly, so neither depends on one pointer leading cleanly to the next. Where list-walking fails outright, they can still return something.
-
-They are still working on a broken source, though. A capture taken while the kernel keeps running is incomplete: a page you need may not be in it at all, or may be frozen half-written. You cannot count on recovering any particular piece of evidence from a live capture, whichever tool you reach for. So leave this image here. Part 1 has made its point: on a running machine you can nearly always take a capture, but what comes back is partial and cannot be trusted on its own. The recoveries themselves come next, from a capture taken properly.
-
-> Log Book Question: Your `live_capture.raw` was taken while the server kept running. Why does that make it an unreliable source of evidence, and which kind of analysis suffers the most from it?
-
 ## Why atomic acquisition matters {#why-atomic-acquisition-matters}
 
-The cleanest way to avoid the smear is to stop the machine from changing while you read its memory. In a physical incident this is hard. On a virtual machine it is straightforward: the hypervisor can pause the guest's CPU and dump guest RAM to a file while nothing inside the guest runs. Every pointer and every structure is then from the same instant, and the list-walking plugins work.
+Reading the memory from outside only helps if what you read is coherent. A capture taken while the kernel is still running is not. The kernel reschedules, allocates and frees while the bytes are being copied, so the pointers that Volatility's list-walking plugins follow are rewritten underneath them and the image is not one consistent moment. This is the **smear** of live acquisition, and it is the normal state of any capture taken from a machine you cannot stop.
 
-Your analyst VM has been given exactly such a capture. It is an **atomic** image of the same compromised system, taken with the virtual machine paused from the hypervisor, placed in your evidence directory as part of this lab. The rest of the challenges use it.
+The way to avoid it is to stop the machine from changing while you read its memory. In a physical incident that is hard. On a virtual machine it is straightforward: the hypervisor pauses the guest's CPU and dumps guest RAM to a file while nothing inside the guest runs, so every pointer and every structure is from the same instant and the list-walking plugins work. Your analyst VM has been given exactly such a capture: an **atomic** image of the compromised system, taken with the virtual machine paused from the hypervisor and placed in your evidence directory as part of this lab. The challenges use it.
+
+If you want to see the difference for yourself, an [optional section at the end](#optional-capture) has you take a live capture of the running server with LiME and watch the same analysis fall short on it.
 
 > Note (how Volatility knows the layout): Volatility needs a **symbol table** (an ISF, Intermediate Symbol Format) that matches the exact kernel of the captured machine. The offsets of fields inside kernel structures change from one kernel build to the next. The ISF is generated from the kernel's debug symbols with a tool called `dwarf2json`, and the one matching this server's kernel ships with the lab, so `vol` finds it automatically. If you ever analyse a capture and Volatility reports it cannot find a matching symbol table, that is the problem to fix first.
 
-## Part 2: analyse the atomic capture {#part-2-analyse-the-atomic-capture}
+## Analyse the atomic capture {#part-2-analyse-the-atomic-capture}
 
 \==VM: On the desktop VM==, ==action: confirm the atomic capture is present==:
 
@@ -186,7 +149,7 @@ Your analyst VM has been given exactly such a capture. It is an **atomic** image
 ls -lh ~/evidence/compromised_server.raw
 ```
 
-\==action: List the processes again, this time from the atomic capture==:
+\==action: List the processes from the atomic capture==:
 
 ```bash
 vol -f ~/evidence/compromised_server.raw linux.pslist
@@ -382,8 +345,51 @@ Don't forget to ==action: save and submit any flags!==
 
 You have now reconstructed the compromise from memory alone: a hidden backdoor and the processes the rootkit lied about, a process running from a deleted binary, a secret held only in a daemon's environment, and a command a shell was told to forget. None of it was reliable from the live tools on the machine itself, and the deleted binary and the unsaved history were never on disk to begin with.
 
-Keep in mind the limitation you met at the start. The clean recoveries in Part 2 came from an atomic capture. Your own live capture in Part 1 was smeared: the list-walking plugins could not be trusted on it, and even signature scanning and string search cannot promise to find a given artefact in a capture taken from a running system. In an incident where you cannot pause the machine, that is the trade-off you work with. You take the capture you can get, and you treat what it gives you with suspicion.
+Keep in mind the limitation behind all of this. The clean recoveries you just made came from an atomic capture, taken with the machine paused. A capture taken from a running server is smeared: the list-walking plugins cannot be trusted on it, and even signature scanning and string search cannot promise to find a given artefact in it. In an incident where you cannot pause the machine, that is the trade-off you work with. You take the capture you can get, and you treat what it gives you with suspicion. The optional section below lets you see that for yourself.
 
 > Log Book Question: You recovered the same kind of evidence in two ways in this lab: with a Volatility plugin that understands kernel structures, and with a plain `strings` search. When would you reach for each, and what can the structured plugin tell you that `strings` cannot?
 
-Once you have finished the Hackerbot challenges, you can power off the VMs from Hacktivity.
+Once you have finished the challenges, you can power off the VMs from Hacktivity. If you want to try the optional live capture below first, leave them running until you have.
+
+## Optional: capture the server's memory yourself {#optional-capture}
+
+The challenges you have just worked through used an atomic capture, one taken for you with the server paused from the hypervisor. In a real incident you often cannot pause the machine, and the capture you can take then is one from inside the running system. It is worth taking once, to see for yourself why it is the harder evidence to trust. Both VMs need to be running for this, so do it before you power them off.
+
+### Capture the memory with LiME {#capture-the-memory-with-lime}
+
+On a modern 64-bit Linux system you cannot simply read `/proc/kcore`. Instead you capture RAM with a kernel module, [LiME](https://github.com/504ensicsLabs/LiME) (Linux Memory Extractor), which is already built on the compromised server. Loading it writes the contents of RAM straight to a file.
+
+\==VM: On the compromised_server VM (ssh)==, ==action: capture the live memory==:
+
+```bash
+sudo insmod /root/LiME/src/lime-$(uname -r).ko "path=$HOME/evidence/live_capture.raw format=raw"
+sudo rmmod lime
+sudo chown $USER:$USER ~/evidence/live_capture.raw
+ls -lh ~/evidence/live_capture.raw
+```
+
+> Note: The capture is roughly the size of the server's RAM (about 1.5 GB), so the file is large and the copy in the next step takes a little while.
+
+The evidence should not stay on the machine you are investigating. ==VM: On the desktop VM (a separate terminal tab, not the ssh session)==, ==action: copy the capture to your desktop==:
+
+```bash
+scp $COMPROMISED_IP:evidence/live_capture.raw ~/evidence/live_capture.raw
+```
+
+### Try to analyse the live capture {#try-to-analyse-the-live-capture}
+
+Volatility reconstructs the kernel's data structures from the raw bytes. Ask this capture for the same process list you pulled cleanly from the atomic image.
+
+\==VM: On the desktop VM==, ==action: list the processes from your live capture==:
+
+```bash
+vol -f ~/evidence/live_capture.raw linux.pslist
+```
+
+`linux.pslist` walks the kernel's linked list of processes, following one pointer to the next. ==action: Look closely at the output.== It may stop short, repeat entries, or miss processes you know are running. Run it twice and you may not get the same list. This is not a bug in Volatility. You captured RAM while the kernel kept scheduling, allocating and freeing: the pointers the plugin follows were being rewritten underneath it, so the snapshot is not one consistent moment. This is the **smear** of live acquisition.
+
+Some tools degrade more gracefully than `linux.pslist` on a smeared capture. `linux.psscan` scans memory for the signature of a process structure instead of following the list, and a plain `strings` search ignores kernel structures and reads the bytes directly, so neither depends on one pointer leading cleanly to the next. Where list-walking fails outright, they can still return something.
+
+They are still working on a broken source, though. A capture taken while the kernel keeps running is incomplete: a page you need may not be in it at all, or may be frozen half-written. Whichever tool you reach for, you cannot count on recovering any particular piece of evidence from it. That is the difference you have now seen from both sides: the clean recoveries in the challenges came from a capture taken with the machine paused, and this one, taken while the machine ran, cannot promise you the same. On a running server you can nearly always take a capture, but what comes back is partial and has to be treated with suspicion.
+
+> Log Book Question: Your `live_capture.raw` was taken while the server kept running. Why does that make it an unreliable source of evidence, and which kind of analysis suffers the most from it?
