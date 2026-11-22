@@ -59,8 +59,8 @@ Each full episode runs at a kiosk in a company training room and steps through f
 1. **Brief.** The company, the role and the job for today.
 2. **Attack half.** The learner researches what the company has made public and builds one message, call or page. This half is never scored.
 3. **Flip.** The learner sees their own attack arrive in an inbox, from the target's side.
-4. **Defend half.** The learner sorts what arrives. For most items they choose Trust, Report, Delete or (on some) Verify; calls have Comply, Escalate, Refuse and sometimes Ring back; sign-in prompts have Approve, Deny, and Deny and report; and a few cards have their own, such as Ask first. Then they tick what gave it away. This half is scored.
-5. **Debrief.** Each answer is explained as the learner makes it; the debrief goes back over the ones they got wrong, sums up the real items, then gives the habit to keep, your organisation's way to report and, after a miss, a no-blame line.
+4. **Defend half.** The learner sorts what arrives. For most items they choose Trust, Report, Delete or (on some) Verify; calls have Comply, Escalate, Refuse and sometimes Ring back; sign-in prompts have Approve, Deny or Deny and report; and a few cards have their own, such as Ask first. Then they tick what gave it away. This half is scored.
+5. **Debrief.** Each answer is explained as the learner makes it; the debrief goes back over the items they got wrong or missed a clue on, sums up the real items, then gives the habit to keep, your organisation's way to report and, after a miss, a no-blame line.
 
 Reporting a real item is never marked down: in the defend half a Report on a genuine message scores the same as trusting it. The course wants people who are unsure to report.
 
@@ -133,7 +133,7 @@ Each course except Refresher drills and Annual refresher has a pair of checks: a
 
 ### Default and role versions
 
-Each course comes with one check pair. Most use the all-staff pair; Payment fraud uses the finance pair and Handling data and conduct uses the data and conduct pair. Role versions of this check (finance, HR, helpdesk, executive, mobile, data and conduct) are available; contact Hacktivity to switch.
+Each course comes with one check pair. Most use the all-staff pair; Payment fraud uses the finance pair and Handling data and conduct uses the data and conduct pair. Role versions of the checks (finance, HR, helpdesk, executive, mobile, data and conduct) are available; contact Hacktivity to switch.
 
 Each role version tests the channel that role meets in its episodes. The help-desk check, for instance, uses calls, a voicemail, emails and a sign-in prompt from a service-desk queue. You cannot swap the check yourself (see [What you can and cannot change](#can-cannot)).
 
@@ -200,7 +200,7 @@ In almost every defend half and check, **Report** or its equivalent (Escalate on
 
 ### Your real reporting route
 
-Every debrief has a reporting box (headed "How to report here" unless you give your route its own heading). When the debrief goes back over an item the learner reported, it adds a line beginning "At work, that means:", taken from the first option in your route. Both show the reporting route set for the course. Set it so it matches what your staff should really do.
+Every debrief has a reporting box (headed "How to report here" unless you give your route its own heading). When the debrief goes back over an item the learner reported, it adds a line beginning "At work, that means:", taken from the first option in your route. The box shows the route set for the course. The "At work, that means:" line appears only when a route has been set, so on the shared courses learners see the general default box and no such line. Set your route so it matches what your staff should really do. Set it so it matches what your staff should really do.
 
 You build the route from up to four standard options, filling in your own details, plus an optional "anything else" paragraph:
 
