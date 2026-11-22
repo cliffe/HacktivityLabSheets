@@ -59,8 +59,8 @@ Each full episode runs at a kiosk in a company training room and steps through f
 1. **Brief.** The company, the role and the job for today.
 2. **Attack half.** The learner researches what the company has made public and builds one message, call or page. This half is never scored.
 3. **Flip.** The learner sees their own attack arrive in an inbox, from the target's side.
-4. **Defend half.** The learner sorts what arrives. For most items they choose Trust, Report, Delete or (on some) Verify; calls, sign-in prompts and a few cards have their own answers, such as Ring back or Ask first. Then they tick what gave it away. This half is scored.
-5. **Debrief.** Every answer explained, including the real items, then the habit to keep, your organisation's way to report, and a no-blame line.
+4. **Defend half.** The learner sorts what arrives. For most items they choose Trust, Report, Delete or (on some) Verify; calls have Comply, Escalate, Refuse and sometimes Ring back; sign-in prompts have Approve, Deny, and Deny and report; and a few cards have their own, such as Ask first. Then they tick what gave it away. This half is scored.
+5. **Debrief.** Each answer is explained as the learner makes it; the debrief goes back over the ones they got wrong, sums up the real items, then gives the habit to keep, your organisation's way to report and, after a miss, a no-blame line.
 
 Reporting a real item is never marked down: in the defend half a Report on a genuine message scores the same as trusting it. The course wants people who are unsure to report.
 
@@ -68,11 +68,11 @@ The debrief opens with a short headline. The default bands are "Well done", "Get
 
 ### Spot-it versions
 
-Every episode also has a **spot-it** version: no attack half, just the defend half and the debrief, in about 8 minutes. The Refresher drills course is all twenty of them. They suit second-year learners and sessions under half an hour.
+Every episode also has a **spot-it** version: no attack half, just the defend half and the debrief, in about 8 minutes (E17, which has no full version, about 12). The Refresher drills course is all twenty of them. They suit second-year learners and sessions under half an hour.
 
 ### Consequence episodes {#consequence-episodes}
 
-Episodes 11, 15, 16, 19 and 20 have no attacker to play. In the first half the learner makes the ordinary choices anyone makes on a busy day, then sees, some months later in the story, where each one led. Then they sort a set of items as usual. Episode 17 (acceptable use) exists only as a spot-it version.
+Episodes 11, 15, 16, 19 and 20 have no attacker to play. In the first half the learner makes the ordinary choices anyone makes on a busy day, then sees where each one led, from later that day to six months on in the story. Then they sort a set of items as usual. Episode 17 (acceptable use) exists only as a spot-it version.
 
 ## The Courses {#courses}
 
@@ -125,7 +125,7 @@ Five fictional companies host the episodes: Brightwell Foods, Tarrowby Logistics
 | E19 | Malware, ransomware and updates | Quayholt Insurance | All staff | Consequence episode: everyday calls at a desk, and where they led | ~15 min | ~8 min |
 | E20 | Working away from the office | Tarrowby Logistics | Staff who work away from the office | Consequence episode: two days on the road (a train, a café, a hotel) and a morning at home | ~15 min | ~8 min |
 
-All times are estimates from the episodes' own descriptions. The opening brief says episodes take "roughly 10 to 15" minutes; a careful first-timer may take longer.
+All times are estimates from the episodes' own descriptions. The opening brief tells learners that most episodes take about 15 minutes and the spot-it versions are shorter; a careful first-timer may take longer.
 
 ## The Checks {#checks}
 
@@ -133,11 +133,9 @@ Each course except Refresher drills and Annual refresher has a pair of checks: a
 
 ### Default and role versions
 
-Each course comes with one check pair. Most use the all-staff pair; Payment fraud uses the finance pair and Handling data and conduct uses the data and conduct pair. Each check listing has this note for organisers:
+Each course comes with one check pair. Most use the all-staff pair; Payment fraud uses the finance pair and Handling data and conduct uses the data and conduct pair. Role versions of this check (finance, HR, helpdesk, executive, mobile, data and conduct) are available; contact Hacktivity to switch.
 
-> This is the course's default check pair. Role versions of this check (finance, HR, helpdesk, executive, mobile, data and conduct) are available; contact Hacktivity to switch.
-
-Each role version tests the channel that role meets in its episodes. The help-desk check, for instance, uses calls, a voicemail, emails and a sign-in prompt from a service-desk queue. You cannot swap the check yourself (see [What you can and cannot change](#hacktivity)).
+Each role version tests the channel that role meets in its episodes. The help-desk check, for instance, uses calls, a voicemail, emails and a sign-in prompt from a service-desk queue. You cannot swap the check yourself (see [What you can and cannot change](#can-cannot)).
 
 ### What the checks measure
 
@@ -156,7 +154,7 @@ In practice:
 Organisations take Cyber Aware in one of two ways:
 
 1. **Opt your members in to the shared courses.** You choose which of your plan's courses your members can play. The shared courses are the same for every organisation, and you cannot change them.
-2. **Copy a course for your organisation.** Each course has a template titled "Cyber Aware: &lt;course&gt;". Copying it gives your organisation its own course, with its own dates, enrolment, settings and progress page. This needs a plan that includes Cyber Aware and free seats.
+2. **Copy a course for your organisation.** Each course has a template titled "Cyber Aware: &lt;course&gt;". Copying it gives your organisation its own course, with its own dates, enrolment, settings and progress page. This needs a current plan that includes Cyber Aware, and free seats.
 
 If you want your own reporting route in the debrief, your own dates, or a progress page for your learners, use option 2.
 
@@ -167,13 +165,13 @@ If you want your own reporting route in the debrief, your own dates, or a progre
 | You can | You cannot |
 |---|---|
 | Choose which shared courses your members can play | Change a shared course |
-| Copy a course template into your organisation, if your plan includes Cyber Aware and you have free seats | Copy a course that is already your organisation's copy, or a template outside your plan |
+| Copy a course template into your organisation, if you have a current plan that includes Cyber Aware, and free seats | Copy a course that is already your organisation's copy, or a template outside your plan |
 | On your copy: change the title, description, start and end dates, the FAQ link and the scoreboard setting | Change your organisation's other settings |
 | On your copy: invite learners by email | Take one learner off one course only (ask Hacktivity) |
 | Remove a member's access to all your organisation's courses (the organisation page's Remove access/seat) | Create a course from scratch, or delete one |
 | On your copy: set the reporting route, rule of thumb and team size | Set the course's habit line |
 | On your copy: choose whether learners see their check result, which attempt counts, and a pass mark for the final check | Edit any mission listing: add, remove or reorder episodes, swap a check for a role version, or change a listing's settings |
-| Set your organisation's default reporting route | Edit the organiser note on a check listing |
+| Set your organisation's default reporting route | Edit a listing's notes or brief |
 | See progress and results for your learners, and download them as CSV | See learners' written feedback on the course |
 
 Copying duplicates the template as it is. When you copy, a box marked "Copy awareness settings (reporting route, rule of thumb, team size)" is ticked by default. Leave it ticked to keep the course's own habit line and default settings, then set your own reporting route on the copy, or clear the copy's route (see [Reporting](#reporting)). Any change to the list of missions, including a role check, goes through Hacktivity.
@@ -198,11 +196,11 @@ The opening brief tells every learner that the course records items, verdicts, t
 
 ### Reporting inside the course
 
-In almost every defend half and check, **Report** (or a check-first answer such as Ring back or Ask first) is one of the answers. The course teaches that reporting when unsure is never wrong and that reporting your own mistake quickly is thanked, not blamed.
+In almost every defend half and check, **Report** or its equivalent (Escalate on a call, Deny and report on a sign-in prompt) is one of the answers, and many items also offer a check-first answer such as Verify, Ring back or Ask first. The course teaches that reporting when unsure is never wrong and that reporting your own mistake quickly is thanked, not blamed.
 
 ### Your real reporting route
 
-Every debrief ends with a "How to report here" box, and the feedback on a Report answer adds a line beginning "At work, that means:". Both show the reporting route set for the course. Set it so it matches what your staff should really do.
+Every debrief has a reporting box (headed "How to report here" unless you give your route its own heading). When the debrief goes back over an item the learner reported, it adds a line beginning "At work, that means:", taken from the first option in your route. Both show the reporting route set for the course. Set it so it matches what your staff should really do.
 
 You build the route from up to four standard options, filling in your own details, plus an optional "anything else" paragraph:
 
