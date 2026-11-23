@@ -57,7 +57,7 @@ Take a note of the IP address of the compromised_server VM (given to you when yo
 export COMPROMISED_IP=10.x.x.4
 ```
 
-> Note: Because the same username exists on both VMs, `ssh $COMPROMISED_IP` logs you straight in without a username. Commands below use `~` and `$USER` for your home directory and username; your own shell expands them.
+> Note: Because the same username exists on both VMs, `ssh $COMPROMISED_IP` does not ask you for a username. It still asks for the password (`tiaspbiqe2r`), and so do `sudo` and `scp` later in the lab. Commands below use `~` and `$USER` for your home directory and username; your own shell expands them.
 
 {% include hackerbot-intro.md role="task you to investigate a compromised server and recover evidence from its memory" %}
 
@@ -74,9 +74,7 @@ During analysis, it is good practice to follow the order of volatility (OOV): co
 
 After suspecting a compromise, before powering down the server for offline analysis, the first step is typically to perform some initial investigation of the live system. Live analysis aims to investigate suspicions that a compromise has occurred, and gather volatile information, which may potentially include evidence that would be lost by powering down the computer.
 
-A rootkit changes what the live tools report. If the kernel, the shell, or the libraries behind `ps`, `ss` and `ls` have been tampered with, then those tools tell you whatever the attacker wants you to hear. A memory capture sidesteps that. It is a copy of the raw bytes of RAM, read out whole, and you analyse it on a trusted machine with tools the compromised system never touched.
-
-First look at the compromise with the live tools you would normally trust, then with a trusted toolkit the attacker never touched, and see how far each gets you before you turn to the memory capture itself. 
+A rootkit changes what the live tools report. If the kernel, the shell, or the libraries behind `ps`, `ss` and `ls` have been tampered with, then those tools tell you whatever the attacker wants you to hear, and nothing in their output lets you know you are being lied to. You will see that first-hand on this server: the ordinary tools report a clean machine, a trusted toolkit the attacker never touched shows the compromise, and a memory capture shows it again where no running-system tampering can reach.
 
 \==VM: On the desktop VM==, ==action: ssh into the compromised server==:
 
@@ -105,17 +103,17 @@ Everything you do from now on is appended to `investigation.log`. Type `exit` wh
 
 ```bash
 ps aux
-ss -tlnp
+netstat -tln
 ```
 
-Nothing here looks obviously wrong, and that is the point. The system has been tampered with to hide the intrusion from exactly these tools. Make a note of what you see; you will compare it against the memory capture, where the hidden processes reappear.
+Nothing here looks obviously wrong, and that is the point. The system has been tampered with to hide the intrusion from exactly these tools. Make a note of the listening ports you see; you are about to run the same check through a trusted tool and compare.
 
-> Log Book Question: Why can you not rely on `ps` and `ss`, run on the compromised machine itself, to tell you what is really running on it?
+> Log Book Question: Why can you not rely on `ps` and `netstat`, run on the compromised machine itself, to tell you what is really running on it?
 
 
 ### Trusted tools: how far they get you {#trusted-tools}
 
-A first principle of live investigation is that you do not trust the compromised machine's own programs. If an attacker can change what `ps`, `ss` or `ls` report, those tools tell you whatever the attacker wants you to hear, and nothing in their output lets you know you are being lied to. So a responder does not run the target's own copies. They bring known-good tools on read-only media and run those instead.
+A first principle of live investigation is that you do not trust the compromised machine's own programs. If an attacker can change what `ps`, `netstat` or `ls` report, those tools tell you whatever the attacker wants you to hear, and nothing in their output lets you know you are being lied to. So a responder does not run the target's own copies. They bring known-good tools on read-only media and run those instead.
 
 This machine already has such a toolkit on it: BusyBox, a single statically linked binary that carries its own `ps`, `netstat`, `cat`, `ls` and dozens of other applets, none of which the attacker has touched. You run an applet by naming it after the binary. ==VM: On the compromised_server VM (ssh)==, ==action: run a trusted tool through BusyBox==:
 
@@ -125,23 +123,87 @@ busybox uname -a
 
 That reads the kernel version straight through BusyBox. Make a note of it; you need the exact kernel to analyse the memory capture later. `uname` is not one of the tampered commands, so this only shows you how BusyBox is invoked.
 
-Now do the same with the commands the attacker *did* interfere with. Run BusyBox's own `ps`, `netstat` and `cat` and compare them against what the machine's own `ps` and `ss` told you a moment ago. The trusted copies show processes, and a listening port, that the live tools kept from you. One of those processes is the backdoor, and one of the ports is its hidden listener: the live tools concealed both, and the trusted copies reveal them. You have caught the machine lying to you. Next you pull the same evidence out of a memory capture, where a rootkit's edits to the running system cannot reach, and it is there that Hackerbot's challenges begin.
+Now run the same two checks you ran a moment ago, but through BusyBox, so the applets the attacker never touched do the reporting. ==VM: On the compromised_server VM (ssh)==, ==action: list the processes and listening ports through BusyBox==:
 
-Those trusted tools are statically linked, and that is a deliberate choice. A normal program like `/usr/bin/ps` loads the system's shared C library when it runs, and obeys the dynamic loader while it does so. That gives an attacker a second place to hide. Setting `LD_PRELOAD`, or writing a library into `/etc/ld.so.preload`, makes every dynamically linked program load an attacker's library first, and that library can strip a process from the output of every tool at once without changing a single binary on disk. Real userland rootkits such as Jynx and Azazel work this way. A statically linked tool carries its own copy of that library and never consults the loader, so neither trick reaches it.
+```bash
+busybox ps
+busybox netstat -tln
+```
 
-Here, BusyBox was enough to see through the deception, but you could not have known that before you looked, and a deeper rootkit would defeat it. Even trusted static tools have a limit, and knowing where it lies is the point of the rest of this lab. Every tool, static or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the lie moves below the C library, and the kernel hands even a trusted static tool the same edited answers it hands everything else. Nothing running on the live machine can be trusted then, because the component answering all of them is the one that has been subverted. What remains is to read the machine's memory from outside and analyse it somewhere safe.
+> Log Book Question: Compare this output with the `ps` and `netstat` you ran before. What appears here that the machine's own tools left out? You should be able to see a listening TCP port, and a process bound to it, that the first look hid from you. You have caught the machine lying to you.
+
+Those two differences are the next two things Hackerbot asks you for. Read them off the BusyBox output you just produced.
+
+\==action: save and submit any flags!== as you go.
+
+#### Challenge 1: the backdoor's hidden port {#challenge-1}
+
+`busybox netstat -tln` listed a listening TCP port that the host's own `netstat` did not, and `busybox ps` shows a process bound to it. That port is the backdoor's listener. Read the port number off the output (the one listening port that was not in the first-look list).
+
+##### Hackerbot Attack #1 {#hackerbot-attack-1}
+
+You can skip the bot to here, by saying **goto 1**.
+
+> Hackerbot: Using the trusted BusyBox tools on the live server, find the TCP port the hidden backdoor is listening on.
+
+When you are ready for the bot to quiz you, ==action: say 'ready'== to Hackerbot. It asks you for the port; ==action: answer with the port number== once you have it.
+
+Don't forget to ==action: save and submit any flags!==
+
+#### Challenge 2: the backdoor's session marker {#challenge-2}
+
+Look again at the backdoor's line in `busybox ps`. The listener was started with a marker on its command line of the form `BACKDOOR_SESSION_ID=<token>`, which the attacker uses to recognise its own shells. A process can be renamed, but the full command line it was launched with stays in the process's argument vector, where a misleading name cannot hide it. Read the value after `BACKDOOR_SESSION_ID=`.
+
+> Note: that same argument vector also survives into a memory capture, where Volatility's `linux.psaux` can recover it later. That is why Hackerbot frames it around the image. You can read it now, straight off the live BusyBox output.
+
+##### Hackerbot Attack #2 {#hackerbot-attack-2}
+
+You can skip the bot to here, by saying **goto 2**.
+
+> Hackerbot: Recover the backdoor listener's session marker, the value after `BACKDOOR_SESSION_ID=` on its command line.
+
+When you are ready for the bot to quiz you, ==action: say 'ready'== to Hackerbot. It asks you for the marker; ==action: answer with the value after the `=` sign== (that part on its own, not the whole command line).
+
+Don't forget to ==action: save and submit any flags!==
+
+BusyBox was enough to see through the deception here, and that it is statically linked is a deliberate choice. A normal program like `/usr/bin/ps` loads the system's shared C library when it runs, and obeys the dynamic loader while it does so. That gives an attacker a second place to hide. Setting `LD_PRELOAD`, or writing a library into `/etc/ld.so.preload`, makes every dynamically linked program load an attacker's library first, and that library can strip a process from the output of every tool at once without changing a single binary on disk. Real userland rootkits such as Jynx and Azazel work this way. A statically linked tool carries its own copy of that library and never consults the loader, so neither trick reaches it.
+
+You could not have known BusyBox would be enough before you looked, and a deeper rootkit would defeat it. Even trusted static tools have a limit, and knowing where it lies is the point of the rest of this lab. Every tool, static or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the lie moves below the C library, and the kernel hands even a trusted static tool the same edited answers it hands everything else. Nothing running on the live machine can be trusted then, because the component answering all of them is the one that has been subverted. What remains is to read the machine's memory from outside and analyse it somewhere safe. Before you do, take your own capture of this running server.
+
+## Capture the live memory now {#capture-live-memory}
+
+Take a capture of the running server yourself, and set it copying to your analyst VM while you work. In a real incident this is often the only capture you can get: you usually cannot pause a production server, so you read its RAM from inside while it keeps running. You will come back to this capture at the very end of the lab and analyse it.
+
+On a modern 64-bit Linux system you cannot simply read `/proc/kcore`. Instead you capture RAM with a kernel module, [LiME](https://github.com/504ensicsLabs/LiME) (Linux Memory Extractor), which is already built on the compromised server. Loading it writes the contents of RAM straight to a file.
+
+\==VM: On the compromised_server VM (ssh)==, ==action: capture the live memory==:
+
+```bash
+sudo insmod /root/LiME/src/lime-$(uname -r).ko "path=$HOME/evidence/live_capture.raw format=raw"
+sudo rmmod lime
+sudo chown $USER:$USER ~/evidence/live_capture.raw
+ls -lh ~/evidence/live_capture.raw
+```
+
+> Note: `sudo` asks for your password (`tiaspbiqe2r`). The capture is roughly the size of the server's RAM (about 1.5 GB), so the file is large.
+
+The evidence should not stay on the machine you are investigating, and the copy is large, so start it now and leave it running while you get on with the analysis. ==VM: On the desktop VM (a separate terminal tab, not the ssh session)==, ==action: start copying the capture to your desktop==:
+
+```bash
+scp $COMPROMISED_IP:evidence/live_capture.raw ~/evidence/live_capture.raw
+```
+
+Leave that copy running in its tab. Capturing from inside a running machine has a cost: the kernel keeps scheduling, allocating and freeing while LiME reads RAM, so the bytes come from many slightly different instants rather than one. That inconsistency is called **smear**, and it is why a live capture cannot be fully trusted. The clean alternative exists only when you can stop the machine while you read it, which on a virtual machine means pausing the guest from the hypervisor so every structure is from the same instant: an **atomic** capture. We have already taken one of this server that way and left it in your evidence directory as `compromised_server.raw`. Analyse that now, and come back to your own live capture at the very end to see the difference for yourself.
 
 ## Why atomic acquisition matters {#why-atomic-acquisition-matters}
 
-Reading the memory from outside only helps if what you read is coherent. A capture taken while the kernel is still running is not. The kernel reschedules, allocates and frees while the bytes are being copied, so the pointers that Volatility's list-walking plugins follow are rewritten underneath them and the image is not one consistent moment. This is the **smear** of live acquisition, and it is the normal state of any capture taken from a machine you cannot stop.
-
-The way to avoid it is to stop the machine from changing while you read its memory. In a physical incident that is hard. On a virtual machine it is straightforward: the hypervisor pauses the guest's CPU and dumps guest RAM to a file while nothing inside the guest runs, so every pointer and every structure is from the same instant and the list-walking plugins work. Your analyst VM has been given exactly such a capture: an **atomic** image of the compromised system, taken with the virtual machine paused from the hypervisor and placed in your evidence directory as part of this lab. The challenges use it.
-
-If you want to see the difference for yourself, an [optional section at the end](#optional-capture) has you take a live capture of the running server with LiME and watch the same analysis fall short on it.
+Reading memory from outside the machine only helps if what you read is coherent. The atomic capture you are about to analyse is: it was taken with the virtual machine paused, so every pointer and every kernel structure in it is from the same instant, and the plugins that walk the kernel's linked lists can follow those pointers cleanly. The live capture you just started is not coherent in that way. The kernel rewrote those same pointers while LiME copied them, so a list-walking plugin on a smeared image can follow a pointer into a structure that has since moved or been freed. That is the practical cost of smear, and you will watch it happen at the end of the lab.
 
 > Note (how Volatility knows the layout): Volatility needs a **symbol table** (an ISF, Intermediate Symbol Format) that matches the exact kernel of the captured machine. The offsets of fields inside kernel structures change from one kernel build to the next. The ISF is generated from the kernel's debug symbols with a tool called `dwarf2json`, and the one matching this server's kernel ships with the lab, so `vol` finds it automatically. If you ever analyse a capture and Volatility reports it cannot find a matching symbol table, that is the problem to fix first.
 
 ## Analyse the atomic capture {#part-2-analyse-the-atomic-capture}
+
+You analyse the capture with Volatility 3, run on your desktop VM as `vol`. Each kind of analysis is a plugin; the Linux plugins are named `linux.<something>` (for example `linux.pslist`). You point `vol` at an image with `-f` and name the plugin to run.
 
 \==VM: On the desktop VM==, ==action: confirm the atomic capture is present==:
 
@@ -159,45 +221,9 @@ The list comes back clean and complete. Everything from here uses `~/evidence/co
 
 > Tip: Volatility plugins are slow: they parse a lot of memory. Each one takes a little while to run; let it finish. To avoid re-running a slow plugin, save its output to a file, for example `vol -f ~/evidence/compromised_server.raw linux.psscan > ~/evidence/psscan.txt`, and then read or `grep` the file.
 
-Now work through Hackerbot's challenges. For each one, you recover a piece of evidence from the capture, save it to a file on your desktop VM under `~/evidence/` (Hackerbot tells you the exact filename in the chat), and then say `ready`.
+Now work through the rest of Hackerbot's challenges. For each one, you recover a piece of evidence from the capture, save it to a file on your desktop VM under `~/evidence/` (Hackerbot tells you the exact filename in the chat), and then say `ready`.
 
-## The challenges {#the-challenges}
-
-### Challenge 1: the backdoor's session marker {#challenge-1}
-
-A backdoor is listening on the server. The live tools hide it, but the memory image does not. The listener was started with a marker on its command line of the form `BACKDOOR_SESSION_ID=<token>`.
-
-A process name is easy to fake, but the full command line is not. ==VM: On the desktop VM==, ==action: list each process with its arguments==:
-
-```bash
-vol -f ~/evidence/compromised_server.raw linux.psaux
-```
-
-`linux.psaux` reads each process's argument vector (argv), the actual command line it was launched with, which a misleading process name cannot disguise. Find the backdoor listener in the output and read off the value after `BACKDOOR_SESSION_ID=`.
-
-> Tip: The command lines are long. Pipe the output through `grep`: `vol -f ~/evidence/compromised_server.raw linux.psaux | grep -a BACKDOOR_SESSION_ID`.
-
-\==action: Save the token== (the value after the `=` sign, on its own) to the filename Hackerbot gives you in the chat, under `~/evidence/`. For example:
-
-```bash
-echo '<the token>' > ~/evidence/<filename Hackerbot gives you>
-```
-
-> Note (a common slip): submit the token only (the part after `=`), not the whole `BACKDOOR_SESSION_ID=...` string and not the surrounding command line.
-
-#### Hackerbot Attack #1 {#hackerbot-attack-1}
-
-You can skip the bot to here, by saying **goto 1**.
-
-> Hackerbot: Recover the backdoor listener's session marker (the value after `BACKDOOR_SESSION_ID=`) from the memory image, and save it to the file Hackerbot names, under `~/evidence/`.
-
-When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
-
-Hackerbot will then quiz you about which part of a process `linux.psaux` reads to show the real command line. ==action: say 'the answer is ...'== once you know it.
-
-Don't forget to ==action: save and submit any flags!==
-
-### Challenge 2: the hidden processes {#challenge-2}
+### Challenge 3: the hidden processes {#challenge-3}
 
 The rootkit hides some processes from the live tools. The memory capture shows them all, so the hidden ones are those present in the capture but missing from the live `ps`.
 
@@ -217,9 +243,9 @@ ps -e
 
 > Note (a common slip): save only the hidden PIDs, not the whole process list. In particular do not include the low-numbered kernel threads (PIDs 2, 3, 4 and so on). They are not hidden, and listing them tells Hackerbot your list is wrong.
 
-#### Hackerbot Attack #2 {#hackerbot-attack-2}
+#### Hackerbot Attack #3 {#hackerbot-attack-3}
 
-You can skip the bot to here, by saying **goto 2**.
+You can skip the bot to here, by saying **goto 3**.
 
 > Hackerbot: List the PIDs of the processes that are running on the system but are not reported by the live `ps`, and save them to the file Hackerbot names, under `~/evidence/`.
 
@@ -229,9 +255,9 @@ Hackerbot will then quiz you on what kind of malware hides processes. ==action: 
 
 Don't forget to ==action: save and submit any flags!==
 
-### Challenge 3: the deleted binary's real name {#challenge-3}
+### Challenge 4: the deleted binary's real name {#challenge-4}
 
-One process is running from a binary that has been deleted from disk. In the process list it is disguised to look like a kernel worker thread, shown as `[kworker/...]`. That disguise is only the argument vector the live tools print. The kernel's own name for the task, its `comm` field, still holds the name the binary was launched under.
+One process is running from a binary that has been deleted from disk. In the live process list it is disguised to look like a kernel worker thread, shown as `[kworker/...]`. That disguise is only the argument vector the live tools print. The kernel's own name for the task, its `comm` field, still holds the name the binary was launched under.
 
 \==VM: On the desktop VM==, ==action: scan the processes and read their real names==:
 
@@ -239,13 +265,13 @@ One process is running from a binary that has been deleted from disk. In the pro
 vol -f ~/evidence/compromised_server.raw linux.psscan
 ```
 
-`linux.psscan` reads each task's `comm` directly, so it is not fooled by the `[kworker/...]` argv disguise. One entry has a `comm` that is plainly not a normal system process. That is the deleted binary's real name. ==action: Save that name== to the file Hackerbot names, under `~/evidence/`.
+`linux.psscan` reads each task's `comm` directly, so it is not fooled by the `[kworker/...]` argv disguise. Find the task that the live tools show as `[kworker/...]`; its `comm` in the scan is the deleted binary's real name. ==action: Save that name== to the file Hackerbot names, under `~/evidence/`.
 
-> Note (a common slip): `[kworker/...]` is the disguise, shown by argument-based views like `linux.psaux`. The answer is the `comm` value from `linux.psscan`, not the `[kworker/...]` string.
+> Note (a common slip): `[kworker/...]` is the disguise, shown by argument-based views like `linux.psaux`. The answer is the `comm` value from `linux.psscan`, not the `[kworker/...]` string. The backdoor process also has an unusual `comm`; that one is the next challenge, not this one.
 
-#### Hackerbot Attack #3 {#hackerbot-attack-3}
+#### Hackerbot Attack #4 {#hackerbot-attack-4}
 
-You can skip the bot to here, by saying **goto 3**.
+You can skip the bot to here, by saying **goto 4**.
 
 > Hackerbot: Recover the real process name (the `comm` field) of the process running from a deleted binary, and save it to the file Hackerbot names, under `~/evidence/`.
 
@@ -255,9 +281,9 @@ Hackerbot will then quiz you on why this program's executable cannot be recovere
 
 Don't forget to ==action: save and submit any flags!==
 
-### Challenge 4: the backdoor process's name {#challenge-4}
+### Challenge 5: the backdoor process's name {#challenge-5}
 
-The backdoor you found in Challenge 1 runs as a process, and the rootkit hides that process from `ps` and `top` just as it hid the port from `ss`. The memory image is not fooled. This is the same listener whose session marker you recovered in Challenge 1; now read the name the kernel knows it by.
+The backdoor whose port and marker you found in Challenges 1 and 2 runs as a process, and the rootkit hides that process from `ps` and `top` just as it hid the port from the live tools. The memory image is not fooled. This is the same listener you fingerprinted by its `BACKDOOR_SESSION_ID` marker; now read the name the kernel knows it by.
 
 \==VM: On the desktop VM==, ==action: find the backdoor process in the scan==:
 
@@ -269,9 +295,9 @@ Identify the backdoor process, the listener you already fingerprinted by its `BA
 
 > Tip: To tie a listening socket to the process that owns it, `vol -f ~/evidence/compromised_server.raw linux.sockstat` lists sockets with their owning process, which helps confirm you have the right one.
 
-#### Hackerbot Attack #4 {#hackerbot-attack-4}
+#### Hackerbot Attack #5 {#hackerbot-attack-5}
 
-You can skip the bot to here, by saying **goto 4**.
+You can skip the bot to here, by saying **goto 5**.
 
 > Hackerbot: Recover the process name (the `comm` field) of the hidden backdoor process from the memory image, and save it to the file Hackerbot names, under `~/evidence/`.
 
@@ -281,7 +307,7 @@ Hackerbot will then quiz you on why this process is missing from the live `ps` a
 
 Don't forget to ==action: save and submit any flags!==
 
-### Challenge 5: the secret in the environment {#challenge-5}
+### Challenge 6: the secret in the environment {#challenge-6}
 
 A daemon on the server holds a secret in its process environment: an environment variable named `TELEMETRY_TOKEN`. It was never written to a file, so it lives only in the process's memory. That memory is in the capture.
 
@@ -297,13 +323,13 @@ Or search the raw bytes directly:
 strings -a ~/evidence/compromised_server.raw | grep -a 'TELEMETRY_TOKEN='
 ```
 
-\==action: Save the token== (the value after the `=` sign) to the file Hackerbot names, under `~/evidence/`.
+Find the `TELEMETRY_TOKEN` entry and read its value. ==action: Save the token== to the file Hackerbot names, under `~/evidence/`.
 
 > Note (a common slip): there is no file on disk to find this in. It is in the daemon's environment in memory. If you went looking in `/etc` or a config file on the server, that is why you came up empty.
 
-#### Hackerbot Attack #5 {#hackerbot-attack-5}
+#### Hackerbot Attack #6 {#hackerbot-attack-6}
 
-You can skip the bot to here, by saying **goto 5**.
+You can skip the bot to here, by saying **goto 6**.
 
 > Hackerbot: Recover the value of the `TELEMETRY_TOKEN` environment variable from the memory image, and save it to the file Hackerbot names, under `~/evidence/`.
 
@@ -313,9 +339,9 @@ Hackerbot will then quiz you on where a running Linux process keeps its environm
 
 Don't forget to ==action: save and submit any flags!==
 
-### Challenge 6: the shell command that was never saved {#challenge-6}
+### Challenge 7: the shell command that was never saved {#challenge-7}
 
-An interactive shell is still running on the server. One command it ran carries a token, but the shell was told not to write its history to disk (its `HISTFILE` was unset), so the command is in no `~/.bash_history` file. It is still in the shell's in-memory history, inside the capture.
+An interactive shell is still running on the server. One command it ran carries a token, but the shell was started with its history writing turned off (its `HISTFILE` points at `/dev/null`), so the command is in no `~/.bash_history` file. It is still in the shell's in-memory history, inside the capture.
 
 \==VM: On the desktop VM==, ==action: recover the shell history from memory==:
 
@@ -329,9 +355,9 @@ vol -f ~/evidence/compromised_server.raw linux.bash
 
 > Note (a common slip): `cat ~/.bash_history` on the server shows nothing useful: the history was never written there. That is the whole reason you go to memory for it.
 
-#### Hackerbot Attack #6 {#hackerbot-attack-6}
+#### Hackerbot Attack #7 {#hackerbot-attack-7}
 
-You can skip the bot to here, by saying **goto 6**.
+You can skip the bot to here, by saying **goto 7**.
 
 > Hackerbot: Recover the token from the running shell's in-memory command history, and save it to the file Hackerbot names, under `~/evidence/`.
 
@@ -343,38 +369,15 @@ Don't forget to ==action: save and submit any flags!==
 
 ## Wrapping up {#wrapping-up}
 
-You have now reconstructed the compromise from memory alone: a hidden backdoor and the processes the rootkit lied about, a process running from a deleted binary, a secret held only in a daemon's environment, and a command a shell was told to forget. None of it was reliable from the live tools on the machine itself, and the deleted binary and the unsaved history were never on disk to begin with.
+You have now reconstructed the compromise from memory alone: a hidden backdoor with its port and session marker, the processes the rootkit lied about, a process running from a deleted binary, a secret held only in a daemon's environment, and a command a shell was told to forget. None of it was reliable from the live tools on the machine itself, and the deleted binary and the unsaved history were never on disk to begin with.
 
-Keep in mind the limitation behind all of this. The clean recoveries you just made came from an atomic capture, taken with the machine paused. A capture taken from a running server is smeared: the list-walking plugins cannot be trusted on it, and even signature scanning and string search cannot promise to find a given artefact in it. In an incident where you cannot pause the machine, that is the trade-off you work with. You take the capture you can get, and you treat what it gives you with suspicion. The optional section below lets you see that for yourself.
+Keep in mind the limitation behind all of this. The clean recoveries you just made came from an atomic capture, taken with the machine paused. A capture taken from a running server is smeared: the list-walking plugins cannot be trusted on it, and even signature scanning and string search cannot promise to find a given artefact in it. In an incident where you cannot pause the machine, that is the trade-off you work with. You take the capture you can get, and you treat what it gives you with suspicion. The live capture you started earlier lets you see that for yourself.
 
 > Log Book Question: You recovered the same kind of evidence in two ways in this lab: with a Volatility plugin that understands kernel structures, and with a plain `strings` search. When would you reach for each, and what can the structured plugin tell you that `strings` cannot?
 
-Once you have finished the challenges, you can power off the VMs from Hacktivity. If you want to try the optional live capture below first, leave them running until you have.
+## Come back to your live capture {#back-to-live-capture}
 
-## Optional: capture the server's memory yourself {#optional-capture}
-
-The challenges you have just worked through used an atomic capture, one taken for you with the server paused from the hypervisor. In a real incident you often cannot pause the machine, and the capture you can take then is one from inside the running system. It is worth taking once, to see for yourself why it is the harder evidence to trust. Both VMs need to be running for this, so do it before you power them off.
-
-### Capture the memory with LiME {#capture-the-memory-with-lime}
-
-On a modern 64-bit Linux system you cannot simply read `/proc/kcore`. Instead you capture RAM with a kernel module, [LiME](https://github.com/504ensicsLabs/LiME) (Linux Memory Extractor), which is already built on the compromised server. Loading it writes the contents of RAM straight to a file.
-
-\==VM: On the compromised_server VM (ssh)==, ==action: capture the live memory==:
-
-```bash
-sudo insmod /root/LiME/src/lime-$(uname -r).ko "path=$HOME/evidence/live_capture.raw format=raw"
-sudo rmmod lime
-sudo chown $USER:$USER ~/evidence/live_capture.raw
-ls -lh ~/evidence/live_capture.raw
-```
-
-> Note: The capture is roughly the size of the server's RAM (about 1.5 GB), so the file is large and the copy in the next step takes a little while.
-
-The evidence should not stay on the machine you are investigating. ==VM: On the desktop VM (a separate terminal tab, not the ssh session)==, ==action: copy the capture to your desktop==:
-
-```bash
-scp $COMPROMISED_IP:evidence/live_capture.raw ~/evidence/live_capture.raw
-```
+Earlier in the lab you took a capture of the running server with LiME and set it copying to your desktop. Now analyse it, and compare it with the clean atomic image you have been working from. Check the copy you started has finished first.
 
 ### Try to analyse the live capture {#try-to-analyse-the-live-capture}
 
@@ -386,10 +389,12 @@ Volatility reconstructs the kernel's data structures from the raw bytes. Ask thi
 vol -f ~/evidence/live_capture.raw linux.pslist
 ```
 
-`linux.pslist` walks the kernel's linked list of processes, following one pointer to the next. ==action: Look closely at the output.== It may stop short, repeat entries, or miss processes you know are running. Run it twice and you may not get the same list. This is not a bug in Volatility. You captured RAM while the kernel kept scheduling, allocating and freeing: the pointers the plugin follows were being rewritten underneath it, so the snapshot is not one consistent moment. This is the **smear** of live acquisition.
+`linux.pslist` walks the kernel's linked list of processes, following one pointer to the next. ==action: Look closely at the output.== It may stop short, repeat entries, or miss processes you know are running. Run it twice and you may not get the same list. This is not a bug in Volatility. You captured RAM while the kernel kept scheduling, allocating and freeing: the pointers the plugin follows were being rewritten underneath it, so the snapshot is not one consistent moment. This is the **smear** you read about earlier, now in front of you.
 
 Some tools degrade more gracefully than `linux.pslist` on a smeared capture. `linux.psscan` scans memory for the signature of a process structure instead of following the list, and a plain `strings` search ignores kernel structures and reads the bytes directly, so neither depends on one pointer leading cleanly to the next. Where list-walking fails outright, they can still return something.
 
 They are still working on a broken source, though. A capture taken while the kernel keeps running is incomplete: a page you need may not be in it at all, or may be frozen half-written. Whichever tool you reach for, you cannot count on recovering any particular piece of evidence from it. That is the difference you have now seen from both sides: the clean recoveries in the challenges came from a capture taken with the machine paused, and this one, taken while the machine ran, cannot promise you the same. On a running server you can nearly always take a capture, but what comes back is partial and has to be treated with suspicion.
 
 > Log Book Question: Your `live_capture.raw` was taken while the server kept running. Why does that make it an unreliable source of evidence, and which kind of analysis suffers the most from it?
+
+Once you have finished, you can power off the VMs from Hacktivity.
