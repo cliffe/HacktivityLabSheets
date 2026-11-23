@@ -162,9 +162,7 @@ When you are ready for the bot to quiz you, ==action: say 'ready'== to Hackerbot
 
 Don't forget to ==action: save and submit any flags!==
 
-BusyBox was enough to see through the deception here, and that it is statically linked is a deliberate choice. A normal program like `/usr/bin/ps` loads the system's shared C library when it runs, and obeys the dynamic loader while it does so. That gives an attacker a second place to hide. Setting `LD_PRELOAD`, or writing a library into `/etc/ld.so.preload`, makes every dynamically linked program load an attacker's library first, and that library can strip a process from the output of every tool at once without changing a single binary on disk. Real userland rootkits such as Jynx and Azazel work this way. A statically linked tool carries its own copy of that library and never consults the loader, so neither trick reaches it.
-
-You could not have known BusyBox would be enough before you looked, and a deeper rootkit would defeat it. Even trusted static tools have a limit, and knowing where it lies is the point of the rest of this lab. Every tool, static or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the lie moves below the C library, and the kernel hands even a trusted static tool the same edited answers it hands everything else. Nothing running on the live machine can be trusted then, because the component answering all of them is the one that has been subverted. What remains is to read the machine's memory from outside and analyse it somewhere safe. Before you do, take your own capture of this running server.
+BusyBox was enough to see through the deception here, but a deeper rootkit would defeat it. Every tool, trusted or not, still asks the kernel for its information through system calls. If the attacker has loaded a kernel rootkit that hooks those calls, the kernel hands even a trusted static tool the same edited answers it hands everything else, and nothing running on the live machine can be trusted. What remains is to read the machine's memory and analyse it somewhere safe. Before you do, take your own capture of this running server.
 
 ## Capture the live memory now {#capture-live-memory}
 
@@ -191,41 +189,11 @@ scp $COMPROMISED_IP:evidence/live_capture.raw ~/evidence/live_capture.raw
 
 Leave that copy running in its tab. Capturing from inside a running machine has a cost: the kernel keeps scheduling, allocating and freeing while LiME reads RAM, so the bytes come from many slightly different instants rather than one. That inconsistency is called **smear**, and it is why a live capture cannot be fully trusted. The clean alternative exists only when you can stop the machine while you read it, which on a virtual machine means pausing the guest from the hypervisor so every structure is from the same instant: an **atomic** capture. We have already taken one of this server that way and left it in your evidence directory as `compromised_server.raw`. Analyse that now, and come back to your own live capture at the very end to see the difference for yourself.
 
-## Why atomic acquisition matters {#why-atomic-acquisition-matters}
-
-Reading memory from outside the machine only helps if what you read is coherent. The atomic capture you are about to analyse is: it was taken with the virtual machine paused, so every pointer and every kernel structure in it is from the same instant, and the plugins that walk the kernel's linked lists can follow those pointers cleanly. The live capture you just started is not coherent in that way. The kernel rewrote those same pointers while LiME copied them, so a list-walking plugin on a smeared image can follow a pointer into a structure that has since moved or been freed. That is the practical cost of smear, and you will watch it happen at the end of the lab.
-
-> Note (how Volatility knows the layout): Volatility needs a **symbol table** (an ISF, Intermediate Symbol Format) that matches the exact kernel of the captured machine. The offsets of fields inside kernel structures change from one kernel build to the next. The ISF is generated from the kernel's debug symbols with a tool called `dwarf2json`, and the one matching this server's kernel ships with the lab, so `vol` finds it automatically. If you ever analyse a capture and Volatility reports it cannot find a matching symbol table, that is the problem to fix first.
-
 ## Analyse the atomic capture
 
 You analyse the capture with Volatility 3, run on your desktop VM as `vol`. Each kind of analysis is a plugin; the Linux plugins are named `linux.<something>` (for example `linux.pslist`). You point `vol` at an image with `-f` and name the plugin to run.
 
-### Volatility 3 quick reference {#volatility-quick-reference}
-
-Every command takes the same form; add `> file.txt` to keep the output:
-
-```bash
-vol -f <image> <plugin>
-```
-
-| Plugin | What it reads | How it finds it | Used in |
-|---|---|---|---|
-| `linux.pslist` | Processes, with PID, parent PID (PPID) and `comm` | follows the kernel's list of tasks | first look, live capture |
-| `linux.psscan` | Processes, including ones unlinked from that list; shows `comm` | scans memory for task structures | Challenges 3, 4, 5 |
-| `linux.psaux` | Each process's full command line (argv) | follows the task list | Challenge 4 |
-| `linux.envars` | Each process's environment variables | follows the task list | Challenge 6 |
-| `linux.bash` | Command history held in running `bash` processes | searches each bash process's memory | Challenge 7 |
-| `linux.sockstat` | Network sockets and the process that owns each | follows the task list | (optional) |
-
-`comm` is the kernel's own short name for a task (up to 15 characters). It is set when the program starts, and changing the command line that `ps` displays does not change it.
-
-To find other plugins, or the options a plugin takes:
-
-```bash
-vol -h | grep linux.
-vol -f ~/evidence/compromised_server.raw linux.psscan -h
-```
+> Note (how Volatility knows the layout): Volatility needs a **symbol table** (an ISF, Intermediate Symbol Format) that matches the exact kernel of the captured machine. The offsets of fields inside kernel structures change from one kernel build to the next. The ISF is generated from the kernel's debug symbols with a tool called `dwarf2json`, and the one matching this server's kernel ships with the lab, so `vol` finds it automatically. If you ever analyse a capture and Volatility reports it cannot find a matching symbol table, that is the problem to fix first.
 
 \==VM: On the desktop VM==, ==action: confirm the atomic capture is present==:
 
@@ -243,7 +211,44 @@ The list comes back clean and complete. Everything from here uses `~/evidence/co
 
 > Tip: Volatility plugins are slow: they parse a lot of memory. Each one takes a little while to run; let it finish. To avoid re-running a slow plugin, save its output to a file, for example `vol -f ~/evidence/compromised_server.raw linux.psscan > ~/evidence/psscan.txt`, and then read or `grep` the file.
 
-Now work through the rest of Hackerbot's challenges. For each one, you recover a piece of evidence from the capture, save it to a file on your desktop VM under `~/evidence/` (Hackerbot tells you the exact filename in the chat), and then say `ready`.
+### Volatility 3 quick reference {#volatility-quick-reference}
+
+Every command takes the same form; add `> file.txt` to keep the output:
+
+```bash
+vol -f <image> <plugin>
+```
+
+| Plugin | What it reads | How it finds it |
+|---|---|---|
+| `linux.pslist` | Processes, with PID, parent PID (PPID) and `comm` | follows the kernel's list of tasks |
+| `linux.psscan` | Processes, including ones unlinked from that list; shows `comm` | scans memory for task structures |
+| `linux.psaux` | Each process's full command line (argv) | follows the task list |
+| `linux.envars` | Each process's environment variables | follows the task list |
+| `linux.bash` | Command history held in running `bash` processes | searches each bash process's memory |
+| `linux.sockstat` | Network sockets and the process that owns each | follows the task list |
+
+`comm` is the kernel's own short name for a task (up to 15 characters). It is set when the program starts, and changing the command line that `ps` displays does not change it.
+
+To find other plugins, or the options a plugin takes:
+
+```bash
+vol -h | grep linux.
+vol -f ~/evidence/compromised_server.raw linux.psscan -h
+```
+
+### Handing your evidence to Hackerbot {#handing-evidence-to-hackerbot}
+
+From here on, Hackerbot does not ask you for answers in the chat. For each challenge it gives you a filename; you save your answer in that file on your **desktop VM** under `~/evidence/`, then say `ready`, and Hackerbot copies the file and checks it. ==VM: On the desktop VM==, save an answer like this:
+
+```bash
+echo "your answer" > ~/evidence/<filename Hackerbot gave you>
+cat ~/evidence/<filename Hackerbot gave you>
+```
+
+Use the exact filename from the chat (they are random, such as `3fa9c1`). Where an answer is a list, such as the PIDs in Challenge 3, put one item per line. You can also write the file in any text editor.
+
+> Note (a common slip): the file must be on the desktop VM, not on the compromised server. Hackerbot fetches it from the desktop.
 
 ### Challenge 3: the hidden processes {#challenge-3}
 
@@ -265,6 +270,31 @@ ps -e
 
 \==action: Compare the two by name.== A process whose name appears in the capture but nowhere in the live `ps` is one the rootkit is hiding. Save **only those processes' PIDs, as the capture shows them,** to the file Hackerbot names, under `~/evidence/`.
 
+The lists are long, so let the computer do the comparison. One way is to turn each list into a sorted list of unique names, then use the `comm` command (no relation to the `comm` field) to print the names that appear only in the capture.
+
+\==VM: On the compromised_server VM (ssh)==, save the names the live `ps` admits to:
+
+```bash
+ps -e -o comm= | sort -u > ~/evidence/live_names.txt
+```
+
+\==VM: On the desktop VM==, fetch that list and build the matching list from the capture:
+
+```bash
+scp $COMPROMISED_IP:evidence/live_names.txt ~/evidence/
+vol -f ~/evidence/compromised_server.raw linux.psscan > ~/evidence/psscan.txt
+head ~/evidence/psscan.txt
+```
+
+Look at the header line in `psscan.txt` and count which column `COMM` is in. If it is the fifth, for example:
+
+```bash
+awk 'NR>4 {print $5}' ~/evidence/psscan.txt | sort -u > ~/evidence/image_names.txt
+comm -23 ~/evidence/image_names.txt ~/evidence/live_names.txt
+```
+
+Change `$5` to match your column, and `NR>4` to skip however many lines come before the first process. `comm -23` prints the lines only in the first file. Check each name it gives you against `psscan.txt` (for example with `grep`) to read its PID.
+
 > Note (a common slip): save only the hidden PIDs, not the whole process list. In particular do not include the low-numbered kernel threads (PIDs 2, 3, 4 and so on). They are not hidden, and listing them tells Hackerbot your list is wrong.
 
 #### Hackerbot Attack #3 {#hackerbot-attack-3}
@@ -276,6 +306,27 @@ You can skip the bot to here, by saying **goto 3**.
 When you are ready for the bot to check your work, ==action: say 'ready'== to Hackerbot.
 
 Don't forget to ==action: save and submit any flags!==
+
+### Close and collect your session log {#close-and-collect-your-session-log}
+
+That was the last thing you need from the compromised server; everything from here happens on your desktop. The record of your investigation is still sitting on the server, which is the last place it should be kept. Close it and copy it off.
+
+\==VM: On the compromised_server VM (ssh, the session where you started `script`)==, ==action: stop recording==:
+
+```bash
+exit
+```
+
+This ends `script` and closes the log; you are back at your ordinary ssh prompt. (If your ssh session has dropped since you started `script`, the log is already closed and you can skip this step.)
+
+\==VM: On the desktop VM==, ==action: copy the log to your desktop==:
+
+```bash
+scp $COMPROMISED_IP:evidence/investigation.log ~/evidence/investigation.log
+less ~/evidence/investigation.log
+```
+
+Every command you ran on the server is there, together with everything the server printed back. That is the account you would hand over to show what you did, and when.
 
 ### Challenge 4: the deleted binary's real name {#challenge-4}
 
@@ -333,19 +384,7 @@ Don't forget to ==action: save and submit any flags!==
 
 A daemon on the server holds a secret in its process environment: an environment variable named `TELEMETRY_TOKEN`. It was never written to a file, so it lives only in the process's memory. That memory is in the capture.
 
-You can read it two ways. ==VM: On the desktop VM==, ==action: read the process environments with Volatility==:
-
-```bash
-vol -f ~/evidence/compromised_server.raw linux.envars | grep -a TELEMETRY_TOKEN
-```
-
-Or search the raw bytes directly:
-
-```bash
-strings -a ~/evidence/compromised_server.raw | grep -a 'TELEMETRY_TOKEN='
-```
-
-Find the `TELEMETRY_TOKEN` entry and read its value. ==action: Save the token== to the file Hackerbot names, under `~/evidence/`.
+There are two ways in. Volatility has a plugin that reads each process's environment (see the [quick reference](#volatility-quick-reference)), or you can search the raw bytes of the image for the variable's name. ==VM: On the desktop VM==, ==action: find the `TELEMETRY_TOKEN` entry== and read its value, then ==action: save the token== to the file Hackerbot names, under `~/evidence/`.
 
 > Note (a common slip): there is no file on disk to find this in. It is in the daemon's environment in memory. If you went looking in `/etc` or a config file on the server, that is why you came up empty.
 
@@ -363,15 +402,7 @@ Don't forget to ==action: save and submit any flags!==
 
 An interactive shell is still running on the server. One command it ran carries a token, but the shell was started with its history writing turned off (its `HISTFILE` points at `/dev/null`), so the command is in no `~/.bash_history` file. It is still in the shell's in-memory history, inside the capture.
 
-\==VM: On the desktop VM==, ==action: recover the shell history from memory==:
-
-```bash
-vol -f ~/evidence/compromised_server.raw linux.bash
-```
-
-`linux.bash` reconstructs the command history held in the memory of running `bash` processes. Find the command that carries the token and read the token out of it. (A raw `strings` search of the image works too, if you know roughly what the token looks like.)
-
-\==action: Save the token== to the file Hackerbot names, under `~/evidence/`.
+Volatility can reconstruct the command history held in the memory of running `bash` processes (see the [quick reference](#volatility-quick-reference)). ==VM: On the desktop VM==, ==action: recover the shell history from the capture==, find the command that carries the token, and ==action: save the token== to the file Hackerbot names, under `~/evidence/`.
 
 > Note (a common slip): `cat ~/.bash_history` on the server shows nothing useful: the history was never written there. That is the whole reason you go to memory for it.
 
@@ -406,27 +437,6 @@ Some tools degrade more gracefully than `linux.pslist` on a smeared capture. `li
 They are still working on a broken source, though. A capture taken while the kernel keeps running is incomplete: a page you need may not be in it at all, or may be frozen half-written. Whichever tool you reach for, you cannot count on recovering any particular piece of evidence from it. That is the difference you have now seen from both sides: the clean recoveries in the challenges came from a capture taken with the machine paused, and this one, taken while the machine ran, cannot promise you the same. On a running server you can nearly always take a capture, but what comes back is partial and has to be treated with suspicion.
 
 > Log Book Question: Your `live_capture.raw` was taken while the server kept running. Why does that make it an unreliable source of evidence, and which kind of analysis suffers the most from it?
-
-## Close and collect your session log {#close-and-collect-your-session-log}
-
-The record of your investigation is still sitting on the compromised server, which is the last place it should be kept. Close it and copy it off.
-
-\==VM: On the compromised_server VM (ssh, the session where you started `script`)==, ==action: stop recording==:
-
-```bash
-exit
-```
-
-This ends `script` and closes the log; you are back at your ordinary ssh prompt. (If your ssh session has dropped since you started `script`, the log is already closed and you can skip this step.)
-
-\==VM: On the desktop VM==, ==action: copy the log to your desktop==:
-
-```bash
-scp $COMPROMISED_IP:evidence/investigation.log ~/evidence/investigation.log
-less ~/evidence/investigation.log
-```
-
-Every command you ran on the server is there, together with everything the server printed back. That is the account you would hand over to show what you did, and when.
 
 ## Wrapping up {#wrapping-up}
 
