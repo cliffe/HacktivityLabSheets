@@ -286,14 +286,15 @@ vol -f ~/evidence/compromised_server.raw linux.psscan > ~/evidence/psscan.txt
 head ~/evidence/psscan.txt
 ```
 
-Look at the header line in `psscan.txt` and count which column `COMM` is in. If it is the fifth, for example:
+\==action: Build `~/evidence/image_names.txt` yourself==: a sorted list of the unique process names in `psscan.txt`, in the same form as `live_names.txt`. Look at the file to work out which column holds `COMM` and which lines come before the first process, then pull out just that column with a tool such as `awk` or `cut`, and pipe it through `sort -u`. Check the result with `head` before you go on.
+
+Once both lists are ready, print the names that appear only in the capture:
 
 ```bash
-awk 'NR>4 {print $5}' ~/evidence/psscan.txt | sort -u > ~/evidence/image_names.txt
 comm -23 ~/evidence/image_names.txt ~/evidence/live_names.txt
 ```
 
-Change `$5` to match your column, and `NR>4` to skip however many lines come before the first process. `comm -23` prints the lines only in the first file. Check each name it gives you against `psscan.txt` (for example with `grep`) to read its PID.
+`comm -23` prints the lines found only in the first file. Check each name it gives you against `psscan.txt` (for example with `grep`) to read its PID.
 
 > Note (a common slip): save only the hidden PIDs, not the whole process list. In particular do not include the low-numbered kernel threads (PIDs 2, 3, 4 and so on). They are not hidden, and listing them tells Hackerbot your list is wrong.
 
