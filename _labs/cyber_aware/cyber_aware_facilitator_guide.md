@@ -78,9 +78,9 @@ Episodes 11, 15, 16, 19 and 20 have no attacker to play. In the first half the l
 
 Hacktivity offers twelve Cyber Aware courses (Hacktivity also lists Cyber Security Foundations, a separate hands-on course). Eleven are built from the episodes below; the twelfth, Incident simulations, is a separate set of longer cases and is not covered here.
 
-The rough totals add up the per-mission estimates (brief 5, each check about 9, full episode 15 or 16, spot-it 8 or so). They are planning figures only.
+Each total is a rough sum of estimates: it adds up the per-mission figures (brief 5, each check about 9, full episode 15 or 16, spot-it 8 or so). Nobody has timed a whole course yet, so use the totals for planning only.
 
-| Course | What is in it | Check pair | Rough total |
+| Course | What is in it | Check pair | Rough total (sum of estimates) |
 |---|---|---|---|
 | Introduction to cyber threats | Brief, starting check, E5, E8, E1, E9, final check | All staff | About 85 minutes |
 | Payment fraud | Brief, starting check, E1, E4, E7, final check | Finance | About 70 minutes |
@@ -154,7 +154,7 @@ In practice:
 Organisations take Cyber Aware in one of two ways:
 
 1. **Opt your members in to the shared courses.** You choose which of your plan's courses your members can play. The shared courses are the same for every organisation, and you cannot change them.
-2. **Copy a course for your organisation.** Each course has a template titled "Cyber Aware: &lt;course&gt;". Copying it gives your organisation its own course, with its own dates, enrolment, settings and progress page. This needs a current plan that includes Cyber Aware, and free seats.
+2. **Copy a course for your organisation.** Each course has a template titled "Cyber Aware: &lt;course&gt;". Copying it gives your organisation its own course, with its own dates, enrolment, settings and progress page. This needs a current plan that includes Cyber Aware, and free seats. **Once you have the copy, press Sign up on it before anything else:** until you do, you cannot edit it, invite learners, move its dates, see progress, download scores or read the organiser notes.
 
 If you want your own reporting route in the debrief, your own dates, or a progress page for your learners, use option 2.
 
@@ -180,7 +180,7 @@ If you set a rule of thumb, it replaces the course's habit line in every debrief
 
 The copy form's "Weeks offset for dates" starts at 52, which moves the course a year ahead. Set it to 0 (or the weeks you want) before you copy, or your learners will not be able to start.
 
-After copying, sign up to your copy yourself. Hacktivity only lets you edit it and see its progress page once you are enrolled.
+After copying, press Sign up on your copy first. Hacktivity only lets you edit it, invite learners, change its dates, see progress, download scores and read the organiser notes once you are enrolled.
 
 ### What you see {#what-you-see}
 
@@ -258,6 +258,7 @@ If someone on your team may struggle with any of these, try the course with them
 - [ ] Choose a course for each group. For most staff, Introduction to cyber threats is the usual first course. Remember that the first course anyone takes is the one to measure.
 - [ ] Decide whether to opt members in to a shared course or copy one. Copy it if you want your own reporting route, dates or progress page.
 - [ ] If a group needs a role check (finance, HR, help desk, executive, mobile, data and conduct), contact Hacktivity before learners start.
+- [ ] Sign up to your copy yourself. Until you have, you cannot edit it or invite anyone.
 - [ ] On your copy, set the reporting route to match what staff really do, and check it reads well in a debrief.
 - [ ] Decide whether learners see their check percentage, which attempt counts, and whether to set a pass mark for the final check.
 - [ ] Check your privacy notice covers what the course records and who can see it.
