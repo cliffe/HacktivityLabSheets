@@ -201,6 +201,32 @@ Reading memory from outside the machine only helps if what you read is coherent.
 
 You analyse the capture with Volatility 3, run on your desktop VM as `vol`. Each kind of analysis is a plugin; the Linux plugins are named `linux.<something>` (for example `linux.pslist`). You point `vol` at an image with `-f` and name the plugin to run.
 
+### Volatility 3 quick reference {#volatility-quick-reference}
+
+Every command takes the same form; add `> file.txt` to keep the output:
+
+```bash
+vol -f <image> <plugin>
+```
+
+| Plugin | What it reads | How it finds it | Used in |
+|---|---|---|---|
+| `linux.pslist` | Processes, with PID, parent PID (PPID) and `comm` | follows the kernel's list of tasks | first look, live capture |
+| `linux.psscan` | Processes, including ones unlinked from that list; shows `comm` | scans memory for task structures | Challenges 3, 4, 5 |
+| `linux.psaux` | Each process's full command line (argv) | follows the task list | Challenge 4 |
+| `linux.envars` | Each process's environment variables | follows the task list | Challenge 6 |
+| `linux.bash` | Command history held in running `bash` processes | searches each bash process's memory | Challenge 7 |
+| `linux.sockstat` | Network sockets and the process that owns each | follows the task list | (optional) |
+
+`comm` is the kernel's own short name for a task (up to 15 characters). It is set when the program starts, and changing the command line that `ps` displays does not change it.
+
+To find other plugins, or the options a plugin takes:
+
+```bash
+vol -h | grep linux.
+vol -f ~/evidence/compromised_server.raw linux.psscan -h
+```
+
 \==VM: On the desktop VM==, ==action: confirm the atomic capture is present==:
 
 ```bash
