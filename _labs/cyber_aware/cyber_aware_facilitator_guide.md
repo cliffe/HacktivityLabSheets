@@ -156,7 +156,7 @@ Organisations take Cyber Aware in one of two ways:
 1. **Opt your members in to the shared courses.** You choose which of your plan's courses your members can play. The shared courses are the same for every organisation, and you cannot change them.
 2. **Copy a course for your organisation.** Each course has a template titled "Cyber Aware: &lt;course&gt;". Copying it gives your organisation its own course, with its own dates, enrolment, settings and progress page. This needs a current plan that includes Cyber Aware, and free seats. **Once you have the copy, press Sign up on it before anything else:** until you do, you cannot edit it, invite learners, move its dates, see progress, download scores or read the organiser notes.
 
-If you want your own reporting route in the debrief, your own dates, or a progress page for your learners, use option 2.
+If you want your own dates or a progress page for your learners, use option 2. Your organisation's reporting route reaches your members either way (see [Reporting](#reporting)).
 
 ### What you can and cannot change {#can-cannot}
 
@@ -171,14 +171,14 @@ If you want your own reporting route in the debrief, your own dates, or a progre
 | Remove a member's access to all your organisation's courses (the organisation page's Remove access/seat) | Create a course from scratch, or delete one |
 | On your copy: set the reporting route, rule of thumb and team size | Set the course's habit line |
 | On your copy: choose whether learners see their check result, which attempt counts, and a pass mark for the final check | Edit any mission listing: add, remove or reorder episodes, swap a check for a role version, or change a listing's settings |
-| Set your organisation's default reporting route | Edit a listing's notes or brief |
+| Set your organisation's reporting route (the organisation page's Set the reporting route button) | Edit a listing's notes or brief |
 | See progress and results for your learners, and download them as CSV | See learners' written feedback on the course |
 
-Copying duplicates the template as it is. When you copy, a box marked "Copy awareness settings (reporting route, rule of thumb, team size)" is ticked by default. Leave it ticked to keep the course's own habit line and default settings, then set your own reporting route on the copy, or clear the copy's route (see [Reporting](#reporting)). Any change to the list of missions, including a role check, goes through Hacktivity.
+Copying duplicates the template as it is, organiser notes included. When you copy, a box marked "Copy awareness settings (reporting route, rule of thumb, team size)" is ticked by default. Leave it ticked to keep the course's habit line and default settings. If your organisation has set its own reporting route, the template's route is left behind and yours applies to the copy (see [Reporting](#reporting)). Any change to the list of missions, including a role check, goes through Hacktivity.
 
 If you set a rule of thumb, it replaces the course's habit line in every debrief. Leave it blank to keep the habit line.
 
-The copy form's "Weeks offset for dates" starts at 52, which moves the course a year ahead. Set it to 0 (or the weeks you want) before you copy, or your learners will not be able to start.
+The copy form's "Weeks offset for dates" starts at 0 for Cyber Aware courses, so the copy keeps the template's dates; raise it only to move the course later. Cyber Security Foundations is the exception: its offset starts at 52, which moves the course a year ahead, so set it to 0 (or the weeks you want) before you copy, or your learners will not be able to start.
 
 After copying, press Sign up on your copy first. Hacktivity only lets you edit it, invite learners, change its dates, see progress, download scores and read the organiser notes once you are enrolled.
 
@@ -200,7 +200,7 @@ In almost every defend half and check, **Report** or its equivalent (Escalate on
 
 ### Your real reporting route
 
-Every debrief has a reporting box (headed "How to report here" unless you give your route its own heading). When the debrief goes back over an item the learner reported, it adds a line beginning "At work, that means:", taken from the first option in your route. The box shows the route set for the course. The "At work, that means:" line appears only when a route has been set, so on the shared courses learners see the general default box and no such line. Set your route so it matches what your staff should really do. Set it so it matches what your staff should really do.
+Every debrief has a reporting box (headed "How to report here" unless you give your route its own heading). When the debrief goes back over an item the learner reported, it adds a line beginning "At work, that means:", taken from the first option in your route. The box shows the route set for the course. The "At work, that means:" line appears only when a route has been set; where none has, learners see the general default box and no such line. Set your route so it matches what your staff should really do.
 
 You build the route from up to four standard options, filling in your own details, plus an optional "anything else" paragraph:
 
@@ -214,11 +214,12 @@ You build the route from up to four standard options, filling in your own detail
 
 All text is plain text, with no links or formatting. The heading can be up to 80 characters and the whole route up to 600. Email addresses and phone numbers are checked when you save, and hidden or control characters are removed.
 
-**Where to set it.** The route is taken from the first of these that has one: the mission listing, then the course, then the organisation that owns the course.
+**Where to set it.** Set your organisation's route once, with the **Set the reporting route** button on your organisation's page. It then applies:
 
-- On a copied course with the box ticked, the template's general route comes across and hides your organisation's default. Either set your own route on the copy, or clear the copy's route so your organisation default shows.
-- Your organisation's default (on the organisation's "Reporting route" page) applies to your organisation's courses that set no route of their own.
-- On the shared courses, learners see the general default: use the Report button, tell your manager, and "If you are not sure which route your organisation uses, ask your IT or security team today."
+- on your organisation's own courses, unless one of them (or one of its missions) sets a route of its own. A copy made when your organisation already has a route leaves the template's route behind, so yours applies; you can still set a different route on one copy;
+- for your seated members on the shared Cyber Aware courses, unless Hacktivity has written a route for that course.
+
+Where no route has been set, learners see the general default: use the Report button, tell your manager, and "If you are not sure which route your organisation uses, ask your IT or security team today."
 
 ### Reporting a problem with the course
 
@@ -256,10 +257,11 @@ If someone on your team may struggle with any of these, try the course with them
 ## Before You Launch: Checklist {#checklist}
 
 - [ ] Choose a course for each group. For most staff, Introduction to cyber threats is the usual first course. Remember that the first course anyone takes is the one to measure.
-- [ ] Decide whether to opt members in to a shared course or copy one. Copy it if you want your own reporting route, dates or progress page.
+- [ ] Decide whether to opt members in to a shared course or copy one. Copy it if you want your own dates or progress page.
+- [ ] Set your organisation's reporting route (Set the reporting route, on your organisation's page) to match what staff really do.
 - [ ] If a group needs a role check (finance, HR, help desk, executive, mobile, data and conduct), contact Hacktivity before learners start.
 - [ ] Sign up to your copy yourself. Until you have, you cannot edit it or invite anyone.
-- [ ] On your copy, set the reporting route to match what staff really do, and check it reads well in a debrief.
+- [ ] Check the route reads well in a debrief, on your copy or on a shared course.
 - [ ] Decide whether learners see their check percentage, which attempt counts, and whether to set a pass mark for the final check.
 - [ ] Check your privacy notice covers what the course records and who can see it.
 - [ ] Play the opening brief and one episode yourself.
