@@ -6,7 +6,7 @@ description: "Use a Wi-Fi Pineapple to run an evil twin of a café's open Wi-Fi 
 overview: |
   A phone or laptop that has joined a network once will usually rejoin anything that broadcasts the same name, and on an open network nothing proves that the access point is the real one. In this in-person lab you work in a team with a Wi-Fi Pineapple and a lab PC playing a customer in the "CSL Café". You will survey the wireless network, set up an evil twin of the café's Wi-Fi, knock your victim off the real network so that they reconnect to yours, and then find out what being in the middle actually gives you. You will see which websites the victim visits even though the traffic is encrypted, read a password sent over plain HTTP, and use your control of the victim's DNS to send their browser to a fake shop and a fake bank, where you will see why the attack works against one and HTTPS and HSTS stop it against the other.
 
-  Along the way you will look at how Wi-Fi attacks have changed: why the classic "Karma" attack rarely works against modern devices, why Protected Management Frames stop deauthentication but not evil twins, and which defences actually prevent an attacker from impersonating a network. Your team submits one short worksheet answering the Submission Questions in this sheet, with evidence from the practical tasks.
+  Along the way you will look at how Wi-Fi attacks have changed: why the classic "Karma" attack rarely works against modern devices, why Protected Management Frames stop deauthentication but not evil twins, and which defences actually prevent an attacker from impersonating a network. Your team submits one short worksheet (downloaded from MyBeckett) answering the Submission Questions, with evidence from the practical tasks.
 tags: ["wireless", "wifi", "wifi-pineapple", "evil-twin", "mitm", "dns-spoofing", "hsts", "wireshark", "pmf", "wpa3"]
 categories: ["cyber_security_landscape"]
 type: ["lab-sheet"]
@@ -36,11 +36,11 @@ The lab is set in a fictional café, the **CSL Café**, which offers free open W
 
 ### How to work through this lab {#how-to-work-through-this-lab}
 
-Each team has one Wi-Fi Pineapple and one Wi-Fi dongle, and works on two neighbouring lab PCs. The session lasts two hours, so the practical work is kept to five short parts. There are questions presented throughout the lab, with an accompanying worksheet to complete and fill in.
+Each team has one Wi-Fi Pineapple and one Wi-Fi dongle, and works on two neighbouring lab PCs. The session lasts two hours, so the practical work is kept to five short parts. There are questions presented throughout the lab, with an accompanying worksheet to complete and fill in: ==action: download the worksheet from MyBeckett==.
 
 Split your team into two groups. The first group operate the Pineapple for Parts 1 to 4 whilst the second group play the victim; at the start of Part 5 you swap seats, so that everyone gets to run part of the attack. The victim stays connected when you swap, so there is nothing to set up again.
 
-Your team submits **one** document containing your answers to the numbered **Submission Questions** in this sheet, with screenshots as evidence where asked. Other questions in this sheet are for discussion and your own understanding, and are not submitted. The marking scheme is at the end of the sheet.
+Your team submits **one** completed worksheet containing your answers to the numbered **Submission Questions**, with screenshots as evidence where asked. Submission Question 1, and the background reading it draws on, are in the worksheet; Questions 2 to 6 are in this sheet and repeated in the worksheet. Other questions in this sheet are for discussion and your own understanding, and are not submitted. The marking scheme is at the end of the sheet.
 
 
 ### Sharing the airwaves {#sharing-the-airwaves}
@@ -167,6 +167,8 @@ The Pineapple has three radios: one hosts its management network and the open AP
 
 ==action: Open Settings, then Networking, and check that the wireless client is connected to `CSL-Cafe` with an address in `192.168.75.0/24`==. It must be connected to the café router's access point (BSSID starting `28:87:ba`, normally on channel 6), not to a Pineapple's own open AP, which can also be called `CSL-Cafe` and has a BSSID starting `00:13:37`. If it is not connected, scan and join the router's `CSL-Cafe` now.
 
+![Settings, Networking: Wireless Client Mode connected to CSL-Cafe on wlan2, with an IP address of 192.168.75.102]({{ site.baseurl }}/assets/images/cyber_security_landscape/8_wireless_security/Wireless%20IP%20Addr.png)
+
 Your Pineapple blocks DNS answers that point to private addresses such as `192.168.75.10`. This is **DNS rebind protection**: it stops a website on the internet from using DNS to trick your browser into attacking devices on your own network. Here it would stop the café sites working through your Pineapple, so you need to allow the café's domain.
 
 ==action: Click the Terminal icon (`>_`) at the top right of the Pineapple's page==; a Web Shell opens at the bottom of the page. ==action: Paste this single line into the Terminal and press Enter:==
@@ -177,7 +179,7 @@ uci -q del_list dhcp.@dnsmasq[0].rebind_domain='csl.internal'; uci add_list dhcp
 
 You should see `Address 1: 192.168.75.10` in the last lines. An extra "No answer" line for IPv6, and lines starting `udhcpc`, are normal.
 
-![The Pineapple's Web Shell, opened from the Terminal icon at the top right of the page]({{ site.baseurl }}/assets/images/cyber_security_landscape/8_wireless_security/web_shell.png)
+![The Pineapple's Web Shell after the DNS fix: nslookup returns Address 1: 192.168.75.10 for intranet.csl.internal]({{ site.baseurl }}/assets/images/cyber_security_landscape/8_wireless_security/dns_config.png)
 
 > Note: Run this before your victim joins the Pineapple: it restarts the Pineapple's DNS and DHCP server, which disconnects any connected clients. If the pasted line arrives with extra characters such as `^[[200~` at the start and fails, hit enter a couple of times then paste it again.
 
@@ -380,7 +382,7 @@ At this point you have:
 
 ## Submission and marking {#submission}
 
-Submit one document per team containing your answers to Submission Questions 1 to 6, with the screenshots requested, and the names of everyone in your team. If you are unable to work in a team, you may complete the worksheet individually. Submit through MyBeckett by the deadline shown there.
+Download the worksheet from MyBeckett, and submit one completed worksheet per team containing your answers to Submission Questions 1 to 6, with the screenshots requested, and the names of everyone in your team. If you are unable to work in a team, you may complete the worksheet individually. Submit through MyBeckett by the deadline shown there.
 
 | Section | Weighting |
 |---|---|
