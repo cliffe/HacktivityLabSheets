@@ -21,9 +21,9 @@ cybok:
 
 ## Introduction {#introduction}
 
-Most people use public Wi-Fi in cafés, hotels, trains and on campus. Very few people check which access point they have actually connected to, and their devices are designed to make the decision for them. This lab looks at Wi-Fi from the attacker's side, using a Wi-Fi Pineapple (a small device made by Hak5 for wireless auditing) to impersonate a network and place yourself between a victim and the services they use. This position is known as a **man-in-the-middle** (MITM).
+Most people use public Wi-Fi in their homes, at work, in cafés and hotels, on trains, and on our univeristy campus. Very few people check which access point they have actually connected to, and their devices are designed to automatically make the decision for them. This lab looks at Wi-Fi from an attacker's perspective, where you will use a Wi-Fi Pineapple (a small device made by Hak5 for wireless auditing) to impersonate a network and place yourself between a victim and the services they use. This position is known as a **man-in-the-middle** (MITM).
 
-You will carry out the attack, and you will also work out what it does and does not give an attacker today. Many of the attacks that made Wi-Fi notorious ten years ago have been weakened by changes to devices and protocols; others work as well as they ever did. By the end of the lab you should be able to explain which is which, and why.
+You will carry out the attack, and you will also work out what it does and does not give an attacker today. Many of the attacks that made Wi-Fi notorious ten years ago have been weakened by changes to devices and protocols, whilst others work as well as they ever did. By the end of the lab you should be able to explain which is which, what the countermeasures address, and why some issues remain.
 
 The lab is set in a fictional café, the **CSL Café**, which offers free open Wi-Fi to its customers. Your team takes two roles, and you will swap them part way through:
 
@@ -107,9 +107,7 @@ netsh wlan show interfaces
 
 ==action: Connect the Wi-Fi Pineapple to the PC with its USB-C cable== and wait about a minute for it to boot (the LED settles).
 
-==action: Open a browser and go to the Pineapple's web interface== at `http://==edit: your Pineapple's IP address==:1471`. The address is on the label on the back of your Pineapple. ==action: Log in== with the details your tutor gives you.
-
-> Note: If the page does not load, disable the browser's proxy (or check that the Pineapple's address is in the proxy exceptions), and check that a new USB network adapter has appeared in `ipconfig`.
+==action: Open a browser and go to the Pineapple's web interface== at `http://==edit: your Pineapple's IP address==:1471`. The address is on the label on the back of your Pineapple. ==action: Log in== with the details your tutor gives you -- TODO UPDATE.
 
 ==action: Spend a few minutes looking around the interface==: Dashboard, Campaigns, PineAP, Recon, Clients, Logging, Modules and Settings. You don't need to document every page; you will use the important ones below.
 
