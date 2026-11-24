@@ -387,6 +387,6 @@ Download the worksheet from MyBeckett, and submit one completed worksheet per te
 | Section | Weighting |
 |---|---|
 | Submission Question 1: how wireless attacks and defences have changed, with references | 25% |
-| Submission Questions 2 to 5: evidence from the practical tasks and accuracy of explanations | 50% |
-| Submission Question 6: legal and ethical considerations | 15% |
+| Submission Questions 2 to 5: evidence from the practical tasks and accuracy of explanations | 40% |
+| Submission Question 6: legal and ethical considerations | 25% |
 | Clarity of communication and use of appropriate references throughout | 10% |
