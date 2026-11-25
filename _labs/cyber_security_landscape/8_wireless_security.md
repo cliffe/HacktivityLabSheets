@@ -323,11 +323,11 @@ The browser remembers addresses it looked up earlier, and may keep its connectio
 
 > Warning: ⚠️ Don't use an Incognito or InPrivate window for this part. A private window starts without the browser's memory of the sites you visited earlier in the lab, and this part depends on that memory.
 
-> Warning: ⚠️ Use **made-up details only** from here on. Anything typed into the fake sites is saved in a file that anyone on the café network can open.
+> Warning: ⚠️ **Never type a real password from here on.** Anything typed into the fake sites is saved in a file that every team shares and anyone on the café network can open. For the Shop login, the username must be the student email address of one of your team members, so that your tutor can see which teams completed this part. The password must be made up.
 
 ==action: Open your browser (Chrome or Edge) and click the Shop bookmark==. If the address bar shows `https://` and a padlock, you have reached the real shop: follow [I still reach the real shop after the DNS change](#faq-real-shop) in the FAQ.
 
-==action: Log in with made-up details==. Look at the address bar: what does it say, and is there a padlock?
+==action: Log in with one team member's student email address as the username and a made-up password==. Look at the address bar: what does it say, and is there a padlock?
 
 ==action: Now click the Bank bookmark, then press Ctrl+F5==. The browser may show a copy of the bank page it saved earlier, and Ctrl+F5 makes it load the page again. You should see a full-page warning: "Your connection is not private" (Edge: "Your connection isn't private"), saying that attackers might be trying to steal your information from `bank.csl.internal`. ==action: Click Advanced and read what it says==. Is there a link to continue to the site anyway? ==action: Take a screenshot of the warning, with Advanced open==.
 
@@ -343,7 +343,7 @@ The browser remembers addresses it looked up earlier, and may keep its connectio
 wget -q -O - http://192.168.75.11/inputs.txt
 ```
 
-(Or, on the victim PC, open `http://192.168.75.11/inputs.txt` in the browser.) Find your victim's login: the "from" column is your Pineapple's address on the café network. ==action: Take a screenshot showing your victim's line==. Wireshark only shows what passed through your Pineapple whilst it was capturing, whereas the attacker's server keeps every login sent to it.
+(Or, on the victim PC, open `http://192.168.75.11/inputs.txt` in the browser.) Find your victim's login: it has your team member's student email address as the username, and the "from" column is your Pineapple's address on the café network. ==action: Take a screenshot showing your victim's line==. Wireshark only shows what passed through your Pineapple whilst it was capturing, whereas the attacker's server keeps every login sent to it.
 
 > Question: Submission Question 6. Include screenshots of the fake Shop page on the victim PC (with the address bar visible), the Bank's warning with Advanced open, and your victim's line in inputs.txt. Why did the attack work against the Shop but fail against the Bank? Explain the part HSTS played.
 
