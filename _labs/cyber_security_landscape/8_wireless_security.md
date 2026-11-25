@@ -329,9 +329,7 @@ The browser remembers addresses it looked up earlier, and may keep its connectio
 
 ==action: Log in with made-up details==. Look at the address bar: what does it say, and is there a padlock?
 
-==action: Now try typing `shop.csl.internal` into the address bar instead==. You get "This site can't provide a secure connection". Typed addresses go to `https://` (the browser remembers the real shop's HTTPS address from earlier), and the attacker's server can't prove it is the shop, so the browser stops. Modern browsers going to HTTPS by default is one of the main defences against this attack.
-
-==action: Now click the Bank bookmark==. You should see a full-page warning: "Your connection is not private" (Edge: "Your connection isn't private"), saying that attackers might be trying to steal your information from `bank.csl.internal`. ==action: Click Advanced and read what it says==. Is there a link to continue to the site anyway? ==action: Take a screenshot of the warning, with Advanced open==.
+==action: Now click the Bank bookmark, then press Ctrl+F5==. The browser may show a copy of the bank page it saved earlier, and Ctrl+F5 makes it load the page again. You should see a full-page warning: "Your connection is not private" (Edge: "Your connection isn't private"), saying that attackers might be trying to steal your information from `bank.csl.internal`. ==action: Click Advanced and read what it says==. Is there a link to continue to the site anyway? ==action: Take a screenshot of the warning, with Advanced open==.
 
 > Hint: Compare how the two bookmarks start (`http://` or `https://`), and read what the Advanced section says. Then look up **HTTP Strict Transport Security** (HSTS), and remember that your victim visited the real bank at the start of the lab.
 
@@ -463,7 +461,3 @@ nslookup shop.csl.internal
 ```
 
 `nslookup` asks the DNS server directly, so it should now show `192.168.75.11`. If it still shows `192.168.75.10`, the DNS change on the Pineapple hasn't worked: run the Part 5 command in the Pineapple's Terminal again and check that its `nslookup` shows `192.168.75.11`. Then open the browser and click the Shop bookmark again.
-
-### Typing the shop's address gives "This site can't provide a secure connection" {#faq-typed-address}
-
-That is expected: typed addresses go to `https://`. Use the Shop bookmark, which starts with `http://`. If the bookmark gives the same error, ask your tutor.
