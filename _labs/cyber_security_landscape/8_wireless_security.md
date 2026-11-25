@@ -36,7 +36,7 @@ The lab is set in a fictional café, the **CSL Café**, which offers free open W
 
 ### How to work through this lab {#how-to-work-through-this-lab}
 
-Each team has one Wi-Fi Pineapple and one Wi-Fi dongle, and works on two neighbouring lab PCs. The session lasts two hours, so the practical work is kept to five short parts. ==action: Download the worksheet from MyBeckett== before you start.
+Each team has one Wi-Fi Pineapple and one Wi-Fi dongle, and works on two neighbouring lab PCs. The session lasts two hours, so the practical work is kept to five short parts. ==action: Use a third PC, not the attacker or victim PC, to read this sheet and download the worksheet from MyBeckett==.
 
 Everyone in the team should follow every step from both perspectives: what the attacker does on one PC, and what the victim sees on the other.
 
@@ -69,9 +69,9 @@ The websites are fictional and only exist on this network; they are there to giv
 
 ## Getting started {#getting-started}
 
-==action: On both PCs, open this lab sheet and the worksheet before you unplug anything==. In this lab both PCs work with their network cables unplugged, so neither can reach the internet until you plug the cables back in at the end.
+==action: Read this sheet and download the worksheet from MyBeckett on a third PC, not the attacker or victim PC==. The attacker and victim PCs keep their network cables unplugged for the whole lab, and the next class uses them as you leave them, so don't log in to MyBeckett or your email on them.
 
-> Note: **Take your screenshots as you go, and save them on the PC.** Whilst the network cables are unplugged you can't reach MyBeckett or your email. At the end of the lab, in [Clean up](#clean-up), you plug the cables back in, log in to MyBeckett and email the screenshots to yourselves. USB sticks are also available if you find it easier to copy the screenshots onto one. Leave time for this before the session ends.
+> Note: **Copy your screenshots onto a USB stick.** Take each screenshot on the attacker or victim PC when the sheet asks for it, save it, and copy it onto one of the USB sticks provided. Use the USB stick to move the screenshots to the third PC and add them to your worksheet. Before you leave, delete them from the attacker and victim PCs (see [Clean up](#clean-up)).
 
 ==action: Open your Hak5 kit and take out the Wi-Fi Pineapple, its three antennae and the USB-C to USB-C cable. Screw the antennae onto the Pineapple. Don't plug the Pineapple into your PC yet.==
 
@@ -380,11 +380,11 @@ rm -f /tmp/hosts/csl-spoof; killall -HUP dnsmasq
 
 ==VM: On the victim PC==
 
-==action: Forget the `CSL-Cafe` network== (Settings, Network and Internet, Wi-Fi, Manage known networks), ==action: unplug the dongle and plug the network cable back in==.
+==action: Forget the `CSL-Cafe` network== (Settings, Network and Internet, Wi-Fi, Manage known networks), ==action: unplug the dongle==.
 
 ==VM: On both PCs==
 
-==action: Plug the attacker PC's network cable back in. On both PCs, log in to MyBeckett and email your screenshots to yourselves before you leave==, or copy them onto one of the USB sticks provided.
+==action: Check that all your screenshots are on the USB stick, then delete them from the PC and empty the Recycle Bin==. Leave the network cables unplugged: the next class uses these PCs as they are.
 
 ## Conclusion {#conclusion}
 
