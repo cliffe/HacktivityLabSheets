@@ -27,8 +27,8 @@ You will carry out the attack, and you will also work out what it does and does 
 
 The lab is set in a fictional café, the **CSL Café**, which offers free open Wi-Fi to its customers. Your team works on two lab PCs:
 
-* The **attacker PC**, which operates the Wi-Fi Pineapple.
-* The **victim PC**, a customer's laptop in the café, with a USB Wi-Fi dongle.
+* **Attackers**, who operate the Wi-Fi Pineapple from one lab PC.
+* **Victim**, a customer using a laptop in the café, played by a second lab PC with a USB Wi-Fi dongle.
 
 > Warning: ⚠️ Intercepting other people's wireless traffic, impersonating a network that you do not own, or disrupting a wireless network without permission is a criminal offence in the UK (under the Computer Misuse Act 1990 and the Wireless Telegraphy Act 2006, amongst others). Everything in this lab is done against the lab's own access point and your own team's victim PC, with your tutor's permission. Only ever target your own victim, keep the Pineapple's filters set as described below, never give your evil twin the name of a real network, and never use these techniques outside the lab.
 
@@ -40,7 +40,7 @@ Each team has one Wi-Fi Pineapple and one Wi-Fi dongle, and works on two neighbo
 
 Everyone in the team should follow every step from both perspectives: what the attacker does on one PC, and what the victim sees on the other.
 
-The numbered **Submission Questions** in this sheet are repeated in the worksheet, which also holds Question 1 and its background reading. Other questions in this sheet are for discussion and are not submitted. [Submission and marking](#submission) explains what to hand in. If something doesn't work, check the [FAQ](#faq) at the end of the sheet.
+The numbered **Submission Questions** in this sheet are repeated in the worksheet, which also holds Question 1 and its background reading. Other questions in this sheet are for discussion and are not submitted. Your team submits **one** completed worksheet via MyBeckett. [Submission and marking](#submission) explains what to hand in. If something doesn't work, check the [FAQ](#faq) at the end of the sheet.
 
 ### Sharing the airwaves {#sharing-the-airwaves}
 
@@ -88,15 +88,13 @@ ipconfig
 netsh wlan show interfaces
 ```
 
-> Note: `ipconfig` should show an address in `192.168.75.0/24` for the Wi-Fi adapter, with the café router (`192.168.75.1` or `192.168.75.254`) as its default gateway. In the output of `netsh wlan show interfaces`, note the **BSSID** of the access point you are connected to and the **Physical address**: the MAC address your dongle is using on this network. You need the physical address on the attacker PC in Part 1. Windows may use a different random address for each network (the "Random hardware addresses" setting), so use the one shown here, not one printed on the dongle.
+> Note: `ipconfig` should show an address in `192.168.75.0/24` for the Wi-Fi adapter, with the café router (`192.168.75.1` or `192.168.75.254`) as its default gateway. In the output of `netsh wlan show interfaces`, note the **BSSID** of the access point you are connected to and the **Physical address**: the MAC address your dongle is using on this network. You need the physical address on the attacker PC in Part 1. Windows may use a different random address for each network (the "Random hardware addresses" setting), so use the one shown heref, not one printed on the dongle.
 
 ![ipconfig and netsh wlan show interfaces on the victim PC, connected to the café router: gateway 192.168.75.254, BSSID starting 28:87:ba]({{ site.baseurl }}/assets/images/cyber_security_landscape/8_wireless_security/ipconfig.PNG)
 
-You will run these two commands again in Part 2 to see whether your victim has moved to the Pineapple.
-
 ==action: Open your browser (Chrome or Edge) and visit each site in the CSL Cafe folder on the bookmarks/favourites bar==: Intranet, Shop, Bank, Health and Jobs, to check that the café network is working.
 
-> Note: If the sites do not load, check that you are connected to `CSL-Cafe`. If a site starts to load but then times out, the network cable is probably still plugged in. If your browser has no CSL Cafe folder, use Chrome. If the browser tries to use the university proxy, ask your tutor.
+> Note: If the sites do not load, check that you are connected to `CSL-Cafe`. If a site starts to load but then times out or if the browser tries to use the university proxy, the network cable is probably still plugged in. If your browser has no CSL Cafe folder, use Chrome.
 
 ### Attacker PC {#attacker-pc}
 
@@ -192,7 +190,7 @@ Your Pineapple is now broadcasting `CSL-Cafe` and will accept connections to it,
 
 ### Moving your victim onto the evil twin {#deauthentication}
 
-Your victim is still connected to the café router, and Windows has no reason to leave a network that is working. To move it, you send a forged **deauthentication** frame that appears to come from the router, telling the victim's PC that it has been disconnected. When the PC reconnects, it should pick your Pineapple rather than the router.
+Your victim is still connected to the café router, and Windows has no reason to leave a network that is working. In order to kick a client off you can send a forged **deauthentication** frame that appears to come from the router, telling the Victim PC that it has been disconnected. When the PC reconnects, if all goes well it will automatically reconnect to your Pineapple rather than the router.
 
 > Warning: ⚠️ Only ever deauthenticate your own victim, and never use "Deauthenticate All". Deauthenticating anybody else's device disrupts a network connection you have no permission to touch.
 
