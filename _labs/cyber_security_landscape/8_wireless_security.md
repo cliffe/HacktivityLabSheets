@@ -69,6 +69,10 @@ The websites are fictional and only exist on this network; they are there to giv
 
 ## Getting started {#getting-started}
 
+==action: On both PCs, open this lab sheet and the worksheet before you unplug anything==. In this lab both PCs work with their network cables unplugged, so neither can reach the internet until you plug the cables back in at the end.
+
+> Note: **Take your screenshots as you go, and save them on the PC.** Whilst the network cables are unplugged you can't reach MyBeckett or your email. At the end of the lab, in [Clean up](#clean-up), you plug the cables back in, log in to MyBeckett and email the screenshots to yourselves. Leave time for this before the session ends.
+
 ==action: Open your Hak5 kit and take out the Wi-Fi Pineapple, its three antennae and the USB-C to USB-C cable. Screw the antennae onto the Pineapple. Don't plug the Pineapple into your PC yet.==
 
 Place the Pineapple on the victim's desk, as close as possible to the Wi-Fi dongle; this is your strongest defence against accidentally attracting another team's victim, and theirs against attracting yours.
@@ -100,7 +104,7 @@ netsh wlan show interfaces
 
 ==VM: On the attacker PC==
 
-==action: Connect the Wi-Fi Pineapple to the PC with its USB-C cable== and wait about a minute for it to boot (the LED settles).
+==action: Unplug the attacker PC's network cable==, then ==action: connect the Wi-Fi Pineapple to the PC with its USB-C cable== and wait about a minute for it to boot (the LED settles).
 
 ==action: Open a browser and go to the Pineapple's web interface== at `http://PINEAPPLE-IP:1471`, replacing `PINEAPPLE-IP` with the address on the label on your Pineapple (for example `http://172.22.252.102:1471`). Without `:1471` the page will not load. ==action: Log in== with username `root` and password `hak5pineapple`.
 
@@ -377,6 +381,10 @@ rm -f /tmp/hosts/csl-spoof; killall -HUP dnsmasq
 ==VM: On the victim PC==
 
 ==action: Forget the `CSL-Cafe` network== (Settings, Network and Internet, Wi-Fi, Manage known networks), ==action: unplug the dongle and plug the network cable back in==.
+
+==VM: On both PCs==
+
+==action: Plug the attacker PC's network cable back in. On both PCs, log in to MyBeckett and email your screenshots to yourselves before you leave==.
 
 ## Conclusion {#conclusion}
 
