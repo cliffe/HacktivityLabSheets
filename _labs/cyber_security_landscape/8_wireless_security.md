@@ -154,11 +154,21 @@ You will now make the Pineapple impersonate `CSL-Cafe`. For the attack to go unn
 
 ### Connecting the Pineapple to the real network {#pineapple-upstream}
 
-The Pineapple has three radios: one hosts its management network and the open AP that victims join, one is used by PineAP and Recon, and one can connect to another Wi-Fi network as an ordinary client.
+The Pineapple has three radios: one hosts its management network and the open AP that victims join, one is used by PineAP and Recon, and one (`wlan2`) can join another Wi-Fi network as an ordinary client. Before you impersonate the café, join `wlan2` to the café router, so that the Pineapple can pass your victim's traffic on.
 
-==action: Open Settings, then Networking, and check that the wireless client is connected to `CSL-Cafe` with an address in `192.168.75.0/24`==. It must be connected to the café router's access point (BSSID starting `28:87:ba`, normally on channel 6), not to a Pineapple's own open AP, which can also be called `CSL-Cafe` and has a BSSID starting `00:13:37`. If it is not connected, follow [The Pineapple isn't connected to CSL-Cafe](#faq-pineapple-client) in the FAQ.
+1. ==action: Open Settings, then Networking. In Wireless Client Mode, select `wlan2` and click Scan==.
+
+   <Insert screenshot 1 showing wlan2 and scan button>
+
+2. ==action: Choose `CSL-Cafe` from the drop-down list and connect to it==. Pick the café router: BSSID starting `28:87:ba`, normally on channel 6. Other teams may already be impersonating the café, so you may see more than one `CSL-Cafe`; any with a BSSID starting `00:13:37` is a Pineapple, not the router. The café network is open, so you should not be asked for a password. If you are, you have picked the wrong `CSL-Cafe`: go back and choose the router.
+
+   <Insert screenshot 2 showing the cafe router>
+
+3. ==action: Check that `wlan2` now shows an IP address in `192.168.75.0/24`==.
 
 ![Settings, Networking: Wireless Client Mode connected to CSL-Cafe on wlan2, with an IP address of 192.168.75.102]({{ site.baseurl }}/assets/images/cyber_security_landscape/8_wireless_security/Wireless%20IP%20Addr.png)
+
+> Note: If `wlan2` already shows `CSL-Cafe` with an address in `192.168.75.0/24`, check that it is the router's BSSID and carry on. If it doesn't get an address, see [The Pineapple isn't connected to CSL-Cafe](#faq-pineapple-client).
 
 Your Pineapple blocks DNS answers that point to private addresses such as `192.168.75.10`. This is **DNS rebind protection**: it stops a website on the internet from using DNS to trick your browser into attacking devices on your own network. Here it would stop the café sites working through your Pineapple, so you need to allow the café's domain.
 
@@ -408,25 +418,16 @@ Download the worksheet from MyBeckett, and submit one completed worksheet per te
 
 The Pineapple's wireless client (`wlan2`) can drop off the café network, for example if the café router is restarted, and it doesn't always rejoin by itself. While it is disconnected, the café sites won't load on a victim connected to the Pineapple, and the Pineapple's DNS lookups for the café sites fail.
 
-<Insert screenshot 1 showing wlan2 and scan button>
-
-Click scan and find CSL-Café in the dropdown menu. 
-
-<Insert screenshot 2 showing the cafe router>
-
-Make sure you select the router (BSSID starting `28:87:ba`), NOT the pineapples own network (BSSID starting `00:13:37`).
-
-Alternatively, to check, run these in the Pineapple's Terminal:
+To check, run these in the Pineapple's Terminal:
 
 ```bash
 iw dev wlan2 link
 ip -4 addr show wlan2
 ```
 
-The first should say `Connected to 28:87:ba:...`, and the second should show an address in `192.168.75.0/24`. If either doesn't, open Settings, then Networking, ==action: scan for networks with the wireless client and join `CSL-Cafe`==. Pick the router's access point (BSSID starting `28:87:ba`, normally channel 6), not a Pineapple's (BSSID starting `00:13:37`). Then check again with the two commands above.
+The first should say `Connected to 28:87:ba:...`, and the second should show an address in `192.168.75.0/24`. If either doesn't, join the café router again by repeating the steps in [Connecting the Pineapple to the real network](#pineapple-upstream), then check again with the two commands above.
 
-If this does not work, it may be due to the router's signal. Talk to your tutor. 
-
+If this does not work, it may be due to the router's signal. Talk to your tutor.
 
 ### The café sites don't load on the victim PC {#faq-sites-dont-load}
 
