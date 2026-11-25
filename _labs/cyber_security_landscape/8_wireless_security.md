@@ -94,7 +94,7 @@ netsh wlan show interfaces
 
 You will run these two commands again in Part 2 to see whether your victim has moved to the Pineapple.
 
-==action: Open your browser (Chrome or Edge) and visit each site in the CSL Cafe folder on the bookmarks bar== (Edge calls it the favourites bar): Intranet, Shop, Bank, Health and Jobs, to check that the café network is working.
+==action: Open your browser (Chrome or Edge) and visit each site in the CSL Cafe folder on the bookmarks/favourites bar==: Intranet, Shop, Bank, Health and Jobs, to check that the café network is working.
 
 > Note: If the sites do not load, check that you are connected to `CSL-Cafe`. If a site starts to load but then times out, the network cable is probably still plugged in. If your browser has no CSL Cafe folder, use Chrome. If the browser tries to use the university proxy, ask your tutor.
 
@@ -116,7 +116,7 @@ The first time the interface opens, a window may ask you to set up an internet c
 ssh root@PINEAPPLE-IP
 ```
 
-Replace `PINEAPPLE-IP` with the address on your Pineapple's label. The first time, answer `yes` when asked whether to continue connecting; the password is the same as for the web interface. Type `exit` to leave the SSH session.
+As above, replace `PINEAPPLE-IP` with the IP address on your Pineapple's label. The first time, answer `yes` when asked whether to continue connecting; the password is the same as for the web interface. Type `exit` to leave the SSH session.
 
 ## Part 1: Surveying the network {#reconnaissance}
 
