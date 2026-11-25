@@ -122,7 +122,7 @@ The first stage of any wireless assessment is reconnaissance: finding out which 
 
 ==VM: On the attacker PC==
 
-==action: Open the Recon page and start a 2-minute scan== (or a continuous one, which you stop once `CSL-Cafe` appears). The Pineapple scans one channel at a time and the room is full of networks, so a short scan can miss `CSL-Cafe`; if it is not listed, scan again before asking for help. Your Pineapple's radios only support 2.4 GHz, so it can only see 2.4 GHz networks and clients.
+==action: Open the Recon page and start a 2-minute scan== (or a continuous one, which you stop once `CSL-Cafe` appears; you may need to increase the items displayed per page to 100 to see it). The Pineapple scans one channel at a time and the room is full of networks, so a short scan can miss `CSL-Cafe`; if it is not listed, scan again before asking for help. Your Pineapple's radios only support 2.4 GHz, so it can only see 2.4 GHz networks and clients.
 
 ==action: Find `CSL-Cafe` in the results==. Note its BSSID, channel, encryption and whether it uses management frame protection (the **MFP** column; MFP is also called PMF). ==action: Expand the network to find its clients== and identify your victim by the physical address you noted on the victim PC.
 
@@ -138,7 +138,7 @@ Now limit what the Pineapple will interact with. Professional testers are always
 
 ==action: Set the Client Filter to "Allow" mode== (an allow list: only the devices listed may connect), then ==action: add your victim's physical address== exactly as `netsh wlan show interfaces` showed it on the victim PC, six pairs of hexadecimal digits such as `a1:b2:c3:d4:e5:f6`. Add nothing else.
 
-==action: Set the SSID Filter to "Allow" mode and add `CSL-Cafe`== as the only entry.
+==action: Set the SSID Filter to "Allow" mode, remove any existing entries using the red button at the bottom, and add `CSL-Cafe`== as the only entry.
 
 ![The Client Filter and SSID Filter, both on Allow List, with only the victim's address and only CSL-Cafe]({{ site.baseurl }}/assets/images/cyber_security_landscape/8_wireless_security/Filters.PNG)
 
