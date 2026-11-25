@@ -71,7 +71,7 @@ The websites are fictional and only exist on this network; they are there to giv
 
 ==action: On both PCs, open this lab sheet and the worksheet before you unplug anything==. In this lab both PCs work with their network cables unplugged, so neither can reach the internet until you plug the cables back in at the end.
 
-> Note: **Take your screenshots as you go, and save them on the PC.** Whilst the network cables are unplugged you can't reach MyBeckett or your email. At the end of the lab, in [Clean up](#clean-up), you plug the cables back in, log in to MyBeckett and email the screenshots to yourselves. Leave time for this before the session ends.
+> Note: **Take your screenshots as you go, and save them on the PC.** Whilst the network cables are unplugged you can't reach MyBeckett or your email. At the end of the lab, in [Clean up](#clean-up), you plug the cables back in, log in to MyBeckett and email the screenshots to yourselves. USB sticks are also available if you find it easier to copy the screenshots onto one. Leave time for this before the session ends.
 
 ==action: Open your Hak5 kit and take out the Wi-Fi Pineapple, its three antennae and the USB-C to USB-C cable. Screw the antennae onto the Pineapple. Don't plug the Pineapple into your PC yet.==
 
@@ -289,7 +289,7 @@ Not everything uses HTTPS. Older internal systems, embedded devices, IoT devices
 
 ==VM: On the victim PC==
 
-==action: Open the [Intranet](http://intranet.csl.internal) site from the CSL Cafe bookmarks and log in with a made-up username and password==. Make a note of what you typed, and look at what the browser shows at the left of the address bar.
+==action: Open the [Intranet](http://intranet.csl.internal) site from the bookmarks folder and log in with a made-up username and password==. Make a note of what you typed, and look at what the browser shows at the left of the address bar.
 
 ==VM: On the attacker PC==
 
@@ -384,7 +384,7 @@ rm -f /tmp/hosts/csl-spoof; killall -HUP dnsmasq
 
 ==VM: On both PCs==
 
-==action: Plug the attacker PC's network cable back in. On both PCs, log in to MyBeckett and email your screenshots to yourselves before you leave==.
+==action: Plug the attacker PC's network cable back in. On both PCs, log in to MyBeckett and email your screenshots to yourselves before you leave==, or copy them onto one of the USB sticks provided.
 
 ## Conclusion {#conclusion}
 
