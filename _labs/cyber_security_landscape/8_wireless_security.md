@@ -408,7 +408,15 @@ Download the worksheet from MyBeckett, and submit one completed worksheet per te
 
 The Pineapple's wireless client (`wlan2`) can drop off the café network, for example if the café router is restarted, and it doesn't always rejoin by itself. While it is disconnected, the café sites won't load on a victim connected to the Pineapple, and the Pineapple's DNS lookups for the café sites fail.
 
-To check, run these in the Pineapple's Terminal:
+<Insert screenshot 1 showing wlan2 and scan button>
+
+Click scan and find CSL-Café in the dropdown menu. 
+
+<Insert screenshot 2 showing the cafe router>
+
+Make sure you select the router (BSSID starting `28:87:ba`), NOT the pineapples own network (BSSID starting `00:13:37`).
+
+Alternatively, to check, run these in the Pineapple's Terminal:
 
 ```bash
 iw dev wlan2 link
@@ -416,6 +424,9 @@ ip -4 addr show wlan2
 ```
 
 The first should say `Connected to 28:87:ba:...`, and the second should show an address in `192.168.75.0/24`. If either doesn't, open Settings, then Networking, ==action: scan for networks with the wireless client and join `CSL-Cafe`==. Pick the router's access point (BSSID starting `28:87:ba`, normally channel 6), not a Pineapple's (BSSID starting `00:13:37`). Then check again with the two commands above.
+
+If this does not work, it may be due to the router's signal. Talk to your tutor. 
+
 
 ### The café sites don't load on the victim PC {#faq-sites-dont-load}
 
