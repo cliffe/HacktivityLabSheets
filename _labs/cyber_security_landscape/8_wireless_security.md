@@ -120,6 +120,9 @@ ssh root@PINEAPPLE-IP
 
 As above, replace `PINEAPPLE-IP` with the IP address on your Pineapple's label. The first time, answer `yes` when asked whether to continue connecting; the password is the same as for the web interface. Type `exit` to leave the SSH session.
 
+==action: IMPORTANT: In PineAP, turn off "Impersonate All Networks" and "Advertise AP Impersonation Pool", and clear the Impersonation pool on the impersonation tab==
+
+
 ## Part 1: Surveying the network {#reconnaissance}
 
 The first stage of any wireless assessment is reconnaissance: finding out which networks and devices are present, without sending anything that would affect them.
@@ -374,7 +377,7 @@ The techniques in this lab are used in authorised wireless penetration tests and
 rm -f /tmp/hosts/csl-spoof; killall -HUP dnsmasq
 ```
 
-==action: In PineAP, turn off "Impersonate All Networks" and "Advertise AP Impersonation Pool", clear the Impersonation pool, and clear your filters== so that the next team starts from a clean Pineapple. ==action: Leave the Pineapple's wireless client connected to `CSL-Cafe`== unless your tutor says otherwise.
+==action: In PineAP, turn off "Impersonate All Networks" and "Advertise AP Impersonation Pool", clear the Impersonation pool (on the impersonation tab), and clear your filters== so that the next team starts from a clean Pineapple. ==action: Leave the Pineapple's wireless client connected to `CSL-Cafe`== unless your tutor says otherwise.
 
 ==VM: On the victim PC==
 
